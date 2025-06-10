@@ -1,3 +1,3 @@
-module github.com/ScrumGuides/ScrumGuides-GuideSiteTemplate/GuideTemplateModule
+module github.com/ScrumGuides/ScrumGuide-SiteTemplates/GuideTemplateModule
 
 go 1.24.4

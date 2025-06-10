@@ -1,6 +1,6 @@
 defaultContentLanguage: en
 languageCode: en
-title: Scrum Guides 2025 Expansion Pack
+title: Scrum Guides Expansion Demo
 
 publishDir: ../public
 resourceDir: ../resources
@@ -24,12 +24,12 @@ taxonomies: {}
 
 # Site-wide parameters
 params:
-  description: "Scrum Guides 2025 Expansion Pack"
+  description: "Scrum Guides Expansion Demo"
   keywords: "Scrum"
   og_image: "/images/og-image.jpg" # URL to the default Open Graph image
   siteProdUrl: "https://scrumexpansion.org"
   supportEmail: "support@scrumexpansion.org"
-  githubUrl: "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack"
+  githubUrl: "https://github.com/ScrumGuides/Demo"
 
 # Enable sitemap and robots.txt
 sitemap:
@@ -57,7 +57,7 @@ outputFormats:
 
 module:
   imports:
-    - path: https://github.com/ScrumGuides/ScrumGuide-SiteTemplates/GuideTemplate
+    - path: github.com/ScrumGuides/ScrumGuide-SiteTemplates/GuideTemplate
 
 markup:
   goldmark:
