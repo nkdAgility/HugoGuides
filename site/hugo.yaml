@@ -57,7 +57,7 @@ outputFormats:
 
 module:
   imports:
-    - path: github.com/ScrumGuides/ScrumGuide-SiteTemplate/GuidesModule
+    - path: github.com/ScrumGuides/ScrumGuides-GuideSiteTemplate/GuideTemplateModule
 
 markup:
   goldmark:
