@@ -55,10 +55,6 @@ outputFormats:
     mediaType: "application/json"
     baseName: "pages"
 
-module:
-  imports:
-    - path: github.com/ScrumGuides/ScrumGuide-ExpansionPack/GuidesModule
-
 markup:
   goldmark:
     renderer:

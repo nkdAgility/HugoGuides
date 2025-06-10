@@ -1,0 +1,93 @@
+{{- define "main" }}
+  {{- $isComingSoon := and .Date (lt now .Date) (eq hugo.Environment "production") }}
+  <section class="my-2" style="max-width: 1200px; margin: 0 auto;">
+    <div class="row">
+      <!-- Sidebar with table of contents -->
+      <aside class="col-md-3 position-sticky" style="top: 1rem; max-height: 100vh;">
+        <nav class="content-list bg-light p-3 rounded h-100 d-flex flex-column">
+          <div class="content-collaboration d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+            <a href="{{ .Site.Params.githubUrl }}/discussions" class="text-decoration-none text-primary"> <i class="fa-solid fa-comments me-1"></i>Join Discussion </a>
+            {{ partial "components/share-dropdown.html" . }}
+          </div>
+          <h4 class="h6 text-muted mb-3 flex-shrink-0">Table of Contents</h4>
+          <div class="overflow-auto flex-grow-1">
+            {{- if $isComingSoon }}
+              <div class="alert alert-warning" role="alert">This guide is coming soon! Stay tuned for updates.</div>
+            {{ else }}
+              {{ .Page.TableOfContents }}
+            {{- end }}
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main content area -->
+      <main class="col-md-9">
+        <div class="content-wrapper px-3">
+          <article class="content-details">
+            <header class="content-header">
+              <h2 class="content-title">{{ .Title }}</h2>
+              {{ if .Date }}
+                <div class="publish-date">
+                  <time datetime="{{ .Date.Format "2006-01-02" }}">
+                    Updated:
+                    {{ .Date.Format "January 2, 2006" }}
+                  </time>
+                </div>
+              {{ end }}
+              <!-- Authors from creators list -->
+              {{ $creators := .Site.GetPage "/creators" }}
+              {{ if $creators }}
+                <div class="content-authors mt-3">
+                  <span class="text-muted me-2">Authors:</span>
+                  {{ range $creators.Pages }}
+                    <span class="author-item me-3">
+                      {{ if .Params.image }}
+                        <img src="{{ .Permalink }}{{ .Params.image }}" alt="{{ .Title }}" aria-label="Profile picture of {{ .Title }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
+                      {{ end }}
+                      <a href="{{ .Permalink }}" class="text-decoration-none">
+                        <strong>{{ .Title }}</strong>
+                      </a>
+                    </span>
+                  {{ end }}
+                </div>
+              {{ end }}
+              <div class="content-version mt-2">
+                <span class="text-muted">Version: </span>
+                <span class="version-number">v#{GitVersion_Major}#.#{GitVersion_Minor}#</span>
+              </div>
+            </header>
+            <div class="content-body pt-3">
+              {{- if $isComingSoon }}
+                <div class="alert alert-warning" role="alert">This guide is coming soon! Stay tuned for updates.</div>
+              {{ else }}
+                {{ .Content }}
+              {{- end }}
+            </div>
+
+            <footer class="content-footer mt-4">
+              <nav class="content-navigation d-flex justify-content-between">
+                {{ with .PrevInSection }}
+                  <a href="{{ .Permalink }}" class="prev-content btn btn-outline-secondary">← {{ .Title }}</a>
+                {{ else }}
+                  <span></span>
+                {{ end }}
+                {{ with .NextInSection }}
+                  <a href="{{ .Permalink }}" class="next-content btn btn-outline-secondary">{{ .Title }} →</a>
+                {{ else }}
+                  <span></span>
+                {{ end }}
+              </nav>
+
+              <div class="back-to-home mt-3">
+                <a href="/" class="text-decoration-none">← Back to Home</a>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+  </section>
+{{- end }}
+{{- define "template" }}
+  guide/single.html
+{{- end }}

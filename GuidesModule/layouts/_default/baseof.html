@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TS77V93FQJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
+      gtag("config", "G-TS77V93FQJ");
+    </script>
+    <!-- End Google Tag Manager -->
     <title>{{ .Title }} | {{ .Site.Title }}</title>
     <meta name="description" content="{{ (.Summary | default .Site.Params.description) | plainify }}" />
     <meta name="keywords" content="{{ .Keywords | default .Site.Params.keywords }}" />
@@ -20,13 +32,14 @@
   </head>
 
   <body data-ndka-environment="{{ hugo.Environment }}" data-ndka-version="{{ .Site.Params.version | default "v0.0.0" }}">
+    <!-- End Google Tag Manager (noscript) -->
     {{ if ne hugo.Environment "production" }}
       <div class="container-fluid text-center p-2 bg-{{ hugo.Environment }}">
         {{ if .Page.Draft }}!!DRAFT!! |{{ end }}
         {{ if eq hugo.Environment "development" }}
           Local | v0.0.0 | No Robots
         {{ else }}
-          {{ .Site.Params.buildInfo | default "No Build Info" }} | v{{ .Site.Params.version | default "v0.0.0" }} | No Robots
+          #{ScrumGuidesExpansionPack_AzureSitesConfig}# | v#{GitVersion.SemVer}# | No Robots
         {{ end }}
         | <a href="#debugArea">Debug Info</a>
       </div>
@@ -51,7 +64,7 @@
 
     {{ block "footer" . }}
       <footer class="footer bg-dark text-white p-4 mt-auto">
-        <div class="container text-center">© {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</div>
+        <div class="container text-center">v#{GitVersion.SemVer}# | © {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</div>
       </footer>
     {{ end }}
 
@@ -71,6 +84,10 @@
                 <tr>
                   <td>Params</td>
                   <td><pre>{{ debug.Dump .Params }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Template</td>
+                  <td>{{ block "template" . }}unknown{{ end }}</td>
                 </tr>
                 <tr>
                   <td>Layout</td>
