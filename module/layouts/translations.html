@@ -1,0 +1,110 @@
+{{- define "main" }}
+  {{/* Get the latest version using the function */}}
+  {{- $latestVersion := partial "functions/get-latest-version" . }}
+
+  {{/* Dynamically find the latest guide page in the current section */}}
+  {{- $guidePage := "" }}
+
+  {{/* Get all pages in the current section */}}
+  {{- $sectionPages := where .Site.RegularPages "Section" .Section }}
+
+  {{/* Filter for guide pages and sort by date (newest first) */}}
+  {{- $guidePages := where $sectionPages "Type" "guide" }}
+  {{- if $guidePages }}
+    {{- $sortedPages := $guidePages.ByDate.Reverse }}
+    {{- $guidePage = index $sortedPages 0 }}
+  {{- end }}
+
+  {{/* Fallback: try to find the page with the latest version */}}
+  {{- if and (not $guidePage) $latestVersion }}
+    {{- range $sectionPages }}
+      {{- $pathParts := split .RelPermalink "/" }}
+      {{- range $pathParts }}
+        {{- if eq . $latestVersion }}
+          {{- $guidePage = $ }}
+          {{- break }}
+        {{- end }}
+      {{- end }}
+      {{- if $guidePage }}
+        {{- break }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{/* Final fallback: get the section page itself */}}
+  {{- if not $guidePage }}
+    {{- $guidePage = .Site.GetPage .Section }}
+  {{- end }}
+
+  {{- if not $guidePage }}
+    {{- $defaultSite := index site.Sites 0 }}
+    {{- $guidePage = $defaultSite.GetPage .Section }}
+  {{- end }}
+
+  {{- if not $guidePage }}
+    {{- fmt.Errorf "No guide page found for section: %s" .Section }}
+  {{- end }}
+
+  {{- $now := now }}
+  {{- $translations := .Site.Data.translations }}
+  {{- $translation := index $translations .Site.Language.Lang | default (index $translations "en") }}
+
+  {{- $isComingSoon := and $guidePage $guidePage.Date (lt now $guidePage.Date) (eq hugo.Environment "production") }}
+
+  {{ partial "components/guide-nav-menu.html" . }}
+
+
+  <section class="container my-5">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="mb-4">{{ i18n "download_page_title" $guidePage }}</h1>
+
+        <p class="lead mb-4">
+          {{ i18n "download_page_description" $guidePage }}
+
+          {{ i18n "download_page_originators" $guidePage }}
+        </p>
+
+        <p class="mb-4">{{ i18n "download_translations_provided" . }}</p>
+
+        <p class="mb-5">{{ i18n "download_translation_error" $guidePage }} <a target="_blank" href="{{ .Site.Params.githubUrl }}">{{ .Site.Params.githubUrl }}</a></p>
+
+        <!-- Official Version -->
+        {{ partial "components/translations/official-version.html" $guidePage }}
+
+        {{ partial "components/translations/community-translations2.html" $guidePage }}
+
+        {{ partial "components/translations/preview-translations.html" $guidePage }}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Add event listeners to all PDF download links
+      document.querySelectorAll(".pdf-download").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          // Get data attributes
+          const language = this.dataset.language;
+          const languageCode = this.dataset.languageCode;
+          const type = this.dataset.type;
+          const filename = this.dataset.filename;
+
+          // Track the download event
+          if (typeof gtag !== "undefined") {
+            gtag("event", "download", {
+              event_category: "PDF",
+              event_label: language + " - " + type,
+              file_name: filename,
+              file_extension: "pdf",
+              language_code: languageCode,
+            });
+          }
+        });
+      });
+    });
+  </script>
+{{- end }}
+{{- define "template" }}
+  guides/transaltions.html
+{{- end }}

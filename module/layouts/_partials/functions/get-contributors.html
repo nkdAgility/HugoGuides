@@ -1,0 +1,52 @@
+{{- $section := .Section -}}
+{{- $type := .Type -}}
+
+{{- $pathParts := split .Path "/" -}}
+{{- $version := "" -}}
+{{- range $pathParts -}}
+  {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) -}}
+    {{- $version = . -}}
+    {{- break -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $allContributors := slice -}}
+
+{{- /* If no section AND not a guide type, return all contributors from all guides */ -}}
+{{- if and (not $section) (ne $type "guide") -}}
+  {{- $seenContributors := dict -}}
+  {{- range $guideKey, $guideContributors := .Site.Data.contributions -}}
+    {{- range $guideContributors -}}
+      {{- $uniqueKey := .name -}}
+      {{- if .githubUsername -}}
+        {{- $uniqueKey = .githubUsername -}}
+      {{- end -}}
+      {{- if not (index $seenContributors $uniqueKey) -}}
+        {{- $seenContributors = $seenContributors | merge (dict $uniqueKey true) -}}
+        {{- $allContributors = $allContributors | append . -}}
+        {{ fmt.Warnf "DEBUG get-contributors1: section=%s type=%s version=%s allContributorsFrom=%s" $section $type $version "ALL" -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Try to get guide-specific contributors based on section */ -}}
+  {{- $sectionContributors := index .Site.Data.contributions $section -}}
+  {{- if $sectionContributors -}}
+    {{ fmt.Warnf "DEBUG get-contributors1: section=%s type=%s version=%s allContributorsFrom=%s" $section $type $version "SECTION" -}}
+    {{- $allContributors = $sectionContributors -}}
+  {{- end -}}
+{{- end -}}
+
+{{ $filtered := $allContributors -}}
+{{- if and $allContributors $version -}}
+  {{ $filtered = where $allContributors "contributions" "intersect" (slice $version) }}
+{{- end -}}
+
+{{ fmt.Warnf "DEBUG get-contributors2: section=%s type=%s version=%s allContributors=%d filtered=%d" $section $type $version (len ($allContributors | default slice)) (len ($filtered | default slice)) -}}
+
+{{- /* Filter contributors by version if specified */ -}}
+{{- if not $filtered -}}
+  {{- $filtered = slice -}}
+{{- end -}}
+
+{{- return $filtered -}}

@@ -1,0 +1,19 @@
+{{ $contributors := partial "functions/get-contributors.html" . }}
+{{- $contributors = where $contributors "founder" true -}}
+{{- $contributors = where $contributors "role" "in" (slice "contributor" "creator" "reviewer") -}}
+{{ if $contributors }}
+  <div class="content-authors mt-3">
+    <div class="row">
+      <div class="col-12 col-md-2">
+        <span class="text-muted me-2">Contributors:</span>
+      </div>
+      <div class="col-12 col-md-10">
+        <div class="d-flex flex-wrap">
+          {{ range sort $contributors "weight" "asc" }}
+            {{ partial "components/guide/guide-author.html" . }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -33,7 +33,7 @@
   translation: "View History"
 
 - id: what_is_guides_title
-  translation: "What are the Kanban Guides?"
+  translation: "What are the {{ .Site.Title }}?"
 
 - id: open_source_title
   translation: "Open Source & Community Driven"

@@ -1,0 +1,90 @@
+{{/* Initialize slice with current language guide sections */}}
+{{ $sections := where .Site.Sections "Type" "guide" }}
+
+{{/* Flatten the slice if needed and remove duplicates */}}
+{{ $finalSections := slice }}
+{{ range $sections }}
+  {{ if reflect.IsSlice . }}
+    {{ range . }}
+      {{ $finalSections = $finalSections | append . }}
+    {{ end }}
+  {{ else }}
+    {{ $finalSections = $finalSections | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* Remove duplicates by checking RelPermalink */}}
+{{ $uniqueSections := slice }}
+{{ $seen := slice }}
+{{ range $finalSections }}
+  {{ if not (in $seen .RelPermalink) }}
+    {{ $uniqueSections = $uniqueSections | append . }}
+    {{ $seen = $seen | append .RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{/* Transform to simplified structure with only useful information */}}
+{{ $guideInfo := slice }}
+{{ range $uniqueSections.ByWeight }}
+  {{/* Get all guide versions for this section */}}
+  {{ $guidePages := where .Pages "Type" "guide" }}
+
+  {{/* Get the latest version for this section using the dedicated function */}}
+  {{ $latestVersionNumber := partial "functions/get-latest-version" . }}
+
+  {{/* Extract versions and create version info */}}
+  {{ $versions := slice }}
+  {{ range $guidePages.ByDate.Reverse }}
+    {{/* Extract version from URL path */}}
+    {{ $pathParts := split .RelPermalink "/" }}
+    {{ $version := "" }}
+    {{ range $pathParts }}
+      {{ if and (ne . "") (findRE `^\d{4}\.\d+$` .) }}
+        {{ $version = . }}
+        {{ break }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $version }}
+      {{/* Get available translations for this version using the dedicated function */}}
+      {{ $versionTranslations := partial "functions/get-guide-translations-for-version" . }}
+
+      {{/* Construct the bundle path based on section and version */}}
+      {{ $bundlePath := "" }}
+      {{ if .Path }}
+        {{ $bundlePath = .Path }}
+      {{ else }}
+        {{/* Construct path from section and version if .Path is empty */}}
+        {{ $bundlePath = printf "content/%s/%s/" .Section $version }}
+      {{ end }}
+
+      {{ $versionInfo := dict
+        "Version" $version
+        "Title" .Title
+        "Date" .Date
+        "RelPermalink" .RelPermalink
+        "Path" $bundlePath
+        "Description" .Description
+        "Latest" (eq $version $latestVersionNumber)
+        "Translations" $versionTranslations
+      }}
+      {{ $versions = $versions | append $versionInfo }}
+    {{ end }}
+  {{ end }}
+
+  {{ $info := dict
+    "Title" .Title
+    "Path" .Path
+    "RelPermalink" .RelPermalink
+    "Section" .Section
+    "Type" .Type
+    "Weight" .Weight
+    "Description" .Description
+    "Versions" $versions
+    "LatestVersion" $latestVersionNumber
+  }}
+  {{ $guideInfo = $guideInfo | append $info }}
+{{ end }}
+
+{{/* Return the simplified guide information */}}
+{{ return $guideInfo }}

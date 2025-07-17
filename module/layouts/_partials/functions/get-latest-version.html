@@ -1,0 +1,37 @@
+{{- $section := .Section -}}
+{{- $latestVersion := "" -}}
+
+{{- /* Get all pages in the current section */ -}}
+{{- $sectionPages := where .Site.RegularPages "Section" $section -}}
+
+{{- /* Filter for guide pages and sort by date (newest first) */ -}}
+{{- $guidePages := where $sectionPages "Type" "guide" -}}
+{{- if $guidePages -}}
+  {{- $sortedPages := $guidePages.ByDate.Reverse -}}
+  {{- $guidePage := index $sortedPages 0 -}}
+  {{- /* Extract version from the latest guide page URL */ -}}
+  {{- $pathParts := split $guidePage.RelPermalink "/" -}}
+  {{- range $pathParts -}}
+    {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) -}}
+      {{- $latestVersion = . -}}
+      {{- break -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Fallback: scan all section pages for highest version number */ -}}
+{{- if not $latestVersion -}}
+  {{- range $sectionPages -}}
+    {{- /* Extract version from URL path (e.g., /open-guide-for-kanban/2025.7/) */ -}}
+    {{- $pathParts := split .RelPermalink "/" -}}
+    {{- range $pathParts -}}
+      {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) -}}
+        {{- if or (not $latestVersion) (gt . $latestVersion) -}}
+          {{- $latestVersion = . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $latestVersion -}}

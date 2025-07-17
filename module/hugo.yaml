@@ -1,64 +1,97 @@
-defaultContentLanguage: en
-languageCode: en
-title: Scrum Guides 2025 Expansion Pack
-
+title: Kanban Guides
+buildFuture: true
 publishDir: ../public
 resourceDir: ../resources
-
-# Multi-language configuration
+summaryLength: 30
+enableRobotsTXT: true
+taxonomies: {}
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+disableDefaultLanguageRedirect: false
+disableLanguages: []
 languages:
   en:
     languageName: English
     weight: 1
-    title: Scrum Guide Expansion Pack
+    title: Kanban Guides
     params:
-      description: "Scrum Guide Expansion Pack"
-      keywords: "Scrum"
+      description: Learn how to apply Kanban to optimise flow and value delivery. Home of the Open Guide to Kanban and The Kanban Guide
+      keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
+  es-419:
+    languageName: Spanish (Latin America)
+    weight: 3
+    title: Guías de Kanban
+    params:
+      description: Kanban Guides es el hogar de la Guía Abierta de Kanban, y la Guía de Kanban. Es una referencia gratuita y comunitaria para aplicar Kanban en el trabajo del conocimiento. Las guías definen las prácticas, métricas y principios fundamentales necesarios para mejorar el flujo, optimizar la entrega de valor y mejorar la sostenibilidad del equipo. Esta guía apoya implementaciones escalables de Kanban en diversas industrias y complementa otros enfoques ágiles, lean y basados en el flujo.
+      keywords: Kanban, Guía Abierta de Kanban, guía de kanban, método kanban, trabajo del conocimiento, optimización del flujo, límites de WIP, entrega de valor, ágil, lean, mejora continua, expectativa de nivel de servicio, flujo acumulativo, rendimiento, métricas, antigüedad de ítems de trabajo, eficiencia de flujo, visualización, trabajo en curso, mejora de procesos, tablero kanban, definición de flujo de trabajo, entrega orientada a resultados
+      status: AI
+  min:
+    languageName: Minionese
+    weight: 1001
+    title: Banana Kanban Guides
+    params:
+      description: Bello! Kanban Guides para banana work! Poopaye me want open guide to kanban, banana kanban guide! Gelato work, banana flow optimizzazione, WIP-ay limitazione, banana delivery, agile banana, lean banana, continuo improvement-o! Bananaaaa!
+      keywords: Kanban, banana, gelato, poopaye, bello, work banana, flow banana, WIP banana, value banana, agile banana, lean banana, improvement banana, kanban board banana, workflow banana, delivery banana
+      status: reference
 
-summaryLength: 30
-
-enableRobotsTXT: true
-
-# Disable default taxonomies (tags and categories)
-taxonomies: {}
-
-# Site-wide parameters
 params:
-  description: "Scrum Guides 2025 Expansion Pack"
-  keywords: "Scrum"
-  og_image: "/images/og-image.jpg" # URL to the default Open Graph image
-  siteProdUrl: "https://scrumexpansion.org"
-  supportEmail: "support@scrumexpansion.org"
-  githubUrl: "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack"
-
-# Enable sitemap and robots.txt
+  description: Authoritative and Open Resources for Flow-Based Work
+  keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
+  og_image: /images/open-guide-to-kanban-logo-512.png
+  siteProdUrl: https://kanbanguides.org
+  supportEmail: support@kanbanguides.org
+  githubUrl: https://github.com/KanbanGuides/KanbanGuides
+  previewSiteUrl: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
+  productionSiteUrl: https://kanbanguides.org/
+  brand:
+    bg_colour: "#135289"
 sitemap:
-  filename: "sitemap.xml"
-  changefreq: "daily"
+  filename: sitemap.xml
+  changefreq: daily
   priority: 0.5
-
-# RSS feed settings
 rss:
-  filename: "rss.xml"
-  name: "RSS Feed"
-  description: "Subscribe to our RSS feed"
-
+  filename: rss.xml
+  name: RSS Feed
+  description: Subscribe to our RSS feed
 outputs:
-  home: [html, json, rss]
-  section: [html, rss]
-  taxonomy: [html, rss]
-  term: [html, rss]
-  page: [html, rss]
-
+  home:
+    - html
+    - json
+    - rss
+    - languages
+    - translations
+  section:
+    - html
+    - rss
+    - guide-translations
+  taxonomy:
+    - html
+    - rss
+  term:
+    - html
+    - rss
+  page:
+    - html
+    - rss
 outputFormats:
   json:
-    mediaType: "application/json"
-    baseName: "pages"
-
+    mediaType: application/json
+    baseName: pages
+  translations:
+    mediaType: application/json
+    baseName: translations
+  languages:
+    mediaType: application/json
+    baseName: languages
+    isPlainText: true
+  guide-translations:
+    mediaType: application/json
+    baseName: guide-translations
+    isPlainText: true
 markup:
   goldmark:
     renderer:
-      unsafe: true # Allows raw HTML in Markdown
+      unsafe: true
     extensions:
       table: true
       linkify: true

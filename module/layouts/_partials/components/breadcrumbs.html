@@ -1,0 +1,41 @@
+{{/* Breadcrumbs Component for Hugo Site */}}
+{{- if gt (len .Ancestors) 0 }}
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol class="breadcrumb mb-0">
+      {{/* Home breadcrumb */}}
+      <li class="breadcrumb-item">
+        <a href="{{ (.Site.GetPage "/").Permalink }}" class="text-decoration-none">
+          <i class="fas fa-home me-1" aria-hidden="true"></i>
+          {{ i18n "breadcrumb_home" | default "Home" }}
+        </a>
+      </li>
+
+      {{/* Build breadcrumb path from ancestors */}}
+      {{- range .Ancestors.Reverse }}
+        {{- if ne .Kind "home" }}
+          <li class="breadcrumb-item">
+            <a href="{{ .Permalink }}" class="text-decoration-none">
+              {{- if eq .Section "latest" -}}
+                Latest
+              {{- else if (strings.Contains .RelPermalink "/latest/") -}}
+                Latest
+              {{- else -}}
+                {{ .Params.short_title | default .Title }}
+              {{- end -}}
+            </a>
+          </li>
+        {{- end }}
+      {{- end }}
+
+      {{/* Current page (no link) */}}
+      <li class="breadcrumb-item active" aria-current="page">
+        {{- $latestVersion := partial "functions/get-latest-version" . }}
+        {{- if (strings.Contains .RelPermalink $latestVersion) -}}
+          Latest
+        {{- else -}}
+          {{ .Params.short_title | default .Title }}
+        {{- end -}}
+      </li>
+    </ol>
+  </nav>
+{{- end }}

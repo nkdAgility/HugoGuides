@@ -1,5 +1,7 @@
+baseURL: "https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/"
 Environment: "preview"
 minifyOutput: true
 
-buildDrafts: true
-buildFuture: true
+languages:
+  es-419:
+    disabled: true

@@ -1,0 +1,39 @@
+{{/* Map language codes to display names using lookup table */}}
+{{- $langCode := . | default "en" -}}
+
+{{/* Normalize to lowercase for case-insensitive lookup */}}
+{{- $normalizedLangCode := $langCode | lower -}}
+
+{{/* Language code to display name lookup table (all keys in lowercase) */}}
+{{- $languageMap := dict
+  "ar" "Arabic"
+  "ca" "Catalan"
+  "cz" "Czech"
+  "de" "German"
+  "en" "English"
+  "en-us" "English (US)"
+  "es" "Spanish"
+  "es-419" "Spanish (Latin America)"
+  "fa" "Persian"
+  "fr" "French"
+  "hi" "Hindi"
+  "it" "Italian"
+  "ja" "Japanese"
+  "ko" "Korean"
+  "mr" "Marathi"
+  "nl" "Dutch"
+  "pl" "Polish"
+  "pt" "Portuguese"
+  "pt-br" "Portuguese (Brazil)"
+  "ro" "Romanian"
+  "ru" "Russian"
+  "tlh" "Klingon"
+  "zh-hans" "Chinese (Simplified)"
+  "zh-hant" "Chinese (Traditional)"
+  "min" "Minionese"
+}}
+
+{{/* Look up the display name using normalized code, fallback to title-cased original code */}}
+{{- $displayName := index $languageMap $normalizedLangCode | default ($langCode | title) }}
+
+{{ return $displayName }}

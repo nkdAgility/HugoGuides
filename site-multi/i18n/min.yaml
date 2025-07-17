@@ -1,0 +1,468 @@
+# Minionese translations
+- id: and
+  translation: "banana"
+
+- id: breadcrumb_home
+  translation: "Bello House"
+
+- id: read_online_title
+  translation: "Luka Luka Ready!"
+
+- id: read_online_description
+  translation: "Ooh la la, fulla guide with clicky-clicky and swishy-swishy scroll!"
+
+- id: read_online_button
+  translation: "Ready Ready"
+
+- id: translations_title
+  translation: "Banana Talkies"
+
+- id: translations_description
+  translation: "Many tongue-tongue! Halp halp with talky-translate!"
+
+- id: translations_button
+  translation: "Peek-a-boo Languages"
+
+- id: history_title
+  translation: "Old Timey Time"
+
+- id: history_description
+  translation: "Zoom-zoom back! Looky looky how guide go grow-grow."
+
+- id: history_button
+  translation: "See da Past-o"
+
+- id: what_is_guides_title
+  translation: "Whaaaa is Kanban Booky?"
+
+- id: open_source_title
+  translation: "Freee! Many banana peoples!"
+
+- id: open_source_description
+  translation: "Dis Kanban thingy is free like banana! You helpy, you writey, but one guide is 'no-no helpy'. We make better together for zoom-zoom flow and happy team-team."
+
+- id: at_a_glance_title
+  translation: "Quick Peeky Peek"
+
+- id: join_discussion_button
+  translation: "Bla Bla With Us!"
+
+- id: join_discussion_title
+  translation: "Banana Chat Time!"
+
+- id: join_discussion_description
+  translation: "Talky talk with guide-friends, share 'aha!', make da booky super wow!"
+
+- id: guides_intro_text
+  translation: "Bello! Dis da big book land of Kanban things. Scroll down for brain food."
+
+- id: download_title
+  translation: "Grabby da {{ .Site.Title }}"
+
+- id: download_description
+  translation: "Take dis guidey in PDFy for when no internety."
+
+- id: download_button
+  translation: "Snatchy PDF"
+
+- id: about_creators_title
+  translation: "Da big brains behind {{ .Site.Title }}"
+
+- id: read_bio_button
+  translation: "Ready {{ .Name }}’s blah blah"
+
+- id: guide_content_not_found
+  translation: "Oopsie! No guidey here!"
+
+- id: reportTranslationError
+  translation: "Uh oh! Banana word broken!"
+
+# Navigation translations
+- id: nav_read_online
+  translation: "Clicky Ready"
+
+- id: nav_translations
+  translation: "Other Tongue-Talk"
+
+- id: nav_versions
+  translation: "Old-New-New"
+
+- id: nav_pdf_version
+  translation: "PDFy"
+
+- id: nav_creators
+  translation: "Smartypantses"
+
+- id: nav_all_creators
+  translation: "Ev’ry smartypants"
+
+- id: nav_faq
+  translation: "Q and A (banana style)"
+
+- id: nav_read_guide
+  translation: "Read da Booky"
+
+- id: nav_history
+  translation: "Zoom to Past"
+
+- id: nav_overview
+  translation: "Big Piccy"
+
+# PDF download translations
+- id: guide_pdf_download_button
+  translation: "Get da PDF"
+
+- id: guide_pdf_not_available
+  translation: "No PDFy now..."
+
+- id: guide_pdf_intro_text
+  translation: "Also have PDFy! Put in pocket."
+
+- id: guide_pdf_intro_link
+  translation: "Downloady PDF"
+
+# Preview Translations functionality
+- id: download_preview_translations
+  translation: "Banana Peeky-Talk"
+
+- id: download_preview_description
+  translation: "Dis talky-talk is in sneak-peek! Need 5 minion-eyes to checky-check before it go big time. Halp us make it super wow!"
+
+- id: download_visit_preview
+  translation: "Zoom-Zoom Sneaky Site"
+
+- id: download_table_status
+  translation: "Banana State"
+
+- id: download_preview_status
+  translation: "Peeky Mode"
+
+- id: download_preview_action
+  translation: "Sneaky Peeky"
+
+- id: download_discussion_action
+  translation: "Blah Blah Time"
+
+# Download page translations
+- id: download_page_title
+  translation: "Read & Grabby {{ .Title }} (so official!)"
+
+- id: download_page_description
+  translation: "{{ .Title }} go blabbity here from big brain peoples"
+
+- id: download_page_originators
+  translation: ", da brainy minions who made da {{ .Title }}."
+
+- id: download_translations_provided
+  translation: "Talky-talk made by nice bananas below. Pick your lingo to grabby-grab!"
+
+- id: download_translation_error
+  translation: "Uh oh! If da {{ .Title }} go blah-blah wrong, poke translator. Or poke us here:"
+
+- id: download_official_version
+  translation: "Super Duper Official"
+
+- id: download_community_translations
+  translation: "Banana Gang Talkies"
+
+- id: download_current_version_released
+  translation: "{{ .Site.Title }} latest-y released in da calendar thingy"
+
+- id: download_older_translations_notice
+  translation: "Old talky-talk might be old bananas. Maybe missing da new shiny bits."
+
+- id: download_table_language
+  translation: "Tongue-Talk"
+
+- id: download_table_translations_by
+  translation: "Made by da talky minions"
+
+- id: download_table_written_by
+  translation: "Writed by"
+
+- id: download_table_action
+  translation: "Do da Thing"
+
+- id: download_official_current_version
+  translation: "Now-now Officialy Wow"
+
+- id: download_button_text
+  translation: "Grabby Now!"
+
+- id: download_coming_soon
+  translation: "Almost-y Here!"
+
+- id: download_missing_language
+  translation: "No banana in your lingo?"
+
+- id: download_contribute_translation
+  translation: "You helpy? Make new talky!"
+
+- id: download_add_translation
+  translation: "Plop in New Talky"
+
+- id: download_community_contributors
+  translation: "Banana Crew Heroes"
+
+- id: contributors_description
+  translation: "These banana heads helped make all da booky stuff in all da timez."
+
+- id: read_online_action
+  translation: "Clicky-Read Time"
+
+# PDF Download functionality
+- id: guide_pdf_download_button
+  translation: "PDF? Grab it!"
+
+- id: guide_pdf_not_available
+  translation: "No PDFy here, sorry-sorry!"
+
+- id: guide_pdf_intro_text
+  translation: "Dis booky also comes in flappy PDF for your poket poket."
+
+- id: guide_pdf_intro_link
+  translation: "Clicky for PDFy"
+
+# History page translations
+- id: history_page_title
+  translation: "Old-y But Goody"
+
+- id: history_evolution_title
+  translation: "Booky Grow-Grow"
+
+- id: history_evolution_description
+  translation: 'Da now-now <strong><a href="{{ .GuideLink }}">Open Kanban Booky</a></strong> is alive! Got fed by past-y bookies, banana peoples, and new wow-wow ideas. For da ProKanban tribe, <a href="/history/kanban-guide-2025/">Dis one</a> is da livin one.'
+
+- id: history_fork_summary_historical
+  translation: "Old-Timey Versions"
+
+- id: history_fork_summary_current
+  translation: "Now Now Booky"
+
+- id: history_fork_summary_description
+  translation: "Dis guidey stand on da shoulders of da old bananas"
+
+- id: history_fork_indicator
+  translation: "Fork! Zoomed up from da old stuff"
+
+- id: history_no_versions_available
+  translation: "Uh oh... No versiony yet. Zzz..."
+
+# Guide template translations
+- id: guide_join_discussion
+  translation: "Bla Bla Together!"
+
+- id: guide_table_of_contents
+  translation: "Listy Bits Inside"
+
+- id: guide_coming_soon
+  translation: "Shhh... It’s coming! 🍌"
+
+- id: guide_no_content_available
+  translation: "No blah-blah yet for dis tongue."
+
+- id: guide_pdf_en
+  translation: "PDF (Minion-English)"
+
+- id: guide_pdf_en_us
+  translation: "PDF (Murica-English)"
+
+- id: guide_pdf_en_not_available
+  translation: "PDF (EN) go bye-bye"
+
+- id: guide_pdf_en_us_not_available
+  translation: "PDF (EN-US) not here, sorry!"
+
+- id: guide_coming_label
+  translation: "Zooming soon:"
+
+- id: guide_updated_label
+  translation: "Fresh Banana:"
+
+- id: guide_version_label
+  translation: "Booky Num Num:"
+
+- id: guide_content_unavailable_note
+  translation: "Banana Note:"
+
+- id: guide_content_unavailable_message
+  translation: "No wordy words in {{ .Language }}. Showing fallback banana words."
+
+- id: guide_content_unavailable_title
+  translation: "Oopsie! No Talky:"
+
+- id: guide_content_unavailable_description
+  translation: "Can't find da page... and no backup banana. Please"
+
+- id: guide_report_issue_link
+  translation: "clicky to scream here"
+
+- id: guide_report_issue_message
+  translation: "so we make fixy fix."
+
+- id: guide_back_to_home
+  translation: "← Backy to Bello House"
+
+- id: not_sure_which_to_use_title
+  translation: "Banana Confuse? Use Which??"
+
+# Additional translations for guide/list.html
+- id: get_started_title
+  translation: "Let’s-a Go! 🍌"
+
+- id: community_driven_label
+  translation: "Banana Powered"
+
+- id: coming_soon
+  translation: "Soon Soon! Wait-y Wait"
+
+- id: purpose_title
+  translation: "Why Dis Exist-y?"
+
+- id: ethos_title
+  translation: "Hearty Vibe"
+
+- id: audience_title
+  translation: "Who Looky Look?"
+
+- id: use_case_title
+  translation: "When to Usey?"
+
+- id: content_title
+  translation: "Stuff Inside"
+
+- id: update_model_title
+  translation: "How We Changey"
+
+- id: guide_overview_title
+  translation: "Guide-y Peek Peek"
+
+- id: guide_overview_description
+  translation: "What dis guidey all 'bout"
+
+- id: when_to_use_title
+  translation: "When go brrrr?"
+
+- id: when_to_use_description
+  translation: "Pick da guide that go ‘yay!’ for your thingy"
+
+- id: quick_decision_guide_title
+  translation: "Fast Pick Banana"
+
+- id: getting_started_title
+  translation: "Jump Now! 🎉"
+
+- id: for_practitioners_title
+  translation: "Serious Banana Users"
+
+- id: current_information_title
+  translation: "Now-Now Info"
+
+- id: current_information_description
+  translation: "Versiony num nums + banana buddies"
+
+- id: current_version_title
+  translation: "Now Version"
+
+- id: current_version_updated_label
+  translation: "Freshy Date"
+
+- id: current_version_description
+  translation: "Dis one is da king version now!"
+
+- id: read_current_version_button
+  translation: "Read da Top Banana 🍌"
+
+- id: version_info_not_available
+  translation: "No num nums here yet…"
+
+- id: contributors_title
+  translation: "Helper Minions"
+
+- id: contributors_description_card
+  translation: "Banana gang who shape da book"
+
+- id: contributors_thank_you
+  translation: "Much banana love to da helpers!"
+
+- id: join_community_button
+  translation: "Banana Join Time 🎊"
+
+- id: no_contributors_found
+  translation: "No banana peeps found..."
+
+- id: version_history_title
+  translation: "Back-in-da-day Versions"
+
+- id: version_history_description
+  translation: "Old bookies and how dey evolve-y evolve"
+
+- id: no_previous_versions_title
+  translation: "No Old Bookies Yet"
+
+- id: no_previous_versions_description
+  translation: "Dis guidey is baby new. Come peek later!"
+
+- id: what_is_guide_title
+  translation: "Wha dis booky anyway?"
+
+- id: license_title
+  translation: "Banana Rights"
+
+- id: view_on_github_button
+  translation: "Peeky on da GittyHub"
+
+# Additional translations for version-card.html
+- id: current_open_guide_label
+  translation: "Now-Now Booky Open"
+
+- id: active_status_label
+  translation: "Go-Go Banana!"
+
+- id: current_fork_label
+  translation: "Now Forky"
+
+- id: active_fork_label
+  translation: "Forky Go-Go"
+
+- id: fork_indicator
+  translation: "Forky:"
+
+- id: forked_from_indicator
+  translation: "Forked from: (old banana)"
+
+- id: this_is_fork_label
+  translation: "Dis one go split-split!"
+
+- id: available_languages_label
+  translation: "Tongue-Talks Here:"
+
+- id: pdf_downloads_label
+  translation: "Grabby Paper (PDFs):"
+
+- id: living_document_updated_label
+  translation: "Breathin' Booky - Fresh Banana!"
+
+- id: active_fork_updated_label
+  translation: "Forky Still Kickin' - Fresh!"
+
+- id: historical_fork_label
+  translation: "Old Forky Time -"
+
+- id: historical_version_label
+  translation: "Old Num Num -"
+
+- id: current_version_label
+  translation: "Now Now Num Num"
+
+- id: read_guide_button
+  translation: "Read-y da Book!"
+
+- id: translations_button_small
+  translation: "Talky-Talks"
+
+- id: read_fork_button
+  translation: "Read da Forky!"
+
+- id: view_archive_button
+  translation: "Looky at da Archive"

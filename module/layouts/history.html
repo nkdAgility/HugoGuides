@@ -1,0 +1,172 @@
+{{- define "main" }}
+  {{/* Dynamically find the latest guide version in the current section */}}
+  {{- $guidePage := "" }}
+  {{- $latestVersion := "" }}
+
+  {{/* Get all pages in the current section */}}
+  {{- $sectionPages := where .Site.RegularPages "Section" .Section }}
+
+  {{/* Filter for guide pages and sort by date (newest first) */}}
+  {{- $guidePages := where $sectionPages "Type" "guide" }}
+  {{- if $guidePages }}
+    {{- $sortedPages := $guidePages.ByDate.Reverse }}
+    {{- $guidePage = index $sortedPages 0 }}
+  {{- end }}
+
+  {{/* Fallback: try to find by version number in URL path */}}
+  {{- if not $guidePage }}
+    {{- range $sectionPages }}
+      {{/* Extract version from URL path (e.g., /open-guide-for-kanban/2025.7/) */}}
+      {{- $pathParts := split .RelPermalink "/" }}
+      {{- range $pathParts }}
+        {{- if and (ne . "") (findRE `^\d{4}\.\d+` .) }}
+          {{- if or (not $latestVersion) (gt . $latestVersion) }}
+            {{- $latestVersion = . }}
+            {{- $guidePage = $ }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{/* Final fallback: get the section page itself */}}
+  {{- if not $guidePage }}
+    {{- $guidePage = .Site.GetPage .Section }}
+  {{- end }}
+
+  {{- if not $guidePage }}
+    {{- $defaultSite := index site.Sites 0 }}
+    {{- $guidePage = $defaultSite.GetPage .Section }}
+  {{- end }}
+
+  {{- if not $guidePage }}
+    {{- fmt.Errorf "No guide page found for section: %s" .Section }}
+  {{- end }}
+
+  {{ partial "components/guide-nav-menu.html" . }}
+
+  <section class="container my-5">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="display-4 text-center mb-3">{{ .Title | default (i18n "history_page_title") }}</h1>
+        {{ with .Content }}
+          <div class="lead text-center mb-5">{{ . }}</div>
+        {{ end }}
+
+
+        <!-- Visual History Flow -->
+        <div class="row mt-4 mb-5">
+          <div class="col-lg-10 mx-auto">
+            <div class="card border-0 bg-light">
+              <div class="card-body">
+                <h5 class="text-center mb-4"><i class="fas fa-project-diagram me-2"></i>Evolution Timeline</h5>
+
+                {{- /* Get complete history chain using our helper function */ -}}
+                {{- $historyChain := partial "functions/get-history-chain.html" . }}
+
+
+                <div class="timeline-container">
+                  <div class="d-flex flex-column align-items-center">
+                    <!-- Current guide latest version -->
+                    {{- if $historyChain.current }}
+                      <div class="timeline-item mb-3">
+                        <div class="d-flex align-items-center">
+                          <div class="timeline-icon bg-primary text-white rounded-circle p-2 me-3">
+                            <i class="fas fa-star"></i>
+                          </div>
+                          <div class="flex-grow-1">
+                            {{ partial "components/versions/version-card.html" (dict "page" $historyChain.current "itemType" "latest") }}
+                          </div>
+                        </div>
+                      </div>
+                    {{- end }}
+
+
+                    <!-- Historical versions of current guide (newest to oldest) -->
+                    {{- if $historyChain.history }}
+                      {{- range $historyChain.history.ByDate.Reverse }}
+                        <div class="timeline-connector text-center mb-3">
+                          <i class="fas fa-arrow-down text-muted"></i>
+                        </div>
+                        <div class="timeline-item mb-3">
+                          <div class="d-flex align-items-center">
+                            <div class="timeline-icon bg-secondary text-white rounded-circle p-2 me-3">
+                              <i class="fas fa-history"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                              {{ partial "components/versions/version-card.html" (dict "page" . "itemType" "history") }}
+                            </div>
+                          </div>
+                        </div>
+                      {{- end }}
+                    {{- end }}
+
+
+                    <!-- Show fork relationship if exists (after current guide history) -->
+                    {{- if $historyChain.forkSource }}
+                      <!-- Fork point visualization -->
+                      <div class="timeline-connector text-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <div class="border-end border-primary border-2 me-2" style="height: 20px;"></div>
+                          <span class="badge bg-info px-3 py-2">
+                            <i class="fas fa-code-branch me-1"></i>
+                            Forked From
+                          </span>
+                          <div class="border-start border-warning border-2 ms-2" style="height: 20px;"></div>
+                        </div>
+                        <small class="text-muted d-block mt-2">{{ $historyChain.current.Date.Format "January 2006" }}</small>
+                      </div>
+
+                      <!-- Fork source latest (the point where fork happened) -->
+                      <div class="timeline-item mb-3">
+                        <div class="d-flex align-items-center">
+                          <div class="timeline-icon bg-warning text-dark rounded-circle p-2 me-3">
+                            <i class="fas fa-code-branch"></i>
+                          </div>
+                          <div class="flex-grow-1">
+                            {{ partial "components/versions/version-card.html" (dict "page" $historyChain.forkSource "itemType" "forkLatest") }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Fork source history (oldest to newest of source guide) -->
+                      {{- if $historyChain.forkHistory }}
+                        {{- range $historyChain.forkHistory.ByDate.Reverse }}
+                          <div class="timeline-connector text-center mb-3">
+                            <i class="fas fa-arrow-down text-muted"></i>
+                          </div>
+                          <div class="timeline-item mb-3">
+                            <div class="d-flex align-items-center">
+                              <div class="timeline-icon bg-secondary text-white rounded-circle p-2 me-3">
+                                <i class="fas fa-archive"></i>
+                              </div>
+                              <div class="flex-grow-1">
+                                {{ partial "components/versions/version-card.html" (dict "page" . "itemType" "forkHistory") }}
+                              </div>
+                            </div>
+                          </div>
+                        {{- end }}
+                      {{- end }}
+                    {{- end }}
+
+                  </div>
+                </div>
+
+                <div class="text-center mt-4">
+                  <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Timeline shows evolution from current to oldest version
+                    {{- if $historyChain.forkSource }}• Fork relationship indicated by branching{{- end }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end }}
+{{- define "template" }}
+  versions/list.html
+{{- end }}

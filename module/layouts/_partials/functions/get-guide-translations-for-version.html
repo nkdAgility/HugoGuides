@@ -1,0 +1,140 @@
+{{- $guideVersionPage := . }}
+
+{{/* Extract version from the page object */}}
+{{ $guideVersion := "" }}
+{{ if $guideVersionPage.File }}
+  {{ $guideVersion = $guideVersionPage.File.Dir | strings.TrimSuffix "/" | path.Base }}
+{{ else }}
+  {{/* Fallback: extract from RelPermalink */}}
+  {{ $pathParts := split (strings.TrimSuffix $guideVersionPage.RelPermalink "/") "/" }}
+  {{ $guideVersion = index $pathParts (sub (len $pathParts) 1) }}
+{{ end }}
+
+{{/* Get all translations for this guide version page */}}
+{{ $allTranslations := $guideVersionPage.AllTranslations }}
+{{ $currentLang := $guideVersionPage.Language.Lang }}
+
+{{/* Collect all unique languages from both translations and PDFs */}}
+{{ $allLanguages := slice }}
+
+{{/* Add languages from online translations */}}
+{{ range $allTranslations }}
+  {{ $lang := .Language.Lang }}
+  {{ if not (in $allLanguages $lang) }}
+    {{ $allLanguages = $allLanguages | append $lang }}
+  {{ end }}
+{{ end }}
+
+{{/* Add languages from PDF resources */}}
+{{ $pdfPattern := "pdf/*.*.pdf" }}
+{{ $pdfResources := $guideVersionPage.Resources.Match $pdfPattern }}
+{{ range $pdfResources }}
+  {{/* Extract language from PDF filename - same logic as version-card.html */}}
+  {{ $pdfName := .Name }}
+  {{ $parts := split $pdfName "." }}
+  {{ if ge (len $parts) 3 }}
+    {{ $langFromPDF := index $parts (sub (len $parts) 2) }}
+    {{ if not (in $allLanguages $langFromPDF) }}
+      {{ $allLanguages = $allLanguages | append $langFromPDF }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Create lookup maps for efficiency */}}
+{{ $translationsByLang := dict }}
+{{ range $allTranslations }}
+  {{ $lang := .Language.Lang }}
+  {{ $translationsByLang = merge $translationsByLang (dict $lang .) }}
+{{ end }}
+
+{{ $pdfsByLang := dict }}
+{{ range $pdfResources }}
+  {{ $pdfName := .Name }}
+  {{ $parts := split $pdfName "." }}
+  {{ if ge (len $parts) 3 }}
+    {{ $langFromPDF := index $parts (sub (len $parts) 2) }}
+    {{ $pdfsByLang = merge $pdfsByLang (dict $langFromPDF .) }}
+  {{ end }}
+{{ end }}
+
+{{/* Build final translations list */}}
+{{ $translations := slice }}
+{{ range $allLanguages }}
+  {{ $lang := . }}
+  {{ $langConfig := $guideVersionPage.Site.Language }}
+  {{ $langConfigFound := false }}
+  {{ range $guideVersionPage.Site.Languages }}
+    {{ if eq .Lang $lang }}
+      {{ $langConfig = . }}
+      {{ $langConfigFound = true }}
+    {{ end }}
+  {{ end }}
+  {{ $page := index $translationsByLang $lang }}
+  {{ $pdfResource := index $pdfsByLang $lang }}
+
+  {{/* Check if content is available for reading online */}}
+  {{ $hasContent := false }}
+  {{ $hasPage := false }}
+  {{ if $page }}
+    {{ $hasPage = true }}
+    {{/* Check if page has content */}}
+    {{ $hasContent = and $page.Content (ne (trim $page.Content " \n\r\t") "") }}
+  {{ end }}
+
+  {{/* Check if PDF is available and get PDF path */}}
+  {{ $hasPDF := ne $pdfResource nil }}
+  {{ $pdfPath := "" }}
+  {{ if $pdfResource }}
+    {{ $pdfPath = $pdfResource.RelPermalink }}
+  {{ end }}
+
+  {{/* Get language display name - use site config if available, otherwise use lookup function */}}
+  {{ $languageName := "" }}
+  {{ if $langConfigFound }}
+    {{ $languageName = $langConfig.LanguageName | default $lang }}
+  {{ else }}
+    {{ $languageName = partial "functions/get-language-display-name.html" $lang }}
+  {{ end }}
+
+  {{/* Use page data if available, otherwise create fallback */}}
+  {{ $title := printf "Open Guide to Kanban %s" $guideVersion }}
+  {{ $relPermalink := "" }}
+  {{ $path := "" }}
+  {{ $date := now }}
+  {{ $description := printf "Guide available in %s" $languageName }}
+
+  {{ if $page }}
+    {{ $title = $page.Title }}
+    {{ $relPermalink = $page.RelPermalink }}
+    {{ $path = $page.Path }}
+    {{ $date = $page.Date }}
+    {{ $description = $page.Description | default $page.Summary }}
+  {{ else }}
+    {{ $title = $guideVersionPage.Title }}
+    {{ $relPermalink = $guideVersionPage.RelPermalink }}
+    {{ $path = $guideVersionPage.Path }}
+    {{ $date = $guideVersionPage.Date }}
+    {{ $description = $guideVersionPage.Description | default $guideVersionPage.Summary }}
+  {{ end }}
+
+  {{ $translationInfo := dict
+    "Language" $lang
+    "LanguageName" $languageName
+    "Weight" ($langConfig.Weight | default 999)
+    "Title" $title
+    "RelPermalink" $relPermalink
+    "Path" $path
+    "VersionPath" $guideVersionPage.Path
+    "Date" $date
+    "Status" (cond (and $hasContent $hasPDF) "published" (cond $hasContent "online-only" (cond $hasPDF "pdf-only" "site-only")))
+    "ReadOnline" (cond $hasContent true false)
+    "ReadOnlineStub" (cond $hasPage true false)
+    "ReadPDF" (cond $hasPDF true false)
+    "PathPdf" $pdfPath
+  }}
+  {{ $translations = $translations | append $translationInfo }}
+{{ end }}
+
+{{ $translations = sort $translations "Version" }}
+{{/* Return just the translations array */}}
+{{ return $translations }}

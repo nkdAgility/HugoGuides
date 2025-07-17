@@ -1,0 +1,109 @@
+{{/* Get complete history chain for the current section
+  Returns a dict with:
+  - current: latest version of current guide
+  - history: historical versions of current guide
+  - forkSource: latest version of source guide (if forked)
+  - forkHistory: historical versions of source guide (if forked)
+*/}}
+
+{{- $result := dict "current" nil "history" slice "forkSource" nil "forkHistory" slice }}
+
+{{/* Get current section's latest version */}}
+{{- $currentSection := .Section }}
+{{- $sectionPages := where .Site.RegularPages "Section" $currentSection }}
+{{- $guidePages := where $sectionPages "Type" "guide" }}
+
+{{/* Find current latest version */}}
+{{- if $guidePages }}
+  {{- $sortedPages := $guidePages.ByDate.Reverse }}
+  {{- $result = merge $result (dict "current" (index $sortedPages 0)) }}
+
+  {{/* Get historical versions (exclude the latest) */}}
+  {{- if gt (len $sortedPages) 1 }}
+    {{- $historyPages := after 1 $sortedPages }}
+    {{- $result = merge $result (dict "history" $historyPages) }}
+  {{- end }}
+{{- end }}
+
+{{/* Check for fork relationship - use 'forked_from' instead of 'fork_source' */}}
+{{- $current := $result.current }}
+{{- if and $current $current.Params.forked_from }}
+  {{- $forkFromPath := $current.Params.forked_from }}
+
+  {{/* Parse the fork path - could be "kanban-guide/2025.5" or just "kanban-guide" */}}
+  {{- $forkPathParts := split $forkFromPath "/" }}
+  {{- $forkSection := index $forkPathParts 0 }}
+  {{- $forkVersion := "" }}
+  {{- if gt (len $forkPathParts) 1 }}
+    {{- $forkVersion = index $forkPathParts 1 }}
+  {{- end }}
+
+  {{/* Get fork source section pages */}}
+  {{- $forkSectionPages := where .Site.RegularPages "Section" $forkSection }}
+  {{- $forkGuidePages := where $forkSectionPages "Type" "guide" }}
+
+  {{- if $forkGuidePages }}
+    {{- $sortedForkPages := $forkGuidePages.ByDate.Reverse }}
+
+    {{/* If specific version is mentioned, try to find that version first */}}
+    {{- if $forkVersion }}
+      {{- range $sortedForkPages }}
+        {{- $pagePath := .RelPermalink }}
+        {{- if findRE (printf `/%s/` $forkVersion) $pagePath }}
+          {{- $result = merge $result (dict "forkSource" .) }}
+          {{- break }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+
+    {{/* Fallback to latest if specific version not found */}}
+    {{- if not $result.forkSource }}
+      {{- $result = merge $result (dict "forkSource" (index $sortedForkPages 0)) }}
+    {{- end }}
+
+    {{/* Get fork source history (exclude the fork source) */}}
+    {{- if gt (len $sortedForkPages) 1 }}
+      {{- $forkHistoryPages := slice }}
+      {{- range $sortedForkPages }}
+        {{- if ne . $result.forkSource }}
+          {{- $forkHistoryPages = $forkHistoryPages | append . }}
+        {{- end }}
+      {{- end }}
+      {{- $result = merge $result (dict "forkHistory" $forkHistoryPages) }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{/* Fallback: try to find by version number in URL path if no date-sorted results */}}
+{{- if not $result.current }}
+  {{- $latestVersion := "" }}
+  {{- $latestPage := "" }}
+
+  {{- range $sectionPages }}
+    {{/* Extract version from URL path (e.g., /open-guide-for-kanban/2025.7/) */}}
+    {{- $pathParts := split .RelPermalink "/" }}
+    {{- range $pathParts }}
+      {{- if and (ne . "") (findRE `^\d{4}\.\d+` .) }}
+        {{- if or (not $latestVersion) (gt . $latestVersion) }}
+          {{- $latestVersion = . }}
+          {{- $latestPage = $ }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{- if $latestPage }}
+    {{- $result = merge $result (dict "current" $latestPage) }}
+  {{- end }}
+{{- end }}
+
+{{/* Final fallback: get the section page itself */}}
+{{- if not $result.current }}
+  {{- $sectionPage := .Site.GetPage $currentSection }}
+  {{- if $sectionPage }}
+    {{- $result = merge $result (dict "current" $sectionPage) }}
+  {{- end }}
+{{- end }}
+
+{{/* Return the complete history chain */}}
+{{- return $result }}

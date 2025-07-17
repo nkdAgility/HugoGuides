@@ -1,0 +1,21 @@
+{{ $status := .Status }}
+  {{ if eq $status "reference" }}
+  <span class="badge bg-warning text-dark">
+    <i class="fa-solid fa-book-reader me-1"></i>{{ i18n "download_reference_status" . | default "Reference" }}
+    </span>
+  {{ else if eq $status "site-only" }}
+   <span class="badge bg-warning text-dark">
+    <i class="fa-solid fa-flask me-1"></i> <i class="fa-regular fa-user-robot"></i> {{ i18n "download_stub_status" . | default "Stub" }}
+   </span>
+  {{ else if eq $status "pdf-only" }}
+<span class="badge bg-warning text-dark">
+    <i class="fa-solid fa-file-pdf me-1"></i>{{ i18n "download_pdf_only_status" . | default "PDF Only" }}
+  </span>
+  {{ else if eq $status "published" }}
+   
+  {{ else }}
+  <span class="badge bg-warning text-dark">
+  {{ $status }} |
+    <i class="fa-solid fa-flask me-1"></i>{{ i18n "download_preview_status" . | default "In Preview" }}
+    </span>
+  {{- end }}

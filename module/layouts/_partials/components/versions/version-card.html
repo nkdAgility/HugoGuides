@@ -1,0 +1,231 @@
+{{/* Versions Card Component
+
+  Usage: {{ partial "components/versions/versions-card.html" (dict "page" $page "itemType" "latest")
+}}
+
+Parameters: - page: The Hugo page object to render - itemType: Type of item - "latest", "history", "forkLatest", or "forkHistory" (default: "history") */}}
+{{- $page := .page }}
+{{- $itemType := .itemType | default "history" }}
+{{- $isLatest := or (eq $itemType "latest") (eq $itemType "forkLatest") }}
+{{- $isFork := (eq $itemType "forkLatest") }}
+
+{{ with $page }}
+  <div class="card h-100 shadow-sm {{ if $isLatest }}border-primary border-2{{ else if $isFork }}border-warning border-2{{ else }}border-secondary{{ end }}">
+    {{ if eq $itemType "latest" }}
+      <div class="card-header bg-primary text-white">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-star me-2"></i>
+            <strong>{{ i18n "current_open_guide_label" . }}</strong>
+          </div>
+          <span class="badge bg-light text-primary">
+            <i class="fas fa-code-branch me-1"></i>
+            {{ i18n "active_status_label" . }}
+          </span>
+        </div>
+      </div>
+    {{ else if eq $itemType "forkLatest" }}
+      <div class="card-header bg-warning text-dark">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-code-branch me-2"></i>
+            <strong>{{ i18n "current_fork_label" . }}</strong>
+          </div>
+          <span class="badge bg-dark text-warning">
+            <i class="fas fa-code-branch me-1"></i>
+            {{ i18n "active_fork_label" . }}
+          </span>
+        </div>
+      </div>
+    {{ end }}
+    <div class="card-body d-flex flex-column">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <h5 class="card-title mb-0 {{ if $isLatest }}text-primary{{ else if $isFork }}text-warning{{ end }}">
+          {{ if eq $itemType "history" }}
+            <i class="fas fa-archive me-2 text-muted"></i>
+          {{ else if eq $itemType "forkHistory" }}
+            <i class="fas fa-code-branch me-2 text-warning"></i>
+          {{ end }}
+          {{ .Title | default "Open Guide to Kanban" }}
+        </h5>
+        {{ if not $isLatest }}
+          <span class="badge bg-secondary">{{ .Date.Format "Jan 2006" }}</span>
+        {{ end }}
+      </div>
+
+      <div class="flex-grow-1">
+        {{ with .Params.description }}
+          <p class="card-text text-muted mb-3">{{ . }}</p>
+        {{ else }}
+          {{ with .Summary }}
+            <p class="card-text text-muted mb-3">{{ . | truncate 200 }}</p>
+          {{ end }}
+        {{ end }}
+
+        {{/* Show fork relationship if this is a forked guide */}}
+        {{ if or $isFork (and .Params.forked_from (ne .Params.forked_from "")) }}
+          <div class="alert alert-info border-0 bg-info bg-opacity-10 mb-3">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-code-branch text-info me-2"></i>
+              <small class="mb-0">
+                <strong>{{ if $isFork }}{{ i18n "fork_indicator" . }}{{ else }}{{ i18n "forked_from_indicator" . }}{{ end }}</strong>
+                {{ if and .Params.forked_from (ne .Params.forked_from "") }}
+                  {{ $sourcePage := .Site.GetPage .Params.forked_from }}
+                  {{ if $sourcePage }}
+                    <a href="{{ $sourcePage.Permalink }}" class="text-decoration-none">{{ $sourcePage.Title }}</a>
+                  {{ else }}
+                    {{ .Params.forked_from | title }}
+                  {{ end }}
+                {{ else if $isFork }}
+                  {{ i18n "this_is_fork_label" . }}
+                {{ end }}
+              </small>
+            </div>
+          </div>
+        {{ end }}
+
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          {{/* Display contributors */}}
+          {{ $contributors := partial "functions/get-contributors.html" . }}
+          {{ if not .Params.contributors }}
+            {{- $contributors = where $contributors "founder" true -}}
+            {{- $contributors = where $contributors "role" "in" (slice "contributor" "creator") -}}
+          {{ end }}
+          {{ range sort $contributors "weight" "asc" }}
+            <span class="badge {{ if eq .role "creator" }}bg-primary{{- else }}bg-secondary{{- end }}">
+              {{ if .url }}
+                <a href="{{ .url }}" target="_blank" rel="noopener" class="text-white text-decoration-none">
+                  {{ .name }}
+                  <i class="fa-solid fa-external-link-alt ms-1" style="font-size: 0.6em;"></i>
+                </a>
+              {{ else }}
+                {{ .name }}
+              {{ end }}
+            </span>
+          {{ end }}
+
+        </div>
+
+        {{/* Language buttons section */}}
+        {{ $translations := .AllTranslations }}
+        {{ $currentLang := .Language.Lang }}
+        {{/* Filter translations to only include those with substantial content */}}
+        {{ $translationsWithContent := slice }}
+        {{ range $translations }}
+          {{/* Check if translation has substantial content (more than 500 characters) */}}
+          {{ if and .Content (gt (len .Content) 500) }}
+            {{ $translationsWithContent = $translationsWithContent | append . }}
+          {{ end }}
+        {{ end }}
+        {{/* Also check current page has content */}}
+        {{ $currentHasContent := and .Content (gt (len .Content) 500) }}
+        {{ if or (gt (len $translationsWithContent) 0) $currentHasContent }}
+          <div class="mb-3">
+            <div class="text-muted small mb-2">
+              <i class="fas fa-globe me-1"></i>
+              {{ i18n "available_languages_label" . }}
+            </div>
+            <div class="d-flex flex-wrap gap-1">
+              {{/* Current language button - only show if it has content */}}
+              {{ if $currentHasContent }}
+                <a href="{{ .Permalink }}" class="btn btn-primary btn-sm">
+                  <i class="fas fa-eye me-1"></i>
+                  {{ .Language.LanguageName }}
+                </a>
+              {{ end }}
+              {{/* Other language buttons - only those with content */}}
+              {{ range $translationsWithContent }}
+                {{ if ne .Language.Lang $currentLang }}
+                  <a href="{{ .Permalink }}" class="btn btn-outline-primary btn-sm">
+                    {{ .Language.LanguageName }}
+                  </a>
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+        {{- $pdfPattern := "pdf/*.*.pdf" }}
+        {{- $pdfResources := .Resources.Match $pdfPattern }}
+        {{ if gt (len $pdfResources) 0 }}
+          <div class="mb-3">
+            <div class="text-muted small mb-2">
+              <i class="fas fa-file-pdf me-1"></i>
+              {{ i18n "pdf_downloads_label" . }}
+            </div>
+            <div class="d-flex flex-wrap gap-1">
+              {{/* PDF language buttons */}}
+              {{ range $pdfResources }}
+                {{- $filename := .Name }}
+                {{- $langCode := "" }}
+                {{- $displayName := "" }}
+                {{/* Extract language code from filename like "kanban-guide.ja.pdf" */}}
+                {{- $parts := split $filename "." }}
+                {{- if ge (len $parts) 3 }}
+                  {{- $langCode = index $parts (sub (len $parts) 2) }}
+                {{ end }}
+                {{/* Skip if no language code found */}}
+                {{- if eq $langCode "" }}
+                  {{- continue }}
+                {{ end }}
+                {{ $displayName = partial "functions/get-language-display-name.html" $langCode }}
+                <a href="{{ .Permalink }}" class="btn btn-outline-secondary btn-sm" title="Download {{ $displayName }} PDF">
+                  <i class="fas fa-file-pdf me-1"></i>
+                  {{ $displayName }}
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+
+      <div class="mt-auto pt-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="text-muted small">
+            <i class="fas fa-calendar me-1"></i>
+            {{ if .Date }}
+              {{ if eq $itemType "latest" }}
+                {{ i18n "living_document_updated_label" . }}
+                {{ .Date.Format "January 2, 2006" }}
+              {{ else if eq $itemType "forkLatest" }}
+                {{ i18n "active_fork_updated_label" . }}
+                {{ .Date.Format "January 2, 2006" }}
+              {{ else if eq $itemType "forkHistory" }}
+                {{ i18n "historical_fork_label" . }}
+                {{ .Date.Format "January 2, 2006" }}
+              {{ else }}
+                {{ i18n "historical_version_label" . }}
+                {{ .Date.Format "January 2, 2006" }}
+              {{ end }}
+            {{ else }}
+              {{ i18n "current_version_label" . }}
+            {{ end }}
+          </div>
+          <div class="d-flex gap-2">
+            {{ if eq $itemType "latest" }}
+              <a href="{{ partial "functions/safe-page-link.html" .Path }}" class="btn btn-primary btn-sm">
+                <i class="fas fa-book me-1"></i>
+                {{ i18n "read_guide_button" . }}
+              </a>
+
+              <a href="{{ partial "functions/safe-page-link.html" "/translations" }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-download me-1"></i>
+                {{ i18n "translations_button_small" . }}
+              </a>
+            {{ else if eq $itemType "forkLatest" }}
+              <a href="{{ .Permalink }}" class="btn btn-warning btn-sm">
+                <i class="fas fa-code-branch me-1"></i>
+                {{ i18n "read_fork_button" . }}
+              </a>
+            {{ else }}
+              <a href="{{ .Permalink }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-archive me-1"></i>
+                {{ i18n "view_archive_button" . }}
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

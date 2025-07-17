@@ -1,0 +1,27 @@
+{{- $defaultLang := .Site.Home.Language.Lang | default "en" -}}
+{{- $currentPageDefaultLang := .Site.GetPage (printf "/%s%s" $defaultLang .File.Path) -}}
+{{- if not $currentPageDefaultLang -}}
+  {{- $currentPageDefaultLang = .Site.Sites.Default.GetPage .File.Path -}}
+{{- end -}}
+
+{{ $creators:= $currentPageDefaultLang.Params.creators }}
+{{ $contributors := $currentPageDefaultLang.Params.contributors }}
+{{ $translators:= .Params.translators }}
+
+{{/* Join all participants into a single slice */}}
+{{ $allParticipants := slice }}
+{{ range $creators }}{{ $allParticipants = $allParticipants | append . }}{{ end }}
+{{ range $contributors }}{{ $allParticipants = $allParticipants | append . }}{{ end }}
+{{ range $translators }}{{ $allParticipants = $allParticipants | append . }}{{ end }}
+
+{{/* Remove duplicates manually to preserve object structure */}}
+{{ $uniqueParticipants := slice }}
+{{ $seenNames := slice }}
+{{ range $allParticipants }}
+  {{ if not (in $seenNames .name) }}
+    {{ $uniqueParticipants = $uniqueParticipants | append . }}
+    {{ $seenNames = $seenNames | append .name }}
+  {{ end }}
+{{ end }}
+
+{{ return $uniqueParticipants }}

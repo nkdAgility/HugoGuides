@@ -1,0 +1,106 @@
+{{- $guidePage := . }}
+{{- $foundingContributors := partial "functions/get-contributors.html" . -}}
+{{- $foundingContributors = where $foundingContributors "founder" true -}}
+{{- $foundingContributors = where $foundingContributors "role" "in" (slice "contributor" "creator") -}}
+
+
+<h2 class="mb-3">{{ i18n "download_official_version" . }}</h2>
+
+<!-- Table Headers (visible on larger screens) -->
+<div class="d-none d-lg-block mb-3">
+  <div class="row fw-bold text-muted border-bottom pb-2">
+    <div class="col-md-3">{{ i18n "download_table_language" . }}</div>
+    <div class="col-md-7">{{ i18n "download_table_contributed_by" . | default "Contributors" }}</div>
+    <div class="col-md-2">{{ i18n "download_table_action" . }}</div>
+  </div>
+</div>
+
+<!-- Official Version Cards/Rows -->
+<div class="mb-5">
+  <!-- Current Language Version -->
+  <div class="card mb-3 d-lg-none">
+    <div class="card-body">
+      <h6 class="card-title mb-2">
+        English ({{ $guidePage.Date.Format "January 2006" }}) -
+        {{ i18n "download_official_current_version" . }}
+      </h6>
+      <p class="card-text text-muted mb-3">
+        <small>{{ i18n "download_table_written_by" . }}:</small><br />
+        {{- range $index, $creator := sort $foundingContributors "weight" "asc" }}
+          {{- if $index }},{{ end }}
+          {{- if gt (len $foundingContributors) 1 }}{{ if eq $index (sub (len $foundingContributors) 1) }}&nbsp;{{ end }}{{ end }}
+          <a href="{{ $creator.url }}" class="text-decoration-none">{{ $creator.name }}<i class="fa-solid fa-external-link-alt ms-1" style="font-size: 0.6em;"></i> </a>
+        {{- end }}
+      </p>
+      <div class="d-flex gap-2 flex-wrap">
+        <!-- Online Reading Link -->
+        <a href="{{ $guidePage.Permalink }}" class="btn btn-outline-secondary btn-sm">
+          <i class="fa-solid fa-book-open me-1"></i>{{ i18n "read_online_action" . }}
+        </a>
+        <!-- PDF Download Link -->
+        {{- $pdfPattern := printf "pdf/*.en.pdf" }}
+        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
+        {{- if $pdfResource }}
+          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="en" data-type="Official" data-filename="{{ $pdfResource.Name }}">
+            <i class="fa-solid fa-download me-1"></i>EN
+          </a>
+        {{- else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN </a>
+        {{- end }}
+        <!-- PDF Download Link -->
+        {{- $pdfPattern := printf "pdf/*.en-us.pdf" }}
+        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
+        {{- if $pdfResource }}
+          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English (US)" data-language-code="en-us" data-type="Official" data-filename="{{ $pdfResource.Name }}">
+            <i class="fa-solid fa-download me-1"></i>EN (US)
+          </a>
+        {{- else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN (US) </a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Language Version - Desktop Row -->
+  <div class="row d-none d-lg-flex align-items-center py-3 border-bottom">
+    <div class="col-md-3">
+      English ({{ $guidePage.Date.Format "January 2006" }}) -
+      {{ i18n "download_official_current_version" . }}
+    </div>
+    <div class="col-md-6">
+      {{- range $index, $creator := sort $foundingContributors "weight" "asc" }}
+        {{- if $index }},{{ end }}
+        {{- if gt (len $foundingContributors) 1 }}{{ if eq $index (sub (len $foundingContributors) 1) }}&nbsp;{{ end }}{{ end }}
+        <a href="{{ $creator.url }}" class="text-decoration-none"> {{ $creator.name }}<i class="fa-solid fa-external-link-alt ms-1" style="font-size: 0.6em;"></i> </a>
+      {{- end }}
+    </div>
+    <div class="col-md-3">
+      <div class="d-flex gap-2">
+        <!-- Online Reading Link -->
+        <a href="{{ $guidePage.Permalink }}" class="btn btn-outline-secondary btn-sm">
+          <i class="fa-solid fa-book-open me-1"></i>{{ i18n "read_online_action" . }}
+        </a>
+        <!-- PDF Download Link -->
+        {{- $pdfPattern := printf "pdf/*.en.pdf" }}
+        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
+        {{- if $pdfResource }}
+          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="en" data-type="Official" data-filename="{{ $pdfResource.Name }}">
+            <i class="fa-regular fa-file-pdf"></i>EN
+          </a>
+        {{- else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN </a>
+        {{- end }}
+        <!-- PDF Download Link -->
+        {{- $pdfPattern := printf "pdf/*.en-us.pdf" }}
+        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
+        {{- if $pdfResource }}
+          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English (US)" data-language-code="en-us" data-type="Official" data-filename="{{ $pdfResource.Name }}">
+            <i class="fa-regular fa-file-pdf"></i>EN-US
+          </a>
+        {{- else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN-US</a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</div>

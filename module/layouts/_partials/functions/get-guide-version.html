@@ -1,0 +1,9 @@
+{{- $pathParts := split .Path "/" -}}
+{{- $version := "" -}}
+{{- range $pathParts -}}
+  {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) -}}
+    {{- $version = . -}}
+    {{- break -}}
+  {{- end -}}
+{{- end -}}
+{{ return $version }}

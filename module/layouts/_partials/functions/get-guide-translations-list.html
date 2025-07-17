@@ -1,0 +1,96 @@
+{{/* Function: get-guide-translations-list
+  Purpose: Get a flat list of the latest version available for each language across all versions of a single guide
+  Input: A single guide page (section)
+  Output: A slice of language objects with the latest version info for each language
+*/}}
+
+{{/* Get all versions for this guide */}}
+{{ $guidePages := where .Pages "Type" "guide" }}
+
+{{/* Map to track latest version for each language */}}
+{{ $languageMap := dict }}
+
+{{/* Process all versions to find the latest for each language */}}
+{{ range $guidePages }}
+  {{/* Extract version from URL path */}}
+  {{ $pathParts := split .RelPermalink "/" }}
+  {{ $version := "" }}
+  {{ range $pathParts }}
+    {{ if and (ne . "") (findRE `^\d{4}\.\d+$` .) }}
+      {{ $version = . }}
+      {{ break }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $version }}
+    {{/* Get available translations for this version using the dedicated function */}}
+    {{ $versionTranslations := partial "functions/get-guide-translations-for-version" . }}
+
+    {{/* Process each translation to find the latest version for each language */}}
+    {{ range $versionTranslations }}
+      {{ $langCode := .Language }}
+
+      {{/* Check if we already have this language or if this version is newer */}}
+      {{ $existing := index $languageMap $langCode }}
+      {{ if not $existing }}
+        {{/* First time seeing this language, add it with version info */}}
+        {{ $translationWithVersion := merge . (dict "Version" $version) }}
+        {{ $languageMap = merge $languageMap (dict $langCode $translationWithVersion) }}
+      {{ else }}
+        {{/* Compare versions to see if this one is newer */}}
+        {{ $currentVersion := $version }}
+        {{ $existingVersion := $existing.Version }}
+
+        {{/* Parse versions for comparison (YYYY.M format) */}}
+        {{ $currentParts := split $currentVersion "." }}
+        {{ $existingParts := split $existingVersion "." }}
+
+        {{ $currentYear := int (index $currentParts 0) }}
+        {{ $currentMonth := int (index $currentParts 1) }}
+        {{ $existingYear := int (index $existingParts 0) }}
+        {{ $existingMonth := int (index $existingParts 1) }}
+
+        {{ $isNewer := false }}
+        {{ if gt $currentYear $existingYear }}
+          {{ $isNewer = true }}
+        {{ else if and (eq $currentYear $existingYear) (gt $currentMonth $existingMonth) }}
+          {{ $isNewer = true }}
+        {{ end }}
+
+        {{ if $isNewer }}
+          {{/* Update with newer version */}}
+          {{ $updatedTranslation := merge . (dict "Version" $currentVersion) }}
+          {{ $languageMap = merge $languageMap (dict $langCode $updatedTranslation) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Convert map to sorted slice */}}
+{{ $translationsList := slice }}
+{{ range $langCode, $translation := $languageMap }}
+  {{/* Ensure all required fields are present */}}
+  {{ if not $translation.Version }}
+    {{/* Try to extract version from the translation's path */}}
+    {{ $pathParts := split $translation.RelPermalink "/" }}
+    {{ $extractedVersion := "" }}
+    {{ range $pathParts }}
+      {{ if and (ne . "") (findRE `^\d{4}\.\d+$` .) }}
+        {{ $extractedVersion = . }}
+        {{ break }}
+      {{ end }}
+    {{ end }}
+    {{ if $extractedVersion }}
+      {{ $translation = merge $translation (dict "Version" $extractedVersion) }}
+    {{ end }}
+  {{ end }}
+
+  {{ $translationsList = $translationsList | append $translation }}
+{{ end }}
+
+{{/* Sort by weight then by language name for consistent output */}}
+{{ $translationsList = sort $translationsList "Weight" "asc" }}
+
+{{/* Return the flat list of latest translations */}}
+{{ return $translationsList }}

@@ -1,0 +1,25 @@
+<div class="card border-0 shadow-sm" style="max-width: 250px;">
+  <div class="card-body text-center p-3">
+    <div class="mb-2 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center rounded-circle bg-secondary" style="width: 80px; height: 80px; min-width: 80px; min-height: 80px; flex-shrink: 0;">
+        {{- if .gravatarHash }}
+          <img src="https://www.gravatar.com/avatar/{{ .gravatarHash }}?s=80&d=mp" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
+        {{- else if .githubUsername }}
+          <img src="https://avatars.githubusercontent.com/{{ .githubUsername }}?s=80" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
+        {{- else if .image }}
+          <img src="{{ .image }}" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
+        {{- else }}
+          <img src="/images/user-default.png" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
+        {{- end }}
+      </div>
+    </div>
+    <h6 class="card-title mb-1 fw-bold">{{ .name }}</h6>
+    {{- $badgeType := "light" }}
+    {{- if eq .role "creator" }}
+      {{- $badgeType = "primary" }}
+    {{- else if eq .role "contributor" }}
+      {{- $badgeType = "secondary" }}
+    {{- end }}
+    <span class="badge text-bg-{{- $badgeType }} mb-2"> {{- if .founder }}<i class="fas fa-star me-1"></i>{{- end }}{{ .role | title }} </span>
+  </div>
+</div>

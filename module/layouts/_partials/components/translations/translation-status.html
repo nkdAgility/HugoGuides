@@ -1,0 +1,17 @@
+{{ $status := "unknown" }}
+{{ if .Language.Params.status }}
+  {{ $status = .Language.Params.status | lower }}
+{{ else if isset . "status" }}
+  {{ $status = .status | lower }}
+{{ end }}
+<span class="badge bg-warning text-dark">
+  {{ if eq $status "reference" }}
+    <i class="fa-solid fa-book-reader me-1"></i>{{ i18n "download_reference_status" . | default "Reference" }}
+  {{ else if eq $status "ai" }}
+    <i class="fa-solid fa-flask me-1"></i> <i class="fa-regular fa-user-robot"></i> {{ i18n "download_stub_status" . | default "Stub" }}
+  {{ else if eq $status "hybrid" }}
+    <i class="fa-solid fa-flask me-1"></i> <i class="fa-regular fa-head-side-gear"></i> {{ i18n "download_preview_status" . | default "In Preview" }}
+  {{ else }}
+    <i class="fa-solid fa-flask me-1"></i>{{ i18n "download_preview_status" . | default "In Preview" }}
+  {{- end }}
+</span>

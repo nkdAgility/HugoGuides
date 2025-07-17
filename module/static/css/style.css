@@ -14,8 +14,21 @@
   border-top: 1px solid #555;
 }
 
+/* Hide bullet points for list items containing checkboxes as direct children */
+li:has(> input[type="checkbox"]) {
+  list-style: none;
+}
+
+/* Fallback for browsers that don't support :has() - target common checkbox list patterns */
+ul li input[type="checkbox"] {
+  margin-left: -1.2em;
+}
+
+li input[type="checkbox"] + * {
+  margin-left: 0.3em;
+}
+
 .main-header {
-  background-color: #135289;
   color: white;
   padding: 10px;
   text-align: center;
@@ -53,6 +66,53 @@
   border-radius: 0.375rem;
 }
 
+/* Dropdown submenu styling */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-menu {
+  overflow: visible;
+}
+
+.dropdown-submenu .dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+  border-radius: 0 6px 6px 6px;
+  display: none;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-submenu .dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu .dropdown-toggle::after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+
+.dropdown-submenu .dropdown-toggle:hover::after {
+  border-left-color: #999;
+}
+
+/* Background colors for different environments */
 .bg-local {
   background-color: #f8f9fa !important;
 }
@@ -93,4 +153,362 @@
   background-color: #1d7fd5 !important;
   border-color: #1d7fd5 !important;
   color: white !important;
+}
+
+/* RTL (Right-to-Left) Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .navbar-nav {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-item {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+[dir="rtl"] .dropdown-menu {
+  right: 0;
+  left: auto;
+  text-align: right;
+}
+
+[dir="rtl"] .dropdown-item {
+  text-align: right;
+}
+
+[dir="rtl"] .d-flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .me-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .card-body {
+  text-align: right;
+}
+
+[dir="rtl"] .card-title {
+  text-align: right;
+}
+
+[dir="rtl"] .card-text {
+  text-align: right;
+}
+
+[dir="rtl"] .text-center {
+  text-align: center !important;
+}
+
+[dir="rtl"] .btn {
+  text-align: center;
+}
+
+/* RTL specific gap adjustments for social buttons */
+[dir="rtl"] .d-flex.gap-2 {
+  gap: 0.5rem;
+  flex-direction: row-reverse;
+}
+
+/* RTL navbar brand alignment */
+[dir="rtl"] .navbar-brand {
+  flex-direction: row-reverse;
+}
+
+/* RTL dropdown toggle */
+[dir="rtl"] .dropdown-toggle::after {
+  margin-left: 0;
+  margin-right: 0.255em;
+}
+
+/* Version Fork Visualization */
+.version-timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.version-timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 120px; /* Start after the latest version */
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #1d7fd5 0%, #6c757d 30%, #6c757d 100%);
+  transform: translateX(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.version-latest {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 2rem;
+}
+
+.version-latest .card {
+  box-shadow: 0 8px 25px rgba(29, 127, 213, 0.15) !important;
+  border-width: 2px !important;
+}
+
+.version-fork-indicator {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+  z-index: 3;
+}
+
+.version-fork-indicator .fork-text {
+  background: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  border: 3px solid #1d7fd5;
+  color: #1d7fd5;
+  font-weight: 700;
+  display: inline-block;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(29, 127, 213, 0.2);
+  position: relative;
+}
+
+.version-fork-indicator .fork-text::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 15px solid #1d7fd5;
+  transform: translateX(-50%);
+}
+
+.version-historical {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+.version-historical .card {
+  border-left: 5px solid #6c757d !important;
+  margin-left: 3rem;
+  opacity: 0.85;
+  background-color: #f8f9fa;
+  border-color: #dee2e6 !important;
+}
+
+.version-historical::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 1.5rem);
+  top: 50%;
+  width: 25px;
+  height: 3px;
+  background: #6c757d;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.version-historical::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + 1px);
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #6c757d;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: 3px solid #fff;
+}
+
+/* Add a connecting dot for the latest version */
+.version-latest::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1rem;
+  width: 16px;
+  height: 16px;
+  background: #1d7fd5;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  border: 4px solid #fff;
+  box-shadow: 0 2px 8px rgba(29, 127, 213, 0.3);
+}
+
+/* History Timeline Styles */
+.timeline-container {
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-connector {
+  opacity: 0.6;
+  margin: 0.5rem 0;
+}
+
+.timeline-connector i {
+  font-size: 0.9rem;
+}
+
+/* Fork visualization styles */
+.timeline-connector .border-end,
+.timeline-connector .border-start {
+  width: 20px;
+}
+
+/* Responsive timeline adjustments */
+@media (max-width: 768px) {
+  .timeline-item .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .timeline-icon {
+    margin-bottom: 10px;
+    margin-right: 0 !important;
+  }
+
+  .timeline-connector {
+    margin-left: 20px;
+  }
+}
+
+/* Enhanced version card styles for timeline context */
+.timeline-item .card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.timeline-item .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .version-timeline::before {
+    left: 2.5rem;
+    top: 140px;
+  }
+
+  .version-latest::after {
+    left: 2.5rem;
+  }
+
+  .version-historical::before {
+    left: 2.5rem;
+    width: 20px;
+  }
+
+  .version-historical::after {
+    left: 2.5rem;
+  }
+
+  .version-historical .card {
+    margin-left: 4rem;
+  }
+
+  .version-fork-indicator {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  /* Responsive submenu positioning */
+  .dropdown-submenu .dropdown-menu {
+    position: static !important;
+    left: auto !important;
+    box-shadow: none;
+    border: none;
+    padding-left: 1.5rem;
+    display: none;
+  }
+
+  .dropdown-submenu .dropdown-menu.show {
+    display: block;
+  }
+
+  .dropdown-submenu .dropdown-toggle::after {
+    display: none;
+  }
+}
+
+/* Breadcrumb styling - Dark header theme */
+.breadcrumb-nav {
+  background-color: transparent;
+  padding: 0.5rem 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.breadcrumb-nav .breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-nav .breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: bold;
+}
+
+.breadcrumb-nav .breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.breadcrumb-nav .breadcrumb-item a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.breadcrumb-nav .breadcrumb-item.active {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Responsive breadcrumbs */
+@media (max-width: 576px) {
+  .breadcrumb-nav {
+    padding: 0.25rem 0;
+    margin-top: 0.25rem;
+  }
+
+  .breadcrumb-nav .breadcrumb {
+    font-size: 0.875rem;
+  }
+
+  /* Hide home icon on very small screens */
+  .breadcrumb-nav .fa-home {
+    display: none;
+  }
 }

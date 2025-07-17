@@ -1,0 +1,46 @@
+{{- /*
+  safe-page-link.html
+
+  A helper partial that returns a safe permalink to a page, falling back to the default language
+  if the page doesn't exist in the current language.
+
+  Usage: {{ partial "functions/safe-page-link.html" "/guide"
+}}
+
+Parameters: - . (string): The path to the page (e.g., "/guide", "/translations") Returns: - A safe permalink URL that either points to the page in the current language or falls back to the default language version */ -}}
+{{- $pagePath := . -}}
+{{- $defaultLang := site.Home.Language.Lang | default "en" -}}
+{{- $currentLang := site.Language.Lang -}}
+{{- $safeUrl := "" -}}
+
+{{- /* Try to get the page in the current language */ -}}
+{{- $currentPage := site.GetPage $pagePath -}}
+
+{{- if $currentPage -}}
+  {{- /* Page exists in current language */ -}}
+  {{- $safeUrl = $currentPage.Permalink -}}
+{{- else -}}
+  {{- /* Page doesn't exist, try default language */ -}}
+  {{- if ne $currentLang $defaultLang -}}
+    {{- /* We're not in the default language, so try to get the default language page */ -}}
+    {{- $defaultSite := index site.Sites 0 -}}
+    {{- range site.Sites -}}
+      {{- if eq .Language.Lang $defaultLang -}}
+        {{- $defaultSite = . -}}
+        {{- break -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $defaultPage := $defaultSite.GetPage $pagePath -}}
+    {{- if $defaultPage -}}
+      {{- $safeUrl = $defaultPage.Permalink -}}
+    {{- else -}}
+      {{- /* Fallback to constructing a basic URL */ -}}
+      {{- $safeUrl = printf "%s%s/" site.BaseURL $pagePath -}}
+    {{- end -}}
+  {{- else -}}
+    {{- /* We're already in default language, construct basic URL */ -}}
+    {{- $safeUrl = printf "%s%s/" site.BaseURL $pagePath -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $safeUrl -}}
