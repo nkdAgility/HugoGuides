@@ -34,6 +34,8 @@ taxonomies: {}
 params:
   description: "Guides Demo"
   keywords: "Guides"
+  logo_image: "/images/guide-1-logo-512.png" # URL to the site logo image
+  menu_logo: "/images/guides-logo-dark.png" # URL to the main menu logo image
   og_image: "/images/og-image.jpg" # URL to the default Open Graph image
   siteProdUrl: "https://hugoguide.org"
   supportEmail: "support@hugoguide.org"
