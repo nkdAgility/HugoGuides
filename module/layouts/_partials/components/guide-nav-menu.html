@@ -13,10 +13,10 @@
 {{- $latestVersion := partial "functions/get-latest-version" . }}
 
 {{/* Check current page type to determine active state */}}
-{{- $isGuideContent := false }}
+{{- $isGuideRoot := false }}
+{{- $isDetails := false }}
 {{- $isTranslations := false }}
 {{- $isHistory := false }}
-{{- $isOverview := false }}
 
 {{/* Build language-aware URL patterns */}}
 {{- $langPrefix := "" }}
@@ -25,45 +25,42 @@
 {{- end }}
 
 {{/* Pattern matching for different page types */}}
+{{- $guideRootPattern := printf "%s/%s/" $langPrefix $currentSection }}
+{{- $guideRootPatternAlt := printf "%s/%s" $langPrefix $currentSection }}
+{{- $detailsPattern := printf "%s/%s/details" $langPrefix $currentSection }}
 {{- $translationsPattern := printf "%s/%s/translations" $langPrefix $currentSection }}
 {{- $historyPattern := printf "%s/%s/history" $langPrefix $currentSection }}
-{{- $overviewPattern := printf "%s/%s/" $langPrefix $currentSection }}
 
-{{/* Alternative patterns without trailing slash for overview */}}
-{{- $overviewPatternAlt := printf "%s/%s" $langPrefix $currentSection }}
-
+{{/* Determine which page type we're on */}}
 {{- if hasPrefix .RelPermalink $translationsPattern }}
   {{- $isTranslations = true }}
 {{- else if hasPrefix .RelPermalink $historyPattern }}
   {{- $isHistory = true }}
-{{- else if or (eq .RelPermalink $overviewPattern) (eq .RelPermalink $overviewPatternAlt) }}
-  {{- $isOverview = true }}
+{{- else if hasPrefix .RelPermalink $detailsPattern }}
+  {{- $isDetails = true }}
+{{- else if or (eq .RelPermalink $guideRootPattern) (eq .RelPermalink $guideRootPatternAlt) }}
+  {{- $isGuideRoot = true }}
 {{- else if eq .Type "guide" }}
-  {{- $isGuideContent = true }}
+  {{/* If it's a guide type but doesn't match specific patterns, treat as guide root */}}
+  {{- $isGuideRoot = true }}
 {{- end }}
 
 
 <nav class="guide-nav-menu bg-light border-bottom py-2" aria-label="Guide navigation">
   <div class="container">
     <ul class="nav nav-pills justify-content-center">
-      {{/* Overview Link */}}
+      {{/* Read Guide Link */}}
       <li class="nav-item">
-        <a class="nav-link {{ if $isOverview }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" $currentSection }}" aria-current="{{ if $isOverview }}page{{ else }}false{{ end }}">
-          <i class="fa-solid fa-house me-2"></i>{{ i18n "nav_overview" | default "Overview" }}
+        <a class="nav-link {{ if $isGuideRoot }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" $currentSection }}" aria-current="{{ if $isGuideRoot }}page{{ else }}false{{ end }}">
+          <i class="fa-solid fa-house me-2"></i>{{ i18n "nav_read_guide" | default "Read Guide" }}
         </a>
       </li>
 
-      {{/* Guide Content Link */}}
+      {{/* Details Link */}}
       <li class="nav-item">
-        {{- if $latestVersion }}
-          <a class="nav-link {{ if $isGuideContent }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection $latestVersion) }}" aria-current="{{ if $isGuideContent }}page{{ else }}false{{ end }}">
-            <i class="fa-solid fa-book me-2"></i>{{ i18n "nav_read_guide" | default "Read Guide" }}
-          </a>
-        {{- else }}
-          <a class="nav-link {{ if $isGuideContent }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" $currentSection }}" aria-current="{{ if $isGuideContent }}page{{ else }}false{{ end }}">
-            <i class="fa-solid fa-book me-2"></i>{{ i18n "nav_read_guide" | default "Read Guide" }}
-          </a>
-        {{- end }}
+        <a class="nav-link {{ if $isDetails }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "details") }}" aria-current="{{ if $isDetails }}page{{ else }}false{{ end }}">
+          <i class="fa-solid fa-eye me-2"></i>{{ i18n "nav_details" | default "Details" }}
+        </a>
       </li>
 
       {{/* Translations Link */}}

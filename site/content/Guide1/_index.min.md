@@ -2,7 +2,6 @@
 title: "Da Guide 1 Booky"
 description: >
   Guide 1 be in dis magic booky! Da Guide 1 made by bunch o' clever banana heads. Dis guidey grow-grow with halp from da community tribe. We go promisey to keep da community nice-nice for all banana types! And it free! FREE!! 🎉
-
 Type: "guide"
 Layout: "root"
 brand:
@@ -37,4 +36,6 @@ layman_description: |
 
 practitioner_description: |
   [Da Guide 1](/min/guide-1/latest) is da pro banana booky. Say how to flow da value like a river of pudding. Got da 3 big things: see da work, manage da work, fix da work. All clean, all shiny. If you need clear, stable, no-headache work stuff, dis da one.
+aliases:
+  - /guide-1/latest
 ---
