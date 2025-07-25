@@ -17,22 +17,6 @@ languages:
     params:
       description: Demo for Hugo Guides
       keywords: Guides
-  es-419:
-    languageName: Español (América Latina)
-    weight: 3
-    title: Guías Demo
-    params:
-      description: Demo for Hugo Guides
-      keywords: Guides
-      status: AI
-  min:
-    languageName: Minionese
-    weight: 1001
-    title: Banana Guides
-    params:
-      description: Bello! Banana Guides para banana work!
-      keywords: Banana
-      status: reference
 
 params:
   description: "Guides Demo"
@@ -48,6 +32,7 @@ params:
     bg_colour: "#135289"
   AzureSitesConfig: "#{Guides_AzureSitesConfig}#"
   GitVersion_SemVer: "v#{GitVersion.SemVer}#"
+  GoogleTagManagerID: "GTM-MOOO" # Replace with your actual GTM ID
 sitemap:
   filename: sitemap.xml
   changefreq: daily
