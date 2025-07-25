@@ -168,6 +168,9 @@
             {{- if $isComingSoon }}
               <div class="alert alert-warning" role="alert">{{ i18n "guide_coming_soon" }}</div>
             {{ else }}
+              {{- /* Version notice for historical versions */ -}}
+              {{ partial "components/guide/guide-version-notice.html" . }}
+
               {{- /* PDF intro text with Google Analytics tracking */ -}}
               {{- if eq .Site.Language.Lang "en" }}
                 {{- $pdfPatternEN := "pdf/*.en.pdf" }}

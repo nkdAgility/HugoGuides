@@ -1,0 +1,32 @@
+{{/* Alternate Links for Guide Versions
+  Purpose: Add alternate/related links for different versions
+  Input: A page context
+  Output: Link tags for version relationships
+*/}}
+
+{{- if eq .Type "guide" -}}
+  {{- $currentVersion := partial "functions/get-guide-version.html" . -}}
+  {{- if $currentVersion -}}
+    {{- $allVersions := partial "functions/get-all-versions.html" . -}}
+    {{- $latestVersion := partial "functions/get-latest-version" . -}}
+
+    {{- /* Add alternate links for other versions */ -}}
+    {{- range $allVersions -}}
+      {{- if ne .version $currentVersion -}}
+        {{- if .isLatest -}}
+          <link rel="alternate" href="{{ $.Site.Params.siteProdUrl }}{{ .url }}" title="{{ .title }} (Latest Version)" />
+        {{- else -}}
+          <link rel="alternate" href="{{ $.Site.Params.siteProdUrl }}{{ .url }}" title="{{ .title }} ({{ .version }})" />
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Add "latest" rel link if this is not the latest version */ -}}
+    {{- if ne $currentVersion $latestVersion -}}
+      {{- $sectionPage := $.Site.GetPage $.Section -}}
+      {{- if $sectionPage -}}
+        <link rel="latest-version" href="{{ $.Site.Params.siteProdUrl }}{{ $sectionPage.RelPermalink }}" title="{{ $.Title }} (Latest Version)" />
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

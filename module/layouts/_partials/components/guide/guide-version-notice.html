@@ -1,0 +1,27 @@
+{{/* Guide Version Notice Component
+  Purpose: Display a notice about guide versioning for historical versions
+  Input: A guide page context
+  Output: HTML notice about the version status
+*/}}
+
+{{- if eq .Type "guide" -}}
+  {{- $currentVersion := partial "functions/get-guide-version.html" . -}}
+  {{- if $currentVersion -}}
+    {{- $latestVersion := partial "functions/get-latest-version" . -}}
+    {{- if ne $currentVersion $latestVersion -}}
+      {{- $sectionPage := .Site.GetPage .Section -}}
+      {{- if $sectionPage -}}
+        <div class="alert alert-info mb-4" role="alert">
+          <div class="d-flex align-items-start">
+            <i class="fa-solid fa-info-circle me-2 mt-1 flex-shrink-0"></i>
+            <div>
+              <strong>Historical Version Notice:</strong>
+              You are viewing version {{ $currentVersion }} of this guide.
+              <a href="{{ $sectionPage.RelPermalink }}" class="alert-link"> View the latest version ({{ $latestVersion }}) </a> for the most up-to-date information.
+            </div>
+          </div>
+        </div>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

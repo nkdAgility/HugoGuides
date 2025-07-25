@@ -1,0 +1,30 @@
+{{/* SEO Meta Tags for Guide Versioning
+  Purpose: Handle SEO meta tags specifically for guide pages
+  Input: A page context
+  Output: SEO meta tags including robots directives
+*/}}
+
+{{- $isGuide := eq .Type "guide" -}}
+{{- $currentVersion := "" -}}
+{{- $latestVersion := "" -}}
+{{- $isLatestVersion := false -}}
+
+{{- if $isGuide -}}
+  {{- $currentVersion = partial "functions/get-guide-version.html" . -}}
+  {{- if $currentVersion -}}
+    {{- $latestVersion = partial "functions/get-latest-version" . -}}
+    {{- $isLatestVersion = eq $currentVersion $latestVersion -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Robots meta tag for non-latest versions */ -}}
+{{- if and $isGuide $currentVersion (not $isLatestVersion) -}}
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="Historical version ({{ $currentVersion }}) of {{ .Title }}. For the latest version, visit the main guide page." />
+{{- end -}}
+
+{{- /* Add version-specific meta for latest version */ -}}
+{{- if and $isGuide $isLatestVersion -}}
+  <meta name="version" content="{{ $currentVersion }}" />
+  <meta name="version-type" content="latest" />
+{{- end -}}

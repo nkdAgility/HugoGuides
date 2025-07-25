@@ -50,7 +50,12 @@
     <title>{{ $title }}</title>
     <meta name="description" content="{{ ( .Description | default  .Site.Params.description) | plainify }}" />
     <meta name="keywords" content="{{ .Keywords | default .Site.Params.keywords }}" />
-    <link rel="canonical" href="{{ .Site.Params.siteProdUrl }}{{ .RelPermalink }}" />
+    {{- $canonicalUrl := partial "functions/get-canonical-url.html" . -}}
+    <link rel="canonical" href="{{ .Site.Params.siteProdUrl }}{{ $canonicalUrl }}" />
+
+    {{/* Guide version-specific SEO meta tags */}}
+    {{ partial "components/seo/guide-version-meta.html" . }}
+    {{ partial "components/seo/guide-version-links.html" . }}
 
     {{/* Open Graph / Facebook Meta Tags */}}
     <meta property="og:type" content="website" />
@@ -82,6 +87,7 @@
 
     {{/* JSON-LD Structured Data */}}
     {{ partial "JSON-LD/main.html" . }}
+    {{ partial "components/seo/guide-structured-data.html" . }}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
@@ -96,8 +102,7 @@
 
   <body id="top" data-ndka-environment="{{ hugo.Environment }}" data-ndka-version="{{ .Site.Params.version | default "v0.0.0" }}">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2KD2BNT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2KD2BNT" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {{ if ne hugo.Environment "production" }}
       <div class="container-fluid text-center p-2 bg-{{ hugo.Environment }}">
