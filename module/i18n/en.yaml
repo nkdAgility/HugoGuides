@@ -318,3 +318,58 @@
 
 - id: view_on_github_button
   translation: "View on GitHub"
+
+# Version Card Component translations
+- id: current_open_guide_label
+  translation: "Current Open Guide"
+
+- id: active_status_label
+  translation: "Active"
+
+- id: current_fork_label
+  translation: "Current Fork"
+
+- id: active_fork_label
+  translation: "Fork"
+
+- id: fork_indicator
+  translation: "Forked from:"
+
+- id: forked_from_indicator
+  translation: "Forked from:"
+
+- id: this_is_fork_label
+  translation: "This is a fork"
+
+- id: available_languages_label
+  translation: "Available in"
+
+- id: pdf_downloads_label
+  translation: "PDF Downloads"
+
+- id: living_document_updated_label
+  translation: "Living document updated"
+
+- id: active_fork_updated_label
+  translation: "Active fork updated"
+
+- id: historical_fork_label
+  translation: "Historical fork from"
+
+- id: historical_version_label
+  translation: "Historical version from"
+
+- id: current_version_label
+  translation: "Current version"
+
+- id: read_guide_button
+  translation: "Read Guide"
+
+- id: translations_button_small
+  translation: "Translations"
+
+- id: read_fork_button
+  translation: "Read Fork"
+
+- id: view_archive_button
+  translation: "View Archive"

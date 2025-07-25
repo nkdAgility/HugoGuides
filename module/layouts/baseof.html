@@ -25,17 +25,29 @@
       {{ $topSection := .Site.GetPage (printf "/%s" .Section) }}
       {{ if eq $topSection.Type "guide" }}
         {{ if eq .Type "guide" }}
-          {{- if eq .Layout "root" }}
-            {{ $title = printf "%s | %s | %s" "Overview" $topSection.Title  .Site.Title }}
-          {{- else }}
-            {{- $version := partial "functions/get-guide-version.html" . -}}
-            {{- $latestVersion := partial "functions/get-latest-version.html" $topSection -}}
-            {{- $guideVersionBit := "unknown" }}
-            {{- if eq $version $latestVersion -}}
-              {{- $guideVersionBit = printf "%s (latest)" ( .Date | dateFormat "January 2006" ) -}}
+          {{- $version := partial "functions/get-guide-version.html" . -}}
+          {{- $allVersions := partial "functions/get-all-versions.html" . -}}
+          {{- $currentVersionObj := "" -}}
+          {{- range $allVersions -}}
+            {{- if eq .version $version -}}
+              {{- $currentVersionObj = . -}}
+              {{- break -}}
+            {{- end -}}
+          {{- end -}}
+          {{- $guideVersionBit := "unknown" }}
+          {{- if $currentVersionObj -}}
+            {{- if $currentVersionObj.isLatest -}}
+              {{- $guideVersionBit = printf "%s (latest)" ( $currentVersionObj.date | dateFormat "January 2006" ) -}}
             {{- else -}}
-              {{- $guideVersionBit = printf "%s"  (.Date | dateFormat "January 2006") -}}
-            {{- end }}
+              {{- $guideVersionBit = printf "%s" ( $currentVersionObj.date | dateFormat "January 2006" ) -}}
+            {{- end -}}
+          {{- else -}}
+            {{- /* Fallback for non-version pages - use page title */ -}}
+            {{- $guideVersionBit = .Title -}}
+          {{- end }}
+          {{- if eq .Layout "root" }}
+            {{ $title = printf "%s | %s | %s" "latest" $topSection.Title  .Site.Title }}
+          {{- else }}
             {{ $title = printf "%s | %s | %s" $guideVersionBit $topSection.Title  .Site.Title }}
           {{- end }}
         {{ else }}
