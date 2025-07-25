@@ -56,48 +56,8 @@
 - id: guides_intro_text
   translation: "Learn effective practices and how to apply them to optimize workflow and value delivery through any process. This is your comprehensive resource for knowledge and best practices. {{ .Site.Title }} is the home of practical guides. It is a free, community-driven reference for applying proven methodologies in knowledge work. The guides define the core practices, and metrics necessary to improve flow, optimize value delivery, and enhance team sustainability. These guides support scalable adoptions across diverse industries and complement other modern workflow approaches."
 
-- id: download_title
-  translation: "Download {{ .Site.Title }}"
-
-- id: download_description
-  translation: "Download the complete {{ .Site.Title }} as a PDF file for offline reading and reference."
-
-- id: download_button
-  translation: "Download PDF"
-
-- id: about_creators_title
-  translation: "About the creators of {{ .Site.Title }}"
-
-- id: read_bio_button
-  translation: "Read {{ .Name }}'s bio"
-
 - id: guide_content_not_found
   translation: "Guide content not found"
-
-- id: reportTranslationError
-  translation: "Report Translation Error"
-
-# Navigation translations
-- id: nav_read_online
-  translation: "Read Online"
-
-- id: nav_translations
-  translation: "Translations"
-
-- id: nav_versions
-  translation: "Versions"
-
-- id: nav_pdf_version
-  translation: "PDF Version"
-
-- id: nav_creators
-  translation: "Creators"
-
-- id: nav_all_creators
-  translation: "All Creators"
-
-- id: nav_faq
-  translation: "FAQ"
 
 - id: nav_read_guide
   translation: "Read Guide"
@@ -120,28 +80,6 @@
 
 - id: guide_pdf_intro_link
   translation: "Download PDF"
-
-# Preview Translations functionality
-- id: download_preview_translations
-  translation: "Preview Translations"
-
-- id: download_preview_description
-  translation: "These translations are available in preview and need at least 5 community reviewers before they can be moved to the main site. Help us review and improve these translations!"
-
-- id: download_visit_preview
-  translation: "Visit preview site"
-
-- id: download_table_status
-  translation: "Status"
-
-- id: download_preview_status
-  translation: "In Preview"
-
-- id: download_preview_action
-  translation: "Preview"
-
-- id: download_discussion_action
-  translation: "Discussion"
 
 # Download page translations
 - id: download_page_title
@@ -176,9 +114,6 @@
 
 - id: download_table_translations_by
   translation: "Translations By"
-
-- id: download_table_written_by
-  translation: "Written By"
 
 - id: download_table_action
   translation: "Action"
@@ -223,35 +158,7 @@
 - id: guide_pdf_intro_link
   translation: "Download PDF"
 
-# History page translations
-- id: history_page_title
-  translation: "Versions"
-
-- id: history_evolution_title
-  translation: "Evolution of the Guide"
-
-- id: history_evolution_description
-  translation: 'The current <strong><a href="{{ .GuideLink }}">Open Guide</a></strong> is a living document that has evolved from previous historical versions, incorporating community feedback and modern best practices. For organizations, <a href="/history/guide-2025/">this guide</a> represents the current living reference.'
-
-- id: history_fork_summary_historical
-  translation: "Historical Versions"
-
-- id: history_fork_summary_current
-  translation: "Open Guide"
-
-- id: history_fork_summary_description
-  translation: "Current guide builds upon and extends previous versions"
-
-- id: history_fork_indicator
-  translation: "Forked & Enhanced from These Historical Versions"
-
-- id: history_no_versions_available
-  translation: "No versions are currently available."
-
 # Guide template translations
-- id: guide_join_discussion
-  translation: "Join Discussion"
-
 - id: guide_table_of_contents
   translation: "Table of Contents"
 
@@ -411,58 +318,3 @@
 
 - id: view_on_github_button
   translation: "View on GitHub"
-
-# Additional translations for version-card.html
-- id: current_open_guide_label
-  translation: "Current Open Guide"
-
-- id: active_status_label
-  translation: "Active"
-
-- id: current_fork_label
-  translation: "Current Fork"
-
-- id: active_fork_label
-  translation: "Active Fork"
-
-- id: fork_indicator
-  translation: "Fork:"
-
-- id: forked_from_indicator
-  translation: "Forked from:"
-
-- id: this_is_fork_label
-  translation: "This is a fork"
-
-- id: available_languages_label
-  translation: "Available Languages:"
-
-- id: pdf_downloads_label
-  translation: "PDF Downloads:"
-
-- id: living_document_updated_label
-  translation: "Living Document - Updated"
-
-- id: active_fork_updated_label
-  translation: "Active Fork - Updated"
-
-- id: historical_fork_label
-  translation: "Historical Fork -"
-
-- id: historical_version_label
-  translation: "Historical Version -"
-
-- id: current_version_label
-  translation: "Current Version"
-
-- id: read_guide_button
-  translation: "Read Guide"
-
-- id: translations_button_small
-  translation: "Translations"
-
-- id: read_fork_button
-  translation: "Read Fork"
-
-- id: view_archive_button
-  translation: "View Archive"
