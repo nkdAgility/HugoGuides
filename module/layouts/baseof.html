@@ -57,7 +57,7 @@
     <meta property="og:url" content="{{ .RelPermalink }}" />
     <meta property="og:title" content="{{ $title }}" />
     <meta property="og:description" content="{{ ( .Description | default  .Site.Params.description) | plainify }}" />
-    <meta property="og:image" content="/images/open-guide-to-kanban-logo-512.png" />
+    <meta property="og:image" content="/images/guide-1-logo-512.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta property="og:image:alt" content="{{ .Site.Title }} Logo" />
@@ -69,7 +69,7 @@
     <meta name="twitter:url" content="{{ .RelPermalink }}" />
     <meta name="twitter:title" content="{{ $title }}" />
     <meta name="twitter:description" content="{{ ( .Description | default .Site.Params.description) | plainify }}" />
-    <meta name="twitter:image" content="/images/open-guide-to-kanban-logo-512.png" />
+    <meta name="twitter:image" content="/images/guide-1-logo-512.png" />
     <meta name="twitter:image:alt" content="{{ .Site.Title }} Logo" />
 
     {{/* Additional Meta Tags */}}
@@ -105,7 +105,7 @@
         {{ if eq hugo.Environment "development" }}
           Local | v0.0.0 | No Robots
         {{ else }}
-          #{KanbanGuides_AzureSitesConfig}# | v#{GitVersion.SemVer}# | No Robots
+          {{ .Site.Params.AzureSitesConfig }} | {{ .Site.Params.GitVersion_SemVer }} | No Robots
         {{ end }}
         | <a href="#debugArea">Debug Info</a>
       </div>

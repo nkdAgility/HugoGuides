@@ -30,7 +30,7 @@
 {{- if and $current $current.Params.forked_from }}
   {{- $forkFromPath := $current.Params.forked_from }}
 
-  {{/* Parse the fork path - could be "kanban-guide/2025.5" or just "kanban-guide" */}}
+  {{/* Parse the fork path - could be "guide/2025.5" or just "guide" */}}
   {{- $forkPathParts := split $forkFromPath "/" }}
   {{- $forkSection := index $forkPathParts 0 }}
   {{- $forkVersion := "" }}
@@ -80,7 +80,7 @@
   {{- $latestPage := "" }}
 
   {{- range $sectionPages }}
-    {{/* Extract version from URL path (e.g., /open-guide-for-kanban/2025.7/) */}}
+    {{/* Extract version from URL path (e.g., /guide1/2025.7/) */}}
     {{- $pathParts := split .RelPermalink "/" }}
     {{- range $pathParts }}
       {{- if and (ne . "") (findRE `^\d{4}\.\d+` .) }}

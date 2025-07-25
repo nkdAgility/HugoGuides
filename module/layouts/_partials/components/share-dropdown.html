@@ -23,11 +23,7 @@
 {{ if not (.Page.Scratch.Get $cacheKey) }}
   {{ .Page.Scratch.Set $cacheKey true }}
   {{ $url := "" }}
-  {{ if eq .Type "resources" }}
-    {{ $url = printf "https://kanbanguides.org/resources/%s" .Params.ResourceId }}
-  {{ else }}
-    {{ $url = printf "https://kanbanguides.org%s" .RelPermalink }}
-  {{ end }}
+  {{ $url = printf "%s/%s" .Site.Params.productionSiteUrl .Params.ResourceId }}
 
 
   <!-- JavaScript to copy link -->

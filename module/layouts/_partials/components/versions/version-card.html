@@ -46,7 +46,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
           {{ else if eq $itemType "forkHistory" }}
             <i class="fas fa-code-branch me-2 text-warning"></i>
           {{ end }}
-          {{ .Title | default "Open Guide to Kanban" }}
+          {{ .Title | default "Guide 1" }}
         </h5>
         {{ if not $isLatest }}
           <span class="badge bg-secondary">{{ .Date.Format "Jan 2006" }}</span>
@@ -159,7 +159,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
                 {{- $filename := .Name }}
                 {{- $langCode := "" }}
                 {{- $displayName := "" }}
-                {{/* Extract language code from filename like "kanban-guide.ja.pdf" */}}
+                {{/* Extract language code from filename like "guide.ja.pdf" */}}
                 {{- $parts := split $filename "." }}
                 {{- if ge (len $parts) 3 }}
                   {{- $langCode = index $parts (sub (len $parts) 2) }}

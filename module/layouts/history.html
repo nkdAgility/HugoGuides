@@ -16,7 +16,7 @@
   {{/* Fallback: try to find by version number in URL path */}}
   {{- if not $guidePage }}
     {{- range $sectionPages }}
-      {{/* Extract version from URL path (e.g., /open-guide-for-kanban/2025.7/) */}}
+      {{/* Extract version from URL path (e.g., /guide1/2025.7/) */}}
       {{- $pathParts := split .RelPermalink "/" }}
       {{- range $pathParts }}
         {{- if and (ne . "") (findRE `^\d{4}\.\d+` .) }}
@@ -44,6 +44,7 @@
   {{- end }}
 
   {{ partial "components/guide-nav-menu.html" . }}
+
 
   <section class="container my-5">
     <div class="row mb-4">

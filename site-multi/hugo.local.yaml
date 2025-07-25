@@ -5,3 +5,7 @@ buildFuture: true
 buildExpired: true
 
 disableAliases: true
+
+module:
+  replacements:
+    - github.com/nkdAgility/HugoGuides/module -> ../../module

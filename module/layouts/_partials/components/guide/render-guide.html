@@ -60,7 +60,7 @@
                 <div class="d-flex gap-2">
                   {{- if ne .Site.Language.Lang "en" }}
                     <a
-                      href="https://github.com/KanbanGuides/KanbanGuides/issues/new?template=translation-error.yml"
+                      href="{{ .Site.Params.githubUrl }}/issues/new?template=translation-error.yml"
                       class="btn btn-outline-warning btn-sm flex-shrink-0"
                       target="_blank"
                       rel="noopener noreferrer"

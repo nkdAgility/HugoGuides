@@ -45,6 +45,8 @@ params:
   productionSiteUrl: https://hugoguides.org/
   brand:
     bg_colour: "#135289"
+  AzureSitesConfig: "#{Guides_AzureSitesConfig}#"
+  GitVersion_SemVer: "v#{GitVersion.SemVer}#"
 sitemap:
   filename: sitemap.xml
   changefreq: daily
