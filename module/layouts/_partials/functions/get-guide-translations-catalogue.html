@@ -23,9 +23,12 @@
   {{ end }}
 {{ end }}
 
+{{/* Sort sections by weight */}}
+{{ $sortedSections := sort $uniqueSections "Weight" }}
+
 {{/* Transform to simplified structure with only useful information */}}
 {{ $guideInfo := slice }}
-{{ range $uniqueSections.ByWeight }}
+{{ range $sortedSections }}
   {{/* Get all guide versions for this section */}}
   {{ $guidePages := where .Pages "Type" "guide" }}
 

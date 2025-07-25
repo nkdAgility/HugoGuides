@@ -1,6 +1,5 @@
-environment: "canary"
+Environment: "preview"
 minifyOutput: true
 
 buildDrafts: true
 buildFuture: true
-buildExpired: true

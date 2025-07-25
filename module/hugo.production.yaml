@@ -1,16 +1,8 @@
-baseURL: https://kanbanguides.org
+baseURL: https://guidedemo.org
 Environment: production
 minifyOutput: true
 languages:
   min:
-    disabled: true
-  fa:
-    disabled: true
-  pl:
-    disabled: true
-  nl:
-    disabled: true
-  de:
     disabled: true
   es-419:
     disabled: true

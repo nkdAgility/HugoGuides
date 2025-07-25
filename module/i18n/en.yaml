@@ -33,13 +33,13 @@
   translation: "View History"
 
 - id: what_is_guides_title
-  translation: "What are the Kanban Guides?"
+  translation: "What are the {{ .Site.Title }}?"
 
 - id: open_source_title
   translation: "Open Source & Community Driven"
 
 - id: open_source_description
-  translation: "The Open Guide to Kanban is an open source project that thrives on community collaboration. Whether you want to suggest improvements, report issues, or contribute content, we welcome your participation. The Kanban Guide is not open to contributions here, but is included here for reference. Together, we can make these resources even more valuable for the Kanban community worldwide and anyone wishing to improve the flow of value (potential and actual realized value)."
+  translation: "This is an open source project that thrives on community collaboration. Whether you want to suggest improvements, report issues, or contribute content, we welcome your participation. Some guides may not be open to contributions but are included here for reference. Together, we can make these resources even more valuable for practitioners worldwide and anyone wishing to improve workflow efficiency and value delivery."
 
 - id: at_a_glance_title
   translation: "At a Glance"
@@ -48,13 +48,13 @@
   translation: "Join the Discussion"
 
 - id: join_discussion_title
-  translation: "Join the Kanban Guides Discussion"
+  translation: "Join the {{ .Site.Title }} Discussion"
 
 - id: join_discussion_description
-  translation: "Engage with the community, share your insights, and help shape the future of the Kanban Guides. Your contributions are invaluable in making these guides comprehensive resources for Kanban practitioners."
+  translation: "Engage with the community, share your insights, and help shape the future of the {{ .Site.Title }}. Your contributions are invaluable in making these guides comprehensive resources for practitioners."
 
 - id: guides_intro_text
-  translation: "Learn what Kanban is and how to apply it to optimise the flow of value through a process. This is your comprehensive resource for Kanban knowledge and practices. Kanban Guides is the home of the The Kanban Guide, adn the Open Guide to Kanban. It is a free, community-driven reference for applying Kanban in knowledge work. The guides define the core practices, and metrics  necessary to improve flow, optimise value delivery, and enhance team sustainability. These guides support scalable Kanban adoptions across diverse industries and complement other agile, lean, and flow-based approaches."
+  translation: "Learn effective practices and how to apply them to optimize workflow and value delivery through any process. This is your comprehensive resource for knowledge and best practices. {{ .Site.Title }} is the home of practical guides. It is a free, community-driven reference for applying proven methodologies in knowledge work. The guides define the core practices, and metrics necessary to improve flow, optimize value delivery, and enhance team sustainability. These guides support scalable adoptions across diverse industries and complement other modern workflow approaches."
 
 - id: download_title
   translation: "Download {{ .Site.Title }}"
@@ -231,7 +231,7 @@
   translation: "Evolution of the Guide"
 
 - id: history_evolution_description
-  translation: 'The current <strong><a href="{{ .GuideLink }}">Open Guide to Kanban</a></strong> is a living document that has evolved from previous historical versions, incorporating community feedback and modern Kanban practices. For ProKanban, <a href="/history/kanban-guide-2025/">The Kanban Guide</a> is their living guide.'
+  translation: 'The current <strong><a href="{{ .GuideLink }}">Open Guide</a></strong> is a living document that has evolved from previous historical versions, incorporating community feedback and modern best practices. For organizations, <a href="/history/guide-2025/">this guide</a> represents the current living reference.'
 
 - id: history_fork_summary_historical
   translation: "Historical Versions"

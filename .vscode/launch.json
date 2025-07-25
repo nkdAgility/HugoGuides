@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PowerShell Launch Current File",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "cwd": "${cwd}"
+    },
+    {
+      "name": "Attach to .NET Functions",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:azureFunctions.pickProcess}"
+    },
+    {
+      "name": "Launch Hugo & Functions",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "start-hugo-and-functions",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

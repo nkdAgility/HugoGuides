@@ -1,4 +1,4 @@
-title: Kanban Guides
+title: Guides Demo
 buildFuture: true
 publishDir: ../public
 resourceDir: ../resources
@@ -13,36 +13,36 @@ languages:
   en:
     languageName: English
     weight: 1
-    title: Kanban Guides
+    title: Guides Demo
     params:
-      description: Learn how to apply Kanban to optimise flow and value delivery. Home of the Open Guide to Kanban and The Kanban Guide
-      keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
+      description: Demo for Hugo Guides
+      keywords: Guides
   es-419:
-    languageName: Spanish (Latin America)
+    languageName: Español (América Latina)
     weight: 3
-    title: Guías de Kanban
+    title: Guías Demo
     params:
-      description: Kanban Guides es el hogar de la Guía Abierta de Kanban, y la Guía de Kanban. Es una referencia gratuita y comunitaria para aplicar Kanban en el trabajo del conocimiento. Las guías definen las prácticas, métricas y principios fundamentales necesarios para mejorar el flujo, optimizar la entrega de valor y mejorar la sostenibilidad del equipo. Esta guía apoya implementaciones escalables de Kanban en diversas industrias y complementa otros enfoques ágiles, lean y basados en el flujo.
-      keywords: Kanban, Guía Abierta de Kanban, guía de kanban, método kanban, trabajo del conocimiento, optimización del flujo, límites de WIP, entrega de valor, ágil, lean, mejora continua, expectativa de nivel de servicio, flujo acumulativo, rendimiento, métricas, antigüedad de ítems de trabajo, eficiencia de flujo, visualización, trabajo en curso, mejora de procesos, tablero kanban, definición de flujo de trabajo, entrega orientada a resultados
+      description: Demo for Hugo Guides
+      keywords: Guides
       status: AI
   min:
     languageName: Minionese
     weight: 1001
-    title: Banana Kanban Guides
+    title: Banana Guides
     params:
-      description: Bello! Kanban Guides para banana work! Poopaye me want open guide to kanban, banana kanban guide! Gelato work, banana flow optimizzazione, WIP-ay limitazione, banana delivery, agile banana, lean banana, continuo improvement-o! Bananaaaa!
-      keywords: Kanban, banana, gelato, poopaye, bello, work banana, flow banana, WIP banana, value banana, agile banana, lean banana, improvement banana, kanban board banana, workflow banana, delivery banana
+      description: Bello! Banana Guides para banana work!
+      keywords: Banana
       status: reference
 
 params:
-  description: Authoritative and Open Resources for Flow-Based Work
-  keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
-  og_image: /images/open-guide-to-kanban-logo-512.png
-  siteProdUrl: https://kanbanguides.org
-  supportEmail: support@kanbanguides.org
-  githubUrl: https://github.com/KanbanGuides/KanbanGuides
-  previewSiteUrl: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
-  productionSiteUrl: https://kanbanguides.org/
+  description: Hugo Guides Module
+  keywords: Hugo, Guides, Module
+  og_image: /images/hugo-guides-module.png
+  siteProdUrl: https://hugoguides.org
+  supportEmail: support@hugoguides.org
+  githubUrl: https://github.com/nkdAgility/HugoGuides
+  previewSiteUrl: https://preview.hugoguides.org/
+  productionSiteUrl: https://hugoguides.org/
   brand:
     bg_colour: "#135289"
 sitemap:

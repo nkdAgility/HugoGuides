@@ -14,6 +14,14 @@ languages:
     params:
       description: "Guide Pack"
       keywords: "Guides"
+  min:
+    languageName: Minionese
+    weight: 1001
+    title: Banana Guides
+    params:
+      description: Bello! Banana Guides para banana work!
+      keywords: Banana
+      status: reference
 
 summaryLength: 30
 

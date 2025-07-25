@@ -33,13 +33,13 @@
   translation: "See da Past-o"
 
 - id: what_is_guides_title
-  translation: "Whaaaa is Kanban Booky?"
+  translation: "Whaaaa is da Booky?"
 
 - id: open_source_title
   translation: "Freee! Many banana peoples!"
 
 - id: open_source_description
-  translation: "Dis Kanban thingy is free like banana! You helpy, you writey, but one guide is 'no-no helpy'. We make better together for zoom-zoom flow and happy team-team."
+  translation: "Dis booky thingy is free like banana! You helpy, you writey, but some guides is 'no-no helpy'. We make better together for zoom-zoom flow and happy team-team."
 
 - id: at_a_glance_title
   translation: "Quick Peeky Peek"
@@ -54,7 +54,7 @@
   translation: "Talky talk with guide-friends, share 'aha!', make da booky super wow!"
 
 - id: guides_intro_text
-  translation: "Bello! Dis da big book land of Kanban things. Scroll down for brain food."
+  translation: "Bello! Dis da big book land of workflow things. Scroll down for brain food."
 
 - id: download_title
   translation: "Grabby da {{ .Site.Title }}"
@@ -231,7 +231,7 @@
   translation: "Booky Grow-Grow"
 
 - id: history_evolution_description
-  translation: 'Da now-now <strong><a href="{{ .GuideLink }}">Open Kanban Booky</a></strong> is alive! Got fed by past-y bookies, banana peoples, and new wow-wow ideas. For da ProKanban tribe, <a href="/history/kanban-guide-2025/">Dis one</a> is da livin one.'
+  translation: 'Da now-now <strong><a href="{{ .GuideLink }}">Open Booky</a></strong> is alive! Got fed by past-y bookies, banana peoples, and new wow-wow ideas. For da workflow tribe, <a href="/history/guide-2025/">Dis one</a> is da livin one.'
 
 - id: history_fork_summary_historical
   translation: "Old-Timey Versions"

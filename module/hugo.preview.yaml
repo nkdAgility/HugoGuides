@@ -1,4 +1,4 @@
-baseURL: "https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/"
+baseURL: "https://preview.guidedemo.org/"
 Environment: "preview"
 minifyOutput: true
 
