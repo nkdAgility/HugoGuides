@@ -8,19 +8,21 @@
 
 {{- $result := dict "current" nil "history" slice "forkSource" nil "forkHistory" slice }}
 
-{{/* Get current section's latest version */}}
+{{/* Get current section's latest version using get-all-versions */}}
 {{- $currentSection := .Section }}
-{{- $sectionPages := where .Site.RegularPages "Section" $currentSection }}
-{{- $guidePages := where $sectionPages "Type" "guide" }}
+{{- $allVersions := partial "functions/get-all-versions" . }}
 
 {{/* Find current latest version */}}
-{{- if $guidePages }}
-  {{- $sortedPages := $guidePages.ByDate.Reverse }}
-  {{- $result = merge $result (dict "current" (index $sortedPages 0)) }}
+{{- if $allVersions }}
+  {{- $latestVersionObj := index $allVersions 0 }}
+  {{- $result = merge $result (dict "current" $latestVersionObj.page) }}
 
   {{/* Get historical versions (exclude the latest) */}}
-  {{- if gt (len $sortedPages) 1 }}
-    {{- $historyPages := after 1 $sortedPages }}
+  {{- if gt (len $allVersions) 1 }}
+    {{- $historyPages := slice }}
+    {{- range after 1 $allVersions }}
+      {{- $historyPages = $historyPages | append .page }}
+    {{- end }}
     {{- $result = merge $result (dict "history" $historyPages) }}
   {{- end }}
 {{- end }}
@@ -38,55 +40,56 @@
     {{- $forkVersion = index $forkPathParts 1 }}
   {{- end }}
 
-  {{/* Get fork source section pages */}}
-  {{- $forkSectionPages := where .Site.RegularPages "Section" $forkSection }}
-  {{- $forkGuidePages := where $forkSectionPages "Type" "guide" }}
+  {{/* Get fork source versions using get-all-versions */}}
+  {{- $forkSectionPage := .Site.GetPage $forkSection }}
+  {{- if $forkSectionPage }}
+    {{- $forkAllVersions := partial "functions/get-all-versions" $forkSectionPage }}
 
-  {{- if $forkGuidePages }}
-    {{- $sortedForkPages := $forkGuidePages.ByDate.Reverse }}
-
-    {{/* If specific version is mentioned, try to find that version first */}}
-    {{- if $forkVersion }}
-      {{- range $sortedForkPages }}
-        {{- $pagePath := .RelPermalink }}
-        {{- if findRE (printf `/%s/` $forkVersion) $pagePath }}
-          {{- $result = merge $result (dict "forkSource" .) }}
-          {{- break }}
+    {{- if $forkAllVersions }}
+      {{/* If specific version is mentioned, try to find that version first */}}
+      {{- if $forkVersion }}
+        {{- range $forkAllVersions }}
+          {{- if eq .version $forkVersion }}
+            {{- $result = merge $result (dict "forkSource" .page) }}
+            {{- break }}
+          {{- end }}
         {{- end }}
       {{- end }}
-    {{- end }}
 
-    {{/* Fallback to latest if specific version not found */}}
-    {{- if not $result.forkSource }}
-      {{- $result = merge $result (dict "forkSource" (index $sortedForkPages 0)) }}
-    {{- end }}
-
-    {{/* Get fork source history (exclude the fork source) */}}
-    {{- if gt (len $sortedForkPages) 1 }}
-      {{- $forkHistoryPages := slice }}
-      {{- range $sortedForkPages }}
-        {{- if ne . $result.forkSource }}
-          {{- $forkHistoryPages = $forkHistoryPages | append . }}
-        {{- end }}
+      {{/* Fallback to latest if specific version not found */}}
+      {{- if not $result.forkSource }}
+        {{- $latestForkVersionObj := index $forkAllVersions 0 }}
+        {{- $result = merge $result (dict "forkSource" $latestForkVersionObj.page) }}
       {{- end }}
-      {{- $result = merge $result (dict "forkHistory" $forkHistoryPages) }}
+
+      {{/* Get fork source history (exclude the fork source) */}}
+      {{- if gt (len $forkAllVersions) 1 }}
+        {{- $forkHistoryPages := slice }}
+        {{- range $forkAllVersions }}
+          {{- if ne .page $result.forkSource }}
+            {{- $forkHistoryPages = $forkHistoryPages | append .page }}
+          {{- end }}
+        {{- end }}
+        {{- $result = merge $result (dict "forkHistory" $forkHistoryPages) }}
+      {{- end }}
     {{- end }}
   {{- end }}
 {{- end }}
 
 {{/* Fallback: try to find by version number in URL path if no date-sorted results */}}
 {{- if not $result.current }}
+  {{- $sectionPages := where .Site.RegularPages "Section" $currentSection }}
   {{- $latestVersion := "" }}
   {{- $latestPage := "" }}
 
-  {{- range $sectionPages }}
+  {{- range $page := $sectionPages }}
     {{/* Extract version from URL path (e.g., /guide1/2025.7/) */}}
-    {{- $pathParts := split .RelPermalink "/" }}
+    {{- $pathParts := split $page.RelPermalink "/" }}
     {{- range $pathParts }}
-      {{- if and (ne . "") (findRE `^\d{4}\.\d+` .) }}
+      {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) }}
         {{- if or (not $latestVersion) (gt . $latestVersion) }}
           {{- $latestVersion = . }}
-          {{- $latestPage = $ }}
+          {{- $latestPage = $page }}
         {{- end }}
       {{- end }}
     {{- end }}

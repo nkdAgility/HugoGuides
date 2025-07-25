@@ -45,6 +45,7 @@ params:
     bg_colour: "#135289"
   AzureSitesConfig: "#{Guides_AzureSitesConfig}#"
   GitVersion_SemVer: "v#{GitVersion.SemVer}#"
+  GoogleTagManagerID: "GTM-MOOO" # Replace with your actual GTM ID
 
 # Enable sitemap and robots.txt
 sitemap:
