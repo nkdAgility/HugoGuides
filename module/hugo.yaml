@@ -35,12 +35,13 @@ languages:
       status: reference
 
 params:
-  description: Hugo Guides Module
-  keywords: Hugo, Guides, Module
-  og_image: /images/hugo-guides-module.png
-  siteProdUrl: https://hugoguides.org
-  supportEmail: support@hugoguides.org
-  githubUrl: https://github.com/nkdAgility/HugoGuides
+  description: "Guides Demo"
+  keywords: "Guides"
+  logo_image: "/images/guide-1-logo-512.png" # URL to the site logo image
+  menu_logo: "/images/guides-logo-dark.png" # URL to the main menu logo image
+  siteProdUrl: "https://hugoguide.org"
+  supportEmail: "support@hugoguide.org"
+  githubUrl: "https://github.com/nkdAgility/HugoGuides"
   previewSiteUrl: https://preview.hugoguides.org/
   productionSiteUrl: https://hugoguides.org/
   brand:
