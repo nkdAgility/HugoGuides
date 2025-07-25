@@ -243,19 +243,6 @@
             {{- end }}
           </div>
           <footer class="content-footer mt-4">
-            <nav class="content-navigation d-flex justify-content-between" aria-label="Previous and next page navigation">
-              {{ with .PrevInSection }}
-                <a href="{{ .Permalink }}" class="prev-content btn btn-outline-secondary">← {{ .Title }}</a>
-              {{ else }}
-                <span></span>
-              {{ end }}
-              {{ with .NextInSection }}
-                <a href="{{ .Permalink }}" class="next-content btn btn-outline-secondary">{{ .Title }} →</a>
-              {{ else }}
-                <span></span>
-              {{ end }}
-            </nav>
-
             <div class="back-to-home mt-3">
               <a href="/" class="text-decoration-none">{{ i18n "guide_back_to_home" }}</a>
             </div>
