@@ -1,6 +1,7 @@
 ---
 title: "History"
 layout: history
+Type: "guide"
 ---
 
 Guide 1 is defined completely in this guide that was created by a community of practitioners.

@@ -1,6 +1,7 @@
 ---
 title: "Old Banana Times"
 layout: history
+Type: "guide"
 ---
 
 Da Guide 2 Banana Booky go _fork-fork_ from da Guide 1 (May 2025).  

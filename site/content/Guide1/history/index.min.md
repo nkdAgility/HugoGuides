@@ -1,6 +1,7 @@
 ---
 title: "Oldy Times"
 layout: history
+Type: "guide"
 ---
 
 Pro-fessy work stuff be all in da Banana Guide, made by da work tribe of thinky-think folks.
