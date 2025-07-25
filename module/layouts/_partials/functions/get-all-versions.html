@@ -1,0 +1,61 @@
+{{/* Function: get-all-versions
+  Purpose: Get all available versions for a guide section, sorted by date (newest first)
+  Input: A guide page
+  Output: A slice of version objects with version string, URL, and title
+*/}}
+
+{{- $section := .Section -}}
+{{- $versions := slice -}}
+
+{{- /* Get all pages in the current section */ -}}
+{{- $sectionPages := where .Site.RegularPages "Section" $section -}}
+
+{{- /* Filter for guide pages */ -}}
+{{- $guidePages := where $sectionPages "Type" "guide" -}}
+
+{{- /* Get the latest version to determine section root URL */ -}}
+{{- $latestVersion := partial "functions/get-latest-version" . -}}
+
+{{- /* Get the section page URL for the latest version */ -}}
+{{- $sectionPage := .Site.GetPage $section -}}
+{{- $sectionUrl := "/" -}}
+{{- if $sectionPage -}}
+  {{- $sectionUrl = $sectionPage.RelPermalink -}}
+{{- else -}}
+  {{- $sectionUrl = printf "/%s/" $section -}}
+{{- end -}}
+
+{{- /* Extract versions from all guide pages */ -}}
+{{- range $guidePages -}}
+  {{- $pathParts := split .RelPermalink "/" -}}
+  {{- $pageVersion := "" -}}
+  {{- range $pathParts -}}
+    {{- if and (ne . "") (findRE `^\d{4}\.\d+$` .) -}}
+      {{- $pageVersion = . -}}
+      {{- break -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $pageVersion -}}
+    {{- /* Use section root URL for latest version, specific version URL for others */ -}}
+    {{- $versionUrl := .RelPermalink -}}
+    {{- if eq $pageVersion $latestVersion -}}
+      {{- $versionUrl = $sectionUrl -}}
+    {{- end -}}
+
+    {{- $versionObj := dict
+      "version" $pageVersion
+      "url" $versionUrl
+      "title" .Title
+      "date" .Date
+      "page" .
+      "isLatest" (eq $pageVersion $latestVersion)
+    -}}
+    {{- $versions = $versions | append $versionObj -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Sort versions by date (newest first) */ -}}
+{{- $sortedVersions := sort $versions "date" "desc" -}}
+
+{{- return $sortedVersions -}}

@@ -161,10 +161,7 @@
 
             <div class="content-version mt-2">
               <span class="text-muted">{{ i18n "guide_version_label" }} </span>
-              <span class="version-number">
-                {{- $version := partial "functions/get-guide-version.html" . -}}
-                v{{ $version }}
-              </span>
+              {{ partial "components/guide/guide-version-select.html" . }}
             </div>
           </header>
           <div class="content-body pt-3">

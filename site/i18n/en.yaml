@@ -282,6 +282,15 @@
 - id: guide_version_label
   translation: "Version:"
 
+- id: guide_version_dropdown_label
+  translation: "Select version"
+
+- id: guide_version_current
+  translation: "Current"
+
+- id: guide_version_latest
+  translation: "Latest"
+
 - id: guide_content_unavailable_note
   translation: "Note:"
 

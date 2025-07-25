@@ -1,0 +1,66 @@
+{{/* Guide Version Selector Component
+  Purpose: Display a dropdown for selecting different versions of a guide
+  Input: A guide page context
+  Output: Either a dropdown (if multiple versions) or static version display
+*/}}
+
+{{- $currentVersion := partial "functions/get-guide-version.html" . -}}
+{{- $allVersions := partial "functions/get-all-versions.html" . -}}
+{{- $latestVersion := partial "functions/get-latest-version" . -}}
+{{- $isOnLatest := eq $currentVersion $latestVersion }}
+
+{{- if gt (len $allVersions) 1 }}
+  <div class="dropdown d-inline-block">
+    <button class="btn btn-outline-secondary btn-sm dropdown-toggle version-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{{ i18n "guide_version_dropdown_label" }}">
+      v{{ $currentVersion }}{{- if $isOnLatest }}({{ i18n "guide_version_latest" }}){{- end }}
+    </button>
+    <ul class="dropdown-menu">
+      {{- range $allVersions }}
+        {{- $isCurrent := eq .version $currentVersion }}
+        {{- if $isCurrent }}
+          <li>
+            <span class="dropdown-item active" aria-current="page">
+              v{{ .version }}{{- if .isLatest }}({{ i18n "guide_version_latest" }}){{- end }} -
+              {{ i18n "guide_version_current" }}
+            </span>
+          </li>
+        {{- else }}
+          <li>
+            <a class="dropdown-item" href="{{ .url }}">
+              v{{ .version }}{{- if .isLatest }}({{ i18n "guide_version_latest" }}){{- end }}
+            </a>
+          </li>
+        {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+{{- else }}
+  <span class="version-number">v{{ $currentVersion }}{{- if $isOnLatest }}({{ i18n "guide_version_latest" }}){{- end }}</span>
+{{- end }}
+
+
+<style>
+  /* Version dropdown styling */
+  .version-dropdown {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .version-dropdown:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+
+  .dropdown-menu {
+    min-width: auto;
+    font-size: 0.875rem;
+  }
+
+  .dropdown-item.active {
+    background-color: var(--bs-primary);
+    color: white;
+  }
+
+  .dropdown-item:hover:not(.active) {
+    background-color: var(--bs-light);
+  }
+</style>

@@ -282,6 +282,15 @@
 - id: guide_version_label
   translation: "Booky Num Num:"
 
+- id: guide_version_dropdown_label
+  translation: "Pick da banana"
+
+- id: guide_version_current
+  translation: "Now Banana"
+
+- id: guide_version_latest
+  translation: "Fresh Banana"
+
 - id: guide_content_unavailable_note
   translation: "Banana Note:"
 
