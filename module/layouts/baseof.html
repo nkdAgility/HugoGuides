@@ -228,6 +228,26 @@
                     {{ end }}
                   </td>
                 </tr>
+                <tr>
+                  <td>Site Params</td>
+                  <td><pre>{{ debug.Dump .Site.Params }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Site Config</td>
+                  <td>
+                    <ul>
+                      {{ range hugo.Deps }}
+                        <li>
+                          <strong>{{ .Path }}</strong> - Version:
+                          {{ .Version }}
+                          {{ if .Replace }}
+                            <br /><em>Replaced by: {{ .Replace.Path }} ({{ .Replace.Version }})</em>
+                          {{ end }}
+                        </li>
+                      {{ end }}
+                    </ul>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
