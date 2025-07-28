@@ -21,6 +21,26 @@
       {{- end -}}
     {{- end -}}
 
+    {{- /* Add hreflang links for all available languages of this version */ -}}
+    {{- range .Site.Sites -}}
+      {{- $langCode := .Language.Lang -}}
+      {{- $siteVersion := "" -}}
+
+      {{- /* Try to find the equivalent page in this language site */ -}}
+      {{- $versionPath := printf "%s/%s" $.Section $currentVersion -}}
+      {{- $langVersionPage := .GetPage $versionPath -}}
+
+      {{- /* If specific version not found and this is latest, try section root */ -}}
+      {{- if and (not $langVersionPage) (eq $currentVersion $latestVersion) -}}
+        {{- $langVersionPage = .GetPage $.Section -}}
+      {{- end -}}
+
+      {{- /* Add hreflang link if page exists in this language */ -}}
+      {{- if $langVersionPage -}}
+        <link rel="alternate" hreflang="{{ $langCode }}" href="{{ $.Site.Params.siteProdUrl }}{{ $langVersionPage.RelPermalink }}" />
+      {{- end -}}
+    {{- end -}}
+
     {{- /* Add "latest" rel link if this is not the latest version */ -}}
     {{- if ne $currentVersion $latestVersion -}}
       {{- $sectionPage := $.Site.GetPage $.Section -}}

@@ -19,7 +19,7 @@
 
 {{- /* Robots meta tag for non-latest versions */ -}}
 {{- if and $isGuide $currentVersion (not $isLatestVersion) -}}
-  <meta name="robots" content="noindex, follow" />
+  <meta name="robots" content="index, follow" />
   <meta name="description" content="Historical version ({{ $currentVersion }}) of {{ .Title }}. For the latest version, visit the main guide page." />
 {{- end -}}
 

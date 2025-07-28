@@ -10,15 +10,12 @@
 {{- if eq .Type "guide" -}}
   {{- $currentVersion := partial "functions/get-guide-version.html" . -}}
   {{- if $currentVersion -}}
-    {{- $latestVersion := partial "functions/get-latest-version" . -}}
-    {{- if eq $currentVersion $latestVersion -}}
-      {{- /* For latest version, canonical should be the section root */ -}}
-      {{- $sectionPage := .Site.GetPage .Section -}}
-      {{- if $sectionPage -}}
-        {{- $canonicalUrl = $sectionPage.RelPermalink -}}
-      {{- else -}}
-        {{- $canonicalUrl = printf "/%s/" .Section -}}
-      {{- end -}}
+    {{- /* For ALL guide versions, canonical should be the section root */ -}}
+    {{- $sectionPage := .Site.GetPage .Section -}}
+    {{- if $sectionPage -}}
+      {{- $canonicalUrl = $sectionPage.RelPermalink -}}
+    {{- else -}}
+      {{- $canonicalUrl = printf "/%s/" .Section -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
