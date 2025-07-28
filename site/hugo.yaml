@@ -46,6 +46,8 @@ params:
   AzureSitesConfig: "#{Guides_AzureSitesConfig}#"
   GitVersion_SemVer: "v#{GitVersion.SemVer}#"
   GoogleTagManagerID: "GTM-MOOO" # Replace with your actual GTM ID
+  features:
+    guideDetails: false
 
 # Enable sitemap and robots.txt
 sitemap:
