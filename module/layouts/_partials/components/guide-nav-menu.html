@@ -55,14 +55,15 @@
           <i class="fa-solid fa-house me-2"></i>{{ i18n "nav_read_guide" | default "Read Guide" }}
         </a>
       </li>
-
+ {{ if .Site.Params.features.guideDetails }}
+      {{/* Guide Details Link */}}
       {{/* Details Link */}}
       <li class="nav-item">
         <a class="nav-link {{ if $isDetails }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "details") }}" aria-current="{{ if $isDetails }}page{{ else }}false{{ end }}">
           <i class="fa-solid fa-eye me-2"></i>{{ i18n "nav_details" | default "Details" }}
         </a>
       </li>
-
+{{ end }}
       {{/* Translations Link */}}
       <li class="nav-item">
         <a class="nav-link {{ if $isTranslations }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "translations") }}" aria-current="{{ if $isTranslations }}page{{ else }}false{{ end }}">
