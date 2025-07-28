@@ -11,6 +11,7 @@ guide_overview: |
   [Guide 1](/guide-1/latest) is a practical, community-curated reference for best practices in knowledge work.
 guide_logo: "guide-1-logo.png"
 weight: 1
+discussionForumUrl: "https://forum.example.com/c/guide-1"
 guide_license: |
   This work is licensed by Generic Publishing Corp and Anonymous Authors under a Creative Commons Attribution 4.0 International License.
 guide_comparison:
