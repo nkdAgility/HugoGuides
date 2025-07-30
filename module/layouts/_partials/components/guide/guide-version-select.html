@@ -12,7 +12,7 @@
 {{- if gt (len $allVersions) 1 }}
   <div class="dropdown d-inline-block">
     <button class="btn btn-outline-secondary btn-sm dropdown-toggle version-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{{ i18n "guide_version_dropdown_label" }}">
-      v{{ $currentVersion }}{{- if $isOnLatest }}({{ i18n "guide_version_latest" }}){{- end }}
+      v{{ $currentVersion }}{{- if $isOnLatest }}&nbsp;({{ i18n "guide_version_latest" | default "latest" }}){{- end }}
     </button>
     <ul class="dropdown-menu">
       {{- range $allVersions }}
@@ -20,14 +20,14 @@
         {{- if $isCurrent }}
           <li>
             <span class="dropdown-item active" aria-current="page">
-              v{{ .version }}{{- if .isLatest }}({{ i18n "guide_version_latest" }}){{- end }} -
-              {{ i18n "guide_version_current" }}
+              v{{ .version }}{{- if .isLatest }}&nbsp;({{ i18n "guide_version_latest" | default "latest" }}){{- end }} -
+              {{ i18n "guide_version_current" | default "current" }}
             </span>
           </li>
         {{- else }}
           <li>
             <a class="dropdown-item" href="{{ .url }}">
-              v{{ .version }}{{- if .isLatest }}({{ i18n "guide_version_latest" }}){{- end }}
+              v{{ .version }}{{- if .isLatest }}&nbsp;({{ i18n "guide_version_latest" | default "latest" }}){{- end }}
             </a>
           </li>
         {{- end }}
@@ -35,7 +35,7 @@
     </ul>
   </div>
 {{- else }}
-  <span class="version-number">v{{ $currentVersion }}{{- if $isOnLatest }}({{ i18n "guide_version_latest" }}){{- end }}</span>
+  <span class="version-number">v{{ $currentVersion }}{{- if $isOnLatest }}&nbsp;({{ i18n "guide_version_latest" | default "latest" }}){{- end }}</span>
 {{- end }}
 
 
