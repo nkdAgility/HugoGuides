@@ -1,5 +1,7 @@
 defaultContentLanguage: en
 languageCode: en
+enableMissingTranslationPlaceholders: true
+printI18nWarnings: true
 title: Guide Demo
 
 publishDir: ../public
@@ -76,6 +78,8 @@ outputFormats:
 module:
   imports:
     - path: github.com/nkdAgility/HugoGuides/module
+  replacements:
+    - github.com/nkdAgility/HugoGuides/module -> ../../module
 
 markup:
   goldmark:

@@ -6,7 +6,7 @@
       <li class="breadcrumb-item">
         <a href="{{ (.Site.GetPage "/").Permalink }}" class="text-decoration-none">
           <i class="fas fa-home me-1" aria-hidden="true"></i>
-          {{ i18n "breadcrumb_home" | default "Home" }}
+          {{ i18n "breadcrumb_home" . }}
         </a>
       </li>
 

@@ -16,11 +16,11 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <i class="fas fa-star me-2"></i>
-            <strong>{{ i18n "current_open_guide_label" . | default "Current Open Guide" }}</strong>
+            <strong>{{ i18n "current_open_guide_label" . }}</strong>
           </div>
           <span class="badge bg-light text-primary">
             <i class="fas fa-code-branch me-1"></i>
-            {{ i18n "active_status_label" . | default "Active" }}
+            {{ i18n "active_status_label" . }}
           </span>
         </div>
       </div>
@@ -29,11 +29,11 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <i class="fas fa-code-branch me-2"></i>
-            <strong>{{ i18n "current_fork_label" . | default "Current Fork" }}</strong>
+            <strong>{{ i18n "current_fork_label" . }}</strong>
           </div>
           <span class="badge bg-dark text-warning">
             <i class="fas fa-code-branch me-1"></i>
-            {{ i18n "active_fork_label" . | default "Fork" }}
+            {{ i18n "active_fork_label" . }}
           </span>
         </div>
       </div>
@@ -68,7 +68,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
             <div class="d-flex align-items-center">
               <i class="fas fa-code-branch text-info me-2"></i>
               <small class="mb-0">
-                <strong>{{ if $isFork }}{{ i18n "fork_indicator" . | default "Forked from:" }}{{ else }}{{ i18n "forked_from_indicator" . | default "Forked from:" }}{{ end }}</strong>
+                <strong>{{ if $isFork }}{{ i18n "fork_indicator" . }}{{ else }}{{ i18n "forked_from_indicator" . }}{{ end }}</strong>
                 {{ if and .Params.forked_from (ne .Params.forked_from "") }}
                   {{ $sourcePage := .Site.GetPage .Params.forked_from }}
                   {{ if $sourcePage }}
@@ -77,7 +77,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
                     {{ .Params.forked_from | title }}
                   {{ end }}
                 {{ else if $isFork }}
-                  {{ i18n "this_is_fork_label" . | default "This is a fork" }}
+                  {{ i18n "this_is_fork_label" . }}
                 {{ end }}
               </small>
             </div>
@@ -124,7 +124,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
           <div class="mb-3">
             <div class="text-muted small mb-2">
               <i class="fas fa-globe me-1"></i>
-              {{ i18n "available_languages_label" . | default "Available in" }}
+              {{ i18n "available_languages_label" . }}
             </div>
             <div class="d-flex flex-wrap gap-1">
               {{/* Current language button - only show if it has content */}}
@@ -151,7 +151,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
           <div class="mb-3">
             <div class="text-muted small mb-2">
               <i class="fas fa-file-pdf me-1"></i>
-              {{ i18n "pdf_downloads_label" . | default "PDF Downloads" }}
+              {{ i18n "pdf_downloads_label" . }}
             </div>
             <div class="d-flex flex-wrap gap-1">
               {{/* PDF language buttons */}}
@@ -185,42 +185,42 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
             <i class="fas fa-calendar me-1"></i>
             {{ if .Date }}
               {{ if eq $itemType "latest" }}
-                {{ i18n "living_document_updated_label" . | default "Living document updated" }}
+                {{ i18n "living_document_updated_label" . }}
                 {{ .Date.Format "January 2, 2006" }}
               {{ else if eq $itemType "forkLatest" }}
-                {{ i18n "active_fork_updated_label" . | default "Active fork updated" }}
+                {{ i18n "active_fork_updated_label" . }}
                 {{ .Date.Format "January 2, 2006" }}
               {{ else if eq $itemType "forkHistory" }}
-                {{ i18n "historical_fork_label" . | default "Historical fork from" }}
+                {{ i18n "historical_fork_label" . }}
                 {{ .Date.Format "January 2, 2006" }}
               {{ else }}
-                {{ i18n "historical_version_label" . | default "Historical version from" }}
+                {{ i18n "historical_version_label" . }}
                 {{ .Date.Format "January 2, 2006" }}
               {{ end }}
             {{ else }}
-              {{ i18n "current_version_label" . | default "Current version" }}
+              {{ i18n "current_version_label" . }}
             {{ end }}
           </div>
           <div class="d-flex gap-2">
             {{ if eq $itemType "latest" }}
               <a href="{{ partial "functions/safe-page-link.html" .Path }}" class="btn btn-primary btn-sm">
                 <i class="fas fa-book me-1"></i>
-                {{ i18n "read_guide_button" . | default "Read Guide" }}
+                {{ i18n "read_guide_button" . }}
               </a>
 
               <a href="{{ partial "functions/safe-page-link.html" "/translations" }}" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-download me-1"></i>
-                {{ i18n "translations_button_small" . | default "Translations" }}
+                {{ i18n "translations_button_small" . }}
               </a>
             {{ else if eq $itemType "forkLatest" }}
               <a href="{{ .Permalink }}" class="btn btn-warning btn-sm">
                 <i class="fas fa-code-branch me-1"></i>
-                {{ i18n "read_fork_button" . | default "Read Fork" }}
+                {{ i18n "read_fork_button" . }}
               </a>
             {{ else }}
               <a href="{{ .Permalink }}" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-archive me-1"></i>
-                {{ i18n "view_archive_button" . | default "View Archive" }}
+                {{ i18n "view_archive_button" . }}
               </a>
             {{ end }}
           </div>

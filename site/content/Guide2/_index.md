@@ -16,12 +16,18 @@ weight: 2
 guide_license: |
   This work, Guide 2, is an adaptation of Guide 1, which is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). The original guide is © 2019-2025 Generic Publishing Corp, Anonymous Authors. Changes were made to the original. Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). _Portions highlighted in italic are © 2025_ Generic Publishing Corp, licensed under CC BY-SA 4.0. All other content is from © 2019-2025 Generic Publishing Corp, Anonymous Authors, also licensed under CC BY-SA 4.0.
 guide_comparison:
-  purpose: "Community-expanded handbook"
-  ethos: "Inclusive, evolving, collaborative"
-  audience: "Teams blending methodologies with other approaches"
-  use_case: "How do we apply this in *our* context?"
-  content: "Rich with examples and extensions"
-  update_model: "Community-driven, iterative"
+  - title: Purpose
+    content: "Minimal, official reference"
+  - title: Ethos
+    content: "Focused, stable, canonical"
+  - title: Audience
+    content: "Team members wanting a clear baseline"
+  - title: Content
+    content: "Core practices, minimal elements"
+  - title: Use Case
+    content: "What are the core principles?"
+  - title: Update Model
+    content: "Periodic, curated"
 which_to_use_summary: |
   Choose [Guide 2](/guide-2/latest) if you're working across approaches or want more context and flexibility. It's well-suited to those with Lean, Agile, Scrum, or Product Management experience who want to adapt practices to their environment.
 layman_description: |
