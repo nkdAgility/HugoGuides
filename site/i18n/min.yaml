@@ -291,6 +291,18 @@
 - id: guide_version_latest
   translation: "Fresh Banana"
 
+- id: guide_historical_version_notice_title
+  translation: "Old Banana Alert:"
+
+- id: guide_historical_version_notice_text
+  translation: "You looky at banana version {{ .CurrentVersion }} of dis guide."
+
+- id: guide_historical_version_notice_link
+  translation: "See da fresh banana ({{ .LatestVersion }})"
+
+- id: guide_historical_version_notice_suffix
+  translation: "for da newest banana info."
+
 - id: guide_content_unavailable_note
   translation: "Banana Note:"
 
