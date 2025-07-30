@@ -28,12 +28,18 @@ guide_license: |
   _Italic parts_ go to Generic Banana HQ. Other bits are also fruity and legal. 🍌📄
 
 guide_comparison:
-  purpose: "Bigger banana booky for all"
-  ethos: "Sharey! Evolvey! Huggy!"
-  audience: "Mixy teams who want fancy stuff but also other spice"
-  use_case: "How we do fancy work in our banana cave?"
-  content: "Moar examples! Moar goodies!"
-  update_model: "Teamy-team add bits, polish bits, yay!"
+  - title: Purpose
+    content: "Tiny but mighty banana book"
+  - title: Ethos
+    content: "No wobbles, only truthy stuff"
+  - title: Audience
+    content: "Banana teams who want da real real"
+  - title: Content
+    content: "Core practices, minimal elements"
+  - title: Use Case
+    content: "Super light, super right"
+  - title: Update Model
+    content: "Sometimes we polish da banana"
 
 which_to_use_summary: |
   Choose [Guide 2 Banana Booky](/min/guide-2/latest) if you play with Agile, Scrum, Lean, or like mixy setups.  

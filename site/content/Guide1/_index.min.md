@@ -18,15 +18,19 @@ weight: 1
 
 guide_license: |
   Dis booky owned by Generic Banana Corp and Anonymous Banana Authors, under da Creative Commons Happy License 4.0 International (Share bananas nicely).
-
 guide_comparison:
-  purpose: "Tiny but mighty banana book"
-  ethos: "No wobbles, only truthy stuff"
-  audience: "Banana teams who want da real real"
-  use_case: "Wut is da corey-core?"
-  content: "Super light, super right"
-  update_model: "Sometimes we polish da banana"
-
+  - title: Purpose
+    content: "Tiny but mighty banana book"
+  - title: Ethos
+    content: "No wobbles, only truthy stuff"
+  - title: Audience
+    content: "Banana teams who want da real real"
+  - title: Content
+    content: "Core practices, minimal elements"
+  - title: Use Case
+    content: "Super light, super right"
+  - title: Update Model
+    content: "Sometimes we polish da banana"
 which_to_use_summary: |
   First time worky? Start-y with [Da Guide 1](/min/guide-1/latest).  
   Need clear n' simple? Dis one's your jam.

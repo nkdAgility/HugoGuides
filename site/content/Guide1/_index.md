@@ -15,12 +15,18 @@ discussionForumUrl: "https://forum.example.com/c/guide-1"
 guide_license: |
   This work is licensed by Generic Publishing Corp and Anonymous Authors under a Creative Commons Attribution 4.0 International License.
 guide_comparison:
-  purpose: "Minimal, official reference"
-  ethos: "Focused, stable, canonical"
-  audience: "Team members wanting a clear baseline"
-  use_case: "What are the core principles?"
-  content: "Clear, lightweight, and essential"
-  update_model: "Periodic, curated"
+  - title: Purpose
+    content: "Minimal, official reference"
+  - title: Ethos
+    content: "Focused, stable, canonical"
+  - title: Audience
+    content: "Team members wanting a clear baseline"
+  - title: Content
+    content: "Core practices, minimal elements"
+  - title: Use Case
+    content: "What are the core principles?"
+  - title: Update Model
+    content: "Periodic, curated"
 which_to_use_summary: |
   Choose [Guide 1](/guide-1/latest) if you're new to the methodology or need a stable, minimal reference. It's ideal for team members who want to start simple and build understanding.
 layman_description: |
