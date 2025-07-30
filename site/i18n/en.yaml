@@ -134,6 +134,9 @@
 - id: download_table_status
   translation: "Status"
 
+- id: download_table_contributed_by
+  translation: "Contributed By"
+
 - id: download_preview_status
   translation: "In Preview"
 
@@ -203,6 +206,9 @@
 
 - id: download_community_contributors
   translation: "Community Contributors"
+
+- id: contributors_label
+  translation: "Contributors"
 
 - id: contributors_description
   translation: "The contributors listed below are a collection of all contributors across all guides and versions."
