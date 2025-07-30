@@ -52,29 +52,29 @@
       {{/* Read Guide Link */}}
       <li class="nav-item">
         <a class="nav-link {{ if $isGuideRoot }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" $currentSection }}" aria-current="{{ if $isGuideRoot }}page{{ else }}false{{ end }}">
-          <i class="fa-solid fa-house me-2"></i>{{ i18n "nav_read_guide" | default "Read Guide" }}
+          <i class="fa-solid fa-house me-2"></i>{{ i18n "nav_read_guide" . }}
         </a>
       </li>
- {{ if .Site.Params.features.guideDetails }}
-      {{/* Guide Details Link */}}
-      {{/* Details Link */}}
-      <li class="nav-item">
-        <a class="nav-link {{ if $isDetails }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "details") }}" aria-current="{{ if $isDetails }}page{{ else }}false{{ end }}">
-          <i class="fa-solid fa-eye me-2"></i>{{ i18n "nav_details" | default "Details" }}
-        </a>
-      </li>
-{{ end }}
+      {{ if .Site.Params.features.guideDetails }}
+        {{/* Guide Details Link */}}
+        {{/* Details Link */}}
+        <li class="nav-item">
+          <a class="nav-link {{ if $isDetails }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "details") }}" aria-current="{{ if $isDetails }}page{{ else }}false{{ end }}">
+            <i class="fa-solid fa-eye me-2"></i>{{ i18n "nav_details" . }}
+          </a>
+        </li>
+      {{ end }}
       {{/* Translations Link */}}
       <li class="nav-item">
         <a class="nav-link {{ if $isTranslations }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "translations") }}" aria-current="{{ if $isTranslations }}page{{ else }}false{{ end }}">
-          <i class="fa-solid fa-language me-2"></i>{{ i18n "translations_button" | default "Translations" }}
+          <i class="fa-solid fa-language me-2"></i>{{ i18n "translations_button" . }}
         </a>
       </li>
 
       {{/* History Link */}}
       <li class="nav-item">
         <a class="nav-link {{ if $isHistory }}active{{ end }}" href="{{ partial "functions/safe-page-link.html" (path.Join $currentSection "history") }}" aria-current="{{ if $isHistory }}page{{ else }}false{{ end }}">
-          <i class="fa-solid fa-clock-rotate-left me-2"></i>{{ i18n "nav_history" | default "History" }}
+          <i class="fa-solid fa-clock-rotate-left me-2"></i>{{ i18n "nav_history" . }}
         </a>
       </li>
     </ul>

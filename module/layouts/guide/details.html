@@ -91,7 +91,7 @@
               <p class="card-text flex-grow-1 text-muted">{{ i18n "read_online_description" . }}</p>
               <div class="mt-auto">
                 <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path $latestVersion) }}" class="btn btn-primary btn-lg w-100">
-                  <i class="fa-solid fa-play me-2"></i>{{ i18n "read_online_button" }}
+                  <i class="fa-solid fa-play me-2"></i>{{ i18n "read_online_button" . }}
                 </a>
               </div>
             </div>
@@ -117,7 +117,7 @@
                   <span class="btn btn-outline-secondary btn-lg w-100 disabled">{{ i18n "coming_soon" . }}</span>
                 {{ else }}
                   <a href="{{ .Site.Params.githubUrl }}/discussions" class="btn btn-success btn-lg w-100" target="_blank">
-                    <i class="fa-solid fa-users me-2"></i>{{ i18n "join_discussion_button" }}
+                    <i class="fa-solid fa-users me-2"></i>{{ i18n "join_discussion_button" . }}
                   </a>
                 {{ end }}
               </div>
@@ -151,7 +151,7 @@
               <h6 class="card-title">{{ i18n "history_title" . }}</h6>
               <p class="card-text flex-grow-1 text-muted small">{{ i18n "history_description" . }}</p>
               <div class="mt-auto">
-                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path "history") }}" class="btn btn-outline-info btn-sm">{{ i18n "nav_history" | default "History" }}</a>
+                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path "history") }}" class="btn btn-outline-info btn-sm">{{ i18n "nav_history" . }}</a>
               </div>
             </div>
           </div>
@@ -440,7 +440,7 @@
               <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body">
                   <h3 class="h5 text-primary mb-3">
-                    <i class="fas fa-open-source me-2"></i>{{ i18n "open_source_title" }}
+                    <i class="fas fa-open-source me-2"></i>{{ i18n "open_source_title" . }}
                   </h3>
                   <p class="mb-0">{{ i18n "open_source_description" . }}</p>
                 </div>
@@ -463,11 +463,11 @@
 
           <div class="text-center mt-5">
             {{ if $isComingSoon }}
-              <button class="btn btn-outline-primary btn-lg disabled me-3">{{ i18n "join_discussion_button" }}</button>
+              <button class="btn btn-outline-primary btn-lg disabled me-3">{{ i18n "join_discussion_button" . }}</button>
               <button class="btn btn-outline-secondary btn-lg disabled"><i class="fab fa-github me-2"></i>View on GitHub</button>
             {{ else }}
               <a href="{{ .Site.Params.githubUrl }}/discussions" class="btn btn-primary btn-lg me-3" target="_blank">
-                <i class="fa-solid fa-comments me-2"></i>{{ i18n "join_discussion_button" }}
+                <i class="fa-solid fa-comments me-2"></i>{{ i18n "join_discussion_button" . }}
               </a>
               <a href="{{ .Site.Params.githubUrl }}" class="btn btn-outline-primary btn-lg" target="_blank"> <i class="fab fa-github me-2"></i>{{ i18n "view_on_github_button" . }} </a>
             {{ end }}

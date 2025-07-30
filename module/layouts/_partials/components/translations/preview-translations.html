@@ -86,12 +86,12 @@
   {{- end }}
 
   {{- if gt (len $previewTranslations) 0 }}
-    <h2 class="mb-3">{{ i18n "download_preview_translations" . | default "Preview Translations" }}</h2>
+    <h2 class="mb-3">{{ i18n "download_preview_translations" . }}</h2>
     <p class="text-muted mb-3">
       <small>
-        {{ i18n "download_preview_description" . | default "These translations are available in preview and need at least 5 community reviewers before they can be moved to the main site. Help us review and improve these translations!" }}
+        {{ i18n "download_preview_description" . }}
         <a href="{{ .Site.Params.previewSiteUrl }}" target="_blank" rel="noopener" class="text-decoration-none">
-          {{ i18n "download_visit_preview" . | default "Visit preview site" }}
+          {{ i18n "download_visit_preview" . }}
           <i class="fa-solid fa-external-link-alt ms-1"></i>
         </a>
       </small>
@@ -110,7 +110,7 @@
     <div class="d-none d-md-block mb-3">
       <div class="row fw-bold text-muted border-bottom pb-2">
         <div class="col-md-4">{{ i18n "download_table_language" . }}</div>
-        <div class="col-md-4">{{ i18n "download_table_status" . | default "Status" }}</div>
+        <div class="col-md-4">{{ i18n "download_table_status" . }}</div>
         <div class="col-md-4">{{ i18n "download_table_action" . }}</div>
       </div>
     </div>
@@ -128,12 +128,12 @@
             <div class="d-flex gap-2 flex-wrap">
               <!-- Preview Reading Link -->
               <a href="{{ $.Site.Params.previewSiteUrl }}{{ .code }}/" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener">
-                <i class="fa-solid fa-eye me-1"></i>{{ i18n "download_preview_action" . | default "Preview" }}
+                <i class="fa-solid fa-eye me-1"></i>{{ i18n "download_preview_action" . }}
               </a>
               <!-- Discussion Link -->
               {{- if .discussionId }}
                 <a href="{{ $.Site.Params.githubUrl }}/discussions/{{ .discussionId }}" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener">
-                  <i class="fa-solid fa-comments me-1"></i>{{ i18n "download_discussion_action" . | default "Discussion" }}
+                  <i class="fa-solid fa-comments me-1"></i>{{ i18n "download_discussion_action" . }}
                 </a>
               {{- end }}
             </div>
@@ -150,12 +150,12 @@
             <div class="d-flex gap-2">
               <!-- Preview Reading Link -->
               <a href="{{ $.Site.Params.previewSiteUrl }}{{ .code }}/" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener">
-                <i class="fa-solid fa-eye me-1"></i>{{ i18n "download_preview_action" . | default "Preview" }}
+                <i class="fa-solid fa-eye me-1"></i>{{ i18n "download_preview_action" . }}
               </a>
               <!-- Discussion Link -->
               {{- if .discussionId }}
                 <a href="{{ $.Site.Params.githubUrl }}/discussions/{{ .discussionId }}" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener">
-                  <i class="fa-solid fa-comments me-1"></i>{{ i18n "download_discussion_action" . | default "Discussion" }}
+                  <i class="fa-solid fa-comments me-1"></i>{{ i18n "download_discussion_action" . }}
                 </a>
               {{- end }}
             </div>
