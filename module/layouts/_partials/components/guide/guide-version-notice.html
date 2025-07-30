@@ -15,9 +15,9 @@
           <div class="d-flex align-items-start">
             <i class="fa-solid fa-info-circle me-2 mt-1 flex-shrink-0"></i>
             <div>
-              <strong>Historical Version Notice:</strong>
-              You are viewing version {{ $currentVersion }} of this guide.
-              <a href="{{ $sectionPage.RelPermalink }}" class="alert-link"> View the latest version ({{ $latestVersion }}) </a> for the most up-to-date information.
+              <strong>{{ i18n "guide_historical_version_notice_title" }}</strong>
+              {{ i18n "guide_historical_version_notice_text" (dict "CurrentVersion" $currentVersion) }}
+              <a href="{{ $sectionPage.RelPermalink }}" class="alert-link">{{ i18n "guide_historical_version_notice_link" (dict "LatestVersion" $latestVersion) }}</a> {{ i18n "guide_historical_version_notice_suffix" }}
             </div>
           </div>
         </div>
