@@ -78,6 +78,8 @@ outputFormats:
 module:
   imports:
     - path: github.com/nkdAgility/HugoGuides/module
+  replacements:
+    - github.com/nkdAgility/HugoGuides/module -> ../../module
 
 markup:
   goldmark:
