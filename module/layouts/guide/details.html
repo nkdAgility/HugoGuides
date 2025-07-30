@@ -162,66 +162,37 @@
 
   {{/* Guide Comparison Section - Using YAML data */}}
   {{- if .Params.guide_comparison }}
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="display-6 fw-bold">{{ i18n "guide_overview_title" . }}</h2>
-          <p class="lead text-muted">{{ i18n "guide_overview_description" . }}</p>
-        </div>
-        <div class="row g-4">
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm border-0 border-start border-primary border-4">
-              <div class="card-body">
-                <h6 class="card-title text-primary fw-bold"><i class="fa-solid fa-bullseye me-2"></i>{{ i18n "purpose_title" . }}</h6>
-                <p class="card-text mb-0">{{ .Params.guide_comparison.purpose }}</p>
-              </div>
-            </div>
+    {{- $guideComparison := .Params.guide_comparison }}
+    {{- if and $guideComparison (reflect.IsSlice $guideComparison) (gt (len $guideComparison) 0) }}
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">{{ i18n "guide_overview_title" . }}</h2>
+            <p class="lead text-muted">{{ i18n "guide_overview_description" . }}</p>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm border-0 border-start border-success border-4">
-              <div class="card-body">
-                <h6 class="card-title text-success fw-bold"><i class="fa-solid fa-heart me-2"></i>{{ i18n "ethos_title" . }}</h6>
-                <p class="card-text mb-0">{{ .Params.guide_comparison.ethos }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm border-0 border-start border-warning border-4">
-              <div class="card-body">
-                <h6 class="card-title text-warning fw-bold"><i class="fa-solid fa-users me-2"></i>{{ i18n "audience_title" . }}</h6>
-                <p class="card-text mb-0">{{ .Params.guide_comparison.audience }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm border-0 border-start border-info border-4">
-              <div class="card-body">
-                    <h6 class="card-title text-info fw-bold"><i class="fa-solid fa-lightbulb me-2"></i>{{ i18n "use_case_title" . }}</h6>
-                    <p class="card-text mb-0">{{ .Params.guide_comparison.use_case }}</p>
+          <div class="row g-4">
+            {{- $colorClasses := slice "border-primary" "border-success" "border-warning" "border-info" "border-secondary" "border-dark" }}
+            {{- $textColorClasses := slice "text-primary" "text-success" "text-warning" "text-info" "text-secondary" "text-dark" }}
+            {{- $iconClasses := slice "fa-bullseye" "fa-heart" "fa-users" "fa-lightbulb" "fa-book" "fa-sync" }}
+            {{- range $index, $item := $guideComparison }}
+              {{- if and $item $item.title $item.content }}
+                {{- $colorIndex := mod $index (len $colorClasses) }}
+                <div class="col-12 col-md-6">
+                  <div class="card h-100 shadow-sm border-0 border-start {{ index $colorClasses $colorIndex }} border-4">
+                    <div class="card-body">
+                      <h6 class="card-title {{ index $textColorClasses $colorIndex }} fw-bold">
+                        <i class="fa-solid {{ index $iconClasses $colorIndex }} me-2"></i>{{ $item.title | title }}
+                      </h6>
+                      <p class="card-text mb-0">{{ $item.content | markdownify }}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="card h-100 shadow-sm border-0 border-start border-secondary border-4">
-                  <div class="card-body">
-                    <h6 class="card-title text-secondary fw-bold"><i class="fa-solid fa-book me-2"></i>{{ i18n "content_title" . }}</h6>
-                    <p class="card-text mb-0">{{ .Params.guide_comparison.content }}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="card h-100 shadow-sm border-0 border-start border-dark border-4">
-                  <div class="card-body">
-                    <h6 class="card-title text-dark fw-bold"><i class="fa-solid fa-sync me-2"></i>{{ i18n "update_model_title" . }}</h6>
-                    <p class="card-text mb-0">{{ .Params.guide_comparison.update_model }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              {{- end }}
+            {{- end }}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    {{- end }}
   {{- end }}
 
   {{/* When to Use This Guide Section */}}
@@ -370,11 +341,12 @@
   </section>
 
   {{/* Historical Versions Section */}}
-  <section class="py-5">      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="display-6 fw-bold">{{ i18n "version_history_title" . }}</h2>
-          <p class="lead text-muted">{{ i18n "version_history_description" . }}</p>
-        </div>
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold">{{ i18n "version_history_title" . }}</h2>
+        <p class="lead text-muted">{{ i18n "version_history_description" . }}</p>
+      </div>
       {{- $sectionPages := where .Site.RegularPages "Section" .Section }}
       {{- $guidePages := where $sectionPages "Type" "guide" }}
       {{- $latestVersion := partial "functions/get-latest-version" . }}
