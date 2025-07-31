@@ -1,4 +1,5 @@
 {{- $isComingSoon := and .Date (lt now .Date) (eq hugo.Environment "production") }}
+{{- $contentAvailable := and .Page.Content (gt (len .Page.Content) 500) (not .Params.contentDraft) }}
 <section class="my-2" style="max-width: 1200px; margin: 0 auto;">
   <div class="row">
     <!-- Sidebar with table of contents -->
@@ -44,7 +45,7 @@
 
         <!-- Collapsible TOC content -->
         <div class="collapse d-md-block overflow-auto flex-grow-1" id="tocCollapse">
-          {{- if and .Page.Content (gt (len .Page.Content) 100) }}
+          {{- if $contentAvailable }}
             {{ .Page.TableOfContents }}
           {{ else }}
             {{- /* Get the default guide content as fallback */ -}}
@@ -67,7 +68,8 @@
     <!-- Main content area -->
     <main class="col-md-9">
       <div class="content-wrapper px-3">
-        <article class="content-details">
+        <article class="content-details" nkda-data-contentavailable="{{ $contentAvailable }}">
+          {{- /* Header with title, date, and download buttons */ -}}
           <header class="content-header">
             <div class="row mb-2">
               <div class="col-12 col-md-6"><h2 class="content-title mb-0">{{ .Title }}</h2></div>
@@ -227,7 +229,7 @@
               {{- end }}
 
               {{- /* Check if content is empty and provide fallback */ -}}
-              {{- if .Content }}
+              {{- if $contentAvailable }}
                 {{ .Content }}
               {{- else }}
                 {{- /* Get the default guide content as fallback */ -}}
