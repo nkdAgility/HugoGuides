@@ -26,8 +26,8 @@ params:
   siteProdUrl: "https://hugoguide.org"
   supportEmail: "support@hugoguide.org"
   githubUrl: "https://github.com/nkdAgility/HugoGuides"
-  previewSiteUrl: https://preview.hugoguides.org/
-  productionSiteUrl: https://hugoguides.org/
+  previewSiteUrl: https://preview.hugoguides.org
+  productionSiteUrl: https://hugoguides.org
   brand:
     bg_colour: "#135289"
   AzureSitesConfig: "#{Guides_AzureSitesConfig}#"

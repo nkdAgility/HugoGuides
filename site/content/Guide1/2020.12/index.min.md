@@ -17,7 +17,7 @@ lang: min
 mainfont: "Times New Banana"
 sansfont: "Ari-Banana"
 monofont: "Courier Peel"
-
+translationDraft: true
 sitemap:
   priority: 0.6
 ---

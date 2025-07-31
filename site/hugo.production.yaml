@@ -1,0 +1,5 @@
+Environment: "production"
+minifyOutput: true
+
+buildDrafts: true
+buildFuture: true
