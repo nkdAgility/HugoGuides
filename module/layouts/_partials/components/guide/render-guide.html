@@ -1,5 +1,5 @@
 {{- $isComingSoon := and .Date (lt now .Date) (eq hugo.Environment "production") }}
-{{- $contentAvailable := and .Page.Content (gt (len .Page.Content) 500) (not .Params.contentDraft) }}
+{{- $contentAvailable := and .Page.Content (gt (len .Page.Content) 500) (not .Params.translationDraft) }}
 <section class="my-2" style="max-width: 1200px; margin: 0 auto;">
   <div class="row">
     <!-- Sidebar with table of contents -->
