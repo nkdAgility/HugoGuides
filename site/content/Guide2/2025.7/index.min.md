@@ -18,8 +18,6 @@ sansfont: "Ari-Banana"
 monofont: "Courier Peel"
 sitemap:
   priority: 1.0
-aliases:
-  - /guide-2/latest/
 ---
 
 Guide 2 Banana Booky – For Smart Worky Stuff

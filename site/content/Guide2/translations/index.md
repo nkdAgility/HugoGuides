@@ -6,5 +6,5 @@ Type: "guide"
 aliases:
   - /downloads/
   - /download/
-  - /translationsdirectory/
+  - /translations/
 ---

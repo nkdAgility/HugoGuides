@@ -1,2 +1,8 @@
+github.com/KanbanGuides/KanbanGuides/site v0.0.0-20250807073058-1fb088304516 h1:bQ4DavaR+iSUnp08SEGOJX8QF9gPKBiemz4Hcxmz4hw=
+github.com/KanbanGuides/KanbanGuides/site v0.0.0-20250807073058-1fb088304516/go.mod h1:9SBjS7dL3fK2jPW/8vSRTH5Z3uogJHgV4P8cHF733c4=
+github.com/ScrumGuides/ScrumGuide-ExpansionPack/site v0.0.0-20250801110201-076bbcf543d8 h1:ZQbyJ44DJ7WCTqYtQp8MiVmPi+IW47C+1RU3PV1Eq+M=
+github.com/ScrumGuides/ScrumGuide-ExpansionPack/site v0.0.0-20250801110201-076bbcf543d8/go.mod h1:MplyV/zE4iA2b3ixo6kX8HUwn0kb8Gjts6JP8qedhww=
 github.com/nkdAgility/HugoGuides/module v0.6.4 h1:5MCak7zvxEJ9N0S6C74s22QNqhsiOoX2NMJ7tfMfOwk=
 github.com/nkdAgility/HugoGuides/module v0.6.4/go.mod h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=
+github.com/nkdAgility/HugoGuides/module v0.7.2 h1:eKkwj7p2r9+CpR7axltRWOX5KPJlhN3UQcVmhsOr8Zc=
+github.com/nkdAgility/HugoGuides/module v0.7.2/go.mod h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=

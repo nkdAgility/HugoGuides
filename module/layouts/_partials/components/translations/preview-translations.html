@@ -15,13 +15,15 @@
   {{- if eq hugo.Environment "production" }}
     {{- $productionLanguagesUrl = "/languages.json" }}
   {{- else }}
-    {{- $productionLanguagesUrl = printf "%slanguages.json?v=%d" .Site.Params.productionSiteUrl now.Unix }}
+    {{- $baseUrl := strings.TrimSuffix "/" .Site.Params.productionSiteUrl }}
+    {{- $productionLanguagesUrl = printf "%s/languages.json?v=%d" $baseUrl now.Unix }}
   {{- end }}
 
   {{- if eq hugo.Environment "preview" }}
     {{- $previewLanguagesUrl = "/languages.json" }}
   {{- else }}
-    {{- $previewLanguagesUrl = printf "%slanguages.json?v=%d" .Site.Params.previewSiteUrl now.Unix }}
+    {{- $baseUrl := strings.TrimSuffix "/" .Site.Params.previewSiteUrl }}
+    {{- $previewLanguagesUrl = printf "%s/languages.json?v=%d" $baseUrl now.Unix }}
   {{- end }}
 
   {{/* Load production languages */}}

@@ -21,7 +21,8 @@
     {{- $productionLanguagesData = $productionLanguagesFile.Content | transform.Unmarshal }}
   {{- end }}
 {{- else }}
-  {{- $productionLanguagesUrl := printf "%slanguages.json?v=%d" .Site.Params.productionSiteUrl now.Unix }}
+  {{- $baseUrl := strings.TrimSuffix "/" .Site.Params.productionSiteUrl }}
+  {{- $productionLanguagesUrl := printf "%s/languages.json?v=%d" $baseUrl now.Unix }}
   {{- with try (resources.GetRemote $productionLanguagesUrl) }}
     {{ with .Err }}
       {{ warnf "Error fetching production languages: %s" . }}

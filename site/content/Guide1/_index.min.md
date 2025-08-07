@@ -40,6 +40,4 @@ layman_description: |
 
 practitioner_description: |
   [Da Guide 1](/min/guide-1/latest) is da pro banana booky. Say how to flow da value like a river of pudding. Got da 3 big things: see da work, manage da work, fix da work. All clean, all shiny. If you need clear, stable, no-headache work stuff, dis da one.
-aliases:
-  - /guide-1/latest
 ---
