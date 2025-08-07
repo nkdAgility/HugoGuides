@@ -1,6 +1,5 @@
 ---
 title: "Banana Guide Bookies"
-url: "/"
 not_sure_which_to_use: |
   New to work stuff? Go go [Da Guide 1](/guide-1/latest) first-y!
 

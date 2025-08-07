@@ -6,5 +6,5 @@ description: Originals & Translations of Guide 1
 aliases:
   - /downloads/
   - /download/
-  - /translationsdirectory/
+  - /translations/
 ---
