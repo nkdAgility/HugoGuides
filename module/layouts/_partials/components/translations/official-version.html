@@ -1,4 +1,73 @@
-{{- $guidePage := . }}
+{{/* Official Version Component
+
+  This partial renders the official version section of a guide, displaying download options
+  for the official English version. This component always uses the default site version
+  which is English, regardless of the current page's language context.
+
+  Context:
+  - Expects the current page context (guide page)
+  - Always references the default English site (index 0 of site.Sites)
+  - Uses the English page's date, resources, and permalink
+
+  Features:
+  - Displays founding contributors/creators with external links
+  - Provides online reading link to the English guide version
+  - Shows PDF download buttons for EN and EN-US versions if available
+  - Responsive design with mobile cards and desktop table rows
+  - Tracks PDF downloads with data attributes for analytics
+
+  Language Behavior:
+  - Always displays the English (default site) version of the content
+  - Uses the first site in the sites collection (index 0) which is always English
+  - Explicitly uses $defaultSite := index site.Sites 0 to ensure consistent English content
+  - Never uses the current page's language context - always defaults to first site
+  - PDF resources are sourced from the English version pages
+
+  Dependencies:
+  - functions/get-contributors.html partial
+  - Bootstrap CSS classes for responsive layout
+  - Font Awesome icons for buttons
+  - i18n translations for labels
+
+  PDF Resources:
+  - Looks for pdf/*.en.pdf and pdf/*.en-us.pdf in English page resources
+  - Shows disabled button if PDF is not available
+*/}}
+{{/* Get the latest version using the function */}}
+{{- $latestVersion := partial "functions/get-latest-version" . }}
+{{/* Always use the first site in the sites collection (index 0) which is English
+  This ensures consistent behavior regardless of the current page's language context
+*/}}
+{{- $defaultSite := index site.Sites 0 }}
+{{/* Dynamically find the latest guide page in the current section */}}
+{{- $guidePage := "" }}
+
+{{/* Get all pages in the current section */}}
+{{- $sectionPages := where $defaultSite.RegularPages "Section" .Section }}
+
+{{/* Filter for guide pages and sort by date (newest first) */}}
+{{- $guidePages := where $sectionPages "Type" "guide" }}
+{{- if $guidePages }}
+  {{- $sortedPages := $guidePages.ByDate.Reverse }}
+  {{- $guidePage = index $sortedPages 0 }}
+{{- end }}
+
+{{/* Fallback: try to find the page with the latest version */}}
+{{- if and (not $guidePage) $latestVersion }}
+  {{- range $sectionPages }}
+    {{- $pathParts := split .RelPermalink "/" }}
+    {{- range $pathParts }}
+      {{- if eq . $latestVersion }}
+        {{- $guidePage = $ }}
+        {{- break }}
+      {{- end }}
+    {{- end }}
+    {{- if $guidePage }}
+      {{- break }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
 {{- $foundingContributors := partial "functions/get-contributors.html" . -}}
 {{- $foundingContributors = where $foundingContributors "founder" true -}}
 {{- $foundingContributors = where $foundingContributors "role" "in" (slice "contributor" "creator") -}}

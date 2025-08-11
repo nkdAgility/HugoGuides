@@ -87,10 +87,10 @@ outputFormats:
 
 module:
   imports:
-    - path: github.com/ScrumGuides/ScrumGuide-ExpansionPack/site
-      mounts:
-        - source: content
-          target: content
+    # - path: github.com/ScrumGuides/ScrumGuide-ExpansionPack/site
+    #   mounts:
+    #     - source: content
+    #       target: content
     - path: github.com/KanbanGuides/KanbanGuides/site
       mounts:
         - source: content
