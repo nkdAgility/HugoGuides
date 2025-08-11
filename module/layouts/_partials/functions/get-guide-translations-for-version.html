@@ -53,7 +53,7 @@
   {{ $parts := split $pdfName "." }}
   {{ if ge (len $parts) 3 }}
     {{ $langFromPDF := index $parts (sub (len $parts) 2) }}
-    {{ $pdfsByLang = merge $pdfsByLang (dict $langFromPDF .) }}
+    {{ $pdfsByLang = merge $pdfsByLang (dict (lower $langFromPDF) .) }}
   {{ end }}
 {{ end }}
 
@@ -70,7 +70,18 @@
     {{ end }}
   {{ end }}
   {{ $page := index $translationsByLang $lang }}
-  {{ $pdfResource := index $pdfsByLang $lang }}
+
+  // Look up PDF by normalized lang
+  {{ $langKey := lower $lang }}
+  {{ $pdfResource := index $pdfsByLang $langKey }}
+
+  // Fallback: check the translation page’s own resources
+  {{ if (and (not $pdfResource) $page) }}
+    {{ $pagePdfResources := $page.Resources.Match $pdfPattern }}
+    {{ if gt (len $pagePdfResources) 0 }}
+      {{ $pdfResource = index $pagePdfResources 0 }}
+    {{ end }}
+  {{ end }}
 
   {{/* Check if content is available for reading online */}}
   {{ $hasContent := false }}

@@ -74,16 +74,41 @@ rss:
   description: "Subscribe to our RSS feed"
 
 outputs:
-  home: [html, json, rss]
-  section: [html, rss]
-  taxonomy: [html, rss]
-  term: [html, rss]
-  page: [html, rss]
+  home:
+    - html
+    - json
+    - rss
+    - languages
+    - translations
+  section:
+    - html
+    - rss
+    - guide-translations
+  taxonomy:
+    - html
+    - rss
+  term:
+    - html
+    - rss
+  page:
+    - html
+    - rss
 
 outputFormats:
   json:
-    mediaType: "application/json"
-    baseName: "pages"
+    mediaType: application/json
+    baseName: pages
+  translations:
+    mediaType: application/json
+    baseName: translations
+  languages:
+    mediaType: application/json
+    baseName: languages
+    isPlainText: true
+  guide-translations:
+    mediaType: application/json
+    baseName: guide-translations
+    isPlainText: true
 
 module:
   imports:
@@ -95,6 +120,8 @@ module:
       mounts:
         - source: content
           target: content
+        - source: i18n
+          target: i18n
     - path: github.com/nkdAgility/HugoGuides/module
   replacements:
     - github.com/nkdAgility/HugoGuides/module -> ../../module
