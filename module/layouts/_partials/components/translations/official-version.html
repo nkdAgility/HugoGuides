@@ -1,7 +1,79 @@
-{{- $guidePage := . }}
+{{/* Official Version Component
+
+  This partial renders the official version section of a guide, displaying download options
+  for the official version in the default site language. This component always uses the default
+  site version, regardless of the current page's language context.
+
+  Context:
+  - Expects the current page context (guide page)
+  - Always references the default site (index 0 of site.Sites)
+  - Uses the default site's page date, resources, and permalink
+
+  Features:
+  - Displays founding contributors/creators with external links
+  - Provides online reading link to the default language guide version
+  - Shows PDF download buttons for all available language variants if available
+  - Responsive design with mobile cards and desktop table rows
+  - Tracks PDF downloads with data attributes for analytics
+
+  Language Behavior:
+  - Always displays the default site language version of the content
+  - Uses the first site in the sites collection (index 0) which is the default language
+  - Explicitly uses $defaultSite := index site.Sites 0 to ensure consistent default language content
+  - Never uses the current page's language context - always defaults to first site
+  - PDF resources are sourced from the default language version pages
+
+  Dependencies:
+  - functions/get-contributors.html partial
+  - Bootstrap CSS classes for responsive layout
+  - Font Awesome icons for buttons
+  - i18n translations for labels
+
+  PDF Resources:
+  - Dynamically looks for pdf/*.[language-code]*.pdf patterns based on default site language
+  - Shows disabled button if PDF is not available
+*/}}
+{{/* Get the latest version using the function */}}
+{{- $latestVersion := partial "functions/get-latest-version" . }}
+{{/* Always use the first site in the sites collection (index 0) which is the default language
+  This ensures consistent behavior regardless of the current page's language context
+*/}}
+{{- $defaultSite := index site.Sites 0 }}
+{{/* Dynamically find the latest guide page in the current section */}}
+{{- $guidePage := "" }}
+
+{{/* Get all pages in the current section */}}
+{{- $sectionPages := where $defaultSite.RegularPages "Section" .Section }}
+
+{{/* Filter for guide pages and sort by date (newest first) */}}
+{{- $guidePages := where $sectionPages "Type" "guide" }}
+{{- if $guidePages }}
+  {{- $sortedPages := $guidePages.ByDate.Reverse }}
+  {{- $guidePage = index $sortedPages 0 }}
+{{- end }}
+
+{{/* Fallback: try to find the page with the latest version */}}
+{{- if and (not $guidePage) $latestVersion }}
+  {{- range $sectionPages }}
+    {{- $pathParts := split .RelPermalink "/" }}
+    {{- range $pathParts }}
+      {{- if eq . $latestVersion }}
+        {{- $guidePage = $ }}
+        {{- break }}
+      {{- end }}
+    {{- end }}
+    {{- if $guidePage }}
+      {{- break }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
 {{- $foundingContributors := partial "functions/get-contributors.html" . -}}
 {{- $foundingContributors = where $foundingContributors "founder" true -}}
 {{- $foundingContributors = where $foundingContributors "role" "in" (slice "contributor" "creator") -}}
+
+{{ $pdfPattern := printf "pdf/*.%s*.pdf" $defaultSite.Language }}
+{{ $pdfMatches := $guidePage.Resources.Match $pdfPattern }}
 
 
 <h2 class="mb-3">{{ i18n "download_official_version" . }}</h2>
@@ -21,7 +93,7 @@
   <div class="card mb-3 d-lg-none">
     <div class="card-body">
       <h6 class="card-title mb-2">
-        English ({{ $guidePage.Date.Format "January 2006" }}) -
+        {{ $defaultSite.Language.LanguageName }} ({{ $guidePage.Date.Format "January 2006" }}) -
         {{ i18n "download_official_current_version" . }}
       </h6>
       <p class="card-text text-muted mb-3">
@@ -37,26 +109,14 @@
         <a href="{{ $guidePage.Permalink }}" class="btn btn-outline-secondary btn-sm">
           <i class="fa-solid fa-book-open me-1"></i>{{ i18n "read_online_action" . }}
         </a>
-        <!-- PDF Download Link -->
-        {{- $pdfPattern := printf "pdf/*.en.pdf" }}
-        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
-        {{- if $pdfResource }}
-          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="en" data-type="Official" data-filename="{{ $pdfResource.Name }}">
-            <i class="fa-solid fa-download me-1"></i>EN
+        {{ range $pdfMatches }}
+          {{ $lang := replaceRE `.*\.(?:([a-z]{2}(?:-[a-z]{2})?))\.pdf$` `$1` .Name }}
+          <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="{{ $lang | upper }}" data-type="Official" data-filename="{{ .Name }}">
+            <i class="fa-regular fa-file-pdf"></i>{{ $lang | upper }}
           </a>
-        {{- else }}
-          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN </a>
-        {{- end }}
-        <!-- PDF Download Link -->
-        {{- $pdfPattern := printf "pdf/*.en-us.pdf" }}
-        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
-        {{- if $pdfResource }}
-          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English (US)" data-language-code="en-us" data-type="Official" data-filename="{{ $pdfResource.Name }}">
-            <i class="fa-solid fa-download me-1"></i>EN (US)
-          </a>
-        {{- else }}
-          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN (US) </a>
-        {{- end }}
+        {{ else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>{{ $defaultSite.Language | upper }}</a>
+        {{ end }}
       </div>
     </div>
   </div>
@@ -80,26 +140,14 @@
         <a href="{{ $guidePage.Permalink }}" class="btn btn-outline-secondary btn-sm">
           <i class="fa-solid fa-book-open me-1"></i>{{ i18n "read_online_action" . }}
         </a>
-        <!-- PDF Download Link -->
-        {{- $pdfPattern := printf "pdf/*.en.pdf" }}
-        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
-        {{- if $pdfResource }}
-          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="en" data-type="Official" data-filename="{{ $pdfResource.Name }}">
-            <i class="fa-regular fa-file-pdf"></i>EN
+        {{ range $pdfMatches }}
+          {{ $lang := replaceRE `.*\.(?:([a-z]{2}(?:-[a-z]{2})?))\.pdf$` `$1` .Name }}
+          <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English" data-language-code="{{ $lang | upper }}" data-type="Official" data-filename="{{ .Name }}">
+            <i class="fa-regular fa-file-pdf"></i>{{ $lang | upper }}
           </a>
-        {{- else }}
-          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN </a>
-        {{- end }}
-        <!-- PDF Download Link -->
-        {{- $pdfPattern := printf "pdf/*.en-us.pdf" }}
-        {{- $pdfResource := $guidePage.Resources.GetMatch $pdfPattern }}
-        {{- if $pdfResource }}
-          <a href="{{ $pdfResource.RelPermalink }}" class="btn btn-primary btn-sm pdf-download" download data-language="English (US)" data-language-code="en-us" data-type="Official" data-filename="{{ $pdfResource.Name }}">
-            <i class="fa-regular fa-file-pdf"></i>EN-US
-          </a>
-        {{- else }}
-          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>EN-US</a>
-        {{- end }}
+        {{ else }}
+          <a href="#" class="btn btn-primary btn-sm disabled" title="PDF not available at {{ $pdfPattern }}"> <i class="fa-solid fa-ban me-1"></i>{{ $defaultSite.Language | upper }}</a>
+        {{ end }}
       </div>
     </div>
   </div>

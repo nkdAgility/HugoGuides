@@ -146,7 +146,7 @@
         </div>
 
         <!-- Desktop Row -->
-        <div class="row d-none d-md-flex align-items-center py-3 border-bottom">
+        <div class="row d-none d-md-flex align-items-center py-3 border-bottom" {{ if eq hugo.Environment "development" -}}title="ReadOnline:={{ .ReadOnline }} | ReadPDF:={{ .ReadPDF }}"{{- end -}}>
           <div class="col-md-4">
             {{ .LanguageName }}
             {{- if .Date }}
