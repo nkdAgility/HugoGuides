@@ -24,6 +24,8 @@ languages:
       description: Bello! Banana Guides para banana work!
       keywords: Banana
       status: reference
+      issueUrl: https://example.com/banana-issue
+      discussionUrl: https://example.com/banana-discussion
   ja:
     languageName: Japanese
     weight: 2
@@ -51,6 +53,8 @@ params:
   siteProdUrl: "https://hugoguide.org"
   supportEmail: "support@hugoguide.org"
   githubUrl: "https://github.com/nkdAgility/HugoGuides"
+  issueUrl: https://github.com/nkdAgility/HugoGuides/issues
+  discussionUrl: https://github.com/nkdAgility/HugoGuides/discussions
   previewSiteUrl: https://preview.hugoguides.org
   productionSiteUrl: https://hugoguides.org
   brand:
