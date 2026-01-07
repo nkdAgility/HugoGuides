@@ -138,18 +138,20 @@
       </div>
     {{ end }}
 
-    {{ block "header" . }}
-      <header class="bg-dark text-white p-4">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
-          {{ partial "components/main-menu.html" . }}
-        </div>
-        {{ if ne .Kind "home" }}
+    <header class="bg-dark text-white p-4">
+      {{ block "menu" . }}
+      <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
+        {{ partial "components/main-menu.html" . }}
+      </div>
+      {{ end }}
+      {{ if ne .Kind "home" }}
+        {{ block "breadcrumbs" . }}
           <div class="container">
             {{ partial "components/breadcrumbs.html" . }}
           </div>
         {{ end }}
-      </header>
-    {{ end }}
+      {{ end }}
+    </header>
 
 
     <main>
