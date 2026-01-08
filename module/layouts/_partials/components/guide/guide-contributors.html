@@ -40,7 +40,7 @@
       </div>
       <div class="col-12 col-md-10">
     {{ end }}
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap{{ if $lightList }} avatar-overlap{{ end }}">
           {{ range sort $contributors "weight" "asc" }}
             {{ partial "components/guide/guide-author.html" (dict "author" . "lightList" $lightList) }}
           {{ end }}
@@ -50,4 +50,20 @@
     </div>
     {{ end }}
   </div>
+  {{ if $lightList }}
+  <style>
+    .avatar-overlap .author-item {
+      margin-left: -12px;
+      transition: transform 0.2s ease;
+    }
+    .avatar-overlap .author-item:first-child {
+      margin-left: 0;
+    }
+    .avatar-overlap .author-item:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      position: relative;
+    }
+  </style>
+  {{ end }}
 {{ end }}
