@@ -26,6 +26,9 @@
               <div class="card-body d-flex flex-column p-4">
                 <p class="flex-grow-1 text-muted">{{ .Params.which_to_use_summary | markdownify }}</p>
 
+                <!-- Contributors - Light List -->
+                {{ partial "components/guide/guide-contributors.html" (dict "context" . "roles" (slice "contributor" "creator" "reviewer") "lightList" true) }}
+
                 <!-- Action buttons with more inviting design -->
                 <div class="d-flex flex-wrap gap-2 justify-content-center py-3">
                   {{- $latestVersion := partial "functions/get-latest-version" . }}

@@ -1,20 +1,33 @@
-<span class="author-item me-3 text-nowrap" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ partial "components/guide/guide-author-tooltip.html" . | safeHTMLAttr }}">
-  {{- if .gravatarHash }}
-    <img src="https://www.gravatar.com/avatar/{{ .gravatarHash }}?s=24&d=mp" alt="{{ .name }}" aria-label="Profile picture of {{ .name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
-  {{- else if .githubUsername }}
-    <img src="https://avatars.githubusercontent.com/{{ .githubUsername }}?size=24" alt="{{ .name }}" aria-label="Profile picture of {{ .name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
-  {{- else if .image }}
-    <img src="{{ .image }}" alt="{{ .name }}" aria-label="Profile picture of {{ .name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
+{{- /* Accept parameters or use defaults */ -}}
+{{- $author := . -}}
+{{- $lightList := false -}}
+
+{{- if reflect.IsMap . -}}
+  {{- $author = .author -}}
+  {{- with .lightList -}}
+    {{- $lightList = . -}}
+  {{- end -}}
+{{- end -}}
+
+<span class="author-item me-3 text-nowrap" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ partial "components/guide/guide-author-tooltip.html" $author | safeHTMLAttr }}">
+  {{- if $author.gravatarHash }}
+    <img src="https://www.gravatar.com/avatar/{{ $author.gravatarHash }}?s=24&d=mp" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
+  {{- else if $author.githubUsername }}
+    <img src="https://avatars.githubusercontent.com/{{ $author.githubUsername }}?size=24" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
+  {{- else if $author.image }}
+    <img src="{{ $author.image }}" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
   {{- end }}
-  {{- if .url }}
-    <a href="{{ .url }}" class="text-decoration-none" target="_blank" rel="noopener">
-      <strong>{{ .name }}</strong>
-    </a>
-  {{- else if .githubUsername }}
-    <a href="https://github.com/{{ .githubUsername }}" class="text-decoration-none" target="_blank" rel="noopener">
-      <strong>{{ .name }}</strong>
-    </a>
-  {{- else }}
-    <strong>{{ .name }}</strong>
+  {{- if not $lightList }}
+    {{- if $author.url }}
+      <a href="{{ $author.url }}" class="text-decoration-none" target="_blank" rel="noopener">
+        <strong>{{ $author.name }}</strong>
+      </a>
+    {{- else if $author.githubUsername }}
+      <a href="https://github.com/{{ $author.githubUsername }}" class="text-decoration-none" target="_blank" rel="noopener">
+        <strong>{{ $author.name }}</strong>
+      </a>
+    {{- else }}
+      <strong>{{ $author.name }}</strong>
+    {{- end }}
   {{- end }}
 </span>
