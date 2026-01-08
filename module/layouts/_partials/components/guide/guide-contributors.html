@@ -53,14 +53,14 @@
   {{ if $lightList }}
   <style>
     .avatar-overlap .author-item {
-      margin-left: -12px;
-      transition: transform 0.2s ease;
+      margin-left: var(--avatar-overlap-offset, -12px);
+      transition: transform var(--avatar-transition-speed, 0.2s) ease;
     }
     .avatar-overlap .author-item:first-child {
       margin-left: 0;
     }
     .avatar-overlap .author-item:hover {
-      transform: scale(1.1);
+      transform: scale(var(--avatar-hover-scale, 1.1));
       z-index: 10;
       position: relative;
     }
