@@ -399,6 +399,16 @@ li input[type="checkbox"] + * {
   }
 }
 
+/* RTL avatar overlap for contributors */
+[dir="rtl"] .avatar-overlap .author-item {
+  margin-left: 0;
+  margin-right: var(--avatar-overlap-offset, -12px);
+}
+
+[dir="rtl"] .avatar-overlap .author-item:first-child {
+  margin-right: 0;
+}
+
 /* Version Fork Visualization */
 .version-timeline {
   position: relative;
