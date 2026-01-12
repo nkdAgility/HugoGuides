@@ -225,6 +225,180 @@ li input[type="checkbox"] + * {
   margin-right: 0.255em;
 }
 
+/* RTL dropdown submenu */
+[dir="rtl"] .dropdown-submenu .dropdown-menu {
+  left: auto;
+  right: 100%;
+}
+
+[dir="rtl"] .dropdown-submenu .dropdown-toggle::after {
+  float: left;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #ccc;
+  border-left-color: transparent;
+  margin-left: -10px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .dropdown-submenu .dropdown-toggle:hover::after {
+  border-right-color: #999;
+  border-left-color: transparent;
+}
+
+/* RTL breadcrumb navigation */
+[dir="rtl"] .breadcrumb-nav .breadcrumb {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumb-nav .breadcrumb-item + .breadcrumb-item::before {
+  content: "‹";
+  padding-right: 0;
+  padding-left: 0.5rem;
+}
+
+/* RTL list items with checkboxes */
+[dir="rtl"] ul li input[type="checkbox"] {
+  margin-right: -1.2em;
+  margin-left: 0;
+}
+
+[dir="rtl"] li input[type="checkbox"] + * {
+  margin-right: 0.3em;
+  margin-left: 0;
+}
+
+/* RTL timeline components */
+[dir="rtl"] .version-historical .card {
+  margin-right: 3rem;
+  margin-left: 0;
+  border-right: 5px solid #6c757d !important;
+  border-left: none !important;
+}
+
+[dir="rtl"] .version-historical::before {
+  left: auto;
+  right: calc(50% - 1.5rem);
+}
+
+[dir="rtl"] .version-historical::after {
+  left: auto;
+  right: calc(50% + 1px);
+}
+
+[dir="rtl"] .version-latest::after {
+  left: auto;
+  right: 50%;
+}
+
+[dir="rtl"] .timeline-icon {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* RTL version timeline */
+[dir="rtl"] .version-timeline::before {
+  left: auto;
+  right: 50%;
+}
+
+/* RTL Bootstrap utility classes */
+[dir="rtl"] .ms-1 {
+  margin-left: 0 !important;
+  margin-right: 0.25rem !important;
+}
+
+[dir="rtl"] .ms-2 {
+  margin-left: 0 !important;
+  margin-right: 0.5rem !important;
+}
+
+[dir="rtl"] .ms-3 {
+  margin-left: 0 !important;
+  margin-right: 1rem !important;
+}
+
+[dir="rtl"] .me-1 {
+  margin-right: 0 !important;
+  margin-left: 0.25rem !important;
+}
+
+[dir="rtl"] .me-3 {
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+[dir="rtl"] .pe-2 {
+  padding-right: 0 !important;
+  padding-left: 0.5rem !important;
+}
+
+[dir="rtl"] .ps-2 {
+  padding-left: 0 !important;
+  padding-right: 0.5rem !important;
+}
+
+/* RTL text alignment */
+[dir="rtl"] .text-start {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-end {
+  text-align: left !important;
+}
+
+/* RTL float adjustments */
+[dir="rtl"] .float-start {
+  float: right !important;
+}
+
+[dir="rtl"] .float-end {
+  float: left !important;
+}
+
+/* RTL border utilities */
+[dir="rtl"] .border-start {
+  border-left: 0 !important;
+  border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+[dir="rtl"] .border-end {
+  border-right: 0 !important;
+  border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+/* RTL mobile responsive adjustments */
+@media (max-width: 768px) {
+  [dir="rtl"] .version-timeline::before {
+    left: auto;
+    right: 2.5rem;
+  }
+
+  [dir="rtl"] .version-latest::after {
+    left: auto;
+    right: 2.5rem;
+  }
+
+  [dir="rtl"] .version-historical::before {
+    left: auto;
+    right: 2.5rem;
+  }
+
+  [dir="rtl"] .version-historical::after {
+    left: auto;
+    right: 2.5rem;
+  }
+
+  [dir="rtl"] .version-historical .card {
+    margin-right: 4rem;
+    margin-left: 0;
+  }
+
+  [dir="rtl"] .dropdown-submenu .dropdown-menu {
+    padding-right: 1.5rem;
+    padding-left: 0;
+  }
+}
+
 /* Version Fork Visualization */
 .version-timeline {
   position: relative;
