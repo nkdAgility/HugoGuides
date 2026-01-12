@@ -26,41 +26,47 @@
     {{/* Get available translations for this version using the dedicated function */}}
     {{ $versionTranslations := partial "functions/get-guide-translations-for-version" . }}
 
-    {{/* Process each translation to find the latest version for each language */}}
+    {{/* Process each translation to find the latest usable version for each language */}}
     {{ range $versionTranslations }}
       {{ $langCode := .Language }}
 
-      {{/* Check if we already have this language or if this version is newer */}}
-      {{ $existing := index $languageMap $langCode }}
-      {{ if not $existing }}
-        {{/* First time seeing this language, add it with version info */}}
-        {{ $translationWithVersion := merge . (dict "Version" $version) }}
-        {{ $languageMap = merge $languageMap (dict $langCode $translationWithVersion) }}
-      {{ else }}
-        {{/* Compare versions to see if this one is newer */}}
-        {{ $currentVersion := $version }}
-        {{ $existingVersion := $existing.Version }}
+      {{/* Check if this translation is usable (has content or PDF) */}}
+      {{ $isUsable := or (eq .ReadOnline true) (eq .ReadPDF true) }}
 
-        {{/* Parse versions for comparison (YYYY.M format) */}}
-        {{ $currentParts := split $currentVersion "." }}
-        {{ $existingParts := split $existingVersion "." }}
+      {{/* Only process usable translations */}}
+      {{ if $isUsable }}
+        {{/* Check if we already have this language or if this version is newer */}}
+        {{ $existing := index $languageMap $langCode }}
+        {{ if not $existing }}
+          {{/* First time seeing this language, add it with version info */}}
+          {{ $translationWithVersion := merge . (dict "Version" $version) }}
+          {{ $languageMap = merge $languageMap (dict $langCode $translationWithVersion) }}
+        {{ else }}
+          {{/* Compare versions to see if this one is newer */}}
+          {{ $currentVersion := $version }}
+          {{ $existingVersion := $existing.Version }}
 
-        {{ $currentYear := int (index $currentParts 0) }}
-        {{ $currentMonth := int (index $currentParts 1) }}
-        {{ $existingYear := int (index $existingParts 0) }}
-        {{ $existingMonth := int (index $existingParts 1) }}
+          {{/* Parse versions for comparison (YYYY.M format) */}}
+          {{ $currentParts := split $currentVersion "." }}
+          {{ $existingParts := split $existingVersion "." }}
 
-        {{ $isNewer := false }}
-        {{ if gt $currentYear $existingYear }}
-          {{ $isNewer = true }}
-        {{ else if and (eq $currentYear $existingYear) (gt $currentMonth $existingMonth) }}
-          {{ $isNewer = true }}
-        {{ end }}
+          {{ $currentYear := int (index $currentParts 0) }}
+          {{ $currentMonth := int (index $currentParts 1) }}
+          {{ $existingYear := int (index $existingParts 0) }}
+          {{ $existingMonth := int (index $existingParts 1) }}
 
-        {{ if $isNewer }}
-          {{/* Update with newer version */}}
-          {{ $updatedTranslation := merge . (dict "Version" $currentVersion) }}
-          {{ $languageMap = merge $languageMap (dict $langCode $updatedTranslation) }}
+          {{ $isNewer := false }}
+          {{ if gt $currentYear $existingYear }}
+            {{ $isNewer = true }}
+          {{ else if and (eq $currentYear $existingYear) (gt $currentMonth $existingMonth) }}
+            {{ $isNewer = true }}
+          {{ end }}
+
+          {{ if $isNewer }}
+            {{/* Update with newer version only if it's usable */}}
+            {{ $updatedTranslation := merge . (dict "Version" $currentVersion) }}
+            {{ $languageMap = merge $languageMap (dict $langCode $updatedTranslation) }}
+          {{ end }}
         {{ end }}
       {{ end }}
     {{ end }}
