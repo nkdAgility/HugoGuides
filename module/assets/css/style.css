@@ -183,11 +183,6 @@ li input[type="checkbox"] + * {
   flex-direction: row-reverse;
 }
 
-[dir="rtl"] .me-2 {
-  margin-right: 0 !important;
-  margin-left: 0.5rem !important;
-}
-
 [dir="rtl"] .card-body {
   text-align: right;
 }
@@ -320,6 +315,11 @@ li input[type="checkbox"] + * {
 [dir="rtl"] .me-1 {
   margin-right: 0 !important;
   margin-left: 0.25rem !important;
+}
+
+[dir="rtl"] .me-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
 }
 
 [dir="rtl"] .me-3 {
