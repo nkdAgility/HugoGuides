@@ -397,6 +397,17 @@ li input[type="checkbox"] + * {
     padding-right: 1.5rem;
     padding-left: 0;
   }
+
+  /* RTL overrides for timeline elements on mobile */
+  [dir="rtl"] .timeline-icon {
+    margin-left: 0 !important;
+    margin-right: 10px;
+  }
+
+  [dir="rtl"] .timeline-connector {
+    margin-right: 20px;
+    margin-left: 0;
+  }
 }
 
 /* RTL avatar overlap for contributors */
