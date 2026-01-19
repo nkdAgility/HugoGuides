@@ -400,8 +400,8 @@ li input[type="checkbox"] + * {
 
   /* RTL overrides for timeline elements on mobile */
   [dir="rtl"] .timeline-icon {
+    margin-bottom: 10px;
     margin-left: 0 !important;
-    margin-right: 10px;
   }
 
   [dir="rtl"] .timeline-connector {
