@@ -88,8 +88,9 @@
   {{ $hasPage := false }}
   {{ if $page }}
     {{ $hasPage = true }}
-    {{/* Check if page has content */}}
-    {{ $hasContent = and $page.Content (ne (trim $page.Content " \n\r\t") "") }}
+    {{/* Check if page has actual content by checking plain text content and word count */}}
+    {{ $plainContent := trim $page.Plain " \n\r\t" }}
+    {{ $hasContent = and (gt $page.WordCount 0) (ne $plainContent "") }}
   {{ end }}
 
   {{/* Check if PDF is available and get PDF path */}}
