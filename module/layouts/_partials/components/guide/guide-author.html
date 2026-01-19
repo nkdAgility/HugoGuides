@@ -16,6 +16,8 @@
     <img src="https://avatars.githubusercontent.com/{{ $author.githubUsername }}?size=24" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
   {{- else if $author.image }}
     <img src="{{ $author.image }}" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
+  {{- else }}
+    <img src="/images/missing-user.png" alt="{{ $author.name }}" aria-label="Profile picture of {{ $author.name }}" class="author-avatar rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" />
   {{- end }}
   {{- if not $lightList }}
     {{- if $author.url }}
