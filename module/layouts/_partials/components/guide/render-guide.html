@@ -80,8 +80,13 @@
           {{- /* Header with title, date, and download buttons */ -}}
           <header class="content-header">
             <div class="row mb-2">
-              <div class="col-12 col-md-6"><h2 class="content-title mb-0">{{ .Title }}</h2></div>
-              <div class="col-12 col-md-6 text-end">
+              <div class="col-12 col-md-8">
+                <h1 class="content-title mb-0">{{ .Title }}</h1>
+                {{- if .Params.subtitle }}
+                  <p class="content-subtitle text-muted fs-5 mt-2">{{ .Params.subtitle }}</p>
+                {{- end }}
+              </div>
+              <div class="col-12 col-md-4 text-end">
                 <div class="d-flex gap-2">
                   {{- if ne .Site.Language.Lang "en" }}
                     <a
@@ -171,6 +176,7 @@
                   {{- end }}
                 </div>
               </div>
+
             </div>
             {{ if .Date }}
               <div class="publish-date">
