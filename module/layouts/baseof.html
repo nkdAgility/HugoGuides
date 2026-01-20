@@ -281,5 +281,9 @@
     {{- if $submenuJs -}}
     <script src="{{ $submenuJs.RelPermalink }}"></script>
     {{- end -}}
+    {{- $footnoteTooltipsJs := resources.Get "js/footnote-tooltips.js" -}}
+    {{- if $footnoteTooltipsJs -}}
+    <script src="{{ $footnoteTooltipsJs.RelPermalink }}"></script>
+    {{- end -}}
   </body>
 </html>

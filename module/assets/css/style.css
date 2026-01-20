@@ -512,3 +512,86 @@ li input[type="checkbox"] + * {
     display: none;
   }
 }
+
+/* ========================================
+   Footnote Tooltips
+   ======================================== */
+
+/* Footnote reference links with enhanced styling */
+a.footnote-tooltip {
+  position: relative;
+  color: #135289;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 2px;
+  transition: all 0.2s ease;
+}
+
+a.footnote-tooltip:hover {
+  color: #0d3d63;
+  text-decoration: underline;
+}
+
+/* Custom tooltip styling for footnote content */
+.footnote-tooltip-content {
+  --bs-tooltip-max-width: 400px;
+  --bs-tooltip-bg: #353535;
+  --bs-tooltip-color: #ffffff;
+  --bs-tooltip-opacity: 0.98;
+}
+
+.footnote-tooltip-content .tooltip-inner {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Links within tooltip */
+.footnote-tooltip-content .tooltip-inner a {
+  color: #6fb3f0;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.footnote-tooltip-content .tooltip-inner a:hover {
+  color: #a0cdf5;
+}
+
+/* Italic text in tooltips (book/article titles) */
+.footnote-tooltip-content .tooltip-inner em,
+.footnote-tooltip-content .tooltip-inner i {
+  font-style: italic;
+  color: #e0e0e0;
+}
+
+/* Better text wrapping in tooltips */
+.footnote-tooltip-content .tooltip-inner {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Responsive tooltip sizing */
+@media (max-width: 768px) {
+  .footnote-tooltip-content {
+    --bs-tooltip-max-width: 280px;
+  }
+  
+  .footnote-tooltip-content .tooltip-inner {
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footnote-tooltip-content {
+    --bs-tooltip-max-width: 240px;
+  }
+  
+  .footnote-tooltip-content .tooltip-inner {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
