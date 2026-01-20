@@ -85,9 +85,10 @@
                 {{- if .Params.subtitle }}
                   <p class="content-subtitle text-muted fs-5 mt-2">{{ .Params.subtitle }}</p>
                 {{- end }}
-              </div>
-              <div class="col-12 col-md-4 text-end">
-                <div class="d-flex gap-2">
+              </div>d
+              <div class="col-12 col-md-4">
+                <div class="d-flex gap-2 justify-content-md-end">
+
                   {{- if ne .Site.Language.Lang "en" }}
                     <a
                       href="{{ .Site.Params.githubUrl }}/issues/new?template=translation-error.yml"
