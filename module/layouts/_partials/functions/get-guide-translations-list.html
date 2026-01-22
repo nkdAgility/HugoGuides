@@ -7,10 +7,8 @@
 {{/* Get all versions for this guide */}}
 {{ $guidePages := where .Pages "Type" "guide" }}
 
-{{/* Map to track latest version for each language */}}
-{{ $languageMap := dict }}
-
-{{/* Process all versions to find the latest for each language */}}
+{{/* Create a slice with version info for sorting */}}
+{{ $versionsWithInfo := slice }}
 {{ range $guidePages }}
   {{/* Extract version from URL path */}}
   {{ $pathParts := split .RelPermalink "/" }}
@@ -21,52 +19,53 @@
       {{ break }}
     {{ end }}
   {{ end }}
-
+  
   {{ if $version }}
-    {{/* Get available translations for this version using the dedicated function */}}
-    {{ $versionTranslations := partial "functions/get-guide-translations-for-version" . }}
+    {{/* Parse version for sorting (YYYY.M format) */}}
+    {{ $versionParts := split $version "." }}
+    {{ $year := int (index $versionParts 0) }}
+    {{ $month := int (index $versionParts 1) }}
+    {{ $sortKey := add (mul $year 100) $month }}
+    {{ $versionsWithInfo = $versionsWithInfo | append (dict "page" . "version" $version "sortKey" $sortKey) }}
+  {{ end }}
+{{ end }}
 
-    {{/* Process each translation to find the latest usable version for each language */}}
-    {{ range $versionTranslations }}
-      {{ $langCode := .Language }}
+{{/* Sort versions in DESCENDING order (newest first) */}}
+{{ $versionsWithInfo = sort $versionsWithInfo "sortKey" "desc" }}
 
-      {{/* Check if this translation is usable (has content or PDF) */}}
-      {{ $isUsable := or (eq .ReadOnline true) (eq .ReadPDF true) }}
+{{/* Map to track best version for each language */}}
+{{ $languageMap := dict }}
 
-      {{/* Only process usable translations */}}
-      {{ if $isUsable }}
-        {{/* Check if we already have this language or if this version is newer */}}
-        {{ $existing := index $languageMap $langCode }}
-        {{ if not $existing }}
-          {{/* First time seeing this language, add it with version info */}}
-          {{ $translationWithVersion := merge . (dict "Version" $version) }}
-          {{ $languageMap = merge $languageMap (dict $langCode $translationWithVersion) }}
-        {{ else }}
-          {{/* Compare versions to see if this one is newer */}}
-          {{ $currentVersion := $version }}
-          {{ $existingVersion := $existing.Version }}
+{{/* Process all versions (newest to oldest) to find best available for each language */}}
+{{ range $versionsWithInfo }}
+  {{ $guidePage := .page }}
+  {{ $version := .version }}
+  
+  {{/* Get available translations for this version using the dedicated function */}}
+  {{ $versionTranslations := partial "functions/get-guide-translations-for-version" $guidePage }}
 
-          {{/* Parse versions for comparison (YYYY.M format) */}}
-          {{ $currentParts := split $currentVersion "." }}
-          {{ $existingParts := split $existingVersion "." }}
+  {{/* Process each translation to find the best version for each language */}}
+  {{ range $versionTranslations }}
+    {{ $langCode := .Language }}
 
-          {{ $currentYear := int (index $currentParts 0) }}
-          {{ $currentMonth := int (index $currentParts 1) }}
-          {{ $existingYear := int (index $existingParts 0) }}
-          {{ $existingMonth := int (index $existingParts 1) }}
+    {{/* Check if this translation is usable (has content or PDF) */}}
+    {{ $isUsable := or (eq .ReadOnline true) (eq .ReadPDF true) }}
 
-          {{ $isNewer := false }}
-          {{ if gt $currentYear $existingYear }}
-            {{ $isNewer = true }}
-          {{ else if and (eq $currentYear $existingYear) (gt $currentMonth $existingMonth) }}
-            {{ $isNewer = true }}
-          {{ end }}
-
-          {{ if $isNewer }}
-            {{/* Update with newer version only if it's usable */}}
-            {{ $updatedTranslation := merge . (dict "Version" $currentVersion) }}
-            {{ $languageMap = merge $languageMap (dict $langCode $updatedTranslation) }}
-          {{ end }}
+    {{/* Only process usable translations */}}
+    {{ if $isUsable }}
+      {{/* Check if we already have this language */}}
+      {{ $existing := index $languageMap $langCode }}
+      {{ if not $existing }}
+        {{/* First time seeing this language, add it */}}
+        {{ $translationWithVersion := merge . (dict "Version" $version) }}
+        {{ $languageMap = merge $languageMap (dict $langCode $translationWithVersion) }}
+      {{ else }}
+        {{/* We already have this language from a newer version */}}
+        {{/* Only replace if current (older) version has ReadOnline content and existing doesn't */}}
+        {{ if and (eq .ReadOnline true) (ne $existing.ReadOnline true) }}
+          {{/* This older version has actual content, while newer version doesn't - use this one */}}
+          {{ $updatedTranslation := merge . (dict "Version" $version) }}
+          {{ $languageMap = merge $languageMap (dict $langCode $updatedTranslation) }}
         {{ end }}
       {{ end }}
     {{ end }}
