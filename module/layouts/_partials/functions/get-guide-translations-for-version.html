@@ -88,9 +88,12 @@
   {{ $hasPage := false }}
   {{ if $page }}
     {{ $hasPage = true }}
-    {{/* Check if page has actual content by checking plain text content and word count */}}
+    {{/* Check if page has actual body content (not just frontmatter) */}}
+    {{/* Plain contains the rendered content body without frontmatter */}}
+    {{/* Count words in Plain to ensure actual content exists, not just translated frontmatter */}}
     {{ $plainContent := trim $page.Plain " \n\r\t" }}
-    {{ $hasContent = and (gt $page.WordCount 0) (ne $plainContent "") }}
+    {{ $plainWords := split $plainContent " " | len }}
+    {{ $hasContent = gt $plainWords 10 }}
   {{ end }}
 
   {{/* Check if PDF is available and get PDF path */}}
