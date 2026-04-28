@@ -1,3 +1,4 @@
 baseURL: https://guidedemo.org
 Environment: production
-minifyOutput: true
+minify:
+  minifyOutput: true

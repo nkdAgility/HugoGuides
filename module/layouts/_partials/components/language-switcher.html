@@ -1,10 +1,11 @@
 {{- if hugo.IsMultilingual }}
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fa-solid fa-globe"></i> {{ .Site.Language.LanguageName }}
+      <i class="fa-solid fa-globe"></i> {{ .Site.Language.Label }}
     </a>
     <ul class="dropdown-menu">
-      {{- range $langCode, $language := $.Site.Languages }}
+      {{- range hugo.Sites }}
+        {{- $language := .Language }}
         {{- if ne $language.Lang $.Site.Language.Lang }}
           {{- $langUrl := "" }}
           {{- /* Check if current page has a translation */ -}}

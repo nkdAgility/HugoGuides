@@ -15,7 +15,7 @@
 {{- /* If no section AND not a guide type, return all contributors from all guides */ -}}
 {{- if and (not $section) (ne $type "guide") -}}
   {{- $seenContributors := dict -}}
-  {{- range $guideKey, $guideContributors := .Site.Data.contributions -}}
+  {{- range $guideKey, $guideContributors := hugo.Data.contributions -}}
     {{- range $guideContributors -}}
       {{- $uniqueKey := .name -}}
       {{- if .githubUsername -}}
@@ -30,7 +30,7 @@
   {{- end -}}
 {{- else -}}
   {{- /* Try to get guide-specific contributors based on section */ -}}
-  {{- $sectionContributors := index .Site.Data.contributions $section -}}
+  {{- $sectionContributors := index hugo.Data.contributions $section -}}
   {{- if $sectionContributors -}}
     {{ fmt.Warnf "DEBUG get-contributors1: section=%s type=%s version=%s allContributorsFrom=%s" $section $type $version "SECTION" -}}
     {{- $allContributors = $sectionContributors -}}

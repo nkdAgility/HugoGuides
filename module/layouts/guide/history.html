@@ -35,7 +35,7 @@
   {{- end }}
 
   {{- if not $guidePage }}
-    {{- $defaultSite := index site.Sites 0 }}
+    {{- $defaultSite := index hugo.Sites 0 }}
     {{- $guidePage = $defaultSite.GetPage .Section }}
   {{- end }}
 

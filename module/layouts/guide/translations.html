@@ -37,7 +37,7 @@
   {{- end }}
 
   {{- if not $guidePage }}
-    {{- $defaultSite := index site.Sites 0 }}
+    {{- $defaultSite := index hugo.Sites 0 }}
     {{- $guidePage = $defaultSite.GetPage .Section }}
   {{- end }}
 
@@ -46,7 +46,7 @@
   {{- end }}
 
   {{- $now := now }}
-  {{- $translations := .Site.Data.translations }}
+  {{- $translations := hugo.Data.translations }}
   {{- $translation := index $translations .Site.Language.Lang | default (index $translations "en") }}
 
   {{- $isComingSoon := and $guidePage $guidePage.Date (lt now $guidePage.Date) (eq hugo.Environment "production") }}

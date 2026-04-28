@@ -18,7 +18,7 @@ Parameters: - page: The page to get the parameter from - param: The parameter na
 {{- /* If no result, fall back to English site */ -}}
 {{- if not $result }}
   {{- $enSite := $context.Site }}
-  {{- range $context.Site.Sites }}
+  {{- range hugo.Sites }}
     {{- if eq .Language.Lang "en" }}
       {{- $enSite = . }}
       {{- break }}
@@ -37,7 +37,7 @@ Parameters: - page: The page to get the parameter from - param: The parameter na
   {{- else }}
     {{- /* If no page at all, try to get English page directly */ -}}
     {{- $enSite := $context.Site }}
-    {{- range $context.Site.Sites }}
+    {{- range hugo.Sites }}
       {{- if eq .Language.Lang "en" }}
         {{- $enSite = . }}
         {{- break }}

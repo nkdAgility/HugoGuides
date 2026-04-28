@@ -38,7 +38,7 @@
       }{{- end -}}
     ]
   },
-  "inLanguage": "{{ .Site.Language.LanguageCode | default "en" }}",
+  "inLanguage": "{{ .Site.Language.Locale | default "en" }}",
   "potentialAction": {
     "@type": "ReadAction",
     "target": {{ $pageURL }}

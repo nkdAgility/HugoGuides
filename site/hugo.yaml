@@ -10,14 +10,14 @@ resourceDir: ../resources
 # Multi-language configuration
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
     title: Guide Pack
     params:
       description: "Guide Pack"
       keywords: "Guides"
   min:
-    languageName: Minionese
+    label: Minionese
     weight: 1001
     title: Banana Guides
     params:
@@ -25,7 +25,7 @@ languages:
       keywords: Banana
       status: reference
   ja:
-    languageName: Japanese
+    label: Japanese
     weight: 2
     # title: Open Guide to Kanban <- 英語がKanban Guidesのため、ここは日本語のカンバンガイドに合わせる
     title: カンバンガイド

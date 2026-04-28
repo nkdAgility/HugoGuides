@@ -7,7 +7,7 @@
 {{- $defaultLang := .Site.Home.Language.Lang | default "en" -}}
 {{- $currentPageDefaultLang := .Site.GetPage (printf "/%s%s" $defaultLang .File.Path) -}}
 {{- if not $currentPageDefaultLang -}}
-  {{- $currentPageDefaultLang = .Site.Sites.Default.GetPage .File.Path -}}
+  {{- $currentPageDefaultLang = hugo.Sites.Default.GetPage .File.Path -}}
 {{- end -}}
 
 <script type="application/ld+json">
@@ -64,7 +64,7 @@
     {{- end }}
   ],
   "keywords": "{{ delimit .Keywords ", " ", and " }}",
-  "inLanguage": "{{ .Site.Language.LanguageCode | default "en" }}",
+  "inLanguage": "{{ .Site.Language.Locale | default "en" }}",
   "license": "© {{ now.Format "2006" }} {{ .Site.Title }}",
   "isPartOf": {
     "@type": "WebSite",

@@ -1,7 +1,8 @@
 {
   "languages": [
     {{- $first := true -}}
-    {{- range $langCode, $langConfig := .Site.Languages -}}
+    {{- range hugo.Sites -}}
+      {{- $langConfig := .Language -}}
       {{- if not $first -}},{{- end -}}
       {
         "code": "{{ $langConfig.Lang }}",
@@ -16,7 +17,7 @@
     {{- end -}}
   ],
   "defaultLanguage": "{{ .Site.Language.Lang }}",
-  "totalEnabledLanguages": {{ len .Site.Languages }},
+  "totalEnabledLanguages": {{ len hugo.Sites }},
   "generatedAt": "{{ now.Format "2006-01-02T15:04:05Z07:00" }}",
   "environment": "{{ hugo.Environment }}"
 }
