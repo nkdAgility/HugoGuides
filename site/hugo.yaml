@@ -125,7 +125,6 @@ module:
     - path: github.com/nkdAgility/HugoGuides/module
   replacements:
     - github.com/nkdAgility/HugoGuides/module -> ../../module
-    - github.com/KanbanGuides/KanbanGuides/site -> ../../../KanbanGuides/site
 
 markup:
   goldmark:
