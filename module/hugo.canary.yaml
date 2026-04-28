@@ -1,7 +1,7 @@
 environment: "canary"
-minifyOutput: true
+minify:
+  minifyOutput: true
 
 buildDrafts: true
 buildFuture: true
 buildExpired: true
-

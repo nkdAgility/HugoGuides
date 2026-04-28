@@ -13,7 +13,6 @@ author:
   - Anonymous Banana Author
 
 type: guide
-lang: min
 mainfont: "Times New Banana"
 sansfont: "Ari-Banana"
 monofont: "Courier Peel"

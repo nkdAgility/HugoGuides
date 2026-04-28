@@ -38,7 +38,7 @@
 {{/* Always use the first site in the sites collection (index 0) which is the default language
   This ensures consistent behavior regardless of the current page's language context
 */}}
-{{- $defaultSite := index site.Sites 0 }}
+{{- $defaultSite := index hugo.Sites 0 }}
 {{/* Dynamically find the latest guide page in the current section */}}
 {{- $guidePage := "" }}
 
@@ -93,7 +93,7 @@
   <div class="card mb-3 d-lg-none">
     <div class="card-body">
       <h6 class="card-title mb-2">
-        {{ $defaultSite.Language.LanguageName }} ({{ $guidePage.Date.Format "January 2006" }}) -
+        {{ $defaultSite.Language.Label }} ({{ $guidePage.Date.Format "January 2006" }}) -
         {{ i18n "download_official_current_version" . }}
       </h6>
       <p class="card-text text-muted mb-3">

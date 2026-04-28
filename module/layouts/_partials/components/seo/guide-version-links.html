@@ -22,7 +22,7 @@
     {{- end -}}
 
     {{- /* Add hreflang links for all available languages of this version */ -}}
-    {{- range .Site.Sites -}}
+    {{- range hugo.Sites -}}
       {{- $langCode := .Language.Lang -}}
       {{- $siteVersion := "" -}}
 

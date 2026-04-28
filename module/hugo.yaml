@@ -11,7 +11,7 @@ disableDefaultLanguageRedirect: false
 disableLanguages: []
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
     title: Guides Demo
     params:
@@ -35,7 +35,6 @@ params:
   GoogleTagManagerID: "GTM-MOOO" # Replace with your actual GTM ID
   features:
     guideDetails: true
-
 
 sitemap:
   filename: sitemap.xml

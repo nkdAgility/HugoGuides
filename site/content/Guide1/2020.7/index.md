@@ -8,7 +8,6 @@ author:
   - Jane Smith
   - Anonymous Author
 type: guide
-lang: en
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"

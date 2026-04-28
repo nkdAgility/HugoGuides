@@ -138,7 +138,7 @@ Parameters: - page: The Hugo page object to render - itemType: Type of item - "l
               {{ range $translationsWithContent }}
                 {{ if ne .Language.Lang $currentLang }}
                   <a href="{{ .Permalink }}" class="btn btn-outline-primary btn-sm">
-                    {{ .Language.LanguageName }}
+                    {{ .Language.Label }}
                   </a>
                 {{ end }}
               {{ end }}

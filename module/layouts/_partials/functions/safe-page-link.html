@@ -23,8 +23,8 @@ Parameters: - . (string): The path to the page (e.g., "/guide", "/translations")
   {{- /* Page doesn't exist, try default language */ -}}
   {{- if ne $currentLang $defaultLang -}}
     {{- /* We're not in the default language, so try to get the default language page */ -}}
-    {{- $defaultSite := index site.Sites 0 -}}
-    {{- range site.Sites -}}
+    {{- $defaultSite := index hugo.Sites 0 -}}
+    {{- range hugo.Sites -}}
       {{- if eq .Language.Lang $defaultLang -}}
         {{- $defaultSite = . -}}
         {{- break -}}

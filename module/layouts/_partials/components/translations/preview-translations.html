@@ -29,8 +29,8 @@
   {{/* Load production languages */}}
   {{- if eq hugo.Environment "production" }}
     {{/* Use site's own language configuration in production */}}
-    {{- range .Site.Languages }}
-      {{- $productionLanguageCodes = $productionLanguageCodes | append .LanguageCode }}
+    {{- range hugo.Sites }}
+      {{- $productionLanguageCodes = $productionLanguageCodes | append .Language.Locale }}
     {{- end }}
   {{- else }}
     {{/* Load remote file in other environments */}}

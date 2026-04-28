@@ -7,7 +7,6 @@ keywords:
 author:
   - Jane Smith
 type: guide
-lang: en
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"

@@ -63,9 +63,9 @@
   {{ $lang := . }}
   {{ $langConfig := $guideVersionPage.Site.Language }}
   {{ $langConfigFound := false }}
-  {{ range $guideVersionPage.Site.Languages }}
-    {{ if eq .Lang $lang }}
-      {{ $langConfig = . }}
+  {{ range hugo.Sites }}
+    {{ if eq .Language.Lang $lang }}
+      {{ $langConfig = .Language }}
       {{ $langConfigFound = true }}
     {{ end }}
   {{ end }}
