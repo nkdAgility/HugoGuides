@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, codex/open-guide-platform]
+    branches: [main]
 permissions:
   contents: read
 jobs:
