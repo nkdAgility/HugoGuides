@@ -77,9 +77,16 @@
 
   // Fallback: check the translation page’s own resources
   {{ if (and (not $pdfResource) $page) }}
-    {{ $pagePdfResources := $page.Resources.Match $pdfPattern }}
-    {{ if gt (len $pagePdfResources) 0 }}
-      {{ $pdfResource = index $pagePdfResources 0 }}
+    {{/* Match this language's own PDF. A resource whose suffix is not a
+         configured language, such as *.en-us.pdf, is untagged and therefore
+         visible to every language's page; taking index 0 of the unfiltered
+         list lets it win purely by sort order. */}}
+    {{ $langPdfResources := $page.Resources.Match (printf "pdf/*.%s.pdf" $lang) }}
+    {{ if eq (len $langPdfResources) 0 }}
+      {{ $langPdfResources = $page.Resources.Match (printf "pdf/*.%s.pdf" (lower $lang)) }}
+    {{ end }}
+    {{ if gt (len $langPdfResources) 0 }}
+      {{ $pdfResource = index $langPdfResources 0 }}
     {{ end }}
   {{ end }}
 
