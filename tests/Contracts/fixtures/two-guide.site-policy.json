@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "siteId": "KanbanGuides",
+  "wrapper": {
+    "sourcePath": "site",
+    "requiredRoutes": [
+      "/",
+      "/the-kanban-guide/",
+      "/open-guide-to-kanban/"
+    ],
+    "requiredFiles": [],
+    "requiredI18nKeys": [],
+    "integrationPoints": [
+      "guide-navigation"
+    ]
+  },
+  "guides": [
+    {
+      "id": "the-kanban-guide",
+      "contentRoot": "site/content/the-kanban-guide",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2020.7",
+          "path": "2020.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "downloads": [],
+              "language": "fa",
+              "fallbackLanguage": "en",
+              "intent": "fallback"
+            },
+            {
+              "downloads": [],
+              "language": "es-419",
+              "intent": "scaffold"
+            },
+            {
+              "downloads": [],
+              "language": "min",
+              "intent": "excluded"
+            }
+          ]
+        },
+        {
+          "id": "2020.12",
+          "path": "2020.12",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2025.5",
+          "path": "2025.5",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "open-guide-to-kanban",
+      "contentRoot": "site/content/open-guide-to-kanban",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2025.7",
+          "path": "2025.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "environments": [
+      {
+        "name": "preview",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      },
+      {
+        "name": "production",
+        "excludedLanguages": [
+          "min"
+        ],
+        "excludedGuides": []
+      }
+    ],
+    "permanentExclusions": [
+      {
+        "environment": "production",
+        "subject": "language",
+        "id": "min",
+        "reason": "Minionese must never be published to production."
+      }
+    ]
+  },
+  "protectedPaths": []
+}

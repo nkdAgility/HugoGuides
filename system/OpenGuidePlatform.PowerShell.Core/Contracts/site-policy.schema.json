@@ -1,0 +1,352 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenGuidePlatform site policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wrapper": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourcePath": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+        },
+        "requiredRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "requiredFiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+          },
+          "minItems": 0
+        },
+        "requiredI18nKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "integrationPoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "sourcePath",
+        "requiredRoutes",
+        "requiredFiles",
+        "requiredI18nKeys",
+        "integrationPoints"
+      ]
+    },
+    "guides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentRoot": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+          },
+          "relationship": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "independent",
+                  "core",
+                  "extension"
+                ]
+              },
+              "parentGuideId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "extension"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "parentGuideId"
+                  ]
+                }
+              }
+            ]
+          },
+          "protectSource": {
+            "type": "boolean"
+          },
+          "editions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+                },
+                "sourceLanguage": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+                },
+                "translations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "language": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+                      },
+                      "intent": {
+                        "enum": [
+                          "web",
+                          "pdf-only",
+                          "fallback",
+                          "scaffold",
+                          "excluded"
+                        ]
+                      },
+                      "fallbackLanguage": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+                      },
+                      "downloads": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "minLength": 1,
+                              "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+                            },
+                            "handling": {
+                              "enum": [
+                                "supplied",
+                                "generated",
+                                "protected"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "handling"
+                          ]
+                        },
+                        "minItems": 0
+                      }
+                    },
+                    "required": [
+                      "language",
+                      "intent",
+                      "downloads"
+                    ],
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "intent": {
+                              "const": "fallback"
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "fallbackLanguage"
+                          ]
+                        }
+                      },
+                      {
+                        "then": {
+                          "properties": {
+                            "downloads": {
+                              "minItems": 1
+                            }
+                          }
+                        },
+                        "if": {
+                          "properties": {
+                            "intent": {
+                              "const": "pdf-only"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "id",
+                "path",
+                "sourceLanguage",
+                "translations"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "contentRoot",
+          "relationship",
+          "protectSource",
+          "editions"
+        ]
+      },
+      "minItems": 1
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "enum": [
+                  "local",
+                  "preview",
+                  "production"
+                ]
+              },
+              "excludedLanguages": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+                },
+                "minItems": 0
+              },
+              "excludedGuides": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 0
+              }
+            },
+            "required": [
+              "name",
+              "excludedLanguages",
+              "excludedGuides"
+            ]
+          },
+          "minItems": 1
+        },
+        "permanentExclusions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "environment": {
+                "enum": [
+                  "preview",
+                  "production"
+                ]
+              },
+              "subject": {
+                "enum": [
+                  "language",
+                  "guide",
+                  "edition"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "environment",
+              "subject",
+              "id",
+              "reason"
+            ]
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "environments",
+        "permanentExclusions"
+      ]
+    },
+    "protectedPaths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "siteId",
+    "wrapper",
+    "guides",
+    "publication",
+    "protectedPaths"
+  ]
+}

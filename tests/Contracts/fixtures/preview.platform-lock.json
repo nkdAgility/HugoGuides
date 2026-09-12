@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "version": "0.0.0-fixture",
+  "channel": "preview",
+  "sourceCommit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "package": {
+    "url": "https://example.invalid/fixture.zip",
+    "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "hugoModule": {
+    "path": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides",
+    "version": "v0.0.0-fixture"
+  },
+  "workflow": {
+    "repository": "nkdAgility/OpenGuidePlatform",
+    "path": ".github/workflows/guide-site.yml",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "components": {
+    "Hugo.Guides": "0.0.0-fixture",
+    "PowerShell.Core": "0.0.0-fixture",
+    "PowerShell.Build": "0.0.0-fixture",
+    "AgentSkills": "0.0.0-fixture",
+    "AgentControls": "0.0.0-fixture"
+  },
+  "toolchain": {
+    "hugo": "0.164.0",
+    "powerShell": "7.6.5",
+    "go": "1.26.5"
+  }
+}
