@@ -43,6 +43,10 @@ The target repository lookup for `nkdAgility/OpenGuidePlatform` returned 404. It
 
 `publication-inventory.json` records HTML routes, PDF hashes and wrapper override paths for each repository and ring. Full source archives, artifact hashes and logs are retained under `.processing/baseline-post-pr344`. The original source inventories remain valid for the other three repositories; the merged Scrum source inventory is included here.
 
+## Structural inventory supplement
+
+`guide-structure.json` records all source Markdown declarations, body-presence observations and effective language configurations for all four snapshots. Reproduce with `.build/Measure-GuideStructureBaseline.ps1`; it uses powershell-yaml 0.4.12 and refuses to overwrite earlier evidence. Body presence is deliberately not interpreted as translation readiness. Run completed successfully against all four archived repositories; existing Hugo deprecation warnings remain visible.
+
 ## Remaining E00 work
 
 - Complete semantic guide/edition/language state and heading-anchor inventories, with explicit intentional exclusions and fallbacks.
