@@ -87,8 +87,8 @@ if ($PSCmdlet.ParameterSetName -eq "CustomFiles") {
     Write-Host "   Target: $TargetFile" -ForegroundColor Gray
 } else {
     # Default files based on Direction
-    $ModuleFile = Join-Path $ProjectRoot "module\i18n\en.yaml"
-    $SiteFile = Join-Path $ProjectRoot "site\i18n\en.yaml"
+    $ModuleFile = Join-Path $ProjectRoot "system\OpenGuidePlatform.Hugo.Guides\i18n\en.yaml"
+    $SiteFile = Join-Path $ProjectRoot "examples\reference-guide-site\i18n\en.yaml"
     
     # Verify default files exist
     if (-not (Test-Path $ModuleFile)) {

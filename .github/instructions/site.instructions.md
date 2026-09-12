@@ -1,5 +1,5 @@
 ---
-applyTo: "site/**"
+applyTo: "examples/reference-guide-site/**"
 ---
 
 ## Site Overview

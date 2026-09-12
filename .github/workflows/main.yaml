@@ -198,7 +198,7 @@ jobs:
         run: |
           Write-Host "Building site for ${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}";
           $env:HUGO_ENV = "${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}";
-          hugo --source site --config hugo.yaml,hugo.${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}.yaml --logLevel info; # --minify
+          hugo --source examples/reference-guide-site --config hugo.yaml,hugo.${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}.yaml --logLevel info; # --minify
 
       - name: Copy Files
         shell: pwsh

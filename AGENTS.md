@@ -2,12 +2,12 @@
 
 ## Build Verification (MANDATORY)
 
-After **every** change to files under `module/` or `site/`, you **must** run a build and confirm it succeeds before considering the task complete.
+After **every** change to files under `system/OpenGuidePlatform.Hugo.Guides/` or `examples/reference-guide-site/`, you **must** run a build and confirm it succeeds before considering the task complete.
 
 ### Build Command
 
 ```powershell
-hugo build --source site --config hugo.yaml,hugo.local.yaml
+hugo build --source examples/reference-guide-site --config hugo.yaml,hugo.local.yaml
 ```
 
 Run from the workspace root (`c:\Users\MartinHinshelwoodNKD\source\repos\HugoGuides`).

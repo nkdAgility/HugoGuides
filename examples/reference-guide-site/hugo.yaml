@@ -4,8 +4,8 @@ enableMissingTranslationPlaceholders: true
 printI18nWarnings: true
 title: Guide Demo
 
-publishDir: ../public
-resourceDir: ../resources
+publishDir: ../../public
+resourceDir: ../../resources
 
 # Multi-language configuration
 languages:
@@ -124,7 +124,7 @@ module:
           target: i18n
     - path: github.com/nkdAgility/HugoGuides/module
   replacements:
-    - github.com/nkdAgility/HugoGuides/module -> ../../module
+    - github.com/nkdAgility/HugoGuides/module -> ../../../system/OpenGuidePlatform.Hugo.Guides
 
 markup:
   goldmark:
