@@ -1,0 +1,618 @@
+[
+  {
+    "repository": "nkdAgility/HugoGuides",
+    "rulesets": [
+      {
+        "id": 6964089,
+        "name": "Default-Bypass-Allowed",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "nkdAgility/HugoGuides",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": true,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge",
+                "squash",
+                "rebase"
+              ]
+            }
+          },
+          {
+            "type": "copilot_code_review"
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47iUouzgBqQ3k",
+        "created_at": "2025-07-25T17:47:07.63+01:00",
+        "updated_at": "2025-07-25T17:47:07.661+01:00",
+        "bypass_actors": [
+          {
+            "actor_id": 5,
+            "actor_type": "RepositoryRole",
+            "bypass_mode": "always"
+          }
+        ],
+        "current_user_can_bypass": "always",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/nkdAgility/HugoGuides/rulesets/6964089"
+          },
+          "html": {
+            "href": "https://github.com/nkdAgility/HugoGuides/rules/6964089"
+          }
+        }
+      },
+      {
+        "id": 6964088,
+        "name": "Default-NoBypass",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "nkdAgility/HugoGuides",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          },
+          {
+            "type": "creation"
+          },
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": false,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": false,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge",
+                "squash",
+                "rebase"
+              ]
+            }
+          },
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": true,
+              "do_not_enforce_on_create": false,
+              "required_status_checks": [
+                {
+                  "context": "Build Site",
+                  "integration_id": 15368
+                }
+              ]
+            }
+          },
+          {
+            "type": "merge_queue",
+            "parameters": {
+              "merge_method": "MERGE",
+              "max_entries_to_build": 5,
+              "min_entries_to_merge": 1,
+              "max_entries_to_merge": 5,
+              "min_entries_to_merge_wait_minutes": 5,
+              "grouping_strategy": "ALLGREEN",
+              "check_response_timeout_minutes": 60
+            }
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47iUouzgBqQ3g",
+        "created_at": "2025-07-25T17:46:55.792+01:00",
+        "updated_at": "2025-07-27T15:58:12.434+01:00",
+        "bypass_actors": [],
+        "current_user_can_bypass": "never",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/nkdAgility/HugoGuides/rulesets/6964088"
+          },
+          "html": {
+            "href": "https://github.com/nkdAgility/HugoGuides/rules/6964088"
+          }
+        }
+      }
+    ],
+    "successfulMainRuns": [
+      {
+        "databaseId": 25063075655,
+        "headSha": "980366a80eb7b9b6a0098229aea43e9401536232",
+        "url": "https://github.com/nkdAgility/HugoGuides/actions/runs/25063075655",
+        "workflowName": "Dependency Graph"
+      },
+      {
+        "databaseId": 25063075178,
+        "headSha": "980366a80eb7b9b6a0098229aea43e9401536232",
+        "url": "https://github.com/nkdAgility/HugoGuides/actions/runs/25063075178",
+        "workflowName": "Build & Release (HugoGuides)"
+      }
+    ]
+  },
+  {
+    "repository": "KanbanGuides/KanbanGuides",
+    "rulesets": [
+      {
+        "id": 6377037,
+        "name": "Default-Bypass-AdminAllowed",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "KanbanGuides/KanbanGuides",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": true,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge"
+              ]
+            }
+          },
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": false,
+              "do_not_enforce_on_create": false,
+              "required_status_checks": [
+                {
+                  "context": "license/cla",
+                  "integration_id": null
+                }
+              ]
+            }
+          },
+          {
+            "type": "copilot_code_review"
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec48P8PszgBhTk0",
+        "created_at": "2025-06-29T23:30:40.243+01:00",
+        "updated_at": "2025-06-29T23:30:40.243+01:00",
+        "bypass_actors": [
+          {
+            "actor_id": 5,
+            "actor_type": "RepositoryRole",
+            "bypass_mode": "always"
+          }
+        ],
+        "current_user_can_bypass": "always",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/KanbanGuides/KanbanGuides/rulesets/6377037"
+          },
+          "html": {
+            "href": "https://github.com/KanbanGuides/KanbanGuides/rules/6377037"
+          }
+        }
+      },
+      {
+        "id": 6377032,
+        "name": "Default-NoBypass",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "KanbanGuides/KanbanGuides",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          },
+          {
+            "type": "creation"
+          },
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": false,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge"
+              ]
+            }
+          },
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": true,
+              "do_not_enforce_on_create": false,
+              "required_status_checks": [
+                {
+                  "context": "Publish Site",
+                  "integration_id": 15368
+                },
+                {
+                  "context": "Build Site",
+                  "integration_id": 15368
+                }
+              ]
+            }
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec48P8PszgBhTkg",
+        "created_at": "2025-06-29T23:30:18.095+01:00",
+        "updated_at": "2025-06-30T13:28:11.978+01:00",
+        "bypass_actors": [],
+        "current_user_can_bypass": "never",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/KanbanGuides/KanbanGuides/rulesets/6377032"
+          },
+          "html": {
+            "href": "https://github.com/KanbanGuides/KanbanGuides/rules/6377032"
+          }
+        }
+      }
+    ],
+    "successfulMainRuns": [
+      {
+        "databaseId": 34716492078,
+        "headSha": "cb991c4df952309cea51cb677b5134350c359ba7",
+        "url": "https://github.com/KanbanGuides/KanbanGuides/actions/runs/34716492078",
+        "workflowName": "Build & Release (KanbanGuides)"
+      },
+      {
+        "databaseId": 34686417699,
+        "headSha": "7b5fd5f882680bf098b8bd2c165be155ee772e3e",
+        "url": "https://github.com/KanbanGuides/KanbanGuides/actions/runs/34686417699",
+        "workflowName": "Build & Release (KanbanGuides)"
+      }
+    ]
+  },
+  {
+    "repository": "nkdAgility/the-safe-delusion",
+    "rulesets": [],
+    "successfulMainRuns": [
+      {
+        "databaseId": 31189824060,
+        "headSha": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+        "url": "https://github.com/nkdAgility/the-safe-delusion/actions/runs/31189824060",
+        "workflowName": "Build & Release (SAFeDelusion)"
+      },
+      {
+        "databaseId": 31185970917,
+        "headSha": "62ec0828e4d4222ae94bb7161e42b81ebe1c8a2c",
+        "url": "https://github.com/nkdAgility/the-safe-delusion/actions/runs/31185970917",
+        "workflowName": "Build & Release (SAFeDelusion)"
+      }
+    ]
+  },
+  {
+    "repository": "ScrumGuides/ScrumGuide-ExpansionPack",
+    "rulesets": [
+      {
+        "id": 5970588,
+        "name": "Default-Bypass-AdminAllowed",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "ScrumGuides/ScrumGuide-ExpansionPack",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": true,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge"
+              ]
+            }
+          },
+          {
+            "type": "copilot_code_review",
+            "parameters": {
+              "review_on_push": false,
+              "review_draft_pull_requests": false
+            }
+          },
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": false,
+              "do_not_enforce_on_create": false,
+              "required_status_checks": [
+                {
+                  "context": "license/cla",
+                  "integration_id": null
+                }
+              ]
+            }
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47gnh0zgBbGpw",
+        "created_at": "2025-06-10T09:26:21.875+01:00",
+        "updated_at": "2026-01-22T14:53:31.209+00:00",
+        "bypass_actors": [
+          {
+            "actor_id": 5,
+            "actor_type": "RepositoryRole",
+            "bypass_mode": "always"
+          }
+        ],
+        "current_user_can_bypass": "always",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/rulesets/5970588"
+          },
+          "html": {
+            "href": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/rules/5970588"
+          }
+        }
+      },
+      {
+        "id": 6199322,
+        "name": "Default-Bypass-MaintainAllowed",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "ScrumGuides/ScrumGuide-ExpansionPack",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47gnh0zgBemBo",
+        "created_at": "2025-06-20T08:02:23.823+01:00",
+        "updated_at": "2025-06-20T08:02:23.823+01:00",
+        "bypass_actors": [
+          {
+            "actor_id": 2,
+            "actor_type": "RepositoryRole",
+            "bypass_mode": "always"
+          }
+        ],
+        "current_user_can_bypass": "always",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/rulesets/6199322"
+          },
+          "html": {
+            "href": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/rules/6199322"
+          }
+        }
+      },
+      {
+        "id": 5970591,
+        "name": "Default-NoBypass",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "ScrumGuides/ScrumGuide-ExpansionPack",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~DEFAULT_BRANCH"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          },
+          {
+            "type": "creation"
+          },
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": false,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "dismissal_restriction": {
+                "enabled": false,
+                "allowed_actors": []
+              },
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge"
+              ]
+            }
+          },
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": true,
+              "do_not_enforce_on_create": false,
+              "required_status_checks": [
+                {
+                  "context": "Publish Site",
+                  "integration_id": 15368
+                },
+                {
+                  "context": "Build Site",
+                  "integration_id": 15368
+                }
+              ]
+            }
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47gnh0zgBbGp8",
+        "created_at": "2025-06-10T09:26:42.973+01:00",
+        "updated_at": "2026-01-22T14:53:09.187+00:00",
+        "bypass_actors": [],
+        "current_user_can_bypass": "never",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/rulesets/5970591"
+          },
+          "html": {
+            "href": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/rules/5970591"
+          }
+        }
+      },
+      {
+        "id": 5971647,
+        "name": "Restrict-Tags",
+        "target": "tag",
+        "source_type": "Repository",
+        "source": "ScrumGuides/ScrumGuide-ExpansionPack",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "~ALL"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          },
+          {
+            "type": "creation"
+          },
+          {
+            "type": "update"
+          },
+          {
+            "type": "tag_name_pattern",
+            "parameters": {
+              "operator": "starts_with",
+              "pattern": "^v(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+              "negate": false,
+              "name": ""
+            }
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec47gnh0zgBbHr8",
+        "created_at": "2025-06-10T10:14:30.684+01:00",
+        "updated_at": "2025-06-10T10:14:30.684+01:00",
+        "bypass_actors": [
+          {
+            "actor_id": 2,
+            "actor_type": "RepositoryRole",
+            "bypass_mode": "always"
+          }
+        ],
+        "current_user_can_bypass": "always",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/rulesets/5971647"
+          },
+          "html": {
+            "href": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/rules/5971647"
+          }
+        }
+      }
+    ],
+    "successfulMainRuns": [
+      {
+        "databaseId": 34723426340,
+        "headSha": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+        "url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/actions/runs/34723426340",
+        "workflowName": "Sync Docs to Wiki"
+      },
+      {
+        "databaseId": 34723426376,
+        "headSha": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+        "url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/actions/runs/34723426376",
+        "workflowName": "PDF language tests"
+      }
+    ]
+  }
+]

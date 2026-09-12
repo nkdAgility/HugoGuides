@@ -1,0 +1,158 @@
+{
+  "capturedAt": "2026-09-12T22:46:21.3743263+00:00",
+  "sourceRef": "origin/main",
+  "hugo": "hugo v0.164.0-ce2470e7012b5ab5fc4e10ebe4027e9f8d9e00dc+extended windows/amd64 BuildDate=2026-07-06T16:39:30Z VendorInfo=gohugoio",
+  "go": "go version go1.26.5 windows/amd64",
+  "powerShell": "7.6.5",
+  "scope": "Raw Hugo builds from archived source; not deployed-artifact or visual approval; CI token substitution and hosting packaging are not reproduced.",
+  "repositories": [
+    {
+      "repository": "HugoGuides",
+      "commit": "980366a80eb7b9b6a0098229aea43e9401536232",
+      "sourceFiles": 137,
+      "builds": [
+        {
+          "ring": "local",
+          "config": "hugo.yaml,hugo.local.yaml",
+          "environment": "development",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 28,
+          "files": 193,
+          "passed": true
+        },
+        {
+          "ring": "preview",
+          "config": "hugo.yaml,hugo.preview.yaml",
+          "environment": "preview",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 26,
+          "files": 205,
+          "passed": true
+        },
+        {
+          "ring": "production",
+          "config": "hugo.yaml,hugo.production.yaml",
+          "environment": "production",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 27,
+          "files": 205,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "commit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "sourceFiles": 204,
+      "builds": [
+        {
+          "ring": "local",
+          "config": "hugo.yaml,hugo.local.yaml",
+          "environment": "development",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 27,
+          "files": 335,
+          "passed": true
+        },
+        {
+          "ring": "preview",
+          "config": "hugo.yaml,hugo.preview.yaml",
+          "environment": "preview",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 27,
+          "files": 302,
+          "passed": true
+        },
+        {
+          "ring": "production",
+          "config": "hugo.yaml,hugo.production.yaml",
+          "environment": "production",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 27,
+          "files": 225,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "commit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "sourceFiles": 68,
+      "builds": [
+        {
+          "ring": "local",
+          "config": "hugo.yaml,hugo.local.yaml",
+          "environment": "development",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 13,
+          "files": 49,
+          "passed": true
+        },
+        {
+          "ring": "preview",
+          "config": "hugo.yaml,hugo.preview.yaml",
+          "environment": "preview",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 13,
+          "files": 49,
+          "passed": true
+        },
+        {
+          "ring": "production",
+          "config": "hugo.yaml,hugo.production.yaml",
+          "environment": "production",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 14,
+          "files": 49,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "commit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "sourceFiles": 311,
+      "builds": [
+        {
+          "ring": "local",
+          "config": "hugo.yaml,hugo.local.yaml",
+          "environment": "development",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 115,
+          "files": 499,
+          "passed": true
+        },
+        {
+          "ring": "preview",
+          "config": "hugo.yaml,hugo.preview.yaml",
+          "environment": "preview",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 109,
+          "files": 483,
+          "passed": true
+        },
+        {
+          "ring": "production",
+          "config": "hugo.yaml,hugo.production.yaml",
+          "environment": "production",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 79,
+          "files": 329,
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

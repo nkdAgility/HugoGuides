@@ -40,7 +40,7 @@ Resolution prepared with Martin's authorisation: [ScrumGuide-ExpansionPack PR 34
 
 Verification of that fix: 13 Pester tests pass; all three Hugo configurations build with exit 0 and no ERROR lines; all 31 published PDF hashes are unchanged. The implemented Persian conversion produces identical LaTeX. The installed MiKTeX toolchain was found through the elevated shell, correcting the initial PATH-only availability check. HMXRoya could not be resolved, so a controlled full PDF comparison used Amiri on both inputs: 61 pages, identical text and identical page renders at 96 DPI. Both sides warn of a missing trademark glyph; this is not original-font appearance approval.
 
-The original baseline JSON and source hashes remain unchanged historical evidence. PR 344 is a separate consumer fix and has not been merged or deployed by this task; rebaseline current main after acceptance rather than claiming the original failed builds now pass.
+The original baseline JSON and source hashes remain unchanged historical evidence. PR 344 has since been merged with Martin's approval and deployed to shared Preview. The [post-prerequisite baseline](post-pr344/README.md) records fresh passing builds and verification against the actual Preview deployment. Production promotion has not been performed.
 
 ## Existing module fixes under review
 

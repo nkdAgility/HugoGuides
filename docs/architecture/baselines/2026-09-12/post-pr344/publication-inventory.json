@@ -1,0 +1,2717 @@
+[
+  {
+    "repository": "HugoGuides",
+    "ring": "local",
+    "routes": [
+      "_index.pl/index.html",
+      "en/index.html",
+      "guide1/2020.12/index.html",
+      "guide1/2020.7/index.html",
+      "guide1/2025.5/index.html",
+      "guide1/details/index.html",
+      "guide1/history/index.html",
+      "guide1/index.html",
+      "guide1/translations/index.html",
+      "guide2/2025.7/index.html",
+      "guide2/details/index.html",
+      "guide2/history/index.html",
+      "guide2/index.html",
+      "guide2/translations/index.html",
+      "index.html",
+      "ja/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "min/guide1/2020.12/index.html",
+      "min/guide1/2020.7/index.html",
+      "min/guide1/2025.5/index.html",
+      "min/guide1/history/index.html",
+      "min/guide1/index.html",
+      "min/guide1/translations/index.html",
+      "min/guide2/2025.7/index.html",
+      "min/guide2/history/index.html",
+      "min/guide2/index.html",
+      "min/guide2/translations/index.html",
+      "min/index.html",
+      "min/open-guide-to-kanban/2025.7/index.html",
+      "min/open-guide-to-kanban/history/index.html",
+      "min/open-guide-to-kanban/index.html",
+      "min/open-guide-to-kanban/translations/index.html",
+      "min/the-kanban-guide/2020.12/index.html",
+      "min/the-kanban-guide/2020.7/index.html",
+      "min/the-kanban-guide/2025.5/index.html",
+      "min/the-kanban-guide/history/index.html",
+      "min/the-kanban-guide/index.html",
+      "min/the-kanban-guide/translations/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/open-guide-for-kanban/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "the-kanban-guide/_index.es-419/index.html",
+      "the-kanban-guide/_index.es-es/index.html",
+      "the-kanban-guide/_index.fa/index.html",
+      "the-kanban-guide/_index.fr/index.html",
+      "the-kanban-guide/_index.pl/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/translations/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "min/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.min.pdf",
+        "sha256": "673116f996784b1d238cf1fbde3a21769f3c926aa5ac6036208b4bb28424780e",
+        "bytes": 175717
+      },
+      {
+        "path": "min/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.min.pdf",
+        "sha256": "e245ffe7feaf779d9c90e7b2e5b21e1111219521a6824dddebcfa9f442eb88ed",
+        "bytes": 72044
+      },
+      {
+        "path": "min/the-kanban-guide/2020.7/pdf/kanban-guide.v2020.7.min.pdf",
+        "sha256": "cc6a66dac3e183803406659b3d4a3cd4a4c1c7bef1c25fe225878e77aac212fd",
+        "bytes": 72146
+      },
+      {
+        "path": "min/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.min.pdf",
+        "sha256": "80fc0597a753080ce737c4beb8db84fb462f237dd825b400a47c108d55c7766a",
+        "bytes": 79817
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "d17b351f984d54ff51f7fa0b692d94094fe8184dfa1e85ff2062622f9e8848ea",
+        "bytes": 201250
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fa.pdf",
+        "sha256": "11fb775bde9f9bc5ed8a702bd4ef0218ef4e4a5054ea7a9beeed689440c73e62",
+        "bytes": 115778
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fr.pdf",
+        "sha256": "6e3e6c77bc8c7a75d9dd1537e4d66a178a12e0fd18ab5c5e77314d404e1c0fdb",
+        "bytes": 279252
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+        "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+        "bytes": 162315
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+        "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+        "bytes": 166694
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es-419.pdf",
+        "sha256": "ac59a0c3a116d53b7b0fb54acf81e0975caed7454b5aa40b3267b6644c16bcae",
+        "bytes": 93464
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+        "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+        "bytes": 128877
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+        "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+        "bytes": 135845
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fa.pdf",
+        "sha256": "77376290c0a0cff860b79368c836fa2812e61c8c596243359f328b2998266642",
+        "bytes": 45985
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fr.pdf",
+        "sha256": "354debd4ad19148d05161468bf9d1f1d2afb64214fac27be5c939aa9e38cd6b2",
+        "bytes": 117806
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+        "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+        "bytes": 67641
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html"
+    ]
+  },
+  {
+    "repository": "HugoGuides",
+    "ring": "preview",
+    "routes": [
+      "_index.pl/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "guide-1/2020.07/index.html",
+      "guide1/2020.12/index.html",
+      "guide1/2020.7/index.html",
+      "guide1/2025.5/index.html",
+      "guide1/details/index.html",
+      "guide1/history/index.html",
+      "guide1/index.html",
+      "guide1/translations/index.html",
+      "guide2/2025.7/index.html",
+      "guide2/details/index.html",
+      "guide2/history/index.html",
+      "guide2/index.html",
+      "guide2/translations/index.html",
+      "index.html",
+      "ja/download/index.html",
+      "ja/downloads/index.html",
+      "ja/index.html",
+      "ja/ja/open-guide-to-kanban/latest/index.html",
+      "ja/ja/the-kanban-guide/latest/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.07/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "ja/translationsdirectory/index.html",
+      "min/download/index.html",
+      "min/downloads/index.html",
+      "min/guide-1/2020.07/index.html",
+      "min/guide-1/latest/index.html",
+      "min/guide1/2020.12/index.html",
+      "min/guide1/2020.7/index.html",
+      "min/guide1/2025.5/index.html",
+      "min/guide1/history/index.html",
+      "min/guide1/index.html",
+      "min/guide1/translations/index.html",
+      "min/guide2/2025.7/index.html",
+      "min/guide2/history/index.html",
+      "min/guide2/index.html",
+      "min/guide2/translations/index.html",
+      "min/index.html",
+      "min/min/open-guide-to-kanban/latest/index.html",
+      "min/min/the-kanban-guide/latest/index.html",
+      "min/open-guide-to-kanban/2025.7/index.html",
+      "min/open-guide-to-kanban/history/index.html",
+      "min/open-guide-to-kanban/index.html",
+      "min/open-guide-to-kanban/translations/index.html",
+      "min/the-kanban-guide/2020.07/index.html",
+      "min/the-kanban-guide/2020.12/index.html",
+      "min/the-kanban-guide/2020.7/index.html",
+      "min/the-kanban-guide/2025.5/index.html",
+      "min/the-kanban-guide/history/index.html",
+      "min/the-kanban-guide/index.html",
+      "min/the-kanban-guide/translations/index.html",
+      "min/translationsdirectory/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/latest/index.html",
+      "open-guide-to-kanban/open-guide-for-kanban/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "the-kanban-guide/_index.es-419/index.html",
+      "the-kanban-guide/_index.es-es/index.html",
+      "the-kanban-guide/_index.fa/index.html",
+      "the-kanban-guide/_index.pl/index.html",
+      "the-kanban-guide/2020.07/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/latest/index.html",
+      "the-kanban-guide/translations/index.html",
+      "translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "537da5d62e71207f42c9a05d4204077e31edd73a7a8e67a7b5cf5b7152123e1b",
+        "bytes": 201509
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+        "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+        "bytes": 162315
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+        "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+        "bytes": 166694
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es-419.pdf",
+        "sha256": "ac59a0c3a116d53b7b0fb54acf81e0975caed7454b5aa40b3267b6644c16bcae",
+        "bytes": 93464
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+        "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+        "bytes": 128877
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+        "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+        "bytes": 135845
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+        "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+        "bytes": 67641
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html"
+    ]
+  },
+  {
+    "repository": "HugoGuides",
+    "ring": "production",
+    "routes": [
+      "_index.pl/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "guide-1/2020.07/index.html",
+      "guide1/2020.12/index.html",
+      "guide1/2020.7/index.html",
+      "guide1/2025.5/index.html",
+      "guide1/details/index.html",
+      "guide1/history/index.html",
+      "guide1/index.html",
+      "guide1/translations/index.html",
+      "guide2/2025.7/index.html",
+      "guide2/details/index.html",
+      "guide2/history/index.html",
+      "guide2/index.html",
+      "guide2/translations/index.html",
+      "index.html",
+      "ja/download/index.html",
+      "ja/downloads/index.html",
+      "ja/index.html",
+      "ja/ja/open-guide-to-kanban/latest/index.html",
+      "ja/ja/the-kanban-guide/latest/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.07/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "ja/translationsdirectory/index.html",
+      "min/download/index.html",
+      "min/downloads/index.html",
+      "min/guide-1/2020.07/index.html",
+      "min/guide-1/latest/index.html",
+      "min/guide1/2020.12/index.html",
+      "min/guide1/2020.7/index.html",
+      "min/guide1/2025.5/index.html",
+      "min/guide1/history/index.html",
+      "min/guide1/index.html",
+      "min/guide1/translations/index.html",
+      "min/guide2/2025.7/index.html",
+      "min/guide2/history/index.html",
+      "min/guide2/index.html",
+      "min/guide2/translations/index.html",
+      "min/index.html",
+      "min/min/open-guide-to-kanban/latest/index.html",
+      "min/min/the-kanban-guide/latest/index.html",
+      "min/open-guide-to-kanban/2025.7/index.html",
+      "min/open-guide-to-kanban/history/index.html",
+      "min/open-guide-to-kanban/index.html",
+      "min/open-guide-to-kanban/translations/index.html",
+      "min/the-kanban-guide/2020.07/index.html",
+      "min/the-kanban-guide/2020.12/index.html",
+      "min/the-kanban-guide/2020.7/index.html",
+      "min/the-kanban-guide/2025.5/index.html",
+      "min/the-kanban-guide/history/index.html",
+      "min/the-kanban-guide/index.html",
+      "min/the-kanban-guide/translations/index.html",
+      "min/translationsdirectory/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/latest/index.html",
+      "open-guide-to-kanban/open-guide-for-kanban/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "the-kanban-guide/_index.es-419/index.html",
+      "the-kanban-guide/_index.es-es/index.html",
+      "the-kanban-guide/_index.fa/index.html",
+      "the-kanban-guide/_index.pl/index.html",
+      "the-kanban-guide/2020.07/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/latest/index.html",
+      "the-kanban-guide/translations/index.html",
+      "translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "537da5d62e71207f42c9a05d4204077e31edd73a7a8e67a7b5cf5b7152123e1b",
+        "bytes": 201509
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+        "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+        "bytes": 162315
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+        "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+        "bytes": 166694
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es-419.pdf",
+        "sha256": "ac59a0c3a116d53b7b0fb54acf81e0975caed7454b5aa40b3267b6644c16bcae",
+        "bytes": 93464
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+        "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+        "bytes": 128877
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+        "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+        "bytes": 135845
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+        "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+        "bytes": 67641
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html"
+    ]
+  },
+  {
+    "repository": "KanbanGuides",
+    "ring": "local",
+    "routes": [
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "es-419/download/index.html",
+      "es-419/downloads/index.html",
+      "es-419/index.html",
+      "es-419/open-guide-to-kanban/2025.7/index.html",
+      "es-419/open-guide-to-kanban/history/index.html",
+      "es-419/open-guide-to-kanban/index.html",
+      "es-419/open-guide-to-kanban/latest/index.html",
+      "es-419/open-guide-to-kanban/translations/index.html",
+      "es-419/the-kanban-guide/2020.12/index.html",
+      "es-419/the-kanban-guide/2020.7/index.html",
+      "es-419/the-kanban-guide/2025.5/index.html",
+      "es-419/the-kanban-guide/history/index.html",
+      "es-419/the-kanban-guide/index.html",
+      "es-419/the-kanban-guide/translations/index.html",
+      "es-419/translationsdirectory/index.html",
+      "es-es/download/index.html",
+      "es-es/downloads/index.html",
+      "es-es/index.html",
+      "es-es/open-guide-to-kanban/2025.7/index.html",
+      "es-es/open-guide-to-kanban/history/index.html",
+      "es-es/open-guide-to-kanban/index.html",
+      "es-es/open-guide-to-kanban/latest/index.html",
+      "es-es/open-guide-to-kanban/translations/index.html",
+      "es-es/the-kanban-guide/2020.07/index.html",
+      "es-es/the-kanban-guide/2020.12/index.html",
+      "es-es/the-kanban-guide/2020.7/index.html",
+      "es-es/the-kanban-guide/2025.5/index.html",
+      "es-es/the-kanban-guide/history/index.html",
+      "es-es/the-kanban-guide/index.html",
+      "es-es/the-kanban-guide/latest/index.html",
+      "es-es/the-kanban-guide/translations/index.html",
+      "es-es/translationsdirectory/index.html",
+      "fa/download/index.html",
+      "fa/downloads/index.html",
+      "fa/index.html",
+      "fa/open-guide-to-kanban/2025.7/index.html",
+      "fa/open-guide-to-kanban/history/index.html",
+      "fa/open-guide-to-kanban/index.html",
+      "fa/open-guide-to-kanban/latest/index.html",
+      "fa/open-guide-to-kanban/translations/index.html",
+      "fa/the-kanban-guide/2020.07/index.html",
+      "fa/the-kanban-guide/2020.12/index.html",
+      "fa/the-kanban-guide/2020.7/index.html",
+      "fa/the-kanban-guide/2025.5/index.html",
+      "fa/the-kanban-guide/fa/download/index.html",
+      "fa/the-kanban-guide/fa/downloads/index.html",
+      "fa/the-kanban-guide/fa/translationsdirectory/index.html",
+      "fa/the-kanban-guide/history/index.html",
+      "fa/the-kanban-guide/index.html",
+      "fa/the-kanban-guide/latest/index.html",
+      "fa/the-kanban-guide/translations/index.html",
+      "fa/translationsdirectory/index.html",
+      "fr/download/index.html",
+      "fr/downloads/index.html",
+      "fr/index.html",
+      "fr/le-guide-kanban/derniere-version/index.html",
+      "fr/open-guide-to-kanban/2025.7/index.html",
+      "fr/open-guide-to-kanban/history/index.html",
+      "fr/open-guide-to-kanban/index.html",
+      "fr/open-guide-to-kanban/latest/index.html",
+      "fr/open-guide-to-kanban/translations/index.html",
+      "fr/the-kanban-guide/2020.07/index.html",
+      "fr/the-kanban-guide/2020.12/index.html",
+      "fr/the-kanban-guide/2020.7/index.html",
+      "fr/the-kanban-guide/2025.5/index.html",
+      "fr/the-kanban-guide/history/index.html",
+      "fr/the-kanban-guide/index.html",
+      "fr/the-kanban-guide/translations/index.html",
+      "fr/translationsdirectory/index.html",
+      "index.html",
+      "ja/download/index.html",
+      "ja/downloads/index.html",
+      "ja/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/latest/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.07/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/latest/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "ja/translationsdirectory/index.html",
+      "min/download/index.html",
+      "min/downloads/index.html",
+      "min/index.html",
+      "min/open-guide-to-kanban/2025.7/index.html",
+      "min/open-guide-to-kanban/history/index.html",
+      "min/open-guide-to-kanban/index.html",
+      "min/open-guide-to-kanban/latest/index.html",
+      "min/open-guide-to-kanban/translations/index.html",
+      "min/the-kanban-guide/2020.07/index.html",
+      "min/the-kanban-guide/2020.12/index.html",
+      "min/the-kanban-guide/2020.7/index.html",
+      "min/the-kanban-guide/2025.5/index.html",
+      "min/the-kanban-guide/history/index.html",
+      "min/the-kanban-guide/index.html",
+      "min/the-kanban-guide/latest/index.html",
+      "min/the-kanban-guide/translations/index.html",
+      "min/translationsdirectory/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/latest/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "pl/download/index.html",
+      "pl/downloads/index.html",
+      "pl/index.html",
+      "pl/open-guide-to-kanban/2025.7/index.html",
+      "pl/open-guide-to-kanban/history/index.html",
+      "pl/open-guide-to-kanban/index.html",
+      "pl/open-guide-to-kanban/latest/index.html",
+      "pl/open-guide-to-kanban/translations/index.html",
+      "pl/the-kanban-guide/2020.07/index.html",
+      "pl/the-kanban-guide/2020.12/index.html",
+      "pl/the-kanban-guide/2020.7/index.html",
+      "pl/the-kanban-guide/2025.5/index.html",
+      "pl/the-kanban-guide/history/index.html",
+      "pl/the-kanban-guide/index.html",
+      "pl/the-kanban-guide/latest/index.html",
+      "pl/the-kanban-guide/translations/index.html",
+      "pl/translationsdirectory/index.html",
+      "the-kanban-guide/2020.07/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/latest/index.html",
+      "the-kanban-guide/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "es-419/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es-419.pdf",
+        "sha256": "ac59a0c3a116d53b7b0fb54acf81e0975caed7454b5aa40b3267b6644c16bcae",
+        "bytes": 93464
+      },
+      {
+        "path": "es-es/open-guide-to-kanban/2025.7/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "d17b351f984d54ff51f7fa0b692d94094fe8184dfa1e85ff2062622f9e8848ea",
+        "bytes": 201250
+      },
+      {
+        "path": "es-es/the-kanban-guide/2025.5/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "fa/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fa.pdf",
+        "sha256": "11fb775bde9f9bc5ed8a702bd4ef0218ef4e4a5054ea7a9beeed689440c73e62",
+        "bytes": 115778
+      },
+      {
+        "path": "fa/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fa.pdf",
+        "sha256": "77376290c0a0cff860b79368c836fa2812e61c8c596243359f328b2998266642",
+        "bytes": 45985
+      },
+      {
+        "path": "fr/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fr.pdf",
+        "sha256": "6e3e6c77bc8c7a75d9dd1537e4d66a178a12e0fd18ab5c5e77314d404e1c0fdb",
+        "bytes": 279252
+      },
+      {
+        "path": "fr/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "fr/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fr.pdf",
+        "sha256": "354debd4ad19148d05161468bf9d1f1d2afb64214fac27be5c939aa9e38cd6b2",
+        "bytes": 117806
+      },
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "min/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.min.pdf",
+        "sha256": "673116f996784b1d238cf1fbde3a21769f3c926aa5ac6036208b4bb28424780e",
+        "bytes": 175717
+      },
+      {
+        "path": "min/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.min.pdf",
+        "sha256": "e245ffe7feaf779d9c90e7b2e5b21e1111219521a6824dddebcfa9f442eb88ed",
+        "bytes": 72044
+      },
+      {
+        "path": "min/the-kanban-guide/2020.7/pdf/kanban-guide.v2020.7.min.pdf",
+        "sha256": "cc6a66dac3e183803406659b3d4a3cd4a4c1c7bef1c25fe225878e77aac212fd",
+        "bytes": 72146
+      },
+      {
+        "path": "min/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.min.pdf",
+        "sha256": "80fc0597a753080ce737c4beb8db84fb462f237dd825b400a47c108d55c7766a",
+        "bytes": 79817
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "pl/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+        "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+        "bytes": 162315
+      },
+      {
+        "path": "pl/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+        "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+        "bytes": 135845
+      },
+      {
+        "path": "pl/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+        "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+        "bytes": 67641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+        "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+        "bytes": 166694
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+        "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+        "bytes": 128877
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      }
+    ],
+    "wrapperOverrides": []
+  },
+  {
+    "repository": "KanbanGuides",
+    "ring": "preview",
+    "routes": [
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "es-es/download/index.html",
+      "es-es/downloads/index.html",
+      "es-es/index.html",
+      "es-es/open-guide-to-kanban/2025.7/index.html",
+      "es-es/open-guide-to-kanban/history/index.html",
+      "es-es/open-guide-to-kanban/index.html",
+      "es-es/open-guide-to-kanban/latest/index.html",
+      "es-es/open-guide-to-kanban/translations/index.html",
+      "es-es/the-kanban-guide/2020.07/index.html",
+      "es-es/the-kanban-guide/2020.12/index.html",
+      "es-es/the-kanban-guide/2020.7/index.html",
+      "es-es/the-kanban-guide/2025.5/index.html",
+      "es-es/the-kanban-guide/history/index.html",
+      "es-es/the-kanban-guide/index.html",
+      "es-es/the-kanban-guide/latest/index.html",
+      "es-es/the-kanban-guide/translations/index.html",
+      "es-es/translationsdirectory/index.html",
+      "fa/download/index.html",
+      "fa/downloads/index.html",
+      "fa/index.html",
+      "fa/open-guide-to-kanban/2025.7/index.html",
+      "fa/open-guide-to-kanban/history/index.html",
+      "fa/open-guide-to-kanban/index.html",
+      "fa/open-guide-to-kanban/latest/index.html",
+      "fa/open-guide-to-kanban/translations/index.html",
+      "fa/the-kanban-guide/2020.07/index.html",
+      "fa/the-kanban-guide/2020.12/index.html",
+      "fa/the-kanban-guide/2020.7/index.html",
+      "fa/the-kanban-guide/2025.5/index.html",
+      "fa/the-kanban-guide/fa/download/index.html",
+      "fa/the-kanban-guide/fa/downloads/index.html",
+      "fa/the-kanban-guide/fa/translationsdirectory/index.html",
+      "fa/the-kanban-guide/history/index.html",
+      "fa/the-kanban-guide/index.html",
+      "fa/the-kanban-guide/latest/index.html",
+      "fa/the-kanban-guide/translations/index.html",
+      "fa/translationsdirectory/index.html",
+      "fr/download/index.html",
+      "fr/downloads/index.html",
+      "fr/index.html",
+      "fr/le-guide-kanban/derniere-version/index.html",
+      "fr/open-guide-to-kanban/2025.7/index.html",
+      "fr/open-guide-to-kanban/history/index.html",
+      "fr/open-guide-to-kanban/index.html",
+      "fr/open-guide-to-kanban/latest/index.html",
+      "fr/open-guide-to-kanban/translations/index.html",
+      "fr/the-kanban-guide/2020.07/index.html",
+      "fr/the-kanban-guide/2020.12/index.html",
+      "fr/the-kanban-guide/2020.7/index.html",
+      "fr/the-kanban-guide/2025.5/index.html",
+      "fr/the-kanban-guide/history/index.html",
+      "fr/the-kanban-guide/index.html",
+      "fr/the-kanban-guide/translations/index.html",
+      "fr/translationsdirectory/index.html",
+      "index.html",
+      "ja/download/index.html",
+      "ja/downloads/index.html",
+      "ja/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/latest/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.07/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/latest/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "ja/translationsdirectory/index.html",
+      "min/download/index.html",
+      "min/downloads/index.html",
+      "min/index.html",
+      "min/open-guide-to-kanban/2025.7/index.html",
+      "min/open-guide-to-kanban/history/index.html",
+      "min/open-guide-to-kanban/index.html",
+      "min/open-guide-to-kanban/latest/index.html",
+      "min/open-guide-to-kanban/translations/index.html",
+      "min/the-kanban-guide/2020.07/index.html",
+      "min/the-kanban-guide/2020.12/index.html",
+      "min/the-kanban-guide/2020.7/index.html",
+      "min/the-kanban-guide/2025.5/index.html",
+      "min/the-kanban-guide/history/index.html",
+      "min/the-kanban-guide/index.html",
+      "min/the-kanban-guide/latest/index.html",
+      "min/the-kanban-guide/translations/index.html",
+      "min/translationsdirectory/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/latest/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "pl/download/index.html",
+      "pl/downloads/index.html",
+      "pl/index.html",
+      "pl/open-guide-to-kanban/2025.7/index.html",
+      "pl/open-guide-to-kanban/history/index.html",
+      "pl/open-guide-to-kanban/index.html",
+      "pl/open-guide-to-kanban/latest/index.html",
+      "pl/open-guide-to-kanban/translations/index.html",
+      "pl/the-kanban-guide/2020.07/index.html",
+      "pl/the-kanban-guide/2020.12/index.html",
+      "pl/the-kanban-guide/2020.7/index.html",
+      "pl/the-kanban-guide/2025.5/index.html",
+      "pl/the-kanban-guide/history/index.html",
+      "pl/the-kanban-guide/index.html",
+      "pl/the-kanban-guide/latest/index.html",
+      "pl/the-kanban-guide/translations/index.html",
+      "pl/translationsdirectory/index.html",
+      "the-kanban-guide/2020.07/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/latest/index.html",
+      "the-kanban-guide/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "es-es/open-guide-to-kanban/2025.7/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "d17b351f984d54ff51f7fa0b692d94094fe8184dfa1e85ff2062622f9e8848ea",
+        "bytes": 201250
+      },
+      {
+        "path": "es-es/the-kanban-guide/2025.5/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "fa/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fa.pdf",
+        "sha256": "11fb775bde9f9bc5ed8a702bd4ef0218ef4e4a5054ea7a9beeed689440c73e62",
+        "bytes": 115778
+      },
+      {
+        "path": "fa/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fa.pdf",
+        "sha256": "77376290c0a0cff860b79368c836fa2812e61c8c596243359f328b2998266642",
+        "bytes": 45985
+      },
+      {
+        "path": "fr/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fr.pdf",
+        "sha256": "6e3e6c77bc8c7a75d9dd1537e4d66a178a12e0fd18ab5c5e77314d404e1c0fdb",
+        "bytes": 279252
+      },
+      {
+        "path": "fr/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "fr/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fr.pdf",
+        "sha256": "354debd4ad19148d05161468bf9d1f1d2afb64214fac27be5c939aa9e38cd6b2",
+        "bytes": 117806
+      },
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "min/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.min.pdf",
+        "sha256": "673116f996784b1d238cf1fbde3a21769f3c926aa5ac6036208b4bb28424780e",
+        "bytes": 175717
+      },
+      {
+        "path": "min/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.min.pdf",
+        "sha256": "e245ffe7feaf779d9c90e7b2e5b21e1111219521a6824dddebcfa9f442eb88ed",
+        "bytes": 72044
+      },
+      {
+        "path": "min/the-kanban-guide/2020.7/pdf/kanban-guide.v2020.7.min.pdf",
+        "sha256": "cc6a66dac3e183803406659b3d4a3cd4a4c1c7bef1c25fe225878e77aac212fd",
+        "bytes": 72146
+      },
+      {
+        "path": "min/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.min.pdf",
+        "sha256": "80fc0597a753080ce737c4beb8db84fb462f237dd825b400a47c108d55c7766a",
+        "bytes": 79817
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "pl/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+        "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+        "bytes": 162315
+      },
+      {
+        "path": "pl/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+        "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+        "bytes": 135845
+      },
+      {
+        "path": "pl/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+        "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+        "bytes": 67641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+        "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+        "bytes": 166694
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+        "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+        "bytes": 128877
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      }
+    ],
+    "wrapperOverrides": []
+  },
+  {
+    "repository": "KanbanGuides",
+    "ring": "production",
+    "routes": [
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "es-es/download/index.html",
+      "es-es/downloads/index.html",
+      "es-es/index.html",
+      "es-es/open-guide-to-kanban/2025.7/index.html",
+      "es-es/open-guide-to-kanban/history/index.html",
+      "es-es/open-guide-to-kanban/index.html",
+      "es-es/open-guide-to-kanban/latest/index.html",
+      "es-es/open-guide-to-kanban/translations/index.html",
+      "es-es/the-kanban-guide/2020.07/index.html",
+      "es-es/the-kanban-guide/2020.12/index.html",
+      "es-es/the-kanban-guide/2020.7/index.html",
+      "es-es/the-kanban-guide/2025.5/index.html",
+      "es-es/the-kanban-guide/history/index.html",
+      "es-es/the-kanban-guide/index.html",
+      "es-es/the-kanban-guide/latest/index.html",
+      "es-es/the-kanban-guide/translations/index.html",
+      "es-es/translationsdirectory/index.html",
+      "fa/download/index.html",
+      "fa/downloads/index.html",
+      "fa/index.html",
+      "fa/open-guide-to-kanban/2025.7/index.html",
+      "fa/open-guide-to-kanban/history/index.html",
+      "fa/open-guide-to-kanban/index.html",
+      "fa/open-guide-to-kanban/latest/index.html",
+      "fa/open-guide-to-kanban/translations/index.html",
+      "fa/the-kanban-guide/2020.07/index.html",
+      "fa/the-kanban-guide/2020.12/index.html",
+      "fa/the-kanban-guide/2020.7/index.html",
+      "fa/the-kanban-guide/2025.5/index.html",
+      "fa/the-kanban-guide/fa/download/index.html",
+      "fa/the-kanban-guide/fa/downloads/index.html",
+      "fa/the-kanban-guide/fa/translationsdirectory/index.html",
+      "fa/the-kanban-guide/history/index.html",
+      "fa/the-kanban-guide/index.html",
+      "fa/the-kanban-guide/latest/index.html",
+      "fa/the-kanban-guide/translations/index.html",
+      "fa/translationsdirectory/index.html",
+      "fr/download/index.html",
+      "fr/downloads/index.html",
+      "fr/index.html",
+      "fr/le-guide-kanban/derniere-version/index.html",
+      "fr/open-guide-to-kanban/2025.7/index.html",
+      "fr/open-guide-to-kanban/history/index.html",
+      "fr/open-guide-to-kanban/index.html",
+      "fr/open-guide-to-kanban/latest/index.html",
+      "fr/open-guide-to-kanban/translations/index.html",
+      "fr/the-kanban-guide/2020.07/index.html",
+      "fr/the-kanban-guide/2020.12/index.html",
+      "fr/the-kanban-guide/2020.7/index.html",
+      "fr/the-kanban-guide/2025.5/index.html",
+      "fr/the-kanban-guide/history/index.html",
+      "fr/the-kanban-guide/index.html",
+      "fr/the-kanban-guide/translations/index.html",
+      "fr/translationsdirectory/index.html",
+      "index.html",
+      "ja/download/index.html",
+      "ja/downloads/index.html",
+      "ja/index.html",
+      "ja/open-guide-to-kanban/2025.7/index.html",
+      "ja/open-guide-to-kanban/history/index.html",
+      "ja/open-guide-to-kanban/index.html",
+      "ja/open-guide-to-kanban/latest/index.html",
+      "ja/open-guide-to-kanban/translations/index.html",
+      "ja/the-kanban-guide/2020.07/index.html",
+      "ja/the-kanban-guide/2020.12/index.html",
+      "ja/the-kanban-guide/2020.7/index.html",
+      "ja/the-kanban-guide/2025.5/index.html",
+      "ja/the-kanban-guide/history/index.html",
+      "ja/the-kanban-guide/index.html",
+      "ja/the-kanban-guide/latest/index.html",
+      "ja/the-kanban-guide/translations/index.html",
+      "ja/translationsdirectory/index.html",
+      "open-guide-to-kanban/2025.7/index.html",
+      "open-guide-to-kanban/history/index.html",
+      "open-guide-to-kanban/index.html",
+      "open-guide-to-kanban/latest/index.html",
+      "open-guide-to-kanban/translations/index.html",
+      "the-kanban-guide/2020.07/index.html",
+      "the-kanban-guide/2020.12/index.html",
+      "the-kanban-guide/2020.7/index.html",
+      "the-kanban-guide/2025.5/index.html",
+      "the-kanban-guide/history/index.html",
+      "the-kanban-guide/index.html",
+      "the-kanban-guide/latest/index.html",
+      "the-kanban-guide/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "es-es/open-guide-to-kanban/2025.7/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+        "sha256": "d17b351f984d54ff51f7fa0b692d94094fe8184dfa1e85ff2062622f9e8848ea",
+        "bytes": 201250
+      },
+      {
+        "path": "es-es/the-kanban-guide/2025.5/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+        "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+        "bytes": 93250
+      },
+      {
+        "path": "fa/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fa.pdf",
+        "sha256": "11fb775bde9f9bc5ed8a702bd4ef0218ef4e4a5054ea7a9beeed689440c73e62",
+        "bytes": 115778
+      },
+      {
+        "path": "fa/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fa.pdf",
+        "sha256": "77376290c0a0cff860b79368c836fa2812e61c8c596243359f328b2998266642",
+        "bytes": 45985
+      },
+      {
+        "path": "fr/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fr.pdf",
+        "sha256": "6e3e6c77bc8c7a75d9dd1537e4d66a178a12e0fd18ab5c5e77314d404e1c0fdb",
+        "bytes": 279252
+      },
+      {
+        "path": "fr/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+        "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+        "bytes": 296372
+      },
+      {
+        "path": "fr/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fr.pdf",
+        "sha256": "354debd4ad19148d05161468bf9d1f1d2afb64214fac27be5c939aa9e38cd6b2",
+        "bytes": 117806
+      },
+      {
+        "path": "ja/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+        "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+        "bytes": 509941
+      },
+      {
+        "path": "ja/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+        "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+        "bytes": 1171203
+      },
+      {
+        "path": "ja/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+        "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+        "bytes": 220652
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+        "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+        "bytes": 327013
+      },
+      {
+        "path": "open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+        "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+        "bytes": 326954
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+        "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+        "bytes": 252950
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+        "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+        "bytes": 217716
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+        "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+        "bytes": 157097
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+        "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+        "bytes": 84160
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+        "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+        "bytes": 424809
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+        "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+        "bytes": 144641
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+        "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+        "bytes": 301859
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+        "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+        "bytes": 135120
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+        "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+        "bytes": 635619
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+        "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+        "bytes": 783148
+      },
+      {
+        "path": "the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+        "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+        "bytes": 112982
+      },
+      {
+        "path": "the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+        "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+        "bytes": 155438
+      },
+      {
+        "path": "the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+        "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+        "bytes": 1849560
+      }
+    ],
+    "wrapperOverrides": []
+  },
+  {
+    "repository": "the-safe-delusion",
+    "ring": "local",
+    "routes": [
+      "about/index.html",
+      "brief/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "getting-out/index.html",
+      "index.html",
+      "objections/index.html",
+      "right-of-reply/index.html",
+      "safe-decision-makers/2024.8/index.html",
+      "safe-decision-makers/details/index.html",
+      "safe-decision-makers/history/index.html",
+      "safe-decision-makers/index.html",
+      "safe-decision-makers/latest/index.html",
+      "safe-decision-makers/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "safe-decision-makers/2024.8/pdf/safe-decision-makers.2024.8.en.pdf",
+        "sha256": "55700314e692cd7e2c6a06ed17ff6630e773a542261ee0b26dbe63cdf7eb3c41",
+        "bytes": 799839
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/old.index.html",
+      "layouts/robots.txt",
+      "layouts/sitemap.xml",
+      "layouts/wrapper/single.html",
+      "layouts/_partials/components/breadcrumbs.html",
+      "layouts/_partials/components/main-menu.html",
+      "layouts/_partials/components/site-styles.html",
+      "layouts/_partials/components/skip-link.html",
+      "layouts/_shortcodes/contradiction.html",
+      "layouts/_shortcodes/editor.html",
+      "layouts/_shortcodes/src.html"
+    ]
+  },
+  {
+    "repository": "the-safe-delusion",
+    "ring": "preview",
+    "routes": [
+      "about/index.html",
+      "brief/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "getting-out/index.html",
+      "index.html",
+      "objections/index.html",
+      "right-of-reply/index.html",
+      "safe-decision-makers/2024.8/index.html",
+      "safe-decision-makers/details/index.html",
+      "safe-decision-makers/history/index.html",
+      "safe-decision-makers/index.html",
+      "safe-decision-makers/latest/index.html",
+      "safe-decision-makers/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "safe-decision-makers/2024.8/pdf/safe-decision-makers.2024.8.en.pdf",
+        "sha256": "55700314e692cd7e2c6a06ed17ff6630e773a542261ee0b26dbe63cdf7eb3c41",
+        "bytes": 799839
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/old.index.html",
+      "layouts/robots.txt",
+      "layouts/sitemap.xml",
+      "layouts/wrapper/single.html",
+      "layouts/_partials/components/breadcrumbs.html",
+      "layouts/_partials/components/main-menu.html",
+      "layouts/_partials/components/site-styles.html",
+      "layouts/_partials/components/skip-link.html",
+      "layouts/_shortcodes/contradiction.html",
+      "layouts/_shortcodes/editor.html",
+      "layouts/_shortcodes/src.html"
+    ]
+  },
+  {
+    "repository": "the-safe-delusion",
+    "ring": "production",
+    "routes": [
+      "about/index.html",
+      "brief/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "getting-out/index.html",
+      "index.html",
+      "objections/index.html",
+      "right-of-reply/index.html",
+      "safe-decision-makers/2024.8/index.html",
+      "safe-decision-makers/details/index.html",
+      "safe-decision-makers/history/index.html",
+      "safe-decision-makers/index.html",
+      "safe-decision-makers/latest/index.html",
+      "safe-decision-makers/translations/index.html",
+      "translationsdirectory/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "safe-decision-makers/2024.8/pdf/safe-decision-makers.2024.8.en.pdf",
+        "sha256": "55700314e692cd7e2c6a06ed17ff6630e773a542261ee0b26dbe63cdf7eb3c41",
+        "bytes": 799839
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/old.index.html",
+      "layouts/robots.txt",
+      "layouts/sitemap.xml",
+      "layouts/wrapper/single.html",
+      "layouts/_partials/components/breadcrumbs.html",
+      "layouts/_partials/components/main-menu.html",
+      "layouts/_partials/components/site-styles.html",
+      "layouts/_partials/components/skip-link.html",
+      "layouts/_shortcodes/contradiction.html",
+      "layouts/_shortcodes/editor.html",
+      "layouts/_shortcodes/src.html"
+    ]
+  },
+  {
+    "repository": "ScrumGuide-ExpansionPack",
+    "ring": "local",
+    "routes": [
+      "adaptive-enterprise/2026.1/index.html",
+      "adaptive-enterprise/history/index.html",
+      "adaptive-enterprise/index.html",
+      "adaptive-enterprise/translations/index.html",
+      "adaptive-executive/2026.1/index.html",
+      "adaptive-executive/history/index.html",
+      "adaptive-executive/index.html",
+      "adaptive-executive/translations/index.html",
+      "ai-and-scrum/2026.1/index.html",
+      "ai-and-scrum/history/index.html",
+      "ai-and-scrum/index.html",
+      "ai-and-scrum/translations/index.html",
+      "ai/index.html",
+      "complexity/2026.1/index.html",
+      "complexity/history/index.html",
+      "complexity/index.html",
+      "complexity/translations/index.html",
+      "creators/index.html",
+      "creators/jeff-sutherland/index.html",
+      "creators/john-coleman/index.html",
+      "creators/ralph-jocham/index.html",
+      "de/creators/index.html",
+      "de/creators/jeff-sutherland/index.html",
+      "de/creators/john-coleman/index.html",
+      "de/creators/ralph-jocham/index.html",
+      "de/de/scrum-guide-expansion-pack/2025.6/index.html",
+      "de/de/scrum-guide-expansion-pack/index.html",
+      "de/foundation/index.html",
+      "de/framework/index.html",
+      "de/index.html",
+      "de/scrum-guide-expanded/2025.6/index.html",
+      "de/scrum-guide-expanded/2026.1/index.html",
+      "de/scrum-guide-expanded/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "emergent-strategy-and-depoyment/2026.1/index.html",
+      "emergent-strategy-and-depoyment/history/index.html",
+      "emergent-strategy-and-depoyment/index.html",
+      "emergent-strategy-and-depoyment/translations/index.html",
+      "en/index.html",
+      "engineering/index.html",
+      "es/creators/index.html",
+      "es/creators/jeff-sutherland/index.html",
+      "es/creators/john-coleman/index.html",
+      "es/creators/ralph-jocham/index.html",
+      "es/es/scrum-guide-expansion-pack/2025.6/index.html",
+      "es/es/scrum-guide-expansion-pack/index.html",
+      "es/foundation/index.html",
+      "es/framework/index.html",
+      "es/index.html",
+      "es/scrum-guide-expanded/2025.6/index.html",
+      "es/scrum-guide-expanded/2026.1/index.html",
+      "es/scrum-guide-expanded/index.html",
+      "fa/creators/index.html",
+      "fa/creators/jeff-sutherland/index.html",
+      "fa/creators/john-coleman/index.html",
+      "fa/creators/ralph-jocham/index.html",
+      "fa/fa/scrum-guide-expansion-pack/2025.6/index.html",
+      "fa/fa/scrum-guide-expansion-pack/index.html",
+      "fa/foundation/index.html",
+      "fa/framework/index.html",
+      "fa/index.html",
+      "fa/scrum-guide-expanded/2025.6/index.html",
+      "fa/scrum-guide-expanded/2026.1/index.html",
+      "fa/scrum-guide-expanded/index.html",
+      "holistic-testing/2026.1/index.html",
+      "holistic-testing/history/index.html",
+      "holistic-testing/index.html",
+      "holistic-testing/translations/index.html",
+      "index.html",
+      "it/adaptive-executive/2026.1/index.html",
+      "it/adaptive-executive/index.html",
+      "it/complexity/2026.1/index.html",
+      "it/complexity/index.html",
+      "it/creators/index.html",
+      "it/creators/jeff-sutherland/index.html",
+      "it/creators/john-coleman/index.html",
+      "it/creators/ralph-jocham/index.html",
+      "it/emergent-strategy-and-depoyment/2026.1/index.html",
+      "it/emergent-strategy-and-depoyment/index.html",
+      "it/foundation/index.html",
+      "it/framework/index.html",
+      "it/index.html",
+      "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+      "it/it/scrum-guide-expansion-pack/index.html",
+      "it/multi-team-scrum/2026.1/index.html",
+      "it/multi-team-scrum/index.html",
+      "it/scrum-guide-expanded/2025.6/index.html",
+      "it/scrum-guide-expanded/2026.1/index.html",
+      "it/scrum-guide-expanded/index.html",
+      "ja/creators/index.html",
+      "ja/creators/jeff-sutherland/index.html",
+      "ja/creators/john-coleman/index.html",
+      "ja/creators/ralph-jocham/index.html",
+      "ja/foundation/index.html",
+      "ja/framework/index.html",
+      "ja/index.html",
+      "ja/ja/scrum-guide-expansion-pack/2025.6/index.html",
+      "ja/ja/scrum-guide-expansion-pack/index.html",
+      "ja/scrum-guide-expanded/2025.6/index.html",
+      "ja/scrum-guide-expanded/2026.1/index.html",
+      "ja/scrum-guide-expanded/index.html",
+      "leadership-organization/index.html",
+      "leadership/index.html",
+      "multi-team-scrum/2026.1/index.html",
+      "multi-team-scrum/history/index.html",
+      "multi-team-scrum/index.html",
+      "multi-team-scrum/translations/index.html",
+      "nl/creators/index.html",
+      "nl/creators/jeff-sutherland/index.html",
+      "nl/creators/john-coleman/index.html",
+      "nl/creators/ralph-jocham/index.html",
+      "nl/foundation/index.html",
+      "nl/framework/index.html",
+      "nl/index.html",
+      "nl/nl/scrum-guide-expansion-pack/2025.6/index.html",
+      "nl/nl/scrum-guide-expansion-pack/index.html",
+      "nl/scrum-guide-expanded/2025.6/index.html",
+      "nl/scrum-guide-expanded/2026.1/index.html",
+      "nl/scrum-guide-expanded/index.html",
+      "operating-models/2026.1/index.html",
+      "operating-models/history/index.html",
+      "operating-models/index.html",
+      "operating-models/translations/index.html",
+      "pl/creators/index.html",
+      "pl/creators/jeff-sutherland/index.html",
+      "pl/creators/john-coleman/index.html",
+      "pl/creators/ralph-jocham/index.html",
+      "pl/foundation/index.html",
+      "pl/framework/index.html",
+      "pl/index.html",
+      "pl/pl/download/index.html",
+      "pl/pl/downloads/index.html",
+      "pl/pl/scrum-guide-expansion-pack/2025.6/index.html",
+      "pl/pl/scrum-guide-expansion-pack/index.html",
+      "pl/pl/translations/index.html",
+      "pl/scrum-guide-expanded/2025.6/index.html",
+      "pl/scrum-guide-expanded/2026.1/index.html",
+      "pl/scrum-guide-expanded/history/index.html",
+      "pl/scrum-guide-expanded/index.html",
+      "pl/scrum-guide-expanded/translations/index.html",
+      "planguage/2026.1/index.html",
+      "planguage/history/index.html",
+      "planguage/index.html",
+      "planguage/translations/index.html",
+      "product-thinking/2026.1/index.html",
+      "product-thinking/history/index.html",
+      "product-thinking/index.html",
+      "product-thinking/translations/index.html",
+      "product/index.html",
+      "psychological-safety-in-scrum-teams/2026.1/index.html",
+      "psychological-safety-in-scrum-teams/history/index.html",
+      "psychological-safety-in-scrum-teams/index.html",
+      "psychological-safety-in-scrum-teams/translations/index.html",
+      "pt/foundation/index.html",
+      "pt/framework/index.html",
+      "pt/index.html",
+      "pt/pt/scrum-guide-expansion-pack/2025.6/index.html",
+      "pt/pt/scrum-guide-expansion-pack/index.html",
+      "pt/scrum-guide-expanded/2025.6/index.html",
+      "pt/scrum-guide-expanded/2026.1/index.html",
+      "pt/scrum-guide-expanded/index.html",
+      "ro/creators/index.html",
+      "ro/foundation/index.html",
+      "ro/framework/index.html",
+      "ro/index.html",
+      "ro/ro/scrum-guide-expansion-pack/2025.6/index.html",
+      "ro/ro/scrum-guide-expansion-pack/index.html",
+      "ro/scrum-guide-expanded/2025.6/index.html",
+      "ro/scrum-guide-expanded/2026.1/index.html",
+      "ro/scrum-guide-expanded/index.html",
+      "scrum-foundations/index.html",
+      "scrum-guide-expanded/2025.6/index.html",
+      "scrum-guide-expanded/2026.1/index.html",
+      "scrum-guide-expanded/history/index.html",
+      "scrum-guide-expanded/index.html",
+      "scrum-guide-expanded/translations/index.html",
+      "scrum-guide-expansion-pack/2025.6/index.html",
+      "scrum-guide-expansion-pack/index.html",
+      "scrum-on-one-page/2026.1/index.html",
+      "scrum-on-one-page/history/index.html",
+      "scrum-on-one-page/index.html",
+      "scrum-on-one-page/translations/index.html",
+      "software-engineering-practices/2026.1/index.html",
+      "software-engineering-practices/history/index.html",
+      "software-engineering-practices/index.html",
+      "software-engineering-practices/translations/index.html",
+      "strategy-as-an-empirical-capability/2026.1/index.html",
+      "strategy-as-an-empirical-capability/history/index.html",
+      "strategy-as-an-empirical-capability/index.html",
+      "strategy-as-an-empirical-capability/translations/index.html",
+      "strategy-product/index.html",
+      "teams/index.html",
+      "technical-excellence/index.html",
+      "tlh/creators/index.html",
+      "tlh/creators/jeff-sutherland/index.html",
+      "tlh/creators/john-coleman/index.html",
+      "tlh/creators/ralph-jocham/index.html",
+      "tlh/foundation/index.html",
+      "tlh/framework/index.html",
+      "tlh/index.html",
+      "tlh/leadership/index.html",
+      "tlh/scrum-guide-expanded/2025.6/index.html",
+      "tlh/scrum-guide-expanded/2026.1/index.html",
+      "tlh/scrum-guide-expanded/index.html",
+      "tlh/tlh/scrum-guide-expansion-pack/2025.6/index.html",
+      "tlh/tlh/scrum-guide-expansion-pack/index.html",
+      "topics/index.html",
+      "translations/index.html",
+      "value/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "adaptive-enterprise/2026.1/pdf/adaptive-enterprise.2026.1.en.pdf",
+        "sha256": "e25b22bf025edfae8df23d80919d1f0e64cba6a2a7273062fe9152c6db967cb2",
+        "bytes": 107958
+      },
+      {
+        "path": "adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.en.pdf",
+        "sha256": "87b93eece2e9e3e508bc8bef2e4936e236c1046709d5adfcf467c83f8d0827d8",
+        "bytes": 103894
+      },
+      {
+        "path": "ai-and-scrum/2026.1/pdf/ai-and-scrum.2026.1.en.pdf",
+        "sha256": "5a34076f54bc6444825fdc245ff26e718dee186e257beb7b1047f1be0d3625c8",
+        "bytes": 154259
+      },
+      {
+        "path": "complexity/2026.1/pdf/complexity.2026.1.en.pdf",
+        "sha256": "e0ce8af4f318ca1b2611e2703ba6aa9fc4deeea3483e425d0c759d607ffb8952",
+        "bytes": 88048
+      },
+      {
+        "path": "emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.en.pdf",
+        "sha256": "7e2b647976671b7ef7581b5fe37d31ea6e2472b798c93215daac3536f487dc4f",
+        "bytes": 128463
+      },
+      {
+        "path": "es/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.es.pdf",
+        "sha256": "9098b74d73183820f47f69556b551a4f14cdd0a3849dbc6d6539fc00a2337ee8",
+        "bytes": 322442
+      },
+      {
+        "path": "fa/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.fa.pdf",
+        "sha256": "a02fd9730fee2dd502fbb089fc300d6f77d5f3e332aa2b8cc54b240d67312a63",
+        "bytes": 337147
+      },
+      {
+        "path": "holistic-testing/2026.1/pdf/holistic-testing.2026.1.en.pdf",
+        "sha256": "87a212d93ef27860fe135acc4312901d988511e0c7b5a59a20e3d17d3f084435",
+        "bytes": 655760
+      },
+      {
+        "path": "it/adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.it.pdf",
+        "sha256": "0a6294c3a58ce58db78ca0b2b7ad10f01ff212f8dbe366a2649b56a6f20be30e",
+        "bytes": 125149
+      },
+      {
+        "path": "it/complexity/2026.1/pdf/complexity.2026.1.it.pdf",
+        "sha256": "36932f80fe1492f9443d304895de536aa94e6c2ea73ca8f69fe0c2ce77de6a09",
+        "bytes": 114736
+      },
+      {
+        "path": "it/emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.it.pdf",
+        "sha256": "49481287fc96f609ecf6df73911fc8f840e3587170d6fde96878d6d5618f2fd2",
+        "bytes": 130141
+      },
+      {
+        "path": "it/multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.it.pdf",
+        "sha256": "20139689a413812b69dfb1a0588726b88e60a9ebb0eb5f10db8c5446bf7f8adb",
+        "bytes": 106280
+      },
+      {
+        "path": "it/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.it.pdf",
+        "sha256": "4b1bfe97a82b674220d1ea37a0271a6d98ec26b204e03c872d95ccdd2827401a",
+        "bytes": 348254
+      },
+      {
+        "path": "it/scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.it.pdf",
+        "sha256": "e889cac586affdae9ae2f4dce1acd3ffed728807ad246d750ac111bcac2d97e8",
+        "bytes": 246489
+      },
+      {
+        "path": "ja/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ja.pdf",
+        "sha256": "e588a1a818568bf615bb7058f29110dee34aa4b9f80ce0a4c09e6befff5cb589",
+        "bytes": 1031730
+      },
+      {
+        "path": "multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.en.pdf",
+        "sha256": "b69890c60c57deb3251ca927522d0b40e3814682bf4193c3d19b9fcadc7c3ae0",
+        "bytes": 85531
+      },
+      {
+        "path": "nl/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.nl.pdf",
+        "sha256": "f61205f91b8e9f43b10ce705b34193cdc1d919be1ec41ae5006c75b6b490c934",
+        "bytes": 319232
+      },
+      {
+        "path": "operating-models/2026.1/pdf/operating-models.2026.1.en.pdf",
+        "sha256": "97bad3d3696f1aad2e253db39cacc4562c7941ca9af1ae6808508efdff792046",
+        "bytes": 182680
+      },
+      {
+        "path": "pl/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.pl.pdf",
+        "sha256": "0ad4e488e5c4d9b47ffff89b4873d3c3e6339cfc0c81efc28a153b92579050e6",
+        "bytes": 305327
+      },
+      {
+        "path": "planguage/2026.1/pdf/planguage.2026.1.en.pdf",
+        "sha256": "782fa2af27d8685c0f4d85948bdbe83d0fdcb25d269b1c154338197c1a9562d5",
+        "bytes": 480681
+      },
+      {
+        "path": "product-thinking/2026.1/pdf/product-thinking.2026.1.en.pdf",
+        "sha256": "dc10229bb6922dd05fe716f7d68a32d1291b9da5a86bd3e018bdc8627a1d2fac",
+        "bytes": 203796
+      },
+      {
+        "path": "psychological-safety-in-scrum-teams/2026.1/pdf/psychological-safety-in-scrum-teams.2026.1.en.pdf",
+        "sha256": "0e120edaac09ea965248570505cd465da8d6ac2b0a76be62e15d29d13cf9bdfe",
+        "bytes": 125122
+      },
+      {
+        "path": "ro/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ro.pdf",
+        "sha256": "45608fb81a5e1fb1a53e05821d92a6304ee3242a2bfca830e780aa94e0237cea",
+        "bytes": 896113
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en-us.pdf",
+        "sha256": "d0a805231a91ef67354789042d62f00211b1d69e2b7479cb52469f9b63366dcf",
+        "bytes": 788104
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en.pdf",
+        "sha256": "2513d629f9a79025b03b280423eb938724022faa28bf76ddd60324584dea468e",
+        "bytes": 809352
+      },
+      {
+        "path": "scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.en.pdf",
+        "sha256": "4303da0c2a7590a6d58bc6452f49960fc1a232181f2d22a17c771574ff22793b",
+        "bytes": 229010
+      },
+      {
+        "path": "scrum-on-one-page/2026.1/pdf/scrum-on-one-page.2026.1.en.pdf",
+        "sha256": "f2d8d05f887141ca725997e869cf68ccf23414610c82db968011f9f25e4318ac",
+        "bytes": 99610
+      },
+      {
+        "path": "software-engineering-practices/2026.1/pdf/software-engineering-practices.2026.1.en.pdf",
+        "sha256": "b4d42263888b2eebbc02fb73e3cec08e8ba385a010c3f6b6520ff0cc8fc231cb",
+        "bytes": 189741
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy-as-an-empirical-capability.2026.1.en.pdf",
+        "sha256": "880e512073b2c9ef68e30c7d2f808a72925a058119f18b589116c7eabcf09bc0",
+        "bytes": 186235
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy.2026.1.en.pdf",
+        "sha256": "973d29d71d663d1cd522cb1283d5c28edc4e2cc0fc9789d20902144070a5bb56",
+        "bytes": 153626
+      },
+      {
+        "path": "tlh/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.tlh.pdf",
+        "sha256": "8fc5dc9e638868a54381b8c62663fd574ca14b40c1e913111361431f738bd070",
+        "bytes": 308636
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/robots.txt",
+      "layouts/categories/list.html",
+      "layouts/creators/list.html",
+      "layouts/creators/single.html",
+      "layouts/_markup/render-blockquote.html",
+      "layouts/_markup/render-image.html",
+      "layouts/_partials/components/category-list.html",
+      "layouts/_partials/components/core-guide-list.html",
+      "layouts/_partials/components/extensions-guide-list.html",
+      "layouts/_partials/components/home-hero.html",
+      "layouts/_partials/components/guide/guide-contributors-with-icon.html",
+      "layouts/_partials/functions/is-expansion.html"
+    ]
+  },
+  {
+    "repository": "ScrumGuide-ExpansionPack",
+    "ring": "preview",
+    "routes": [
+      "adaptive-executive/2026.1/index.html",
+      "adaptive-executive/history/index.html",
+      "adaptive-executive/index.html",
+      "adaptive-executive/translations/index.html",
+      "ai-and-scrum/2026.1/index.html",
+      "ai-and-scrum/history/index.html",
+      "ai-and-scrum/index.html",
+      "ai-and-scrum/translations/index.html",
+      "ai/index.html",
+      "complexity/2026.1/index.html",
+      "complexity/history/index.html",
+      "complexity/index.html",
+      "complexity/translations/index.html",
+      "creators/index.html",
+      "creators/jeff-sutherland/index.html",
+      "creators/john-coleman/index.html",
+      "creators/ralph-jocham/index.html",
+      "de/creators/index.html",
+      "de/creators/jeff-sutherland/index.html",
+      "de/creators/john-coleman/index.html",
+      "de/creators/ralph-jocham/index.html",
+      "de/de/scrum-guide-expansion-pack/2025.6/index.html",
+      "de/de/scrum-guide-expansion-pack/index.html",
+      "de/foundation/index.html",
+      "de/framework/index.html",
+      "de/index.html",
+      "de/scrum-guide-expanded/2025.6/index.html",
+      "de/scrum-guide-expanded/2026.1/index.html",
+      "de/scrum-guide-expanded/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "engineering/index.html",
+      "es/creators/index.html",
+      "es/creators/jeff-sutherland/index.html",
+      "es/creators/john-coleman/index.html",
+      "es/creators/ralph-jocham/index.html",
+      "es/es/scrum-guide-expansion-pack/2025.6/index.html",
+      "es/es/scrum-guide-expansion-pack/index.html",
+      "es/foundation/index.html",
+      "es/framework/index.html",
+      "es/index.html",
+      "es/scrum-guide-expanded/2025.6/index.html",
+      "es/scrum-guide-expanded/2026.1/index.html",
+      "es/scrum-guide-expanded/index.html",
+      "fa/creators/index.html",
+      "fa/creators/jeff-sutherland/index.html",
+      "fa/creators/john-coleman/index.html",
+      "fa/creators/ralph-jocham/index.html",
+      "fa/fa/scrum-guide-expansion-pack/2025.6/index.html",
+      "fa/fa/scrum-guide-expansion-pack/index.html",
+      "fa/foundation/index.html",
+      "fa/framework/index.html",
+      "fa/index.html",
+      "fa/scrum-guide-expanded/2025.6/index.html",
+      "fa/scrum-guide-expanded/2026.1/index.html",
+      "fa/scrum-guide-expanded/index.html",
+      "holistic-testing/2026.1/index.html",
+      "holistic-testing/history/index.html",
+      "holistic-testing/index.html",
+      "holistic-testing/translations/index.html",
+      "index.html",
+      "it/adaptive-executive/2026.1/index.html",
+      "it/adaptive-executive/index.html",
+      "it/complexity/2026.1/index.html",
+      "it/complexity/index.html",
+      "it/creators/index.html",
+      "it/creators/jeff-sutherland/index.html",
+      "it/creators/john-coleman/index.html",
+      "it/creators/ralph-jocham/index.html",
+      "it/emergent-strategy-and-depoyment/2026.1/index.html",
+      "it/emergent-strategy-and-depoyment/index.html",
+      "it/foundation/index.html",
+      "it/framework/index.html",
+      "it/index.html",
+      "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+      "it/it/scrum-guide-expansion-pack/index.html",
+      "it/multi-team-scrum/2026.1/index.html",
+      "it/multi-team-scrum/index.html",
+      "it/scrum-guide-expanded/2025.6/index.html",
+      "it/scrum-guide-expanded/2026.1/index.html",
+      "it/scrum-guide-expanded/index.html",
+      "ja/creators/index.html",
+      "ja/creators/jeff-sutherland/index.html",
+      "ja/creators/john-coleman/index.html",
+      "ja/creators/ralph-jocham/index.html",
+      "ja/foundation/index.html",
+      "ja/framework/index.html",
+      "ja/index.html",
+      "ja/ja/scrum-guide-expansion-pack/2025.6/index.html",
+      "ja/ja/scrum-guide-expansion-pack/index.html",
+      "ja/scrum-guide-expanded/2025.6/index.html",
+      "ja/scrum-guide-expanded/2026.1/index.html",
+      "ja/scrum-guide-expanded/index.html",
+      "leadership-organization/index.html",
+      "leadership/index.html",
+      "multi-team-scrum/2026.1/index.html",
+      "multi-team-scrum/history/index.html",
+      "multi-team-scrum/index.html",
+      "multi-team-scrum/translations/index.html",
+      "nl/creators/index.html",
+      "nl/creators/jeff-sutherland/index.html",
+      "nl/creators/john-coleman/index.html",
+      "nl/creators/ralph-jocham/index.html",
+      "nl/foundation/index.html",
+      "nl/framework/index.html",
+      "nl/index.html",
+      "nl/nl/scrum-guide-expansion-pack/2025.6/index.html",
+      "nl/nl/scrum-guide-expansion-pack/index.html",
+      "nl/scrum-guide-expanded/2025.6/index.html",
+      "nl/scrum-guide-expanded/2026.1/index.html",
+      "nl/scrum-guide-expanded/index.html",
+      "operating-models/2026.1/index.html",
+      "operating-models/history/index.html",
+      "operating-models/index.html",
+      "operating-models/translations/index.html",
+      "pl/creators/index.html",
+      "pl/creators/jeff-sutherland/index.html",
+      "pl/creators/john-coleman/index.html",
+      "pl/creators/ralph-jocham/index.html",
+      "pl/foundation/index.html",
+      "pl/framework/index.html",
+      "pl/index.html",
+      "pl/pl/download/index.html",
+      "pl/pl/downloads/index.html",
+      "pl/pl/scrum-guide-expansion-pack/2025.6/index.html",
+      "pl/pl/scrum-guide-expansion-pack/index.html",
+      "pl/pl/translations/index.html",
+      "pl/scrum-guide-expanded/2025.6/index.html",
+      "pl/scrum-guide-expanded/2026.1/index.html",
+      "pl/scrum-guide-expanded/history/index.html",
+      "pl/scrum-guide-expanded/index.html",
+      "pl/scrum-guide-expanded/translations/index.html",
+      "planguage/2026.1/index.html",
+      "planguage/history/index.html",
+      "planguage/index.html",
+      "planguage/translations/index.html",
+      "product-thinking/2026.1/index.html",
+      "product-thinking/history/index.html",
+      "product-thinking/index.html",
+      "product-thinking/translations/index.html",
+      "product/index.html",
+      "psychological-safety-in-scrum-teams/2026.1/index.html",
+      "psychological-safety-in-scrum-teams/history/index.html",
+      "psychological-safety-in-scrum-teams/index.html",
+      "psychological-safety-in-scrum-teams/translations/index.html",
+      "pt/foundation/index.html",
+      "pt/framework/index.html",
+      "pt/index.html",
+      "pt/pt/scrum-guide-expansion-pack/2025.6/index.html",
+      "pt/pt/scrum-guide-expansion-pack/index.html",
+      "pt/scrum-guide-expanded/2025.6/index.html",
+      "pt/scrum-guide-expanded/2026.1/index.html",
+      "pt/scrum-guide-expanded/index.html",
+      "ro/creators/index.html",
+      "ro/foundation/index.html",
+      "ro/framework/index.html",
+      "ro/index.html",
+      "ro/ro/scrum-guide-expansion-pack/2025.6/index.html",
+      "ro/ro/scrum-guide-expansion-pack/index.html",
+      "ro/scrum-guide-expanded/2025.6/index.html",
+      "ro/scrum-guide-expanded/2026.1/index.html",
+      "ro/scrum-guide-expanded/index.html",
+      "scrum-foundations/index.html",
+      "scrum-guide-expanded/2025.6/index.html",
+      "scrum-guide-expanded/2026.1/index.html",
+      "scrum-guide-expanded/history/index.html",
+      "scrum-guide-expanded/index.html",
+      "scrum-guide-expanded/translations/index.html",
+      "scrum-guide-expansion-pack/2025.6/index.html",
+      "scrum-guide-expansion-pack/index.html",
+      "scrum-on-one-page/2026.1/index.html",
+      "scrum-on-one-page/history/index.html",
+      "scrum-on-one-page/index.html",
+      "scrum-on-one-page/translations/index.html",
+      "software-engineering-practices/2026.1/index.html",
+      "software-engineering-practices/history/index.html",
+      "software-engineering-practices/index.html",
+      "software-engineering-practices/translations/index.html",
+      "strategy-as-an-empirical-capability/2026.1/index.html",
+      "strategy-as-an-empirical-capability/history/index.html",
+      "strategy-as-an-empirical-capability/index.html",
+      "strategy-as-an-empirical-capability/translations/index.html",
+      "strategy-product/index.html",
+      "teams/index.html",
+      "technical-excellence/index.html",
+      "tlh/creators/index.html",
+      "tlh/creators/jeff-sutherland/index.html",
+      "tlh/creators/john-coleman/index.html",
+      "tlh/creators/ralph-jocham/index.html",
+      "tlh/foundation/index.html",
+      "tlh/framework/index.html",
+      "tlh/index.html",
+      "tlh/leadership/index.html",
+      "tlh/scrum-guide-expanded/2025.6/index.html",
+      "tlh/scrum-guide-expanded/2026.1/index.html",
+      "tlh/scrum-guide-expanded/index.html",
+      "tlh/tlh/scrum-guide-expansion-pack/2025.6/index.html",
+      "tlh/tlh/scrum-guide-expansion-pack/index.html",
+      "topics/index.html",
+      "translations/index.html",
+      "value/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "adaptive-enterprise/2026.1/pdf/adaptive-enterprise.2026.1.en.pdf",
+        "sha256": "e25b22bf025edfae8df23d80919d1f0e64cba6a2a7273062fe9152c6db967cb2",
+        "bytes": 107958
+      },
+      {
+        "path": "adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.en.pdf",
+        "sha256": "87b93eece2e9e3e508bc8bef2e4936e236c1046709d5adfcf467c83f8d0827d8",
+        "bytes": 103894
+      },
+      {
+        "path": "ai-and-scrum/2026.1/pdf/ai-and-scrum.2026.1.en.pdf",
+        "sha256": "5a34076f54bc6444825fdc245ff26e718dee186e257beb7b1047f1be0d3625c8",
+        "bytes": 154259
+      },
+      {
+        "path": "complexity/2026.1/pdf/complexity.2026.1.en.pdf",
+        "sha256": "e0ce8af4f318ca1b2611e2703ba6aa9fc4deeea3483e425d0c759d607ffb8952",
+        "bytes": 88048
+      },
+      {
+        "path": "emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.en.pdf",
+        "sha256": "7e2b647976671b7ef7581b5fe37d31ea6e2472b798c93215daac3536f487dc4f",
+        "bytes": 128463
+      },
+      {
+        "path": "es/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.es.pdf",
+        "sha256": "9098b74d73183820f47f69556b551a4f14cdd0a3849dbc6d6539fc00a2337ee8",
+        "bytes": 322442
+      },
+      {
+        "path": "fa/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.fa.pdf",
+        "sha256": "a02fd9730fee2dd502fbb089fc300d6f77d5f3e332aa2b8cc54b240d67312a63",
+        "bytes": 337147
+      },
+      {
+        "path": "holistic-testing/2026.1/pdf/holistic-testing.2026.1.en.pdf",
+        "sha256": "87a212d93ef27860fe135acc4312901d988511e0c7b5a59a20e3d17d3f084435",
+        "bytes": 655760
+      },
+      {
+        "path": "it/adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.it.pdf",
+        "sha256": "0a6294c3a58ce58db78ca0b2b7ad10f01ff212f8dbe366a2649b56a6f20be30e",
+        "bytes": 125149
+      },
+      {
+        "path": "it/complexity/2026.1/pdf/complexity.2026.1.it.pdf",
+        "sha256": "36932f80fe1492f9443d304895de536aa94e6c2ea73ca8f69fe0c2ce77de6a09",
+        "bytes": 114736
+      },
+      {
+        "path": "it/emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.it.pdf",
+        "sha256": "49481287fc96f609ecf6df73911fc8f840e3587170d6fde96878d6d5618f2fd2",
+        "bytes": 130141
+      },
+      {
+        "path": "it/multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.it.pdf",
+        "sha256": "20139689a413812b69dfb1a0588726b88e60a9ebb0eb5f10db8c5446bf7f8adb",
+        "bytes": 106280
+      },
+      {
+        "path": "it/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.it.pdf",
+        "sha256": "4b1bfe97a82b674220d1ea37a0271a6d98ec26b204e03c872d95ccdd2827401a",
+        "bytes": 348254
+      },
+      {
+        "path": "it/scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.it.pdf",
+        "sha256": "e889cac586affdae9ae2f4dce1acd3ffed728807ad246d750ac111bcac2d97e8",
+        "bytes": 246489
+      },
+      {
+        "path": "ja/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ja.pdf",
+        "sha256": "e588a1a818568bf615bb7058f29110dee34aa4b9f80ce0a4c09e6befff5cb589",
+        "bytes": 1031730
+      },
+      {
+        "path": "multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.en.pdf",
+        "sha256": "b69890c60c57deb3251ca927522d0b40e3814682bf4193c3d19b9fcadc7c3ae0",
+        "bytes": 85531
+      },
+      {
+        "path": "nl/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.nl.pdf",
+        "sha256": "f61205f91b8e9f43b10ce705b34193cdc1d919be1ec41ae5006c75b6b490c934",
+        "bytes": 319232
+      },
+      {
+        "path": "operating-models/2026.1/pdf/operating-models.2026.1.en.pdf",
+        "sha256": "97bad3d3696f1aad2e253db39cacc4562c7941ca9af1ae6808508efdff792046",
+        "bytes": 182680
+      },
+      {
+        "path": "pl/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.pl.pdf",
+        "sha256": "0ad4e488e5c4d9b47ffff89b4873d3c3e6339cfc0c81efc28a153b92579050e6",
+        "bytes": 305327
+      },
+      {
+        "path": "planguage/2026.1/pdf/planguage.2026.1.en.pdf",
+        "sha256": "782fa2af27d8685c0f4d85948bdbe83d0fdcb25d269b1c154338197c1a9562d5",
+        "bytes": 480681
+      },
+      {
+        "path": "product-thinking/2026.1/pdf/product-thinking.2026.1.en.pdf",
+        "sha256": "dc10229bb6922dd05fe716f7d68a32d1291b9da5a86bd3e018bdc8627a1d2fac",
+        "bytes": 203796
+      },
+      {
+        "path": "psychological-safety-in-scrum-teams/2026.1/pdf/psychological-safety-in-scrum-teams.2026.1.en.pdf",
+        "sha256": "0e120edaac09ea965248570505cd465da8d6ac2b0a76be62e15d29d13cf9bdfe",
+        "bytes": 125122
+      },
+      {
+        "path": "ro/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ro.pdf",
+        "sha256": "45608fb81a5e1fb1a53e05821d92a6304ee3242a2bfca830e780aa94e0237cea",
+        "bytes": 896113
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en-us.pdf",
+        "sha256": "d0a805231a91ef67354789042d62f00211b1d69e2b7479cb52469f9b63366dcf",
+        "bytes": 788104
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en.pdf",
+        "sha256": "2513d629f9a79025b03b280423eb938724022faa28bf76ddd60324584dea468e",
+        "bytes": 809352
+      },
+      {
+        "path": "scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.en.pdf",
+        "sha256": "4303da0c2a7590a6d58bc6452f49960fc1a232181f2d22a17c771574ff22793b",
+        "bytes": 229010
+      },
+      {
+        "path": "scrum-on-one-page/2026.1/pdf/scrum-on-one-page.2026.1.en.pdf",
+        "sha256": "f2d8d05f887141ca725997e869cf68ccf23414610c82db968011f9f25e4318ac",
+        "bytes": 99610
+      },
+      {
+        "path": "software-engineering-practices/2026.1/pdf/software-engineering-practices.2026.1.en.pdf",
+        "sha256": "b4d42263888b2eebbc02fb73e3cec08e8ba385a010c3f6b6520ff0cc8fc231cb",
+        "bytes": 189741
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy-as-an-empirical-capability.2026.1.en.pdf",
+        "sha256": "880e512073b2c9ef68e30c7d2f808a72925a058119f18b589116c7eabcf09bc0",
+        "bytes": 186235
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy.2026.1.en.pdf",
+        "sha256": "973d29d71d663d1cd522cb1283d5c28edc4e2cc0fc9789d20902144070a5bb56",
+        "bytes": 153626
+      },
+      {
+        "path": "tlh/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.tlh.pdf",
+        "sha256": "8fc5dc9e638868a54381b8c62663fd574ca14b40c1e913111361431f738bd070",
+        "bytes": 308636
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/robots.txt",
+      "layouts/categories/list.html",
+      "layouts/creators/list.html",
+      "layouts/creators/single.html",
+      "layouts/_markup/render-blockquote.html",
+      "layouts/_markup/render-image.html",
+      "layouts/_partials/components/category-list.html",
+      "layouts/_partials/components/core-guide-list.html",
+      "layouts/_partials/components/extensions-guide-list.html",
+      "layouts/_partials/components/home-hero.html",
+      "layouts/_partials/components/guide/guide-contributors-with-icon.html",
+      "layouts/_partials/functions/is-expansion.html"
+    ]
+  },
+  {
+    "repository": "ScrumGuide-ExpansionPack",
+    "ring": "production",
+    "routes": [
+      "adaptive-executive/2026.1/index.html",
+      "adaptive-executive/history/index.html",
+      "adaptive-executive/index.html",
+      "adaptive-executive/translations/index.html",
+      "ai-and-scrum/2026.1/index.html",
+      "ai-and-scrum/history/index.html",
+      "ai-and-scrum/index.html",
+      "ai-and-scrum/translations/index.html",
+      "ai/index.html",
+      "complexity/2026.1/index.html",
+      "complexity/history/index.html",
+      "complexity/index.html",
+      "complexity/translations/index.html",
+      "creators/index.html",
+      "creators/jeff-sutherland/index.html",
+      "creators/john-coleman/index.html",
+      "creators/ralph-jocham/index.html",
+      "download/index.html",
+      "downloads/index.html",
+      "en/index.html",
+      "engineering/index.html",
+      "es/creators/index.html",
+      "es/creators/jeff-sutherland/index.html",
+      "es/creators/john-coleman/index.html",
+      "es/creators/ralph-jocham/index.html",
+      "es/es/scrum-guide-expansion-pack/2025.6/index.html",
+      "es/es/scrum-guide-expansion-pack/index.html",
+      "es/foundation/index.html",
+      "es/framework/index.html",
+      "es/index.html",
+      "es/scrum-guide-expanded/2025.6/index.html",
+      "es/scrum-guide-expanded/2026.1/index.html",
+      "es/scrum-guide-expanded/index.html",
+      "fa/creators/index.html",
+      "fa/creators/jeff-sutherland/index.html",
+      "fa/creators/john-coleman/index.html",
+      "fa/creators/ralph-jocham/index.html",
+      "fa/fa/scrum-guide-expansion-pack/2025.6/index.html",
+      "fa/fa/scrum-guide-expansion-pack/index.html",
+      "fa/foundation/index.html",
+      "fa/framework/index.html",
+      "fa/index.html",
+      "fa/scrum-guide-expanded/2025.6/index.html",
+      "fa/scrum-guide-expanded/2026.1/index.html",
+      "fa/scrum-guide-expanded/index.html",
+      "holistic-testing/2026.1/index.html",
+      "holistic-testing/history/index.html",
+      "holistic-testing/index.html",
+      "holistic-testing/translations/index.html",
+      "index.html",
+      "ja/creators/index.html",
+      "ja/creators/jeff-sutherland/index.html",
+      "ja/creators/john-coleman/index.html",
+      "ja/creators/ralph-jocham/index.html",
+      "ja/foundation/index.html",
+      "ja/framework/index.html",
+      "ja/index.html",
+      "ja/ja/scrum-guide-expansion-pack/2025.6/index.html",
+      "ja/ja/scrum-guide-expansion-pack/index.html",
+      "ja/scrum-guide-expanded/2025.6/index.html",
+      "ja/scrum-guide-expanded/2026.1/index.html",
+      "ja/scrum-guide-expanded/index.html",
+      "leadership-organization/index.html",
+      "leadership/index.html",
+      "multi-team-scrum/2026.1/index.html",
+      "multi-team-scrum/history/index.html",
+      "multi-team-scrum/index.html",
+      "multi-team-scrum/translations/index.html",
+      "operating-models/2026.1/index.html",
+      "operating-models/history/index.html",
+      "operating-models/index.html",
+      "operating-models/translations/index.html",
+      "pl/creators/index.html",
+      "pl/creators/jeff-sutherland/index.html",
+      "pl/creators/john-coleman/index.html",
+      "pl/creators/ralph-jocham/index.html",
+      "pl/foundation/index.html",
+      "pl/framework/index.html",
+      "pl/index.html",
+      "pl/pl/download/index.html",
+      "pl/pl/downloads/index.html",
+      "pl/pl/scrum-guide-expansion-pack/2025.6/index.html",
+      "pl/pl/scrum-guide-expansion-pack/index.html",
+      "pl/pl/translations/index.html",
+      "pl/scrum-guide-expanded/2025.6/index.html",
+      "pl/scrum-guide-expanded/2026.1/index.html",
+      "pl/scrum-guide-expanded/history/index.html",
+      "pl/scrum-guide-expanded/index.html",
+      "pl/scrum-guide-expanded/translations/index.html",
+      "product-thinking/2026.1/index.html",
+      "product-thinking/history/index.html",
+      "product-thinking/index.html",
+      "product-thinking/translations/index.html",
+      "product/index.html",
+      "psychological-safety-in-scrum-teams/2026.1/index.html",
+      "psychological-safety-in-scrum-teams/history/index.html",
+      "psychological-safety-in-scrum-teams/index.html",
+      "psychological-safety-in-scrum-teams/translations/index.html",
+      "pt/foundation/index.html",
+      "pt/framework/index.html",
+      "pt/index.html",
+      "pt/pt/scrum-guide-expansion-pack/2025.6/index.html",
+      "pt/pt/scrum-guide-expansion-pack/index.html",
+      "pt/scrum-guide-expanded/2025.6/index.html",
+      "pt/scrum-guide-expanded/2026.1/index.html",
+      "pt/scrum-guide-expanded/index.html",
+      "scrum-foundations/index.html",
+      "scrum-guide-expanded/2025.6/index.html",
+      "scrum-guide-expanded/2026.1/index.html",
+      "scrum-guide-expanded/history/index.html",
+      "scrum-guide-expanded/index.html",
+      "scrum-guide-expanded/translations/index.html",
+      "scrum-guide-expansion-pack/2025.6/index.html",
+      "scrum-guide-expansion-pack/index.html",
+      "scrum-on-one-page/2026.1/index.html",
+      "scrum-on-one-page/history/index.html",
+      "scrum-on-one-page/index.html",
+      "scrum-on-one-page/translations/index.html",
+      "software-engineering-practices/2026.1/index.html",
+      "software-engineering-practices/history/index.html",
+      "software-engineering-practices/index.html",
+      "software-engineering-practices/translations/index.html",
+      "strategy-as-an-empirical-capability/2026.1/index.html",
+      "strategy-as-an-empirical-capability/history/index.html",
+      "strategy-as-an-empirical-capability/index.html",
+      "strategy-as-an-empirical-capability/translations/index.html",
+      "strategy-product/index.html",
+      "teams/index.html",
+      "technical-excellence/index.html",
+      "topics/index.html",
+      "translations/index.html",
+      "value/index.html"
+    ],
+    "downloads": [
+      {
+        "path": "adaptive-enterprise/2026.1/pdf/adaptive-enterprise.2026.1.en.pdf",
+        "sha256": "e25b22bf025edfae8df23d80919d1f0e64cba6a2a7273062fe9152c6db967cb2",
+        "bytes": 107958
+      },
+      {
+        "path": "adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.en.pdf",
+        "sha256": "87b93eece2e9e3e508bc8bef2e4936e236c1046709d5adfcf467c83f8d0827d8",
+        "bytes": 103894
+      },
+      {
+        "path": "ai-and-scrum/2026.1/pdf/ai-and-scrum.2026.1.en.pdf",
+        "sha256": "5a34076f54bc6444825fdc245ff26e718dee186e257beb7b1047f1be0d3625c8",
+        "bytes": 154259
+      },
+      {
+        "path": "complexity/2026.1/pdf/complexity.2026.1.en.pdf",
+        "sha256": "e0ce8af4f318ca1b2611e2703ba6aa9fc4deeea3483e425d0c759d607ffb8952",
+        "bytes": 88048
+      },
+      {
+        "path": "emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.en.pdf",
+        "sha256": "7e2b647976671b7ef7581b5fe37d31ea6e2472b798c93215daac3536f487dc4f",
+        "bytes": 128463
+      },
+      {
+        "path": "es/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.es.pdf",
+        "sha256": "9098b74d73183820f47f69556b551a4f14cdd0a3849dbc6d6539fc00a2337ee8",
+        "bytes": 322442
+      },
+      {
+        "path": "fa/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.fa.pdf",
+        "sha256": "a02fd9730fee2dd502fbb089fc300d6f77d5f3e332aa2b8cc54b240d67312a63",
+        "bytes": 337147
+      },
+      {
+        "path": "holistic-testing/2026.1/pdf/holistic-testing.2026.1.en.pdf",
+        "sha256": "87a212d93ef27860fe135acc4312901d988511e0c7b5a59a20e3d17d3f084435",
+        "bytes": 655760
+      },
+      {
+        "path": "ja/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ja.pdf",
+        "sha256": "e588a1a818568bf615bb7058f29110dee34aa4b9f80ce0a4c09e6befff5cb589",
+        "bytes": 1031730
+      },
+      {
+        "path": "multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.en.pdf",
+        "sha256": "b69890c60c57deb3251ca927522d0b40e3814682bf4193c3d19b9fcadc7c3ae0",
+        "bytes": 85531
+      },
+      {
+        "path": "operating-models/2026.1/pdf/operating-models.2026.1.en.pdf",
+        "sha256": "97bad3d3696f1aad2e253db39cacc4562c7941ca9af1ae6808508efdff792046",
+        "bytes": 182680
+      },
+      {
+        "path": "pl/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.pl.pdf",
+        "sha256": "0ad4e488e5c4d9b47ffff89b4873d3c3e6339cfc0c81efc28a153b92579050e6",
+        "bytes": 305327
+      },
+      {
+        "path": "planguage/2026.1/pdf/planguage.2026.1.en.pdf",
+        "sha256": "782fa2af27d8685c0f4d85948bdbe83d0fdcb25d269b1c154338197c1a9562d5",
+        "bytes": 480681
+      },
+      {
+        "path": "product-thinking/2026.1/pdf/product-thinking.2026.1.en.pdf",
+        "sha256": "dc10229bb6922dd05fe716f7d68a32d1291b9da5a86bd3e018bdc8627a1d2fac",
+        "bytes": 203796
+      },
+      {
+        "path": "psychological-safety-in-scrum-teams/2026.1/pdf/psychological-safety-in-scrum-teams.2026.1.en.pdf",
+        "sha256": "0e120edaac09ea965248570505cd465da8d6ac2b0a76be62e15d29d13cf9bdfe",
+        "bytes": 125122
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en-us.pdf",
+        "sha256": "d0a805231a91ef67354789042d62f00211b1d69e2b7479cb52469f9b63366dcf",
+        "bytes": 788104
+      },
+      {
+        "path": "scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en.pdf",
+        "sha256": "2513d629f9a79025b03b280423eb938724022faa28bf76ddd60324584dea468e",
+        "bytes": 809352
+      },
+      {
+        "path": "scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.en.pdf",
+        "sha256": "4303da0c2a7590a6d58bc6452f49960fc1a232181f2d22a17c771574ff22793b",
+        "bytes": 229010
+      },
+      {
+        "path": "scrum-on-one-page/2026.1/pdf/scrum-on-one-page.2026.1.en.pdf",
+        "sha256": "f2d8d05f887141ca725997e869cf68ccf23414610c82db968011f9f25e4318ac",
+        "bytes": 99610
+      },
+      {
+        "path": "software-engineering-practices/2026.1/pdf/software-engineering-practices.2026.1.en.pdf",
+        "sha256": "b4d42263888b2eebbc02fb73e3cec08e8ba385a010c3f6b6520ff0cc8fc231cb",
+        "bytes": 189741
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy-as-an-empirical-capability.2026.1.en.pdf",
+        "sha256": "880e512073b2c9ef68e30c7d2f808a72925a058119f18b589116c7eabcf09bc0",
+        "bytes": 186235
+      },
+      {
+        "path": "strategy-as-an-empirical-capability/2026.1/pdf/strategy.2026.1.en.pdf",
+        "sha256": "973d29d71d663d1cd522cb1283d5c28edc4e2cc0fc9789d20902144070a5bb56",
+        "bytes": 153626
+      }
+    ],
+    "wrapperOverrides": [
+      "layouts/index.html",
+      "layouts/robots.txt",
+      "layouts/categories/list.html",
+      "layouts/creators/list.html",
+      "layouts/creators/single.html",
+      "layouts/_markup/render-blockquote.html",
+      "layouts/_markup/render-image.html",
+      "layouts/_partials/components/category-list.html",
+      "layouts/_partials/components/core-guide-list.html",
+      "layouts/_partials/components/extensions-guide-list.html",
+      "layouts/_partials/components/home-hero.html",
+      "layouts/_partials/components/guide/guide-contributors-with-icon.html",
+      "layouts/_partials/functions/is-expansion.html"
+    ]
+  }
+]
