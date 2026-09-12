@@ -21,3 +21,11 @@ It uses [Hugo](https://gohugo.io/) to generate a static site, which can be deplo
 - [Kanban Guides](https://kanbanguides.org) – [GitHub](https://github.com/KanbanGuides/KanbanGuides)
 - [Scrum Expansion Pack](https://scrumexpansion.org) – [GitHub](https://github.com/ScrumGuides/ScrumGuide-ExpansionPack)
 - [Safe Delusion](https://safedelusion.com) –
+
+## Platform development layout
+
+The rendering module is in `system/OpenGuidePlatform.Hugo.Guides/`; the self-contained example is in `examples/reference-guide-site/`. The module identity and historical release tags have not been renamed yet. Consumer guide content and bespoke wrappers remain in their own repositories.
+
+Build the example with `hugo --source examples/reference-guide-site --config hugo.yaml,hugo.local.yaml`. Run structural contract checks with `pwsh -File .build/Test-PlatformContracts.ps1`.
+
+A site wraps a collection of guides with no platform-defined maximum. One, two and fifteen guides are current consumer examples, not supported-count limits. A 128-guide fixture exercises the same schema. No guide is selected by an ordinal position or a hard-coded current consumer count.
