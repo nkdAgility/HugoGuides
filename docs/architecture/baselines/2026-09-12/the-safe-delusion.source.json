@@ -1,0 +1,342 @@
+[
+  {
+    "path": ".gitattributes",
+    "sha256": "f80dcc94402f38c7b9be9d27d83a5f3010189ba041cdc5f27094480b4f909d0d",
+    "bytes": 13
+  },
+  {
+    "path": ".github/GitVersion.yml",
+    "sha256": "d1025effb080d19cebdef22e82642a470c87616b181d585d961f255f9cf1fc87",
+    "bytes": 668
+  },
+  {
+    "path": ".github/spellcheck.yml",
+    "sha256": "2c15c495ac54579a8a85f393bf0eb40473e31680a736223342283677f6d58fc9",
+    "bytes": 526
+  },
+  {
+    "path": ".github/workflows/close-pr.yaml",
+    "sha256": "018c46e2d5571cf48a8e3972ea2163f3f98f56285edf01e05a4bf0a5baf3337b",
+    "bytes": 813
+  },
+  {
+    "path": ".github/workflows/main.yaml",
+    "sha256": "c054ee4c95e1eba089c18f7cd6931417f7339d722cc6d258a238d57dc9e8d518",
+    "bytes": 13766
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "bacf3bfd7cfb4377c45823e160f41573314ee21de56955835108f8112a95e5d5",
+    "bytes": 100
+  },
+  {
+    "path": ".hugo_build.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": ".prettierrc",
+    "sha256": "479d3181c5fcbac731818a78fc75c6fa78b55b3904cd7dd7b8e81903d50695f1",
+    "bytes": 292
+  },
+  {
+    "path": ".sitepins/config.json",
+    "sha256": "76e07305b653bda10d0fa5ce51bdc12d20a738b3521da8c971ae61f9f5e11541",
+    "bytes": 236
+  },
+  {
+    "path": ".spellcheck.yml",
+    "sha256": "2c15c495ac54579a8a85f393bf0eb40473e31680a736223342283677f6d58fc9",
+    "bytes": 526
+  },
+  {
+    "path": ".wordlist.txt",
+    "sha256": "47448d150f3b48c8a364ca5214e037a6bb0c78f129761bb462cff7a5e628f9ab",
+    "bytes": 40
+  },
+  {
+    "path": "CLAUDE.md",
+    "sha256": "46b15e3f8b48b263409bb1fc1c75bc2586c9f67bdf52a55ac497982c868b9f6a",
+    "bytes": 4936
+  },
+  {
+    "path": "LICENCE",
+    "sha256": "cbd5af318286b74656f145dff5091907cc23d6d8c9ad09e0291ec2497792ba41",
+    "bytes": 19051
+  },
+  {
+    "path": "PLAN.md",
+    "sha256": "a94ea9bbba9aaca1b950e0a608c4a3f315fa51a84ec69cf93d8937516f27797b",
+    "bytes": 8399
+  },
+  {
+    "path": "README.md",
+    "sha256": "c7c010e36aabb429871ca82b627792e3fadcd7c0e94c32b977557de492104346",
+    "bytes": 85
+  },
+  {
+    "path": "site/.hugo_build.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "site/content/_index.md",
+    "sha256": "f53b5e507db9c314e3e02a38808883963bd2cd1b1b7826234f3eb35d3963f224",
+    "bytes": 536
+  },
+  {
+    "path": "site/content/about/index.md",
+    "sha256": "3873dbc41f60ed374193fad0653c07a3ec75e04b8e724515fc4c5917b496d4c5",
+    "bytes": 4232
+  },
+  {
+    "path": "site/content/brief/index.md",
+    "sha256": "8c2459baa488cb4e6e717b7711aed44a12507846ee8a84358a8113df5800adf3",
+    "bytes": 5838
+  },
+  {
+    "path": "site/content/getting-out/index.md",
+    "sha256": "579bd228c463cc4158f44ae5a2f1820fe3c26f42c7a7f355b58749c6ba4e8499",
+    "bytes": 10585
+  },
+  {
+    "path": "site/content/objections/index.md",
+    "sha256": "1dd695e2644a39c49993270f937bac091b34028ad0d6d94b5c2505592a79e707",
+    "bytes": 3820
+  },
+  {
+    "path": "site/content/right-of-reply/index.md",
+    "sha256": "6d346639a61509bbaa462745a444927fa24153eaac661fe8f3716688946bd94c",
+    "bytes": 2212
+  },
+  {
+    "path": "site/content/safe-decision-makers/_index.md",
+    "sha256": "9d0ab52c39c4509b032f2900dc8f278772b3a5a2d77dbc3b9bfbfda248994506",
+    "bytes": 2243
+  },
+  {
+    "path": "site/content/safe-decision-makers/2024.8/index.md",
+    "sha256": "1264a3ff01452964ba8d2c9384c43ff6da193c55915469af4c2a0c20ad207b53",
+    "bytes": 68150
+  },
+  {
+    "path": "site/content/safe-decision-makers/2024.8/pdf/safe-decision-makers.2024.8.en.pdf",
+    "sha256": "55700314e692cd7e2c6a06ed17ff6630e773a542261ee0b26dbe63cdf7eb3c41",
+    "bytes": 799839
+  },
+  {
+    "path": "site/content/safe-decision-makers/history/index.md",
+    "sha256": "ba685cd3b68c83dd458aa26e7820a4fe1c06eca89dff706069ad96d8c76a0607",
+    "bytes": 688
+  },
+  {
+    "path": "site/content/safe-decision-makers/translations/index.md",
+    "sha256": "1e941e9ad90b2cf52fe7dc796fec29d18d79b2ef605d010a600687d03a62cc42",
+    "bytes": 190
+  },
+  {
+    "path": "site/data/contributions/safe-decision-makers.yml",
+    "sha256": "37604ee87b6367ba3163c145e37152df335d9ca8876450c23710a12d9e8baa9e",
+    "bytes": 1508
+  },
+  {
+    "path": "site/go.mod",
+    "sha256": "026fb269aafced9cc1fb9380ddafcdf8c4a63b984ebfdc31dedc0785876805e1",
+    "bytes": 136
+  },
+  {
+    "path": "site/go.sum",
+    "sha256": "f079a84dc6d6610becee61fc01c3a088af91ad9a130f866a73ed46099af4b4fc",
+    "bytes": 1194
+  },
+  {
+    "path": "site/hugo.canary.yaml",
+    "sha256": "1a11fbe3bd324a0b5f324c5b77e65e0a944b9db6e4c1295346cc4de54e224a4b",
+    "bytes": 105
+  },
+  {
+    "path": "site/hugo.local.yaml",
+    "sha256": "219fabafb8df379a09cc23131660d60d6668e202d1b3b5ec9cbeb7165a4d2f71",
+    "bytes": 113
+  },
+  {
+    "path": "site/hugo.preview.yaml",
+    "sha256": "4d061d6dc56d43385d2d1ba5a3e051b6c4476333744d2ad540c5bb221923923e",
+    "bytes": 127
+  },
+  {
+    "path": "site/hugo.production.yaml",
+    "sha256": "61be02f46d3d37160ee86556ad242297a089f1879cab53eb4a32fd0762d2e561",
+    "bytes": 151
+  },
+  {
+    "path": "site/hugo.yaml",
+    "sha256": "d56f06d300045449d0375c6e51a96235c0a3b937201c57c64725b2904551a283",
+    "bytes": 3308
+  },
+  {
+    "path": "site/i18n/en.yaml",
+    "sha256": "ae558a77984bcdb8ef1fa86f1566bca190f17f75e8a06219d55a66c956f65bc7",
+    "bytes": 13014
+  },
+  {
+    "path": "site/layouts/_partials/components/breadcrumbs.html",
+    "sha256": "f2f50ca7f6634c7d16ef63c6523a4b12c3838ceec9eb0df9512c711dcf6f66f1",
+    "bytes": 2164
+  },
+  {
+    "path": "site/layouts/_partials/components/main-menu.html",
+    "sha256": "23de82e97c80991e8d3ed9979b1b031d10b4b4e03dc3b7fb5fc8a15dc9de6220",
+    "bytes": 1638
+  },
+  {
+    "path": "site/layouts/_partials/components/site-styles.html",
+    "sha256": "4135cf03d61bdd0ff5cca87bfc392ee92da34df286db6bd7416c6836aeb15d0c",
+    "bytes": 614
+  },
+  {
+    "path": "site/layouts/_partials/components/skip-link.html",
+    "sha256": "c14e10664c11f02be7d72dd79961d3003dac0818256d4de72b3b06e2109bc734",
+    "bytes": 969
+  },
+  {
+    "path": "site/layouts/_shortcodes/contradiction.html",
+    "sha256": "caa17d1f62808b7ec2efa2d007aca93f9cdb8da4e58b75be1ba66fcbdee42465",
+    "bytes": 456
+  },
+  {
+    "path": "site/layouts/_shortcodes/editor.html",
+    "sha256": "3307de4f37fcf7d5320b15dac43e0495e951be0bfffeb16a0e39876798944e71",
+    "bytes": 518
+  },
+  {
+    "path": "site/layouts/_shortcodes/src.html",
+    "sha256": "f69fd03dd1030a8dc92d6cc736e1dc89315aed8d885392f7d520a7e887ad5efe",
+    "bytes": 1129
+  },
+  {
+    "path": "site/layouts/index.html",
+    "sha256": "425d942c2fa61063fadfb3978f72eb69b89380493cc7d33ec8137fc299078c9d",
+    "bytes": 8977
+  },
+  {
+    "path": "site/layouts/old.index.html",
+    "sha256": "75f5b731c6a99e5864893d7fdc39f0228ed4d81511ed2f9cbd98be7c9874f43f",
+    "bytes": 93021
+  },
+  {
+    "path": "site/layouts/robots.txt",
+    "sha256": "78059a7a9f32909fa230ca5b34040e229bab8e28e2540290d62f728b3cb7a9f3",
+    "bytes": 199
+  },
+  {
+    "path": "site/layouts/sitemap.xml",
+    "sha256": "8a8c4ea6d0e44ad0b7c53fec790fa776865b08bf180cf7e60eb6fb458018a621",
+    "bytes": 1547
+  },
+  {
+    "path": "site/layouts/wrapper/single.html",
+    "sha256": "47c3846aaa888c90a62bbb1e7b837bdf4bfafa8dbbc321c6849dfad3292466e5",
+    "bytes": 3468
+  },
+  {
+    "path": "site/static/apple-touch-icon-114x114.png",
+    "sha256": "3564fb6f09f77be94a861beee94982272e88c906a967f0d6d33247362e398119",
+    "bytes": 17709
+  },
+  {
+    "path": "site/static/apple-touch-icon-120x120.png",
+    "sha256": "12c2e4e0c51526839f8e23935396cc2d9e9f8f0c98eff9ced2e2d67fab166752",
+    "bytes": 19346
+  },
+  {
+    "path": "site/static/apple-touch-icon-144x144.png",
+    "sha256": "020ee8c51d09c2d06e042fcb6de6f39e8ab6243f0821edffc513503af8099330",
+    "bytes": 25667
+  },
+  {
+    "path": "site/static/apple-touch-icon-152x152.png",
+    "sha256": "0fe3282f7d4eba06634f8daa5d208243f23e422f5b79a36aa8a93c214552a6ac",
+    "bytes": 28002
+  },
+  {
+    "path": "site/static/apple-touch-icon-180x180.png",
+    "sha256": "eb50447a63e99caa528108f8f34829cc41508935b7a175ef3f9f705f6c6a9b51",
+    "bytes": 35957
+  },
+  {
+    "path": "site/static/apple-touch-icon-57x57.png",
+    "sha256": "4f9702a99c7763b1c62d2eddbdcab5872993b29dab10200ea2b6c13055b86a21",
+    "bytes": 6255
+  },
+  {
+    "path": "site/static/apple-touch-icon-72x72.png",
+    "sha256": "3921c48b32279408c00655a0b463f9d9573f42c186132752a28b205cd5c0b4df",
+    "bytes": 8898
+  },
+  {
+    "path": "site/static/apple-touch-icon-76x76.png",
+    "sha256": "802563cd1d937d532293f15854605ab98faf23dbdd48c90ed6c8e51a362a507e",
+    "bytes": 9618
+  },
+  {
+    "path": "site/static/apple-touch-icon.png",
+    "sha256": "eb50447a63e99caa528108f8f34829cc41508935b7a175ef3f9f705f6c6a9b51",
+    "bytes": 35957
+  },
+  {
+    "path": "site/static/css/site.css",
+    "sha256": "eb1ec63164ba8fe9121d31e79b863b59938e873163dff8781fb5e9d002c39a71",
+    "bytes": 21559
+  },
+  {
+    "path": "site/static/favicon.ico",
+    "sha256": "065af7f94d3ac53ca878b7296783b7a1c4ed9d81b3b8a76e051dc17559e718b6",
+    "bytes": 32038
+  },
+  {
+    "path": "site/static/images/logo.png",
+    "sha256": "286d3a62b98ad99dab9083b4632832abeb15d9be323dee64302c3c9dffc282d3",
+    "bytes": 256276
+  },
+  {
+    "path": "site/static/images/og-image.jpg",
+    "sha256": "fad75f37ae6e8d887156410d02664629a85a98527ada1d1f465e6c40a5da4c10",
+    "bytes": 65559
+  },
+  {
+    "path": "site/static/images/safe-delusion-icon.png",
+    "sha256": "1f26100f7db962470d36444ce622e4fe44044d345e6d9626384f2d933762705f",
+    "bytes": 18033
+  },
+  {
+    "path": "site/static/images/safe-delusion-logo.png",
+    "sha256": "286d3a62b98ad99dab9083b4632832abeb15d9be323dee64302c3c9dffc282d3",
+    "bytes": 256276
+  },
+  {
+    "path": "static/sitepins-manifest.json",
+    "sha256": "46edcd5c65f42f9416aa05288327f2decf8a1dba317d77b774b8c15c13c8cfa6",
+    "bytes": 240
+  },
+  {
+    "path": "staticwebapp.config.canary.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.json",
+    "sha256": "4bb474aca7084081018c08e1d659a095c56af5f1e4cc8831167083f4352d5123",
+    "bytes": 341
+  },
+  {
+    "path": "staticwebapp.config.preview.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.production.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  }
+]

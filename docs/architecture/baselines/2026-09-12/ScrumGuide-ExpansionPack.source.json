@@ -1,0 +1,1542 @@
+[
+  {
+    "path": ".gitattributes",
+    "sha256": "f80dcc94402f38c7b9be9d27d83a5f3010189ba041cdc5f27094480b4f909d0d",
+    "bytes": 13
+  },
+  {
+    "path": ".github/CODEOWNERS",
+    "sha256": "9eb2bc9bebced8bd61be7f68aa2e2bcd45eeb2cee8ffbc7df09319de69e3d089",
+    "bytes": 1836
+  },
+  {
+    "path": ".github/copilot-instructions.md",
+    "sha256": "afa6c16ce70581cb66ea4d46a79625f8f513a6cc664c72d28f6c9f860bf12a07",
+    "bytes": 8088
+  },
+  {
+    "path": ".github/GitVersion.yml",
+    "sha256": "7015afcb312025c1e2532b81c781002e40fb3d9d225de8c184976b2baa584214",
+    "bytes": 663
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/config.yml",
+    "sha256": "5bb9719cb2c3a0653cc37941d1d8341ff590fc023bf3cab754983104a0ec5d1a",
+    "bytes": 265
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/guide-change.yml",
+    "sha256": "946abe07fad3091b43929ea4b090ed33a52bc046d3aa5bec95d078e4ee6a68f5",
+    "bytes": 6913
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/new-translation.yml",
+    "sha256": "d9ecd3667e5ecdb3c6bfccac2331f8d3c846daa9e8bf15de1812aa54175f8633",
+    "bytes": 8122
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/translation-error.yml",
+    "sha256": "646a7af2ddf2ef6aa05fbbb99498b71e6144af54a49fd0a94d462de822f4d691",
+    "bytes": 3529
+  },
+  {
+    "path": ".github/workflows/azure-static-web-apps-agreeable-island-0c966e810.yml",
+    "sha256": "5e6c6f6fc74f3a1331c9047c4700cefea3456bbd1a46a4582fc82c32d9e3a7fe",
+    "bytes": 3350
+  },
+  {
+    "path": ".github/workflows/close-pr.yaml",
+    "sha256": "593687e78b61db2abfc354ec4f2d0761b076d096c74335176e30e352a0e7472c",
+    "bytes": 629
+  },
+  {
+    "path": ".github/workflows/copilot-setup-steps.yml",
+    "sha256": "2e8b633a6e52acdb3b13486dad430c6d25de7c8c62f127f4a7446851427a6733",
+    "bytes": 778
+  },
+  {
+    "path": ".github/workflows/discussion-tag-external-edits.yml",
+    "sha256": "b61a2ae1b6f7b8f1d56cf1da395b24ecb46699e03783de9d7f7fea70bc81f819",
+    "bytes": 6352
+  },
+  {
+    "path": ".github/workflows/docs-to-wiki.yml",
+    "sha256": "94dbff9babbe934b715bbc848ceeb85b515851a6dc1d1981dd51a9be095360b1",
+    "bytes": 2225
+  },
+  {
+    "path": ".github/workflows/main.yaml",
+    "sha256": "dc2964b5b0254c51514a82d83c0e45007a5762b3e34bae2147e7b62bd3b90f43",
+    "bytes": 15913
+  },
+  {
+    "path": ".github/workflows/stale-issues.yml",
+    "sha256": "500cec6bc4e54d85e13120b655cc08506bae4e7f59fe24fe5a29c628b9ae3625",
+    "bytes": 1896
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "c0b46ddedbcfd2f6a6d543873842e5f710f867682228140ccd6398cca65288a9",
+    "bytes": 283
+  },
+  {
+    "path": ".prettierrc",
+    "sha256": "479d3181c5fcbac731818a78fc75c6fa78b55b3904cd7dd7b8e81903d50695f1",
+    "bytes": 292
+  },
+  {
+    "path": ".vscode/settings.json",
+    "sha256": "b58dce9892b4bd419f4e78fc01984d80610963aedea4257f5abf3c3c546b4b4d",
+    "bytes": 607
+  },
+  {
+    "path": "agents.md",
+    "sha256": "783e967e26791bd5a95060afa81b09a2d37a68743c1e449ffa66c1ad3202d7b1",
+    "bytes": 26937
+  },
+  {
+    "path": "CODE_OF_CONDUCT.md",
+    "sha256": "e3cd9ea6ecce9a897cd5eb21a25fd80033ed5a63fb323a9f814949e1988c4738",
+    "bytes": 4460
+  },
+  {
+    "path": "docker/docker-compose.yml",
+    "sha256": "863060f14dd8f946da35f54f135acff5df9a4c440a75ec5071f541ef53aa8dae",
+    "bytes": 164
+  },
+  {
+    "path": "docs/architecture.md",
+    "sha256": "c450d93334e1cf9cbe4e3f059a9409b1fc3ff96dd10673ae0f2798ce108bc754",
+    "bytes": 11668
+  },
+  {
+    "path": "docs/configuration.md",
+    "sha256": "bcc2af39d45df834ee7a7a96ae73abb18cefc69bc049a803ce7620e2afb322a0",
+    "bytes": 14364
+  },
+  {
+    "path": "docs/content-management.md",
+    "sha256": "d4b3ffc15116e12859bb9e36ccfa11ec11b540d710194076d4d9ba59977f7707",
+    "bytes": 24503
+  },
+  {
+    "path": "docs/contributing.md",
+    "sha256": "4173e949e2af4980669e116e599ebc4b9c5adcaef791c0ba9350c493269caa1b",
+    "bytes": 13691
+  },
+  {
+    "path": "docs/deployment.md",
+    "sha256": "735ba780b705d7364ec37c09dd3b72b73bf86b6e7981c584deec57564b6d819b",
+    "bytes": 21161
+  },
+  {
+    "path": "docs/development.md",
+    "sha256": "fb324f9b02f567a65155045531d634d11661dc54810e8983bb350be9cd8cee3c",
+    "bytes": 17206
+  },
+  {
+    "path": "docs/getting-started.md",
+    "sha256": "2858d34a343486cee90d1131dbd4ae50d2ce120d70e0285834d0fbe3a8a74f8b",
+    "bytes": 10076
+  },
+  {
+    "path": "docs/maintainer-guide.md",
+    "sha256": "e545afb0553a06e8e3c0a295d382086ee8683e8a87d09bfe6976441a47e824a0",
+    "bytes": 32013
+  },
+  {
+    "path": "docs/README.md",
+    "sha256": "1752e31822ca8b3f111b82dd6007cc3dc8ade30c67ef398e76dcc86884fc34cc",
+    "bytes": 5117
+  },
+  {
+    "path": "docs/simple-pdf-generation.md",
+    "sha256": "4bc0239fda0986e080a9bf68fd6a20da45f5798084844417e43c09afa4225497",
+    "bytes": 9897
+  },
+  {
+    "path": "docs/translations-code-of-conduct.md",
+    "sha256": "6c65bbe6104af18b223f049bcf8f08ad54110e710b607c9d9d1d627c0079338a",
+    "bytes": 13371
+  },
+  {
+    "path": "docs/translations.md",
+    "sha256": "12c0853a9123694b8c6bea7246d28c8d5fb38b60bbac019956be3b0fe33f5cd7",
+    "bytes": 12633
+  },
+  {
+    "path": "docs/troubleshooting.md",
+    "sha256": "273c244d5fd577762d9b77cf87983a65c6e67715f3f7f5a4aae627932c009266",
+    "bytes": 12325
+  },
+  {
+    "path": "LICENSE",
+    "sha256": "db67f1025b94e7c0de22022d5c1f9e23c965ebbfc327e4a248c8352ac9d73ceb",
+    "bytes": 1104
+  },
+  {
+    "path": "package-lock.json",
+    "sha256": "10032e6b094595b711ed0ee1ebef1da4d2ea2e6354cb29feb94b2595e89cf550",
+    "bytes": 1703
+  },
+  {
+    "path": "package.json",
+    "sha256": "cf609bcd3d017117707b75d35b0d3fdf867411e069d5d0e63f9f3b1a7bb449b9",
+    "bytes": 108
+  },
+  {
+    "path": "readme.md",
+    "sha256": "f998e95dd51067fd9cf1aafe65cd096f9bef5e0bb761f07deb2119e5541e69fa",
+    "bytes": 14095
+  },
+  {
+    "path": "scripts/callouts-header.tex",
+    "sha256": "8a27335c551a35372fb44e873607f17f3249549ad130b8791e3229017dacd143",
+    "bytes": 647
+  },
+  {
+    "path": "scripts/callouts-latex.lua",
+    "sha256": "737b69a12af459278785fbb0ef0a2dab2086bc58bbaa39179870cd7921910c8c",
+    "bytes": 5097
+  },
+  {
+    "path": "scripts/callouts.lua",
+    "sha256": "bc9c58f1bd8f667ed4ab935e9a4aea67e9804872c567b83ff7db2d83fc8d9caf",
+    "bytes": 1591
+  },
+  {
+    "path": "scripts/cover-page.tex",
+    "sha256": "d8d05103496c18e7afe8f217f650e086900fbdcd16ad75e75138149bddf68ad0",
+    "bytes": 730
+  },
+  {
+    "path": "scripts/Create-GuidePDFs.ps1",
+    "sha256": "281552df7f2011459489a96b9d790bb705ce0166b7b865010c0891197bf1d308",
+    "bytes": 7660
+  },
+  {
+    "path": "site/.hugo_build.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "site/assets/css/style.css",
+    "sha256": "56a55b1d0c704af57195be18d7bc83b71f784bb78745169435cf5fcc317435ef",
+    "bytes": 10474
+  },
+  {
+    "path": "site/content/_index.es.md",
+    "sha256": "c6471312aa2d8bc3706cba360a0b20ac3005150427c81cf9ebfd6c46f4dd0065",
+    "bytes": 146
+  },
+  {
+    "path": "site/content/_index.it.md",
+    "sha256": "09f4d66a5bd97e6b00346afc6d3937a92271908f418a1d11f6826c998e6c3d6d",
+    "bytes": 156
+  },
+  {
+    "path": "site/content/_index.ja.md",
+    "sha256": "ed79b023c3e7a1b1f5c9a47fba8b9b35a14f5ff90322b81afe8acdbd9f2d7491",
+    "bytes": 249
+  },
+  {
+    "path": "site/content/_index.md",
+    "sha256": "7b8bc55341c1de429e0ed4869431c8cfb277c27992ad9f80cfc6cd04c8f623c5",
+    "bytes": 226
+  },
+  {
+    "path": "site/content/_index.ro.md",
+    "sha256": "9eadcd97511792f9b6d2d40073415e8302d22436d0802b549087df53c322c1ae",
+    "bytes": 143
+  },
+  {
+    "path": "site/content/adaptive-enterprise/_index.md",
+    "sha256": "ffc3a78b3e07fe496afe506ff882bbe48a165b4128c082db4b472a2e946b76de",
+    "bytes": 856
+  },
+  {
+    "path": "site/content/adaptive-enterprise/2026.1/index.md",
+    "sha256": "c7b65076bd38ce73fe7af65828b103f116d5f3e05ff57b300200b9fca2dd6203",
+    "bytes": 13354
+  },
+  {
+    "path": "site/content/adaptive-enterprise/2026.1/pdf/adaptive-enterprise.2026.1.en.pdf",
+    "sha256": "e25b22bf025edfae8df23d80919d1f0e64cba6a2a7273062fe9152c6db967cb2",
+    "bytes": 107958
+  },
+  {
+    "path": "site/content/adaptive-enterprise/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/adaptive-enterprise/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/adaptive-executive/_index.md",
+    "sha256": "e938e5d9506eba2dbd40296e41ea70b6570d858e1f028f4741fdd13dbb8dc030",
+    "bytes": 800
+  },
+  {
+    "path": "site/content/adaptive-executive/2026.1/index.it.md",
+    "sha256": "40670d71972c73b1defef9aa46d99c89f0259007a12e95c3eb882253393f2b80",
+    "bytes": 22132
+  },
+  {
+    "path": "site/content/adaptive-executive/2026.1/index.md",
+    "sha256": "6885c478e332af7d2713dad0466e0f728b8c0a95b00aebf25a37729e81add2cc",
+    "bytes": 19195
+  },
+  {
+    "path": "site/content/adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.en.pdf",
+    "sha256": "87b93eece2e9e3e508bc8bef2e4936e236c1046709d5adfcf467c83f8d0827d8",
+    "bytes": 103894
+  },
+  {
+    "path": "site/content/adaptive-executive/2026.1/pdf/adaptive-executive.2026.1.it.pdf",
+    "sha256": "0a6294c3a58ce58db78ca0b2b7ad10f01ff212f8dbe366a2649b56a6f20be30e",
+    "bytes": 125149
+  },
+  {
+    "path": "site/content/adaptive-executive/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/adaptive-executive/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/ai-and-scrum/_index.md",
+    "sha256": "b31568540507fb6b4217a7ca0bafc684ff6002ce2f0f34c08fe62a6c0ff5e130",
+    "bytes": 499
+  },
+  {
+    "path": "site/content/ai-and-scrum/2026.1/index.md",
+    "sha256": "4dc4f4163ee3e76c1d56f68b0e37cbbffc6a306f3e96f8b1cfc915fb0eda711b",
+    "bytes": 48675
+  },
+  {
+    "path": "site/content/ai-and-scrum/2026.1/pdf/ai-and-scrum.2026.1.en.pdf",
+    "sha256": "5a34076f54bc6444825fdc245ff26e718dee186e257beb7b1047f1be0d3625c8",
+    "bytes": 154259
+  },
+  {
+    "path": "site/content/ai-and-scrum/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/ai-and-scrum/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/categories/leadership/_index.md",
+    "sha256": "cf53ef9a53ed381c2b2229bcfa455c8dfaec4042ca785d461ff53306884b661f",
+    "bytes": 49
+  },
+  {
+    "path": "site/content/categories/leadership/_index.tlh.md",
+    "sha256": "8699422dbf15c91af605af2cb9cd0010987f890c873b710c137a8069553cd453",
+    "bytes": 45
+  },
+  {
+    "path": "site/content/complexity/_index.md",
+    "sha256": "875ae63d58cb85d2e5a81e6762ede21cb2b2fff4c89e3347827d8bdf9dc01f68",
+    "bytes": 710
+  },
+  {
+    "path": "site/content/complexity/2026.1/index.it.md",
+    "sha256": "3080d2cc6f73a893e5c2cd8f7f6b3774bfba1a655f265f1da2b17ae47512aa2e",
+    "bytes": 14833
+  },
+  {
+    "path": "site/content/complexity/2026.1/index.md",
+    "sha256": "4d4b51e94f672ad0ac7448697b95532a3e79fc7219dd2a8a9b8d52af49b27033",
+    "bytes": 11196
+  },
+  {
+    "path": "site/content/complexity/2026.1/pdf/complexity.2026.1.en.pdf",
+    "sha256": "e0ce8af4f318ca1b2611e2703ba6aa9fc4deeea3483e425d0c759d607ffb8952",
+    "bytes": 88048
+  },
+  {
+    "path": "site/content/complexity/2026.1/pdf/complexity.2026.1.it.pdf",
+    "sha256": "36932f80fe1492f9443d304895de536aa94e6c2ea73ca8f69fe0c2ce77de6a09",
+    "bytes": 114736
+  },
+  {
+    "path": "site/content/complexity/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/complexity/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/creators/_index.es.md",
+    "sha256": "05c27ed4bc290e67837af3c88f70bb13acc4ccc01f600ac586485141d1f38c87",
+    "bytes": 57
+  },
+  {
+    "path": "site/content/creators/_index.fa.md",
+    "sha256": "3d8a4a4362120aa9206e831199744dbb1d955e0627b25596e9fd7d0763089376",
+    "bytes": 60
+  },
+  {
+    "path": "site/content/creators/_index.it.md",
+    "sha256": "5c18d5aa2b996ee428684b3993b095d2c01d2b48f72dae0d5157778a8842b4a7",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/creators/_index.ja.md",
+    "sha256": "b5409500edc27d6e57d8ecdfeec2be939dbec156a68aa1a94d600f746f3987c3",
+    "bytes": 83
+  },
+  {
+    "path": "site/content/creators/_index.md",
+    "sha256": "85a8edfe7266bda2a619fe17927a3ebcfbe155905dbf75f9cbac7d0484cf517f",
+    "bytes": 56
+  },
+  {
+    "path": "site/content/creators/_index.nl.md",
+    "sha256": "4d7c2c0acc2565afe9ccc9c85075623a90ff31245c67d09df6032afc795e71d5",
+    "bytes": 57
+  },
+  {
+    "path": "site/content/creators/_index.pl.md",
+    "sha256": "e75d8773a40169910298fb7aeb4e740c8bf50334c42968474ce7b5af7d898131",
+    "bytes": 53
+  },
+  {
+    "path": "site/content/creators/_index.ro.md",
+    "sha256": "5dc67f7e5e79fbe7f7babbf63dd97c2c5c94f4da5791f57672a8bae5912b815e",
+    "bytes": 56
+  },
+  {
+    "path": "site/content/creators/_index.tlh.md",
+    "sha256": "85a8edfe7266bda2a619fe17927a3ebcfbe155905dbf75f9cbac7d0484cf517f",
+    "bytes": 56
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.de.md",
+    "sha256": "196cd4c53e45886de73c3ad5fa595fe905bd953d2430813bb29084bf6c6fcf83",
+    "bytes": 3544
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.es.md",
+    "sha256": "16651474a7036f29ed036d723b325b46b4ec3131315634552b1c109686ef9ff3",
+    "bytes": 3523
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.fa.md",
+    "sha256": "de35e1f65ecd73a95773d5338dcb8eca93f6f8a5912c50d8e653b29a176e45e3",
+    "bytes": 5421
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.it.md",
+    "sha256": "d79e2176f73e408225f4beba3c8d7af74a95b45d877737477c9f29b485d6d710",
+    "bytes": 3605
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.ja.md",
+    "sha256": "290501dbf753bc375cbd693ff2ec5ca45e2e3b90718531771f3b92dac38b6e3a",
+    "bytes": 6900
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.md",
+    "sha256": "78592ae60533219970a7427327e9d4db6cadd809e35d7fe75c2c6d39dfb86dc6",
+    "bytes": 3345
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.nl.md",
+    "sha256": "00ad49697dc449786d8eab6e41c03d1329e80b557ee9bbee4f5dfa5271ca17ff",
+    "bytes": 3541
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.pl.md",
+    "sha256": "9b5aad5ebccc02d84299dfc3bf24359b2e34145c94ab3557af7edd425fe8b8c7",
+    "bytes": 3574
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/index.tlh.md",
+    "sha256": "f4c4c300a280b4c6e5987782513d08837a5b03fde426d55bf7111723c75decc5",
+    "bytes": 2100
+  },
+  {
+    "path": "site/content/creators/jeff-sutherland/jeff-sutherland.jpg",
+    "sha256": "25db46addef47568f99b72f6c844cde10c64748b9fb81e0d5fe634b99abe8899",
+    "bytes": 113624
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.de.md",
+    "sha256": "8be7b20f86afce9032c61c914977e4a8fe0c339abf56f7a9f0f4766032236292",
+    "bytes": 1759
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.es.md",
+    "sha256": "91442f11c70f3b2b22fde75bf41193491544ce59ec8e10e4788cd8e1b4466f90",
+    "bytes": 1769
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.fa.md",
+    "sha256": "07a09b369e8f675971043e86416284d1ed1917e1f408c0df2ff111ce0ccb2db3",
+    "bytes": 2574
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.it.md",
+    "sha256": "e517085eab3a1f2e253acac153f3b0398a9df4602ae13b96360b25965ef2702c",
+    "bytes": 1985
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.ja.md",
+    "sha256": "507497e7d86684bef6797f884d18b362b6b1ebb7bcc18f8d5c4466b72203a16c",
+    "bytes": 3775
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.md",
+    "sha256": "3fe8f44d7462e4b62dd562e9bb996e7048f9942fd446a2e4aa0c992848f07bca",
+    "bytes": 1649
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.nl.md",
+    "sha256": "f9409ae017954a58514ea9d750ed484c13e02e1cedbe435a2c70462172954f48",
+    "bytes": 1737
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.pl.md",
+    "sha256": "3149e9392736d919a887f43e46a0a80832023cb09fe7ea17a22d0faf27e3eb6b",
+    "bytes": 1883
+  },
+  {
+    "path": "site/content/creators/john-coleman/index.tlh.md",
+    "sha256": "8b8022f16a635fa2709605782d5b97ec62722c008e1b35af9642ef17276c9413",
+    "bytes": 1355
+  },
+  {
+    "path": "site/content/creators/john-coleman/john-coleman.png",
+    "sha256": "af380ab839647428d15ec4cd33edb73fce9d30b9ce07bce535578a9906e3b749",
+    "bytes": 7378
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.de.md",
+    "sha256": "2c61a733bebb0ce4006ff8f9912d33e7fd3b8839376b290dbe692caeea3c5727",
+    "bytes": 2919
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.es.md",
+    "sha256": "7c1a9e11c0855efc3f6317e3cfd823438f22be04439e20e7eaba2942993b38ba",
+    "bytes": 3067
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.fa.md",
+    "sha256": "518a96d9a378e9cb54127ea3d5bbf7c817eef761215499c1d0960846a621d7fa",
+    "bytes": 4328
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.it.md",
+    "sha256": "4e615ee53d521be58ad7d63cb7c0fd91bbf04f989ea37d5cefef560370454f8e",
+    "bytes": 3040
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.ja.md",
+    "sha256": "498d8e8496291d8d143f177447270d29d2d52cbdc634e8cb06c5fb94cadceca9",
+    "bytes": 5962
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.md",
+    "sha256": "843f72b568154ee354822ec1a5a5baaa132dfc1dcabe6cb697e2ebb6c99de6fc",
+    "bytes": 2693
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.nl.md",
+    "sha256": "7522a57a1bd1da73654c7f4ffd05779d6f972a026437787838631660c8b6fd9b",
+    "bytes": 2931
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.pl.md",
+    "sha256": "726d32c70ff8e6eafec2c55626cc81956ae8760561b69574698b1d70e8503d2d",
+    "bytes": 2944
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/index.tlh.md",
+    "sha256": "cb41b564e0d1313496a2f782026ab48f2483a32371e2633ed70bf7cb9d2d97c4",
+    "bytes": 1676
+  },
+  {
+    "path": "site/content/creators/ralph-jocham/ralph-jocham.jpg",
+    "sha256": "126294e3711f20f550228d611fe9c5bd1348f78a7f08383a853321017d04352a",
+    "bytes": 138457
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/_index.md",
+    "sha256": "d0139d0d471e9dd97677554684fa890f58e7514e7aed3ca89d64b5ba0261ba29",
+    "bytes": 656
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/2026.1/index.it.md",
+    "sha256": "b6d127f584455c31358479fc4f0767cae979a221bfa7c3f41bef6aa39ce38f01",
+    "bytes": 23422
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/2026.1/index.md",
+    "sha256": "8b43dedacf5e8935398a862513e568df6d59350feb5b166b2dc254a3144e8090",
+    "bytes": 20564
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.en.pdf",
+    "sha256": "7e2b647976671b7ef7581b5fe37d31ea6e2472b798c93215daac3536f487dc4f",
+    "bytes": 128463
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/2026.1/pdf/emergent-strategy-and-depoyment.2026.1.it.pdf",
+    "sha256": "49481287fc96f609ecf6df73911fc8f840e3587170d6fde96878d6d5618f2fd2",
+    "bytes": 130141
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/emergent-strategy-and-depoyment/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/holistic-testing/_index.md",
+    "sha256": "4cc6bc87e6f80516ace97be848539cb1f093bf925544251db130ac5ad699f919",
+    "bytes": 558
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/images/brisk-derisking-board-example.png",
+    "sha256": "02cd47be24bf276d47e2a24988873bdd61b446d4a0bfeae7362d28783a1f8ea7",
+    "bytes": 188089
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/images/holistic-testing-model-example-testing-activities.jpg",
+    "sha256": "5491f656368084016671ce0bd3430a4e473521466ee1a736ef1b7fae30e1639c",
+    "bytes": 136076
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/images/holistic-testing-model.jpg",
+    "sha256": "61e1b329a81a7b135cfa0fe1642b14f8a7aa0a9845dd84818b7587207479e37e",
+    "bytes": 93310
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/images/sample-map.png",
+    "sha256": "2ebaa8329f0532c6b4a775b25547f24b6643de69b06e508b86b40dbbb2536787",
+    "bytes": 131021
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/index.md",
+    "sha256": "6cbb969893508dde81a83a7bff659f01c9b617c4f41380c38fb59ff4b603864a",
+    "bytes": 19392
+  },
+  {
+    "path": "site/content/holistic-testing/2026.1/pdf/holistic-testing.2026.1.en.pdf",
+    "sha256": "87a212d93ef27860fe135acc4312901d988511e0c7b5a59a20e3d17d3f084435",
+    "bytes": 655760
+  },
+  {
+    "path": "site/content/holistic-testing/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/holistic-testing/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/multi-team-scrum/_index.md",
+    "sha256": "8046b2e5f0636871b6d83e1679702ea61cf0a2f5711f4f00bd3d63cea24d1fe9",
+    "bytes": 589
+  },
+  {
+    "path": "site/content/multi-team-scrum/2026.1/index.it.md",
+    "sha256": "b005e3f323900721b46c76c959f53460a8af359a61e099d9a89cc4403ad966cb",
+    "bytes": 10125
+  },
+  {
+    "path": "site/content/multi-team-scrum/2026.1/index.md",
+    "sha256": "3d5f12b72751fd1b7c7de2ce44f07a1905a6f62bc294e3f3acb552a3d8cb7914",
+    "bytes": 8435
+  },
+  {
+    "path": "site/content/multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.en.pdf",
+    "sha256": "b69890c60c57deb3251ca927522d0b40e3814682bf4193c3d19b9fcadc7c3ae0",
+    "bytes": 85531
+  },
+  {
+    "path": "site/content/multi-team-scrum/2026.1/pdf/multi-team-scrum.2026.1.it.pdf",
+    "sha256": "20139689a413812b69dfb1a0588726b88e60a9ebb0eb5f10db8c5446bf7f8adb",
+    "bytes": 106280
+  },
+  {
+    "path": "site/content/multi-team-scrum/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/multi-team-scrum/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/operating-models/_index.md",
+    "sha256": "3cd90e51296b6b8778819c80de1174c01ba603b0752a7bdaf661ec3aa87ddc3e",
+    "bytes": 1284
+  },
+  {
+    "path": "site/content/operating-models/2026.1/index.md",
+    "sha256": "5d89a7b1076b34d8dd0b5c471b7348ff023dc1b32bd9f7a51f29bafa6a28708c",
+    "bytes": 70341
+  },
+  {
+    "path": "site/content/operating-models/2026.1/pdf/operating-models.2026.1.en.pdf",
+    "sha256": "97bad3d3696f1aad2e253db39cacc4562c7941ca9af1ae6808508efdff792046",
+    "bytes": 182680
+  },
+  {
+    "path": "site/content/operating-models/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/operating-models/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/planguage/_index.md",
+    "sha256": "ed4dbdc0fda2804624b8ea23d3acc3a0a1802bc51a56bcb3f5ac5aac1cea2e85",
+    "bytes": 1540
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image1.png",
+    "sha256": "4061e959c0162862af86e631c551a8ba6d356c488f6e91d583a178d1104293ff",
+    "bytes": 137843
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image10.png",
+    "sha256": "9fbd0f9fa0bd8c1732d25fd9b5b7ab5a7f3a179591172e29ba1fe2279da34a5b",
+    "bytes": 114793
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image11.png",
+    "sha256": "ea980314644e54ef236153095419a8d37ae02ce73e670addac000296f2e5050a",
+    "bytes": 113064
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image12.png",
+    "sha256": "9759582c91fec04e3174ef5d8de8a0d0e3e6c6d7bd8996dcd1863cd2a5a429b6",
+    "bytes": 207909
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image13.png",
+    "sha256": "7b6456294751499d7e36563f4090fdcbc57721e73f7adfa6e6995a9925687344",
+    "bytes": 102215
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image14.png",
+    "sha256": "7f8a152736843f193c08da091d7c249ac2fb6865207c7304cdc65473cfdd3ef8",
+    "bytes": 145337
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image15.png",
+    "sha256": "b1538e55ce96a0f569ca5d6109439dd5a9c82feff9a2d2d2253f24b2c06a15a2",
+    "bytes": 104855
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image16.png",
+    "sha256": "a7c174f2007c6c643f6b8d67dadbd2b81066adb11ef6b58a5599871298cec246",
+    "bytes": 106374
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image2.png",
+    "sha256": "7b8d946c435decdddb7a1bfe143c1321be06c0ac0cbbb762a79c78b93cecbade",
+    "bytes": 93297
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image3.png",
+    "sha256": "73ab08be92e62b3e7f14ccba4db66653c195c5058804df9ec59be17b56c846c8",
+    "bytes": 292594
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image4.png",
+    "sha256": "64ab4c82777b1f2557b32f81edc0fc3e8a10186875d8d00d424b8c8f03b6e2e2",
+    "bytes": 141207
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image5.jpeg",
+    "sha256": "e2fe827e390b46ff5b8491cced74da6b91eb3501769965f5b1ae12ed3fe840b4",
+    "bytes": 166022
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image6.png",
+    "sha256": "eef797ec6f6e8efa0d001e76b92b830af63973ae39f27e7d105847b23b340e41",
+    "bytes": 155336
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image7.png",
+    "sha256": "35d4d5be2273ffa6cea464b4dac16409bc6a9a75b5b1051b8ffc0e374572d8f5",
+    "bytes": 396035
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image8.png",
+    "sha256": "356335521d8c339e2063dbe662c2c97f051fbc32eae3baa1860cf925decf77e0",
+    "bytes": 104338
+  },
+  {
+    "path": "site/content/planguage/2026.1/images/image9.png",
+    "sha256": "8fccfd50f2c695c635293073b20e1196d93b6f95d630ef1629a62090b879b31e",
+    "bytes": 123779
+  },
+  {
+    "path": "site/content/planguage/2026.1/index.md",
+    "sha256": "2083878868e72236290a39559fca01cb552c917350168c8bc9e56a486c1a7fdc",
+    "bytes": 201861
+  },
+  {
+    "path": "site/content/planguage/2026.1/pdf/planguage.2026.1.en.pdf",
+    "sha256": "782fa2af27d8685c0f4d85948bdbe83d0fdcb25d269b1c154338197c1a9562d5",
+    "bytes": 480681
+  },
+  {
+    "path": "site/content/planguage/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/planguage/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/product-thinking/_index.md",
+    "sha256": "4db16a92d54597c4f723105e09d961cb801a57f81bc2f8f2ecaecb021ffb9111",
+    "bytes": 518
+  },
+  {
+    "path": "site/content/product-thinking/2026.1/images/value-chain-feedback-loop.png",
+    "sha256": "a6c88f24df9e5d02fc9230f8f4c11129a72ae83778cea6d6b8fce9c77b6777dc",
+    "bytes": 21411
+  },
+  {
+    "path": "site/content/product-thinking/2026.1/index.md",
+    "sha256": "dce33ee4830e048f287fa96085466eb8c095a3c14c80d46f65363f0a79581133",
+    "bytes": 56493
+  },
+  {
+    "path": "site/content/product-thinking/2026.1/pdf/product-thinking.2026.1.en.pdf",
+    "sha256": "dc10229bb6922dd05fe716f7d68a32d1291b9da5a86bd3e018bdc8627a1d2fac",
+    "bytes": 203796
+  },
+  {
+    "path": "site/content/product-thinking/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/product-thinking/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/psychological-safety-in-scrum-teams/_index.md",
+    "sha256": "2e4ebc68deb494e586c92ccf86ac95c0d5132adf8fad6e1098af2bbfec0e4901",
+    "bytes": 761
+  },
+  {
+    "path": "site/content/psychological-safety-in-scrum-teams/2026.1/index.md",
+    "sha256": "c1fdde28d1a5929efadcb70ebabf2c882b4b32eb32d533d29d1e9b53feb0a9f8",
+    "bytes": 31621
+  },
+  {
+    "path": "site/content/psychological-safety-in-scrum-teams/2026.1/pdf/psychological-safety-in-scrum-teams.2026.1.en.pdf",
+    "sha256": "0e120edaac09ea965248570505cd465da8d6ac2b0a76be62e15d29d13cf9bdfe",
+    "bytes": 125122
+  },
+  {
+    "path": "site/content/psychological-safety-in-scrum-teams/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/psychological-safety-in-scrum-teams/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.de.md",
+    "sha256": "dbe37d545fdde5429bf16c39a24c58b0814d845571f9cca64ac017f7bee67b22",
+    "bytes": 599
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.es.md",
+    "sha256": "b3588ef3f023c190f1b3746d755eed9eaddbca4b066bc09620a1834961924851",
+    "bytes": 624
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.fa.md",
+    "sha256": "b1eb37beff2ab79ca75087670721dfd1dd4005fd2ecf4c407cbd1d2d0f79aebe",
+    "bytes": 722
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.it.md",
+    "sha256": "ae14c875da61a1bd0108ca6e29cfb6d5aaa9b08cac5022def5ea102b90eb7d6c",
+    "bytes": 601
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.ja.md",
+    "sha256": "bbecdafa2024f00c026b5f2d23be3376f82367d625dfd0e0135409551f0e7860",
+    "bytes": 868
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.md",
+    "sha256": "f028488ed84951628b82f80fba1b760e3b20e99dacb0b05159da51a5a682f47e",
+    "bytes": 569
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.nl.md",
+    "sha256": "39826d7f71b5b94ff07abf87f84dd1b5c22b74b16d1dcfa881c3e46c837e979c",
+    "bytes": 605
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.pl.md",
+    "sha256": "b6d4e2fe48833a4597d1a322d0b10bf2e6188140d2c7ccde778edcc5ddba16d0",
+    "bytes": 591
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.pt.md",
+    "sha256": "b00f64606109cc9d52ba4cd7fc16b50b6c3beff48f930dfea5105b315d46e642",
+    "bytes": 583
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.ro.md",
+    "sha256": "b290da10061eab6e82f1c46008193f3be5f4fc0bdc652915734d7b84d151c512",
+    "bytes": 617
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/_index.tlh.md",
+    "sha256": "4b9b7dd8428921635b1449aae0beaf277f1c301d5d0009a48c0414ef081fc2a9",
+    "bytes": 591
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.de.md",
+    "sha256": "7e43beb39027141cc9d060be0b0a22f3f14843e6274c8af133f282f791b9f726",
+    "bytes": 195334
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.es.md",
+    "sha256": "a75356692ec86d4d9fda10543e41efabdd7f99076b4c409d6132aff6b14a1e1e",
+    "bytes": 177191
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.fa.md",
+    "sha256": "d18e6822453a99d641fc6094d99f0fcad05427b4f50c36c4b41dcaf949ceaf6b",
+    "bytes": 269096
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.it.md",
+    "sha256": "c3b751ab3fef6a0e3c691c39c9d53699d459ff9840b460b4cc362e3660b5f98e",
+    "bytes": 202820
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.ja.md",
+    "sha256": "d6b0d8e10ba2cd10371a34d2ed7562a89698c60ea688a45a317fd81f5ef0d2ea",
+    "bytes": 427876
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.md",
+    "sha256": "3300eead71c1493ccc438952b58b90927fb0395d34e26ba43fcfd0ae0c6e90d8",
+    "bytes": 169678
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.nl.md",
+    "sha256": "9949116ec3502ef31c4389e02e92489f880d91daaa1b944815aed87da3d159f2",
+    "bytes": 183042
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.pl.md",
+    "sha256": "ad3777b8ac89fdff5abf530ba626ebea6c9643c28726c030379cbf6d2afd1857",
+    "bytes": 192301
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.pt.md",
+    "sha256": "5da929b83d6518779c053f3ab416a05dae869001929bb259b4a13e5a07dd3760",
+    "bytes": 178262
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.ro.md",
+    "sha256": "30e47fbacc47f689a576bb470e66d0aa8b4d452a217a4ffafc078105c7022da0",
+    "bytes": 206602
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/index.tlh.md",
+    "sha256": "31668161348aa326105e8a4d34af7d304e3404b28119928058b14f3567697a3f",
+    "bytes": 155707
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en-us.pdf",
+    "sha256": "d0a805231a91ef67354789042d62f00211b1d69e2b7479cb52469f9b63366dcf",
+    "bytes": 788104
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.en.pdf",
+    "sha256": "2513d629f9a79025b03b280423eb938724022faa28bf76ddd60324584dea468e",
+    "bytes": 809352
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.es.pdf",
+    "sha256": "9098b74d73183820f47f69556b551a4f14cdd0a3849dbc6d6539fc00a2337ee8",
+    "bytes": 322442
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.fa.pdf",
+    "sha256": "a02fd9730fee2dd502fbb089fc300d6f77d5f3e332aa2b8cc54b240d67312a63",
+    "bytes": 337147
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.it.pdf",
+    "sha256": "4b1bfe97a82b674220d1ea37a0271a6d98ec26b204e03c872d95ccdd2827401a",
+    "bytes": 348254
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ja.pdf",
+    "sha256": "e588a1a818568bf615bb7058f29110dee34aa4b9f80ce0a4c09e6befff5cb589",
+    "bytes": 1031730
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.nl.pdf",
+    "sha256": "f61205f91b8e9f43b10ce705b34193cdc1d919be1ec41ae5006c75b6b490c934",
+    "bytes": 319232
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.pl.pdf",
+    "sha256": "0ad4e488e5c4d9b47ffff89b4873d3c3e6339cfc0c81efc28a153b92579050e6",
+    "bytes": 305327
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.ro.pdf",
+    "sha256": "45608fb81a5e1fb1a53e05821d92a6304ee3242a2bfca830e780aa94e0237cea",
+    "bytes": 896113
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2025.6/pdf/scrum-guide-expansion-pack.tlh.pdf",
+    "sha256": "8fc5dc9e638868a54381b8c62663fd574ca14b40c1e913111361431f738bd070",
+    "bytes": 308636
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.de.md",
+    "sha256": "c58bda979b4e7017adb215a114f68fbda02423b52b48337af42c6ae5806ecc69",
+    "bytes": 821
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.es.md",
+    "sha256": "2db65bce4eab5e12f4f9522bbb4223bfabefd8a61580fd53290aa2bb5ecd78c9",
+    "bytes": 847
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.fa.md",
+    "sha256": "8c59c4747040fae5314efdab973a0c834c8f36dcae7e96c70dfad4c28d8b350d",
+    "bytes": 1159
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.it.md",
+    "sha256": "b44993781f7afa406233095a5f82d5797381b6b4858cbdd8b83e233118cfd693",
+    "bytes": 135206
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.ja.md",
+    "sha256": "877612c47d9c3e3f66c100521c996e255eaead1e8c1766b1996ef4712261923b",
+    "bytes": 976
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.md",
+    "sha256": "b123adfdc9a9c633d25e31f1b2347f2b452aac20241979d470a7988fed9bf1b5",
+    "bytes": 112431
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.nl.md",
+    "sha256": "607676ca7d84eafae89c740af56430c186dfc731fda1c9012d1744d6f562cf1b",
+    "bytes": 814
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.pl.md",
+    "sha256": "07f5dd9fca43183441a25a8d4c362c8b9e47dadf51019eee3f0162d8d15fa0d0",
+    "bytes": 840
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.pt.md",
+    "sha256": "577389b38b4184eae4fcf3d424f093b2346f8d990d7d32189ee463a71b1c3125",
+    "bytes": 826
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.ro.md",
+    "sha256": "4e832148cfe4b9ae6acb86cff306bd5131acdc6838dc1ab780c3d8486754ffbd",
+    "bytes": 871
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/index.tlh.md",
+    "sha256": "64a78c2a90ed92ea086de12cc6b0e1d0f5c79f8c378fabaacaf35d125a693d53",
+    "bytes": 547
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.en.pdf",
+    "sha256": "4303da0c2a7590a6d58bc6452f49960fc1a232181f2d22a17c771574ff22793b",
+    "bytes": 229010
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/2026.1/pdf/scrum-guide-expanded.2026.1.it.pdf",
+    "sha256": "e889cac586affdae9ae2f4dce1acd3ffed728807ad246d750ac111bcac2d97e8",
+    "bytes": 246489
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/history/index.pl.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/scrum-guide-expanded/translations/index.pl.md",
+    "sha256": "10fd3545b00fbcacea79cd667bdb67956bb1e85d7505107ff699d3072057756e",
+    "bytes": 203
+  },
+  {
+    "path": "site/content/scrum-on-one-page/_index.md",
+    "sha256": "b306e69e66276e6f91fdfdb74282657fec3aec2ed0be6d4d959e5e4ae2cdf85a",
+    "bytes": 560
+  },
+  {
+    "path": "site/content/scrum-on-one-page/2026.1/index.md",
+    "sha256": "320f6056a713dc6c7aaeaee8c20421af1fe525f5861c176ac7389760b8505172",
+    "bytes": 5349
+  },
+  {
+    "path": "site/content/scrum-on-one-page/2026.1/pdf/scrum-on-one-page.2026.1.en.pdf",
+    "sha256": "f2d8d05f887141ca725997e869cf68ccf23414610c82db968011f9f25e4318ac",
+    "bytes": 99610
+  },
+  {
+    "path": "site/content/scrum-on-one-page/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/scrum-on-one-page/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/software-engineering-practices/_index.md",
+    "sha256": "6ecf754f1bd169a7481f9394423e163fbb248d178f6b59793104dc124a691504",
+    "bytes": 803
+  },
+  {
+    "path": "site/content/software-engineering-practices/2026.1/index.md",
+    "sha256": "aa12548cc28956bcfa9bce4267d9e318508f9e189a48370f15a1ce50a5330cbf",
+    "bytes": 60761
+  },
+  {
+    "path": "site/content/software-engineering-practices/2026.1/pdf/software-engineering-practices.2026.1.en.pdf",
+    "sha256": "b4d42263888b2eebbc02fb73e3cec08e8ba385a010c3f6b6520ff0cc8fc231cb",
+    "bytes": 189741
+  },
+  {
+    "path": "site/content/software-engineering-practices/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/software-engineering-practices/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/_index.md",
+    "sha256": "0a69c0a4aaa9c688d23d4d68d0fd1ddea0076d16b2a0935f8358c1168d533fb8",
+    "bytes": 579
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/2026.1/images/ten-strategic-qualities.png",
+    "sha256": "e81558b1a6806cb9edc7e56cdc138e4cea6496282fe6768018e8803b0a511709",
+    "bytes": 98160
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/2026.1/index.md",
+    "sha256": "174251586f210296051bd3b539f6e816e5c200d182f8dd0b8bc711546b421d48",
+    "bytes": 35488
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/2026.1/pdf/strategy-as-an-empirical-capability.2026.1.en.pdf",
+    "sha256": "880e512073b2c9ef68e30c7d2f808a72925a058119f18b589116c7eabcf09bc0",
+    "bytes": 186235
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/2026.1/pdf/strategy.2026.1.en.pdf",
+    "sha256": "973d29d71d663d1cd522cb1283d5c28edc4e2cc0fc9789d20902144070a5bb56",
+    "bytes": 153626
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/history/index.md",
+    "sha256": "7538235923f338575744f1729bada1f666ec8a556cf29412ab9a967b1a158536",
+    "bytes": 58
+  },
+  {
+    "path": "site/content/strategy-as-an-empirical-capability/translations/index.md",
+    "sha256": "8972a86885dc359d309d75ece654ec3d0a21f63ebf1e94dfad0431a2c3317ae8",
+    "bytes": 202
+  },
+  {
+    "path": "site/data/contributions/adaptive-enterprise.yml",
+    "sha256": "22be792b85116a30010f909dafe629e54ff7631ab8da17bf2af9a53b693f8bdb",
+    "bytes": 494
+  },
+  {
+    "path": "site/data/contributions/adaptive-executive.yml",
+    "sha256": "22be792b85116a30010f909dafe629e54ff7631ab8da17bf2af9a53b693f8bdb",
+    "bytes": 494
+  },
+  {
+    "path": "site/data/contributions/ai-and-scrum.yml",
+    "sha256": "6e02a67b1962cdae297c20d3fcff00637b7ddc87837ced96ac7f6c07baab427c",
+    "bytes": 475
+  },
+  {
+    "path": "site/data/contributions/complexity.yml",
+    "sha256": "f8a1011e4c815e1b1f9d25fdf95da71fec6131fdec6e758658fa2ea4a78bb75e",
+    "bytes": 492
+  },
+  {
+    "path": "site/data/contributions/emergent-strategy-and-depoyment.yml",
+    "sha256": "00ebb92eff20ab72e7fa2189fddd92ab30918152968bfba4d6a69e4e99d5d016",
+    "bytes": 377
+  },
+  {
+    "path": "site/data/contributions/holistic-testing.yml",
+    "sha256": "23a2a3df42965f863979ec6c1b40e9848c1d6e1b6d261369f0959e532223f186",
+    "bytes": 524
+  },
+  {
+    "path": "site/data/contributions/multi-team-scrum.yml",
+    "sha256": "18be25cef730ae749e52f5838b10b1d9508879d343851eb6a1a77aba0c3ff466",
+    "bytes": 668
+  },
+  {
+    "path": "site/data/contributions/operating-models.yaml",
+    "sha256": "c3fa9f0974930162863df552efeec5642af8bb61c3c360fe9b0050c80a4b5bfa",
+    "bytes": 615
+  },
+  {
+    "path": "site/data/contributions/product-thinking.yml",
+    "sha256": "1401dc7d513c0ad22c1fd28c6fa7467bc75e409a01701bf9995421eca91b1e6e",
+    "bytes": 730
+  },
+  {
+    "path": "site/data/contributions/psychological-safety-in-scrum-teams.yaml",
+    "sha256": "bf65e67cdf979d04397b1e034efabe7d2992a3e8ae7c3451acd0639a0039a3f9",
+    "bytes": 169
+  },
+  {
+    "path": "site/data/contributions/scrum-guide-expanded.yml",
+    "sha256": "3e8a2279c39398aa7e9a70dcae795b5b736b3398285a6cd3d153f97cb3e8235b",
+    "bytes": 716
+  },
+  {
+    "path": "site/data/contributions/scrum-on-one-page.yml",
+    "sha256": "f8a1011e4c815e1b1f9d25fdf95da71fec6131fdec6e758658fa2ea4a78bb75e",
+    "bytes": 492
+  },
+  {
+    "path": "site/data/contributions/software-engineering-practices.yml",
+    "sha256": "bd65043bef9106ad3dadbd3e785c75e27907c2cbd7c2ddfe2c1b483e051f593a",
+    "bytes": 328
+  },
+  {
+    "path": "site/data/contributions/strategy-as-an-empirical-capability.yaml",
+    "sha256": "db7e40c5ecafb51882c151df2d76b71933ecee6a8ffa9d30659ce90583949830",
+    "bytes": 181
+  },
+  {
+    "path": "site/go.mod",
+    "sha256": "57a4c9953ac12a4d5b68193ccbe1f9061c777eab3d25b4e42731ec53092081a7",
+    "bytes": 225
+  },
+  {
+    "path": "site/go.sum",
+    "sha256": "ab3eb0a478ad5ac8503a5306da76627be540c9b863b795b401a9263ba8e6568a",
+    "bytes": 2388
+  },
+  {
+    "path": "site/hugo.canary.yaml",
+    "sha256": "1a11fbe3bd324a0b5f324c5b77e65e0a944b9db6e4c1295346cc4de54e224a4b",
+    "bytes": 105
+  },
+  {
+    "path": "site/hugo.local.yaml",
+    "sha256": "b7f0ae8b6c157cd2228f8f6a8d2d08093d32bb9307a00c9f3382ad531315bf0e",
+    "bytes": 156
+  },
+  {
+    "path": "site/hugo.preview.yaml",
+    "sha256": "fe0a58a9d670656de51b0ec6e820a108b6b1e7372ae572d7ad78372de4d6a3c3",
+    "bytes": 169
+  },
+  {
+    "path": "site/hugo.production.yaml",
+    "sha256": "12e9db32a0b94576566f88c244b7875c0fa1cdaeddb93f0d2b990232acb1e768",
+    "bytes": 417
+  },
+  {
+    "path": "site/hugo.yaml",
+    "sha256": "ebf9bed319006fc833c0164c1fd47792b633d4abaeb9ae310f177d2d30e1f777",
+    "bytes": 8785
+  },
+  {
+    "path": "site/i18n/de.yaml",
+    "sha256": "f520732010be38fd20288715f259c0092faa6539102a67e13fafb65a31190e29",
+    "bytes": 10517
+  },
+  {
+    "path": "site/i18n/en.yaml",
+    "sha256": "4f05a52e97e72530e4baa45065312ac7d6d17b48fae8913ff5365ba3a275a449",
+    "bytes": 10058
+  },
+  {
+    "path": "site/i18n/es.yaml",
+    "sha256": "d2517a162580c0f08807d465ac67f08ac01356ecaa9480e82ec389f9aa1a52bf",
+    "bytes": 10035
+  },
+  {
+    "path": "site/i18n/fa.yaml",
+    "sha256": "b040f040dd78926c8ac70b92d6afc7fc8dd8eec39c53006efac0a5934ba49f49",
+    "bytes": 11744
+  },
+  {
+    "path": "site/i18n/it.yaml",
+    "sha256": "92d27b196bb14a6768404e4e4983a4e13402b1c52b916370987b7b997038c866",
+    "bytes": 10140
+  },
+  {
+    "path": "site/i18n/ja.yaml",
+    "sha256": "3e7790b39a0e6a13f689d8dfccd092ca1f95e0f47fe058e74bd9c6cadcc5957e",
+    "bytes": 16160
+  },
+  {
+    "path": "site/i18n/nl.yaml",
+    "sha256": "cabf1ed4d561d95e776c41419a05d4833b9d8c285f645442fb0e89af9fa62658",
+    "bytes": 10247
+  },
+  {
+    "path": "site/i18n/pl.yaml",
+    "sha256": "2f7ec338d83c14f671f2e4b1f8e3638928c6613575ac038319cc96e0ab41ec19",
+    "bytes": 10306
+  },
+  {
+    "path": "site/i18n/pt.yaml",
+    "sha256": "563156c5cd7aefb357d4a5769429dbf0551e84df51cd59d74a9f8d45812d096d",
+    "bytes": 10025
+  },
+  {
+    "path": "site/i18n/ro.yaml",
+    "sha256": "10c42f9304f9293b6a6db9bbbbcc0fa665cc188780e16320a0ba0ca0feb7347d",
+    "bytes": 10946
+  },
+  {
+    "path": "site/i18n/tlh.yaml",
+    "sha256": "63d1a3499259ade6ceb5783a97e955bbf28026e87ec899449d74efceac8f79b7",
+    "bytes": 8998
+  },
+  {
+    "path": "site/layouts/_markup/render-blockquote.html",
+    "sha256": "8bcef3eeb3bf9e5f5378645e8257e515898121a55635c578ff99a945936d6f97",
+    "bytes": 1363
+  },
+  {
+    "path": "site/layouts/_markup/render-image.html",
+    "sha256": "4088ecb448d8f92a4a5e6e1fbed4df4bd7d00dc2dec9c4646e3707547df3127a",
+    "bytes": 1333
+  },
+  {
+    "path": "site/layouts/_partials/components/category-list.html",
+    "sha256": "ddb3a8be156083fbc43b106f19f524d216cf55959e1fd8eff1d7ecd93a326c0c",
+    "bytes": 5960
+  },
+  {
+    "path": "site/layouts/_partials/components/core-guide-list.html",
+    "sha256": "1e52dea81396cb03c62b6c6fbc527442192aa29002a3923224ab4f18119e29fd",
+    "bytes": 8277
+  },
+  {
+    "path": "site/layouts/_partials/components/extensions-guide-list.html",
+    "sha256": "a4da6d08eb4c1eec5b21b7c8d100f4aaeab8dfce006ae5c94f36b0aa3f4a1170",
+    "bytes": 6063
+  },
+  {
+    "path": "site/layouts/_partials/components/guide/guide-contributors-with-icon.html",
+    "sha256": "c80c7962f741081c676a0edf0231567aab245543d18a86703be532075417addc",
+    "bytes": 3176
+  },
+  {
+    "path": "site/layouts/_partials/components/home-hero.html",
+    "sha256": "3e2e3d663a60ac3bacd1ab553406c3b7b3b55be21411c5873728431690278670",
+    "bytes": 3446
+  },
+  {
+    "path": "site/layouts/_partials/functions/is-expansion.html",
+    "sha256": "42f283da0ad59fded6751951f917e62b133ae858f09113b540c500a3a1841d2a",
+    "bytes": 756
+  },
+  {
+    "path": "site/layouts/categories/list.html",
+    "sha256": "1c41545d780a36f2f939ab91ed7c20bb84a96f0b93702dd2aa1239d1bb93d915",
+    "bytes": 3597
+  },
+  {
+    "path": "site/layouts/creators/list.html",
+    "sha256": "933dd5ba4bc3967228998d449ec1f4725a482af2451a090350909ff93a7068b1",
+    "bytes": 3163
+  },
+  {
+    "path": "site/layouts/creators/single.html",
+    "sha256": "591578dcfa518d0b2961f2937660cc081cbf3b23bc7a922f2c5c719a45b254e3",
+    "bytes": 2592
+  },
+  {
+    "path": "site/layouts/index.html",
+    "sha256": "ea76570ec6e9308dd5426511de2d804344413173dd816d0cdf2be5fa43f80e56",
+    "bytes": 4083
+  },
+  {
+    "path": "site/layouts/robots.txt",
+    "sha256": "78059a7a9f32909fa230ca5b34040e229bab8e28e2540290d62f728b3cb7a9f3",
+    "bytes": 199
+  },
+  {
+    "path": "site/static/apple-touch-icon-114x114.png",
+    "sha256": "b6c5b9b6cd4c0225a22bc3423ecdae6035d285ab0d4b54c7b5abbacc28b1cfe3",
+    "bytes": 14902
+  },
+  {
+    "path": "site/static/apple-touch-icon-120x120.png",
+    "sha256": "9689124d78f6613a69550be1de85c322909f93fcabe2e0c731dc8217f60c5384",
+    "bytes": 16403
+  },
+  {
+    "path": "site/static/apple-touch-icon-144x144.png",
+    "sha256": "646cfdad832b4258f724d450838486ffdc4511e99d0d3f020c47ec6f81e455f8",
+    "bytes": 21364
+  },
+  {
+    "path": "site/static/apple-touch-icon-152x152.png",
+    "sha256": "b9faa10663efd3f3eec747d22eab7d0ef7cd1c8b9b09d2a0847072032fb82249",
+    "bytes": 23493
+  },
+  {
+    "path": "site/static/apple-touch-icon-180x180.png",
+    "sha256": "97281356c3cdea7f2e69f2481da6fd7e0ccf93c688b608e3b838fa1f977c3022",
+    "bytes": 30744
+  },
+  {
+    "path": "site/static/apple-touch-icon-57x57.png",
+    "sha256": "8608e525e104b3d586bc97b6353ac8e860cc8e2fa4f5d403c8fdfc53dced323c",
+    "bytes": 5208
+  },
+  {
+    "path": "site/static/apple-touch-icon-72x72.png",
+    "sha256": "e7af451d54dc1ea199884c102a5d022cdd33f1b7ad3da790cf0ed4ca1b9847e9",
+    "bytes": 7291
+  },
+  {
+    "path": "site/static/apple-touch-icon-76x76.png",
+    "sha256": "716c30d2e27f32ea1ed6000b3e855783e2a507d1818b3bd31b6e18d586a68bcd",
+    "bytes": 8125
+  },
+  {
+    "path": "site/static/apple-touch-icon.png",
+    "sha256": "8608e525e104b3d586bc97b6353ac8e860cc8e2fa4f5d403c8fdfc53dced323c",
+    "bytes": 5208
+  },
+  {
+    "path": "site/static/favicon.ico",
+    "sha256": "31ee13489134308107148830287ac5ce68d229a76c0b9bf1631e456b7d01af18",
+    "bytes": 34494
+  },
+  {
+    "path": "site/static/images/contributors/david-farley.jpg",
+    "sha256": "06233091e6c0841a1b0c56e9c0e77aefb943ed8e70ec6e91612270ee99bf06a8",
+    "bytes": 20617
+  },
+  {
+    "path": "site/static/images/iconifier-readme.txt",
+    "sha256": "62185cc3255d275f70c22db11ca2c317de9bc0b5586f36dc20aa456a6cfafbc2",
+    "bytes": 2809
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo-512.png",
+    "sha256": "2001d3112c70ed8a529f66211ffa708e39c9ec64a25376987a105133666be987",
+    "bytes": 210010
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo-solo.pdn",
+    "sha256": "9bbd1328488afbb4e3bde3fc37698d8c36b6db4c80f3098ef7e525f3d7cdcd9c",
+    "bytes": 209654
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo-solo.png",
+    "sha256": "1d7130b483c98809dfaf08d1f0a192051f8b3f9b12c3219857b436742de6a87c",
+    "bytes": 194579
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo-square.png",
+    "sha256": "1ebbc7dd5eab5de3b19a32eb9c313dff9ccb77a97b26278cc665aa5ba246233a",
+    "bytes": 929470
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo.ico",
+    "sha256": "32859dbae222bc5831aaca82ef878da51fddf1177ff91f6af66ea7168492387e",
+    "bytes": 56922
+  },
+  {
+    "path": "site/static/images/scrum-guide-expansion-pack-logo.png",
+    "sha256": "24edbcb7d83ba54a376ceb1a4329e6c9881fb4ff1e3a7c753db2cfb7134ce509",
+    "bytes": 927456
+  },
+  {
+    "path": "staticwebapp.config.canary.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.json",
+    "sha256": "c60c4e602fb6be25e48cc06bf6d89c836da8a9a067c98c1e8154a1a13cc84fca",
+    "bytes": 1492
+  },
+  {
+    "path": "staticwebapp.config.preview.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.production.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  }
+]
