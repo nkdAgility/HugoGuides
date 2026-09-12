@@ -20,13 +20,13 @@
     Show what would be added without actually modifying the target file
 
 .EXAMPLE
-    .\Compare-YamlTranslations.ps1 -SourceFile "module\i18n\en.yaml" -TargetFile "site\i18n\en.yaml"
+    .\Compare-YamlTranslations.ps1 -SourceFile "system\OpenGuidePlatform.Hugo.Guides\i18n\en.yaml" -TargetFile "examples\reference-guide-site\i18n\en.yaml"
     
 .EXAMPLE
-    .\Compare-YamlTranslations.ps1 -SourceFile "module\i18n\en.yaml" -TargetFile "site\i18n\en.yaml" -AddMissing
+    .\Compare-YamlTranslations.ps1 -SourceFile "system\OpenGuidePlatform.Hugo.Guides\i18n\en.yaml" -TargetFile "examples\reference-guide-site\i18n\en.yaml" -AddMissing
     
 .EXAMPLE
-    .\Compare-YamlTranslations.ps1 -SourceFile "module\i18n\en.yaml" -TargetFile "site\i18n\en.yaml" -AddMissing -WhatIf
+    .\Compare-YamlTranslations.ps1 -SourceFile "system\OpenGuidePlatform.Hugo.Guides\i18n\en.yaml" -TargetFile "examples\reference-guide-site\i18n\en.yaml" -AddMissing -WhatIf
 #>
 
 [CmdletBinding()]

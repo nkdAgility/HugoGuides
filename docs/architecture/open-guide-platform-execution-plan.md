@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: execution started on codex/open-guide-platform. E00 source/build capture is recorded in [the initial baseline](baselines/2026-09-12/README.md); the [post-prerequisite refresh](baselines/2026-09-12/post-pr344/README.md) now has twelve passing builds and verified shared-preview deployment. E00 capture and its limitations are recorded in the [handoff](baselines/2026-09-12/post-pr344/handoff.md). E01 schemas, fixtures and architecture decisions are implemented for PR review; E02 has not started.
+Status: execution started on codex/open-guide-platform. E00 source/build capture is recorded in [the initial baseline](baselines/2026-09-12/README.md); the [post-prerequisite refresh](baselines/2026-09-12/post-pr344/README.md) now has twelve passing builds and verified shared-preview deployment. E00 capture and its limitations are recorded in the [handoff](baselines/2026-09-12/post-pr344/handoff.md). E01 schemas, fixtures and architecture decisions are implemented for PR review; E02 mechanical relocation and independent reference-example changes are implemented; the move manifest and validation are recorded in [the relocation notes](migrations/e02-relocation.md). Skills/operation extraction follows in E03.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 

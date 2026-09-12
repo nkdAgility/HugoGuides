@@ -9,4 +9,3 @@ disableAliases: true
 module:
   replacements:
     - github.com/nkdAgility/HugoGuides/module -> ../../../system/OpenGuidePlatform.Hugo.Guides
-    - github.com/KanbanGuides/KanbanGuides/site -> ../../../../KanbanGuides/site

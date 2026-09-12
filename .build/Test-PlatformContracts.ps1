@@ -46,4 +46,8 @@ $x=Read-Fixture 'single-guide.site-policy'; $x.guides[0].editions[0].translation
 Assert-Contract 'PDF-only with supplied resource is valid' 'site-policy' $x $true
 $x.guides[0].editions[0].translations[0].downloads=@()
 Assert-Contract 'PDF-only requires a declared download' 'site-policy' $x $false
+$x=Read-Fixture 'single-guide.site-policy'
+$prototype=$x.guides[0] | ConvertTo-Json -Depth 30
+$x.guides=@(1..128 | ForEach-Object { $g=$prototype|ConvertFrom-Json -AsHashtable; $g.id="synthetic-guide-$_"; $g.contentRoot="site/content/synthetic-guide-$_"; $g })
+Assert-Contract 'guide collection is not limited to existing consumer counts' 'site-policy' $x $true
 Write-Host "$count contract checks passed. These are structural checks; trusted policy enforcement is E06."

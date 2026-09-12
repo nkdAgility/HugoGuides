@@ -52,6 +52,7 @@ $previousHugoEnv = $env:HUGO_ENV
 try {
     foreach ($record in $records) {
         $snapshot = Join-Path $destination $record.repository
+        $sourceDirectory = if (Test-Path (Join-Path $snapshot 'examples/reference-guide-site/hugo.yaml')) { 'examples/reference-guide-site' } else { 'site' }
         foreach ($ring in @('local','preview','production')) {
             $config = "hugo.yaml,hugo.$ring.yaml"
             $environment = if ($ring -eq 'local') { 'development' } else { $ring }
@@ -61,7 +62,7 @@ try {
             $logPath = Join-Path $destination "$($record.repository).$ring.log"
             Push-Location $snapshot
             try {
-                & $HugoCommand --source site --config $config --environment $environment --destination $artifact *> $logPath
+                & $HugoCommand --source $sourceDirectory --config $config --environment $environment --destination $artifact *> $logPath
                 $buildExit = $LASTEXITCODE
             } finally { Pop-Location }
             $errors = @(Select-String -LiteralPath $logPath -Pattern '^ERROR')

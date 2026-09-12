@@ -18,7 +18,7 @@ $baseline = Get-Content -Raw (Join-Path $BaselinePath 'baseline.json') | Convert
 if (Test-Path -LiteralPath $OutputPath) { throw 'Use a new output path to preserve earlier evidence.' }
 $records = foreach ($repository in $baseline.repositories) {
     $snapshot = Join-Path $BaselinePath $repository.repository
-    $site = Join-Path $snapshot 'site'
+    $site = if (Test-Path (Join-Path $snapshot 'examples/reference-guide-site/hugo.yaml')) { Join-Path $snapshot 'examples/reference-guide-site' } else { Join-Path $snapshot 'site' }
     $configurations = foreach ($ring in @('local','preview','production')) {
         $environment = if ($ring -eq 'local') { 'development' } else { $ring }
         $raw = & hugo config --source $site --config "hugo.yaml,hugo.$ring.yaml" --environment $environment --format json

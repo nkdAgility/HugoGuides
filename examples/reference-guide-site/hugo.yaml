@@ -116,12 +116,6 @@ module:
     #   mounts:
     #     - source: content
     #       target: content
-    - path: github.com/KanbanGuides/KanbanGuides/site
-      mounts:
-        - source: content
-          target: content
-        - source: i18n
-          target: i18n
     - path: github.com/nkdAgility/HugoGuides/module
   replacements:
     - github.com/nkdAgility/HugoGuides/module -> ../../../system/OpenGuidePlatform.Hugo.Guides
