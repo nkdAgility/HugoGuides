@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: execution started on codex/open-guide-platform. E00 source/build capture is recorded in [the initial baseline](baselines/2026-09-12/README.md); the [post-prerequisite refresh](baselines/2026-09-12/post-pr344/README.md) now has twelve passing builds and verified shared-preview deployment. E00 remains open for the explicitly listed semantic, visual and recovery checks; later stages have not started.
+Status: execution started on codex/open-guide-platform. E00 source/build capture is recorded in [the initial baseline](baselines/2026-09-12/README.md); the [post-prerequisite refresh](baselines/2026-09-12/post-pr344/README.md) now has twelve passing builds and verified shared-preview deployment. E00 capture and its limitations are recorded in the [handoff](baselines/2026-09-12/post-pr344/handoff.md). E01 schemas, fixtures and architecture decisions are implemented for PR review; E02 has not started.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -304,7 +304,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 
 ## 19. Completion checklist
 
-- [ ] E00 Baselines refreshed and recorded.
+- [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
 - [ ] E01 Contracts and policy ownership agreed.
 - [ ] E02 Shared source/example content moved with provenance.
 - [ ] E03 Core operations and seven skills extracted and tested.
@@ -320,4 +320,4 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [ ] E13 Adoption transition documentation, update automation and operational handover complete.
 - [ ] E14 Proposed module refactoring done after the other work builds successfully, and verified across all guides and sites.
 
-All boxes remain unchecked: E00 is in progress. Capturing baseline evidence does not mark the full stage complete.
+E01 remains unchecked pending review of the contract candidate. Its structural tests pass; later semantic validation and trusted enforcement are not implied by schema validation.

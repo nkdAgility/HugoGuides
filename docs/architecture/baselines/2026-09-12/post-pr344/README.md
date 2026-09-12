@@ -1,6 +1,6 @@
 # Post-prerequisite baseline — 12 September 2026
 
-This supplements the original baseline; it does not overwrite the failed-build evidence. PR 344 is merged at `7ce0683dd1548af108e391a31e34fe43c6f10d90`. Platform work remains on `codex/open-guide-platform` / HugoGuides PR 35. E00 remains open until the outstanding verification below is complete.
+This supplements the original baseline; it does not overwrite the failed-build evidence. PR 344 is merged at `7ce0683dd1548af108e391a31e34fe43c6f10d90`. Platform work remains on `codex/open-guide-platform` / HugoGuides PR 35. E00 capture is now complete with the explicit findings and recovery limitations in the [handoff](handoff.md). Later equivalence and recovery gates remain required.
 
 ## Build and deployment evidence
 
@@ -47,11 +47,6 @@ The target repository lookup for `nkdAgility/OpenGuidePlatform` returned 404. It
 
 `guide-structure.json` records all source Markdown declarations, body-presence observations and effective language configurations for all four snapshots. Reproduce with `.build/Measure-GuideStructureBaseline.ps1`; it uses powershell-yaml 0.4.12 and refuses to overwrite earlier evidence. Body presence is deliberately not interpreted as translation readiness. Run completed successfully against all four archived repositories; existing Hugo deprecation warnings remain visible.
 
-## Remaining E00 work
+## Baseline handoff
 
-- Complete semantic guide/edition/language state and heading-anchor inventories, with explicit intentional exclusions and fallbacks.
-- Complete representative browser baselines for Kanban, safe-delusion and the reference wrapper; do not substitute a successful build for visual review.
-- Resolve the effective deployment/recovery identity for each site from ring-specific successful runs and artifacts; a successful main build alone is insufficient.
-- Finish governance ownership and external enforcement feasibility assessment, including permissions that could not be observed.
-
-No source relocation or module refactoring has started. E01 contracts and E02 relocation follow completion of these baseline checks.
+The [13 September handoff](handoff.md) records representative browser and semantic capture, dispositions for existing findings, the recovery method for expired artifacts, and E01 contracts. Full migration equivalence remains E05; verified recovery artifacts are required before E08 cutover.
