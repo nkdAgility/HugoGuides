@@ -36,7 +36,11 @@ PDF investigation: scripts/Create-GuidePDFs.ps1 calculates a filename-derived la
 
 An in-memory experiment on adaptive-enterprise compared its original input with the lang line omitted and --metadata lang=en supplied. Pandoc emitted identical standalone XeLaTeX source. The full JSON AST was not byte-identical because CLI language metadata is represented as MetaString rather than the source YAML representation. This is evidence for the approach on that English guide, not proof for every language or complete PDF equivalence. XeLaTeX was not found on PATH, and no replacement PDF was generated.
 
-Next decision: agree how PDF language metadata is supplied and how intentional language overrides are represented. Verify PDF output and all Hugo configurations before accepting the repair. Do not bypass the failure or quietly change audited guide content during platform extraction.
+Resolution prepared with Martin's authorisation: [ScrumGuide-ExpansionPack PR 344](https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/pull/344), commit 593e385, passes filename-derived language to Pandoc and reads Hugo's defaultContentLanguage for index.md. It removes the 39 conflicting fields without changing guide bodies, direction or font metadata. Italian filename languages now supersede the previous English declarations.
+
+Verification of that fix: 13 Pester tests pass; all three Hugo configurations build with exit 0 and no ERROR lines; all 31 published PDF hashes are unchanged. The implemented Persian conversion produces identical LaTeX. The installed MiKTeX toolchain was found through the elevated shell, correcting the initial PATH-only availability check. HMXRoya could not be resolved, so a controlled full PDF comparison used Amiri on both inputs: 61 pages, identical text and identical page renders at 96 DPI. Both sides warn of a missing trademark glyph; this is not original-font appearance approval.
+
+The original baseline JSON and source hashes remain unchanged historical evidence. PR 344 is a separate consumer fix and has not been merged or deployed by this task; rebaseline current main after acceptance rather than claiming the original failed builds now pass.
 
 ## Existing module fixes under review
 
@@ -78,4 +82,4 @@ Committed evidence includes source hashes and the build summary. Full archives, 
 - No Hugo module files or consumer source files were changed. Warnings remain visible and have not been suppressed.
 - The platform reference site's dependency on the Kanban site still exists. Its local sibling replacements are reproduced rather than redesigned in this baseline step.
 
-Next: resolve the Scrum baseline disposition, account for the two module fix PRs, finish baseline verification, then proceed with mechanical structure and shared tooling. Repository rename and production promotion remain explicit later approval points.
+Next: review the separate Scrum compatibility fix, account for the two module fix PRs, finish baseline verification, then proceed with mechanical structure and shared tooling. Repository rename and production promotion remain explicit later approval points.
