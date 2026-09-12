@@ -21,7 +21,7 @@ The existing safe-delusion checkout remains on more-updates with an untracked AG
 
 ## Existing blocker requiring disposition
 
-ScrumGuide-ExpansionPack contains a top-level front matter field at site/content/adaptive-enterprise/2026.1/index.md:14:
+ScrumGuide-ExpansionPack contains 39 top-level lang declarations across its guide files. One example is site/content/adaptive-enterprise/2026.1/index.md:14:
 
     lang: en
 
@@ -30,9 +30,13 @@ All three builds fail with:
     ERROR deprecated: lang in front matter was deprecated in Hugo v0.144.0 and subsequently removed.
     ERROR error building site: logged 1 error(s)
 
-The emitted files from those failed builds are incomplete output, not an accepted baseline. The content has not been edited. Proposed minimal repair for a separate consumer change, if authorised: remove the obsolete front matter field while retaining the existing index.md source-language convention, then rebuild all three configurations and compare rendering. This proposal is not an assertion that there are no further issues after that fix.
+The emitted files from those failed builds are incomplete output, not an accepted baseline. The content has not been edited. The initial suggestion of a single-field removal was incomplete: the PDF generator relies on Pandoc reading this metadata. Resolve the Hugo/Pandoc input conflict before changing source metadata.
 
-Decision needed from Martin: disposition of this pre-existing consumer failure before approving the all-sites baseline. Do not bypass the failure or quietly change audited guide content during platform extraction.
+PDF investigation: scripts/Create-GuidePDFs.ps1 calculates a filename-derived language but does not pass it to Pandoc. KanbanGuides already passes --metadata lang=... explicitly. Some Scrum index.it.md files declare lang: en; those mismatches need a deliberate decision rather than automatic rewriting.
+
+An in-memory experiment on adaptive-enterprise compared its original input with the lang line omitted and --metadata lang=en supplied. Pandoc emitted identical standalone XeLaTeX source. The full JSON AST was not byte-identical because CLI language metadata is represented as MetaString rather than the source YAML representation. This is evidence for the approach on that English guide, not proof for every language or complete PDF equivalence. XeLaTeX was not found on PATH, and no replacement PDF was generated.
+
+Next decision: agree how PDF language metadata is supplied and how intentional language overrides are represented. Verify PDF output and all Hugo configurations before accepting the repair. Do not bypass the failure or quietly change audited guide content during platform extraction.
 
 ## Existing module fixes under review
 
