@@ -18,7 +18,6 @@ function ConvertTo-GuideAssessmentMarkdown {
     $lines.Add('');$lines.Add("Wrapper runtime readiness: $(Escape-ReportText $Assessment.inventory.wrapper.state). A Prepare result is not a deployment or visual approval.")
     $lines -join "`n"
 }
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown
 function Write-GuideAssessmentReport {
     [CmdletBinding()]
     param([Parameter(Mandatory)]$Assessment,[Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath)
@@ -51,7 +50,6 @@ function Write-GuideAssessmentReport {
     } finally {$lock.Dispose();[IO.File]::Delete($lockPath)}
     [pscustomobject]@{Outcome=$Assessment.outcome;JsonPath=(Join-Path $output 'assessment.json');MarkdownPath=(Join-Path $output 'assessment.md')}
 }
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport
 function Get-GuideHugoConfiguration {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$SourcePath,[Parameter(Mandatory)][string[]]$ConfigFiles,[ValidateSet('local','preview','production')][string]$Target='local')
@@ -71,9 +69,9 @@ function Get-GuideHugoConfiguration {
         [pscustomobject]@{Configuration=$configuration;Diagnostics=$diagnostics;Target=$Target}
     } finally {$process.Dispose()}
 }
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration
 . (Join-Path $PSScriptRoot 'ArtifactValidation/ArtifactValidation.ps1')
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity
 
 . (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleFreshness.ps1')
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness
+
+. (Join-Path $PSScriptRoot 'BuildContext/Get-GuideBuildContext.ps1')
+Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext
