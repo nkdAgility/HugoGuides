@@ -572,4 +572,18 @@ Commit `7cddf62e88895ef7e9a582e56e26e227a2fc8633` passed [run 34778471282](https
 
 ### E05 current semantic and visual findings
 
-Every retained HTML page has now been compared semantically across pinned/original/relocated builds and repeat controls; all 9,289 raw file hashes were reverified. The evidence is in `baselines/2026-09-13-relocation/semantic-comparison.json`. Targeted styled screenshots confirm that upgrading Safe Delusion from its old pin changes heading size, contributor labeling and layout. Those changes predate relocation but remain incompatible with unchanged-output adoption. E05 is current and remains open; no module refactor or consumer modification has been made. E06–E08 remain paused pending E05 acceptance.
+Every retained HTML page has now been compared semantically across pinned/original/relocated builds and repeat controls; all 9,289 raw file hashes were reverified. The evidence is in `baselines/2026-09-13-relocation/semantic-comparison.json`. Targeted styled screenshots confirm that upgrading Safe Delusion from its old pin changes heading size, contributor labeling and layout. Those changes predate relocation. The maintainer explicitly accepted these unadopted module updates on 2026-09-13; they no longer block adoption, and coordinated platform/Hugo versioning remains the agreed approach. E05 is current and remains open; no module refactor or consumer modification has been made. E06–E08 remain paused pending E05 acceptance.
+
+### E05 accepted upgrade differences and remaining verification — 2026-09-13
+
+The maintainer accepted the recorded Safe Delusion v0.6.8-to-current module differences, including title/layout, contributor and catalogue output. This is acceptance of the identified existing updates, not permission for additional Hugo refactoring or arbitrary output changes. No separate tooling/renderer versioning change is needed. Preserve the recorded old and new baselines.
+
+- [x] Record the explicit Safe Delusion upgrade acceptance.
+- [x] Verify evidence commit `0323396e7c832a050b8f0d15964ca39556c22f53`: [CI run 34779610357](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34779610357) succeeded.
+- [x] Capture 87 production viewports across pinned/original/relocated builds (29 routes across the three wrappers, including available Persian and Japanese guide routes). These are captured evidence, not 87 reviewed or approved pages.
+- [ ] Finish visual review and reconcile coverage against every guide and distinct rendering state, including states absent from the production viewport selection.
+- [ ] Close the remaining E05 findings against recorded evidence before advancing E06–E08.
+
+E00–E04 remain complete. E05 remains current. No consumer source, deployed site, Hugo template, permission or GitHub administrative configuration changed.
+
+E05 visual continuation: the initial replay omitted Bootstrap RTL CSS; its Persian screenshots are not acceptance evidence. The corrected replay uses the exact referenced RTL asset and is recorded in `baselines/2026-09-13-relocation/viewport-comparison.json`, including screenshot and asset hashes. All 29 original/relocated production viewport pairs match pixel-for-pixel. Persian Kanban and Japanese Scrum fallback viewports were inspected. These bounded captures exclude external avatars/icons and do not close full-page, history, preview-only, empty-body or PDF-only state coverage. Local platform acceptance passed again: 211 tests, zero failures, package validation and exit 0.

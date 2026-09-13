@@ -1,0 +1,1349 @@
+{
+  "scope": "29 production viewport pairs, 1365x1000; original versus relocated. Exact retained Bootstrap LTR/RTL CSS and JS replayed. External avatars, icons and analytics blocked. Not full-page or exhaustive state acceptance. Earlier capture omitted RTL CSS and is superseded.",
+  "captureDirectory": ".processing\\e05-cross-guide-visuals-rtl-corrected",
+  "captures": [
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/fa/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/ja/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/fa/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "page": "/ja/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/fa/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/ja/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/fa/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "page": "/ja/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/fa/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/ja/open-guide-to-kanban/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/fa/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "page": "/ja/the-kanban-guide/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/about/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/brief/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/getting-out/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/objections/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/right-of-reply/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "page": "/safe-decision-makers/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/about/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/brief/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/getting-out/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/objections/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/right-of-reply/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "page": "/safe-decision-makers/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/about/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/brief/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/getting-out/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/objections/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/right-of-reply/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "page": "/safe-decision-makers/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://www.googletagmanager.com",
+        "https://avatars.githubusercontent.com",
+        "https://www.gravatar.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/adaptive-executive/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/ai-and-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/complexity/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/holistic-testing/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/multi-team-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/operating-models/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/product-thinking/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/psychological-safety-in-scrum-teams/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/fa/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/ja/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/scrum-on-one-page/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/software-engineering-practices/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "page": "/strategy-as-an-empirical-capability/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/adaptive-executive/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/ai-and-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/complexity/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/holistic-testing/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/multi-team-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/operating-models/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/product-thinking/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/psychological-safety-in-scrum-teams/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/fa/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/ja/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/scrum-on-one-page/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/software-engineering-practices/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "page": "/strategy-as-an-empirical-capability/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/adaptive-executive/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/ai-and-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/complexity/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/holistic-testing/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/multi-team-scrum/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/operating-models/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/product-thinking/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/psychological-safety-in-scrum-teams/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/fa/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/ja/scrum-guide-expanded/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/scrum-on-one-page/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/software-engineering-practices/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "page": "/strategy-as-an-empirical-capability/",
+      "browser": "153.0.8010.12",
+      "externalOriginsBlocked": [
+        "https://kit.fontawesome.com",
+        "https://avatars.githubusercontent.com",
+        "https://janetgregory.ca",
+        "https://www.gravatar.com",
+        "https://jpattonassociates.com",
+        "https://www.googletagmanager.com"
+      ]
+    }
+  ],
+  "assetHashes": {
+    "bootstrap.css": "a31a97d0b41c95bbebb09b7c2329a4c672129f8369d96cb6ad8f638e84250c48",
+    "bootstrap.js": "cb789b7cec81aa580177e1b3c0561011539974d243d3a1de0d78a1a278015cab",
+    "bootstrap.rtl.css": "3778de8998d9fa3a73e68f49699bbee6c421d49313b9a70c4e16a729f9b0f77e"
+  },
+  "comparisons": [
+    {
+      "original": "KanbanGuides-original-fa-open-guide-to-kanban.png",
+      "relocated": "KanbanGuides-relocated-fa-open-guide-to-kanban.png",
+      "originalSha256": "f1e100e3629c50ae144ca3f7af3dd55225db8dfdc445e21c7e2101e2338c5923",
+      "relocatedSha256": "f1e100e3629c50ae144ca3f7af3dd55225db8dfdc445e21c7e2101e2338c5923",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-fa-the-kanban-guide.png",
+      "relocated": "KanbanGuides-relocated-fa-the-kanban-guide.png",
+      "originalSha256": "9a129f68093ba41f677174bed02afa7f0f18f20d41a0464dcb49645255bc99e1",
+      "relocatedSha256": "9a129f68093ba41f677174bed02afa7f0f18f20d41a0464dcb49645255bc99e1",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-home.png",
+      "relocated": "KanbanGuides-relocated-home.png",
+      "originalSha256": "1ddd4d83ae9bc2210dac7a9d56d11e776ca90b1ba67848788b9d421e8852d826",
+      "relocatedSha256": "1ddd4d83ae9bc2210dac7a9d56d11e776ca90b1ba67848788b9d421e8852d826",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-ja-open-guide-to-kanban.png",
+      "relocated": "KanbanGuides-relocated-ja-open-guide-to-kanban.png",
+      "originalSha256": "08548dbd45acff46f64585f76086d6e53416a67bf34b11fdc887660b0bf8f12f",
+      "relocatedSha256": "08548dbd45acff46f64585f76086d6e53416a67bf34b11fdc887660b0bf8f12f",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-ja-the-kanban-guide.png",
+      "relocated": "KanbanGuides-relocated-ja-the-kanban-guide.png",
+      "originalSha256": "7e1d7933d8cd8507f225dea1bdb013ef3b07e504f1782c0f02801eebe14212bb",
+      "relocatedSha256": "7e1d7933d8cd8507f225dea1bdb013ef3b07e504f1782c0f02801eebe14212bb",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-open-guide-to-kanban.png",
+      "relocated": "KanbanGuides-relocated-open-guide-to-kanban.png",
+      "originalSha256": "8cf38ae9171ca4efd69eef02b18f5c056ec51c25d6f4d4956860eae27124b110",
+      "relocatedSha256": "8cf38ae9171ca4efd69eef02b18f5c056ec51c25d6f4d4956860eae27124b110",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "KanbanGuides-original-the-kanban-guide.png",
+      "relocated": "KanbanGuides-relocated-the-kanban-guide.png",
+      "originalSha256": "244ceaa042f0161a9ae136b4bb28bd7fc872767f79c1bbfda075a4c5bf06db27",
+      "relocatedSha256": "244ceaa042f0161a9ae136b4bb28bd7fc872767f79c1bbfda075a4c5bf06db27",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-adaptive-executive.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-adaptive-executive.png",
+      "originalSha256": "54bed269d33c6455b77acf5dc776a556569f99fc97c0ec5af52960f822c5cc5c",
+      "relocatedSha256": "54bed269d33c6455b77acf5dc776a556569f99fc97c0ec5af52960f822c5cc5c",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-ai-and-scrum.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-ai-and-scrum.png",
+      "originalSha256": "aec9680b7786a8ee0b8d667cddbeedc454e144c6899dad4b081f0f02e54911f2",
+      "relocatedSha256": "aec9680b7786a8ee0b8d667cddbeedc454e144c6899dad4b081f0f02e54911f2",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-complexity.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-complexity.png",
+      "originalSha256": "a09fcfcecb1315dc3cf1457a750e2ff121ba0921caa06c7940476936f3d86d80",
+      "relocatedSha256": "a09fcfcecb1315dc3cf1457a750e2ff121ba0921caa06c7940476936f3d86d80",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-fa-scrum-guide-expanded.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-fa-scrum-guide-expanded.png",
+      "originalSha256": "8c2e8ce50bdcabcd10e74d73c4e75f20ed073a0dd815a8d4c10ff84d9716e9fd",
+      "relocatedSha256": "8c2e8ce50bdcabcd10e74d73c4e75f20ed073a0dd815a8d4c10ff84d9716e9fd",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-holistic-testing.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-holistic-testing.png",
+      "originalSha256": "b4f1c4e7c7ff6b16fe92131d868770a11a15d5f3f6ee3916838a94993634c9b6",
+      "relocatedSha256": "b4f1c4e7c7ff6b16fe92131d868770a11a15d5f3f6ee3916838a94993634c9b6",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-home.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-home.png",
+      "originalSha256": "22823791cae5782617111f550641f9ea7020d99afff06251609410c3aa486fd9",
+      "relocatedSha256": "22823791cae5782617111f550641f9ea7020d99afff06251609410c3aa486fd9",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-ja-scrum-guide-expanded.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-ja-scrum-guide-expanded.png",
+      "originalSha256": "365b01aef210df6126f4d796bfc25ed0dc14ff644447325d87f49e9b6622d3ba",
+      "relocatedSha256": "365b01aef210df6126f4d796bfc25ed0dc14ff644447325d87f49e9b6622d3ba",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-multi-team-scrum.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-multi-team-scrum.png",
+      "originalSha256": "7ad18c75b677cb47ff95bc8f5b31dcfb43458f43cfe725ed0f1e5cfae9d17a68",
+      "relocatedSha256": "7ad18c75b677cb47ff95bc8f5b31dcfb43458f43cfe725ed0f1e5cfae9d17a68",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-operating-models.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-operating-models.png",
+      "originalSha256": "9609d91d95432a85d11347ac426bd11de8edb73fd199028a395d2fc97b6875d2",
+      "relocatedSha256": "9609d91d95432a85d11347ac426bd11de8edb73fd199028a395d2fc97b6875d2",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-product-thinking.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-product-thinking.png",
+      "originalSha256": "ace28e576798fe8ae89b20205471deb17a634972a7d3440b4895f9bc7f374724",
+      "relocatedSha256": "ace28e576798fe8ae89b20205471deb17a634972a7d3440b4895f9bc7f374724",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-psychological-safety-in-scrum-teams.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-psychological-safety-in-scrum-teams.png",
+      "originalSha256": "3715145824d3c8e054ba1855b97605dd0d8638c6773dd23a72173b769ee7eaaf",
+      "relocatedSha256": "3715145824d3c8e054ba1855b97605dd0d8638c6773dd23a72173b769ee7eaaf",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-scrum-guide-expanded.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-scrum-guide-expanded.png",
+      "originalSha256": "d349a784037cc3261c9adafa3022256337322b60c51bc775be0e2f19768669e4",
+      "relocatedSha256": "d349a784037cc3261c9adafa3022256337322b60c51bc775be0e2f19768669e4",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-scrum-on-one-page.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-scrum-on-one-page.png",
+      "originalSha256": "b191d14b7c552cd33d2ca819974339862ce3f51429bcf83a7914a98dd7bdb927",
+      "relocatedSha256": "b191d14b7c552cd33d2ca819974339862ce3f51429bcf83a7914a98dd7bdb927",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-software-engineering-practices.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-software-engineering-practices.png",
+      "originalSha256": "7821ffe0334a9a5c5db50dfbc3efa4d2ce69e7430480269b10bbe618c238e258",
+      "relocatedSha256": "7821ffe0334a9a5c5db50dfbc3efa4d2ce69e7430480269b10bbe618c238e258",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "ScrumGuide-ExpansionPack-original-strategy-as-an-empirical-capability.png",
+      "relocated": "ScrumGuide-ExpansionPack-relocated-strategy-as-an-empirical-capability.png",
+      "originalSha256": "068c4fe676b5ac7ed7b99bbdac3f169f45709e2b99ab931c59c04a4b7f87dcbe",
+      "relocatedSha256": "068c4fe676b5ac7ed7b99bbdac3f169f45709e2b99ab931c59c04a4b7f87dcbe",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-about.png",
+      "relocated": "the-safe-delusion-relocated-about.png",
+      "originalSha256": "58574e9815e8df877af20ec5cef2a0bcd1d597dbbda2652b7a7c8a06ad3c500d",
+      "relocatedSha256": "58574e9815e8df877af20ec5cef2a0bcd1d597dbbda2652b7a7c8a06ad3c500d",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-brief.png",
+      "relocated": "the-safe-delusion-relocated-brief.png",
+      "originalSha256": "88a65b2d8754333dbb7254b4187cd72e9144cb8ff8c2cdf1c7fdc324d24037ed",
+      "relocatedSha256": "88a65b2d8754333dbb7254b4187cd72e9144cb8ff8c2cdf1c7fdc324d24037ed",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-getting-out.png",
+      "relocated": "the-safe-delusion-relocated-getting-out.png",
+      "originalSha256": "b4a0de480d2586c508f3f7ab87a7fb7c13bacc58ab7b7f5b101f2258fb0b160c",
+      "relocatedSha256": "b4a0de480d2586c508f3f7ab87a7fb7c13bacc58ab7b7f5b101f2258fb0b160c",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-home.png",
+      "relocated": "the-safe-delusion-relocated-home.png",
+      "originalSha256": "8fe0a08edd353bcdd84ec4591bab24874b69173fb0cae977c4ec4ed69bbdacf2",
+      "relocatedSha256": "8fe0a08edd353bcdd84ec4591bab24874b69173fb0cae977c4ec4ed69bbdacf2",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-objections.png",
+      "relocated": "the-safe-delusion-relocated-objections.png",
+      "originalSha256": "d16976e6e11c7e189028412cc7deb510ef90aa023a512f61c2045c17c16f8949",
+      "relocatedSha256": "d16976e6e11c7e189028412cc7deb510ef90aa023a512f61c2045c17c16f8949",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-right-of-reply.png",
+      "relocated": "the-safe-delusion-relocated-right-of-reply.png",
+      "originalSha256": "1cb9ca929faee34d9c4a7104b9a8b36c8223b5dfb7033af3bd65376c1ae07943",
+      "relocatedSha256": "1cb9ca929faee34d9c4a7104b9a8b36c8223b5dfb7033af3bd65376c1ae07943",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    },
+    {
+      "original": "the-safe-delusion-original-safe-decision-makers.png",
+      "relocated": "the-safe-delusion-relocated-safe-decision-makers.png",
+      "originalSha256": "b390f5f29d413af887c006f6aa1f37c920021da71f39a2317995caf6b580e308",
+      "relocatedSha256": "b390f5f29d413af887c006f6aa1f37c920021da71f39a2317995caf6b580e308",
+      "pixelsIdentical": true,
+      "differenceBounds": null
+    }
+  ]
+}
