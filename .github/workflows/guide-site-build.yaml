@@ -94,7 +94,7 @@ jobs:
             .processing/i18n-probe/
           if-no-files-found: error
   build:
-    name: Build (${{ inputs.site-name }} / ${{ inputs.target }})
+    name: Build (${{ inputs.site-name }} - ${{ inputs.target }})
     needs: prepare
     runs-on: ubuntu-24.04
     steps:
@@ -126,7 +126,7 @@ jobs:
           path: .processing/guide-site/
           if-no-files-found: error
   validate:
-    name: Validate (${{ inputs.site-name }} / ${{ inputs.target }})
+    name: Validate (${{ inputs.site-name }} - ${{ inputs.target }})
     needs: build
     runs-on: ubuntu-24.04
     steps:
@@ -154,7 +154,7 @@ jobs:
           path: .processing/guide-site/artifact-validation.json
           if-no-files-found: error
   deploy:
-    name: Deploy (${{ inputs.site-name }} / ${{ inputs.target }})
+    name: Deploy (${{ inputs.site-name }} - ${{ inputs.target }})
     permissions:
       contents: read
       pull-requests: write
@@ -200,7 +200,7 @@ jobs:
           skip_api_build: true
           deployment_environment: ${{ inputs.deployment-environment }}
   verify:
-    name: Verify (${{ inputs.site-name }} / ${{ inputs.target }})
+    name: Verify (${{ inputs.site-name }} - ${{ inputs.target }})
     needs: deploy
     if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
     runs-on: ubuntu-24.04

@@ -35,7 +35,8 @@ if($Stage -in @('All','Prepare','Serve')){
         $values.baseURL=$address.AbsoluteUri
     }
     if(-not $values.ContainsKey('baseURL')){
-        $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles @('hugo.yaml',"hugo.$Target.yaml") -Target $Target).Configuration.baseurl
+        [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
+        $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl
     }
     [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
     $null=Get-GuideHugoToolchain
