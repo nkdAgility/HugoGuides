@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 contract implementation and ownership are reconciled; its verification is recorded below. E04–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
+Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 contract implementation and ownership are reconciled; its verification is recorded below. E04 is complete with local and committed CI acceptance recorded below. E05–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -322,7 +322,7 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 - [x] Deliver structured Prepare assessments for same-repository PRs in an isolated data-only reporting job; include blocked findings and repair guidance, with stale-run and delivery-failure tests. Real PR #35 delivery is recorded below. Fork delivery and independent authority remain E06; a deployment-link comment is not the Prepare report.
 - [x] Integrate current-artifact browser evidence for declared runtime anchors; do not waive static failures solely because an older baseline passed. Commit `8b82061` passed all sample stages in run `34777283414`.
 - [x] Collect/persist approved PDF environment and generation receipts during build integration without regenerating supplied or protected publications. Commit `d9e324e` passed all sample stages in run `34777698645`.
-- [ ] Preserve only the frozen, existing legacy `/download/`, `/downloads/` and `/translationsdirectory/` alias declarations during affected consumer adoption, including existing language variants. Do not extend them to new languages or introduce a blanket collision exemption.
+- [x] Implement and test preservation of frozen existing legacy `/download/`, `/downloads/` and `/translationsdirectory/` declarations and exact duplicate counts. New sources/languages and unrelated collisions are rejected. Populating each consumer record remains its E09–E11 adoption task.
 - [x] Validate rendered guide bodies and reject unresolved rendered translation placeholders in the sample.
 - [x] Verify Japanese edition selection and declared English fallback, and Minionese preview content with production exclusion in sample builds.
 
@@ -424,7 +424,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [x] E01 Contracts and policy ownership agreed.
 - [x] E02 Shared source/example content moved with provenance.
 - [x] E03 Core operations and seven skills extracted and tested.
-- [ ] E04 Local build, validation and reports implemented.
+- [x] E04 Local build, validation and reports implemented.
 - [ ] E05 Existing multilingual behaviour characterised across every guide; relocation/adoption preserves output.
 - [ ] E06 Agent adapters and independent enforcement verified.
 - [ ] E07 Distribution, updater and shared workflows tested.
@@ -565,3 +565,7 @@ Declared wrapper JSON indexes are checked for required guide/edition entries, lo
 The remaining publication checks are implemented: declared JSON catalogue entries/links/languages, explicit guide/edition exclusion prefixes used by Validate and Verify, and frozen legacy alias declarations with exact duplicate-count compatibility. The sample policy records its existing aliases; no aliases or Hugo templates were changed. A production negative fixture correctly failed on excluded Guide 2 files and indexed links. Normal preview/production sample builds pass.
 
 Local acceptance passed 211 tests, platform packaging and both sample targets. E04 remains open pending the final committed CI run. E05 cross-consumer equivalence, E06 external enforcement and real consumer adoption remain separate acceptance stages. The workflow was not changed for the optional JSON detail artifact; findings use the existing validation report.
+
+### E04 closed against the reconciled criteria
+
+Commit `7cddf62e88895ef7e9a582e56e26e227a2fc8633` passed [run 34778471282](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34778471282): platform build/package, sample Prepare, Build, Validate, Deploy, Verify and PR reporting. Release was skipped as required on the PR. Local acceptance passed 211 tests, package validation, both sample targets and the expected failure for prohibited Guide 2 files/index entries. Runtime-anchor and PDF-receipt increments also have independent successful CI evidence above. E04 is complete; E05 cross-consumer equivalence is next. No deployed consumer, Hugo template or administrative setting changed.
