@@ -14,6 +14,14 @@ This is an execution plan, not authorisation inferred to rename or deploy immedi
 
 ## Current acceptance status
 
+**Run boundary agreed 14 September 2026:** the current platform implementation run is complete within its agreed scope. The following work remains in the execution plan but is explicitly deferred outside this run:
+
+- GitHub administrative changes, required-check replacement, review/merge actions and the resulting release cutover (E08).
+- The trusted deployment boundary that prevents PR-controlled code from accessing Azure deployment credentials (E06/E08).
+- Installation and live verification of managed Codex, Claude and Copilot restrictions on contributor machines, to be addressed during guide-site adoption (E06/E09–E11).
+
+These are retained requirements, not completed acceptance or active requests for permission. Do not resume them merely because this run was previously instructed to close blockers. E06 and E08 remain unchecked. After the deferred release work, the next adoption stage is E09, KanbanGuides. No consumer adoption, production promotion or Hugo internal refactoring is authorized by this status record.
+
 - [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
 - [x] E01 Contracts and policy ownership agreed.
 - [x] E02 Shared source/example content moved with provenance.
@@ -42,7 +50,7 @@ Remaining gates:
 
 - **E06:** managed client/OS enforcement and an independently administered required gate are uninstalled/unverified. No permission or GitHub administrative changes are authorized. The recorded exception permits repository implementation through E08.
 - **E07 / E09–E11:** fresh-fixture acceptance is complete; each existing consumer's file conflicts and deployment integration must still be reconciled in its own adoption PR.
-- **E08:** the GitHub rename is complete, but a complete coordinated named preview release, nested Hugo tag and clean released installation remain outstanding. Earlier preview releases predate the complete current manifest. PR #35 remains draft; obsolete required checks and review-thread requirements block merging. The subsequent instruction to close blockers authorizes merge-queue support: `merge_group` now runs packaging and sample validation, with deployment and release disabled for queue candidates. Local acceptance passed 217 tests and package validation; committed CI/actual queue verification remains pending. An exact required-check replacement is prepared locally, awaiting authorization to change the ruleset. The deployment credential trust boundary and supported managed-client rollout are pending maintainer decisions.
+- **E08:** the GitHub rename is complete, but a complete coordinated named preview release, nested Hugo tag and clean released installation remain outstanding. Earlier preview releases predate the complete current manifest. PR #35 remains draft; obsolete required checks and review-thread requirements block merging. The subsequent instruction to close blockers authorizes merge-queue support: `merge_group` now runs packaging and sample validation, with deployment and release disabled for queue candidates. Local acceptance passed 217 tests and package validation; commit `5d6256718492d32665398ca3a2233e4ef75a7680` passed [CI run 34788772030](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34788772030) through live Verify. Actual merge-queue verification remains deferred with the administrative cutover. The required-check proposal, deployment credential boundary and managed-client rollout are explicitly outside this completed run, as agreed above.
 - **E09–E11:** accept each exact consumer preview and functional/visual comparison before adoption. Safe Delusion's recorded old-module upgrade differences are accepted; the corrected Persian CSS capture is the valid baseline.
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
