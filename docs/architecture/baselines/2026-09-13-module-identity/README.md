@@ -21,3 +21,9 @@ A disposable copy of the sample used the actual canonical module at `v0.0.0-2026
 A working local Hugo replacement was deliberately added and the release path blocked it. Pre-publication candidate builds retain their explicit package overlay; released restoration records select native resolution and cannot silently fall back.
 
 Cold native resolution exposed progress text preceding Hugo configuration JSON and Windows path limits in deeply nested probe module caches. Configuration queries now use Hugo's supported quiet flag. On Windows, immutable probe module downloads use a short temporary cache path, while probe output and resources remain in each run's evidence directory. Both issues were reproduced and the native builds passed after correction. No Git settings were changed.
+
+## Native installer and installed builds
+
+[Native planning evidence](native-installer-plan.json) records real canonical Go resolution and preserved consumer YAML in a disposable Safe Delusion snapshot. [Installed-consumer evidence](installed-consumer.json) records the exact package, installed preview/production validation, seven skills, Core inventory and cached rebuilding with Go freshness/GitHub release access disabled. Release transport used local immutable files; no named release was published by this rehearsal. The successful package includes the verified Windows browser-cache path fix.
+
+[Cleanup evidence](preview-cleanup.json) records successful deployment/verification of disposable sample PR #36, successful shared cleanup, HTTP 404 afterward and PR #35 still available. Its unchanged disposable branch was subsequently removed. These are E07 acceptance results, not real-site adoption or production approval.
