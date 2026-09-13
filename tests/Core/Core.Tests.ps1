@@ -71,6 +71,16 @@ Describe 'Filesystem publishing operations' {
         [IO.File]::ReadAllText((Join-Path $edition 'index.md')) | Should -BeExactly $original
         (Get-FileHash $configPath).Hash | Should -Be $hash
     }
+    It 'does not extend legacy download aliases into a new language' {
+        $source=Join-Path $edition 'index.md'
+        $sourceText="---`ntitle: Guide`nversion: 2026.1`nlang: en`naliases: ['/download/', '/downloads/', '/translationsdirectory/', '/guide-a/latest']`n---`nOriginal body`n"
+        [IO.File]::WriteAllText($source,$sourceText)
+        $null=New-GuideTranslationScaffold $workspace $policy guide-a 2026.1 fa
+        $created=[IO.File]::ReadAllText((Join-Path $edition 'index.fa.md'))
+        $created | Should -Not -Match '/downloads?/|/translationsdirectory/|(?m)^lang:'
+        $created | Should -Match '/guide-a/latest'
+        [IO.File]::ReadAllText($source) | Should -BeExactly $sourceText
+    }
     It 'preserves populated translations during reconciliation' {
         $target=Join-Path $edition 'index.fa.md';[IO.File]::WriteAllText($target,"---`ntitle: Persian`n---`nمتن فارسی`n")
         $hash=(Get-FileHash $target).Hash

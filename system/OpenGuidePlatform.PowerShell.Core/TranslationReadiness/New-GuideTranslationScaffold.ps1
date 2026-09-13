@@ -15,5 +15,18 @@ function New-GuideTranslationScaffold {
     $source=Resolve-GuideWorkspacePath $WorkspaceRoot "$($selection.RelativePath)/index.md"
     $document=Read-GuideDocument $source
     $yaml=[regex]::Replace($document.Yaml,'(?m)^lang:\s*[^\r\n]*\r?\n?','')
-    if ($PSCmdlet.ShouldProcess($target,'Create empty guide translation with unchanged source metadata and aliases')) { New-GuideFile $target "---`n$yaml`n---`n";return [pscustomobject]@{Status='created';Path=$relative;ProductionChanged=$false;NeedsMetadataTranslation=$true} }
+    # Shared download-directory aliases are historical compatibility, not new-language routes.
+    # Preserve existing source/target files and unrelated guide-specific aliases.
+    $legacyAliases=@('/download/','/downloads/','/translationsdirectory/')
+    $metadata=$document.Metadata
+    if($metadata.Contains('aliases')){
+        $aliases=@($metadata.aliases)
+        $remaining=@($aliases|Where-Object { $_ -cnotin $legacyAliases })
+        if($remaining.Count -ne $aliases.Count){
+            if($remaining.Count){$metadata['aliases']=$remaining}else{$metadata.Remove('aliases')|Out-Null}
+            $metadata.Remove('lang')|Out-Null
+            $yaml=(ConvertTo-Yaml $metadata).TrimEnd()
+        }
+    }
+    if ($PSCmdlet.ShouldProcess($target,'Create empty guide translation without extending legacy download aliases')) { New-GuideFile $target "---`n$yaml`n---`n";return [pscustomobject]@{Status='created';Path=$relative;ProductionChanged=$false;NeedsMetadataTranslation=$true} }
 }
