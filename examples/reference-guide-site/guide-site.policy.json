@@ -71,6 +71,16 @@
         "text": "Brainy Noodles",
         "route": "/min/guide2/"
       }
+    ],
+    "runtimeAnchors": [
+      {
+        "route": "/ja/guide1/",
+        "fragment": "1-the-shift-from-physical-to-digital-workspaces"
+      },
+      {
+        "route": "/min/guide1/",
+        "fragment": "1-bye-office-hello-laptop"
+      }
     ]
   },
   "guides": [

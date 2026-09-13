@@ -543,3 +543,9 @@ E01 local acceptance passed through the root build: contract checks, Core regres
 E01 committed verification: `daf09c6e5b58dbe186dae664b8fc049ca3f18059` passed [run 34776517342](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34776517342), including platform packaging, all five sample stages and PR reporting. Release was correctly skipped. E01 is closed; E04 is current.
 
 E04 tool diagnostics: root -Versions now reports executable version output for Hugo, Go, Pandoc and XeLaTeX, preserving dependency-free missing-tool diagnostics. Verified locally with all four installed tools and the full platform build (196 tests, package verification). E04 remains open for its remaining runtime-anchor, PDF receipt and publication acceptance work.
+
+### E04 current-artifact browser validation
+
+Validate now evaluates explicitly declared runtime anchors in the current artifact using a packaged browser adapter. Observed anchors resolve only matching target-page/fragment static findings. Missing anchors, browser failure and changed artifacts block validation; old baseline evidence is never accepted as a waiver. HTTP and WebSocket requests outside the artifact origin are blocked, and service workers are disabled. This remains functional validation in an unprivileged build context, not independent OS enforcement.
+
+Local validation passed 199 tests and both sample targets, including Japanese and Minionese preview anchors and production exclusion. The sample uses the same packaged operation as consumers. Browser dependencies are restored to a versioned local cache; no global installation, consumer deployment or Hugo internal change is included. Committed CI verification remains required before checking off this E04 item. PDF receipts and remaining publication acceptance remain open.

@@ -108,6 +108,21 @@ if($Stage -in @('All','Validate')){
     $requiredContent=if($policy.wrapper.Contains('requiredPageContent')){@($policy.wrapper.requiredPageContent|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
     $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase -RequiredPageContent $requiredContent
     [IO.File]::WriteAllText("$output/navigation-validation.json",($navigation|ConvertTo-Json -Depth 10))
+    $runtimeAnchors=if($policy.wrapper.Contains('runtimeAnchors')){@($policy.wrapper.runtimeAnchors|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
+    try{
+        $runtime=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri $navigationBase -IdentityPath "$output/artifact-identity.json" -OutputPath "$OutputPath/runtime" -Anchors $runtimeAnchors
+        $navigation=Resolve-GuideRuntimeNavigation -Navigation $navigation -Runtime $runtime
+        if($runtime.outcome -eq 'fail'){
+            $report.Outcome='fail'
+            $report.Findings+=@($runtime.observations|Where-Object {-not $_.exists}|ForEach-Object {[pscustomobject]@{Code='RUNTIME_ANCHOR_MISSING';Path=$_.route;Message="Repair declared runtime anchor #$($_.fragment): $($_.error)"}})
+        }
+    }catch{
+        $runtime=@{schemaVersion=1;outcome='blocked';error=$_.Exception.Message;observations=@()}
+        $report.Outcome='fail'
+        $report.Findings+=[pscustomobject]@{Code='RUNTIME_ANCHOR_CHECK_BLOCKED';Path='runtime';Message=$_.Exception.Message}
+    }
+    [IO.File]::WriteAllText("$output/runtime-anchor-validation.json",($runtime|ConvertTo-Json -Depth 10))
+    $navigation.Outcome=if($navigation.Findings.Count){'fail'}else{'pass'}
     if($navigation.Outcome -ne 'pass'){
         $report.Outcome='fail'
         $report.Findings+=@($navigation.Findings|ForEach-Object {[pscustomobject]@{Code=$_.Code;Path=$_.Page;Message="Repair local target $($_.Target)"}})

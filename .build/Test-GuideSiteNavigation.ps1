@@ -55,7 +55,7 @@ foreach($file in $files|Where-Object Extension -EQ '.html'){
                 $anchorsChecked++
                 $anchors=Get-PageAnchors $found[0]
                 if(-not $anchors.Contains($fragment)){
-                    $findings.Add([pscustomobject]@{Code='INTERNAL_ANCHOR_MISSING';Page=$relative;Target=$value})
+                    $findings.Add([pscustomobject]@{Code='INTERNAL_ANCHOR_MISSING';Page=$relative;Target=$value;TargetPage=$found[0];Fragment=$fragment})
                 }
             }
         }

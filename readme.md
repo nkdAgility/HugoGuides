@@ -12,7 +12,7 @@ Sign in and install the currently required PowerShell YAML dependency:
 
 ```powershell
 gh auth login
-Install-Module powershell-yaml -RequiredVersion 0.4.12 -Scope CurrentUser
+Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser
 ```
 
 On Windows, enable **Developer Mode** or use an account with symbolic-link privileges, then run this before cloning:
@@ -63,6 +63,8 @@ Once installed, run these commands from your guide-site repository:
 Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. Routine builds use your installed platform version; rerun the install/update command when you want an update.
 
 For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.AgentSkills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
+
+Sites with declared JavaScript-created anchors also need Node.js 20 or newer and npm. Validate restores its browser tools into `.processing/` on first use and checks the built pages without contacting the live site. Later runs reuse that cache.
 
 ## When something fails
 

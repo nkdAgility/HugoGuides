@@ -4,7 +4,7 @@ These commands run in the **OpenGuidePlatform repository**. For an installed gui
 
 ## Build and test
 
-Install the tools listed in the README and Node.js (for isolated GitHub reporting adapter tests), then the platform test dependencies:
+Install the tools listed in the README and Node.js 20 or newer and npm (for reporting adapter and real browser validation tests), then the platform test dependencies:
 
 ```powershell
 ./.build/Install-PlatformTestDependencies.ps1
