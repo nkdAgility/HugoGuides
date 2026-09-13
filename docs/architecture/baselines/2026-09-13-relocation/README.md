@@ -31,3 +31,22 @@ These findings remain open. The user clarified that the shared aliases exist onl
 Run .build/Measure-ModuleRelocation.ps1 with the post-prerequisite BaselinePath and a fresh direct child of .processing as OutputPath. Then run .build/Explain-ModuleRelocationDifferences.ps1 and .build/Measure-ModuleRepeatability.ps1 against that output. Helpers archive exact Git commits and invoke tools with bounded timeouts; consumer working trees are not switched or edited.
 
 Full archived sources, inventories and logs remain in .processing/e05-relocation-20260913. The first repeatability attempt failed before rendering because PowerShell deserialized the clock into DateTime and formatted it for the current culture. The harness now converts it back to UTC RFC3339; repeatability-2.json is the successful attempt. Failed logs are preserved locally.
+## Additional static navigation characterisation
+
+[Navigation evidence](navigation-validation.json) applies the current platform checker to all 27 retained artifacts. This is a new analysis of the recorded builds, not 27 new builds. All 6,966 retained file hashes were reverified against their original inventories. Exact findings (code, source page and target), including repeated occurrences, match original versus relocated for all nine site/target pairs.
+
+| Site | Pinned findings: local / preview / production | Original and relocated findings: local / preview / production |
+|---|---|---|
+| KanbanGuides | 17 / 356 / 260 | 17 / 356 / 260 |
+| the-safe-delusion | 8 / 25 / 26 | 8 / 28 / 29 |
+| ScrumGuide-ExpansionPack | 34 / 38 / 4 | 34 / 38 / 4 |
+
+Counts are link occurrences, not distinct broken destinations. The files record exact findings for review. Several classes need different treatment before adoption:
+
+- Missing `/images/user-default.png` accounts for most preview/production findings. These are raw Hugo artifacts; distinguish hosting/configuration processing from actual missing assets before prescribing a consumer change.
+- Kanban references a historical guide URL and some Spanish `latest` URLs absent from the raw artifact. Check existing hosting redirects and case-sensitive publication routes before changing anything.
+- Safe Delusion has five `#content` findings in each artifact: its existing script assigns that ID to `main` at runtime. Static absence is not evidence that browser navigation fails. Two appendix-anchor occurrences also need an exact heading/runtime check.
+- Scrum local/preview references missing image resources and numeric anchors. Its four production findings are the default avatar resource. Preserve exclusion differences between targets.
+- Doubled-slash translation URLs also occur in existing output. Their deployed/hosting behavior needs verification; no redirect or module rewrite is authorized by this analysis.
+
+This evidence supports mechanical-relocation equivalence for the checked navigation, while keeping known consumer findings open. It does not make those findings acceptable, prove all JSON/catalogue semantics, or approve visuals. Reproduce by running `.build/Test-GuideSiteNavigation.ps1` against each `artifacts/<repository>/<variant>/<target>` directory with the canonical origin recorded in the evidence file, then compare the exact `Findings` records. The checker commit and SHA256 are recorded.
