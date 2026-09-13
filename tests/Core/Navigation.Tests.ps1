@@ -22,6 +22,30 @@ Describe 'Guide-site navigation validation' {
         [IO.File]::WriteAllText("$site/index.html",'<h1>Expected guide chapter</h1>')
         (& $checker -ArtifactRoot $site -BaseUri https://preview.example/ -RequiredPageContent $expectations).Outcome | Should -Be pass
     }
+    It 'checks same-page and cross-page anchors including encoded Unicode IDs' {
+        $site=Join-Path $TestDrive 'anchors'
+        [IO.Directory]::CreateDirectory("$site/guide")|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",'<a href="#missing">Bad</a><a href="/guide/#missing">Bad</a><a href="/guide/#%D9%81%D8%A7">Persian</a><a href="#top">Top</a><a href="#:~:text=hello">Text selection</a>')
+        [IO.File]::WriteAllText("$site/guide/index.html",'<h2 id="فا">Heading</h2><a name="legacy"></a><a href="#legacy">Legacy</a>')
+        $result=& $checker -ArtifactRoot $site -BaseUri https://preview.example/
+        $result.Outcome | Should -Be fail
+        @($result.Findings|Where-Object Code -EQ INTERNAL_ANCHOR_MISSING).Count | Should -Be 2
+        $result.Anchors | Should -Be 4
+    }
+    It 'does not accept lookalike attributes, form names or inert markup as anchors' {
+        $site=Join-Path $TestDrive 'false-anchors'
+        [IO.Directory]::CreateDirectory($site)|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",'<a href="#fake">Missing</a><div data-id="fake" title="id=''fake''"></div><form name="fake"></form><!-- <i id="fake"></i> --><script>const html = ''<i id="fake"></i>'';</script>')
+        $result=& $checker -ArtifactRoot $site -BaseUri https://preview.example/
+        $result.Findings.Code | Should -Contain INTERNAL_ANCHOR_MISSING
+    }
+    It 'does not treat PDF page fragments as HTML IDs' {
+        $site=Join-Path $TestDrive 'pdf-fragment'
+        [IO.Directory]::CreateDirectory($site)|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",'<a href="/guide.pdf#page=2">PDF</a>')
+        [IO.File]::WriteAllText("$site/guide.pdf",'%PDF- fixture')
+        (& $checker -ArtifactRoot $site -BaseUri https://preview.example/).Outcome | Should -Be pass
+    }
     It 'accepts existing directory routes and assets while ignoring external resources' {
         $site=Join-Path $TestDrive 'valid'
         [IO.Directory]::CreateDirectory("$site/min/guide1")|Out-Null

@@ -309,13 +309,13 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 
 ### E03 — Publishing operations and distributed skills
 
-- [ ] Complete wrapper/i18n creation and reviewed reconciliation, then verify the distributed skills and Prepare consume the same effective translation evidence. See the E00–E03 reconciliation above; PDF diagnostics/fingerprints and generated replacement/cache operations are already implemented. Real consumer adoption is not an E03 prerequisite.
+- [x] Complete wrapper/i18n creation and reviewed reconciliation, then verify the distributed skills and Prepare consume the same effective translation evidence. See the E00–E03 reconciliation above; PDF diagnostics/fingerprints and generated replacement/cache operations are already implemented. Real consumer adoption is not an E03 prerequisite.
 - [ ] Preserve supplied/protected PDFs, PDF-only editions and intentional English fallback throughout build integration; do not regenerate supplied publications to make checks pass.
 
 ### E04 — Build validation and actionable reporting
 
-- [ ] Map each policy-declared download from its source guide/edition location to its actual published artifact path and pass those expectations into validation. Add negative tests for missing declared downloads and prohibited downloads outside language-prefixed directories.
-- [ ] Bind saved Prepare evidence to all relevant assessed content, configuration and tool inputs. Reject reuse after a local assessed input changes, even when commit, target and policy digest are unchanged; include a regression test across separate Prepare and Build invocations.
+- [x] Map each policy-declared download from its source guide/edition location to its actual published artifact path and pass those expectations into validation. Add negative tests for missing declared downloads and prohibited downloads outside language-prefixed directories.
+- [x] Bind saved Prepare evidence to all relevant assessed content, configuration and tool inputs. Reject reuse after a local assessed input changes, even when commit, target and policy digest are unchanged; include a regression test across separate Prepare and Build invocations.
 - [ ] Complete required heading-anchor validation alongside page, asset and download checks.
 - [ ] Deliver the structured Prepare assessment to the PR through trusted reporting, including failures, blocked checks and actionable fixes. Verify stale-run protection; a deployment-link comment is not the Prepare report.
 - [ ] Preserve only the frozen, existing legacy `/download/`, `/downloads/` and `/translationsdirectory/` alias declarations during affected consumer adoption, including existing language variants. Do not extend them to new languages or introduce a blanket collision exemption.
@@ -459,3 +459,10 @@ Implemented reviewed `publishedPaths` for each declared source download, Prepare
 Validation: 170 tests, 26 contract checks, seven skill checks, full platform packaging, workflow lint and real Hugo preview/production builds of a disposable sample with an edition-relative synthetic PDF resource mapped to its public path. This tests artifact publication/bytes, not PDF rendering. Consumer published content and Hugo internals were unchanged. The generated policy must record existing public paths during adoption; no guessed route migration is implied.
 
 Freshness CI run 34763082733 exposed a Prepare-only YAML dependency incorrectly required by the Build fingerprint check. Commit d2ccb9a removes it and adds a regression; its CI result remains required. Shared stage names from the concurrent naming correction are preserved and tested independently of target names.
+### E04 committed CI verification and anchor checks
+
+Commit `1656159a95b02468928a2d759c97540c481df673` passed [CI run 34763565169](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34763565169), including platform packaging and sample Prepare, Build, Validate, Deploy and Verify. This verifies both the Build fingerprint dependency repair and download publication checks. PR release publication was correctly skipped. The active follow-up checklist now reflects those results rather than retaining stale unchecked entries.
+
+Anchor validation now checks same-page and cross-page HTML fragments, encoded Unicode IDs and legacy named anchors. It excludes PDF viewer fragments, text-fragment navigation and false targets in data attributes, form names, comments or script text. Missing anchors produce page/target findings in the existing validation report. Local acceptance passed: 173 tests, 26 contracts, seven skills, platform packaging and both real Hugo sample targets. Committed CI verification follows before closing the anchor follow-up.
+
+These are static HTML checks. Existing JavaScript-created destinations in consumer wrappers still need the E05 browser evidence and an explicit treatment before adoption; this implementation does not declare those existing links broken or waive them. E04 remains open for trusted PR reporting, PDF receipts and remaining publication/index/alias cases. No deployed consumer site or Hugo module internals changed.
