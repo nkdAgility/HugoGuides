@@ -40,7 +40,7 @@ function Get-GuideArtifactFiles {
 }
 function Test-GuideArtifact {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$ArtifactRoot,[string[]]$RequiredRoutes=@('/'),[string[]]$RequiredDownloads=@(),[string[]]$ForbiddenPaths=@(),[long]$MaximumBytes=524288000)
+    param([Parameter(Mandatory)][string]$ArtifactRoot,[string[]]$RequiredRoutes=@('/'),[string[]]$RequiredDownloads=@(),[string[]]$ForbiddenPaths=@(),[long]$MaximumBytes=524288000,[string[]]$HugoLog=@())
     $files=@(Get-GuideArtifactFiles $ArtifactRoot)
     $paths=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach($file in $files){$null=$paths.Add($file.Path)}
@@ -59,6 +59,11 @@ function Test-GuideArtifact {
     foreach($path in $ForbiddenPaths){
         $prefix=$path.TrimEnd('/');Assert-RelativeArtifactPath $prefix
         foreach($file in $files){if($file.Path -ceq $prefix -or $file.Path.StartsWith($prefix+'/',[StringComparison]::Ordinal)){Add-ArtifactFinding FORBIDDEN_RESOURCE_PRESENT $file.Path 'Remove this prohibited resource from the artifact through reviewed publication configuration.'}}
+    }
+    foreach($line in $HugoLog){
+        if($line -match '^WARN\s+Duplicate target paths:\s*(?<targets>.+)$'){
+            Add-ArtifactFinding HUGO_DUPLICATE_TARGETS 'Hugo output paths' "Assign one owner to each output path; remove conflicting aliases or routes. Hugo reported: $($Matches.targets)"
+        }
     }
     $size=0L
     foreach($file in $files){

@@ -33,7 +33,7 @@ if($Stage -in @('All','Build')){
     $previousResources=$env:HUGO_RESOURCEDIR
     try {
         $env:HUGO_RESOURCEDIR=Join-Path $output 'resources'
-        $lines=@(& hugo --source (Join-Path $root 'examples/reference-guide-site') --config "hugo.yaml,hugo.$Target.yaml,$overlay" --destination $site --environment $Target --logLevel info 2>&1)
+        $lines=@(& hugo --source (Join-Path $root 'examples/reference-guide-site') --config "hugo.yaml,hugo.$Target.yaml,$overlay" --destination $site --environment $Target --logLevel info --printPathWarnings 2>&1)
         $exitCode=$LASTEXITCODE
         $lines|ForEach-Object { Write-Host $_ }
         [IO.File]::WriteAllLines((Join-Path $output 'hugo.log'),[string[]]$lines)
@@ -50,7 +50,7 @@ if($Stage -in @('All','Build')){
     [IO.File]::WriteAllText((Join-Path $output 'artifact-identity.json'),($identity|ConvertTo-Json -Depth 100))
 }
 if($Stage -in @('All','Validate')){
-    $validation=Test-GuideArtifact -ArtifactRoot $site -RequiredRoutes @('/') -RequiredDownloads @('staticwebapp.config.json')
+    $validation=Test-GuideArtifact -ArtifactRoot $site -RequiredRoutes @('/') -RequiredDownloads @('staticwebapp.config.json') -HugoLog (Get-Content -LiteralPath (Join-Path $output 'hugo.log') -ErrorAction Stop)
     try {
         $identity=Get-Content -LiteralPath (Join-Path $output 'artifact-identity.json') -Raw|ConvertFrom-Json -ErrorAction Stop
         $null=Test-GuideArtifactIdentity -ArtifactRoot $site -Identity $identity -ExpectedTarget $Target -ExpectedSourceCommit $sourceCommit

@@ -63,4 +63,13 @@ Describe 'Artifact verification' {
             {Test-GuideArtifact $artifact -RequiredRoutes @($route)} | Should -Throw '*Unsafe*'
         }
     }
+    It 'rejects duplicate Hugo output ownership even when all files exist' {
+        $result=Test-GuideArtifact $artifact -HugoLog @('WARN  Duplicate target paths: download/index.html (2), fa/download/index.html (2)')
+        $result.Outcome | Should -Be fail
+        $result.Findings.Code | Should -Contain HUGO_DUPLICATE_TARGETS
+        $result.Findings[0].Message | Should -Match 'Assign one owner'
+    }
+    It 'does not mistake unrelated Hugo warnings for path collisions' {
+        (Test-GuideArtifact $artifact -HugoLog @('WARN  Deprecated configuration option')).Outcome | Should -Be pass
+    }
 }
