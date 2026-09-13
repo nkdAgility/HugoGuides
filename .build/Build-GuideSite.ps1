@@ -30,7 +30,7 @@ if($Stage -in @('All','Prepare','Serve')){
         $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
         $module=Join-Path $platformRoot 'system/OpenGuidePlatform.Hugo.Guides'
         # Bind the consumer to the packaged candidate without changing its module or source files.
-        $values=@{module=@{replacements=@("github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+        $values=@{module=@{replacements=@("github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides -> $($module.Replace('\','/'))","github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
         if($BaseUrl){
             $address=[uri]$BaseUrl
             if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}

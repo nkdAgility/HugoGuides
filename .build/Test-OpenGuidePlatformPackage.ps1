@@ -12,6 +12,16 @@ $destination=Join-Path $output ('verified-'+[guid]::NewGuid().ToString('N'))
 Expand-Archive "$output/OpenGuidePlatform.zip" $destination
 $metadata=Get-Content "$destination/platform.json" -Raw|ConvertFrom-Json
 if($metadata.sourceCommit -cne $manifest.sourceCommit -or $metadata.version -cne $manifest.version){throw 'Package source/version mismatch.'}
+foreach($field in @('nativeHugoModule','workflow','components','requirements')){
+    if(($metadata.$field|ConvertTo-Json -Depth 10 -Compress) -cne ($manifest.$field|ConvertTo-Json -Depth 10 -Compress)){throw "Package/manifest coordinated identity differs: $field"}
+}
+$module=$manifest.nativeHugoModule
+if($module.path -cne 'github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides' -or $module.version -cne "v$($manifest.version)" -or $module.tag -cne "system/OpenGuidePlatform.Hugo.Guides/v$($manifest.version)" -or $module.sourceCommit -cne $manifest.sourceCommit){throw 'Native Hugo identity is not coordinated with the release.'}
+if((Get-Content "$destination/system/OpenGuidePlatform.Hugo.Guides/go.mod" -First 1) -cne "module $($module.path)"){throw 'Packaged Hugo module declaration differs from its release identity.'}
+if($manifest.workflow.repository -cne 'nkdAgility/OpenGuidePlatform' -or $manifest.workflow.path -cne '.github/workflows/guide-site-build.yaml' -or $manifest.workflow.version -cne "v$($manifest.version)" -or $manifest.workflow.sourceCommit -cne $manifest.sourceCommit){throw 'Workflow identity is not coordinated with the release.'}
+$directories=@(Get-ChildItem "$destination/system" -Directory)
+if($directories.Count -ne @($manifest.components.PSObject.Properties).Count){throw 'Component inventory differs from the package.'}
+foreach($component in $directories){if($manifest.components.($component.Name) -cne $manifest.version){throw "Component version differs: $($component.Name)"}}
 foreach($path in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','build.ps1','.build/Build-GuideSite.ps1','.build/Prepare-GuideSite.ps1','system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1','system/OpenGuidePlatform.Hugo.Guides/go.mod')){
     if(-not [IO.File]::Exists((Join-Path $destination $path))){throw "Package missing $path"}
 }

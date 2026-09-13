@@ -1,3 +1,3 @@
-module github.com/nkdAgility/HugoGuides/module
+module github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
 
 go 1.24.4

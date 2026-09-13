@@ -1,0 +1,98 @@
+[
+  {
+    "mode": "proxy",
+    "version": "v0.8.4",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:/XvcN67XQubG9c7Ljoqndq85lN+v04hYQuSDgEQBhEI=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "980366a80eb7b9b6a0098229aea43e9401536232",
+      "Ref": "refs/tags/module/v0.8.4"
+    },
+    "error": null
+  },
+  {
+    "mode": "proxy",
+    "version": "v0.6.8",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:9Y4fJ/+6cfx7qEOnSleQPb7oldcseR6TepJQo88EV6k=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "85d1948210d8274c68561067cb3ef2ba67e49276",
+      "Ref": "refs/tags/module/v0.6.8"
+    },
+    "error": null
+  },
+  {
+    "mode": "proxy",
+    "version": "v0.8.3",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:Zy6OweL4p4uZn0Y+/+gwsg3J8n8rnQFjxTqrKuS3Gp0=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "55eab59c6cad2be62dd0494406e855f1e5cbd1ee",
+      "Ref": "refs/tags/module/v0.8.3"
+    },
+    "error": null
+  },
+  {
+    "mode": "direct",
+    "version": "v0.8.4",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:/XvcN67XQubG9c7Ljoqndq85lN+v04hYQuSDgEQBhEI=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "980366a80eb7b9b6a0098229aea43e9401536232",
+      "Ref": "refs/tags/module/v0.8.4"
+    },
+    "error": null
+  },
+  {
+    "mode": "direct",
+    "version": "v0.6.8",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:9Y4fJ/+6cfx7qEOnSleQPb7oldcseR6TepJQo88EV6k=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "85d1948210d8274c68561067cb3ef2ba67e49276",
+      "Ref": "refs/tags/module/v0.6.8"
+    },
+    "error": null
+  },
+  {
+    "mode": "direct",
+    "version": "v0.8.3",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/HugoGuides/module",
+    "sum": "h1:Zy6OweL4p4uZn0Y+/+gwsg3J8n8rnQFjxTqrKuS3Gp0=",
+    "goModSum": "h1:VGUy7t0I5Ba4FWVFpuBzVI1RN/cOBvcWSeYGsAj37tE=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/HugoGuides",
+      "Subdir": "module",
+      "Hash": "55eab59c6cad2be62dd0494406e855f1e5cbd1ee",
+      "Ref": "refs/tags/module/v0.8.3"
+    },
+    "error": null
+  }
+]

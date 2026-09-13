@@ -9,6 +9,19 @@ if((Get-FileHash "$OutputPath/bootstrap.ps1").Hash.ToLowerInvariant() -cne $mani
 $commit=(& git rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0 -or $commit -cne $manifest.sourceCommit){throw 'Release checkout does not match the package.'}
 $tag="v$($manifest.version)"
+$module=$manifest.nativeHugoModule
+if($module.path -cne 'github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides' -or $module.version -cne $tag -or $module.tag -cne "system/OpenGuidePlatform.Hugo.Guides/$tag" -or $module.sourceCommit -cne $commit){throw 'Native Hugo publication identity differs from the tested release.'}
+# A module under system/ requires its own subdirectory-prefixed tag. Never move it.
+$remote="https://github.com/$env:GITHUB_REPOSITORY.git"
+$ref="refs/tags/$($module.tag)"
+$prior=@(& git ls-remote --refs $remote $ref)
+if($LASTEXITCODE -ne 0){throw 'Cannot establish whether the native Hugo tag already exists.'}
+if($prior.Count){
+    if($prior.Count -ne 1 -or ($prior[0] -split '\s+')[0] -cne $commit){throw 'Existing native Hugo tag differs; publish a new version.'}
+}else{
+    & gh api "repos/$env:GITHUB_REPOSITORY/git/refs" --method POST -f "ref=$ref" -f "sha=$commit" | Out-Null
+    if($LASTEXITCODE -ne 0){throw 'Native Hugo tag publication failed; no platform release was created.'}
+}
 # Reruns verify an existing immutable release; they never replace assets or move tags.
 $existing=& gh release view $tag --repo $env:GITHUB_REPOSITORY --json targetCommitish,isDraft 2>$null
 if($LASTEXITCODE -eq 0){

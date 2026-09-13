@@ -8,4 +8,4 @@ disableAliases: true
 
 module:
   replacements:
-    - github.com/nkdAgility/HugoGuides/module -> ../../../system/OpenGuidePlatform.Hugo.Guides
+    - github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides -> ../../../system/OpenGuidePlatform.Hugo.Guides
