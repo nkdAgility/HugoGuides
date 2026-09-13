@@ -3,6 +3,7 @@ BeforeAll {
     $bootstrap=Join-Path $root 'bootstrap.ps1'
     function gh {
         $global:LASTEXITCODE=0
+        if($args -contains '--slurp' -and $args -contains '--jq'){throw 'GitHub CLI forbids combining --slurp and --jq.'}
         if($global:OgpBootstrapOffline){throw 'Unexpected network access.'}
         if($args[0] -eq 'api'){
             return (@(@{draft=$false;prerelease=$true;tag_name='v1.2.3-Preview.2';published_at='2026-09-13';assets=@(@{name='bootstrap.ps1'})})|ConvertTo-Json -Depth 5)

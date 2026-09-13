@@ -34,6 +34,9 @@ if($Stage -in @('All','Prepare','Serve')){
         if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}
         $values.baseURL=$address.AbsoluteUri
     }
+    if(-not $values.ContainsKey('baseURL')){
+        $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles @('hugo.yaml',"hugo.$Target.yaml") -Target $Target).Configuration.baseurl
+    }
     [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
     $null=Get-GuideHugoToolchain
     & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay)
@@ -73,7 +76,7 @@ if($Stage -in @('All','Validate')){
     }
     $requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
     $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -ForbiddenPaths $forbidden
-    $navigationBase=if($BaseUrl){$BaseUrl}else{(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl}
+    $navigationBase=(Get-Content $overlay -Raw|ConvertFrom-Json -AsHashtable).baseURL
     $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase
     [IO.File]::WriteAllText("$output/navigation-validation.json",($navigation|ConvertTo-Json -Depth 10))
     if($navigation.Outcome -ne 'pass'){

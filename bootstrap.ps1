@@ -63,7 +63,7 @@ if($Restore){
     $manifest=$previous.release
 }else{
     if(-not $ReleaseTag){
-        $releases=Invoke-GitHub @('api',"repos/$repository/releases?per_page=100",'--paginate','--slurp','--jq','add') | ConvertFrom-Json
+        $releases=Invoke-GitHub @('api',"repos/$repository/releases?per_page=100",'--paginate','--slurp') | ConvertFrom-Json | ForEach-Object { foreach($item in $_){$item} }
         $eligible=@($releases|Where-Object { -not $_.draft -and $_.prerelease -and @($_.assets|Where-Object name -eq 'bootstrap.ps1').Count -eq 1 }|Sort-Object published_at -Descending)
         if(-not $eligible.Count){throw 'No installable preview release is available.'}
         $ReleaseTag=$eligible[0].tag_name
