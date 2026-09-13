@@ -19,9 +19,9 @@ This module enforces the supplied policy, not the authenticity of that policy. T
 ## Remaining E03 work
 
 - Full wrapper, routes and i18n reconciliation; inventory currently checks declared wrapper files and reports other requirements.
-- Resolve multi-hop fallback readiness; current inventory observes direct fallback targets.
 - Safe existing-contributor updates and generated-PDF replacement/cache invalidation.
-- Failure recovery for edition snapshots: a failed copy can leave a partial new destination; it never changes the source and subsequent attempts refuse that destination.
+- Abrupt process termination during a snapshot can leave a staging directory/lock for manual inspection; handled copy failures clean up staging and never publish a partial edition.
 - Complete regression coverage for those operations before declaring E03 finished.
 
 Shared skills describe these boundaries explicitly. Root Prepare/Build/report orchestration belongs to E04. Nothing here changes Hugo rendering or adopts the platform in a consumer.
+Fallback observation follows declared chains to populated web content and treats cycles, undeclared targets and non-web targets as unavailable. Edition snapshots publish by a same-parent directory rename after all files are copied. An existing destination is never replaced.

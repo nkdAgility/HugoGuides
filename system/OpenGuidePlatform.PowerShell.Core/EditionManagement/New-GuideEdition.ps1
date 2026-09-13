@@ -36,14 +36,28 @@ function New-GuideEdition {
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
         $lockPath=$target+'.edition-lock'
         $lock=[IO.File]::Open($lockPath,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
+        $staging=$target+'.staging-'+[guid]::NewGuid().ToString('N')
         try {
             if (Test-Path -LiteralPath $target) { throw 'Edition target appeared during preparation.' }
-            [IO.Directory]::CreateDirectory($target) | Out-Null
+            [IO.Directory]::CreateDirectory($staging) | Out-Null
             foreach ($file in $outputs) {
-                if ($null -ne $file.Content) { New-GuideFile $file.Target $file.Content }
-                else { [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($file.Target)) | Out-Null;[IO.File]::Copy($file.Source,$file.Target,$false) }
+                $stagedFile=Join-Path $staging ([IO.Path]::GetRelativePath($target,$file.Target))
+                if ($null -ne $file.Content) { New-GuideFile $stagedFile $file.Content }
+                else { [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($stagedFile)) | Out-Null;[IO.File]::Copy($file.Source,$stagedFile,$false) }
             }
-        } finally { $lock.Dispose();[IO.File]::Delete($lockPath) }
+            # Same-parent rename publishes only a complete snapshot and refuses an existing target.
+            $checked=Resolve-GuideWorkspacePath $WorkspaceRoot $relative
+            Assert-GuideWriteAllowed $Policy $relative
+            [IO.Directory]::Move($staging,$checked)
+        } finally {
+            try {
+                # Cleanup is restricted to the unique staging directory created by this operation.
+                $rootPath=[IO.Path]::GetFullPath($WorkspaceRoot).TrimEnd([IO.Path]::DirectorySeparatorChar)+[IO.Path]::DirectorySeparatorChar
+                $stagePath=[IO.Path]::GetFullPath($staging)
+                if (-not $stagePath.StartsWith($rootPath,[StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetDirectoryName($stagePath) -ne [IO.Path]::GetDirectoryName($target)) { throw 'Unsafe staging cleanup path.' }
+                if ([IO.Directory]::Exists($stagePath)) { [IO.Directory]::Delete($stagePath,$true) }
+            } finally { $lock.Dispose();[IO.File]::Delete($lockPath) }
+        }
         [pscustomobject]@{Status='created-draft';Guide=$GuideId;Edition=$NewEditionId;Path=$relative;Files=$outputs.Count;SourceChanged=$false;RequiresPublicationReview=$true}
     }
 }

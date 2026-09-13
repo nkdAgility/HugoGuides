@@ -20,9 +20,21 @@ function Get-GuideInventory {
                 })
                 $fallbackAvailable=$false
                 if ($translation.intent -eq 'fallback') {
-                    $fallbackName=if($translation.fallbackLanguage -eq $edition.sourceLanguage){'index.md'}else{"index.$($translation.fallbackLanguage).md"}
-                    $fallbackPath=Resolve-GuideWorkspacePath $WorkspaceRoot "$relative/$fallbackName"
-                    if ([IO.File]::Exists($fallbackPath)) { $fallbackAvailable= -not [string]::IsNullOrWhiteSpace((Read-GuideDocument $fallbackPath).Body) }
+                    # Follow declared fallback intent only; excluded/PDF-only/scaffold bodies
+                    # are not evidence that a web fallback is available.
+                    $visited=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+                    $next=$translation.fallbackLanguage
+                    while ($visited.Add($next)) {
+                        $matches=@($edition.translations | Where-Object { $_.language -eq $next })
+                        if ($matches.Count -ne 1) { break }
+                        $candidate=$matches[0]
+                        if ($candidate.intent -eq 'fallback') { $next=$candidate.fallbackLanguage;continue }
+                        if ($candidate.intent -ne 'web') { break }
+                        $fallbackName=if($next -eq $edition.sourceLanguage){'index.md'}else{"index.$next.md"}
+                        $fallbackPath=Resolve-GuideWorkspacePath $WorkspaceRoot "$relative/$fallbackName"
+                        if ([IO.File]::Exists($fallbackPath)) { $fallbackAvailable= -not [string]::IsNullOrWhiteSpace((Read-GuideDocument $fallbackPath).Body) }
+                        break
+                    }
                 }
                 $state=Get-GuideTranslationState -Intent $translation.intent -Body $body -HasDownload (@($downloads|Where-Object Exists).Count -gt 0) -FallbackAvailable $fallbackAvailable
                 [pscustomobject]@{Language=$translation.language;Intent=$translation.intent;Source="$relative/$name";State=$state.State;Body=$body;FindingCode=$state.FindingCode;DeprecatedLang=$frontMatterLang;Downloads=$downloads}

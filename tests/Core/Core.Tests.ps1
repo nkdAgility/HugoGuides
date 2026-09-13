@@ -117,6 +117,42 @@ Describe 'Filesystem publishing operations' {
         [IO.File]::ReadAllText((Join-Path $edition 'index.md')) | Should -BeExactly $original
         { New-GuideEdition $workspace $policy guide-a 2026.1 2025.12 2025.12 } | Should -Throw '*already exists*'
     }
+    It 'resolves multiple fallback hops to a populated declared web translation' {
+        $policy.guides[0].editions[0].translations+=@{language='fr';intent='fallback';fallbackLanguage='en';downloads=@()},@{language='fa';intent='fallback';fallbackLanguage='fr';downloads=@()}
+        $result=Get-GuideInventory $workspace $policy
+        @($result.Guides[0].Editions[0].Translations | Where-Object Intent -eq fallback).State | Should -Be @('fallback','fallback')
+    }
+    It 'does not treat an excluded populated body as a web fallback' {
+        $policy.guides[0].editions[0].translations[0].intent='excluded'
+        $policy.guides[0].editions[0].translations+=@{language='fa';intent='fallback';fallbackLanguage='en';downloads=@()}
+        (Get-GuideInventory $workspace $policy).Guides[0].Editions[0].Translations[1].FindingCode | Should -Be 'FALLBACK_UNAVAILABLE'
+    }
+    It 'terminates fallback cycles without marking them ready' {
+        $policy.guides[0].editions[0].translations=@(@{language='fa';intent='fallback';fallbackLanguage='fr';downloads=@()},@{language='fr';intent='fallback';fallbackLanguage='fa';downloads=@()})
+        @((Get-GuideInventory $workspace $policy).Guides[0].Editions[0].Translations | Where-Object State -ne unknown).Count | Should -Be 0
+    }
+    It 'removes a failed staged snapshot and allows a clean retry' {
+        Mock New-GuideFile -ModuleName OpenGuidePlatform.PowerShell.Core { throw 'Simulated write failure' }
+        { New-GuideEdition $workspace $policy guide-a 2026.1 2025.12 2025.12 } | Should -Throw '*Simulated write failure*'
+        Test-Path (Join-Path $workspace 'site/content/guide-a/2025.12') | Should -BeFalse
+        @(Get-ChildItem (Split-Path $edition) -Force | Where-Object Name -like '2025.12*').Count | Should -Be 0
+        [IO.File]::ReadAllText((Join-Path $edition 'index.md')) | Should -BeExactly $original
+        Mock New-GuideFile -ModuleName OpenGuidePlatform.PowerShell.Core { param($Path,$Content) [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($Path))|Out-Null;[IO.File]::WriteAllText($Path,$Content) }
+        (New-GuideEdition $workspace $policy guide-a 2026.1 2025.12 2025.12).Status | Should -Be 'created-draft'
+    }
+    It 'preserves a destination created by another writer during staging' {
+        $racingTarget=Join-Path $workspace 'site/content/guide-a/2025.12'
+        Mock New-GuideFile -ModuleName OpenGuidePlatform.PowerShell.Core {
+            param($Path,$Content)
+            [IO.File]::WriteAllText($Path,$Content)
+            $destination=[IO.Path]::GetDirectoryName($Path) -replace '\.staging-[a-f0-9]+$',''
+            [IO.Directory]::CreateDirectory($destination)|Out-Null
+            [IO.File]::WriteAllText((Join-Path $destination 'keep.txt'),'Other writer')
+        }
+        { New-GuideEdition $workspace $policy guide-a 2026.1 2025.12 2025.12 } | Should -Throw
+        [IO.File]::ReadAllText((Join-Path $racingTarget 'keep.txt')) | Should -BeExactly 'Other writer'
+        @(Get-ChildItem (Split-Path $edition) -Force | Where-Object Name -like '*.staging-*').Count | Should -Be 0
+    }
     It 'refuses protected edition creation' {
         $policy.guides[0].protectSource=$true
         { New-GuideEdition $workspace $policy guide-a 2026.1 2025.12 2025.12 } | Should -Throw '*PROTECTED_RESOURCE*'

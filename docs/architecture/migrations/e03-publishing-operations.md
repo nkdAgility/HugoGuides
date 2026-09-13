@@ -8,7 +8,7 @@ The candidates remove fixed guide counts and edition conventions, require an exp
 
 ## Verification
 
-- 29 local Pester tests passed, including protected writes, traversal/symlink refusal, publication exclusions, draft snapshots, existing-file preservation, explicit Persian PDF language and a native Pandoc failure that publishes no output.
+- 34 local Pester tests passed, including protected writes, traversal/symlink refusal, publication exclusions, draft snapshots, existing-file preservation, explicit Persian PDF language and a native Pandoc failure that publishes no output.
 - Seven skill metadata, relative-reference and exported-command checks passed.
 - A real disposable Persian document generated successfully through Pandoc/XeLaTeX with installed Amiri. The one-page PDF was rendered and inspected: connected Persian text, right-aligned body and no clipping. No published PDF was regenerated. This smoke test is not a claim of visual parity for every consumer PDF.
 - CI runs the same Core checks on Ubuntu 24.04 and Windows 2022. Remote results are recorded on the PR.
@@ -17,4 +17,5 @@ The bundled Python skill validator could not run because PyYAML was unavailable.
 
 ## Work still required
 
-See the Core README for current limitations. Full wrapper/i18n reconciliation, multi-hop fallback observation, existing contributor updates, safe generated-PDF replacement/cache behavior and snapshot failure recovery remain E03 work. These commands are not yet ready for consumer installation. E04 builds stage orchestration and reports; E06 establishes independent enforcement; E07 distributes pinned candidates. Repository rename stays at E08 and Hugo internal refactoring stays at E14.
+See the Core README for current limitations. Full wrapper/i18n reconciliation, existing contributor updates and safe generated-PDF replacement/cache behavior remain E03 work. These commands are not yet ready for consumer installation. E04 builds stage orchestration and reports; E06 establishes independent enforcement; E07 distributes pinned candidates. Repository rename stays at E08 and Hugo internal refactoring stays at E14.
+Follow-up: fallback chains now resolve only to declared, populated web translations; cycles and non-web targets remain unavailable. Snapshot writes use a private sibling staging directory and publish by rename. Regression tests cover copy failure cleanup/retry and a concurrent destination, which is preserved. Abrupt termination may leave staging/lock evidence requiring inspection; automatic crash recovery is not claimed.
