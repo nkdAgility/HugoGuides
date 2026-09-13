@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 and E04–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
+Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 contract implementation and ownership are reconciled; its verification is recorded below. E04–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -50,6 +50,8 @@ This is an execution plan, not authorisation inferred to rename or deploy immedi
 | E14 | Refactor Hugo module contents last | E05, E09, E10, E11 | Existing proposed refactoring, checked against working preview builds |
 
 E05 adds tests and baseline evidence only and can run alongside E03/E04 after the mechanical move. E14 follows successful build and preview verification of the other platform work across the three sites. It does not wait for stable releases, production deployment or handover; its ID is retained for traceability. E10 and E11 can proceed independently after the Kanban pilot. Do not rename while the platform pipeline is still unable to build, package and validate the new paths.
+
+Execution may deviate from this order when justified. Record the reason, affected work packages, scope, validation and effect on outstanding acceptance before acting. A deviation does not close unfinished criteria or authorize administrative changes or consumer deployments.
 
 Each work package should become an issue with this document's ID, and one or more bounded PRs. Mark a package complete only after its acceptance criteria are evidenced. This plan does not create those issues or PRs yet.
 
@@ -136,9 +138,9 @@ Meaningful tests must demonstrate that scaffolding preserves populated translati
 This audit supersedes vague or stale progress statements in the early extraction notes and the initial implementation follow-up register. It evaluates the original package criteria, not later adoption or production readiness. Validation ran against implementation commit `83ffd1b910ac289256e92280bfb51b485b31e979`; only this execution document was modified during reconciliation. The final full `./build.ps1 -Version 0.0.0-local` also passed, including package verification.
 
 - [x] **E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.** The dated baseline records exact commits/toolchains for four repositories and twelve successful builds. Source, publication/PDF, guide-structure, semantic, governance and integration inventories exist. Known findings, owners/dispositions and the recovery method/limitations are recorded in the handoff. Re-read the JSON and verified all twelve recorded builds have exit 0 and zero errors. These are historical baseline results, not twelve new builds. Full cross-site equivalence remains E05; recovery rehearsal/cutover remains E07/E08 and does not reopen baseline capture.
-- [ ] **E01 Contracts and policy ownership agreed.** The three versioned schemas, four ADRs and single/two/many-guide fixtures exist. All 19 structural checks passed again, including the synthetic 128-guide collection. Core/Build/adaptor boundaries and consumer ownership are documented. Remaining: reconcile ADR 001/003 and the workflow-lock contract's mandatory commit-pinning requirement with the later explicit instruction to use action version tags with only necessary restrictions; record the final ownership decisions required by E01. Candidate schemas/ADRs are not evidence of owner agreement. Installing/testing external enforcement belongs to E06, not E01.
+- [x] **E01 Contracts and policy ownership agreed.** The three versioned schemas, four ADRs and single/two/many-guide fixtures exist. All 19 structural checks passed again, including the synthetic 128-guide collection. Core/Build/adaptor boundaries and consumer ownership are documented. Version-tag references and separate commit provenance are implemented in ADRs, schema and fixtures. The maintainer instructed closure of the proposed ownership decision; @MrHinsh is recorded as technical/publication-policy owner with editorial ownership preserved. Administrative installation and enforcement are E06 work.
 - [x] **E02 Shared source/example content moved with provenance.** The 113-entry move manifest and separately recorded independent-example change exist. Reconstructed relocation commit `1d116dd` from Git: every manifest destination with disposition `move` exists, and all 73 moved module files match the recorded pre-move SHA-256. The example no longer imports KanbanGuides. Recorded standalone archive/example builds and current shared sample evidence support the independent example acceptance. Later intentional edits are not represented as byte-identical to the relocation snapshot. Native module identity changes remain E08; full consumer visual equivalence remains E05.
-- [ ] **E03 Core operations and seven skills extracted and tested.** The detailed checklist below identifies the remaining work. Completion does not depend on adopting real consumers, independent enforcement or publishing a stable release.
+- [x] **E03 Core operations and seven skills extracted and tested.** The checklist below records the original gaps, now completed and verified by the E03 closure. Completion does not depend on adopting real consumers, independent enforcement or publishing a stable release.
 
 E03 completed implementation:
 
@@ -153,10 +155,10 @@ E03 completed implementation:
 
 E03 remaining acceptance:
 
-- [ ] Complete policy-driven wrapper/i18n creation and reviewed reconciliation, preserving bespoke consumer structure. `New-GuideTranslationScaffold` currently creates a guide document only; distributed transcreate/transreconcile explicitly leave wrapper/configuration/i18n repairs to a separate reviewed diff. Full wrapper reconciliation was part of the extraction scope and has not been delivered by that guide-only operation.
-- [ ] Make the distributed translation status/reconciliation workflow consume the same effective translation evidence as Prepare. Today Prepare calls `Get-GuideEffectiveTranslations` and passes the result to Core, while the skills direct callers to local wrapper catalogue checks and disclaim effective module fallback. A module-provided translation can therefore receive different readiness findings through the documented skill path.
-- [ ] Add acceptance tests for that shared skill/Prepare evidence path and the remaining wrapper operations, including preservation of populated translations and intended fallback. Existing seven-skill checks validate metadata, references and exported commands; they do not prove end-to-end readiness parity.
-- [ ] Correct stale extraction/Core/skill documentation when those supported paths are completed; do not leave documentation saying already implemented PDF replacement or effective fallback is absent.
+- [x] Complete policy-driven wrapper/i18n creation and reviewed reconciliation, preserving bespoke consumer structure. At the original audit, `New-GuideTranslationScaffold` created a guide document only; distributed transcreate/transreconcile explicitly leave wrapper/configuration/i18n repairs to a separate reviewed diff. Full wrapper reconciliation was part of the extraction scope and was not delivered by that guide-only operation. The later wrapper operations and E03 closure resolve this gap.
+- [x] Make the distributed translation status/reconciliation workflow consume the same effective translation evidence as Prepare. At the original audit Prepare called `Get-GuideEffectiveTranslations` and passes the result to Core, while the skills direct callers to local wrapper catalogue checks and disclaim effective module fallback. A module-provided translation can therefore receive different readiness findings through the documented skill path.
+- [x] Add acceptance tests for that shared skill/Prepare evidence path and the remaining wrapper operations, including preservation of populated translations and intended fallback. Existing seven-skill checks validate metadata, references and exported commands; they do not prove end-to-end readiness parity.
+- [x] Correct stale extraction/Core/skill documentation when those supported paths are completed; do not leave documentation saying already implemented PDF replacement or effective fallback is absent.
 
 Explicit scope corrections: Build wiring that collects/persists approved PDF environment receipts belongs to E04; it is not a reason to call the implemented Core PDF/cache operations incomplete. Independent agent enforcement is E06; complete native distribution is E07/E08; real site adoption is E09–E11. Automatic recovery from abrupt process termination is not an added E03 acceptance requirement: the original plan requires refusal/preservation of conflicts, and the current crash residue limitation remains documented.
 
@@ -200,9 +202,9 @@ Administrator-managed installation is separate from project-file adoption. Docum
 
 ## 10. E07 — Packaging, shared workflows and adoption tools
 
-Build a coordinated package and manifest containing exact component versions, Hugo module version, workflow SHA, checksums, schemas and toolchain requirements. Use versioned local caches rather than global PowerShell installations.
+Build a coordinated package and manifest containing exact component versions, Hugo module version, workflow version tag and source provenance, checksums, schemas and toolchain requirements. Use versioned local caches rather than global PowerShell installations.
 
-Implement installer/update operations with previewable diffs. Clearly distinguish regenerated platform adapters from starter wrapper files that become consumer-owned. Updates change the lock, native Hugo dependency, generated skill/control files and reusable workflow SHA together. Refuse unresolved conflicts.
+Implement installer/update operations with previewable diffs. Clearly distinguish regenerated platform adapters from starter wrapper files that become consumer-owned. Updates change the lock, native Hugo dependency, generated skill/control files and reusable workflow version tag and source provenance together. Refuse unresolved conflicts.
 
 Shared workflows provision tools, invoke the released Build module, transport artifacts and call deployment actions. Consumer workflows contain triggers, minimum permissions, inputs and explicit secret mappings. Keep cleanup and update workflows shared too. Platform self-build/release workflows remain distinct from consumer workflows.
 
@@ -397,7 +399,7 @@ The question about renaming the shared workflow to `OpenGuidePlatform.yaml` has 
 | PDF generation | Opens successfully, contains pages, expected fonts/layout on representative fixtures |
 | Publication exclusion | Negative tests for language, edition, guide cascades and downloadable resources |
 | Governance tampering | Candidate modification/removal of checks cannot satisfy the independent gate |
-| Package update | Lock, module tag, workflow SHA and generated adapters updated together |
+| Package update | Lock, module tag, workflow version tag and source provenance and generated adapters updated together |
 | Failure reporting | Actionable report survives Prepare failure; missing reports never pass |
 | Fork contribution | Validation runs without secrets; unavailable preview deploy is handled explicitly |
 | Production deployment | Validated artifact identity matches deployed commit, ring and platform |
@@ -419,7 +421,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 ## 19. Completion checklist
 
 - [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
-- [ ] E01 Contracts and policy ownership agreed.
+- [x] E01 Contracts and policy ownership agreed.
 - [x] E02 Shared source/example content moved with provenance.
 - [x] E03 Core operations and seven skills extracted and tested.
 - [ ] E04 Local build, validation and reports implemented.
@@ -434,7 +436,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [ ] E13 Adoption transition documentation, update automation and operational handover complete.
 - [ ] E14 Proposed module refactoring done after the other work builds successfully, and verified across all guides and sites.
 
-E01 version-tag reconciliation is implemented: the contract separates the version reference from source provenance and permits broad version labels. Final protected-policy ownership decisions remain open; installing independent enforcement belongs to E06. E03 is now complete: the gaps recorded in the earlier E00–E03 audit were implemented and verified; see the closure entry below. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
+E01 version-tag reconciliation is implemented: the contract separates the version reference from source provenance and permits broad version labels. Protected-policy ownership is recorded; installing independent enforcement belongs to E06. E03 is now complete: the gaps recorded in the earlier E00–E03 audit were implemented and verified; see the closure entry below. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
 
 ## Execution log — continued reconciliation
 
@@ -532,3 +534,8 @@ Restoration now records candidate versus release mode, version and source. Guide
 [Native consumer evidence](baselines/2026-09-13-module-identity/README.md#native-consumer-build-rehearsal) records successful preview/production builds against the actual canonical pseudo-version, with no module override, plus refusal of an intentionally working local replacement. This verifies the native execution path before named publication; it does not finish installer coordination or certify a release tag that has not been published.
 
 The rehearsal also corrected cold-cache JSON progress output and Windows translation-probe module cache path length. Runtime source and multilingual templates remain unchanged. Independent evaluator commit `5272d3b10c41576959aa3ce3825ad03e1b3f5a3a` passed [run 34773525747](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34773525747), including all sample stages. Nested client-control directories and Git metadata files have also been included in the evaluator's protected selectors.
+### Sequential execution reconciliation — E01
+
+The maintainer required completing each stage before advancing. E07 installer work is paused and preserved locally in `.processing/paused-e07-native-installer/`; it is not part of the E01 commit or claimed as verified. E01 now consistently records version-tag workflow references with separate provenance and the technical owner decision. E03 is complete; its original audit checkboxes have been reconciled with the recorded closure. E04 is the next stage after E01 verification. No administrative or consumer changes are included.
+
+E01 local acceptance passed through the root build: contract checks, Core regression suite, seven distributed skill checks, real Hugo translation probe and distributable package validation. The main-only publication condition remains unchanged. Committed CI verification follows.
