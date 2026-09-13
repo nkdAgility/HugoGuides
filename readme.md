@@ -1,31 +1,106 @@
-# Hugo Guides Module
+# OpenGuidePlatform
 
-The **Hugo Guides Module** is designed to power a multi-language, multi-guide, multi-version platform for serving authoritative guides and resources. Its goal is to provide a flexible, scalable engine for publishing and maintaining guides such as:
+Shared rendering, publishing operations and validation for sites that wrap one or more guides. Each site retains its own content and bespoke wrapper. There is no platform-defined maximum number of guides.
 
-- **The Kanban Guide**
-- **Open Guide to Kanban**
-- **Information for Decision Makers**
-- **Scrum Expansion Pack**
+The platform migration is a development candidate. GitHub now names this repository OpenGuidePlatform; the Hugo module still declares github.com/nkdAgility/HugoGuides/module. The rename alone does not complete module, release or consumer migration. Do not automatically change consumer pins.
 
-This module enables organizations and communities to deliver guides in multiple languages, support multiple versions, and manage several guides from a single platform.
+## Build locally
 
-It uses [Hugo](https://gohugo.io/) to generate a static site, which can be deployed anywhere (such as Azure Static Web Apps, Netlify, Vercel, GitHub Pages, or any static hosting provider).
+Run commands from the repository root in PowerShell 7.4 or later. The full build requires Hugo Extended 0.146.0 or later, Go supporting the declared go.mod toolchains, Pester 5.7.1 and powershell-yaml 0.4.12. The build checks the Hugo executable's edition and minimum version.
 
-### Translation Flexibility
+Install the PowerShell dependencies once:
 
-- You can provide PDF-only translations for any guide or version, allowing for translated content even if a full web version is not available.
-- Individual versions of a guide can be translated independently, without requiring other versions or other guides to be translated as well.
+```powershell
+Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Repository PSGallery -Force
+Install-Module powershell-yaml -RequiredVersion 0.4.12 -Scope CurrentUser -Repository PSGallery -Force
+```
 
-## Current sites using this module
+Check the tools and run the full build:
 
-- [Kanban Guides](https://kanbanguides.org) – [GitHub](https://github.com/KanbanGuides/KanbanGuides)
-- [Scrum Expansion Pack](https://scrumexpansion.org) – [GitHub](https://github.com/ScrumGuides/ScrumGuide-ExpansionPack)
-- [Safe Delusion](https://safedelusion.com) –
+```powershell
+./build.ps1 -Versions
+hugo version
+go version
+./build.ps1
+```
 
-## Platform development layout
+The bare command runs Prepare, Build and Validate for the independent reference site. Prepare checks contracts, publishing operations and tool prerequisites. Build renders Hugo and packages hosting configuration. Validate checks the artifact and its source/target identity. It does not deploy.
 
-The rendering module is in `system/OpenGuidePlatform.Hugo.Guides/`; the self-contained example is in `examples/reference-guide-site/`. The module identity and historical release tags have not been renamed yet. Consumer guide content and bespoke wrappers remain in their own repositories.
+Build the preview configuration with `./build.ps1 -Target preview`. Each run chooses a fresh directory under .processing/platform-build and prints its location.
 
-Build the example with `hugo --source examples/reference-guide-site --config hugo.yaml,hugo.local.yaml`. Run structural contract checks with `pwsh -File .build/Test-PlatformContracts.ps1`.
+| Output | Purpose |
+|---|---|
+| site/ | Generated site and packaged hosting configuration |
+| hugo.log | Build output, including duplicate-path diagnostics |
+| artifact-identity.json | Source commit, target and file hashes |
+| artifact-validation.json | Result and actionable findings |
 
-A site wraps a collection of guides with no platform-defined maximum. One, two and fifteen guides are current consumer examples, not supported-count limits. A 128-guide fixture exercises the same schema. No guide is selected by an ordinal position or a hard-coded current consumer count.
+A production-target build checks that configuration locally; it does not publish production.
+
+## Run stages individually
+
+Use the same fresh output path and target for Build and Validate:
+
+```powershell
+$run = '.processing/manual-' + [guid]::NewGuid().ToString('N')
+./build.ps1 -Stage Prepare
+./build.ps1 -Stage Build -Target preview -OutputPath $run
+./build.ps1 -Stage Validate -Target preview -OutputPath $run
+```
+
+Build refuses an existing output directory so stale files cannot pass as current output. Investigate a nonzero exit or failed/blocked report. Missing evidence is never successful validation.
+
+## Preview while editing
+
+```powershell
+./build.ps1 -Stage Prepare
+hugo serve --source examples/reference-guide-site --config hugo.yaml,hugo.local.yaml
+```
+
+Open the URL printed by Hugo. Stop with Ctrl+C. Hugo builds at server startup and rebuilds as files change. This editing loop does not run full artifact validation after each save; run `./build.ps1` before committing.
+
+The existing serve.ps1 is a legacy shortcut that does not use platform preparation. The explicit commands above are the documented workflow while that entry point is reviewed.
+
+## Understand reports
+
+Prepare distinguishes wrapper, guide, edition, language and download readiness. Supplied PDFs and intentional language fallbacks are supported states. Available text does not establish translation quality.
+
+Validate checks required resources, JSON, unresolved tokens, duplicate Hugo target paths, size and artifact identity. Missing artifacts/logs produce blocked results with unknown metrics. REPORT_DELIVERY_FAILED identifies a delivery problem separately from the underlying assessment.
+
+Known migration issue: a negative test using commit aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and missing-policy.json can leak its expected blocked fixture into the Actions summary. That fixture is not a consumer assessment. Check the actual workflow job result and assessment commit; genuine blocked results must still be addressed.
+
+## Work with a guide site
+
+The root build currently builds the platform reference example. Consumer adoption, packaging and shared workflows remain in progress. Do not copy a test policy into a live site or automatically replace its build.
+
+See [Core commands](system/OpenGuidePlatform.PowerShell.Core/README.md) and [skill usage](system/OpenGuidePlatform.AgentSkills/USAGE.md). The development .build/Invoke-GuidePrepare.ps1 entry point requires an explicit workspace, reviewed policy, source commit, output path and target.
+
+PDF generation additionally requires Pandoc, XeLaTeX and the required fonts. Supplied/protected PDFs cannot be regenerated by generated-PDF operations.
+
+Existing /download/, /downloads/ and /translationsdirectory/ aliases are legacy compatibility only. Preserve existing declarations; do not extend them or require them for new languages.
+
+## Repository map
+
+| Location | Responsibility |
+|---|---|
+| build.ps1 | Human and CI build entry point |
+| .build/ | Orchestration, verification and comparison harnesses |
+| system/OpenGuidePlatform.Hugo.Guides/ | Shared Hugo rendering |
+| system/OpenGuidePlatform.PowerShell.Core/ | Publishing rules and operations |
+| system/OpenGuidePlatform.PowerShell.Build/ | Build, reporting and external-tool adapters |
+| system/OpenGuidePlatform.AgentSkills/ | Distributed skill candidates |
+| examples/reference-guide-site/ | Independent example wrapper and content |
+| tests/ | Contract and operation regressions |
+| docs/architecture/ | Plan, decisions and evidence |
+
+Adapter resources may use another tool's language. A Hugo template used solely to probe translation resolution belongs to the Build adapter; it is not a reusable site-rendering template.
+
+## Contribution and verification
+
+Use a branch and PR. Keep module internal changes minimal during migration and preserve the deliberate multilingual structure. Follow AGENTS.md for mandatory Hugo builds after module/example changes.
+
+The platform PR currently validates without deploying the reference site. Later Deploy/Verify checks need an isolated preview endpoint to verify hosting behavior and the deployed artifact.
+
+Follow the [execution plan](docs/architecture/open-guide-platform-execution-plan.md) for checkpoints and [cross-consumer evidence](docs/architecture/baselines/2026-09-13-relocation/README.md) for existing behavior.
+
+Update this README in the same change as any command, prerequisite, stage, report or deployment behavior. Examples must describe implemented behavior; planned capabilities belong in the execution plan.
