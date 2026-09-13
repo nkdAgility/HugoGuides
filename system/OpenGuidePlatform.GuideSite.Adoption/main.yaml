@@ -11,6 +11,10 @@ permissions:
   actions: read
 jobs:
   guide-site:
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: write
     uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@__RELEASE__
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}

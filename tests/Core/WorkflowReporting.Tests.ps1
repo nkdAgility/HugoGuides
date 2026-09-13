@@ -13,6 +13,12 @@ Describe 'Isolated workflow Prepare reporting' {
         $reportJob.needs | Should -Be prepare
         $reportJob.if | Should -Match 'always\(\)'
     }
+    It 'passes report permission through the generated consumer caller' {
+        $consumer=ConvertFrom-Yaml (Get-Content "$root/system/OpenGuidePlatform.GuideSite.Adoption/main.yaml" -Raw)
+        $consumer.jobs['guide-site'].permissions['pull-requests'] | Should -Be write
+        $consumer.jobs['guide-site'].permissions.actions | Should -Be read
+        $consumer.permissions['pull-requests'] | Should -BeNullOrEmpty
+    }
     It 'delivers current reports, preserves stale reports and distinguishes delivery failures' {
         $script=($reportJob.steps|Where-Object uses -EQ 'actions/github-script@v7').with.script
         $scriptPath=Join-Path $TestDrive 'report-script.json'
