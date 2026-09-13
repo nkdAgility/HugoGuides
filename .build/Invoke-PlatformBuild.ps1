@@ -15,10 +15,14 @@ if($LASTEXITCODE -ne 0){throw 'Cannot determine the build source commit.'}
 function Merge-Config([Collections.IDictionary]$base,[Collections.IDictionary]$overlay){
     foreach($key in $overlay.Keys){if($base.Contains($key) -and $base[$key] -is [Collections.IDictionary] -and $overlay[$key] -is [Collections.IDictionary]){Merge-Config $base[$key] $overlay[$key]}else{$base[$key]=$overlay[$key]}}
 }
+if($Stage -in @('All','Prepare','Build')){
+    $toolchain=Get-GuideHugoToolchain
+    Write-Host "Hugo $($toolchain.Version) Extended verified."
+}
 if($Stage -in @('All','Prepare')){
     & (Join-Path $PSScriptRoot 'Test-PlatformContracts.ps1')
     & (Join-Path $PSScriptRoot 'Test-PlatformCore.ps1')
-    if(-not (Get-Command hugo -CommandType Application -ErrorAction SilentlyContinue)){throw 'Hugo Extended is required for the platform reference build.'}
+
 }
 if($Stage -in @('All','Build')){
     if(Test-Path -LiteralPath $output){throw 'Build output already exists; choose a new OutputPath to avoid stale artifacts.'}
