@@ -16,37 +16,49 @@ Import-Module "$platformRoot/system/OpenGuidePlatform.PowerShell.Core/OpenGuideP
 Import-Module "$platformRoot/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
 if($OutputPath -notmatch '^\.processing/[A-Za-z0-9/_-]+$'){throw 'Guide-site evidence must use a named directory under .processing.'}
 $output=Resolve-GuideWorkspacePath $root $OutputPath
-$policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
-$source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
 $commit=(& git -C $root rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0){throw 'Cannot resolve guide-site source commit.'}
 $site=Join-Path $output 'site'
 $overlay=Join-Path $output 'candidate-platform.json'
 $configs=@('hugo.yaml',"hugo.$Target.yaml",$overlay)
-$inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
 if($Stage -in @('All','Prepare','Serve')){
     if(Test-Path -LiteralPath $output){throw 'Guide-site output exists; choose a fresh evidence directory.'}
     [IO.Directory]::CreateDirectory($output)|Out-Null
-    $module=Join-Path $platformRoot 'system/OpenGuidePlatform.Hugo.Guides'
-    # Bind the consumer to the packaged candidate without changing its module or source files.
-    $values=@{module=@{replacements=@("github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
-    if($BaseUrl){
-        $address=[uri]$BaseUrl
-        if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}
-        $values.baseURL=$address.AbsoluteUri
-    }
-    if(-not $values.ContainsKey('baseURL')){
+    try {
+        $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
+        $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
+        $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
+        $module=Join-Path $platformRoot 'system/OpenGuidePlatform.Hugo.Guides'
+        # Bind the consumer to the packaged candidate without changing its module or source files.
+        $values=@{module=@{replacements=@("github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+        if($BaseUrl){
+            $address=[uri]$BaseUrl
+            if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}
+            $values.baseURL=$address.AbsoluteUri
+        }
+        if(-not $values.ContainsKey('baseURL')){
+            [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
+            $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl
+        }
         [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
-        $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl
+        $null=Get-GuideHugoToolchain
+        $preparedTools=Get-GuidePreparedBuildTools
+        $preparedInputs=Get-GuidePreparedInputs @inputArguments
+    } catch {
+        # Route setup failures through the same contract/renderers as assessment failures.
+        # No assessment exists yet; never replace evidence from an earlier Prepare run.
+        & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -InputFailure $_.Exception.Message
+        throw
     }
-    [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
-    $null=Get-GuideHugoToolchain
-    $preparedTools=Get-GuidePreparedBuildTools
-    $preparedInputs=Get-GuidePreparedInputs @inputArguments
     & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay)
     Assert-GuidePreparedInputs -Expected $preparedInputs -Actual (Get-GuidePreparedInputs @inputArguments)
     [IO.File]::WriteAllText("$output/prepare/inputs.json",($preparedInputs|ConvertTo-Json -Depth 10))
     [IO.File]::WriteAllText("$output/prepare/tools.json",($preparedTools|ConvertTo-Json -Depth 10))
+}
+if($Stage -in @('Build','Validate')){
+    $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
+    $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
+    $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
 }
 if($Stage -in @('All','Build','Validate')){
     $assessment=Get-Content "$output/prepare/assessment.json" -Raw|ConvertFrom-Json

@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$WorkspaceRoot,
     [Parameter(Mandatory)][string]$PolicyPath,
     [string]$EffectiveProductionPath,
+    [string]$InputFailure,
     [string]$SummaryPath=$env:GITHUB_STEP_SUMMARY,
     [string]$PlatformVersion='0.0.0',[string]$ModulePath='github.com/nkdAgility/HugoGuides/module',
     [string[]]$Languages,
@@ -18,6 +19,7 @@ $platformRoot=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
 $policyDigest=$null
 try {
+    if($InputFailure){throw $InputFailure}
     Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
     $policyDigest=(Get-FileHash -LiteralPath $PolicyPath -Algorithm SHA256).Hash.ToLowerInvariant()
     $policy=Import-GuidePolicy -Path $PolicyPath
