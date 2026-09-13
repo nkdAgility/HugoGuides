@@ -50,16 +50,10 @@ if($Stage -in @('All','Build')){
     [IO.File]::WriteAllText((Join-Path $output 'artifact-identity.json'),($identity|ConvertTo-Json -Depth 100))
 }
 if($Stage -in @('All','Validate')){
-    $validation=Test-GuideArtifact -ArtifactRoot $site -RequiredRoutes @('/') -RequiredDownloads @('staticwebapp.config.json') -HugoLog (Get-Content -LiteralPath (Join-Path $output 'hugo.log') -ErrorAction Stop)
-    try {
-        $identity=Get-Content -LiteralPath (Join-Path $output 'artifact-identity.json') -Raw|ConvertFrom-Json -ErrorAction Stop
-        $null=Test-GuideArtifactIdentity -ArtifactRoot $site -Identity $identity -ExpectedTarget $Target -ExpectedSourceCommit $sourceCommit
-    } catch {
-        $validation.Outcome='fail'
-        $validation.Findings+= [pscustomobject]@{Code='ARTIFACT_IDENTITY_INVALID';Path='artifact-identity.json';Message=$_.Exception.Message}
-    }
-    $report=[ordered]@{Outcome=$validation.Outcome;SourceCommit=$sourceCommit;Target=$Target;SizeBytes=$validation.SizeBytes;FileCount=$validation.Files.Count;Findings=@($validation.Findings)}
+    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath (Join-Path $output 'artifact-identity.json') -HugoLogPath (Join-Path $output 'hugo.log') -SourceCommit $sourceCommit -Target $Target -RequiredRoutes @('/') -RequiredDownloads @('staticwebapp.config.json')
+    # Output containment/reparse checks above also apply to a missing-build report.
+    [IO.Directory]::CreateDirectory($output)|Out-Null
     [IO.File]::WriteAllText((Join-Path $output 'artifact-validation.json'),($report|ConvertTo-Json -Depth 100))
-    if($validation.Outcome -ne 'pass'){$validation.Findings|Format-Table -AutoSize|Out-Host;throw 'Artifact validation failed; inspect artifact-validation.json.'}
-    "Validated $($validation.Files.Count) files in $site. No deployment performed."
+    if($report.Outcome -ne 'pass'){$report.Findings|Format-Table -AutoSize|Out-Host;throw "Artifact validation $($report.Outcome); inspect artifact-validation.json."}
+    "Validated $($report.FileCount) files in $site. No deployment performed."
 }
