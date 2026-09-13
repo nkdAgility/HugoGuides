@@ -7,7 +7,15 @@ function Invoke-GuideTranslationProbe {
     $start.Environment['GOWORK']='off';$start.Environment['GOFLAGS']='-mod=readonly'
     $start.Environment['HUGO_RESOURCEDIR']=Join-Path $ProbePath 'resources'
     $destination=Join-Path $ProbePath $Pass
-    $arguments=@('--source',$SourcePath,'--contentDir',(Join-Path $ProbePath 'content'),'--layoutDir',(Join-Path $ProbePath 'layouts'),'--config',(($ConfigFiles+@($OverlayPath))-join ','),'--environment',$Target,'--destination',$destination,'--cacheDir',(Join-Path $ProbePath 'cache'),'--noBuildLock','--printI18nWarnings')
+    # Go's nested VCS paths exceed Windows limits below per-probe evidence folders.
+    # Keep immutable module caches short; probe outputs/resources remain isolated.
+    $cache=if($IsWindows){Join-Path ([IO.Path]::GetTempPath()) 'ogp-hugo-cache'}else{Join-Path $ProbePath 'cache'}
+    $cursor=[IO.Path]::GetFullPath($cache)
+    while($cursor){
+        if((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)){throw 'Linked Hugo module cache is unsupported.'}
+        $cursor=[IO.Path]::GetDirectoryName($cursor)
+    }
+    $arguments=@('--source',$SourcePath,'--contentDir',(Join-Path $ProbePath 'content'),'--layoutDir',(Join-Path $ProbePath 'layouts'),'--config',(($ConfigFiles+@($OverlayPath))-join ','),'--environment',$Target,'--destination',$destination,'--cacheDir',$cache,'--noBuildLock','--printI18nWarnings')
     foreach($argument in $arguments){$start.ArgumentList.Add($argument)}
     $process=[Diagnostics.Process]::new();$process.StartInfo=$start
     try {

@@ -100,6 +100,8 @@ $package=Join-Path $work 'package'
 [IO.Compression.ZipFile]::ExtractToDirectory($archivePath,$package)
 $metadata=Get-Content "$package/platform.json" -Raw|ConvertFrom-Json
 if($metadata.version -cne $manifest.version -or $metadata.sourceCommit -cne $manifest.sourceCommit){throw 'Installed package identity mismatch.'}
+$resolution=[ordered]@{schemaVersion=1;mode='release';version=$manifest.version;sourceCommit=$manifest.sourceCommit}
+[IO.File]::WriteAllText("$package/platform-resolution.json",($resolution|ConvertTo-Json))
 if($Restore){return $package}
 foreach($required in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','system/OpenGuidePlatform.GuideSite.Adoption/main.yaml')){
     if(-not (Test-Path -LiteralPath "$package/$required" -PathType Leaf)){throw 'This release predates guide-site installation support; choose a newer release.'}
@@ -141,7 +143,7 @@ foreach($name in $files.Keys){
 if($conflicts.Count){throw "Managed-file conflicts; reconcile on your review branch before retrying: $($conflicts -join ', ')"}
 $hashes=[ordered]@{}
 foreach($name in $files.Keys){$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
-$record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;policyPath=$PolicyPath;release=$manifest;hugoResolution='verified-package-overlay';adoptionBlockers=@('Native Hugo module publication','Coordinated agent controls and independent enforcement');managedFiles=$hashes}
+$record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;policyPath=$PolicyPath;release=$manifest;hugoResolution='native-module-required';adoptionBlockers=@('Native Hugo module publication','Coordinated agent controls and independent enforcement');managedFiles=$hashes}
 $files['open-guide-platform.installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
 Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); managed files:"
 $files.Keys|ForEach-Object {Write-Host "  $_"}

@@ -28,9 +28,9 @@ if($Stage -in @('All','Prepare','Serve')){
         $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
         $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
         $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
-        $module=Join-Path $platformRoot 'system/OpenGuidePlatform.Hugo.Guides'
-        # Bind the consumer to the packaged candidate without changing its module or source files.
-        $values=@{module=@{replacements=@("github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides -> $($module.Replace('\','/'))","github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+        $resolution=Get-GuideModuleResolution -PlatformRoot $platformRoot -SourcePath $source -Version $Version
+        $values=@{params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+        if($resolution.Mode -ne 'release'){$values.module=@{replacements=@($resolution.Replacements)}}
         if($BaseUrl){
             $address=[uri]$BaseUrl
             if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}
@@ -41,6 +41,10 @@ if($Stage -in @('All','Prepare','Serve')){
             $values.baseURL=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl
         }
         [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
+        if($resolution.Mode -eq 'release'){
+            $effective=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration
+            if(@($effective.module.replacements|Where-Object { $_ -match '^\s*github\.com/nkdAgility/(?:HugoGuides/module|OpenGuidePlatform/system/OpenGuidePlatform\.Hugo\.Guides)\s*->' }).Count -or -not @($effective.module.imports|Where-Object { $_.path -ceq $resolution.ModulePath }).Count){throw 'Released builds require a canonical Hugo import without a configuration replacement.'}
+        }
         $null=Get-GuideHugoToolchain
         $preparedTools=Get-GuidePreparedBuildTools
         $preparedInputs=Get-GuidePreparedInputs @inputArguments
@@ -50,7 +54,7 @@ if($Stage -in @('All','Prepare','Serve')){
         & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -InputFailure $_.Exception.Message
         throw
     }
-    & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay) -ExpectedInputs $preparedInputs -InputArguments $inputArguments
+    & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ModulePath $resolution.ModulePath -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay) -ExpectedInputs $preparedInputs -InputArguments $inputArguments
     [IO.File]::WriteAllText("$output/prepare/inputs.json",($preparedInputs|ConvertTo-Json -Depth 10))
     [IO.File]::WriteAllText("$output/prepare/tools.json",($preparedTools|ConvertTo-Json -Depth 10))
 }

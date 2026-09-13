@@ -40,7 +40,7 @@ function Get-GuidePreparedInputs {
         Add-InputTree (Join-Path $PlatformRoot "system/$component") "platform/$component"
     }
     # Runtime scripts are the same in the source checkout and distributed package.
-    foreach($file in @('build.ps1','.build/Build-GuideSite.ps1','.build/Prepare-GuideSite.ps1','.build/Test-GuideSiteNavigation.ps1','.build/Write-GuideSiteValidationSummary.ps1')){
+    foreach($file in @('platform.json','platform-resolution.json','build.ps1','.build/Build-GuideSite.ps1','.build/Prepare-GuideSite.ps1','.build/Test-GuideSiteNavigation.ps1','.build/Write-GuideSiteValidationSummary.ps1')){
         Add-InputFile (Join-Path $PlatformRoot $file) "platform/$file"
     }
     Add-InputFile $OverlayPath 'configuration-overlay'

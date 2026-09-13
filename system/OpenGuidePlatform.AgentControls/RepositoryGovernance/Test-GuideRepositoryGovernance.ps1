@@ -58,10 +58,11 @@ $candidate=Read-CommitTree $CandidateCommit
 $paths=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 foreach($path in @($baseline.Keys)+@($candidate.Keys)){$null=$paths.Add($path)}
 $protectedPaths=@('.github','.agents','.codex','.claude','build.ps1','bootstrap.ps1','guide-site.policy.json','platform-lock.json','open-guide-platform.installation.json')+@($policy.protectedPaths)
-$protectedNames=@('AGENTS.md','CLAUDE.md','agents.md','copilot-instructions.md','go.mod','go.sum','go.work','go.work.sum','hugo*.yaml','hugo*.yml','hugo*.toml','hugo*.json')+@($policy.protectedFileNames)
+$protectedNames=@('.gitattributes','.gitmodules','.gitignore','AGENTS.md','CLAUDE.md','agents.md','copilot-instructions.md','go.mod','go.sum','go.work','go.work.sum','hugo*.yaml','hugo*.yml','hugo*.toml','hugo*.json')+@($policy.protectedFileNames)
 $findings=[Collections.Generic.List[object]]::new()
 foreach($path in $paths|Sort-Object){
     $protected=@($protectedPaths|Where-Object {$prefix=$_.TrimEnd('/');$path.Equals($prefix,[StringComparison]::OrdinalIgnoreCase) -or $path.StartsWith($prefix+'/',[StringComparison]::OrdinalIgnoreCase)}).Count -gt 0
+    if($path -match '(?:^|/)\.(?:github|agents|codex|claude)(?:/|$)'){$protected=$true}
     $name=($path -split '/')[-1]
     if(-not $protected){$protected=@($protectedNames|Where-Object {$name -like $_}).Count -gt 0}
     if(-not $protected){continue}
