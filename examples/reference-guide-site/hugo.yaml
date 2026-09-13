@@ -117,8 +117,6 @@ module:
     #     - source: content
     #       target: content
     - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
-  replacements:
-    - github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides -> ../../../system/OpenGuidePlatform.Hugo.Guides
 
 markup:
   goldmark:
