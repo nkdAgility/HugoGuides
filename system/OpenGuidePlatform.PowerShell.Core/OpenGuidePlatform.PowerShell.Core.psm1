@@ -17,3 +17,5 @@ $script:CoreRoot=$PSScriptRoot
 . (Join-Path $PSScriptRoot 'PdfPublishing/Test-GuidePdfCache.ps1')
 
 . (Join-Path $PSScriptRoot 'WrapperReadiness/Get-GuideWrapperStatus.ps1')
+
+. (Join-Path $PSScriptRoot 'Assessment/Get-GuideAssessment.ps1')

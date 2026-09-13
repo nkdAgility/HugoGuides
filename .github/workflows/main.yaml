@@ -175,58 +175,23 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
-      - uses: cschleiden/replace-tokens@v1
-        with:
-          files: '["**/*.html", "**/*.yaml"]'
-          tokenPrefix: "#{"
-          tokenSuffix: "}#"
-        env:
-          GitVersion_SemVer: ${{ needs.Setup.outputs.GitVersion_SemVer }}
-          GitVersion_AssemblySemVer: ${{ needs.Setup.outputs.GitVersion_AssemblySemVer }}
-          GitVersion_InformationalVersion: ${{ needs.Setup.outputs.GitVersion_InformationalVersion }}
-          GitVersion.SemVer: ${{ needs.Setup.outputs.GitVersion_SemVer }}
-          HugoGuides_AzureSitesConfig: ${{ needs.Setup.outputs.HugoGuides_AzureSitesConfig }}
-          PR_Number: ${{ github.event.number }}
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "${{ vars.HUGO_BUILD_VERSION }}"
           extended: true
 
-      - name: Build
+      - name: Build and validate platform artifact
+        env:
+          GUIDE_BUILD_TARGET: ${{ needs.Setup.outputs.HugoGuides_AzureSitesConfig }}
+          GUIDE_BUILD_VERSION: ${{ needs.Setup.outputs.GitVersion_SemVer }}
         run: |
-          Write-Host "Building site for ${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}";
-          $env:HUGO_ENV = "${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}";
-          hugo --source examples/reference-guide-site --config hugo.yaml,hugo.${{ (needs.Setup.outputs.HugoGuides_AzureSitesConfig) }}.yaml --logLevel info; # --minify
-
-      - name: Copy Files
-        shell: pwsh
-        run: |
-          Get-ChildItem -Path "${{ github.workspace }}" -Directory | Select-Object -ExpandProperty FullName
-          Copy-Item -Path "./staticwebapp.config.json" -Destination ./public/
-          Get-ChildItem -Path "./" -Filter "staticwebapp.config.*.json" | ForEach-Object {
-              Copy-Item -Path $_.FullName -Destination "./public/"
-          }
-
-      - name: Check if folder size exceeds 500MB
-        shell: pwsh
-        run: |
-          $folder = "./public/"
-          $size = (Get-ChildItem -Recurse -File -Path $folder | Measure-Object -Property Length -Sum).Sum
-
-          # Example: Perform an action if the folder is larger than 500MB (524288000 bytes)
-          if ($size -gt 524288000 ) {
-            Write-Host "Folder is larger than 500MB"
-            # Add additional actions or logic here
-          } else {
-            Write-Host "Folder is under 500MB"
-          }
-
+          ./build.ps1 -Stage Build -Target $env:GUIDE_BUILD_TARGET -Version $env:GUIDE_BUILD_VERSION -OutputPath .processing/ci-build
+          ./build.ps1 -Stage Validate -Target $env:GUIDE_BUILD_TARGET -OutputPath .processing/ci-build
       - uses: actions/upload-artifact@v4
         with:
           name: Site
-          path: ./public/**/*
+          path: ./.processing/ci-build/site/**/*
 
   # Release to Docs
   Publsh:
