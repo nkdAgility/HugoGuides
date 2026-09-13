@@ -44,3 +44,13 @@ Describe 'Prepare input freshness' {
         { Assert-GuidePreparedInputs $before (Get-GuidePreparedInputs @argsForInputs) } | Should -Throw '*PREPARE_INPUTS_CHANGED*'
     }
 }
+Describe 'Build-only tool fingerprints' {
+    It 'does not require the YAML parser installed only in Prepare' {
+        Mock Import-Module { throw 'Prepare-only dependency must not be loaded by Build fingerprinting.' } -ModuleName OpenGuidePlatform.PowerShell.Build
+        $tools=Get-GuidePreparedBuildTools
+        $tools.Tools.Keys | Should -Contain hugo
+        $tools.Tools.Keys | Should -Contain go
+        $tools.Tools.Keys | Should -Not -Contain powershell-yaml
+        Should -Invoke Import-Module -ModuleName OpenGuidePlatform.PowerShell.Build -Times 0 -Exactly
+    }
+}

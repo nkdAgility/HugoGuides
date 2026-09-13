@@ -68,9 +68,6 @@ function Get-GuidePreparedBuildTools {
         $command=Get-Command $name -CommandType Application -ErrorAction Stop|Select-Object -First 1
         $tools[$name]=(Get-FileHash -LiteralPath $command.Source).Hash.ToLowerInvariant()
     }
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
-    $yaml=Get-Module powershell-yaml|Select-Object -First 1
-    $tools['powershell-yaml']=(Get-FileHash -LiteralPath $yaml.Path).Hash.ToLowerInvariant()
     $json=$tools|ConvertTo-Json -Compress
     [pscustomobject]@{Tools=$tools;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json))).ToLowerInvariant()}
 }
