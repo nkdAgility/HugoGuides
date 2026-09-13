@@ -20,6 +20,7 @@ $runtime=@('Build-GuideSite.ps1','Prepare-GuideSite.ps1','Write-GuideSiteValidat
 Get-ChildItem -LiteralPath "$stage/.build" -File|Where-Object Name -NotIn $runtime|Remove-Item
 $metadata=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=if($Version.Contains('-')){'preview'}else{'stable'};hugoModule='github.com/nkdAgility/HugoGuides/module'}
 [IO.File]::WriteAllText("$stage/platform.json",($metadata|ConvertTo-Json))
+Copy-Item -LiteralPath "$root/bootstrap.ps1" -Destination "$output/bootstrap.ps1"
 $archive=Join-Path $output 'OpenGuidePlatform.zip'
 $zip=[IO.Compression.ZipFile]::Open($archive,[IO.Compression.ZipArchiveMode]::Create)
 try{
@@ -31,6 +32,6 @@ try{
         try{$inputStream.CopyTo($outputStream)}finally{$inputStream.Dispose();$outputStream.Dispose()}
     }
 }finally{$zip.Dispose()}
-$manifest=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=$metadata.channel;archive='OpenGuidePlatform.zip';sha256=(Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()}
+$manifest=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=$metadata.channel;archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$output/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()}
 [IO.File]::WriteAllText("$output/release-manifest.json",($manifest|ConvertTo-Json))
 "Packaged OpenGuidePlatform $Version from $commit"

@@ -57,6 +57,7 @@ jobs:
           path: |
             .processing/platform-package/OpenGuidePlatform.zip
             .processing/platform-package/release-manifest.json
+            .processing/platform-package/bootstrap.ps1
           if-no-files-found: error
   release:
     name: Publish OpenGuidePlatform GitHub Release
