@@ -14,7 +14,15 @@ param(
 $ErrorActionPreference='Stop'
 if($Versions){
     "PowerShell $($PSVersionTable.PSVersion)"
-    foreach($tool in @('hugo','go','pandoc','xelatex')){$command=Get-Command $tool -CommandType Application -ErrorAction SilentlyContinue|Select-Object -First 1;if($command){"${tool}: $($command.Source)"}else{"${tool}: unavailable"}}
+    foreach($tool in @('hugo','go','pandoc','xelatex')){
+        $command=Get-Command $tool -CommandType Application -ErrorAction SilentlyContinue|Select-Object -First 1
+        if(-not $command){"${tool}: unavailable";continue}
+        $argument=if($tool -in @('hugo','go')){'version'}else{'--version'}
+        $lines=@(& $command.Source $argument 2>&1)
+        if($LASTEXITCODE -ne 0){"${tool}: version query failed ($LASTEXITCODE)";continue}
+        $version=$lines|Where-Object {-not [string]::IsNullOrWhiteSpace([string]$_)}|Select-Object -First 1
+        "${tool}: $version"
+    }
     return
 }
 if(-not $OutputPath){$OutputPath='.processing/'+$Product.ToLowerInvariant()+'/'+[guid]::NewGuid().ToString('N')}

@@ -539,3 +539,7 @@ The rehearsal also corrected cold-cache JSON progress output and Windows transla
 The maintainer required completing each stage before advancing. E07 installer work is paused and preserved locally in `.processing/paused-e07-native-installer/`; it is not part of the E01 commit or claimed as verified. E01 now consistently records version-tag workflow references with separate provenance and the technical owner decision. E03 is complete; its original audit checkboxes have been reconciled with the recorded closure. E04 is the next stage after E01 verification. No administrative or consumer changes are included.
 
 E01 local acceptance passed through the root build: contract checks, Core regression suite, seven distributed skill checks, real Hugo translation probe and distributable package validation. The main-only publication condition remains unchanged. Committed CI verification follows.
+
+E01 committed verification: `daf09c6e5b58dbe186dae664b8fc049ca3f18059` passed [run 34776517342](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34776517342), including platform packaging, all five sample stages and PR reporting. Release was correctly skipped. E01 is closed; E04 is current.
+
+E04 tool diagnostics: root -Versions now reports executable version output for Hugo, Go, Pandoc and XeLaTeX, preserving dependency-free missing-tool diagnostics. Verified locally with all four installed tools and the full platform build (196 tests, package verification). E04 remains open for its remaining runtime-anchor, PDF receipt and publication acceptance work.
