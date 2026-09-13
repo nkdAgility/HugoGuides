@@ -23,6 +23,9 @@ defaults:
     shell: pwsh
 jobs:
   build:
+    permissions:
+      contents: read
+      actions: read
     name: OpenGuidePlatform Build and package 
     runs-on: ubuntu-24.04
     outputs:

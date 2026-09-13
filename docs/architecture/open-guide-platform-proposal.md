@@ -301,7 +301,7 @@ Never run untrusted PR scripts in a privileged reporting workflow. Keep deployme
 
 One report contract generates console output, Actions summaries, file annotations and an updated PR comment. Findings carry rule ID, severity, subject, source path/line, observed/expected state, reason, repair guidance and verification command. Include commit, policy/platform versions, target, time and run URL.
 
-Keep one bot-owned comment; prevent older runs overwriting newer results. Report blocked and skipped stages honestly. Public comments omit secrets, local machine details and unnecessary personal data. Validate and escape untrusted report text before publishing. Always upload reports when possible, including failed Prepare runs.
+Use bot-owned, immutable comments scoped to commit, run, attempt and target; prevent duplicate delivery and skip a changed PR head. This reconciles the original single-comment mockup with the implemented reporting strategy: without an atomic compare-and-swap update, append-only evidence prevents an older concurrent run overwriting newer results. Report blocked and skipped stages honestly. Public comments omit secrets, local machine details and unnecessary personal data. Validate and escape untrusted report text before publishing. Always upload reports when possible, including failed Prepare runs.
 
 **Illustrative Actions failure, not a current scan:**
 

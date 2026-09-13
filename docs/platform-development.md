@@ -4,7 +4,7 @@ These commands run in the **OpenGuidePlatform repository**. For an installed gui
 
 ## Build and test
 
-Install the tools listed in the README, then the platform test dependencies:
+Install the tools listed in the README and Node.js (for isolated GitHub reporting adapter tests), then the platform test dependencies:
 
 ```powershell
 ./.build/Install-PlatformTestDependencies.ps1
@@ -29,6 +29,8 @@ Serve prints the local address. Stop it with Ctrl+C. Shared Hugo changes require
 [main.yaml](../.github/workflows/main.yaml) runs:
 
 **Build and package OpenGuidePlatform → sample Prepare → Build → Validate → Deploy → Verify → Publish OpenGuidePlatform GitHub Release**
+
+Prepare report is a separate delivery job beside Prepare so its comment-writing token is never given to guide-site build code. It downloads only the assessment data, posts the common Markdown report, and never checks out or executes candidate scripts. It runs for same-repository PRs even when Prepare fails; fork PRs retain Actions artifacts. Reports are immutable per commit/run/attempt, with duplicate and stale-head protection. A report is candidate evidence, not the independent E06 policy gate.
 
 Required stage check names contain the site name and stage only; preview and production report the same checks. The target remains visible in assessment summaries and artifact names.
 

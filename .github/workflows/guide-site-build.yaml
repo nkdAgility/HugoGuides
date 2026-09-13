@@ -109,6 +109,15 @@ jobs:
         run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
       - name: Prepare guide site
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain Prepare report for PR delivery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Assessment-${{ inputs.target }}
+          path: |
+            .processing/guide-site/prepare/assessment.json
+            .processing/guide-site/prepare/assessment.md
+          if-no-files-found: error
       - name: Retain prepared context and assessment
         if: always()
         uses: actions/upload-artifact@v4
@@ -120,6 +129,71 @@ jobs:
             .processing/guide-site/
             .processing/i18n-probe/
           if-no-files-found: error
+  prepare-report:
+    name: ${{ inputs.site-name }} Prepare report
+    needs: prepare
+    if: ${{ always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      # Data only: no checkout, restored package, candidate script or shell execution.
+      - uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Assessment-${{ inputs.target }}
+          path: assessment
+      - name: Deliver commit-scoped Prepare assessment
+        uses: actions/github-script@v7
+        env:
+          ASSESSED_COMMIT: ${{ inputs.source-ref }}
+          ASSESSED_TARGET: ${{ inputs.target }}
+          PREPARE_RESULT: ${{ needs.prepare.result }}
+        with:
+          script: |
+            const fs = require('node:fs');
+            try {
+              const read = name => {
+                const path = `assessment/${name}`;
+                const stat = fs.lstatSync(path);
+                if (!stat.isFile() || stat.size > 1024 * 1024) throw new Error('Invalid assessment file or size.');
+                return fs.readFileSync(path, 'utf8');
+              };
+              const assessment = JSON.parse(read('assessment.json'));
+              const markdown = read('assessment.md');
+              const sha = process.env.ASSESSED_COMMIT;
+              const target = process.env.ASSESSED_TARGET;
+              if (!/^[a-f0-9]{40}$/.test(sha) || assessment.sourceCommit !== sha ||
+                  assessment.schemaVersion !== 1 || assessment.stage !== 'Prepare' ||
+                  assessment.target !== target || !['local', 'preview', 'production'].includes(target) ||
+                  !['pass', 'fail', 'blocked'].includes(assessment.outcome) ||
+                  !markdown.startsWith(`## Prepare: ${assessment.outcome}\n`)) {
+                throw new Error('Assessment identity or format does not match this run.');
+              }
+              const number = context.payload.pull_request.number;
+              const scope = { ...context.repo, pull_number: number };
+              const current = async () => {
+                const { data } = await github.rest.pulls.get(scope);
+                return data.state === 'open' && data.head.sha === sha;
+              };
+              if (!(await current())) { core.notice('REPORT_SUPERSEDED: PR closed or head changed.'); return; }
+              const marker = `<!-- openguide-assessment:${context.runId}/${process.env.GITHUB_RUN_ATTEMPT}/${target}/Prepare/${sha} -->`;
+              const run = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+              const state = process.env.PREPARE_RESULT === 'success' ? 'completed' : 'did not complete successfully; recorded findings may be incomplete';
+              const body = `${marker}\nPrepare ${state}. [Workflow evidence](${run}). This is the candidate assessment, not independent policy or deployment approval.\n\n${markdown}`;
+              if (body.length > 65000) throw new Error('Report exceeds GitHub comment size; use retained artifacts.');
+              const comments = await github.paginate(github.rest.issues.listComments, { ...context.repo, issue_number: number, per_page: 100 });
+              const prior = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.startsWith(marker));
+              if (prior) {
+                if (prior.body !== body) throw new Error('This run already has different immutable report content.');
+                core.notice('REPORT_ALREADY_DELIVERED'); return;
+              }
+              if (!(await current())) { core.notice('REPORT_SUPERSEDED: head changed before delivery.'); return; }
+              await github.rest.issues.createComment({ ...context.repo, issue_number: number, body });
+              core.notice('REPORT_DELIVERED');
+            } catch (error) {
+              core.setFailed(`REPORT_DELIVERY_FAILED: ${error.message}. Assessment outcome was not changed.`);
+            }
   build:
     name: ${{ inputs.site-name }} Build
     needs: prepare
