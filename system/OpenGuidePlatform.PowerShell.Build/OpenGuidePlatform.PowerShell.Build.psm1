@@ -74,3 +74,6 @@ function Get-GuideHugoConfiguration {
 Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration
 . (Join-Path $PSScriptRoot 'ArtifactValidation/ArtifactValidation.ps1')
 Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity
+
+. (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleFreshness.ps1')
+Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness
