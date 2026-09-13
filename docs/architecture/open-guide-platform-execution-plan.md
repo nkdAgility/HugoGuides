@@ -178,7 +178,7 @@ Implement console, Actions-summary and PR renderers from one result contract. In
 
 ## 8. E05 — Characterise existing Hugo behaviour without refactoring
 
-Progress: [cross-consumer relocation evidence](baselines/2026-09-13-relocation/README.md) records 27 passing builds and nine passing repeat controls, unchanged PDF/path inventories, and existing alias/share-output variability. E05 remains open; the evidence does not approve module upgrades or waive functional/visual verification.
+Complete: [cross-consumer evidence](baselines/2026-09-13-relocation/README.md) records 27 builds, nine repeat controls, all-page analysis and 284 matching viewport pairs across all 18 guides. Safe Delusion module updates are explicitly accepted. Known defects and offline visual limits are recorded in the closure below; deployed adoption remains E09–E11.
 
 Record the deliberately structured multilingual behaviour before changing implementation. Build isolated, pinned copies of all three consumers against their existing dependencies and the mechanically relocated module. Keep production deployments untouched.
 
@@ -347,7 +347,7 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 - [ ] Complete coordinated release metadata and adoption updates for the native Hugo dependency, component versions, schemas, toolchain requirements, workflow identity and generated skills/controls. Immutable provenance may record source commits; action references must use version tags with no unnecessary version restriction.
 - [x] Validate the corrected publication gate: `main.yaml` builds/packages, directly calls the shared guide-site workflow for every sample stage using the build artifact ZIP URL/checksum/version/commit, then publishes the same assets only on success. Remove `sample-main.yaml`; retain published-release resolution for ordinary consumers. Committed and verified by successful runs 34764729959 and 34766032512. Release remains restricted to main pushes; PR validation does not publish.
 - [x] Run distinct Prepare, Build, Validate, Deploy and Verify jobs with one selected target per sample run. Restore released assets rather than building the platform inside the consumer workflow.
-- [ ] Exercise the shared close-PR workflow against an authorised disposable preview and confirm the intended environment is removed. PR #35 cleanup is configured but has not been exercised.
+- [x] Exercise shared cleanup using disposable PR #36: build/deploy/verify run 34781569243 passed, close run 34781826103 passed, the removed preview identity returned HTTP 404, and PR #35 remained available. Evidence: `baselines/2026-09-13-module-identity/preview-cleanup.json`.
 - [ ] Reconcile existing consumer-owned files explicitly during adoption; do not overwrite them or claim a clean fixture installation proves migration of existing sites.
 - [x] Keep human README installation, update, local build/serve and sample URL instructions aligned with the shipped interface. Serve remains a stage of the root build entry point.
 
@@ -572,7 +572,7 @@ Commit `7cddf62e88895ef7e9a582e56e26e227a2fc8633` passed [run 34778471282](https
 
 ### E05 current semantic and visual findings
 
-Every retained HTML page has now been compared semantically across pinned/original/relocated builds and repeat controls; all 9,289 raw file hashes were reverified. The evidence is in `baselines/2026-09-13-relocation/semantic-comparison.json`. Targeted styled screenshots confirm that upgrading Safe Delusion from its old pin changes heading size, contributor labeling and layout. Those changes predate relocation. The maintainer explicitly accepted these unadopted module updates on 2026-09-13; they no longer block adoption, and coordinated platform/Hugo versioning remains the agreed approach. E05 is current and remains open; no module refactor or consumer modification has been made. E06–E08 remain paused pending E05 acceptance.
+Every retained HTML page has now been compared semantically across pinned/original/relocated builds and repeat controls; all 9,289 raw file hashes were reverified. The evidence is in `baselines/2026-09-13-relocation/semantic-comparison.json`. Targeted styled screenshots confirm that upgrading Safe Delusion from its old pin changes heading size, contributor labeling and layout. Those changes predate relocation. The maintainer explicitly accepted these unadopted module updates on 2026-09-13; they no longer block adoption, and coordinated platform/Hugo versioning remains the agreed approach. This earlier finding is superseded by the E05 closure below; no module refactor or consumer modification was needed.
 
 ### E05 accepted upgrade differences and remaining verification — 2026-09-13
 
@@ -581,10 +581,10 @@ The maintainer accepted the recorded Safe Delusion v0.6.8-to-current module diff
 - [x] Record the explicit Safe Delusion upgrade acceptance.
 - [x] Verify evidence commit `0323396e7c832a050b8f0d15964ca39556c22f53`: [CI run 34779610357](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34779610357) succeeded.
 - [x] Capture 87 production viewports across pinned/original/relocated builds (29 routes across the three wrappers, including available Persian and Japanese guide routes). These are captured evidence, not 87 reviewed or approved pages.
-- [ ] Finish visual review and reconcile coverage against every guide and distinct rendering state, including states absent from the production viewport selection.
-- [ ] Close the remaining E05 findings against recorded evidence before advancing E06–E08.
+- [x] Finish the representative visual/state comparison; see E05 closure and the 255 additional preview/local viewport pairs.
+- [x] Close E05 characterisation with explicit existing-defect dispositions before continuing repository implementation.
 
-E00–E04 remain complete. E05 remains current. No consumer source, deployed site, Hugo template, permission or GitHub administrative configuration changed.
+E00–E05 are complete; see the subsequent closure evidence. No consumer source, deployed site, Hugo template, permission or GitHub administrative configuration changed.
 
 E05 visual continuation: the initial replay omitted Bootstrap RTL CSS; its Persian screenshots are not acceptance evidence. The corrected replay uses the exact referenced RTL asset and is recorded in `baselines/2026-09-13-relocation/viewport-comparison.json`, including screenshot and asset hashes. All 29 original/relocated production viewport pairs match pixel-for-pixel. Persian Kanban and Japanese Scrum fallback viewports were inspected. These bounded captures exclude external avatars/icons and do not close full-page, history, preview-only, empty-body or PDF-only state coverage. Local platform acceptance passed again: 211 tests, zero failures, package validation and exit 0.
 
@@ -598,7 +598,7 @@ Disposition of existing defects: frozen duplicate legacy aliases remain unchange
 
 E05 is complete as characterisation of the mechanically relocated module. This does not assert that E09–E11 adoption or all pre-existing website defects are complete. Broader Hugo refactoring remains E14. The maintainer permits targeted bug fixes and justified, recorded deviations.
 
-E06 is current. Its external managed-client installation and independent required-gate configuration cannot be completed under the no-permission/no-GitHub-administration instruction. The existing maintainer action-point exception permits repository implementation to continue through E07 while these external checks remain explicitly pending; it does not turn them into passed checks.
+E06 retains external acceptance actions. Its external managed-client installation and independent required-gate configuration cannot be completed under the no-permission/no-GitHub-administration instruction. The existing maintainer action-point exception permits repository implementation to continue through E07 while these external checks remain explicitly pending; it does not turn them into passed checks.
 
 ### E06 repository boundary review and E07 native installer — 2026-09-13
 
@@ -609,3 +609,5 @@ The native installer now plans go.mod/go.sum and Hugo YAML identity updates alon
 Targeted tests passed 16 checks; full platform acceptance passed 216 tests and package validation. `baselines/2026-09-13-module-identity/native-installer-plan.json` records real Go resolution and a successful isolated Safe Delusion production build against the canonical pseudo-version. Semantic output matches the accepted newer-module baseline. A first diagnostic used an excessively deep Windows cache and failed; a short temporary cache succeeded without changing global settings. Named coordinated release publication remains E08; the pseudo-version test does not claim it has happened.
 
 Disposable draft PR #36 rehearses the shared sample deploy/close lifecycle, leaving PR #35 open. Cleanup acceptance remains unchecked until the deployment has passed and the close workflow proves its environment was removed.
+
+E07 transaction coverage now also exercises native-file installation, preservation during WhatIf/managed conflicts, and stale snapshot refusal. The full platform build passed 217 tests and package validation. The last outstanding local integration check is a complete fresh fixture using real packaged tooling and native Go resolution through the installer, with release transport supplied locally; actual named release publication remains E08.

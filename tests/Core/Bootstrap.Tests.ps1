@@ -30,7 +30,13 @@ BeforeAll {
         Copy-Item $bootstrap "$assets/bootstrap.ps1"
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
         [IO.File]::WriteAllText("$stage/platform.json",(@{version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
-        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", 'param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion) [pscustomobject]@{Files=[ordered]@{};ExpectedHashes=[ordered]@{};Sum="fixture-sum";GoModSum="fixture-mod-sum"}')
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", @'
+param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion)
+$path="$WorkspaceRoot/site/go.mod"
+$expected=(Get-FileHash $path).Hash.ToLowerInvariant()
+if(Test-Path "$WorkspaceRoot/simulate-stale-snapshot"){ $expected='0'*64 }
+[pscustomobject]@{Files=[ordered]@{'site/go.mod'=[Text.Encoding]::UTF8.GetBytes("module fixture`nrequire $($NativeModule.path) $($NativeModule.version)`n")};ExpectedHashes=[ordered]@{'site/go.mod'=$expected};Sum='fixture-sum';GoModSum='fixture-mod-sum'}
+'@)
         [IO.Compression.ZipFile]::CreateFromDirectory($stage,"$assets/OpenGuidePlatform.zip")
         $manifest=@{nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)};schemaVersion=1;product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);channel='preview';archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()}
         [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 5))
@@ -44,6 +50,8 @@ Describe 'Guide-site installation and update' {
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         & git init -q -b codex/adoption $workspace
         Copy-Item "$root/tests/Contracts/fixtures/single-guide.site-policy.json" "$workspace/guide-site.policy.json"
+        [IO.Directory]::CreateDirectory("$workspace/site")|Out-Null
+        [IO.File]::WriteAllText("$workspace/site/go.mod",'module fixture')
         $parameters=@{WorkspaceRoot=$workspace;ReleaseTag='v1.2.3-Preview.1'}
     }
     It 'installs matching workflow and identical root agent shims without touching policy' {
@@ -51,6 +59,9 @@ Describe 'Guide-site installation and update' {
         & $bootstrap -Install @parameters
         $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json
         $record.releaseTag | Should -Be 'v1.2.3-Preview.1'
+        $record.nativeHugoModule.version | Should -Be 'v1.2.3-Preview.1'
+        $record.managedFiles.PSObject.Properties.Name | Should -Not -Contain 'site/go.mod'
+        Get-Content "$workspace/site/go.mod" -Raw | Should -Match 'v1.2.3-Preview.1'
         Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '@v1.2.3-Preview.1'
         (Get-FileHash "$workspace/AGENTS.md").Hash | Should -Be (Get-FileHash "$workspace/CLAUDE.md").Hash
         (Get-FileHash "$workspace/guide-site.policy.json").Hash | Should -Be $before
@@ -78,11 +89,19 @@ Describe 'Guide-site installation and update' {
         { & $bootstrap -Install @parameters } | Should -Throw '*Managed-file conflicts*'
         Test-Path "$workspace/build.ps1" | Should -BeFalse
         [IO.File]::ReadAllText("$workspace/AGENTS.md") | Should -Be 'Consumer instructions'
+        [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
+    }
+    It 'refuses stale native snapshots before writing any managed files' {
+        [IO.File]::WriteAllText("$workspace/simulate-stale-snapshot",'fixture')
+        { & $bootstrap -Install @parameters } | Should -Throw '*Consumer file changed during native update*'
+        Test-Path "$workspace/build.ps1" | Should -BeFalse
+        [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
     }
     It 'previews installation without writing managed files' {
         & $bootstrap -Install @parameters -WhatIf
         Test-Path "$workspace/build.ps1" | Should -BeFalse
         Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeFalse
+        [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
     }
     It 'rejects a corrupt cached archive instead of executing cached code' {
         & $bootstrap -Install @parameters
