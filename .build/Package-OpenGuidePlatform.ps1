@@ -16,7 +16,7 @@ foreach($path in @('system','.build','build.ps1','LICENSE','readme.md')){
     Copy-Item -LiteralPath (Join-Path $root $path) -Destination $stage -Recurse
 }
 # Only distribution/runtime entry points belong in the package; repository tests stay in the checkout.
-$runtime=@('Build-GuideSite.ps1','Prepare-GuideSite.ps1','Write-GuideSiteValidationSummary.ps1')
+$runtime=@('Build-GuideSite.ps1','Prepare-GuideSite.ps1','Write-GuideSiteValidationSummary.ps1','Confirm-GuideSiteDeployment.ps1','Verify-GuideSiteDeployment.ps1')
 Get-ChildItem -LiteralPath "$stage/.build" -File|Where-Object Name -NotIn $runtime|Remove-Item
 $metadata=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=if($Version.Contains('-')){'preview'}else{'stable'};hugoModule='github.com/nkdAgility/HugoGuides/module'}
 [IO.File]::WriteAllText("$stage/platform.json",($metadata|ConvertTo-Json))

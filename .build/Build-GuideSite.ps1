@@ -55,6 +55,9 @@ if($Stage -in @('All','Build')){
         if(Test-Path "$root/staticwebapp.config.$hostingTarget.json"){Merge-Hosting $hosting (Get-Content "$root/staticwebapp.config.$hostingTarget.json" -Raw|ConvertFrom-Json -AsHashtable)}
         [IO.File]::WriteAllText("$site/staticwebapp.config.json",($hosting|ConvertTo-Json -Depth 100))
     }
+    [IO.Directory]::CreateDirectory((Join-Path $site '.well-known'))|Out-Null
+    $publishedIdentity=[ordered]@{sourceCommit=$commit;platformVersion=$Version;target=$Target}
+    [IO.File]::WriteAllText((Join-Path $site '.well-known/open-guide-platform.json'),($publishedIdentity|ConvertTo-Json))
     $identity=New-GuideArtifactIdentity -ArtifactRoot $site -Target $Target -SourceCommit $commit -Version $Version -SourceDirty (@(& git -C $root status --porcelain).Count -gt 0)
     [IO.File]::WriteAllText("$output/artifact-identity.json",($identity|ConvertTo-Json -Depth 100))
 }

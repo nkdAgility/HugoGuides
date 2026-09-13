@@ -2,13 +2,13 @@
 [CmdletBinding()]
 param(
     [ValidateSet('Platform','GuideSite')][string]$Product='Platform',
-    [ValidateSet('All','Prepare','Build','Package','Release','Validate','Serve')][string]$Stage='All',
+    [ValidateSet('All','Prepare','Build','Package','Release','Validate','Serve','Deploy','Verify')][string]$Stage='All',
     [ValidateSet('local','preview','production')][string]$Target='local',
     [string]$WorkspaceRoot=$PSScriptRoot,
     [string]$PolicyPath,
     [string]$OutputPath,
     [string]$Version='0.0.0-local',
-    [string]$ReleaseTag,
+    [string]$ReleaseTag,[string]$DeploymentUrl,[string]$DeploymentEnvironment,
     [switch]$Versions
 )
 $ErrorActionPreference='Stop'
@@ -21,9 +21,19 @@ if(-not $OutputPath){$OutputPath='.processing/'+$Product.ToLowerInvariant()+'/'+
 if($Product -eq 'GuideSite'){
     if(-not $PolicyPath){throw 'GuideSite requires a reviewed site policy (-PolicyPath).'}
     if($Stage -in @('Package','Release')){throw 'GuideSite produces a validated site artifact, not a platform release.'}
+    if($Stage -eq 'Deploy'){
+        if($Target -eq 'local' -or ($Target -ne 'production' -and [string]::IsNullOrWhiteSpace($DeploymentEnvironment))){throw 'Preview deployment requires an explicit named hosting environment; local builds cannot deploy.'}
+        & "$PSScriptRoot/.build/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version
+        return
+    }
+    if($Stage -eq 'Verify'){
+        if([string]::IsNullOrWhiteSpace($DeploymentUrl)){throw 'Verify requires the actual deployment URL returned by the hosting adapter.'}
+        & "$PSScriptRoot/.build/Verify-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -PolicyPath $PolicyPath -DeploymentUrl $DeploymentUrl -Target $Target -Version $Version
+        return
+    }
     & "$PSScriptRoot/.build/Build-GuideSite.ps1" -Stage $Stage -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
 }else{
-    if($Stage -eq 'Serve'){throw 'Serve belongs to GuideSite; specify -Product GuideSite and its policy.'}
+    if($Stage -in @('Serve','Deploy','Verify')){throw 'Serve, Deploy and Verify belong to GuideSite; specify -Product GuideSite and its policy.'}
     if($Stage -in @('All','Prepare')){
         Import-Module "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
         Get-GuideHugoToolchain

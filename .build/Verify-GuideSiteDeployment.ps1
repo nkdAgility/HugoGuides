@@ -1,0 +1,26 @@
+#Requires -Version 7.4
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)][string]$WorkspaceRoot,
+    [Parameter(Mandatory)][string]$OutputPath,
+    [Parameter(Mandatory)][string]$PolicyPath,
+    [Parameter(Mandatory)][string]$DeploymentUrl,
+    [Parameter(Mandatory)][string]$Target,
+    [Parameter(Mandatory)][string]$Version
+)
+$ErrorActionPreference='Stop'
+& "$PSScriptRoot/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version
+$root=Split-Path $PSScriptRoot -Parent
+Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
+Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+$output=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
+$policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath)
+$identity=Get-Content "$output/artifact-identity.json" -Raw|ConvertFrom-Json
+$forbidden=@()
+if($Target -eq 'production'){$forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object id)}
+$result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $policy.wrapper.requiredRoutes -ForbiddenPaths $forbidden
+[IO.File]::WriteAllText("$output/deployment-verification.json",($result|ConvertTo-Json -Depth 30))
+$markdown="## Verify: $($result.Outcome)`n`nCommit: $($result.SourceCommit)`n`nPlatform: $($result.PlatformVersion)`n`nTarget: $Target`n`nURL: $DeploymentUrl`n"
+Write-Host $markdown
+if($env:GITHUB_STEP_SUMMARY){[IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,$markdown)}
+if($result.Outcome -ne 'pass'){$result.Findings|Format-Table|Out-Host;throw 'Deployment verification failed; inspect deployment-verification.json.'}

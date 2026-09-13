@@ -1,4 +1,4 @@
-name: Build and validate guide site
+name: Build & Release (GuideSite)
 on:
   workflow_call:
     inputs:
@@ -11,30 +11,46 @@ on:
       site-name:
         required: true
         type: string
+      target:
+        type: string
+        default: preview
       platform-release:
         description: Exact release tag; omit to wait for the pinned platform commit release.
         default: ''
         type: string
       platform-commit:
-        description: Exact platform commit matching the release and pinned reusable workflow
+        description: Platform source identity recorded in the release manifest
         required: true
         type: string
+      deploy:
+        description: Explicitly enable deployment to the configured site environment
+        type: boolean
+        default: false
+      deployment-environment:
+        description: Azure Static Web Apps named environment; empty only for production
+        type: string
+        default: ''
+    secrets:
+      static-web-app-token:
+        required: false
 permissions:
   contents: read
+defaults:
+  run:
+    shell: pwsh
+env:
+  SITE_POLICY: ${{ inputs.policy-path }}
+  SITE_TARGET: ${{ inputs.target }}
 jobs:
-  guide-site:
-    name: ${{ inputs.site-name }} — ${{ matrix.target }} — Prepare, Build, Validate
-    strategy:
-      fail-fast: false
-      matrix:
-        target: [preview, production]
+  prepare:
+    name: Prepare (${{ inputs.site-name }} / ${{ inputs.target }})
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
           persist-credentials: false
-      - name: Get pinned release installer
+      - name: Get released-platform installer
         uses: actions/checkout@v4
         with:
           repository: nkdAgility/OpenGuidePlatform
@@ -52,39 +68,165 @@ jobs:
           go-version: '>=1.24.5'
           cache: false
       - name: Restore released OpenGuidePlatform
-        shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
           PLATFORM_RELEASE: ${{ inputs.platform-release }}
           PLATFORM_COMMIT: ${{ inputs.platform-commit }}
         run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatformRelease.ps1 -ReleaseTag $env:PLATFORM_RELEASE -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform -WaitSeconds 600
-      - name: Install guide-site build dependencies
-        shell: pwsh
-        run: Install-Module powershell-yaml -RequiredVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
+      - name: Install guide-site preparation dependencies
+        run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
       - name: Prepare guide site
-        shell: pwsh
-        env:
-          SITE_POLICY: ${{ inputs.policy-path }}
-          SITE_TARGET: ${{ matrix.target }}
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
-      - name: Build guide site
-        shell: pwsh
-        env:
-          SITE_POLICY: ${{ inputs.policy-path }}
-          SITE_TARGET: ${{ matrix.target }}
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
-      - name: Validate guide site
-        shell: pwsh
-        env:
-          SITE_POLICY: ${{ inputs.policy-path }}
-          SITE_TARGET: ${{ matrix.target }}
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
-      - name: Retain guide-site reports and built site
+      - name: Retain prepared context and assessment
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.site-name }}-${{ matrix.target }}
+          name: GuideSite-Prepare-${{ inputs.target }}
+          include-hidden-files: true
           path: |
+            .processing/platform/
             .processing/guide-site/
             .processing/i18n-probe/
+          if-no-files-found: error
+  build:
+    name: Build (${{ inputs.site-name }} / ${{ inputs.target }})
+    needs: prepare
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
+          extended: true
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.24.5'
+          cache: false
+      - name: Build guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain built artifact and identity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          include-hidden-files: true
+          path: .processing/guide-site/
+          if-no-files-found: error
+  validate:
+    name: Validate (${{ inputs.site-name }} / ${{ inputs.target }})
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - name: Download built guide site
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Validate guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain artifact validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Validate-${{ inputs.target }}
+          path: .processing/guide-site/artifact-validation.json
+          if-no-files-found: error
+  deploy:
+    name: Deploy (${{ inputs.site-name }} / ${{ inputs.target }})
+    permissions:
+      contents: read
+      pull-requests: write
+    needs: validate
+    if: ${{ inputs.deploy && github.event_name != 'merge_group' }}
+    runs-on: ubuntu-24.04
+    outputs:
+      url: ${{ steps.hosting.outputs.static_web_app_url }}
+    env:
+      SITE_DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - name: Download built guide site
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Download validation evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Validate-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Deploy guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Deploy -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentEnvironment $env:SITE_DEPLOYMENT_ENVIRONMENT
+      - name: Upload validated site to Azure Static Web Apps
+        id: hosting
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
+          repo_token: ${{ github.token }}
+          action: upload
+          app_location: .processing/guide-site/site
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
+          deployment_environment: ${{ inputs.deployment-environment }}
+  verify:
+    name: Verify (${{ inputs.site-name }} / ${{ inputs.target }})
+    needs: deploy
+    if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
+    runs-on: ubuntu-24.04
+    env:
+      SITE_DEPLOYMENT_URL: ${{ needs.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - name: Download built guide site
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Download validation evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Validate-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Verify guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
+      - name: Retain deployed-site verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Verify-${{ inputs.target }}
+          path: .processing/guide-site/deployment-verification.json
           if-no-files-found: error

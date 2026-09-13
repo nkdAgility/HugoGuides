@@ -79,4 +79,5 @@ function Get-GuideHugoConfiguration {
 . (Join-Path $PSScriptRoot 'AssessmentReporting/Publish-GuideAssessmentComment.ps1')
 . (Join-Path $PSScriptRoot 'ArtifactValidation/Get-GuideArtifactAssessment.ps1')
 . (Join-Path $PSScriptRoot 'WrapperTranslations/Get-GuideEffectiveTranslations.ps1')
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Publish-GuideAssessmentComment,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations
+. (Join-Path $PSScriptRoot 'DeploymentVerification/Test-GuideSiteDeployment.ps1')
+Export-ModuleMember -Function Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Publish-GuideAssessmentComment,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations

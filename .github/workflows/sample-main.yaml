@@ -7,15 +7,25 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pull-requests: write
 concurrency:
   group: guide-site-sample-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   sample:
     name: GuideSiteSample
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [preview, production]
     uses: ./.github/workflows/guide-site-build.yaml
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
       policy-path: examples/reference-guide-site/guide-site.policy.json
       site-name: GuideSiteSample
+      target: ${{ matrix.target }}
       platform-commit: ${{ github.event.pull_request.head.sha || github.sha }}
+      deploy: ${{ matrix.target == 'preview' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+      deployment-environment: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'preview' }}
+    secrets:
+      static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}

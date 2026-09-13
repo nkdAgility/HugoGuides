@@ -8,7 +8,7 @@ Shared guide rendering, publishing operations, validation and agent tooling for 
 |---|---|
 | `.github/workflows/main.yaml` — **Build & Release (OpenGuidePlatform)** | Build, test and package the platform, then publish and verify a GitHub Release containing the consumer assets. |
 | `.github/workflows/sample-main.yaml` — **Build & Release (GuideSiteSample)** | Call the shared guide-site workflow with the sample policy and an exact platform release. It never builds or packages the platform. |
-| `.github/workflows/guide-site-build.yaml` | Restore the released platform, then Prepare, Build and Validate a guide site for preview and production. This is the consumer workflow, including for the sample. |
+| `.github/workflows/guide-site-build.yaml` | Restore the released platform, then run separately named Prepare, Build, Validate, Deploy and Verify jobs for the requested site target. This is the consumer workflow, including for the sample. |
 
 GitVersion, using `.github/GitVersion.yml`, determines the version. The source SHA is recorded separately as provenance. The sample waits up to ten minutes for the release matching its explicitly pinned platform commit; other consumers can provide an exact release tag. It fails if the release cannot be restored; it never falls back to a repository build. A platform run and the sample run must both pass for candidate acceptance. A preview release can exist while sample validation is pending or failed. These development versions are not stable releases.
 
@@ -68,7 +68,7 @@ Guide-site evidence includes `prepare/assessment.json`, `prepare/assessment.md`,
 
 Prepare assesses the wrapper, guide editions, translations and declared downloads. It checks permanent production exclusions even during a preview build. Effective i18n evidence comes from isolated Hugo probes using the actual catalogues and module; resolved text does not prove translation quality. Expected failure tests have isolated summary destinations.
 
-Validate checks declared wrapper routes, generated JSON, unresolved tokens, duplicate target paths, prohibited language directories, artifact size and identity. Build evidence is not browser or hosting approval. Preview deployment, post-deployment checks, trusted external enforcement and full adoption remain open work; this change does not modify deployed consumer sites.
+Validate checks declared wrapper routes, generated JSON, unresolved tokens, duplicate target paths, prohibited language directories, artifact size and identity. Build evidence is not browser or hosting approval. Deploy uploads only the validated artifact to an explicitly configured Azure Static Web App. Verify compares the served identity, required pages and PDFs against that artifact and checks forbidden language routes. The sample validates preview and production artifacts, then deploys only preview to the supplied Blue Field Static Web App (a PR-specific named environment) and verifies it. Its production deployment remains disabled. Trusted external enforcement and full adoption remain open work; this change does not modify deployed consumer sites.
 
 The module keeps its historical identity `github.com/nkdAgility/HugoGuides/module` for now. The candidate build resolves the module from the verified package through an output-only configuration overlay. Canonical native module publication and the full coordinated adoption lock remain required before consumer adoption is declared complete. No Hugo rendering internals are refactored here.
 
@@ -89,3 +89,6 @@ The module keeps its historical identity `github.com/nkdAgility/HugoGuides/modul
 Read [Core commands](system/OpenGuidePlatform.PowerShell.Core/README.md), [skill usage](system/OpenGuidePlatform.AgentSkills/USAGE.md), the [execution plan](docs/architecture/open-guide-platform-execution-plan.md) and [cross-consumer evidence](docs/architecture/baselines/2026-09-13-relocation/README.md).
 
 Keep this README updated with commands, prerequisites, workflow responsibilities and report changes. Preserve supplied/protected PDFs and the deliberately structured multilingual Hugo module. Existing legacy download aliases remain consumer compatibility behavior; do not extend them to new languages.
+
+The shared workflow accepts `target`, `deploy`, `deployment-environment` and the explicitly mapped `static-web-app-token` secret. Named preview environments are required for nonproduction deployment. Deploy rechecks artifact hashes immediately before the hosting action; no Hugo build runs in Deploy or Verify. Each stage retains its own evidence artifact. HTTP verification has bounded retries; unavailable or mismatching evidence fails verification.
+The Azure-generated workflow is retained unchanged under `.github/workflow-reference/azure-static-web-apps-blue-field-06cea8c03.yml`; outside the workflows directory it cannot trigger a competing deployment.
