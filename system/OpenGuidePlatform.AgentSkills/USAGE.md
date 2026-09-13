@@ -6,4 +6,4 @@ In the platform development checkout, load `system/OpenGuidePlatform.PowerShell.
 
 Site policy describes an unrestricted collection of guides; counts in fixtures are examples. Core decisions have no agent dependency. Agent instructions do not grant write authority or replace the independent E06 gate. Mutation commands support WhatIf and refuse protected resources under the supplied policy.
 
-Initial extraction deliberately reports unsupported work rather than pretending to complete it: full wrapper/i18n reconciliation, generated-PDF replacement/cache invalidation remain E03 follow-up. Root Prepare/Build reporting is E04. Preserve the consumer's multilingual content structure and bespoke wrapper throughout.
+Initial extraction deliberately reports unsupported work rather than pretending to complete it: effective Hugo wrapper/i18n reconciliation and build wiring for PDF cache evidence remain E03 follow-up. Root Prepare/Build reporting is E04. Preserve the consumer's multilingual content structure and bespoke wrapper throughout.

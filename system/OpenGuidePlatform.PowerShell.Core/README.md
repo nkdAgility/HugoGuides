@@ -18,8 +18,8 @@ This module enforces the supplied policy, not the authenticity of that policy. T
 
 ## Remaining E03 work
 
-- Full wrapper, routes and i18n reconciliation; inventory currently checks declared wrapper files and reports other requirements.
-- Generated-PDF replacement/cache invalidation.
+- Effective Hugo catalogue fallback and wrapper content reconciliation; local YAML checks are available through Get-GuideWrapperStatus, with runtime route/integration observations supplied separately.
+- Build adapter wiring for PDF receipts and approved environment fingerprints; automatic reuse is off without complete evidence.
 - Abrupt process termination during a snapshot can leave a staging directory/lock for manual inspection; handled copy failures clean up staging and never publish a partial edition.
 - Complete regression coverage for those operations before declaring E03 finished.
 
@@ -27,3 +27,5 @@ Shared skills describe these boundaries explicitly. Root Prepare/Build/report or
 Fallback observation follows declared chains to populated web content and treats cycles, undeclared targets and non-web targets as unavailable. Edition snapshots publish by a same-parent directory rename after all files are copied. An existing destination is never replaced.
 
 Contributor updates accept exact candidate YAML, one existing contributor name and the reviewed source SHA-256. They preserve the existing .yml/.yaml path and reject semantic changes to other records. Candidate comments and formatting must be reviewed because the command writes the supplied text exactly. A cooperative lock, staged replacement and second hash check catch observed conflicts; they are not an OS-level compare-and-swap against other editors. Existing site-specific roles are retained. Adding, removing and renaming records through this update operation are unsupported.
+
+Generated PDFs can now be replaced using ExpectedOutputSha256. They remain untouched on rendering/input failures; supplied/protected downloads remain ineligible. A successful receipt can carry CacheKey when EnvironmentSha256 is supplied. Test-GuidePdfCache rechecks input/output hashes and recipe/tool/environment evidence; callers must provide a digest covering fonts, TeX packages and indirect resources. No timestamp-based reuse occurs. Local wrapper catalogue checks support YAML mappings/sequences and numeric/script language tags; they do not claim effective Hugo fallback or plural completeness. Required routes/integration points remain unknown until the build adapter provides observations.

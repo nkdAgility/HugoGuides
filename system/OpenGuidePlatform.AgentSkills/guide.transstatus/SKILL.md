@@ -8,3 +8,5 @@ Read [Core usage](../USAGE.md), load the consumer policy and run `Get-GuideInven
 Report wrapper files separately from every guide, edition and language. Filter the returned inventory if the user selected a language or guide; do not hard-code the current sites' guide counts or names. Show declared intent, observed body state, downloads and findings. A populated body is not proof of translation quality. PDF-only and source-language fallback are legitimate declared states.
 
 This skill is read-only. Do not repair aliases, reorder languages by speaker counts, enable publication or rewrite existing content. Wrapper routes/i18n keys in this initial inventory are declarations, not completed runtime validation; say when a check is still unavailable.
+
+Use Get-GuideWrapperStatus with Languages from the effective site configuration for local wrapper YAML catalogue and required-file observations. Route and integration checks require observed build evidence and remain unknown without it. This does not evaluate Hugo module catalogue fallback, plural completeness or translation quality; preserve those distinctions in the report.

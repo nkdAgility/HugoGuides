@@ -10,3 +10,5 @@ For authorized missing guide scaffolds, use `New-GuideTranslationScaffold` with 
 Do not add lang front matter, prefix aliases automatically, reorder languages by global speaker counts, or enable production. Existing metadata, wrapper and i18n repairs require a specifically reviewed diff; report those gaps rather than claim this initial command repaired them. Supplied PDFs and declared fallbacks remain valid.
 
 Rerun inventory and the consumer build after authorized edits. Report what was created, what was preserved, and what remains unresolved.
+
+Use Get-GuideWrapperStatus with Languages from the effective site configuration for local wrapper YAML catalogue and required-file observations. Route and integration checks require observed build evidence and remain unknown without it. This does not evaluate Hugo module catalogue fallback, plural completeness or translation quality; preserve those distinctions in the report.
