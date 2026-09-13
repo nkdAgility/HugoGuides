@@ -12,6 +12,7 @@ Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.
 Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
 $output=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
 $identity=Get-Content "$output/artifact-identity.json" -Raw|ConvertFrom-Json
+if(-not $identity.PSObject.Properties['sourceDirty'] -or $identity.sourceDirty -isnot [bool] -or $identity.sourceDirty){throw 'Deploy requires an explicitly clean source identity; commit changes and rebuild.'}
 $report=Get-Content "$output/artifact-validation.json" -Raw|ConvertFrom-Json
 $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0){throw 'Cannot establish deployment source commit.'}

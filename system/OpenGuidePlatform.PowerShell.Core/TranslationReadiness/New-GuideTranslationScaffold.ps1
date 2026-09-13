@@ -9,7 +9,7 @@ function New-GuideTranslationScaffold {
     if ([IO.File]::Exists($target)) { return [pscustomobject]@{Status='preserved';Path=$relative;ProductionChanged=$false} }
     # Require an explicit disabled entry before creating a language file. Never enable it here.
     $production=Resolve-GuideWorkspacePath $WorkspaceRoot "$($Policy.wrapper.sourcePath)/hugo.production.yaml"
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
     $config=ConvertFrom-Yaml ([IO.File]::ReadAllText($production))
     if (-not $config.Contains('languages') -or -not $config.languages.Contains($Language) -or $config.languages[$Language]['disabled'] -ne $true) { throw "Declare $Language disabled in production configuration before scaffolding." }
     $source=Resolve-GuideWorkspacePath $WorkspaceRoot "$($selection.RelativePath)/index.md"

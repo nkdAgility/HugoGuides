@@ -13,7 +13,7 @@ param(
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-Import-Module powershell-yaml -RequiredVersion 0.4.12
+Import-Module powershell-yaml -MinimumVersion 0.4.12
 $baseline = Get-Content -Raw (Join-Path $BaselinePath 'baseline.json') | ConvertFrom-Json
 if (Test-Path -LiteralPath $OutputPath) { throw 'Use a new output path to preserve earlier evidence.' }
 $records = foreach ($repository in $baseline.repositories) {

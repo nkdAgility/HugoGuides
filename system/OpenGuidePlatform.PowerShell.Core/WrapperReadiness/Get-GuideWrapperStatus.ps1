@@ -25,7 +25,7 @@ function Get-GuideWrapperStatus {
         if ($candidates.Count -gt 1) { $catalogState='ambiguous';$detail='Both YAML extensions exist; select one authoritative catalogue.' }
         elseif ($candidates.Count -eq 1) {
             try {
-                Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+                Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
                 $catalog=ConvertFrom-Yaml ([IO.File]::ReadAllText($candidates[0])) -ErrorAction Stop
                 $entries=@{}
                 if ($catalog -is [Collections.IDictionary]) {

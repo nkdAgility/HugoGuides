@@ -36,7 +36,7 @@ function Set-GuideWrapperTranslation {
     $exists=[IO.File]::Exists($target)
     if($exists -and -not $ExpectedSha256){throw 'Wrapper file exists; preserve it or supply its reviewed ExpectedSha256.'}
     if($ExpectedSha256 -and (-not $exists -or (Get-FileHash -LiteralPath $target).Hash -ine $ExpectedSha256)){throw 'Wrapper file changed since review or is missing.'}
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
     if($configuration){
         if(-not $exists){throw 'Existing Hugo configuration is required; do not invent wrapper configuration.'}
         $before=ConvertFrom-Yaml ([IO.File]::ReadAllText($target))

@@ -3,6 +3,13 @@ function Get-GuidePolicyFinding {
     param([Parameter(Mandatory)][System.Collections.IDictionary]$Policy)
     $guideIds=@($Policy.guides | ForEach-Object { $_.id })
     foreach ($group in @($guideIds | Group-Object | Where-Object Count -gt 1)) { [pscustomobject]@{Code='DUPLICATE_GUIDE';Subject=$group.Name} }
+    foreach($environment in $Policy.publication.environments){
+        foreach($id in $environment.excludedGuides){
+            $selected=@($Policy.guides|Where-Object id -CEQ $id)
+            if($selected.Count -ne 1){[pscustomobject]@{Code='UNKNOWN_EXCLUDED_GUIDE';Subject="$($environment.name)/$id"}}
+            elseif(-not $selected[0].Contains('artifactPrefixes') -or -not @($selected[0].artifactPrefixes).Count){[pscustomobject]@{Code='EXCLUDED_GUIDE_PATHS_REQUIRED';Subject="$($environment.name)/$id"}}
+        }
+    }
     foreach ($guide in $Policy.guides) {
         if ($guide.relationship.kind -eq 'extension' -and $guide.relationship.parentGuideId -notin $guideIds) { [pscustomobject]@{Code='UNKNOWN_PARENT_GUIDE';Subject=$guide.id} }
         $seen=@{};$node=$guide
@@ -60,8 +67,16 @@ function Import-GuidePolicy {
 function Get-GuideForbiddenPaths {
     [CmdletBinding()]
     param([Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string]$Target)
-    foreach($rule in $Policy.publication.permanentExclusions){
-        if($rule.environment -cne $Target){continue}
+    $rules=@($Policy.publication.permanentExclusions|Where-Object environment -CEQ $Target)
+    foreach($environment in $Policy.publication.environments|Where-Object name -CEQ $Target){
+        foreach($language in $environment.excludedLanguages){$rules+=@{subject='language';id=$language}}
+        foreach($id in $environment.excludedGuides){
+            $guide=@($Policy.guides|Where-Object id -CEQ $id)
+            if($guide.Count -ne 1 -or -not $guide[0].Contains('artifactPrefixes')){throw "Declare artifactPrefixes on excluded guide $id."}
+            $rules+=@{subject='guide';id=$id;artifactPrefixes=$guide[0].artifactPrefixes}
+        }
+    }
+    foreach($rule in $rules){
         if($rule.subject -eq 'language'){$rule.id;continue}
         if(-not $rule.Contains('artifactPrefixes') -or -not @($rule.artifactPrefixes).Count){throw "Declare artifactPrefixes for excluded $($rule.subject) $($rule.id); no public paths are inferred from content IDs."}
         foreach($prefix in $rule.artifactPrefixes){

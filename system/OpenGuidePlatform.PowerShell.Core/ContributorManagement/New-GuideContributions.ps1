@@ -8,7 +8,7 @@ function New-GuideContributions {
     foreach ($contributor in $Contributors) {
         if ([string]::IsNullOrWhiteSpace($contributor.name) -or [string]::IsNullOrWhiteSpace($contributor.role)) { throw 'Each contributor needs a name and a non-empty role.' }
     }
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
     $yaml=ConvertTo-Yaml -Data $Contributors
     if ($PSCmdlet.ShouldProcess($path,'Create guide contributor data')) { New-GuideFile $path $yaml;[pscustomobject]@{Status='created';Path=$relative;Count=$Contributors.Count} }
 }

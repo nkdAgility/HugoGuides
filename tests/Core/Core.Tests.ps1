@@ -54,6 +54,26 @@ Describe 'Policy semantics and permanent exclusions' {
         @(Get-GuideForbiddenPaths $policy production) | Should -Contain 'another/2026'
         @(Get-GuideForbiddenPaths $policy preview).Count | Should -Be 0
     }
+    It 'enforces environment-specific exclusions without making them permanent' {
+        $policy.publication.permanentExclusions=@()
+        $policy.guides[0].artifactPrefixes=@('bespoke-guide','ja/bespoke-guide')
+        $policy.publication.environments=@(@{name='preview';excludedLanguages=@('fa');excludedGuides=@('guide-a')},@{name='production';excludedLanguages=@();excludedGuides=@()})
+        @(Get-GuideForbiddenPaths $policy preview) | Should -Contain 'fa'
+        @(Get-GuideForbiddenPaths $policy preview) | Should -Contain 'ja/bespoke-guide'
+        @(Get-GuideForbiddenPaths $policy production).Count | Should -Be 0
+        $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
+        [IO.Directory]::CreateDirectory($workspace)|Out-Null
+        $policy.guides[0].editions[0].translations[0].downloads=@(@{path='guide.pdf';handling='supplied';publishedPaths=@('outside/guide.pdf')})
+        $requirements=Get-GuideDownloadRequirements $workspace $policy preview @('en','fa')
+        @($requirements.Required).Count | Should -Be 0
+        $requirements.ForbiddenPaths | Should -Contain 'outside/guide.pdf'
+    }
+    It 'refuses unknown excluded guides and absent route mappings during policy import checks' {
+        $policy.publication.environments=@(@{name='preview';excludedLanguages=@();excludedGuides=@('guide-a','unknown')})
+        $findings=@(Get-GuidePolicyFinding $policy)
+        $findings.Code | Should -Contain 'EXCLUDED_GUIDE_PATHS_REQUIRED'
+        $findings.Code | Should -Contain 'UNKNOWN_EXCLUDED_GUIDE'
+    }
     It 'does not assume guide exclusions without effective evidence' {
         $policy.publication.permanentExclusions=@(@{environment='production';subject='guide';id='extension';reason='Excluded'})
         @(Test-GuidePublicationPolicy $policy @{languages=@{}}).Code | Should -Contain 'PUBLICATION_EVIDENCE_REQUIRED'

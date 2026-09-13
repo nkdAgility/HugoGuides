@@ -33,6 +33,16 @@ Describe 'Shared Prepare assessment and reports' {
         Get-Content "$workspace/summary.md" -Raw | Should -Not -Match 'Prepare: pass'
         Get-Content "$workspace/.processing/drift/assessment.md" -Raw | Should -Match 'Stop concurrent edits'
     }
+    It 'blocks an enabled excluded default language only in its declared environment' {
+        $policy.publication.environments=@(@{name='preview';excludedLanguages=@('en');excludedGuides=@()})
+        $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0' -Target preview
+        $result.outcome | Should -Be fail
+        $result.findings.code | Should -Contain ENVIRONMENT_LANGUAGE_ENABLED
+        $other=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0' -Target production
+        $other.findings.code | Should -Not -Contain ENVIRONMENT_LANGUAGE_ENABLED
+        $disabled=Get-GuideAssessment $workspace $policy @('fa') @{} ('a'*40) '0.0.0' -Target preview
+        $disabled.findings.code | Should -Not -Contain ENVIRONMENT_LANGUAGE_ENABLED
+    }
     It 'creates schema-valid evidence with runtime checks explicitly pending' {
         $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0'
         $json=$result|ConvertTo-Json -Depth 100

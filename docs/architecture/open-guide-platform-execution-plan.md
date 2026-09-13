@@ -633,4 +633,30 @@ Actual existing-site conflict reconciliation belongs to E09–E11, where each be
 
 Commit `053ff5b9e2b509fc97689d0109b39b00b2586c06` passed [CI run 34782633036](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34782633036): platform packaging and every sample stage through Verify. Release was correctly skipped. Local Windows acceptance passed 218 tests, both source sample targets, exact-package installed preview/production builds, installed Core/skills use, cached rebuilding without Go freshness/GitHub release access, and same-release update. Native planner and bootstrap transaction tests cover mismatched identities, stale pins, corrupt assets and conflicts. Disposable PR #36 proved actual shared preview creation and cleanup; PR #35 remained available.
 
-E07 is complete against its stated fresh-consumer-fixture acceptance. E06 is **not** fully complete: live managed-client policies and the independent required gate remain uninstalled/unverified. Continuing repository work despite those external actions followed the explicitly recorded maintainer exception; no permission or GitHub administrative change was made. The real guide repositories, their deployed sites and Hugo templates are unchanged. The next platform stage is E08, outside this request to continue through E07.
+E07 is complete against its stated fresh-consumer-fixture acceptance. E06 is **not** fully complete: live managed-client policies and the independent required gate remain uninstalled/unverified. Continuing repository work despite those external actions followed the explicitly recorded maintainer exception; no permission or GitHub administrative change was made. The real guide repositories, their deployed sites and Hugo templates are unchanged. The subsequent continuation authorizes E08 repository and release-readiness work; its remaining publication and administrative acceptance is recorded below.
+
+
+### E08 release-readiness audit and targeted review fixes
+
+The continuation after E07 starts E08. Read-only inspection confirmed repository ID `R_kgDOO4lKLg`, canonical remote, and default branch `main`. The existing preview releases are historical evidence, not completion of the current coordinated native-module release: the newest inspected release, `v0.5.3-PullRequest0035.146`, lacks the native module/workflow/component provenance now required by bootstrap. No new release or consumer deployment has been made.
+
+Before publication, unresolved PR review findings required bounded corrections to E04/E07 implementation. This is an authorized bug-fix deviation during E08, with no Hugo templates or consumer repositories changed:
+
+- Map Canary deployment rings to the supported `preview` build target; retain environment names.
+- Enforce environment-specific language/guide exclusions in artifact and download validation. Excluded guides require explicit public `artifactPrefixes`; Prepare rejects an excluded language still enabled in the selected effective configuration, including root/default languages.
+- Require an explicit boolean clean-source identity before deployment confirmation. Dirty, missing and string-valued declarations fail.
+- Treat PowerShell YAML 0.4.12 as the minimum supported version consistently across installation and imports.
+
+Local validation: full platform build passed **223 tests**, distributed-skill checks, Hugo translation probe and package validation. Both sample preview and production builds passed their artifact validation. Regression tests include environment-only exclusions, unknown/unmapped guide exclusions, default-language exclusion and dirty deployment identity. Committed CI evidence is pending this increment.
+
+The six unresolved review threads have these dispositions: four code issues addressed above; the historical PR release-credential finding is addressed by main-push-only publication; the candidate-controlled workflow receiving a deployment secret remains an **E06 external trust-boundary issue**, not resolved by job isolation. Threads have not been marked resolved or commented on by the agent.
+
+Publication remains blocked by external merge requirements. PR #35 is draft. Active ruleset 6964088 still requires retired `Build Site` and mandates merge queue; `main.yaml` has no `merge_group` trigger. Ruleset 6964089 requires review-thread resolution. No rulesets, permissions, or GitHub administrative configuration were changed. An earlier automatic approval review rejected a workflow edit under the maintainer's no-GitHub-configuration instruction; no workflow mutation was retried. The maintainer must update obsolete required checks and clarify authorization for the merge-queue workflow trigger before this path can complete.
+
+- [x] Audit current repository identity, releases and merge requirements.
+- [x] Correct the four actionable repository review defects and pass local acceptance.
+- [ ] Verify the committed increment in the shared sample CI pipeline.
+- [ ] Complete maintainer-owned merge requirements and resolve the remaining trust-boundary decision.
+- [ ] Publish and verify a complete coordinated preview release from main, including its native module tag and clean installation.
+
+E08 remains incomplete. E06 external enforcement remains incomplete. E09–E14 have not started.

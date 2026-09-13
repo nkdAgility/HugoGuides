@@ -4,7 +4,7 @@ param()
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
-Import-Module powershell-yaml -RequiredVersion 0.4.12
+Import-Module powershell-yaml -MinimumVersion 0.4.12
 Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
 $expected=@('guide.contributions','guide.genpdfs','guide.gravatar','guide.historicalversion','guide.transcreate','guide.transreconcile','guide.transstatus')
 $directory=Join-Path $root 'system/OpenGuidePlatform.AgentSkills'

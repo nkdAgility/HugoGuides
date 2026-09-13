@@ -27,7 +27,7 @@ function Update-GuideContributions {
     $originalBytes=[IO.File]::ReadAllBytes($selection.Path)
     $originalHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($originalBytes))
     if ($originalHash -ne $ExpectedSha256) { throw 'Contributor file changed since review; read and review it again.' }
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
     $before=ConvertFrom-Yaml ([Text.Encoding]::UTF8.GetString($originalBytes).TrimStart([char]0xFEFF))
     $after=ConvertFrom-Yaml $CandidateYaml
     if ($before -isnot [Collections.IList] -or $after -isnot [Collections.IList]) { throw 'Expected a contributor collection.' }

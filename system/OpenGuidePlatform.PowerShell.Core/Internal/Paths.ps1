@@ -26,7 +26,7 @@ function Get-GuideSelection {
 }
 function Read-GuideDocument {
     param([string]$Path)
-    Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
     $raw=[IO.File]::ReadAllText($Path)
     $match=[regex]::Match($raw,'\A---\r?\n(?<yaml>.*?)\r?\n---(?:\r?\n|\z)(?<body>.*)\z',[Text.RegularExpressions.RegexOptions]::Singleline)
     if (-not $match.Success) { throw "Expected YAML front matter: $Path" }

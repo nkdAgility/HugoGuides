@@ -371,6 +371,15 @@
               ]
             },
             "minItems": 1
+          },
+          "artifactPrefixes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*[\\\\:?#%]).+$"
+            }
           }
         },
         "required": [

@@ -7,6 +7,13 @@ function Get-GuideAssessment {
     }
     foreach($finding in @(Get-GuidePolicyFinding $Policy)) { Add-Finding $finding.Code platform $finding.Subject 'The declared policy relationship is inconsistent.' 'Correct the reported policy relationship in the reviewed site policy.' }
     foreach($finding in @(Test-GuidePublicationPolicy $Policy $EffectiveProduction)) { Add-Finding $finding.Code platform $finding.Subject $finding.Reason 'Keep permanently excluded subjects disabled in effective production configuration and provide exclusion evidence.' $finding.Severity }
+    foreach($environment in @($Policy.publication.environments | Where-Object name -EQ $Target)) {
+        foreach($language in $environment.excludedLanguages) {
+            if($language -in $Languages) {
+                Add-Finding ENVIRONMENT_LANGUAGE_ENABLED language $language "The language is enabled in effective $Target configuration but excluded by publication policy." "Disable this language in the $Target configuration or review the environment exclusion policy."
+            }
+        }
+    }
     $wrapperState='unknown'
     try {
         $wrapperArguments=@{}
