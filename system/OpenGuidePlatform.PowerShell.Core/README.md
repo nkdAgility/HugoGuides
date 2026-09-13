@@ -19,9 +19,11 @@ This module enforces the supplied policy, not the authenticity of that policy. T
 ## Remaining E03 work
 
 - Full wrapper, routes and i18n reconciliation; inventory currently checks declared wrapper files and reports other requirements.
-- Safe existing-contributor updates and generated-PDF replacement/cache invalidation.
+- Generated-PDF replacement/cache invalidation.
 - Abrupt process termination during a snapshot can leave a staging directory/lock for manual inspection; handled copy failures clean up staging and never publish a partial edition.
 - Complete regression coverage for those operations before declaring E03 finished.
 
 Shared skills describe these boundaries explicitly. Root Prepare/Build/report orchestration belongs to E04. Nothing here changes Hugo rendering or adopts the platform in a consumer.
 Fallback observation follows declared chains to populated web content and treats cycles, undeclared targets and non-web targets as unavailable. Edition snapshots publish by a same-parent directory rename after all files are copied. An existing destination is never replaced.
+
+Contributor updates accept exact candidate YAML, one existing contributor name and the reviewed source SHA-256. They preserve the existing .yml/.yaml path and reject semantic changes to other records. Candidate comments and formatting must be reviewed because the command writes the supplied text exactly. A cooperative lock, staged replacement and second hash check catch observed conflicts; they are not an OS-level compare-and-swap against other editors. Existing site-specific roles are retained. Adding, removing and renaming records through this update operation are unsupported.

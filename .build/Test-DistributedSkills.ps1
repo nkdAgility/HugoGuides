@@ -19,7 +19,7 @@ foreach($folder in $actual) {
     if($metadata.name -cne $folder.Name -or $metadata.name.Length -gt 64){throw 'Skill identity mismatch'}
     if([string]::IsNullOrWhiteSpace($metadata.description) -or $metadata.description.Length -gt 1024 -or $metadata.description -match '[<>]'){throw 'Invalid skill description'}
     if($text -match '\[TODO:'){throw 'Unfinished skill placeholder'}
-    foreach($call in [regex]::Matches($text,'\b(?:Get|New|Import|Test)-Guide[A-Za-z]+\b')) { if($call.Value -notin $commands){throw "Skill refers to missing Core command: $($call.Value)"} }
+    foreach($call in [regex]::Matches($text,'\b(?:Get|New|Import|Test|Update)-Guide[A-Za-z]+\b')) { if($call.Value -notin $commands){throw "Skill refers to missing Core command: $($call.Value)"} }
     foreach($link in [regex]::Matches($text,'\]\((?<path>[^)]+)\)')) { if(-not (Test-Path (Join-Path $folder.FullName $link.Groups['path'].Value))){throw "Skill reference missing: $($link.Value)"} }
     Write-Host "PASS $($folder.Name) metadata, references and Core commands"
 }
