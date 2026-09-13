@@ -1,0 +1,7671 @@
+{
+  "schemaVersion": 1,
+  "checkerSha256": "e582447d79783b9b83846333bb5bf54962f288932d20c45e50b9ec47fa58ce29",
+  "verifiedFiles": 9289,
+  "scope": "All retained HTML pages. Text whitespace is collapsed; script/style text is excluded. Main text, heading content, IDs, ordered links, language, direction and redirects are compared separately. Raw artifact hashes are verified first. No finding is waived and no visual approval is inferred.",
+  "comparisons": [
+    {
+      "repository": "KanbanGuides",
+      "target": "local",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 138,
+      "differences": [
+        {
+          "page": "download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "downloads/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-419/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-419/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "local",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 138,
+      "differences": [
+        {
+          "page": "es-419/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-419/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-419/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "local",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 138,
+      "differences": [
+        {
+          "page": "download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-419/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-419/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/translationsdirectory/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/translationsdirectory/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "preview",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 123,
+      "differences": [
+        {
+          "page": "downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "preview",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 123,
+      "differences": [
+        {
+          "page": "es-es/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "min/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/2025.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/open-guide-to-kanban/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.12/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2020.7/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/2025.5/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "the-kanban-guide/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "preview",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 123,
+      "differences": [
+        {
+          "page": "download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "min/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "pl/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "pl/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "production",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 89,
+      "differences": [
+        {
+          "page": "downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "production",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 89,
+      "differences": [
+        {
+          "page": "download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "target": "production",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 89,
+      "differences": [
+        {
+          "page": "download/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es-es/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "es-es/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "fr/download/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fr/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/downloads/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "ja/translationsdirectory/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "local",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 210,
+      "differences": [
+        {
+          "page": "adaptive-enterprise/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership-organization/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-foundations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-product/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "technical-excellence/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "local",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 210,
+      "differences": [
+        {
+          "page": "adaptive-enterprise/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-enterprise/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "emergent-strategy-and-depoyment/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership-organization/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-foundations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-product/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "technical-excellence/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "local",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 210,
+      "differences": [
+        {
+          "page": "ja/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "preview",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 202,
+      "differences": [
+        {
+          "page": "adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "fields": [
+            "textSha256",
+            "redirects"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership-organization/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-foundations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-product/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "technical-excellence/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "preview",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 202,
+      "differences": [
+        {
+          "page": "adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "adaptive-executive/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ai-and-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "complexity/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "fa/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "holistic-testing/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/adaptive-executive/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/complexity/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/emergent-strategy-and-depoyment/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "it/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ja/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership-organization/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "multi-team-scrum/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "nl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "operating-models/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "planguage/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "product-thinking/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "psychological-safety-in-scrum-teams/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pt/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "ro/scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-foundations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-guide-expanded/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "scrum-on-one-page/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "software-engineering-practices/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-as-an-empirical-capability/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "strategy-product/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "technical-excellence/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/jeff-sutherland/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/john-coleman/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/creators/ralph-jocham/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/foundation/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/framework/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/leadership/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "tlh/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "preview",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 202,
+      "differences": [
+        {
+          "page": "de/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "de/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "es/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "production",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 132,
+      "differences": []
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "production",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 132,
+      "differences": []
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "target": "production",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 132,
+      "differences": [
+        {
+          "page": "pl/scrum-guide-expanded/2026.1/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "pl/scrum-guide-expanded/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "idsSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "local",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 15,
+      "differences": [
+        {
+          "page": "about/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "brief/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "getting-out/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "objections/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "right-of-reply/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/2024.8/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "local",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 15,
+      "differences": [
+        {
+          "page": "about/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "brief/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "getting-out/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "objections/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "right-of-reply/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/2024.8/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/history/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/translations/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "local",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 15,
+      "differences": []
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "preview",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 15,
+      "differences": [
+        {
+          "page": "about/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "brief/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "getting-out/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "objections/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "right-of-reply/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/2024.8/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/history/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/translations/index.html",
+          "fields": [
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "preview",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 15,
+      "differences": [
+        {
+          "page": "about/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "brief/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "getting-out/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "objections/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "right-of-reply/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/2024.8/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/history/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/translations/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "preview",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 15,
+      "differences": []
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "production",
+      "before": "original",
+      "after": "relocated",
+      "pagesCompared": 15,
+      "differences": []
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "production",
+      "before": "pinned",
+      "after": "original",
+      "pagesCompared": 15,
+      "differences": [
+        {
+          "page": "about/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "brief/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "getting-out/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "objections/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "right-of-reply/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/2024.8/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/history/index.html",
+          "fields": [
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "headingSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        },
+        {
+          "page": "safe-decision-makers/translations/index.html",
+          "fields": [
+            "mainTextCharacters",
+            "mainTextSha256",
+            "mainLinksSha256",
+            "allLinksSha256",
+            "textSha256"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "target": "production",
+      "before": "original",
+      "after": "original-repeat-2",
+      "pagesCompared": 15,
+      "differences": []
+    }
+  ],
+  "fullReport": {
+    "path": ".processing/e05-rendered-semantics-20260913-v2/rendered-semantics.json",
+    "sha256": "78bbf8a8075681bc4ca20c4abc7f00f8cf3ba0bb93e934308e31d9fc72a47337"
+  },
+  "pageCounts": [
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "target": "local",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 138
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "target": "preview",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 123
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "pinned",
+      "target": "production",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 89
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "target": "local",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 138
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "target": "preview",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 123
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original",
+      "target": "production",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 89
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "target": "local",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 138
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "target": "preview",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 123
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "relocated",
+      "target": "production",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 89
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "target": "local",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "target": "preview",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "pinned",
+      "target": "production",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "target": "local",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "target": "preview",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original",
+      "target": "production",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "target": "local",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "target": "preview",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "relocated",
+      "target": "production",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "target": "local",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 210
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "target": "preview",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 202
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "pinned",
+      "target": "production",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 132
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "target": "local",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 210
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "target": "preview",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 202
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original",
+      "target": "production",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 132
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "target": "local",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 210
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "target": "preview",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 202
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "relocated",
+      "target": "production",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 132
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original-repeat-2",
+      "target": "local",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 138
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original-repeat-2",
+      "target": "preview",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 123
+    },
+    {
+      "repository": "KanbanGuides",
+      "variant": "original-repeat-2",
+      "target": "production",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "pages": 89
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original-repeat-2",
+      "target": "local",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original-repeat-2",
+      "target": "preview",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "the-safe-delusion",
+      "variant": "original-repeat-2",
+      "target": "production",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "pages": 15
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original-repeat-2",
+      "target": "local",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 210
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original-repeat-2",
+      "target": "preview",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 202
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "variant": "original-repeat-2",
+      "target": "production",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "pages": 132
+    }
+  ]
+}

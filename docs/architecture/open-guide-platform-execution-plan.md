@@ -569,3 +569,7 @@ Local acceptance passed 211 tests, platform packaging and both sample targets. E
 ### E04 closed against the reconciled criteria
 
 Commit `7cddf62e88895ef7e9a582e56e26e227a2fc8633` passed [run 34778471282](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34778471282): platform build/package, sample Prepare, Build, Validate, Deploy, Verify and PR reporting. Release was skipped as required on the PR. Local acceptance passed 211 tests, package validation, both sample targets and the expected failure for prohibited Guide 2 files/index entries. Runtime-anchor and PDF-receipt increments also have independent successful CI evidence above. E04 is complete; E05 cross-consumer equivalence is next. No deployed consumer, Hugo template or administrative setting changed.
+
+### E05 current semantic and visual findings
+
+Every retained HTML page has now been compared semantically across pinned/original/relocated builds and repeat controls; all 9,289 raw file hashes were reverified. The evidence is in `baselines/2026-09-13-relocation/semantic-comparison.json`. Targeted styled screenshots confirm that upgrading Safe Delusion from its old pin changes heading size, contributor labeling and layout. Those changes predate relocation but remain incompatible with unchanged-output adoption. E05 is current and remains open; no module refactor or consumer modification has been made. E06–E08 remain paused pending E05 acceptance.

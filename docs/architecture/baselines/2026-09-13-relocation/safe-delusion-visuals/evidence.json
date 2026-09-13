@@ -1,0 +1,18 @@
+{
+  "scope": "Top viewport of retained production guide pages, pinned versus original pre-relocation module. Bootstrap 5.3.6 CSS/JS replayed from captured bytes. FontAwesome, avatars and analytics blocked; this is targeted evidence of title/label/layout differences, not full visual acceptance.",
+  "browser": "153.0.8010.12",
+  "viewport": {
+    "width": 1365,
+    "height": 1000
+  },
+  "assets": [
+    {
+      "file": "bootstrap.css",
+      "sha256": "a31a97d0b41c95bbebb09b7c2329a4c672129f8369d96cb6ad8f638e84250c48"
+    },
+    {
+      "file": "bootstrap.js",
+      "sha256": "cb789b7cec81aa580177e1b3c0561011539974d243d3a1de0d78a1a278015cab"
+    }
+  ]
+}

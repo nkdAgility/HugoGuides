@@ -68,3 +68,13 @@ node .build/Measure-RetainedGuideAnchors.cjs .processing/e05-relocation-20260913
 ```
 
 Use a fresh output directory and record the tool/browser versions of each new run. The helper refuses an existing output directory and records its source SHA256. These optional characterization tools are separate from everyday guide-site prerequisites.
+
+## Rendered semantics and targeted visual comparison
+
+[Semantic comparisons](semantic-comparison.json) cover every HTML page in the 27 retained builds and nine repeat controls, after rechecking all 9,289 file hashes. The checker compares language/direction, headings, main text, IDs, ordered links and redirects separately. Whitespace normalization and script/style exclusion are explicit; full text still captures debug panels. No baseline or finding was suppressed.
+
+Original-versus-relocated production semantic differences are confined to Kanban's recorded legacy alias outputs. Scrum and Safe Delusion production semantics match. Scrum local/preview main-text differences are the existing copy-link toast containing `%!s(<nil>)`; repeat-control variability remains recorded. Full-text changes in local/preview also include printed checkout paths.
+
+The older Safe Delusion v0.6.8 pin differs from the original/current module: the guide title changes from H2 to H1, the contributor label loses its text, homepage contributor text changes, and some catalogue labels/links differ. The [pinned guide viewport](safe-delusion-visuals/pinned-guide.png) and [newer-module viewport](safe-delusion-visuals/original-guide.png) confirm title-size and layout changes. Both use the same captured Bootstrap assets. External avatars/font icons are blocked, so these images do not certify complete visual equivalence; their limits and asset hashes are recorded alongside them.
+
+These are pre-existing module-upgrade differences, not relocation-induced guide content edits. They still block unchanged-output acceptance for adopting the newer module in Safe Delusion. E05 remains open for a verified preservation approach and the remaining representative visual states across all guides. No consumer source or module template was changed to hide the findings.
