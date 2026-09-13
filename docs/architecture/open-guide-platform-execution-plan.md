@@ -30,7 +30,13 @@ This is an execution plan, not authorisation inferred to rename or deploy immedi
 - [ ] E13 Adoption transition documentation, update automation and operational handover complete.
 - [ ] E14 Proposed module refactoring done after the other work builds successfully, and verified across all guides and sites.
 
-Current work: the approved simplification pass removes unused adapters, moves shared build operations into the Build component, consolidates package identity validation, deduplicates input fingerprints, maintains one PR assessment per target and separates this plan from its history. Acceptance requires platform regression tests, install/update checks, both sample targets and committed preview verification. These checks are pending for this change; earlier green runs do not validate it.
+The approved simplification pass is implemented and verified at `85c1db805ebfb78f2a621c4a00815c2582f949a8`: unused adapters removed; shared stages moved into the Build component; package identity validation consolidated; prepared inputs deduplicated; one current PR assessment per target; execution history separated. No Hugo internals or consumer repositories changed.
+
+Acceptance: **216 tests**, package validation and both local sample targets passed. [CI run 34787509971](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34787509971) passed platform packaging and all five sample stages through live Verify; release was skipped. Actual reporting created current preview comment `5656678132`. Tests exercise its update, target isolation, stale-head refusal and delivery failure paths.
+
+A fresh installed sample fixture also passed preview, production, cached restore with GitHub access blocked and `GOPROXY=off`, and same-version update; all seven skills loaded. It consumed version `0.0.0-20260913224036-85c1db805ebf`, ZIP SHA256 `8e6a086498bb4d7a85eccb8430618e604d4e1a3064917b7da539f6c2ccee3848`. Only release download transport used local assets; native Go resolution, bootstrap and installed builds were real. No named release was published. Local evidence is retained in `.processing/simplify-installed-consumer-evidence.json`.
+
+The only intentional duplication retained is verification before executing downloaded code: archive safety and checksum/source checks remain in standalone bootstrap and CI restoration. They cannot depend on unverified package code. Both then use the same packaged identity validator.
 
 Remaining gates:
 
