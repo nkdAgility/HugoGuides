@@ -10,6 +10,7 @@ function Test-GuideSiteDeployment {
         [Parameter(Mandatory)]$Identity,[uri]$ExpectedBaseUri,
         [string[]]$RequiredRoutes=@('/'),
         [string[]]$ForbiddenPaths=@(),
+        [string[]]$ForbiddenDownloads=@(),
         [ValidateRange(1,10)][int]$Attempts=5
     )
     if($BaseUri.Scheme -notin @('https','http') -or $BaseUri.Query -or $BaseUri.Fragment -or $BaseUri.UserInfo){throw 'Supply an HTTP(S) deployment base URL without credentials, query or fragment.'}
@@ -44,6 +45,13 @@ function Test-GuideSiteDeployment {
                 $response=Invoke-GuideHttpProbe ($BaseUri.AbsoluteUri.TrimEnd('/')+'/'+$path.Trim('/')+'/')
                 if($response.StatusCode -notin @(404,410)){throw "Prohibited route returned HTTP $($response.StatusCode)."}
             }catch{$findings.Add(@{Code='DEPLOYED_EXCLUSION_UNVERIFIED';Path=$path;Message=$_.Exception.Message})}
+        }
+        foreach($path in $ForbiddenDownloads){
+            try{
+                $uri=$BaseUri.AbsoluteUri.TrimEnd('/')+'/'+(($path.Split('/')|ForEach-Object {[uri]::EscapeDataString($_)}) -join '/')
+                $response=Invoke-GuideHttpProbe $uri
+                if($response.StatusCode -notin @(404,410)){throw "Prohibited download returned HTTP $($response.StatusCode)."}
+            }catch{$findings.Add(@{Code='DEPLOYED_DOWNLOAD_EXCLUSION_UNVERIFIED';Path=$path;Message=$_.Exception.Message})}
         }
         if($findings.Count -eq 0){return [pscustomobject]@{Outcome='pass';SourceCommit=$Identity.sourceCommit;PlatformVersion=$Identity.version;Target=$Identity.target;Url=$BaseUri.AbsoluteUri;Attempts=$attempt;Findings=@()}}
         if($attempt -lt $Attempts){Start-Sleep -Seconds 5}

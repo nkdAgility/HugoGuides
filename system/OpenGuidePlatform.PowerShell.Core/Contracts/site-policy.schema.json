@@ -196,6 +196,16 @@
                                 "generated",
                                 "protected"
                               ]
+                            },
+                            "publishedPaths": {
+                              "type": "array",
+                              "uniqueItems": true,
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*[\\\\:?#%]).+$"
+                              },
+                              "minItems": 1
                             }
                           },
                           "required": [

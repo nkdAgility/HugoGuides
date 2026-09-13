@@ -86,7 +86,9 @@ if($Stage -in @('All','Validate')){
         $forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object {$_.id})
     }
     $requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
-    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -ForbiddenPaths $forbidden
+    $downloadRequirements=Get-GuideDownloadRequirements -WorkspaceRoot $root -Policy $policy -Target $Target -EnabledLanguages @($assessment.inventory.wrapper.languages)
+    [IO.File]::WriteAllText("$output/download-requirements.json",($downloadRequirements|ConvertTo-Json -Depth 20))
+    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -RequiredDownloads $downloadRequirements.RequiredPaths -ForbiddenPaths $forbidden -DownloadRequirements $downloadRequirements
     $navigationBase=(Get-Content $overlay -Raw|ConvertFrom-Json -AsHashtable).baseURL
     $requiredContent=if($policy.wrapper.Contains('requiredPageContent')){@($policy.wrapper.requiredPageContent|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
     $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase -RequiredPageContent $requiredContent

@@ -30,3 +30,9 @@ Run `pwsh -File .build/Test-PlatformContracts.ps1` locally. The thin Platform co
 E03 validates unique guide/edition/language keys, extension and fallback references/cycles, intent/download consistency, actual filesystem containment, protected hashes and effective publication rules. E04 computes report outcomes from checks and diagnoses missing reports; a caller-supplied outcome is not trusted. E07 validates package digests, module tag/source provenance, workflow/source coherence and supported toolchain combinations. E06 evaluates authoritative policy independently of PR-modifiable tests and schemas.
 
 Passing these structural tests is not evidence that those enforcement features already exist. No schema or fixture is loaded by Hugo or by a consumer build at this stage.
+
+## Download publication paths
+
+A download's `path` locates the source relative to its edition. `publishedPaths` records one or more existing file paths relative to the built site, without a leading slash. Source paths and public paths are deliberately separate because Hugo mounts, language behaviour and wrapper routes vary by consumer. The field is optional for reading older candidate policy files, but Prepare blocks an eligible download without its reviewed public mapping; adoption must add the existing paths before building.
+
+Artifact validation requires each eligible mapped file with the same source bytes. PDF-only and declared fallback resources remain valid. Excluded downloads are checked at their declared paths and by source hash/filename throughout the artifact, including outside language prefixes. Shared fallback bytes are allowed only at an explicitly eligible mapped path. Validate passes forbidden public paths to post-deployment verification.

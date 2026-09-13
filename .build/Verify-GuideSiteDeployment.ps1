@@ -22,6 +22,8 @@ $overlay=Get-Content "$output/candidate-platform.json" -Raw|ConvertFrom-Json -As
 $arguments=@{}
 if($overlay.Contains('baseURL')){$arguments.ExpectedBaseUri=$overlay.baseURL}
 $requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
+$downloads=Get-Content "$output/download-requirements.json" -Raw|ConvertFrom-Json
+$arguments.ForbiddenDownloads=@($downloads.ForbiddenPaths|Where-Object {$_ -cnotin $downloads.RequiredPaths})
 $result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $requiredRoutes -ForbiddenPaths $forbidden @arguments
 [IO.File]::WriteAllText("$output/deployment-verification.json",($result|ConvertTo-Json -Depth 30))
 $markdown="## Verify: $($result.Outcome)`n`nCommit: $($result.SourceCommit)`n`nPlatform: $($result.PlatformVersion)`n`nTarget: $Target`n`nURL: $DeploymentUrl`n"

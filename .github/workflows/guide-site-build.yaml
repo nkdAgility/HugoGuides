@@ -61,7 +61,7 @@ env:
   SITE_BASE_URL: ${{ inputs.site-url }}
 jobs:
   prepare:
-    name: ${{ inputs.site-name }} Prepare (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Prepare
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -121,7 +121,7 @@ jobs:
             .processing/i18n-probe/
           if-no-files-found: error
   build:
-    name: ${{ inputs.site-name }} Build (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Build
     needs: prepare
     runs-on: ubuntu-24.04
     steps:
@@ -153,7 +153,7 @@ jobs:
           path: .processing/guide-site/
           if-no-files-found: error
   validate:
-    name: ${{ inputs.site-name }} Validate (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Validate
     needs: build
     runs-on: ubuntu-24.04
     steps:
@@ -178,10 +178,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: GuideSite-Validate-${{ inputs.target }}
-          path: .processing/guide-site/artifact-validation.json
+          path: |
+            .processing/guide-site/artifact-validation.json
+            .processing/guide-site/download-requirements.json
           if-no-files-found: error
   deploy:
-    name: ${{ inputs.site-name }} Deploy (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Deploy
     permissions:
       contents: read
       pull-requests: write
@@ -227,7 +229,7 @@ jobs:
           skip_api_build: true
           deployment_environment: ${{ inputs.deployment-environment }}
   verify:
-    name: ${{ inputs.site-name }} Verify (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Verify
     needs: deploy
     if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
     runs-on: ubuntu-24.04

@@ -12,10 +12,10 @@ Describe your own site:
 
 1. Its identity, Hugo source folder, required wrapper files, routes and translation keys.
 2. Every guide and edition, its source language, and each translation's intended state: web, PDF-only, fallback, scaffold or excluded.
-3. Existing download paths and whether each PDF is supplied, generated or protected.
+3. Existing download source paths, their `publishedPaths` in the built site, and whether each PDF is supplied, generated or protected.
 4. Production exclusions, protected content and the permitted publishing operations.
 
-Paths must reflect the existing site. Most paths are repository-relative; edition paths are relative to the guide's content root and download paths are relative to the edition. Do not copy the sample's guide names, content paths or publication rules unchanged. Test fixtures are incomplete examples, not installation policies.
+Paths must reflect the existing site. Most paths are repository-relative; edition paths are relative to the guide's content root and download `path` values are relative to the edition. Each download's `publishedPaths` lists its existing public file paths relative to the built site, without a leading slash; for example `downloads/guide.en.pdf`. Record those from the current site/baseline, preserving URLs rather than deriving them from content folder names. Do not copy the sample's guide names, content paths or publication rules unchanged. Test fixtures are incomplete examples, not installation policies.
 
 Have the site's maintainers review these declarations. A policy file describes requirements; it does not install independent enforcement or grant an agent maintainer authority.
 

@@ -33,6 +33,11 @@ Describe 'Deployed guide-site verification' {
         $result=Test-GuideSiteDeployment -BaseUri https://example.test/ -Identity $identity -ForbiddenPaths @('min') -Attempts 1
         $result.Findings.Code | Should -Contain DEPLOYED_EXCLUSION_UNVERIFIED
     }
+    It 'rejects an excluded PDF outside language prefixes and requests its exact file URL' {
+        $result=Test-GuideSiteDeployment -BaseUri https://example.test/ -Identity $identity -ForbiddenDownloads @('downloads/guide.min.pdf') -Attempts 1
+        $result.Findings.Code | Should -Contain DEPLOYED_DOWNLOAD_EXCLUSION_UNVERIFIED
+        Should -Invoke Invoke-GuideHttpProbe -ModuleName OpenGuidePlatform.PowerShell.Build -ParameterFilter { $Uri -eq 'https://example.test/downloads/guide.min.pdf' } -Times 1 -Exactly
+    }
     It 'verifies PDF responses as well as required pages' {
         $identity.files+=@{path='guide.pdf';sha256=$hash}
         Mock Invoke-GuideHttpProbe -ModuleName OpenGuidePlatform.PowerShell.Build {

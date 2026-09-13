@@ -9,6 +9,7 @@ function Get-GuideArtifactAssessment {
         [string[]]$RequiredRoutes=@('/'),
         [string[]]$RequiredDownloads=@(),
         [string[]]$ForbiddenPaths=@(),
+        [object]$DownloadRequirements,
         [long]$MaximumBytes=524288000
     )
     $report=[ordered]@{Outcome='blocked';SourceCommit=$SourceCommit;Target=$Target;SizeBytes=$null;FileCount=$null;Findings=@()}
@@ -19,6 +20,11 @@ function Get-GuideArtifactAssessment {
         $report.SizeBytes=$validation.SizeBytes
         $report.FileCount=$validation.Files.Count
         $report.Findings=@($validation.Findings)
+        if($DownloadRequirements){
+            $downloads=Test-GuideDownloadPublication -Requirements $DownloadRequirements -ArtifactFiles $validation.Files
+            $report.Findings+=@($downloads.Findings)
+            if($downloads.Outcome -ne 'pass'){$report.Outcome='fail'}
+        }
     } catch {
         $report.Findings+= [pscustomobject]@{Code='VALIDATE_INPUT_UNAVAILABLE';Path='Build evidence';Message="Restore the build artifact and Hugo log, then rerun Validate. $($_.Exception.Message)"}
         return $report

@@ -452,3 +452,10 @@ Commit `d953f2f71c7e3cbee8f6dc9ff1cadddde247eee7` passed [CI run 34762682088](ht
 ### E04 Prepare freshness guard
 
 Local validation passed with 160 tests and 26 contract checks. A real disposable sample run proved that changing content after Prepare, with the same commit and policy, blocks a separate Build; restoring the assessed bytes permits Build and standalone Validate. Inputs include wrapper/guide files, configuration, policy, selected version, platform runtime, relevant environment settings and build-tool fingerprints. Validate checks file evidence without needing Hugo installed. This closes the stale local Prepare-input finding; E04 remains open for downloads, anchors, PR reporting and remaining stage acceptance. CI verification of the committed guard follows.
+### E04 download publication validation
+
+Implemented reviewed `publishedPaths` for each declared source download, Prepare findings for absent mappings/source files, and artifact checks for required paths and unchanged source bytes. PDF-only/fallback resources remain valid. Excluded resources are checked throughout the artifact by mapped path, filename and source digest, with explicitly allowed shared fallback paths preserved. Post-deployment Verify requests exact forbidden download URLs, including paths outside language prefixes.
+
+Validation: 170 tests, 26 contract checks, seven skill checks, full platform packaging, workflow lint and real Hugo preview/production builds of a disposable sample with an edition-relative synthetic PDF resource mapped to its public path. This tests artifact publication/bytes, not PDF rendering. Consumer published content and Hugo internals were unchanged. The generated policy must record existing public paths during adoption; no guessed route migration is implied.
+
+Freshness CI run 34763082733 exposed a Prepare-only YAML dependency incorrectly required by the Build fingerprint check. Commit d2ccb9a removes it and adds a regression; its CI result remains required. Shared stage names from the concurrent naming correction are preserved and tested independently of target names.
