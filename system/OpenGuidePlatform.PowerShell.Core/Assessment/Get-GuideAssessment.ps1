@@ -6,7 +6,7 @@ function Get-GuideAssessment {
         $findings.Add([ordered]@{code=$code;severity=$severity;scope=$scope;subject=$subject;message=$message;remediation=$fix;evidence=@()})
     }
     foreach($finding in @(Get-GuidePolicyFinding $Policy)) { Add-Finding $finding.Code platform $finding.Subject 'The declared policy relationship is inconsistent.' 'Correct the reported policy relationship in the reviewed site policy.' }
-    foreach($finding in @(Test-GuidePublicationPolicy $Policy $EffectiveProduction)) { Add-Finding $finding.Code platform $finding.Subject $finding.Reason 'Keep permanently excluded subjects disabled in effective production configuration and provide exclusion evidence.' }
+    foreach($finding in @(Test-GuidePublicationPolicy $Policy $EffectiveProduction)) { Add-Finding $finding.Code platform $finding.Subject $finding.Reason 'Keep permanently excluded subjects disabled in effective production configuration and provide exclusion evidence.' $finding.Severity }
     $wrapperState='unknown'
     try {
         $wrapperArguments=@{}

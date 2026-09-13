@@ -10,12 +10,13 @@ function Get-GuideArtifactAssessment {
         [string[]]$RequiredDownloads=@(),
         [string[]]$ForbiddenPaths=@(),
         [object]$DownloadRequirements,
+        [hashtable]$AllowedLegacyDuplicates=@{},
         [long]$MaximumBytes=524288000
     )
     $report=[ordered]@{Outcome='blocked';SourceCommit=$SourceCommit;Target=$Target;SizeBytes=$null;FileCount=$null;Findings=@()}
     try {
         $log=Get-Content -LiteralPath $HugoLogPath -ErrorAction Stop
-        $validation=Test-GuideArtifact -ArtifactRoot $ArtifactRoot -RequiredRoutes $RequiredRoutes -RequiredDownloads $RequiredDownloads -ForbiddenPaths $ForbiddenPaths -MaximumBytes $MaximumBytes -HugoLog $log
+        $validation=Test-GuideArtifact -ArtifactRoot $ArtifactRoot -RequiredRoutes $RequiredRoutes -RequiredDownloads $RequiredDownloads -ForbiddenPaths $ForbiddenPaths -MaximumBytes $MaximumBytes -HugoLog $log -AllowedLegacyDuplicates $AllowedLegacyDuplicates
         $report.Outcome=$validation.Outcome
         $report.SizeBytes=$validation.SizeBytes
         $report.FileCount=$validation.Files.Count

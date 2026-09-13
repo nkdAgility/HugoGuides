@@ -46,6 +46,14 @@ Describe 'Policy semantics and permanent exclusions' {
         @(Test-GuidePublicationPolicy $policy @{languages=@{min=@{disabled=$true}}}).Count | Should -Be 0
         @(Test-GuidePublicationPolicy $policy @{languages=@{}}).Code | Should -Contain 'PRODUCTION_LANGUAGE_STATE_UNKNOWN'
     }
+    It 'defers mapped guide and edition exclusion to artifact validation without claiming production approval' {
+        $policy.publication.permanentExclusions=@(@{environment='production';subject='guide';id='example';reason='Excluded';artifactPrefixes=@('bespoke-guide','ja/bespoke-guide')},@{environment='production';subject='edition';id='another/2026';reason='Excluded';artifactPrefixes=@('another/2026')})
+        $findings=@(Test-GuidePublicationPolicy $policy @{languages=@{}})
+        $findings.Count | Should -Be 2
+        @($findings|Where-Object Severity -eq blocker).Count | Should -Be 0
+        @(Get-GuideForbiddenPaths $policy production) | Should -Contain 'another/2026'
+        @(Get-GuideForbiddenPaths $policy preview).Count | Should -Be 0
+    }
     It 'does not assume guide exclusions without effective evidence' {
         $policy.publication.permanentExclusions=@(@{environment='production';subject='guide';id='extension';reason='Excluded'})
         @(Test-GuidePublicationPolicy $policy @{languages=@{}}).Code | Should -Contain 'PUBLICATION_EVIDENCE_REQUIRED'

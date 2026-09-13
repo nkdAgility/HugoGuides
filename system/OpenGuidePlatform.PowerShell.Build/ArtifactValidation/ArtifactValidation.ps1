@@ -40,7 +40,7 @@ function Get-GuideArtifactFiles {
 }
 function Test-GuideArtifact {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$ArtifactRoot,[string[]]$RequiredRoutes=@('/'),[string[]]$RequiredDownloads=@(),[string[]]$ForbiddenPaths=@(),[long]$MaximumBytes=524288000,[string[]]$HugoLog=@())
+    param([Parameter(Mandatory)][string]$ArtifactRoot,[string[]]$RequiredRoutes=@('/'),[string[]]$RequiredDownloads=@(),[string[]]$ForbiddenPaths=@(),[long]$MaximumBytes=524288000,[string[]]$HugoLog=@(),[hashtable]$AllowedLegacyDuplicates=@{})
     $files=@(Get-GuideArtifactFiles $ArtifactRoot)
     $paths=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach($file in $files){$null=$paths.Add($file.Path)}
@@ -62,7 +62,16 @@ function Test-GuideArtifact {
     }
     foreach($line in $HugoLog){
         if($line -match '^WARN\s+Duplicate target paths:\s*(?<targets>.+)$'){
-            Add-ArtifactFinding HUGO_DUPLICATE_TARGETS 'Hugo output paths' "Assign one owner to each output path; remove conflicting aliases or routes. Hugo reported: $($Matches.targets)"
+            $reported=$Matches.targets
+            $entries=@([regex]::Matches($reported,'(?:^|,\s*)(?<path>[^,]+?)\s+\((?<count>\d+)\)'))
+            $reconstructed=($entries|ForEach-Object {$_.Value.TrimStart(',',' ')}) -join ', '
+            $approved=$entries.Count -gt 0 -and $reconstructed -ceq $reported
+            foreach($entry in $entries){
+                $target=$entry.Groups['path'].Value;$count=[int]$entry.Groups['count'].Value
+                if($target -cnotmatch '^(?:[A-Za-z0-9-]+/)?(?:download|downloads|translationsdirectory)/index\.html$' -or -not $AllowedLegacyDuplicates.ContainsKey($target) -or $AllowedLegacyDuplicates[$target] -ne $count){$approved=$false}
+            }
+            if($approved){continue}
+            Add-ArtifactFinding HUGO_DUPLICATE_TARGETS 'Hugo output paths' "Assign one owner to each output path; remove conflicting aliases or routes. Hugo reported: $reported"
         }
     }
     $size=0L

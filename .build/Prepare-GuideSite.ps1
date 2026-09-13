@@ -53,7 +53,8 @@ try {
     }
     $downloads=Get-GuideDownloadRequirements -WorkspaceRoot $WorkspaceRoot -Policy $policy -Target $Target -EnabledLanguages $Languages
     $pdfReceipts=Get-GuidePdfReceipts -WorkspaceRoot $WorkspaceRoot -Policy $policy -Requirements $downloads
-    foreach($finding in @($downloads.Findings)+@($pdfReceipts.Findings)){
+    $legacyAliases=Test-GuideLegacyAliases -WorkspaceRoot $WorkspaceRoot -Policy $policy
+    foreach($finding in @($downloads.Findings)+@($pdfReceipts.Findings)+@($legacyAliases.Findings)){
         $assessment.findings+=[ordered]@{code=$finding.Code;severity='blocker';scope='download';subject=$finding.Path;message=$finding.Message;remediation=$finding.Message;evidence=@()}
         $assessment.outcome='fail'
     }

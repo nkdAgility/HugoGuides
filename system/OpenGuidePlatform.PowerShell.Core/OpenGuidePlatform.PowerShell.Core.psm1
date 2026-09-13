@@ -25,3 +25,5 @@ $script:CoreRoot=$PSScriptRoot
 . (Join-Path $PSScriptRoot 'PublicationPolicy/Get-GuideDownloadRequirements.ps1')
 
 . (Join-Path $PSScriptRoot 'PdfPublishing/Get-GuidePdfReceipts.ps1')
+
+. (Join-Path $PSScriptRoot 'PublicationPolicy/Get-GuideLegacyAliases.ps1')

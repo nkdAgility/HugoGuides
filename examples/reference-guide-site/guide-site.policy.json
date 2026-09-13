@@ -81,6 +81,71 @@
         "route": "/min/guide1/",
         "fragment": "1-bye-office-hello-laptop"
       }
+    ],
+    "jsonIndexes": [
+      {
+        "route": "/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/translations.json",
+        "requiredRoutes": [
+          "/guide1/",
+          "/guide2/",
+          "/guide1/2025.5/",
+          "/guide2/2025.7/"
+        ]
+      },
+      {
+        "route": "/ja/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/ja/translations.json",
+        "requiredRoutes": [
+          "/ja/guide1/",
+          "/ja/guide2/"
+        ]
+      },
+      {
+        "route": "/min/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/min/translations.json",
+        "requiredRoutes": [
+          "/min/guide1/",
+          "/min/guide2/"
+        ]
+      }
+    ],
+    "legacyAliases": [
+      {
+        "source": "examples/reference-guide-site/content/Guide1/translations/index.md",
+        "language": "en",
+        "aliases": [
+          "/downloads/",
+          "/download/"
+        ],
+        "targets": [
+          "downloads/index.html",
+          "download/index.html"
+        ]
+      },
+      {
+        "source": "examples/reference-guide-site/content/Guide1/translations/index.min.md",
+        "language": "min",
+        "aliases": [
+          "/downloads/",
+          "/download/",
+          "/translationsdirectory/"
+        ],
+        "targets": [
+          "min/downloads/index.html",
+          "min/download/index.html",
+          "min/translationsdirectory/index.html"
+        ]
+      }
     ]
   },
   "guides": [

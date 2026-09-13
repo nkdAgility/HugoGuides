@@ -96,18 +96,22 @@ if($Stage -in @('All','Build')){
     [IO.File]::WriteAllText("$output/artifact-identity.json",($identity|ConvertTo-Json -Depth 100))
 }
 if($Stage -in @('All','Validate')){
-    $forbidden=@()
-    if($Target -eq 'production'){
-        $forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object {$_.id})
-    }
+    $forbidden=@(Get-GuideForbiddenPaths -Policy $policy -Target $Target)
     $requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
     $downloadRequirements=Get-GuideDownloadRequirements -WorkspaceRoot $root -Policy $policy -Target $Target -EnabledLanguages @($assessment.inventory.wrapper.languages)
     [IO.File]::WriteAllText("$output/download-requirements.json",($downloadRequirements|ConvertTo-Json -Depth 20))
-    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -RequiredDownloads $downloadRequirements.RequiredPaths -ForbiddenPaths $forbidden -DownloadRequirements $downloadRequirements
+    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -RequiredDownloads $downloadRequirements.RequiredPaths -ForbiddenPaths $forbidden -DownloadRequirements $downloadRequirements -AllowedLegacyDuplicates (Get-GuideLegacyAliasTargets -Policy $policy -EnabledLanguages @($assessment.inventory.wrapper.languages))
     $navigationBase=(Get-Content $overlay -Raw|ConvertFrom-Json -AsHashtable).baseURL
     $requiredContent=if($policy.wrapper.Contains('requiredPageContent')){@($policy.wrapper.requiredPageContent|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
     $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase -RequiredPageContent $requiredContent
     [IO.File]::WriteAllText("$output/navigation-validation.json",($navigation|ConvertTo-Json -Depth 10))
+    $indexes=if($policy.wrapper.Contains('jsonIndexes')){@($policy.wrapper.jsonIndexes|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
+    $indexes=@($indexes|ForEach-Object {
+        [pscustomobject]@{route=$_.route;requiredRoutes=@($_.requiredRoutes|Where-Object {$route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count})}
+    })
+    $jsonReport=Test-GuideJsonIndexes -ArtifactRoot $site -BaseUri $navigationBase -Indexes $indexes -EnabledLanguages @($assessment.inventory.wrapper.languages) -ForbiddenPaths $forbidden
+    [IO.File]::WriteAllText("$output/json-index-validation.json",($jsonReport|ConvertTo-Json -Depth 10))
+    if($jsonReport.Outcome -ne 'pass'){$report.Outcome='fail';$report.Findings+=@($jsonReport.Findings)}
     $runtimeAnchors=if($policy.wrapper.Contains('runtimeAnchors')){@($policy.wrapper.runtimeAnchors|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
     try{
         $runtime=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri $navigationBase -IdentityPath "$output/artifact-identity.json" -OutputPath "$OutputPath/runtime" -Anchors $runtimeAnchors

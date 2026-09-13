@@ -321,7 +321,7 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 - [x] Complete required heading-anchor validation alongside page, asset and download checks. Static checks passed in committed sample CI; JavaScript-created consumer anchors remain an E05 adoption disposition.
 - [x] Deliver structured Prepare assessments for same-repository PRs in an isolated data-only reporting job; include blocked findings and repair guidance, with stale-run and delivery-failure tests. Real PR #35 delivery is recorded below. Fork delivery and independent authority remain E06; a deployment-link comment is not the Prepare report.
 - [x] Integrate current-artifact browser evidence for declared runtime anchors; do not waive static failures solely because an older baseline passed. Commit `8b82061` passed all sample stages in run `34777283414`.
-- [ ] Collect/persist approved PDF environment and generation receipts during build integration without regenerating supplied or protected publications.
+- [x] Collect/persist approved PDF environment and generation receipts during build integration without regenerating supplied or protected publications. Commit `d9e324e` passed all sample stages in run `34777698645`.
 - [ ] Preserve only the frozen, existing legacy `/download/`, `/downloads/` and `/translationsdirectory/` alias declarations during affected consumer adoption, including existing language variants. Do not extend them to new languages or introduce a blanket collision exemption.
 - [x] Validate rendered guide bodies and reject unresolved rendered translation placeholders in the sample.
 - [x] Verify Japanese edition selection and declared English fallback, and Minionese preview content with production exclusion in sample builds.
@@ -555,3 +555,13 @@ Local validation passed 199 tests and both sample targets, including Japanese an
 New-GuidePdf now returns the generation environment and guide/edition identity with its existing fingerprints. Save-GuidePdfReceipt persists reviewed evidence without overwriting an unreviewed receipt. Prepare validates required generated-PDF receipts against source/output bytes, policy, approved environment and recorded toolchain, then retains them in prepare/pdf-receipts.json. Receipt files are included in Prepare freshness checks even outside the wrapper directory. Supplied/protected publications do not need receipts, Pandoc or regeneration.
 
 Local validation passed 202 tests, including receipt persistence through Prepare and stale evidence/refusal cases, plus both real sample targets. Synthetic test environment digests are fixture values, not approval of a real publication environment. Committed CI verification follows; E04 remains open.
+
+### E04 JSON-index semantics
+
+Declared wrapper JSON indexes are checked for required guide/edition entries, local public links, prohibited targets and agreement with Prepare-enabled languages. Empty indexes are permitted when no entries are required. The reference policy exercises language and translation indexes in each enabled language without changing Hugo templates. Findings use the existing artifact validation report. Automatic approval review rejected an additional workflow artifact-retention edit under the no-GitHub-configuration restriction; that edit was not applied and is unnecessary for the existing report path.
+
+### E04 final acceptance candidate
+
+The remaining publication checks are implemented: declared JSON catalogue entries/links/languages, explicit guide/edition exclusion prefixes used by Validate and Verify, and frozen legacy alias declarations with exact duplicate-count compatibility. The sample policy records its existing aliases; no aliases or Hugo templates were changed. A production negative fixture correctly failed on excluded Guide 2 files and indexed links. Normal preview/production sample builds pass.
+
+Local acceptance passed 211 tests, platform packaging and both sample targets. E04 remains open pending the final committed CI run. E05 cross-consumer equivalence, E06 external enforcement and real consumer adoption remain separate acceptance stages. The workflow was not changed for the optional JSON detail artifact; findings use the existing validation report.

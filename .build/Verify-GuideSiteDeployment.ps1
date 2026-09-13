@@ -16,8 +16,7 @@ Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform
 $output=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
 $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath)
 $identity=Get-Content "$output/artifact-identity.json" -Raw|ConvertFrom-Json
-$forbidden=@()
-if($Target -eq 'production'){$forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object id)}
+$forbidden=@(Get-GuideForbiddenPaths -Policy $policy -Target $Target)
 $overlay=Get-Content "$output/candidate-platform.json" -Raw|ConvertFrom-Json -AsHashtable
 $arguments=@{}
 if($overlay.Contains('baseURL')){$arguments.ExpectedBaseUri=$overlay.baseURL}

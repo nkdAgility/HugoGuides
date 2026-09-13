@@ -39,6 +39,8 @@ function Test-GuidePublicationPolicy {
             } elseif ($languages[$rule.id]['disabled'] -ne $true) {
                 [pscustomobject]@{Code='PERMANENT_LANGUAGE_ENABLED';Subject=$rule.id;Severity='blocker';Reason=$rule.reason}
             }
+        } elseif($rule.Contains('artifactPrefixes') -and @($rule.artifactPrefixes).Count){
+            [pscustomobject]@{Code='PUBLICATION_ARTIFACT_CHECK_PENDING';Subject=$rule.id;Severity='info';Reason='Validate must prove the declared guide/edition artifact prefixes are absent for the selected target. Prepare is not artifact approval.'}
         } else {
             [pscustomobject]@{Code='PUBLICATION_EVIDENCE_REQUIRED';Subject=$rule.id;Severity='blocker';Reason='Guide/edition exclusion requires effective artifact evidence from Validate.'}
         }
@@ -53,4 +55,18 @@ function Import-GuidePolicy {
     $findings=@(Get-GuidePolicyFinding -Policy $policy)
     if ($findings.Count) { throw "Invalid policy relationships: $($findings.Code -join ', ')" }
     return $policy
+}
+
+function Get-GuideForbiddenPaths {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string]$Target)
+    foreach($rule in $Policy.publication.permanentExclusions){
+        if($rule.environment -cne $Target){continue}
+        if($rule.subject -eq 'language'){$rule.id;continue}
+        if(-not $rule.Contains('artifactPrefixes') -or -not @($rule.artifactPrefixes).Count){throw "Declare artifactPrefixes for excluded $($rule.subject) $($rule.id); no public paths are inferred from content IDs."}
+        foreach($prefix in $rule.artifactPrefixes){
+            if([string]::IsNullOrWhiteSpace($prefix) -or $prefix.StartsWith('/') -or $prefix -match '[\\:?#%]' -or @($prefix.Split('/')|Where-Object {$_ -in @('..','.','')}).Count){throw "Unsafe exclusion prefix: $prefix"}
+            $prefix
+        }
+    }
 }

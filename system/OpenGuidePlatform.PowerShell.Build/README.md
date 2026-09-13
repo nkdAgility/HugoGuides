@@ -11,3 +11,6 @@ Prepare persists JSON/Markdown findings before throwing on blockers. Runtime wra
 `Write-GuideAssessmentSummary` appends schema-validated Markdown to Actions. `Publish-GuideAssessmentComment` is an append-only, commit-scoped GitHub adapter with PR-head checks and idempotency detection. It remains unwired to privileged automatic PR publication pending the trusted reporter boundary; report artifacts and Actions summaries are active. `-WhatIf` reads metadata without posting.
 
 Artifact validation checks identity, configured routes, forbidden directories, JSON, tokens, duplicate Hugo output targets and size. Deployed HTTP/browser validation remains a separate stage.
+
+
+Declare enabled JSON outputs under `wrapper.jsonIndexes` in the site policy. Each entry names a `route` (such as `/translations.json`) and `requiredRoutes` that must appear in that index. Validate checks nested public URL fields against the artifact, rejects prohibited targets and compares language catalogues with the languages observed during Prepare. Results are included in the normal validation report; `json-index-validation.json` also holds local detail. This does not change Hugo output formats or enable an index.
