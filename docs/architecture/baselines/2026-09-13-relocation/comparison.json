@@ -1,0 +1,6591 @@
+{
+  "schemaVersion": 1,
+  "candidateCommit": "84247fd8d0db3837ec067c47261eef99efacfbc1",
+  "originalModuleCommit": "980366a80eb7b9b6a0098229aea43e9401536232",
+  "clock": "2026-09-13T00:00:00Z",
+  "hugo": "hugo v0.164.0-ce2470e7012b5ab5fc4e10ebe4027e9f8d9e00dc+extended windows/amd64 BuildDate=2026-07-06T16:39:30Z VendorInfo=gohugoio",
+  "go": "go version go1.26.5 windows/amd64",
+  "scope": "Isolated raw Hugo builds: pinned dependency, original module and relocated module. No consumer checkout edits or deployment. Exact byte comparison; no ignored output fields.",
+  "builds": [
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "pinned",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 335,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "pinned",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 302,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "pinned",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 225,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "original",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 335,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "original",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 302,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "original",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 225,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "relocated",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 335,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "relocated",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 302,
+      "passed": true
+    },
+    {
+      "repository": "KanbanGuides",
+      "sourceCommit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "variant": "relocated",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 27,
+      "files": 225,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "pinned",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 49,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "pinned",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 49,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "pinned",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 14,
+      "files": 49,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "original",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 12,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "original",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "original",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "relocated",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 12,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "relocated",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "the-safe-delusion",
+      "sourceCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "variant": "relocated",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 13,
+      "files": 50,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "pinned",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 115,
+      "files": 499,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "pinned",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 109,
+      "files": 483,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "pinned",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 79,
+      "files": 329,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "original",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 113,
+      "files": 499,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "original",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 107,
+      "files": 483,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "original",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 77,
+      "files": 329,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "relocated",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 113,
+      "files": 499,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "relocated",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 107,
+      "files": 483,
+      "passed": true
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "sourceCommit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "variant": "relocated",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "warnings": 77,
+      "files": 329,
+      "passed": true
+    }
+  ],
+  "comparisons": [
+    {
+      "repository": "KanbanGuides",
+      "ring": "local",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "en/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "min/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "robots.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "local",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "preview",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "min/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "robots.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "translationsdirectory/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "preview",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/open-guide-to-kanban/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "translationsdirectory/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "production",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/the-kanban-guide/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/2025.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "open-guide-to-kanban/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "robots.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.12/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2020.7/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/2025.5/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "the-kanban-guide/index.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "production",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "local",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "about/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "brief/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "getting-out/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "images/iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "added"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "objections/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "right-of-reply/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/2024.8/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "local",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "about/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "brief/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "getting-out/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "objections/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "right-of-reply/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/2024.8/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "preview",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "about/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "brief/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "getting-out/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "images/iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "added"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "objections/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "right-of-reply/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/2024.8/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "preview",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "about/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "brief/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "getting-out/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "objections/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "right-of-reply/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/2024.8/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "production",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "about/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "brief/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "css/style.css",
+          "kind": "changed"
+        },
+        {
+          "path": "getting-out/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "images/iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "added"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "objections/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "right-of-reply/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/2024.8/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "safe-decision-makers/translations/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "production",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "identical",
+      "differences": []
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "local",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "adaptive-enterprise/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "de/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "de/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "en/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership-organization/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-foundations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-product/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "technical-excellence/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/languages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "local",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "adaptive-enterprise/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-enterprise/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "emergent-strategy-and-depoyment/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership-organization/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-foundations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-product/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "technical-excellence/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "preview",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "de/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership-organization/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-foundations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-product/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "technical-excellence/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "preview",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/emergent-strategy-and-depoyment/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/it/scrum-guide-expansion-pack/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership-organization/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "planguage/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-foundations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/history/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/translations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-product/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "technical-excellence/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/jeff-sutherland/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/john-coleman/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/creators/ralph-jocham/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "production",
+      "before": "pinned",
+      "after": "original",
+      "purpose": "Dependency version differences",
+      "outcome": "different",
+      "differences": [
+        {
+          "path": "adaptive-executive/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "adaptive-executive/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ai-and-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "complexity/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "holistic-testing/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "iconifier-readme.txt",
+          "kind": "changed"
+        },
+        {
+          "path": "index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "js/footnote-tooltips.js",
+          "kind": "changed"
+        },
+        {
+          "path": "js/submenu.js",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership-organization/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "leadership/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "multi-team-scrum/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "operating-models/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "product-thinking/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "psychological-safety-in-scrum-teams/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/foundation/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/framework/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/pages.json",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-foundations/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2025.6/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-guide-expanded/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "scrum-on-one-page/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "software-engineering-practices/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-as-an-empirical-capability/index.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "strategy-product/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "technical-excellence/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "production",
+      "before": "original",
+      "after": "relocated",
+      "purpose": "Mechanical relocation equivalence",
+      "outcome": "identical",
+      "differences": []
+    }
+  ]
+}

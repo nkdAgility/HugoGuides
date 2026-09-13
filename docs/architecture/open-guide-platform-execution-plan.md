@@ -145,6 +145,8 @@ Implement console, Actions-summary and PR renderers from one result contract. In
 
 ## 8. E05 — Characterise existing Hugo behaviour without refactoring
 
+Progress: [cross-consumer relocation evidence](baselines/2026-09-13-relocation/README.md) records 27 passing builds and nine passing repeat controls, unchanged PDF/path inventories, and existing alias/share-output variability. E05 remains open; the evidence does not approve module upgrades or waive functional/visual verification.
+
 Record the deliberately structured multilingual behaviour before changing implementation. Build isolated, pinned copies of all three consumers against their existing dependencies and the mechanically relocated module. Keep production deployments untouched.
 
 Cover every guide, edition and configured language, including intentional empty bodies, English fallback, PDF-only states, numeric language regions, RTL/CJK content, cascades, render/list exclusions, wrapper overrides, catalogues, category/creator pages, aliases, anchors and downloads. Record pre-existing differences between consumers' pinned module versions; upgrading a pin must not silently accept output changes.
