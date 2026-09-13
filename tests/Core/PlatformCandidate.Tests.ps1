@@ -25,51 +25,51 @@ Describe 'Candidate ZIP restoration before publication' {
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         Push-Location $workspace
         Mock Import-Module {}
-        Mock Invoke-WebRequest { Copy-Item -LiteralPath $script:fixtureZip -Destination $OutFile }
-        $script:fixtureZip=$null
+        Mock Invoke-WebRequest { Copy-Item -LiteralPath $global:OgpCandidateFixtureZip -Destination $OutFile }
+        $global:OgpCandidateFixtureZip=$null
         $arguments=@{PackageUrl='https://api.github.com/repos/example/platform/actions/artifacts/123/zip';ExpectedVersion='1.2.3-Preview.4';ExpectedCommit=('a'*40);OutputPath='.processing/install'}
     }
     AfterEach { Pop-Location }
     It 'restores the verified build ZIP without querying any release' {
-        $script:fixtureZip=Write-CandidateFixture $workspace
-        $arguments.PackageSha256=(Get-FileHash $script:fixtureZip).Hash
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
+        $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
         & $installer @arguments
         (Get-Content .processing/install/platform.json -Raw|ConvertFrom-Json).sourceCommit | Should -Be ('a'*40)
         Should -Invoke Import-Module -Times 2 -Exactly
         Should -Invoke Invoke-WebRequest -Times 1 -Exactly
     }
     It 'rejects an altered transport ZIP before extracting candidate files' {
-        $script:fixtureZip=Write-CandidateFixture $workspace
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
         $arguments.PackageSha256='0'*64
         { & $installer @arguments } | Should -Throw '*Candidate package digest mismatch*'
         Test-Path .processing/install | Should -BeFalse
         Should -Invoke Import-Module -Times 0 -Exactly
     }
     It 'rejects an inner package whose digest disagrees with its manifest' {
-        $script:fixtureZip=Write-CandidateFixture $workspace -CorruptInner
-        $arguments.PackageSha256=(Get-FileHash $script:fixtureZip).Hash
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace -CorruptInner
+        $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
         { & $installer @arguments } | Should -Throw '*Release package digest mismatch*'
         Test-Path .processing/install | Should -BeFalse
         Should -Invoke Import-Module -Times 0 -Exactly
     }
     It 'rejects a different source commit or version before executing candidate code' -ForEach @(@{Field='ExpectedCommit';Value=('b'*40)},@{Field='ExpectedVersion';Value='9.9.9-Preview.1'}) {
-        $script:fixtureZip=Write-CandidateFixture $workspace
-        $arguments.PackageSha256=(Get-FileHash $script:fixtureZip).Hash
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
+        $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
         $arguments[$Field]=$Value
         { & $installer @arguments } | Should -Throw '*manifest does not match*'
         Test-Path .processing/install | Should -BeFalse
         Should -Invoke Import-Module -Times 0 -Exactly
     }
     It 'rejects unsafe inner paths even when both checksums match' {
-        $script:fixtureZip=Write-CandidateFixture $workspace -Traversal
-        $arguments.PackageSha256=(Get-FileHash $script:fixtureZip).Hash
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace -Traversal
+        $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
         { & $installer @arguments } | Should -Throw '*Unsafe release archive*'
         Test-Path .processing/escaped.txt | Should -BeFalse
         Should -Invoke Import-Module -Times 0 -Exactly
     }
     It 'rejects installed metadata differing from the verified manifest' {
-        $script:fixtureZip=Write-CandidateFixture $workspace -WrongMetadata
-        $arguments.PackageSha256=(Get-FileHash $script:fixtureZip).Hash
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace -WrongMetadata
+        $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
         { & $installer @arguments } | Should -Throw '*Installed platform identity mismatch*'
         Should -Invoke Import-Module -Times 0 -Exactly
     }
@@ -92,7 +92,7 @@ Describe 'Platform publication dependency' {
         $main.jobs.release['if'] | Should -Not -Match 'always\(|failure\(|cancelled\('
         $main.jobs.sample.with['platform-package-url'] | Should -Match 'needs.build.outputs.package-url'
         $main.jobs.sample.with['platform-package-sha256'] | Should -Match 'needs.build.outputs.package-sha256'
-        $download=@($main.jobs.release.steps|Where-Object uses -Like 'actions/download-artifact@*')[0]
+        $download=@($main.jobs.release.steps|Where-Object { $_.Contains('uses') -and $_['uses'] -like 'actions/download-artifact@*' })[0]
         $download.with['artifact-ids'] | Should -Match 'needs.build.outputs.artifact-id'
         $shared.jobs.build.needs | Should -Be prepare
         $shared.jobs.validate.needs | Should -Be build
@@ -101,3 +101,4 @@ Describe 'Platform publication dependency' {
         Test-Path "$root/.github/workflows/sample-main.yaml" | Should -BeFalse
     }
 }
+AfterAll { Remove-Variable OgpCandidateFixtureZip -Scope Global -ErrorAction SilentlyContinue }
