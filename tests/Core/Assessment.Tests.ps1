@@ -53,6 +53,21 @@ Describe 'Shared Prepare assessment and reports' {
         { Write-GuideAssessmentReport $result $workspace '.processing/run-1' } | Should -Throw '*already exists*'
         { Write-GuideAssessmentReport $result $workspace '../escape' } | Should -Throw '*Unsafe*'
     }
+    It 'uses effective fallback consistently in Core observations and the shared Prepare report' {
+        $policy.wrapper.requiredI18nKeys=@('home')
+        $evidence=@([pscustomobject]@{Language='fa';Scope='hugo-effective-i18n';Keys=@([pscustomobject]@{Key='home';State='fallback';Value='Home'})})
+        $wrapper=Get-GuideWrapperStatus -WorkspaceRoot $workspace -Policy $policy -Languages @('fa') -EffectiveTranslations $evidence
+        $report=Get-GuideAssessment $workspace $policy @('fa') @{} ('a'*40) '0.0.0' -EffectiveTranslations $evidence
+        $wrapper.Languages[0].Keys[0].State | Should -Be present
+        $wrapper.Languages[0].Keys[0].Resolution | Should -Be fallback
+        $report.findings.code | Should -Contain WRAPPER_TRANSLATION_FALLBACK
+        $report.findings.code | Should -Not -Contain WRAPPER_TRANSLATION_MISSING
+        $report.findings.code | Should -Not -Contain WRAPPER_CATALOGUE_UNAVAILABLE
+        $written=Write-GuideAssessmentReport $report $workspace '.processing/skill-and-ci'
+        $readBack=Get-Content $written.JsonPath -Raw|ConvertFrom-Json
+        $readBack.findings.code | Should -Contain WRAPPER_TRANSLATION_FALLBACK
+        $readBack.inventory.guides[0].editions[0].translations[0].state | Should -Be $report.inventory.guides[0].editions[0].translations[0].state
+    }
     It 'writes a blocked report for missing policy input and rejects unknown digest on success' {
         $entry=Join-Path $root '.build/Prepare-GuideSite.ps1'
         { & $entry -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing-policy.json') -SourceCommit ('a'*40) -OutputPath '.processing/blocked-input' -SummaryPath (Join-Path $workspace 'fixture-summary.md') } | Should -Throw '*Prepare blocked*'

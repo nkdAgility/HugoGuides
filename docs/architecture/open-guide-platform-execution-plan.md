@@ -438,3 +438,11 @@ E01 version-tag reconciliation is implemented: the contract separates the versio
 
 - E01: reconciled workflow version tags with separate commit provenance in ADRs, lock schema and contract fixtures. Broad version labels are accepted; SHA action references are rejected. Owner configuration remains E06 work; no candidate file grants authority.
 - E07: added Actions read permission to generated consumer callers, required by the shared workflow's artifact-restoration interface. The direct sample/publication chain passed in GitHub run 34761323204; subsequent commits require their own CI evidence.
+
+### E03 acceptance candidate — reviewed wrapper operations and common readiness
+
+Implemented Set-GuideWrapperTranslation for reviewed wrapper Markdown, catalogue and selected-language configuration changes. The distributed translation skills now read the same Prepare report as CI. Local validation passed: 151 tests in the shared working tree, 26 contract checks, seven skill checks, real Hugo catalogue probing, packaging and package verification. A disposable sample copy successfully added an es-419 wrapper language through the new configuration/content/catalogue operations and passed real Hugo Prepare.
+
+An initial Windows replacement attempt failed without changing the target; isolated replacement checks and a retry using separately captured candidate text and reviewed hash succeeded. The operation fails closed on replacement errors; file access by other processes is not bypassed. Core regression tests verify prior bytes survive staging failures.
+
+The implementation addresses the reconciled E03 gaps; its package checkbox remains open until the committed candidate passes CI. Real consumer adoption and E04 PDF-receipt orchestration are not E03 prerequisites. Concurrent workflow naming edits are outside this E03 change.

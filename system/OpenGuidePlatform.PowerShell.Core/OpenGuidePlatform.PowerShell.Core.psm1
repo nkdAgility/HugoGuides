@@ -19,3 +19,5 @@ $script:CoreRoot=$PSScriptRoot
 . (Join-Path $PSScriptRoot 'WrapperReadiness/Get-GuideWrapperStatus.ps1')
 
 . (Join-Path $PSScriptRoot 'Assessment/Get-GuideAssessment.ps1')
+
+. (Join-Path $PSScriptRoot 'TranslationReadiness/Set-GuideWrapperTranslation.ps1')

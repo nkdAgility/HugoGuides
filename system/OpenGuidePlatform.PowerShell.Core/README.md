@@ -14,18 +14,18 @@ Capabilities include inventory and translation readiness, publication exclusions
 
 PDF language comes from the filename suffix or declared source language and is passed explicitly to Pandoc metadata. Source front matter does not need a lang field. Generation checks native failures and PDF format before publishing a new file; returned evidence includes input, policy, executable and output hashes. Visual review remains necessary.
 
-This module enforces the supplied policy, not the authenticity of that policy. The independent trusted gate is E06. These are development candidates, not an installable release; pinned distribution is E07.
+This module enforces the supplied policy, not the authenticity of that policy. The independent trusted gate is E06. Preview installation distributes these commands; native module publication and complete coordinated adoption remain E07/E08 work.
 
-## Remaining E03 work
+## Wrapper publishing and readiness
 
-- Effective Hugo catalogue fallback and wrapper content reconciliation; local YAML checks are available through Get-GuideWrapperStatus, with runtime route/integration observations supplied separately.
-- Build adapter wiring for PDF receipts and approved environment fingerprints; automatic reuse is off without complete evidence.
-- Abrupt process termination during a snapshot can leave a staging directory/lock for manual inspection; handled copy failures clean up staging and never publish a partial edition.
-- Complete regression coverage for those operations before declaring E03 finished.
+Set-GuideWrapperTranslation creates or applies exact reviewed candidate text to language-specific wrapper Markdown, YAML catalogues and selected Hugo language configuration entries. Existing files require ExpectedSha256; guide content and supplied-policy protected paths are refused. New languages must be disabled in production, unrelated configuration is preserved, and legacy shared download aliases cannot be extended. Changes are staged per file; a multi-file adoption is not one transaction.
 
-Shared skills describe these boundaries explicitly. Root Prepare/Build/report orchestration belongs to E04. Nothing here changes Hugo rendering or adopts the platform in a consumer.
+Use the installed `./build.ps1 -Stage Prepare` assessment for both human/skill translation status and CI. It supplies effective Hugo catalogue/fallback evidence to Core. Local catalogue diagnostics alone must not replace that assessment. See [shared skill usage](../OpenGuidePlatform.AgentSkills/USAGE.md).
+
+PDF replacement and cache-evidence checks are implemented. Collection/persistence of approved environment receipts in the build adapter is E04 work. Abrupt termination can leave staging/lock evidence for inspection; automatic crash recovery is not claimed. Translation quality, full plural-form coverage and runtime integration readiness are not inferred from available strings.
+
 Fallback observation follows declared chains to populated web content and treats cycles, undeclared targets and non-web targets as unavailable. Edition snapshots publish by a same-parent directory rename after all files are copied. An existing destination is never replaced.
 
 Contributor updates accept exact candidate YAML, one existing contributor name and the reviewed source SHA-256. They preserve the existing .yml/.yaml path and reject semantic changes to other records. Candidate comments and formatting must be reviewed because the command writes the supplied text exactly. A cooperative lock, staged replacement and second hash check catch observed conflicts; they are not an OS-level compare-and-swap against other editors. Existing site-specific roles are retained. Adding, removing and renaming records through this update operation are unsupported.
 
-Generated PDFs can now be replaced using ExpectedOutputSha256. They remain untouched on rendering/input failures; supplied/protected downloads remain ineligible. A successful receipt can carry CacheKey when EnvironmentSha256 is supplied. Test-GuidePdfCache rechecks input/output hashes and recipe/tool/environment evidence; callers must provide a digest covering fonts, TeX packages and indirect resources. No timestamp-based reuse occurs. Local wrapper catalogue checks support YAML mappings/sequences and numeric/script language tags; they do not claim effective Hugo fallback or plural completeness. Required routes/integration points remain unknown until the build adapter provides observations.
+Generated PDFs can now be replaced using ExpectedOutputSha256. They remain untouched on rendering/input failures; supplied/protected downloads remain ineligible. A successful receipt can carry CacheKey when EnvironmentSha256 is supplied. Test-GuidePdfCache rechecks input/output hashes and recipe/tool/environment evidence; callers must provide a digest covering fonts, TeX packages and indirect resources. No timestamp-based reuse occurs. Local wrapper catalogue checks support YAML mappings/sequences and numeric/script language tags; effective Hugo fallback requires the evidence produced by Prepare, and plural completeness is not inferred. Required routes/integration points remain unknown until the build adapter provides observations.
