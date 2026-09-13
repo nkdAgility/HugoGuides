@@ -50,3 +50,21 @@ Counts are link occurrences, not distinct broken destinations. The files record 
 - Doubled-slash translation URLs also occur in existing output. Their deployed/hosting behavior needs verification; no redirect or module rewrite is authorized by this analysis.
 
 This evidence supports mechanical-relocation equivalence for the checked navigation, while keeping known consumer findings open. It does not make those findings acceptable, prove all JSON/catalogue semantics, or approve visuals. Reproduce by running `.build/Test-GuideSiteNavigation.ps1` against each `artifacts/<repository>/<variant>/<target>` directory with the canonical origin recorded in the evidence file, then compare the exact `Findings` records. The checker commit and SHA256 are recorded.
+## Selected runtime-anchor verification
+
+[Browser evidence](runtime-anchors.json) records fourteen page observations across the original and relocated raw local artifacts using Playwright 1.63.0 / Chromium 153.0.8010.12. Requests to the consumer origin were fulfilled from retained artifact files; all external origins and non-read requests were blocked. No deployed site was contacted or changed. This intentionally bounded replay is not a complete network-dependent or visual acceptance test.
+
+Safe Delusion's five `#content` destinations existed as `main#content` after its own JavaScript ran. Keyboard activation of each skip link reached the hash and a visible target, in both module variants. The static check must not become a blanket exemption: normal build integration still needs equivalent browser evidence for declared runtime anchors in the current artifact.
+
+The appendix destination `appendix---safe-alternatives-to-safe` remained absent in both variants. The actual heading ID is `appendix-3---safe-alternatives-to-safe`. Scrum's Planguage `#36` and `#60` destinations also remained absent in both latest and explicit edition output. These are pre-existing findings to resolve or explicitly disposition in the relevant adoption work; this analysis does not authorize protected guide edits or premature module refactoring.
+
+The replay helper uses the [Playwright library](https://playwright.dev/docs/library) with explicit request interception and browser cleanup. To repeat it after reproducing the retained artifacts:
+
+```powershell
+npm install --prefix .processing/browser-tools --no-audit --no-fund --ignore-scripts --package-lock=false --save=false '@playwright/test@^1'
+$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD/.processing/browser-tools/browsers"
+node .processing/browser-tools/node_modules/playwright/cli.js install chromium
+node .build/Measure-RetainedGuideAnchors.cjs .processing/e05-relocation-20260913/artifacts docs/architecture/baselines/2026-09-13-relocation/navigation-validation.json .processing/browser-tools .processing/e05-runtime-replay
+```
+
+Use a fresh output directory and record the tool/browser versions of each new run. The helper refuses an existing output directory and records its source SHA256. These optional characterization tools are separate from everyday guide-site prerequisites.
