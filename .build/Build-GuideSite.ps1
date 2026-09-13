@@ -50,8 +50,7 @@ if($Stage -in @('All','Prepare','Serve')){
         & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -InputFailure $_.Exception.Message
         throw
     }
-    & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay)
-    Assert-GuidePreparedInputs -Expected $preparedInputs -Actual (Get-GuidePreparedInputs @inputArguments)
+    & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay) -ExpectedInputs $preparedInputs -InputArguments $inputArguments
     [IO.File]::WriteAllText("$output/prepare/inputs.json",($preparedInputs|ConvertTo-Json -Depth 10))
     [IO.File]::WriteAllText("$output/prepare/tools.json",($preparedTools|ConvertTo-Json -Depth 10))
 }

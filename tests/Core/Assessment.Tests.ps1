@@ -13,6 +13,26 @@ Describe 'Shared Prepare assessment and reports' {
         [IO.File]::WriteAllText((Join-Path $directory 'index.md'),"---`ntitle: Guide`n---`nBody")
         $edition.translations[0].downloads=@()
     }
+    It 'blocks final input drift before publishing a report and retains independent findings' {
+        $policy.wrapper.requiredFiles=@('site/missing.txt')
+        $policy.wrapper.requiredI18nKeys=@()
+        $policyPath=Join-Path $workspace 'policy.json'
+        [IO.File]::WriteAllText($policyPath,($policy|ConvertTo-Json -Depth 50))
+        [IO.File]::WriteAllText((Join-Path $workspace 'production.json'),'{}')
+        [IO.File]::WriteAllText((Join-Path $workspace 'overlay.json'),'{}')
+        $inputArguments=@{WorkspaceRoot=$workspace;Policy=$policy;PolicyPath='policy.json';PlatformRoot=$root;OverlayPath=(Join-Path $workspace 'overlay.json');Version='0.0.0';Target='preview'}
+        $expected=Get-GuidePreparedInputs @inputArguments
+        [IO.File]::WriteAllText((Join-Path $directory 'index.md'),"---`ntitle: Changed`n---`nChanged while preparing")
+        Mock Get-GuideModuleFreshness -ModuleName OpenGuidePlatform.PowerShell.Build { [pscustomobject]@{Code='MODULE_CURRENT';Severity='info';Module='fixture';Installed='v1';Latest='v1';Message='Fixture'} }
+        $entry=Join-Path $root '.build/Prepare-GuideSite.ps1'
+        { & $entry -WorkspaceRoot $workspace -PolicyPath $policyPath -Languages @('en') -EffectiveProductionPath (Join-Path $workspace 'production.json') -SourceCommit ('a'*40) -OutputPath '.processing/drift' -Target preview -ExpectedInputs $expected -InputArguments $inputArguments -SummaryPath (Join-Path $workspace 'summary.md') } | Should -Throw '*Prepare blocked*'
+        $record=Get-Content "$workspace/.processing/drift/assessment.json" -Raw|ConvertFrom-Json
+        $record.outcome | Should -Be blocked
+        $record.findings.code | Should -Contain WRAPPER_FILE_MISSING
+        $record.findings.code | Should -Contain PREPARE_INPUTS_UNVERIFIED
+        Get-Content "$workspace/summary.md" -Raw | Should -Not -Match 'Prepare: pass'
+        Get-Content "$workspace/.processing/drift/assessment.md" -Raw | Should -Match 'Stop concurrent edits'
+    }
     It 'creates schema-valid evidence with runtime checks explicitly pending' {
         $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0'
         $json=$result|ConvertTo-Json -Depth 100

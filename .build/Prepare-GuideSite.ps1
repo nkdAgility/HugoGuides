@@ -5,6 +5,8 @@ param(
     [Parameter(Mandatory)][string]$PolicyPath,
     [string]$EffectiveProductionPath,
     [string]$InputFailure,
+    $ExpectedInputs,
+    [hashtable]$InputArguments,
     [string]$SummaryPath=$env:GITHUB_STEP_SUMMARY,
     [string]$PlatformVersion='0.0.0',[string]$ModulePath='github.com/nkdAgility/HugoGuides/module',
     [string[]]$Languages,
@@ -59,6 +61,17 @@ try {
     $assessment.findings+= [ordered]@{code=$freshness.Code;severity=$freshness.Severity;scope='platform';subject=$freshness.Module;message=$freshness.Message;remediation='Review the module version through the coordinated platform update process; never change the pin during Prepare.';evidence=@("Installed: $($freshness.Installed)","Latest resolved by Go: $($freshness.Latest)")}
 } catch {
     $assessment=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion=$PlatformVersion;policyDigest=$policyDigest;target=$Target;stage='Prepare';outcome='blocked';findings=@([ordered]@{code='PREPARE_INPUT_UNAVAILABLE';severity='blocker';scope='platform';subject='Prepare inputs';message=$_.Exception.Message;remediation='Correct the policy/configuration or install the missing dependency and rerun Prepare.';evidence=@()});inventory=@{wrapper=@{state='unknown';languages=@()};guides=@()}}
+}
+# Finalize input evidence before rendering any pass. Preserve independent findings
+# if concurrent edits invalidate the assessed snapshot.
+if($null -ne $ExpectedInputs -or $null -ne $InputArguments){
+    try {
+        if($null -eq $ExpectedInputs -or $null -eq $InputArguments){throw 'Expected input evidence and its arguments must be supplied together.'}
+        Assert-GuidePreparedInputs -Expected $ExpectedInputs -Actual (Get-GuidePreparedInputs @InputArguments)
+    } catch {
+        $assessment.outcome='blocked'
+        $assessment.findings+=[ordered]@{code='PREPARE_INPUTS_UNVERIFIED';severity='blocker';scope='platform';subject='Assessed input snapshot';message=$_.Exception.Message;remediation='Stop concurrent edits and rerun Prepare in a fresh output directory before Build.';evidence=@()}
+    }
 }
 $deliveryFailures=[Collections.Generic.List[string]]::new()
 try {
