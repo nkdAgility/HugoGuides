@@ -69,6 +69,12 @@ Describe 'Artifact verification' {
         $result.Findings.Code | Should -Contain HUGO_DUPLICATE_TARGETS
         $result.Findings[0].Message | Should -Match 'Assign one owner'
     }
+    It 'rejects rendered missing-translation placeholders' {
+        [IO.File]::AppendAllText((Join-Path $artifact 'index.html'),'<span>[i18n] contributors_label</span>')
+        $result=Test-GuideArtifact $artifact
+        $result.Outcome | Should -Be fail
+        $result.Findings.Code | Should -Contain MISSING_RENDERED_TRANSLATION
+    }
     It 'does not mistake unrelated Hugo warnings for path collisions' {
         (Test-GuideArtifact $artifact -HugoLog @('WARN  Deprecated configuration option')).Outcome | Should -Be pass
     }

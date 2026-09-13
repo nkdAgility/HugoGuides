@@ -488,3 +488,8 @@
 
 - id: view_archive_button
   translation: "Looky at da Archive"
+
+- id: contributors_label
+  translation: "Helper Minions"
+- id: download_table_contributed_by
+  translation: "Made by da Helpers"

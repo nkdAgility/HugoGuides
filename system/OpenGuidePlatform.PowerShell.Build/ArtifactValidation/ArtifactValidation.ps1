@@ -68,6 +68,9 @@ function Test-GuideArtifact {
     $size=0L
     foreach($file in $files){
         $size+=$file.Length
+        if([IO.Path]::GetExtension($file.Path) -eq '.html' -and [IO.File]::ReadAllText($file.FullName) -match '\[i18n\]\s+[A-Za-z0-9_]+'){
+            Add-ArtifactFinding MISSING_RENDERED_TRANSLATION $file.Path 'Supply the missing catalogue key shown by the rendered i18n placeholder.'
+        }
         if([IO.Path]::GetExtension($file.Path) -eq '.json'){try{$null=ConvertFrom-Json ([IO.File]::ReadAllText($file.FullName)) -ErrorAction Stop}catch{Add-ArtifactFinding INVALID_JSON $file.Path 'Correct the generated JSON.'}}
         if([IO.Path]::GetExtension($file.Path) -in @('.html','.json','.xml','.yaml','.yml')){if([IO.File]::ReadAllText($file.FullName) -match '#\{[A-Za-z0-9_.]+\}#'){Add-ArtifactFinding UNRESOLVED_TOKEN $file.Path 'Supply the missing build value through the configuration overlay.'}}
     }
