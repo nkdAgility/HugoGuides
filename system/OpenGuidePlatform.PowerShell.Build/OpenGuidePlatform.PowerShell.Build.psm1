@@ -52,3 +52,23 @@ function Write-GuideAssessmentReport {
     [pscustomobject]@{Outcome=$Assessment.outcome;JsonPath=(Join-Path $output 'assessment.json');MarkdownPath=(Join-Path $output 'assessment.md')}
 }
 Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport
+function Get-GuideHugoConfiguration {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$SourcePath,[Parameter(Mandatory)][string[]]$ConfigFiles,[ValidateSet('local','preview','production')][string]$Target='local')
+    $command=Get-Command hugo -CommandType Application -ErrorAction Stop|Select-Object -First 1
+    $start=[Diagnostics.ProcessStartInfo]::new()
+    $start.FileName=$command.Source;$start.UseShellExecute=$false;$start.CreateNoWindow=$true
+    $start.RedirectStandardOutput=$true;$start.RedirectStandardError=$true
+    foreach($argument in @('config','--source',[IO.Path]::GetFullPath($SourcePath),'--config',($ConfigFiles -join ','),'--environment',$Target,'--format','json','--printZero')){$start.ArgumentList.Add($argument)}
+    $process=[Diagnostics.Process]::new();$process.StartInfo=$start
+    try {
+        $null=$process.Start();$stdout=$process.StandardOutput.ReadToEndAsync();$stderr=$process.StandardError.ReadToEndAsync()
+        if(-not $process.WaitForExit(30000)){$process.Kill($true);throw 'Hugo effective configuration timed out.'}
+        $raw=$stdout.GetAwaiter().GetResult();$diagnostics=$stderr.GetAwaiter().GetResult()
+        if($process.ExitCode -ne 0){throw "Hugo configuration failed ($($process.ExitCode)): $diagnostics"}
+        $configuration=ConvertFrom-Json -InputObject $raw -AsHashtable -ErrorAction Stop
+        if($configuration -isnot [Collections.IDictionary] -or -not $configuration.Contains('languages')){throw 'Hugo did not return effective language configuration.'}
+        [pscustomobject]@{Configuration=$configuration;Diagnostics=$diagnostics;Target=$Target}
+    } finally {$process.Dispose()}
+}
+Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration

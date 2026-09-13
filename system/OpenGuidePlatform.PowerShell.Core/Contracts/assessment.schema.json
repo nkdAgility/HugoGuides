@@ -16,7 +16,10 @@
       "minLength": 1
     },
     "policyDigest": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^[0-9a-f]{64}$"
     },
     "target": {
@@ -279,6 +282,9 @@
                 }
               }
             }
+          },
+          "policyDigest": {
+            "type": "string"
           }
         }
       }

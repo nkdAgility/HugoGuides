@@ -52,4 +52,13 @@ Describe 'Shared Prepare assessment and reports' {
         Get-Content $report.MarkdownPath -Raw | Should -Match 'WRAPPER_FILE_MISSING'
         { Write-GuideAssessmentReport $result $workspace '.processing/run-1' } | Should -Throw '*already exists*'
         { Write-GuideAssessmentReport $result $workspace '../escape' } | Should -Throw '*Unsafe*'
+    }
+    It 'writes a blocked report for missing policy input and rejects unknown digest on success' {
+        $entry=Join-Path $root '.build/Invoke-GuidePrepare.ps1'
+        { & $entry -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing-policy.json') -SourceCommit ('a'*40) -OutputPath '.processing/blocked-input' } | Should -Throw '*Prepare blocked*'
+        $report=Get-Content (Join-Path $workspace '.processing/blocked-input/assessment.json') -Raw|ConvertFrom-Json -AsHashtable
+        $report.policyDigest | Should -BeNullOrEmpty
+        $report.findings[0].code | Should -Be PREPARE_INPUT_UNAVAILABLE
+        $report.outcome='pass';$report.findings=@()
+        Test-Json -Json ($report|ConvertTo-Json -Depth 100) -SchemaFile (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Core/Contracts/assessment.schema.json') -ErrorAction SilentlyContinue | Should -BeFalse
     }}

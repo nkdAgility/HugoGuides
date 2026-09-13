@@ -10,5 +10,5 @@ $configuration.Run.PassThru=$true
 $configuration.Output.Verbosity='Detailed'
 $configuration.TestResult.Enabled=$false
 $result=Invoke-Pester -Configuration $configuration
-if($result.FailedCount -gt 0 -or $result.TotalCount -eq 0){throw 'Core tests failed or no tests ran.'}
+if($result.Result -ne 'Passed' -or $result.FailedCount -gt 0 -or $result.TotalCount -eq 0){throw 'Core tests failed or no tests ran.'}
 & (Join-Path $PSScriptRoot 'Test-DistributedSkills.ps1')
