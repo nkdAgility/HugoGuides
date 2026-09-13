@@ -23,6 +23,7 @@ if($LASTEXITCODE -ne 0){throw 'Cannot resolve guide-site source commit.'}
 $site=Join-Path $output 'site'
 $overlay=Join-Path $output 'candidate-platform.json'
 $configs=@('hugo.yaml',"hugo.$Target.yaml",$overlay)
+$inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
 if($Stage -in @('All','Prepare','Serve')){
     if(Test-Path -LiteralPath $output){throw 'Guide-site output exists; choose a fresh evidence directory.'}
     [IO.Directory]::CreateDirectory($output)|Out-Null
@@ -40,13 +41,22 @@ if($Stage -in @('All','Prepare','Serve')){
     }
     [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
     $null=Get-GuideHugoToolchain
+    $preparedTools=Get-GuidePreparedBuildTools
+    $preparedInputs=Get-GuidePreparedInputs @inputArguments
     & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay)
+    Assert-GuidePreparedInputs -Expected $preparedInputs -Actual (Get-GuidePreparedInputs @inputArguments)
+    [IO.File]::WriteAllText("$output/prepare/inputs.json",($preparedInputs|ConvertTo-Json -Depth 10))
+    [IO.File]::WriteAllText("$output/prepare/tools.json",($preparedTools|ConvertTo-Json -Depth 10))
 }
 if($Stage -in @('All','Build','Validate')){
     $assessment=Get-Content "$output/prepare/assessment.json" -Raw|ConvertFrom-Json
+    $preparedInputs=Get-Content "$output/prepare/inputs.json" -Raw|ConvertFrom-Json
+    Assert-GuidePreparedInputs -Expected $preparedInputs -Actual (Get-GuidePreparedInputs @inputArguments)
     if($assessment.outcome -ne 'pass' -or $assessment.sourceCommit -cne $commit -or $assessment.target -cne $Target -or $assessment.policyDigest -cne (Get-FileHash (Join-Path $root $PolicyPath)).Hash.ToLowerInvariant()){throw 'Build requires passing Prepare evidence for this source, policy and target.'}
 }
 if($Stage -in @('All','Build')){
+    $preparedTools=Get-Content "$output/prepare/tools.json" -Raw|ConvertFrom-Json
+    if($preparedTools.Sha256 -cne (Get-GuidePreparedBuildTools).Sha256){throw 'PREPARE_TOOLS_CHANGED: Build tools differ from Prepare. Run Prepare again.'}
     if(Test-Path -LiteralPath $site){throw 'Site output already exists.'}
     $previousResources=$env:HUGO_RESOURCEDIR
     try{

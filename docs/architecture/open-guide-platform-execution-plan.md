@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E01 and E03–E08 have implemented candidates but remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
+Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 and E04–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -419,7 +419,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
 - [ ] E01 Contracts and policy ownership agreed.
 - [x] E02 Shared source/example content moved with provenance.
-- [ ] E03 Core operations and seven skills extracted and tested.
+- [x] E03 Core operations and seven skills extracted and tested.
 - [ ] E04 Local build, validation and reports implemented.
 - [ ] E05 Existing multilingual behaviour characterised across every guide; relocation/adoption preserves output.
 - [ ] E06 Agent adapters and independent enforcement verified.
@@ -432,7 +432,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [ ] E13 Adoption transition documentation, update automation and operational handover complete.
 - [ ] E14 Proposed module refactoring done after the other work builds successfully, and verified across all guides and sites.
 
-E01 version-tag reconciliation is implemented: the contract separates the version reference from source provenance and permits broad version labels. Final protected-policy ownership decisions remain open; installing independent enforcement belongs to E06. E03 remains unchecked for wrapper operations and skill/Prepare readiness parity, as itemised in the E00–E03 audit. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
+E01 version-tag reconciliation is implemented: the contract separates the version reference from source provenance and permits broad version labels. Final protected-policy ownership decisions remain open; installing independent enforcement belongs to E06. E03 is now complete: the gaps recorded in the earlier E00–E03 audit were implemented and verified; see the closure entry below. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
 
 ## Execution log — continued reconciliation
 
@@ -446,3 +446,9 @@ Implemented Set-GuideWrapperTranslation for reviewed wrapper Markdown, catalogue
 An initial Windows replacement attempt failed without changing the target; isolated replacement checks and a retry using separately captured candidate text and reviewed hash succeeded. The operation fails closed on replacement errors; file access by other processes is not bypassed. Core regression tests verify prior bytes survive staging failures.
 
 The implementation addresses the reconciled E03 gaps; its package checkbox remains open until the committed candidate passes CI. Real consumer adoption and E04 PDF-receipt orchestration are not E03 prerequisites. Concurrent workflow naming edits are outside this E03 change.
+### E03 closed against the reconciled criteria
+
+Commit `d953f2f71c7e3cbee8f6dc9ff1cadddde247eee7` passed [CI run 34762682088](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34762682088): platform build/package plus sample Prepare, Build, Validate, Deploy and Verify all succeeded. Release was intentionally skipped by the current main-only publication condition. Together with the recorded real wrapper/Persian PDF checks and Core regression tests, this closes the original E03 criteria. The older unchecked audit sub-items describe the pre-implementation state and are superseded by this closure. E04 receipt orchestration, E06 independent enforcement and consumer adoption retain their own gates.
+### E04 Prepare freshness guard
+
+Local validation passed with 160 tests and 26 contract checks. A real disposable sample run proved that changing content after Prepare, with the same commit and policy, blocks a separate Build; restoring the assessed bytes permits Build and standalone Validate. Inputs include wrapper/guide files, configuration, policy, selected version, platform runtime, relevant environment settings and build-tool fingerprints. Validate checks file evidence without needing Hugo installed. This closes the stale local Prepare-input finding; E04 remains open for downloads, anchors, PR reporting and remaining stage acceptance. CI verification of the committed guard follows.
