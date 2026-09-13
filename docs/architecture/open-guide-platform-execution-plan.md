@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 contract implementation and ownership are reconciled; its verification is recorded below. E04 is complete with local and committed CI acceptance recorded below. E05–E08 remain open against their full acceptance criteria. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
+Status: implementation is on `codex/open-guide-platform`, PR #35. E00 and the E02 mechanical relocation are complete. E03 is complete with the reconciled wrapper operations and common readiness path verified locally and in CI. E01 contract implementation and ownership are reconciled; its verification is recorded below. E04 is complete with local and committed CI acceptance recorded below. E05 characterisation is complete with bounded visual evidence and dispositions recorded below. E06–E08 retain implementation or external acceptance work. The repository has already been renamed to `nkdAgility/OpenGuidePlatform`; preview release `v0.5.3-PullRequest0035.139` and the reference site's five-stage preview workflow passed at commit `8d1822027afde92a951f09bf070dab0819cb5235`. E09–E14 remain outstanding. No consumer adoption or production deployment is implied by the sample results. The implementation follow-up register below records remaining findings without changing the original work-package IDs or ordering.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -328,8 +328,8 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 
 ### E05 — Cross-consumer equivalence
 
-- [ ] Finish semantic, route, anchor, download and representative visual comparisons across every guide and distinct language/edition state in the three real consumers. Existing relocation evidence (27 builds and nine repeat controls) and sample checks do not complete this acceptance.
-- [ ] Review unexplained differences against each consumer's own pinned dependency before accepting any module upgrade; do not regenerate baselines automatically.
+- [x] Complete cross-consumer characterisation: 27 builds, nine repeat controls, all-page semantic/navigation analysis, unchanged PDF/JSON/CSS/JS bytes, 29 production viewport pairs and 255 preview/local state pairs. All 18 guides are represented, including cascade-excluded local guides, history, translations, empty-body fallback and numeric-region/RTL/CJK states. Visual limits and known defects remain explicit below.
+- [x] Review dependency and relocation differences without regenerating baselines. Safe Delusion updates are explicitly accepted by the maintainer. Existing duplicate alias/share-output variability is demonstrated by unchanged repeat controls; exact defects remain in the adoption follow-up register.
 
 ### E06 — Agent controls and trusted enforcement
 
@@ -425,7 +425,7 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [x] E02 Shared source/example content moved with provenance.
 - [x] E03 Core operations and seven skills extracted and tested.
 - [x] E04 Local build, validation and reports implemented.
-- [ ] E05 Existing multilingual behaviour characterised across every guide; relocation/adoption preserves output.
+- [x] E05 Existing multilingual behaviour characterised across every guide; relocation comparison passed within the recorded baseline scope. Real adoption verification remains E09–E11.
 - [ ] E06 Agent adapters and independent enforcement verified.
 - [ ] E07 Distribution, updater and shared workflows tested.
 - [ ] E08 Repository renamed and first preview release verified.
@@ -587,3 +587,15 @@ The maintainer accepted the recorded Safe Delusion v0.6.8-to-current module diff
 E00–E04 remain complete. E05 remains current. No consumer source, deployed site, Hugo template, permission or GitHub administrative configuration changed.
 
 E05 visual continuation: the initial replay omitted Bootstrap RTL CSS; its Persian screenshots are not acceptance evidence. The corrected replay uses the exact referenced RTL asset and is recorded in `baselines/2026-09-13-relocation/viewport-comparison.json`, including screenshot and asset hashes. All 29 original/relocated production viewport pairs match pixel-for-pixel. Persian Kanban and Japanese Scrum fallback viewports were inspected. These bounded captures exclude external avatars/icons and do not close full-page, history, preview-only, empty-body or PDF-only state coverage. Local platform acceptance passed again: 211 tests, zero failures, package validation and exit 0.
+
+### E05 characterisation closure and bounded acceptance — 2026-09-13
+
+`rendering-state-comparison.json` records 79 preview routes and six local routes, each captured at top/middle/bottom in original and relocated output. All 255 pairs are pixel-identical with a Bootstrap-loaded assertion. Together with 29 production viewport pairs, all 18 source guide roots are represented. Adaptive Enterprise and Emergent Strategy deliberately suppress HTML in preview/production through existing cascades: their retained PDFs match and their local guide/edition pages were compared. Empty Persian historical and numeric-region bodies render the existing English fallback. Source/PDF, route, JSON, CSS and JavaScript evidence is unchanged. Selected Persian, Japanese, Minionese, long-guide and local-only states were visually inspected.
+
+The first preview capture stopped on a redirect navigation race. The successful replay separates the two redirect documents from stable page screenshots; their destination semantics remain covered by the all-page comparison. The unstyled initial Persian capture remains excluded. External avatar/icon services were blocked equally in both variants; the evidence is bounded offline equivalence, not certification of those services or a deployment approval.
+
+Disposition of existing defects: frozen duplicate legacy aliases remain unchanged as instructed; missing appendix/numeric anchors, default-avatar resources and malformed share-copy URLs remain explicit adoption findings in the baseline navigation/runtime evidence. They are pre-existing, not unexplained relocation regressions. Resolve targeted bugs on reviewed changes during adoption/appropriate platform work, with affected comparisons rerun; do not waive the new validation rules. Raw preview build tokens are pre-hosting inputs, not acceptance of unresolved tokens in a deployed artifact. Accepted Safe Delusion module upgrades remain separately recorded.
+
+E05 is complete as characterisation of the mechanically relocated module. This does not assert that E09–E11 adoption or all pre-existing website defects are complete. Broader Hugo refactoring remains E14. The maintainer permits targeted bug fixes and justified, recorded deviations.
+
+E06 is current. Its external managed-client installation and independent required-gate configuration cannot be completed under the no-permission/no-GitHub-administration instruction. The existing maintainer action-point exception permits repository implementation to continue through E07 while these external checks remain explicitly pending; it does not turn them into passed checks.

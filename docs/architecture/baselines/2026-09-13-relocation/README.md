@@ -78,3 +78,8 @@ Original-versus-relocated production semantic differences are confined to Kanban
 The older Safe Delusion v0.6.8 pin differs from the original/current module: the guide title changes from H2 to H1, the contributor label loses its text, homepage contributor text changes, and some catalogue labels/links differ. The [pinned guide viewport](safe-delusion-visuals/pinned-guide.png) and [newer-module viewport](safe-delusion-visuals/original-guide.png) confirm title-size and layout changes. Both use the same captured Bootstrap assets. External avatars/font icons are blocked, so these images do not certify complete visual equivalence; their limits and asset hashes are recorded alongside them.
 
 These are pre-existing module-upgrade differences, not relocation-induced guide content edits. The maintainer explicitly accepted these existing updates on 2026-09-13, so they no longer block adoption of the newer module. Coordinated platform/Hugo versioning is retained. E05 remains open for the remaining representative visual review and state coverage across all guides. No consumer source or module template was changed to hide the findings.
+
+
+## Completed rendering-state comparison
+
+[State evidence](rendering-state-comparison.json) adds 79 preview and six local routes, compared at top, middle and bottom. All 255 original/relocated pairs match exactly with Bootstrap loaded. All 18 guides are represented, including the two guides suppressed outside local builds. The production replay adds 29 matching pairs. External avatars/icons remain blocked; no claim is made about their service availability. The execution-plan closure records accepted updates, known defects and remaining adoption verification separately.
