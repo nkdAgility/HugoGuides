@@ -1,5 +1,7 @@
 name: Build & Release (OpenGuidePlatform)
 on:
+  merge_group:
+    types: [checks_requested]
   pull_request:
     branches: [main]
   push:
@@ -83,7 +85,7 @@ jobs:
       policy-path: examples/reference-guide-site/guide-site.policy.json
       site-name: GuideSiteSample
       site-url: ${{ (inputs.target || 'preview') == 'production' && 'https://blue-field-06cea8c03.6.azurestaticapps.net/' || (github.event_name == 'pull_request' && format('https://blue-field-06cea8c03-{0}.westeurope.6.azurestaticapps.net/', github.event.pull_request.number) || 'https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/') }}
-      deploy: ${{ (inputs.target || 'preview') == 'preview' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+      deploy: ${{ github.event_name != 'merge_group' && (inputs.target || 'preview') == 'preview' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
       deployment-environment: ${{ github.event_name == 'pull_request' && format('{0}', github.event.pull_request.number) || 'preview' }}
       platform-commit: ${{ needs.build.outputs.source-commit }}
       platform-version: ${{ needs.build.outputs.version }}
