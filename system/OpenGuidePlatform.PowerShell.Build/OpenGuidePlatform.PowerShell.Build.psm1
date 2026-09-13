@@ -74,14 +74,12 @@ function Get-GuideHugoConfiguration {
 . (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleFreshness.ps1')
 . (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleResolution.ps1')
 
-. (Join-Path $PSScriptRoot 'BuildContext/Get-GuideBuildContext.ps1')
 . (Join-Path $PSScriptRoot 'Toolchain/Get-GuideHugoToolchain.ps1')
 . (Join-Path $PSScriptRoot 'AssessmentReporting/Write-GuideAssessmentSummary.ps1')
-. (Join-Path $PSScriptRoot 'AssessmentReporting/Publish-GuideAssessmentComment.ps1')
 . (Join-Path $PSScriptRoot 'ArtifactValidation/Get-GuideArtifactAssessment.ps1')
 . (Join-Path $PSScriptRoot 'WrapperTranslations/Get-GuideEffectiveTranslations.ps1')
 . (Join-Path $PSScriptRoot 'DeploymentVerification/Test-GuideSiteDeployment.ps1')
 . (Join-Path $PSScriptRoot 'BuildContext/Get-GuidePreparedInputs.ps1')
 . (Join-Path $PSScriptRoot 'BrowserValidation/Test-GuideRuntimeAnchors.ps1')
 . (Join-Path $PSScriptRoot 'ArtifactValidation/Test-GuideJsonIndexes.ps1')
-Export-ModuleMember -Function Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Publish-GuideAssessmentComment,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations
+Export-ModuleMember -Function Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations

@@ -177,19 +177,22 @@ jobs:
                 return data.state === 'open' && data.head.sha === sha;
               };
               if (!(await current())) { core.notice('REPORT_SUPERSEDED: PR closed or head changed.'); return; }
-              const marker = `<!-- openguide-assessment:${context.runId}/${process.env.GITHUB_RUN_ATTEMPT}/${target}/Prepare/${sha} -->`;
+              const marker = `<!-- openguide-assessment:${target}/Prepare -->`;
               const run = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
               const state = process.env.PREPARE_RESULT === 'success' ? 'completed' : 'did not complete successfully; recorded findings may be incomplete';
               const body = `${marker}\nPrepare ${state}. [Workflow evidence](${run}). This is the candidate assessment, not independent policy or deployment approval.\n\n${markdown}`;
               if (body.length > 65000) throw new Error('Report exceeds GitHub comment size; use retained artifacts.');
               const comments = await github.paginate(github.rest.issues.listComments, { ...context.repo, issue_number: number, per_page: 100 });
               const prior = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.startsWith(marker));
-              if (prior) {
-                if (prior.body !== body) throw new Error('This run already has different immutable report content.');
+              if (prior && prior.body === body) {
                 core.notice('REPORT_ALREADY_DELIVERED'); return;
               }
               if (!(await current())) { core.notice('REPORT_SUPERSEDED: head changed before delivery.'); return; }
-              await github.rest.issues.createComment({ ...context.repo, issue_number: number, body });
+              if (prior) {
+                await github.rest.issues.updateComment({ ...context.repo, comment_id: prior.id, body });
+              } else {
+                await github.rest.issues.createComment({ ...context.repo, issue_number: number, body });
+              }
               core.notice('REPORT_DELIVERED');
             } catch (error) {
               core.setFailed(`REPORT_DELIVERY_FAILED: ${error.message}. Assessment outcome was not changed.`);

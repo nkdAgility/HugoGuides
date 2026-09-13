@@ -100,6 +100,7 @@ $package=Join-Path $work 'package'
 [IO.Compression.ZipFile]::ExtractToDirectory($archivePath,$package)
 $metadata=Get-Content "$package/platform.json" -Raw|ConvertFrom-Json
 if($metadata.version -cne $manifest.version -or $metadata.sourceCommit -cne $manifest.sourceCommit){throw 'Installed package identity mismatch.'}
+$metadata=& "$package/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $package -Manifest $manifest
 $resolution=[ordered]@{schemaVersion=1;mode='release';version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$package/platform-resolution.json",($resolution|ConvertTo-Json))
 if($Restore){return $package}

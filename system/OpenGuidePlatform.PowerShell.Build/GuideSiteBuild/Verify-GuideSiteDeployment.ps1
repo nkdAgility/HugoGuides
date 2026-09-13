@@ -10,7 +10,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 & "$PSScriptRoot/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version
-$root=Split-Path $PSScriptRoot -Parent
+$root=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
 Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
 Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
 $output=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath

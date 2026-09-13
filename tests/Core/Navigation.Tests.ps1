@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $checker=Join-Path $root '.build/Test-GuideSiteNavigation.ps1'
+    $checker=Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1'
 }
 Describe 'Guide-site navigation validation' {
     It 'rejects missing language pages, broken canonical links and missing assets' {

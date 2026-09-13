@@ -10,43 +10,55 @@ function Get-GuidePreparedInputs {
         [Parameter(Mandatory)][string]$Target
     )
     $records=[Collections.Generic.SortedDictionary[string,string]]::new([StringComparer]::Ordinal)
-    function Add-InputFile([string]$Path,[string]$Key){
+    $pathComparer=if($IsWindows){[StringComparer]::OrdinalIgnoreCase}else{[StringComparer]::Ordinal}
+    $visitedFiles=[Collections.Generic.HashSet[string]]::new($pathComparer)
+    $visitedDirectories=[Collections.Generic.HashSet[string]]::new($pathComparer)
+    function Get-InputKey([string]$Path){
+        $relative=[IO.Path]::GetRelativePath($WorkspaceRoot,$Path).Replace('\','/')
+        if($relative -ne '..' -and -not $relative.StartsWith('../')){return "workspace/$relative"}
+        $relative=[IO.Path]::GetRelativePath($PlatformRoot,$Path).Replace('\','/')
+        return "platform/$relative"
+    }
+    function Add-InputFile([string]$Path){
+        $Path=[IO.Path]::GetFullPath($Path)
+        if(-not $visitedFiles.Add($Path)){return}
+        $Key=Get-InputKey $Path
         if(-not [IO.File]::Exists($Path)){$records[$Key]='missing';return}
         if((Get-Item -LiteralPath $Path -Force).Attributes -band [IO.FileAttributes]::ReparsePoint){throw "Linked prepared input is unsupported: $Key"}
         $records[$Key]=(Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
     }
     function Add-InputTree([string]$Directory,[string]$Prefix){
-        if(-not [IO.Directory]::Exists($Directory)){$records[$Prefix]='missing';return}
+        if(-not [IO.Directory]::Exists($Directory)){$records[(Get-InputKey $Directory)]='missing';return}
         $pending=[Collections.Generic.Stack[string]]::new();$pending.Push($Directory)
         while($pending.Count){
             $current=$pending.Pop()
+            if(-not $visitedDirectories.Add([IO.Path]::GetFullPath($current))){continue}
             foreach($item in Get-ChildItem -LiteralPath $current -Force){
                 $relative=[IO.Path]::GetRelativePath($Directory,$item.FullName).Replace('\','/')
                 # Exclude only repository metadata and platform output, never arbitrary wrapper resource/content directories.
                 if($relative -match '^(?:\.git|\.processing)(?:/|$)' -or $item.Name -eq '.hugo_build.lock'){continue}
                 if($item.Attributes -band [IO.FileAttributes]::ReparsePoint){throw "Linked prepared input is unsupported: $Prefix/$relative"}
-                if($item.PSIsContainer){$pending.Push($item.FullName)}else{Add-InputFile $item.FullName "$Prefix/$relative"}
+                if($item.PSIsContainer){$pending.Push($item.FullName)}else{Add-InputFile $item.FullName}
             }
         }
     }
     Add-InputTree (Resolve-GuideWorkspacePath $WorkspaceRoot $Policy.wrapper.sourcePath) 'site'
     foreach($guide in $Policy.guides){Add-InputTree (Resolve-GuideWorkspacePath $WorkspaceRoot $guide.contentRoot) "guide/$($guide.id)"}
-    foreach($path in $Policy.wrapper.requiredFiles){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $path) "wrapper/$path"}
-    Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath) 'policy'
+    foreach($path in $Policy.wrapper.requiredFiles){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $path)}
+    Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath)
     foreach($path in @('go.mod','go.sum','go.work','go.work.sum','staticwebapp.config.json','staticwebapp.config.canary.json','staticwebapp.config.preview.json','staticwebapp.config.production.json')){
-        Add-InputFile (Join-Path $WorkspaceRoot $path) "workspace/$path"
+        Add-InputFile (Join-Path $WorkspaceRoot $path)
     }
     foreach($component in @('OpenGuidePlatform.PowerShell.Core','OpenGuidePlatform.PowerShell.Build','OpenGuidePlatform.Hugo.Guides')){
         Add-InputTree (Join-Path $PlatformRoot "system/$component") "platform/$component"
     }
     foreach($guide in $Policy.guides){foreach($edition in $guide.editions){foreach($translation in $edition.translations){foreach($download in $translation.downloads){
-        if($download.Contains('generationReceipt')){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $download.generationReceipt.path) "pdf-receipt/$($download.generationReceipt.path)"}
+        if($download.Contains('generationReceipt')){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $download.generationReceipt.path)}
     }}}}
-    # Runtime scripts are the same in the source checkout and distributed package.
-    foreach($file in @('platform.json','platform-resolution.json','build.ps1','.build/Build-GuideSite.ps1','.build/Prepare-GuideSite.ps1','.build/Test-GuideSiteNavigation.ps1','.build/Write-GuideSiteValidationSummary.ps1')){
-        Add-InputFile (Join-Path $PlatformRoot $file) "platform/$file"
+    foreach($file in @('platform.json','platform-resolution.json','build.ps1')){
+        Add-InputFile (Join-Path $PlatformRoot $file)
     }
-    Add-InputFile $OverlayPath 'configuration-overlay'
+    Add-InputFile $OverlayPath
     foreach($entry in Get-ChildItem Env: | Where-Object { $_.Name -match '^HUGO_' -and $_.Name -notin @('HUGO_RESOURCEDIR','HUGO_CACHEDIR') } | Sort-Object Name){
         # Store only hashes; environment values may contain deployment data.
         $records["environment/$($entry.Name)"]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($entry.Value))).ToLowerInvariant()

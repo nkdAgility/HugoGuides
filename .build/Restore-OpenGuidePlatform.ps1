@@ -60,8 +60,10 @@ if($manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $Expect
 if((Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant() -cne $manifest.sha256){throw 'Release package digest mismatch.'}
 # Check archive paths before extracting or importing any candidate code.
 Expand-VerifiedPlatformArchive "$assets/OpenGuidePlatform.zip" $output
+# Check source identity before running the checksum-verified package validator.
 $metadata=Get-Content "$output/platform.json" -Raw|ConvertFrom-Json
 if($metadata.product -cne 'OpenGuidePlatform' -or $metadata.sourceCommit -cne $ExpectedCommit -or $metadata.version -cne $manifest.version){throw 'Installed platform identity mismatch.'}
+$metadata=& "$output/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $output -Manifest $manifest
 if((Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant() -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
 $resolution=[ordered]@{schemaVersion=1;mode=if($PSCmdlet.ParameterSetName -eq 'Candidate'){'candidate'}else{'release'};version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$output/platform-resolution.json",($resolution|ConvertTo-Json))

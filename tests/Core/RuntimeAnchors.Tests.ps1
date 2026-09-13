@@ -12,7 +12,7 @@ BeforeAll {
 }
 Describe 'Current artifact runtime anchors' {
     It 'observes JavaScript anchors, blocks external requests and never waives another page or missing ID' {
-        $navigation=& "$root/.build/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
+        $navigation=& "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
         $navigation.Findings.Count | Should -Be 2
         $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')) -Anchors @(@{route='/other/';fragment='content'},@{route='/other/';fragment='missing'})
         $result.outcome | Should -Be fail

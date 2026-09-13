@@ -29,7 +29,7 @@ BeforeAll {
         }
         Copy-Item $bootstrap "$assets/bootstrap.ps1"
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
-        [IO.File]::WriteAllText("$stage/platform.json",(@{version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
+        [IO.File]::WriteAllText("$stage/platform.json",(@{product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
         [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", @'
 param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion)
 $path="$WorkspaceRoot/site/go.mod"

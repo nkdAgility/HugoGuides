@@ -17,7 +17,7 @@ param(
     [ValidateSet('local','preview','production')][string]$Target='local'
 )
 $ErrorActionPreference='Stop'
-$platformRoot=Split-Path $PSScriptRoot -Parent
+$platformRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
 Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
 $policyDigest=$null;$pdfReceipts=$null
 try {

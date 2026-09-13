@@ -33,13 +33,13 @@ async function test(options={}) {
   const sha='a'.repeat(40);
   const assessment={schemaVersion:1,sourceCommit:sha,target:'preview',stage:'Prepare',outcome:options.outcome||'pass',...options.assessment};
   const markdown=`## Prepare: ${assessment.outcome}\n\nCommit: ${sha}\n${options.text||''}`;
-  const notices=[],failures=[],posts=[];
+  const notices=[],failures=[],posts=[],updates=[];
   let gets=0;
-  const api={rest:{pulls:{get:async()=>({data:{state:'open',head:{sha:(options.stale && ++gets>=options.stale)?'b'.repeat(40):sha}}})},issues:{listComments:()=>{},createComment:async comment=>{if(options.apiFailure)throw Error('API unavailable');posts.push(comment);}}},paginate:async()=>options.prior||[]};
+  const api={rest:{pulls:{get:async()=>({data:{state:'open',head:{sha:(options.stale && ++gets>=options.stale)?'b'.repeat(40):sha}}})},issues:{listComments:()=>{},updateComment:async comment=>{if(options.apiFailure)throw Error('API unavailable');updates.push(comment);},createComment:async comment=>{if(options.apiFailure)throw Error('API unavailable');posts.push(comment);}}},paginate:async()=>options.prior||[]};
   const files={'assessment/assessment.json':JSON.stringify(assessment),'assessment/assessment.md':markdown};
   const fakeFs={lstatSync:()=>{if(options.missing)throw Error('Report missing');return {isFile:()=>true,size:100};},readFileSync:path=>files[path]};
   await run(name=>{assert.equal(name,'node:fs');return fakeFs;},api,{notice:x=>notices.push(x),setFailed:x=>failures.push(x)},{repo:{owner:'org',repo:'repo'},payload:{pull_request:{number:35}},runId:100},{env:{ASSESSED_COMMIT:sha,ASSESSED_TARGET:'preview',GITHUB_RUN_ATTEMPT:'1',PREPARE_RESULT:options.prepareResult||'success'}});
-  return {notices,failures,posts};
+  return {notices,failures,posts,updates};
 }
 (async()=>{
   const success=await test({text:'${throw new Error("Never execute report text") }'});
@@ -50,14 +50,18 @@ async function test(options={}) {
   assert.match(blocked.posts[0].body,/## Prepare: blocked/);
   for(const stale of [1,2]){const r=await test({stale});assert.equal(r.posts.length,0);assert.match(r.notices[0],/REPORT_SUPERSEDED/);}
   const body=(await test()).posts[0].body;
-  const prior=[{user:{login:'github-actions[bot]'},body}];
+  const prior=[{id:42,user:{login:'github-actions[bot]'},body}];
   assert.match((await test({prior})).notices[0],/REPORT_ALREADY_DELIVERED/);
   prior[0].body+=' changed';
-  assert.match((await test({prior})).failures[0],/REPORT_DELIVERY_FAILED/);
+  const updated=await test({prior});assert.equal(updated.updates.length,1);assert.equal(updated.updates[0].comment_id,42);assert.equal(updated.posts.length,0);
+  for(const stale of [1,2]){const r=await test({prior,stale});assert.equal(r.updates.length,0);assert.equal(r.posts.length,0);}
+  assert.match((await test({prior,apiFailure:true})).failures[0],/REPORT_DELIVERY_FAILED/);
+  const other=[{id:43,user:{login:'github-actions[bot]'},body:body.replace('preview/Prepare','production/Prepare')}];
+  assert.equal((await test({prior:other})).posts.length,1);
   for(const options of [{missing:true},{apiFailure:true},{assessment:{sourceCommit:'b'.repeat(40)}}]){
     const r=await test(options);assert.equal(r.posts.length,0);assert.match(r.failures[0],/REPORT_DELIVERY_FAILED/);
   }
-  console.log('PASS isolated PR delivery: current, blocked, stale, duplicate, conflicting, missing and API failure evidence');
+  console.log('PASS isolated PR delivery: current, blocked, stale, duplicate, updated, target-isolated, missing and API failure evidence');
 })().catch(error=>{console.error(error);process.exitCode=1;});
 '@
         $runner=$runner.Replace('\\n','\n')

@@ -16,6 +16,14 @@ Describe 'Prepare input freshness' {
         $argsForInputs=@{WorkspaceRoot=$workspace;Policy=$policy;PolicyPath='policy.json';PlatformRoot="$workspace/platform";OverlayPath="$workspace/overlay.json";Version='0.0.0';Target='preview'}
         $before=Get-GuidePreparedInputs @argsForInputs
     }
+    It 'inventories overlapping guide and wrapper paths once without losing drift detection' {
+        $policy.guides[0].contentRoot='site/content'
+        $policy.wrapper.requiredFiles=@('site/content/_index.md')
+        $snapshot=Get-GuidePreparedInputs @argsForInputs
+        @($snapshot.Files.Keys|Where-Object {$_ -like '*_index.md'}).Count | Should -Be 1
+        [IO.File]::WriteAllText("$workspace/site/content/_index.md",'Changed shared input')
+        {Assert-GuidePreparedInputs $snapshot (Get-GuidePreparedInputs @argsForInputs)} | Should -Throw '*PREPARE_INPUTS_CHANGED*'
+    }
     It 'accepts the same inputs after persisted evidence is read back' {
         $persisted=$before|ConvertTo-Json -Depth 10|ConvertFrom-Json
         { Assert-GuidePreparedInputs $persisted (Get-GuidePreparedInputs @argsForInputs) } | Should -Not -Throw

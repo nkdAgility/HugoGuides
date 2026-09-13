@@ -68,7 +68,7 @@ Sites with declared JavaScript-created anchors also need Node.js 20 or newer and
 
 ## When something fails
 
-Read the finding and its suggested fix in the terminal or GitHub Actions job summary. For a PR opened from the same repository, Prepare also posts a report with the assessed commit and workflow link. Use the report for your current commit; a reporting failure is shown separately in the Prepare report job. Fork PRs retain their reports in Actions artifacts. Build reports are saved beneath `.processing/guidesite/` by default; a failed Prepare also prints its report paths.
+Read the finding and its suggested fix in the terminal or GitHub Actions job summary. For a PR opened from the same repository, Prepare maintains one current report per target with the assessed commit and workflow link. Earlier reports remain in workflow artifacts. Use the report for your current commit; a reporting failure is shown separately in the Prepare report job. Fork PRs retain their reports in Actions artifacts. Build reports are saved beneath `.processing/guidesite/` by default; a failed Prepare also prints its report paths.
 
 | Problem | What to do |
 |---|---|

@@ -18,14 +18,14 @@ Describe 'Deployment source provenance' {
     }
     It 'accepts explicitly clean validated artifacts' {
         [IO.File]::WriteAllText("$workspace/.processing/result/artifact-identity.json",($identity|ConvertTo-Json -Depth 10))
-        {& "$root/.build/Confirm-GuideSiteDeployment.ps1" @arguments} | Should -Not -Throw
+        {& "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Confirm-GuideSiteDeployment.ps1" @arguments} | Should -Not -Throw
     }
     It 'rejects dirty, missing and non-boolean source-cleanliness declarations' {
         foreach($state in @($true,'false',$null)){
             $identity.sourceDirty=$state
             if($null -eq $state){$identity.Remove('sourceDirty')}
             [IO.File]::WriteAllText("$workspace/.processing/result/artifact-identity.json",($identity|ConvertTo-Json -Depth 10))
-            {& "$root/.build/Confirm-GuideSiteDeployment.ps1" @arguments} | Should -Throw '*explicitly clean source identity*'
+            {& "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Confirm-GuideSiteDeployment.ps1" @arguments} | Should -Throw '*explicitly clean source identity*'
         }
     }
 }

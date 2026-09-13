@@ -31,15 +31,15 @@ if($Product -eq 'GuideSite'){
     if($Stage -in @('Package','Release')){throw 'GuideSite produces a validated site artifact, not a platform release.'}
     if($Stage -eq 'Deploy'){
         if($Target -eq 'local' -or ($Target -ne 'production' -and [string]::IsNullOrWhiteSpace($DeploymentEnvironment))){throw 'Preview deployment requires an explicit named hosting environment; local builds cannot deploy.'}
-        & "$PSScriptRoot/.build/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version
+        & "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version
         return
     }
     if($Stage -eq 'Verify'){
         if([string]::IsNullOrWhiteSpace($DeploymentUrl)){throw 'Verify requires the actual deployment URL returned by the hosting adapter.'}
-        & "$PSScriptRoot/.build/Verify-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -PolicyPath $PolicyPath -DeploymentUrl $DeploymentUrl -Target $Target -Version $Version
+        & "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Verify-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -PolicyPath $PolicyPath -DeploymentUrl $DeploymentUrl -Target $Target -Version $Version
         return
     }
-    & "$PSScriptRoot/.build/Build-GuideSite.ps1" -Stage $Stage -BaseUrl $BaseUrl -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
+    & "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Build-GuideSite.ps1" -Stage $Stage -BaseUrl $BaseUrl -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
 }else{
     if($Stage -in @('Serve','Deploy','Verify')){throw 'Serve, Deploy and Verify belong to GuideSite; specify -Product GuideSite and its policy.'}
     if($Stage -in @('All','Prepare')){
