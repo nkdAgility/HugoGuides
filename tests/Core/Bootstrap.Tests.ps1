@@ -29,10 +29,11 @@ BeforeAll {
         }
         Copy-Item $bootstrap "$assets/bootstrap.ps1"
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
-        [IO.File]::WriteAllText("$stage/platform.json",(@{version=$version;sourceCommit=('a'*40)}|ConvertTo-Json))
+        [IO.File]::WriteAllText("$stage/platform.json",(@{version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", 'param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion) [pscustomobject]@{Files=[ordered]@{};ExpectedHashes=[ordered]@{};Sum="fixture-sum";GoModSum="fixture-mod-sum"}')
         [IO.Compression.ZipFile]::CreateFromDirectory($stage,"$assets/OpenGuidePlatform.zip")
-        $manifest=@{schemaVersion=1;product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);channel='preview';archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()}
-        [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json))
+        $manifest=@{nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)};schemaVersion=1;product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);channel='preview';archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()}
+        [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 5))
         $global:OgpBootstrapAssets["v$version"]=$assets
     }
 }

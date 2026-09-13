@@ -107,6 +107,12 @@ foreach($required in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','
     if(-not (Test-Path -LiteralPath "$package/$required" -PathType Leaf)){throw 'This release predates guide-site installation support; choose a newer release.'}
 }
 if(-not (Test-Json -Json (Get-Content $policyFile -Raw) -SchemaFile "$package/system/OpenGuidePlatform.PowerShell.Core/Contracts/site-policy.schema.json" -ErrorAction Stop)){throw 'Invalid guide-site policy.'}
+if(-not $metadata.PSObject.Properties['nativeHugoModule'] -or -not $manifest.ContainsKey('nativeHugoModule')){throw 'This release predates coordinated native Hugo installation.'}
+$native=$manifest.nativeHugoModule
+if($native.path -cne $metadata.nativeHugoModule.path -or $native.version -cne ('v'+$manifest.version) -or $native.version -cne $metadata.nativeHugoModule.version -or $native.sourceCommit -cne $manifest.sourceCommit -or $native.sourceCommit -cne $metadata.nativeHugoModule.sourceCommit){throw 'Native Hugo package and release identities disagree.'}
+$nativeArguments=@{WorkspaceRoot=$root;SourcePath=$policy.wrapper.sourcePath;NativeModule=$native}
+if($previous -and $previous.ContainsKey('nativeHugoModule')){$nativeArguments.PreviousVersion=$previous.nativeHugoModule.version}
+$nativePlan=& "$package/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1" @nativeArguments
 $files=[ordered]@{}
 $null=Invoke-GitHub @('release','download',$ReleaseTag,'--repo',$repository,'--pattern','bootstrap.ps1','--dir',$work)
 if((Get-Digest "$work/bootstrap.ps1") -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
@@ -125,8 +131,21 @@ $files['AGENTS.md']=$instructions
 $files['CLAUDE.md']=$instructions
 # Fail before any tracked changes if this machine cannot create Git-compatible shims.
 try{New-Item -ItemType SymbolicLink -Path (Join-Path $work 'shim-test') -Target '.agents/agents.md' -WhatIf:$false | Out-Null}
-catch{throw 'Symbolic links are required. Enable Windows Developer Mode (or use an elevated shell), and clone with git -c core.symlinks=true.'}
+catch{throw 'Symbolic links are required. Enable Windows Developer Mode (or use an elevated shell), run git config --global core.symlinks true before cloning.'}
 $files['.github/copilot-instructions.md']=$instructions
+# Native dependency/configuration patches remain consumer-owned.
+foreach($name in $nativePlan.Files.Keys){
+    if($files.Contains($name)){throw "Native update overlaps a platform-owned file: $name"}
+    $files[$name]=$nativePlan.Files[$name]
+}
+function Confirm-NativeSnapshot {
+    foreach($name in $nativePlan.ExpectedHashes.Keys){
+        $path=Resolve-InstallPath $name
+        $actual=if(Test-Path -LiteralPath $path -PathType Leaf){Get-Digest $path}else{$null}
+        if($actual -cne $nativePlan.ExpectedHashes[$name]){throw "Consumer file changed during native update: $name"}
+    }
+}
+Confirm-NativeSnapshot
 # Preflight ALL managed destinations. Never silently replace consumer work.
 $conflicts=[Collections.Generic.List[string]]::new()
 if($previous){
@@ -138,16 +157,17 @@ if($previous){
 }
 foreach($name in $files.Keys){
     $path=Resolve-InstallPath $name
-    if((Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
+    if(-not $nativePlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
 }
 if($conflicts.Count){throw "Managed-file conflicts; reconcile on your review branch before retrying: $($conflicts -join ', ')"}
 $hashes=[ordered]@{}
-foreach($name in $files.Keys){$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
-$record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;policyPath=$PolicyPath;release=$manifest;hugoResolution='native-module-required';adoptionBlockers=@('Native Hugo module publication','Coordinated agent controls and independent enforcement');managedFiles=$hashes}
+foreach($name in $files.Keys){if($nativePlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
+$record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;policyPath=$PolicyPath;release=$manifest;hugoResolution='native-module';nativeHugoModule=$native;nativeChecksums=@{sum=$nativePlan.Sum;goModSum=$nativePlan.GoModSum};adoptionBlockers=@('Coordinated agent controls and independent enforcement');managedFiles=$hashes}
 $files['open-guide-platform.installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
 Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); managed files:"
 $files.Keys|ForEach-Object {Write-Host "  $_"}
 if(-not $PSCmdlet.ShouldProcess($root,"Install coordinated preview files from $ReleaseTag")){return}
+Confirm-NativeSnapshot
 # Roll back tracked files if a write fails. The installation record is written last.
 $original=@{};$written=[Collections.Generic.List[string]]::new()
 try{

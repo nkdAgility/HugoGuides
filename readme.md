@@ -33,7 +33,7 @@ Run the same command for both:
 irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/main/bootstrap.ps1 | iex
 ```
 
-It selects the newest installable preview release and verifies the download. On `main` or `master`, it creates a review branch; otherwise it uses your current branch. Existing files that conflict with the installation are reported for review.
+It selects the newest installable preview release and verifies the download. On `main` or `master`, it creates a review branch; otherwise it uses your current branch. It updates the native Hugo dependency to the same release and preserves your wrapper YAML formatting. Existing files that conflict with the installation are reported for review.
 
 Then check the changes and build both targets:
 

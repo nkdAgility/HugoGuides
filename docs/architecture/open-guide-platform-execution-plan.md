@@ -337,7 +337,7 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 - [x] Document Windows symbolic-link prerequisites and `git config --global core.symlinks true`; apply the global setting on the maintainer's system.
 - [ ] Complete and test managed Codex, Claude and GitHub Copilot controls on the supported client/OS surfaces, including indirect shell/MCP writes and nested overrides.
 - [ ] Establish administrator-owned contributor/maintainer permissions and an independent required gate that candidate code cannot replace or weaken.
-- [ ] Verify that privileged PR reporting and deployment never execute untrusted candidate code. Instruction files and installed templates alone are not enforcement evidence.
+- [x] Verify isolation of the implemented privileged reporting/deployment jobs: neither checks out or executes candidate scripts; deployment uploads validated static bytes with build execution disabled. Regression tests exercise malformed identities/artifacts and stale reporting. This is job-isolation evidence, not independently installed required-gate enforcement.
 
 ### E07 — Consumer distribution and shared workflow acceptance
 
@@ -599,3 +599,13 @@ Disposition of existing defects: frozen duplicate legacy aliases remain unchange
 E05 is complete as characterisation of the mechanically relocated module. This does not assert that E09–E11 adoption or all pre-existing website defects are complete. Broader Hugo refactoring remains E14. The maintainer permits targeted bug fixes and justified, recorded deviations.
 
 E06 is current. Its external managed-client installation and independent required-gate configuration cannot be completed under the no-permission/no-GitHub-administration instruction. The existing maintainer action-point exception permits repository implementation to continue through E07 while these external checks remain explicitly pending; it does not turn them into passed checks.
+
+### E06 repository boundary review and E07 native installer — 2026-09-13
+
+E06 remains externally incomplete: managed client policies and live OS/tool bypass verification, plus administrator-owned required-check installation, are not performed under the maintainer restriction. The repository evaluator and the isolated reporting/deployment paths have passing regression coverage. Moving into E07 repository implementation follows the explicit maintainer action-point exception; no missing external check is marked passed.
+
+The native installer now plans go.mod/go.sum and Hugo YAML identity updates alongside managed assets, validates the downloaded Go module source against the coordinated manifest, preserves local replacement destinations and wrapper formatting, and refuses stale installation pins or unsupported YAML forms. Consumer-owned configuration participates in the pre-write snapshot/rollback transaction but is not claimed as platform-owned. The planner writes only disposable staging before the complete bootstrap preflight succeeds.
+
+Targeted tests passed 16 checks; full platform acceptance passed 216 tests and package validation. `baselines/2026-09-13-module-identity/native-installer-plan.json` records real Go resolution and a successful isolated Safe Delusion production build against the canonical pseudo-version. Semantic output matches the accepted newer-module baseline. A first diagnostic used an excessively deep Windows cache and failed; a short temporary cache succeeded without changing global settings. Named coordinated release publication remains E08; the pseudo-version test does not claim it has happened.
+
+Disposable draft PR #36 rehearses the shared sample deploy/close lifecycle, leaving PR #35 open. Cleanup acceptance remains unchecked until the deployment has passed and the close workflow proves its environment was removed.

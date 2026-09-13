@@ -25,11 +25,13 @@ Preserve existing edits and create a review branch, then run the install command
 
 The installer refuses conflicting existing files, including build scripts, workflow callers and agent instructions. Review each conflict and migrate the existing behaviour deliberately before retrying. Do not remove bespoke instructions, workflows or content merely to make installation succeed.
 
-Review the resulting build adapter, installation record, skills and instructions. Build preview and production output. Check guide bodies, language fallbacks, links, downloads and the site's appearance against the existing site.
+The wrapper must already have a `site/go.mod` (or the equivalent under its configured source folder) and its Hugo module import in YAML. The installer updates the native module identity, version and checksums together with the platform. Unsupported YAML forms or locally modified managed files stop installation for review; the installer does not reformat the whole configuration. Local-only module replacement destinations are preserved.
+
+Review the resulting module/configuration diff, build adapter, installation record, skills and instructions. Build preview and production output. Check guide bodies, language fallbacks, links, downloads and the site's appearance against the existing site.
 
 The generated workflow initially validates a preview target. To deploy, configure the shared workflow's site URL, target, preview environment and explicitly mapped hosting secret. Add the [shared close-PR workflow](../../.github/workflows/guide-site-close-pr.yaml) through a site-owned caller. The platform's [sample cleanup caller](../../.github/workflows/sample-close-pr.yaml) illustrates this; its hosting destination and secret belong to the sample, not your site.
 
-Approve production deployment separately. Native Hugo module adoption and independently managed agent enforcement remain unfinished platform work; a passing preview does not mean those controls are installed.
+Approve production deployment separately. A coordinated native module release must be published before installation. Independently managed agent enforcement still requires external setup; a passing preview does not mean those controls are installed.
 
 ## Windows symbolic links
 
