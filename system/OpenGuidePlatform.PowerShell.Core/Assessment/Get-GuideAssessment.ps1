@@ -1,6 +1,6 @@
 function Get-GuideAssessment {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string[]]$Languages,[Parameter(Mandatory)][Collections.IDictionary]$EffectiveProduction,[Parameter(Mandatory)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,[Parameter(Mandatory)][string]$PlatformVersion,[ValidateSet('local','preview','production')][string]$Target='local')
+    param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string[]]$Languages,[Parameter(Mandatory)][Collections.IDictionary]$EffectiveProduction,[Parameter(Mandatory)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,[Parameter(Mandatory)][string]$PlatformVersion,[ValidateSet('local','preview','production')][string]$Target='local',[object[]]$EffectiveTranslations)
     $findings=[Collections.Generic.List[object]]::new()
     function Add-Finding($code,$scope,$subject,$message,$fix,$severity='blocker') {
         $findings.Add([ordered]@{code=$code;severity=$severity;scope=$scope;subject=$subject;message=$message;remediation=$fix;evidence=@()})
@@ -9,11 +9,21 @@ function Get-GuideAssessment {
     foreach($finding in @(Test-GuidePublicationPolicy $Policy $EffectiveProduction)) { Add-Finding $finding.Code platform $finding.Subject $finding.Reason 'Keep permanently excluded subjects disabled in effective production configuration and provide exclusion evidence.' }
     $wrapperState='unknown'
     try {
-        $wrapper=Get-GuideWrapperStatus $WorkspaceRoot $Policy $Languages
+        $wrapperArguments=@{}
+        if($PSBoundParameters.ContainsKey('EffectiveTranslations')){$wrapperArguments.EffectiveTranslations=$EffectiveTranslations}
+        $wrapper=Get-GuideWrapperStatus $WorkspaceRoot $Policy $Languages @wrapperArguments
         foreach($file in $wrapper.Files) { if($file.State -ne 'present'){Add-Finding WRAPPER_FILE_MISSING wrapper $file.Path 'A required wrapper file is missing.' $file.Fix;$wrapperState='incomplete'} }
         foreach($language in $wrapper.Languages) {
             if ($language.RequiredKeys.Count -gt 0 -and $language.Catalogue -ne 'present') { Add-Finding WRAPPER_CATALOGUE_UNAVAILABLE wrapper $language.Language "Local wrapper catalogue is $($language.Catalogue). $($language.Detail)" 'Restore or reconcile the local YAML catalogue, or supply effective module fallback evidence through the build adapter.';$wrapperState='incomplete' }
             foreach($key in $language.Keys) { if($key.State -ne 'present'){Add-Finding WRAPPER_TRANSLATION_MISSING wrapper "$($language.Language)/$($key.Key)" "Required translation is $($key.State)." $key.Fix;$wrapperState='incomplete'} }
+            if($language.Scope -eq 'hugo-effective-i18n'){
+                foreach($key in $language.Keys|Where-Object Resolution -EQ fallback){
+                    Add-Finding WRAPPER_TRANSLATION_FALLBACK wrapper "$($language.Language)/$($key.Key)" 'Hugo resolved this key using fallback text.' 'Review the intended fallback; available text does not establish translation quality.' warning
+                }
+                if($language.LocalCatalogue -eq 'missing'){
+                    Add-Finding WRAPPER_CATALOGUE_RESOLVED wrapper $language.Language 'Hugo supplied effective translation evidence without a local wrapper YAML catalogue.' 'Review the mounted catalogues and language quality; resolution alone does not establish a complete translation.' info
+                }
+            }
         }
         if(@($wrapper.Routes).Count -or @($wrapper.IntegrationPoints).Count) { Add-Finding WRAPPER_BUILD_EVIDENCE_PENDING wrapper $Policy.siteId 'Runtime routes and integration points have not been validated during Prepare.' 'Run Build and Validate to inspect the generated artifact.' info }
     } catch { Add-Finding WRAPPER_ASSESSMENT_FAILED wrapper $Policy.siteId $_.Exception.Message 'Correct the wrapper input and rerun Prepare.' }

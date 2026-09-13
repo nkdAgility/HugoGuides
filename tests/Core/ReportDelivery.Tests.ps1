@@ -41,7 +41,7 @@ Describe 'Assessment delivery is independent of validation' {
         $workspace=Join-Path $TestDrive 'workspace'
         [IO.Directory]::CreateDirectory((Join-Path $workspace '.processing/occupied'))|Out-Null
         $summary=Join-Path $TestDrive 'entry-summary.md'
-        { & (Join-Path $root '.build/Invoke-GuidePrepare.ps1') -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing.json') -SourceCommit ('a'*40) -OutputPath '.processing/occupied' -SummaryPath $summary } | Should -Throw '*REPORT_DELIVERY_FAILED*assessment remains blocked*'
+        { & (Join-Path $root '.build/Prepare-GuideSite.ps1') -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing.json') -SourceCommit ('a'*40) -OutputPath '.processing/occupied' -SummaryPath $summary } | Should -Throw '*REPORT_DELIVERY_FAILED*assessment remains blocked*'
         Get-Content $summary -Raw | Should -Match 'PREPARE_INPUT_UNAVAILABLE'
     }
 }

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "siteId": "GuideSiteSample",
+  "wrapper": {
+    "sourcePath": "examples/reference-guide-site",
+    "requiredRoutes": [
+      "/",
+      "/guide1/",
+      "/guide1/2020.7/",
+      "/guide1/2020.12/",
+      "/guide1/2025.5/",
+      "/guide2/",
+      "/guide2/2025.7/"
+    ],
+    "requiredFiles": [
+      "examples/reference-guide-site/content/_index.md"
+    ],
+    "requiredI18nKeys": [
+      "breadcrumb_home",
+      "read_online_title"
+    ],
+    "integrationPoints": []
+  },
+  "guides": [
+    {
+      "id": "Guide1",
+      "contentRoot": "examples/reference-guide-site/content/Guide1",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2020.7",
+          "path": "2020.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2020.12",
+          "path": "2020.12",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2025.5",
+          "path": "2025.5",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Guide2",
+      "contentRoot": "examples/reference-guide-site/content/Guide2",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2025.7",
+          "path": "2025.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "environments": [
+      {
+        "name": "preview",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      },
+      {
+        "name": "production",
+        "excludedLanguages": [
+          "min"
+        ],
+        "excludedGuides": []
+      }
+    ],
+    "permanentExclusions": [
+      {
+        "environment": "production",
+        "subject": "language",
+        "id": "min",
+        "reason": "Minionese must never be published to production."
+      }
+    ]
+  },
+  "protectedPaths": []
+}

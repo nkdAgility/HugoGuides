@@ -4,3 +4,7 @@ minify:
 
 buildDrafts: true
 buildFuture: true
+
+languages:
+  min:
+    disabled: true

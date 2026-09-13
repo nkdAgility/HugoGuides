@@ -47,4 +47,16 @@ Describe 'Wrapper readiness observations' {
         (Get-GuideWrapperStatus $workspace $policy @('fa')).Languages[0].Catalogue | Should -Be ambiguous
         { Get-GuideWrapperStatus $workspace $policy @('../outside') } | Should -Throw '*Invalid wrapper language*'
     }
+    It 'uses effective fallback without rewriting an empty local translation' {
+        $hash=(Get-FileHash $catalog).Hash
+        $evidence=@(@{Language='fa';Scope='hugo-effective-i18n';Keys=@(@{Key='title';State='available';Value='عنوان'},@{Key='download';State='fallback';Value='Download'})})
+        $result=Get-GuideWrapperStatus $workspace $policy @('fa') -EffectiveTranslations $evidence
+        $result.Languages[0].Keys[1].State | Should -Be present
+        $result.Languages[0].Keys[1].Resolution | Should -Be fallback
+        (Get-FileHash $catalog).Hash | Should -Be $hash
+        $result.TranslationQualityAssessed | Should -BeFalse
+    }
+    It 'rejects incomplete effective evidence' {
+        {Get-GuideWrapperStatus $workspace $policy @('fa') -EffectiveTranslations @()} | Should -Throw '*effective catalogue evidence*'
+    }
 }

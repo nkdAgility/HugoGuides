@@ -5,6 +5,7 @@ function Get-GuideWrapperStatus {
         [Parameter(Mandatory)][System.Collections.IDictionary]$Policy,
         [Parameter(Mandatory)][AllowEmptyCollection()][string[]]$Languages,
         [string[]]$ObservedRoutes,
+        [object[]]$EffectiveTranslations,
         [string[]]$ObservedIntegrationPoints
     )
     # Languages come from the effective site configuration, not from guide counts.
@@ -48,7 +49,21 @@ function Get-GuideWrapperStatus {
                 })
             } catch { $catalogState='invalid';$detail=$_.Exception.Message }
         }
-        [pscustomobject]@{Language=$language;Catalogue=$catalogState;Detail=$detail;Keys=$keys;RequiredKeys=@($Policy.wrapper.requiredI18nKeys);Scope='local-wrapper-yaml'}
+        $localCatalogue=$catalogState
+        $scope='local-wrapper-yaml'
+        if($PSBoundParameters.ContainsKey('EffectiveTranslations')){
+            $effective=@($EffectiveTranslations|Where-Object Language -CEQ $language)
+            if($effective.Count -ne 1 -or $effective[0].Scope -ne 'hugo-effective-i18n'){throw "Missing or ambiguous effective catalogue evidence for $language."}
+            $keys=@(foreach($key in $Policy.wrapper.requiredI18nKeys){
+                $entry=@($effective[0].Keys|Where-Object Key -CEQ $key)
+                if($entry.Count -ne 1){throw "Missing or ambiguous effective translation evidence for $language/$key."}
+                $present=$entry[0].State -in @('available','fallback') -and -not [string]::IsNullOrWhiteSpace($entry[0].Value)
+                [pscustomobject]@{Key=$key;State=if($present){'present'}else{'missing'};Resolution=$entry[0].State;Fix="Supply a reviewed translation or intended fallback for '$key'."}
+            })
+            if($catalogState -in @('present','missing')){$catalogState='present'}
+            $scope='hugo-effective-i18n'
+        }
+        [pscustomobject]@{Language=$language;Catalogue=$catalogState;LocalCatalogue=$localCatalogue;Detail=$detail;Keys=$keys;RequiredKeys=@($Policy.wrapper.requiredI18nKeys);Scope=$scope}
     })
     $routes=@(foreach($route in $Policy.wrapper.requiredRoutes) {
         [pscustomobject]@{Route=$route;State=if(-not $PSBoundParameters.ContainsKey('ObservedRoutes')){'unknown'}elseif($route -cin $ObservedRoutes){'present'}else{'missing'}}

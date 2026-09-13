@@ -1,0 +1,90 @@
+name: Build and validate guide site
+on:
+  workflow_call:
+    inputs:
+      source-ref:
+        required: true
+        type: string
+      policy-path:
+        required: true
+        type: string
+      site-name:
+        required: true
+        type: string
+      platform-release:
+        description: Exact release tag; omit to wait for the pinned platform commit release.
+        default: ''
+        type: string
+      platform-commit:
+        description: Exact platform commit matching the release and pinned reusable workflow
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  guide-site:
+    name: ${{ inputs.site-name }} — ${{ matrix.target }} — Prepare, Build, Validate
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [preview, production]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Get pinned release installer
+        uses: actions/checkout@v4
+        with:
+          repository: nkdAgility/OpenGuidePlatform
+          ref: ${{ inputs.platform-commit }}
+          path: .processing/platform-installer
+          sparse-checkout: .build/Restore-OpenGuidePlatformRelease.ps1
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
+          extended: true
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.24.5'
+          cache: false
+      - name: Restore released OpenGuidePlatform
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM_RELEASE: ${{ inputs.platform-release }}
+          PLATFORM_COMMIT: ${{ inputs.platform-commit }}
+        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatformRelease.ps1 -ReleaseTag $env:PLATFORM_RELEASE -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform -WaitSeconds 600
+      - name: Install guide-site build dependencies
+        shell: pwsh
+        run: Install-Module powershell-yaml -RequiredVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
+      - name: Prepare guide site
+        shell: pwsh
+        env:
+          SITE_POLICY: ${{ inputs.policy-path }}
+          SITE_TARGET: ${{ matrix.target }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Build guide site
+        shell: pwsh
+        env:
+          SITE_POLICY: ${{ inputs.policy-path }}
+          SITE_TARGET: ${{ matrix.target }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Validate guide site
+        shell: pwsh
+        env:
+          SITE_POLICY: ${{ inputs.policy-path }}
+          SITE_TARGET: ${{ matrix.target }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain guide-site reports and built site
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.site-name }}-${{ matrix.target }}
+          path: |
+            .processing/guide-site/
+            .processing/i18n-probe/
+          if-no-files-found: error

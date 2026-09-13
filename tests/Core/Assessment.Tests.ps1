@@ -54,8 +54,8 @@ Describe 'Shared Prepare assessment and reports' {
         { Write-GuideAssessmentReport $result $workspace '../escape' } | Should -Throw '*Unsafe*'
     }
     It 'writes a blocked report for missing policy input and rejects unknown digest on success' {
-        $entry=Join-Path $root '.build/Invoke-GuidePrepare.ps1'
-        { & $entry -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing-policy.json') -SourceCommit ('a'*40) -OutputPath '.processing/blocked-input' } | Should -Throw '*Prepare blocked*'
+        $entry=Join-Path $root '.build/Prepare-GuideSite.ps1'
+        { & $entry -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing-policy.json') -SourceCommit ('a'*40) -OutputPath '.processing/blocked-input' -SummaryPath (Join-Path $workspace 'fixture-summary.md') } | Should -Throw '*Prepare blocked*'
         $report=Get-Content (Join-Path $workspace '.processing/blocked-input/assessment.json') -Raw|ConvertFrom-Json -AsHashtable
         $report.policyDigest | Should -BeNullOrEmpty
         $report.findings[0].code | Should -Be PREPARE_INPUT_UNAVAILABLE

@@ -1,0 +1,21 @@
+name: Build & Release (GuideSiteSample)
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: guide-site-sample-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  sample:
+    name: GuideSiteSample
+    uses: ./.github/workflows/guide-site-build.yaml
+    with:
+      source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      policy-path: examples/reference-guide-site/guide-site.policy.json
+      site-name: GuideSiteSample
+      platform-commit: ${{ github.event.pull_request.head.sha || github.sha }}

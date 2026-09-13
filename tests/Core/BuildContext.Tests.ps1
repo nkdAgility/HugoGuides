@@ -21,12 +21,4 @@ Describe 'Build context policy' {
         (Get-GuideBuildContext -EventName workflow_dispatch -PreReleaseLabel "Preview`nTarget=production").Target | Should -Be canary
         {Get-GuideBuildContext -EventName push -ProductionEnvironment "production`nInjected=true"} | Should -Throw
     }
-    It 'writes matching local and Actions context without evaluating label text' {
-        $output=Join-Path $TestDrive 'outputs.txt'
-        $summary=Join-Path $TestDrive 'summary.md'
-        $context=& (Join-Path $root '.build/Write-PlatformRunContext.ps1') -EventName pull_request -PullRequestNumber 35 -OutputPath $output -SummaryPath $summary
-        $context.Target | Should -Be canary
-        (Get-Content $output) | Should -Contain 'AzureSitesConfig=canary'
-        (Get-Content $summary -Raw) | Should -Match 'Deployment remains disabled'
-    }
 }

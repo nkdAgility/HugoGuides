@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory)][string]$PolicyPath,
     [string]$EffectiveProductionPath,
     [string]$SummaryPath=$env:GITHUB_STEP_SUMMARY,
-    [string]$ModulePath='github.com/nkdAgility/HugoGuides/module',
+    [string]$PlatformVersion='0.0.0',[string]$ModulePath='github.com/nkdAgility/HugoGuides/module',
     [string[]]$Languages,
     [string[]]$ConfigFiles,
     [string[]]$ProductionConfigFiles=@('hugo.yaml','hugo.production.yaml'),
@@ -34,12 +34,24 @@ try {
         $Languages=@($observed.Configuration.languages.Keys | Where-Object { $observed.Configuration.languages[$_].disabled -ne $true })
         if($observed.Diagnostics){Write-Warning $observed.Diagnostics}
     }
-    $assessment=Get-GuideAssessment -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages -EffectiveProduction $production -SourceCommit $SourceCommit -PlatformVersion '0.0.0' -Target $Target
+    $effectiveArguments=@{};$probeError=$null
+    if($policy.wrapper.requiredI18nKeys.Count){
+        try {
+            if(-not $ConfigFiles){$ConfigFiles=@('hugo.yaml',"hugo.$Target.yaml")}
+            $probe=Get-GuideEffectiveTranslations -SourcePath $source -ConfigFiles $ConfigFiles -RequiredKeys $policy.wrapper.requiredI18nKeys -WorkspaceRoot $WorkspaceRoot -OutputPath ('.processing/i18n-probe/'+[guid]::NewGuid().ToString('N')) -Target $Target
+            $effectiveArguments.EffectiveTranslations=$probe.Languages
+        } catch {$probeError=$_.Exception.Message}
+    }
+    $assessment=Get-GuideAssessment -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages -EffectiveProduction $production -SourceCommit $SourceCommit -PlatformVersion $PlatformVersion -Target $Target @effectiveArguments
+    if($probeError){
+        $assessment.findings+= [ordered]@{code='WRAPPER_EFFECTIVE_EVIDENCE_UNAVAILABLE';severity='blocker';scope='wrapper';subject=$policy.siteId;message=$probeError;remediation='Inspect the isolated Hugo translation probe logs and restore effective catalogue evidence.';evidence=@()}
+        if($assessment.outcome -eq 'pass'){$assessment.outcome='blocked'}
+    }
     $assessment.policyDigest=$policyDigest
     $freshness=Get-GuideModuleFreshness -SourcePath $source -ModulePath $ModulePath
     $assessment.findings+= [ordered]@{code=$freshness.Code;severity=$freshness.Severity;scope='platform';subject=$freshness.Module;message=$freshness.Message;remediation='Review the module version through the coordinated platform update process; never change the pin during Prepare.';evidence=@("Installed: $($freshness.Installed)","Latest resolved by Go: $($freshness.Latest)")}
 } catch {
-    $assessment=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion='0.0.0';policyDigest=$policyDigest;target=$Target;stage='Prepare';outcome='blocked';findings=@([ordered]@{code='PREPARE_INPUT_UNAVAILABLE';severity='blocker';scope='platform';subject='Prepare inputs';message=$_.Exception.Message;remediation='Correct the policy/configuration or install the missing dependency and rerun Prepare.';evidence=@()});inventory=@{wrapper=@{state='unknown';languages=@()};guides=@()}}
+    $assessment=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion=$PlatformVersion;policyDigest=$policyDigest;target=$Target;stage='Prepare';outcome='blocked';findings=@([ordered]@{code='PREPARE_INPUT_UNAVAILABLE';severity='blocker';scope='platform';subject='Prepare inputs';message=$_.Exception.Message;remediation='Correct the policy/configuration or install the missing dependency and rerun Prepare.';evidence=@()});inventory=@{wrapper=@{state='unknown';languages=@()};guides=@()}}
 }
 $deliveryFailures=[Collections.Generic.List[string]]::new()
 try {
