@@ -14,6 +14,10 @@ on:
       target:
         type: string
         default: preview
+      site-url:
+        description: Absolute public URL for the selected site environment
+        type: string
+        default: ''
       platform-release:
         description: Exact release tag; omit to wait for the pinned platform commit release.
         default: ''
@@ -41,6 +45,7 @@ defaults:
 env:
   SITE_POLICY: ${{ inputs.policy-path }}
   SITE_TARGET: ${{ inputs.target }}
+  SITE_BASE_URL: ${{ inputs.site-url }}
 jobs:
   prepare:
     name: Prepare (${{ inputs.site-name }} / ${{ inputs.target }})
@@ -76,7 +81,7 @@ jobs:
       - name: Install guide-site preparation dependencies
         run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
       - name: Prepare guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
       - name: Retain prepared context and assessment
         if: always()
         uses: actions/upload-artifact@v4

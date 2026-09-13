@@ -48,11 +48,11 @@ params:
   keywords: "Guides"
   logo_image: "/images/guide-1-logo-512.png" # URL to the site logo image
   menu_logo: "/images/guides-logo-dark.png" # URL to the main menu logo image
-  siteProdUrl: "https://hugoguide.org"
+  siteProdUrl: "https://blue-field-06cea8c03.6.azurestaticapps.net/"
   supportEmail: "support@hugoguide.org"
-  githubUrl: "https://github.com/nkdAgility/HugoGuides"
-  previewSiteUrl: https://preview.hugoguides.org
-  productionSiteUrl: https://hugoguides.org
+  githubUrl: "https://github.com/nkdAgility/OpenGuidePlatform"
+  previewSiteUrl: https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/
+  productionSiteUrl: https://blue-field-06cea8c03.6.azurestaticapps.net/
   brand:
     bg_colour: "#135289"
   AzureSitesConfig: "#{Guides_AzureSitesConfig}#"

@@ -6,7 +6,7 @@ param(
     [Parameter(Mandatory)][string]$WorkspaceRoot,
     [Parameter(Mandatory)][string]$PolicyPath,
     [Parameter(Mandatory)][string]$OutputPath,
-    [string]$Version='0.0.0-local'
+    [string]$Version='0.0.0-local',[string]$BaseUrl
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
@@ -29,6 +29,11 @@ if($Stage -in @('All','Prepare','Serve')){
     $module=Join-Path $platformRoot 'system/OpenGuidePlatform.Hugo.Guides'
     # Bind the consumer to the packaged candidate without changing its module or source files.
     $values=@{module=@{replacements=@("github.com/nkdAgility/HugoGuides/module -> $($module.Replace('\','/'))")};params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+    if($BaseUrl){
+        $address=[uri]$BaseUrl
+        if(-not $address.IsAbsoluteUri -or $address.Scheme -notin @('http','https') -or $address.UserInfo -or $address.Query -or $address.Fragment){throw 'Site BaseUrl must be an absolute HTTP(S) URL without credentials, query or fragment.'}
+        $values.baseURL=$address.AbsoluteUri
+    }
     [IO.File]::WriteAllText($overlay,($values|ConvertTo-Json -Depth 10))
     $null=Get-GuideHugoToolchain
     & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay)

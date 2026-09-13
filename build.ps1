@@ -8,7 +8,7 @@ param(
     [string]$PolicyPath,
     [string]$OutputPath,
     [string]$Version='0.0.0-local',
-    [string]$ReleaseTag,[string]$DeploymentUrl,[string]$DeploymentEnvironment,
+    [string]$BaseUrl,[string]$ReleaseTag,[string]$DeploymentUrl,[string]$DeploymentEnvironment,
     [switch]$Versions
 )
 $ErrorActionPreference='Stop'
@@ -31,7 +31,7 @@ if($Product -eq 'GuideSite'){
         & "$PSScriptRoot/.build/Verify-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -PolicyPath $PolicyPath -DeploymentUrl $DeploymentUrl -Target $Target -Version $Version
         return
     }
-    & "$PSScriptRoot/.build/Build-GuideSite.ps1" -Stage $Stage -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
+    & "$PSScriptRoot/.build/Build-GuideSite.ps1" -Stage $Stage -BaseUrl $BaseUrl -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
 }else{
     if($Stage -in @('Serve','Deploy','Verify')){throw 'Serve, Deploy and Verify belong to GuideSite; specify -Product GuideSite and its policy.'}
     if($Stage -in @('All','Prepare')){
