@@ -647,7 +647,7 @@ Before publication, unresolved PR review findings required bounded corrections t
 - Require an explicit boolean clean-source identity before deployment confirmation. Dirty, missing and string-valued declarations fail.
 - Treat PowerShell YAML 0.4.12 as the minimum supported version consistently across installation and imports.
 
-Local validation: full platform build passed **223 tests**, distributed-skill checks, Hugo translation probe and package validation. Both sample preview and production builds passed their artifact validation. Regression tests include environment-only exclusions, unknown/unmapped guide exclusions, default-language exclusion and dirty deployment identity. Committed CI evidence is pending this increment.
+Local validation: full platform build passed **223 tests**, distributed-skill checks, Hugo translation probe and package validation. Both sample preview and production builds passed their artifact validation. Regression tests include environment-only exclusions, unknown/unmapped guide exclusions, default-language exclusion and dirty deployment identity. Committed acceptance: `5959ef0a83d9d901a59ef5aabe19333784dc4425` passed [run 34785088948](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34785088948), including platform packaging and sample Prepare, Build, Validate, Deploy and live Verify. Release was correctly skipped on the PR branch.
 
 The six unresolved review threads have these dispositions: four code issues addressed above; the historical PR release-credential finding is addressed by main-push-only publication; the candidate-controlled workflow receiving a deployment secret remains an **E06 external trust-boundary issue**, not resolved by job isolation. Threads have not been marked resolved or commented on by the agent.
 
@@ -655,7 +655,7 @@ Publication remains blocked by external merge requirements. PR #35 is draft. Act
 
 - [x] Audit current repository identity, releases and merge requirements.
 - [x] Correct the four actionable repository review defects and pass local acceptance.
-- [ ] Verify the committed increment in the shared sample CI pipeline.
+- [x] Verify the committed increment in the shared sample CI pipeline; run 34785088948 passed all five stages.
 - [ ] Complete maintainer-owned merge requirements and resolve the remaining trust-boundary decision.
 - [ ] Publish and verify a complete coordinated preview release from main, including its native module tag and clean installation.
 
