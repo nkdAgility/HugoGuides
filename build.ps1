@@ -53,7 +53,7 @@ if($Product -eq 'GuideSite'){
         if($ReleaseTag){
             $commit=(& git -C $PSScriptRoot rev-parse HEAD).Trim()
             if($LASTEXITCODE -ne 0){throw 'Cannot resolve platform commit.'}
-            & "$PSScriptRoot/.build/Restore-OpenGuidePlatformRelease.ps1" -ReleaseTag $ReleaseTag -ExpectedCommit $commit -OutputPath $OutputPath
+            & "$PSScriptRoot/.build/Restore-OpenGuidePlatform.ps1" -ReleaseTag $ReleaseTag -ExpectedCommit $commit -OutputPath $OutputPath
         }else{
             & "$PSScriptRoot/.build/Test-OpenGuidePlatformPackage.ps1" -OutputPath $OutputPath
         }

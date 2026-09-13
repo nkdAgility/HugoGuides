@@ -5,10 +5,18 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      target:
+        description: Sample validation target; production does not deploy
+        type: choice
+        options: [preview, production]
+        default: preview
 permissions:
   contents: read
+  actions: read
+  pull-requests: write
 concurrency:
-  group: open-guide-platform-${{ github.ref }}
+  group: open-guide-platform-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 defaults:
   run:
@@ -20,6 +28,9 @@ jobs:
     outputs:
       version: ${{ steps.gitversion.outputs.semVer }}
       source-commit: ${{ steps.gitversion.outputs.sha }}
+      artifact-id: ${{ steps.assets.outputs.artifact-id }}
+      package-url: ${{ format('https://api.github.com/repos/{0}/actions/artifacts/{1}/zip', github.repository, steps.assets.outputs.artifact-id) }}
+      package-sha256: ${{ steps.assets.outputs.artifact-digest }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,7 +61,8 @@ jobs:
         env:
           PLATFORM_VERSION: ${{ steps.gitversion.outputs.semVer }}
         run: ./build.ps1 -Version $env:PLATFORM_VERSION -OutputPath .processing/platform-package
-      - name: Retain release assets
+      - name: Retain candidate release assets
+        id: assets
         uses: actions/upload-artifact@v4
         with:
           name: OpenGuidePlatform-ReleaseAssets
@@ -59,9 +71,27 @@ jobs:
             .processing/platform-package/release-manifest.json
             .processing/platform-package/bootstrap.ps1
           if-no-files-found: error
+  sample:
+    name: Validate GuideSiteSample before publication
+    needs: build
+    uses: ./.github/workflows/guide-site-build.yaml
+    with:
+      source-ref: ${{ needs.build.outputs.source-commit }}
+      policy-path: examples/reference-guide-site/guide-site.policy.json
+      site-name: GuideSiteSample
+      site-url: ${{ (inputs.target || 'preview') == 'production' && 'https://blue-field-06cea8c03.6.azurestaticapps.net/' || (github.event_name == 'pull_request' && format('https://blue-field-06cea8c03-{0}.westeurope.6.azurestaticapps.net/', github.event.pull_request.number) || 'https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/') }}
+      deploy: ${{ (inputs.target || 'preview') == 'preview' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+      deployment-environment: ${{ github.event_name == 'pull_request' && format('{0}', github.event.pull_request.number) || 'preview' }}
+      platform-commit: ${{ needs.build.outputs.source-commit }}
+      platform-version: ${{ needs.build.outputs.version }}
+      platform-package-url: ${{ needs.build.outputs.package-url }}
+      platform-package-sha256: ${{ needs.build.outputs.package-sha256 }}
+      target: ${{ inputs.target || 'preview' }}
+    secrets:
+      static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}
   release:
     name: Publish OpenGuidePlatform GitHub Release
-    needs: build
+    needs: [build, sample]
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     permissions:
       contents: write
@@ -73,7 +103,8 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@v4
         with:
-          name: OpenGuidePlatform-ReleaseAssets
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          merge-multiple: true
           path: .processing/platform-release
       - name: Publish and verify preview release
         env:

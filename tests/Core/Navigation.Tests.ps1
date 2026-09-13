@@ -41,7 +41,7 @@ Describe 'Repository instruction shims and sample workflow' {
         }
     }
     It 'runs a single sample target through the shared workflow' {
-        $workflow=Get-Content "$root/.github/workflows/sample-main.yaml" -Raw
+        $workflow=Get-Content "$root/.github/workflows/main.yaml" -Raw
         $workflow | Should -Not -Match 'matrix:'
         $workflow | Should -Match 'uses: ./\.github/workflows/guide-site-build.yaml'
     }

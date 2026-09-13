@@ -19,9 +19,21 @@ on:
         type: string
         default: ''
       platform-release:
-        description: Exact release tag; omit to wait for the pinned platform commit release.
+        description: Published release tag; omit to resolve the unique release matching platform-commit. Mutually exclusive with a candidate ZIP URL.
         default: ''
         type: string
+      platform-package-url:
+        description: HTTPS ZIP URL containing candidate release assets from the platform build.
+        type: string
+        default: ''
+      platform-package-sha256:
+        description: SHA256 of the candidate ZIP supplied by the platform build.
+        type: string
+        default: ''
+      platform-version:
+        description: Expected candidate version supplied by the platform build.
+        type: string
+        default: ''
       platform-commit:
         description: Platform source identity recorded in the release manifest
         required: true
@@ -39,6 +51,7 @@ on:
         required: false
 permissions:
   contents: read
+  actions: read
 defaults:
   run:
     shell: pwsh
@@ -48,20 +61,20 @@ env:
   SITE_BASE_URL: ${{ inputs.site-url }}
 jobs:
   prepare:
-    name: Prepare (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Prepare (${{ inputs.target }})
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
           persist-credentials: false
-      - name: Get released-platform installer
+      - name: Get platform installer
         uses: actions/checkout@v4
         with:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ inputs.platform-commit }}
           path: .processing/platform-installer
-          sparse-checkout: .build/Restore-OpenGuidePlatformRelease.ps1
+          sparse-checkout: .build/Restore-OpenGuidePlatform.ps1
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - uses: peaceiris/actions-hugo@v3
@@ -72,12 +85,26 @@ jobs:
         with:
           go-version: '>=1.24.5'
           cache: false
-      - name: Restore released OpenGuidePlatform
+      - name: Restore and verify OpenGuidePlatform
         env:
           GH_TOKEN: ${{ github.token }}
           PLATFORM_RELEASE: ${{ inputs.platform-release }}
           PLATFORM_COMMIT: ${{ inputs.platform-commit }}
-        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatformRelease.ps1 -ReleaseTag $env:PLATFORM_RELEASE -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform -WaitSeconds 600
+          PLATFORM_PACKAGE_URL: ${{ inputs.platform-package-url }}
+          PLATFORM_PACKAGE_SHA256: ${{ inputs.platform-package-sha256 }}
+          PLATFORM_VERSION: ${{ inputs.platform-version }}
+        run: |
+          $restore = @{ ExpectedCommit=$env:PLATFORM_COMMIT; OutputPath='.processing/platform' }
+          if ($env:PLATFORM_PACKAGE_URL) {
+            if ($env:PLATFORM_RELEASE) { throw 'Select a candidate URL or release tag, not both.' }
+            $restore.PackageUrl=$env:PLATFORM_PACKAGE_URL
+            $restore.PackageSha256=$env:PLATFORM_PACKAGE_SHA256
+            $restore.ExpectedVersion=$env:PLATFORM_VERSION
+          } else {
+            if ($env:PLATFORM_PACKAGE_SHA256 -or $env:PLATFORM_VERSION) { throw 'Candidate identity requires a package URL.' }
+            $restore.ReleaseTag=$env:PLATFORM_RELEASE
+          }
+          & ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 @restore
       - name: Install guide-site preparation dependencies
         run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
       - name: Prepare guide site
@@ -94,7 +121,7 @@ jobs:
             .processing/i18n-probe/
           if-no-files-found: error
   build:
-    name: Build (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Build (${{ inputs.target }})
     needs: prepare
     runs-on: ubuntu-24.04
     steps:
@@ -126,7 +153,7 @@ jobs:
           path: .processing/guide-site/
           if-no-files-found: error
   validate:
-    name: Validate (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Validate (${{ inputs.target }})
     needs: build
     runs-on: ubuntu-24.04
     steps:
@@ -154,7 +181,7 @@ jobs:
           path: .processing/guide-site/artifact-validation.json
           if-no-files-found: error
   deploy:
-    name: Deploy (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Deploy (${{ inputs.target }})
     permissions:
       contents: read
       pull-requests: write
@@ -200,7 +227,7 @@ jobs:
           skip_api_build: true
           deployment_environment: ${{ inputs.deployment-environment }}
   verify:
-    name: Verify (${{ inputs.target }})
+    name: ${{ inputs.site-name }} Verify (${{ inputs.target }})
     needs: deploy
     if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
     runs-on: ubuntu-24.04

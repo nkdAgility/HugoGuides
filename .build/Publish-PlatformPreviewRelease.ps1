@@ -26,7 +26,7 @@ if($LASTEXITCODE -eq 0){
 $notes=@"
 Preview candidate from commit $commit.
 
-Platform component tests and package verification passed. GuideSiteSample independently restores this exact release through the shared guide-site workflow. Its result is required evidence before adopting the candidate.
+Platform component tests and package verification passed. Before publication, GuideSiteSample consumed this build's candidate artifact through the shared guide-site workflow. Publication depends on that workflow succeeding; the release reuses the validated build assets without repackaging.
 
 This prerelease does not deploy or update any guide instance. Hosting/browser verification and stable promotion remain separate acceptance steps.
 "@
