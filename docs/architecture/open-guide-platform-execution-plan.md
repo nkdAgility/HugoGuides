@@ -611,3 +611,10 @@ Targeted tests passed 16 checks; full platform acceptance passed 216 tests and p
 Disposable draft PR #36 rehearses the shared sample deploy/close lifecycle, leaving PR #35 open. Cleanup acceptance remains unchecked until the deployment has passed and the close workflow proves its environment was removed.
 
 E07 transaction coverage now also exercises native-file installation, preservation during WhatIf/managed conflicts, and stale snapshot refusal. The full platform build passed 217 tests and package validation. The last outstanding local integration check is a complete fresh fixture using real packaged tooling and native Go resolution through the installer, with release transport supplied locally; actual named release publication remains E08.
+
+
+### E07 installed-build defect and fix
+
+The full installed-consumer rehearsal exposed a Windows Chromium launch failure in deep workspaces. The browser tool executable exceeded Windows process path limits; the PowerShell wrapper also discarded the JSON diagnostic on stdout and pointed to empty stderr. The shared Build adapter now chooses a short temporary browser cache keyed by workspace plus lockfile when necessary, records its location, and retains stdout as well as stderr on failure. It still fails validation if the browser cannot run. No Hugo template or permission setting changed.
+
+The new real-browser regression launches successfully from a deeply nested Windows workspace. Full platform acceptance passed 218 tests, zero failures, package verification and both sample targets. This targeted bug fix is an authorised, recorded E07 deviation. The exact-package installed-consumer rehearsal is being repeated with the fix before E07 is closed.

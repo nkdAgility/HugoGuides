@@ -1,3 +1,16 @@
+function Resolve-GuideBrowserToolCache {
+    param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$LockSha256)
+    $cache=Resolve-GuideWorkspacePath $WorkspaceRoot ".processing/browser-tools/$LockSha256"
+    # Leave headroom for Chromium's executable suffix under Windows process APIs.
+    if($IsWindows -and $cache.Length + 100 -gt 240){
+        $key=[IO.Path]::GetFullPath($WorkspaceRoot).ToLowerInvariant()+':'+$LockSha256
+        $digest=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($key))).ToLowerInvariant()
+        $cache=Resolve-GuideWorkspacePath ([IO.Path]::GetTempPath()) ("ogp-browser/"+$digest.Substring(0,32))
+        if($cache.Length + 100 -gt 260){throw 'The Windows temporary path is too long for Chromium. Use a shorter temporary directory.'}
+    }
+    $cache
+}
+
 function Test-GuideRuntimeAnchors {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$ArtifactRoot,[Parameter(Mandatory)][uri]$BaseUri,[Parameter(Mandatory)][string]$IdentityPath,[Parameter(Mandatory)][string]$OutputPath,[object[]]$Anchors=@())
@@ -9,7 +22,8 @@ function Test-GuideRuntimeAnchors {
     $evidence=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
     [IO.Directory]::CreateDirectory($evidence)|Out-Null
     $lock=(Get-FileHash "$PSScriptRoot/package-lock.json").Hash.ToLowerInvariant()
-    $cache=Resolve-GuideWorkspacePath $WorkspaceRoot ".processing/browser-tools/$lock"
+    $cache=Resolve-GuideBrowserToolCache -WorkspaceRoot $WorkspaceRoot -LockSha256 $lock
+    [IO.File]::WriteAllText("$evidence/browser-cache.log",$cache)
     [IO.Directory]::CreateDirectory($cache)|Out-Null
     foreach($name in @('package.json','package-lock.json')){[IO.File]::Copy("$PSScriptRoot/$name","$cache/$name",$true)}
     if(-not (Test-Path "$cache/node_modules/playwright/cli.js")){
@@ -26,7 +40,9 @@ function Test-GuideRuntimeAnchors {
         $request=@{artifactRoot=$ArtifactRoot;baseUri=$BaseUri.AbsoluteUri;artifactIdentitySha256=$identity;anchors=@($Anchors)}
         [IO.File]::WriteAllText("$evidence/runtime-request.json",($request|ConvertTo-Json -Depth 10))
         $raw=@(& node "$PSScriptRoot/Measure-GuideRuntimeAnchors.cjs" "$evidence/runtime-request.json" $cache 2> "$evidence/browser-errors.log")
-        if($LASTEXITCODE -ne 0){throw 'Runtime anchor browser check failed. See browser-errors.log.'}
+        $browserExit=$LASTEXITCODE
+        [IO.File]::WriteAllLines("$evidence/browser-output.log",[string[]]$raw)
+        if($browserExit -ne 0){throw 'Runtime anchor browser check failed. See browser-output.log and browser-errors.log.'}
         $result=($raw -join "`n")|ConvertFrom-Json
         if($result.artifactIdentitySha256 -cne $identity -or $result.schemaVersion -ne 1 -or @($result.observations).Count -ne $Anchors.Count){throw 'Runtime anchor evidence does not match this artifact.'}
         $null=Test-GuideArtifactIdentity -ArtifactRoot $ArtifactRoot -Identity $artifactIdentity -ExpectedTarget $artifactIdentity.target -ExpectedSourceCommit $artifactIdentity.sourceCommit

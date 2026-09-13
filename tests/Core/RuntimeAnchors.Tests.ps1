@@ -25,6 +25,15 @@ Describe 'Current artifact runtime anchors' {
         $resolved.Findings[0].TargetPage | Should -Be 'index.html'
         $resolved.Outcome | Should -Be fail
     }
+    It 'launches browser validation from a deeply nested Windows workspace' -Skip:(-not $IsWindows) {
+        $deep=Join-Path $root ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')+'/'+('deep'*24))
+        [IO.Directory]::CreateDirectory($deep)|Out-Null
+        $result=Test-GuideRuntimeAnchors -WorkspaceRoot $deep -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath 'runtime' -Anchors @(@{route='/other/';fragment='content'})
+        $result.outcome | Should -Be pass
+        $cache=[IO.File]::ReadAllText("$deep/runtime/browser-cache.log")
+        $cache.Length | Should -BeLessThan 161
+        Test-Path "$deep/runtime/browser-output.log" | Should -BeTrue
+    }
     It 'does not need a browser when no runtime anchors are declared' {
         $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath '.processing/not-created'
         $result.outcome | Should -Be 'not-required'
