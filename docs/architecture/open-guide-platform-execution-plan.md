@@ -432,4 +432,9 @@ No rollback may silently re-enable Minionese or remove mandatory production prot
 - [ ] E13 Adoption transition documentation, update automation and operational handover complete.
 - [ ] E14 Proposed module refactoring done after the other work builds successfully, and verified across all guides and sites.
 
-E01 remains unchecked pending reconciliation of the workflow identity contract with the user's version-tag requirement and final policy ownership decisions. E03 remains unchecked for wrapper operations and skill/Prepare readiness parity, as itemised in the E00–E03 audit. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
+E01 version-tag reconciliation is implemented: the contract separates the version reference from source provenance and permits broad version labels. Final protected-policy ownership decisions remain open; installing independent enforcement belongs to E06. E03 remains unchecked for wrapper operations and skill/Prepare readiness parity, as itemised in the E00–E03 audit. E00 and E02 are complete. Schema and skill metadata checks do not imply later-stage enforcement or full skill acceptance.
+
+## Execution log — continued reconciliation
+
+- E01: reconciled workflow version tags with separate commit provenance in ADRs, lock schema and contract fixtures. Broad version labels are accepted; SHA action references are rejected. Owner configuration remains E06 work; no candidate file grants authority.
+- E07: added Actions read permission to generated consumer callers, required by the shared workflow's artifact-restoration interface. The direct sample/publication chain passed in GitHub run 34761323204; subsequent commits require their own CI evidence.

@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 jobs:
   guide-site:
     uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@__RELEASE__

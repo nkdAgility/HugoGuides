@@ -13,8 +13,9 @@
   },
   "workflow": {
     "repository": "nkdAgility/OpenGuidePlatform",
-    "path": ".github/workflows/guide-site.yml",
-    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "path": ".github/workflows/guide-site-build.yaml",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "version": "v0.0.0-fixture"
   },
   "components": {
     "Hugo.Guides": "0.0.0-fixture",

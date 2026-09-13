@@ -35,7 +35,7 @@ Assert-Contract 'a site must wrap at least one guide' 'site-policy' $x $false
 $x=Read-Fixture 'single-guide.site-policy'; $x.maintainer=$true
 Assert-Contract 'candidate policy cannot add an authority field' 'site-policy' $x $false
 $x=Read-Fixture 'preview.platform-lock'; $x.workflow.commit='main'
-Assert-Contract 'mutable workflow branch rejected' 'platform-lock' $x $false
+Assert-Contract 'invalid workflow source provenance rejected' 'platform-lock' $x $false
 $x=Read-Fixture 'preview.platform-lock'; $x.hugoModule.version='latest'
 Assert-Contract 'floating Hugo dependency rejected' 'platform-lock' $x $false
 $x=Read-Fixture 'single-guide.site-policy'; $x.guides[0].editions[0].translations[0].intent='ready'
@@ -51,3 +51,15 @@ $prototype=$x.guides[0] | ConvertTo-Json -Depth 30
 $x.guides=@(1..128 | ForEach-Object { $g=$prototype|ConvertFrom-Json -AsHashtable; $g.id="synthetic-guide-$_"; $g.contentRoot="site/content/synthetic-guide-$_"; $g })
 Assert-Contract 'guide collection is not limited to existing consumer counts' 'site-policy' $x $true
 Write-Host "$count contract checks passed. These are structural checks; trusted policy enforcement is E06."
+
+foreach($version in @('v1','v1.2','v1.2.3','v1.2.3-Preview.4')) {
+    $x=Read-Fixture 'preview.platform-lock';$x.workflow.version=$version
+    Assert-Contract "version-tag workflow reference $version accepted" 'platform-lock' $x $true
+}
+foreach($version in @('main',('a'*40))) {
+    $x=Read-Fixture 'preview.platform-lock';$x.workflow.version=$version
+    Assert-Contract "non-version workflow reference rejected" 'platform-lock' $x $false
+}
+$x=Read-Fixture 'preview.platform-lock';$x.workflow.Remove('version')|Out-Null
+Assert-Contract 'workflow version reference is required separately from source provenance' 'platform-lock' $x $false
+Write-Host "$count total contract checks passed."

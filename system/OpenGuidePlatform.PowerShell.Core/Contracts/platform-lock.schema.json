@@ -73,12 +73,17 @@
         "commit": {
           "type": "string",
           "pattern": "^[0-9a-f]{40}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^v[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?$"
         }
       },
       "required": [
         "repository",
         "path",
-        "commit"
+        "commit",
+        "version"
       ]
     },
     "components": {
