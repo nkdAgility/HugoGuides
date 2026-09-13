@@ -228,6 +228,24 @@
                                 "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*[\\\\:?#%]).+$"
                               },
                               "minItems": 1
+                            },
+                            "generationReceipt": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "path",
+                                "environmentSha256"
+                              ],
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+                                },
+                                "environmentSha256": {
+                                  "type": "string",
+                                  "pattern": "^[a-f0-9]{64}$"
+                                }
+                              }
                             }
                           },
                           "required": [

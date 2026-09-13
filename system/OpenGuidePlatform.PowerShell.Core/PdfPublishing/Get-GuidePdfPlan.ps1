@@ -78,7 +78,7 @@ function New-GuidePdf {
                 if (-not [IO.File]::Exists($checked) -or (Get-FileHash -LiteralPath $checked).Hash -ne $ExpectedOutputSha256) { throw 'PDF changed during generation; output not published.' }
                 [IO.File]::Replace($temporary,$checked,[System.Management.Automation.Language.NullString]::Value)
             } else { [IO.File]::Move($temporary,$checked) }
-            [pscustomobject]@{Status=if($replacing){'replaced'}else{'created'};Path=$plan.RelativeOutput;Language=$plan.Language;Sha256=(Get-FileHash $checked -Algorithm SHA256).Hash.ToLowerInvariant();Inputs=$plan.Fingerprints;ConfigurationSha256=$plan.ConfigurationSha256;Fonts=$plan.Fonts;Toolchain=$toolchain;VisualReviewRequired=$true;CacheKey=if($EnvironmentSha256){Get-GuidePdfCacheKey $plan $toolchain $EnvironmentSha256}else{$null}}
+            [pscustomobject]@{schemaVersion=1;Guide=$GuideId;Edition=$EditionId;EnvironmentSha256=$EnvironmentSha256;Status=if($replacing){'replaced'}else{'created'};Path=$plan.RelativeOutput;Language=$plan.Language;Sha256=(Get-FileHash $checked -Algorithm SHA256).Hash.ToLowerInvariant();Inputs=$plan.Fingerprints;ConfigurationSha256=$plan.ConfigurationSha256;Fonts=$plan.Fonts;Toolchain=$toolchain;VisualReviewRequired=$true;CacheKey=if($EnvironmentSha256){Get-GuidePdfCacheKey $plan $toolchain $EnvironmentSha256}else{$null}}
         } finally {
             try {
                 # Delete only this operation's validated sibling staging directory.

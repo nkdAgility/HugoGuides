@@ -39,6 +39,9 @@ function Get-GuidePreparedInputs {
     foreach($component in @('OpenGuidePlatform.PowerShell.Core','OpenGuidePlatform.PowerShell.Build','OpenGuidePlatform.Hugo.Guides')){
         Add-InputTree (Join-Path $PlatformRoot "system/$component") "platform/$component"
     }
+    foreach($guide in $Policy.guides){foreach($edition in $guide.editions){foreach($translation in $edition.translations){foreach($download in $translation.downloads){
+        if($download.Contains('generationReceipt')){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $download.generationReceipt.path) "pdf-receipt/$($download.generationReceipt.path)"}
+    }}}}
     # Runtime scripts are the same in the source checkout and distributed package.
     foreach($file in @('platform.json','platform-resolution.json','build.ps1','.build/Build-GuideSite.ps1','.build/Prepare-GuideSite.ps1','.build/Test-GuideSiteNavigation.ps1','.build/Write-GuideSiteValidationSummary.ps1')){
         Add-InputFile (Join-Path $PlatformRoot $file) "platform/$file"

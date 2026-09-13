@@ -17,7 +17,7 @@ Describe 'Generated PDF replacement and evidence' {
         [IO.File]::WriteAllText($output,'%PDF-original')
         $hash=(Get-FileHash $output).Hash
         $argsForPdf=@{WorkspaceRoot=$workspace;Policy=$policy;GuideId=$guide.id;EditionId=$edition.id;Language='en';DownloadPath='pdf/guide.pdf';ExpectedOutputSha256=$hash}
-        Mock Get-GuidePdfToolchain -ModuleName OpenGuidePlatform.PowerShell.Core { @([pscustomobject]@{Tool='pandoc';Available=$true;Version='test'},[pscustomobject]@{Tool='xelatex';Available=$true;Version='test'}) }
+        Mock Get-GuidePdfToolchain -ModuleName OpenGuidePlatform.PowerShell.Core { @([pscustomobject]@{Tool='pandoc';Available=$true;Version='test';ExecutableSha256=('b'*64)},[pscustomobject]@{Tool='xelatex';Available=$true;Version='test';ExecutableSha256=('b'*64)}) }
         Mock Get-Command -ModuleName OpenGuidePlatform.PowerShell.Core -ParameterFilter { $Name -eq 'fc-list' } { $null }
         Mock Invoke-GuidePandoc -ModuleName OpenGuidePlatform.PowerShell.Core { param($Arguments) [IO.File]::WriteAllText($Arguments[-1],'%PDF-new');return 0 }
     }
@@ -31,6 +31,43 @@ Describe 'Generated PDF replacement and evidence' {
         (Test-GuidePdfCache $plan $result $result.Toolchain ('b'*64)).Reusable | Should -BeFalse
         [IO.File]::AppendAllText($output,'changed')
         (Test-GuidePdfCache $plan $result $result.Toolchain ('a'*64)).Reason | Should -Be OUTPUT_CHANGED_OR_MISSING
+    }
+    It 'persists approved generation receipts and detects stale source or environment without PDF tools' {
+        $receiptPath='receipts/guide.json'
+        $edition.translations[0].downloads[0].publishedPaths=@('guide.pdf')
+        $edition.translations[0].downloads[0].generationReceipt=@{path=$receiptPath;environmentSha256=('a'*64)}
+        $result=New-GuidePdf @argsForPdf -EnvironmentSha256 ('a'*64)
+        Save-GuidePdfReceipt -WorkspaceRoot $workspace -Policy $policy -Receipt $result -ReceiptPath $receiptPath | Out-Null
+        $requirements=Get-GuideDownloadRequirements -WorkspaceRoot $workspace -Policy $policy -Target preview -EnabledLanguages @('en')
+        $evidence=Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements
+        $evidence.Outcome | Should -Be pass
+        @($evidence.Records|Where-Object State -eq verified).Count | Should -Be 1
+        [IO.File]::WriteAllText("$workspace/policy.json",($policy|ConvertTo-Json -Depth 40))
+        [IO.File]::WriteAllText("$workspace/production.json",'{"languages":{"en":{"disabled":false}}}')
+        & "$root/.build/Prepare-GuideSite.ps1" -WorkspaceRoot $workspace -PolicyPath "$workspace/policy.json" -EffectiveProductionPath "$workspace/production.json" -Languages en -SourceCommit ('a'*40) -Target preview -OutputPath '.processing/receipt-prepare' | Out-Null
+        $retained=Get-Content "$workspace/.processing/receipt-prepare/pdf-receipts.json" -Raw|ConvertFrom-Json
+        $retained.Outcome | Should -Be pass
+        @($retained.Records|Where-Object State -eq verified).Count | Should -Be 1
+        {Save-GuidePdfReceipt -WorkspaceRoot $workspace -Policy $policy -Receipt $result -ReceiptPath $receiptPath} | Should -Throw '*already exists*'
+        [IO.File]::AppendAllText($source,'changed')
+        (Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements).Outcome | Should -Be blocked
+        [IO.File]::WriteAllText($source,"---`ntitle: Example`n---`nBody")
+        $requirements.Required[0].GenerationReceipt.environmentSha256='c'*64
+        (Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements).Outcome | Should -Be blocked
+    }
+    It 'does not request generation receipts or tools for supplied publications' {
+        $edition.translations[0].downloads[0].handling='supplied'
+        $requirements=Get-GuideDownloadRequirements -WorkspaceRoot $workspace -Policy $policy -Target preview -EnabledLanguages @('en')
+        $evidence=Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements
+        $evidence.Outcome | Should -Be pass
+        Should -Invoke Get-GuidePdfToolchain -ModuleName OpenGuidePlatform.PowerShell.Core -Times 0
+        Should -Invoke Invoke-GuidePandoc -ModuleName OpenGuidePlatform.PowerShell.Core -Times 0
+    }
+    It 'reports missing generated receipts as a repairable finding' {
+        $requirements=Get-GuideDownloadRequirements -WorkspaceRoot $workspace -Policy $policy -Target preview -EnabledLanguages @('en')
+        $evidence=Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements
+        $evidence.Outcome | Should -Be blocked
+        $evidence.Findings[0].Code | Should -Be 'PDF_GENERATION_EVIDENCE_INVALID'
     }
     It 'preserves the previous PDF on native failure' {
         Mock Invoke-GuidePandoc -ModuleName OpenGuidePlatform.PowerShell.Core { 42 }

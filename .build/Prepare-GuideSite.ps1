@@ -19,7 +19,7 @@ param(
 $ErrorActionPreference='Stop'
 $platformRoot=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
-$policyDigest=$null
+$policyDigest=$null;$pdfReceipts=$null
 try {
     if($InputFailure){throw $InputFailure}
     Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
@@ -52,7 +52,8 @@ try {
         if($assessment.outcome -eq 'pass'){$assessment.outcome='blocked'}
     }
     $downloads=Get-GuideDownloadRequirements -WorkspaceRoot $WorkspaceRoot -Policy $policy -Target $Target -EnabledLanguages $Languages
-    foreach($finding in $downloads.Findings){
+    $pdfReceipts=Get-GuidePdfReceipts -WorkspaceRoot $WorkspaceRoot -Policy $policy -Requirements $downloads
+    foreach($finding in @($downloads.Findings)+@($pdfReceipts.Findings)){
         $assessment.findings+=[ordered]@{code=$finding.Code;severity='blocker';scope='download';subject=$finding.Path;message=$finding.Message;remediation=$finding.Message;evidence=@()}
         $assessment.outcome='fail'
     }
@@ -76,6 +77,7 @@ if($null -ne $ExpectedInputs -or $null -ne $InputArguments){
 $deliveryFailures=[Collections.Generic.List[string]]::new()
 try {
     $report=Write-GuideAssessmentReport -Assessment $assessment -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath
+    if($pdfReceipts){[IO.File]::WriteAllText((Join-Path (Split-Path $report.JsonPath) 'pdf-receipts.json'),($pdfReceipts|ConvertTo-Json -Depth 50))}
 } catch {
     $deliveryFailures.Add("Local report: $($_.Exception.Message)")
 }

@@ -14,7 +14,7 @@ function Get-GuideDownloadRequirements {
             $paths=@(if($download.Contains('publishedPaths')){$download.publishedPaths})
             foreach($path in $paths){if([string]::IsNullOrWhiteSpace($path) -or $path.StartsWith('/') -or $path -match '[\\:?#%]' -or @($path.Split('/')|Where-Object {$_ -in @('..','.','')}).Count){throw "Unsafe published download path: $path"}}
             $hash=if([IO.File]::Exists($file)){(Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant()}else{$null}
-            $record=[pscustomobject]@{Subject="$($guide.id)/$($edition.id)/$($translation.language)";SourcePath=$source;PublishedPaths=$paths;Sha256=$hash;Handling=$download.handling}
+            $record=[pscustomobject]@{Subject="$($guide.id)/$($edition.id)/$($translation.language)";SourcePath=$source;PublishedPaths=$paths;Sha256=$hash;Handling=$download.handling;Guide=$guide.id;Edition=$edition.id;Language=$translation.language;SourceDocument="$($guide.contentRoot)/$($edition.path)/$(if($translation.language -ceq $edition.sourceLanguage){'index.md'}else{"index.$($translation.language).md"})";GenerationReceipt=if($download.Contains('generationReceipt')){$download.generationReceipt}else{$null}}
             if($excluded){$forbidden.Add($record)}else{
                 if(-not $paths.Count){$findings.Add([pscustomobject]@{Code='DOWNLOAD_PUBLICATION_PATH_UNDECLARED';Path=$source;Message='Declare the existing publishedPaths for this download in the reviewed policy; source paths are not public URLs.'})}
                 if(-not $hash){$findings.Add([pscustomobject]@{Code='DOWNLOAD_SOURCE_MISSING';Path=$source;Message='Restore the supplied/protected PDF or generate the declared generated resource before Prepare.'})}

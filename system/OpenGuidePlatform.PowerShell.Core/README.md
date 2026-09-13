@@ -22,10 +22,19 @@ Set-GuideWrapperTranslation creates or applies exact reviewed candidate text to 
 
 Use the installed `./build.ps1 -Stage Prepare` assessment for both human/skill translation status and CI. It supplies effective Hugo catalogue/fallback evidence to Core. Local catalogue diagnostics alone must not replace that assessment. See [shared skill usage](../OpenGuidePlatform.AgentSkills/USAGE.md).
 
-PDF replacement and cache-evidence checks are implemented. Collection/persistence of approved environment receipts in the build adapter is E04 work. Abrupt termination can leave staging/lock evidence for inspection; automatic crash recovery is not claimed. Translation quality, full plural-form coverage and runtime integration readiness are not inferred from available strings.
+PDF replacement and cache-evidence checks are implemented. Prepare collects and validates declared generated-PDF receipts and retains them as build evidence. Supplied/protected PDFs do not require generation receipts or a PDF toolchain. Abrupt termination can leave staging/lock evidence for inspection; automatic crash recovery is not claimed. Translation quality, full plural-form coverage and runtime integration readiness are not inferred from available strings.
 
 Fallback observation follows declared chains to populated web content and treats cycles, undeclared targets and non-web targets as unavailable. Edition snapshots publish by a same-parent directory rename after all files are copied. An existing destination is never replaced.
 
 Contributor updates accept exact candidate YAML, one existing contributor name and the reviewed source SHA-256. They preserve the existing .yml/.yaml path and reject semantic changes to other records. Candidate comments and formatting must be reviewed because the command writes the supplied text exactly. A cooperative lock, staged replacement and second hash check catch observed conflicts; they are not an OS-level compare-and-swap against other editors. Existing site-specific roles are retained. Adding, removing and renaming records through this update operation are unsupported.
 
 Generated PDFs can now be replaced using ExpectedOutputSha256. They remain untouched on rendering/input failures; supplied/protected downloads remain ineligible. A successful receipt can carry CacheKey when EnvironmentSha256 is supplied. Test-GuidePdfCache rechecks input/output hashes and recipe/tool/environment evidence; callers must provide a digest covering fonts, TeX packages and indirect resources. No timestamp-based reuse occurs. Local wrapper catalogue checks support YAML mappings/sequences and numeric/script language tags; effective Hugo fallback requires the evidence produced by Prepare, and plural completeness is not inferred. Required routes/integration points remain unknown until the build adapter provides observations.
+
+
+### Retain generated-PDF evidence
+
+For a `generated` download, declare `generationReceipt` in the reviewed site policy with a repository-relative JSON `path` and an approved `environmentSha256`. The digest must describe the reviewed fonts, TeX packages and indirect resources; do not invent it. Establish the policy before generation, since receipts bind its digest.
+
+Capture the result of `New-GuidePdf -EnvironmentSha256 <approved-digest>`, then pass that result to `Save-GuidePdfReceipt -WorkspaceRoot ... -Policy ... -Receipt ... -ReceiptPath ...`. Existing receipt replacement requires its reviewed `-ExpectedReceiptSha256`. Review and commit the receipt with the generated PDF. This records generation evidence; it does not approve visual output.
+
+Prepare validates receipt identity, PDF/input hashes, policy digest, approved environment digest and recorded toolchain. It retains the receipt in `prepare/pdf-receipts.json`; absent or stale evidence produces an actionable blocker. Routine builds never run Pandoc or compare against tools installed on the CI runner. Existing supplied/protected publications remain byte-preserved and need no receipt.
