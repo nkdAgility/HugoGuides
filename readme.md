@@ -1,152 +1,87 @@
 # OpenGuidePlatform
 
-Shared guide rendering, publishing operations, validation and agent tooling for sites with one or more guides. Each guide site keeps its own content and bespoke wrapper.
+Build and maintain guide websites with shared Hugo rendering, publishing tools, translation checks and agent skills. Your site keeps its own design, content and any number of guides.
 
-## Build, sample validation and publication
+**Current status: preview.** Installation and updates are available for evaluation on a branch. First adoption needs maintainer setup; stable adoption and independently enforced agent controls are not yet complete.
 
-`main.yaml` runs this dependency chain in one Actions run:
+## Before you start
 
-**Build and package OpenGuidePlatform → GuideSiteSample: Prepare → Build → Validate → Deploy → Verify → Publish OpenGuidePlatform GitHub Release**
+Work from the root of your **guide-site repository**, using PowerShell 7.4 or newer. You need Git, [GitHub CLI](https://cli.github.com/), Hugo Extended 0.146 or newer, and Go 1.24.5 or newer (or the newer version required by your site's modules).
 
-The sample job directly calls `.github/workflows/guide-site-build.yaml`, the same reusable workflow used by guide sites. There is no sample-only intermediate workflow. All sample stages must succeed before publication; an intentionally disabled deployment does not deploy or verify a site. Default runs select preview and deploy only trusted same-repository changes. A manual production target validates production output without deploying it.
-
-GitVersion supplies the candidate version and source commit. The build uploads `OpenGuidePlatform.zip`, `release-manifest.json` and standalone `bootstrap.ps1` as one Actions artifact. The sample receives that artifact's HTTPS ZIP download URL, SHA256, version and commit directly from the build outputs. It validates the downloaded ZIP, inner package checksum, manifest identity and installed identity before running the packaged tooling. Publication downloads the same immutable artifact ID; it does not rebuild or repackage.
-
-The shared workflow accepts either `platform-package-url`, `platform-package-sha256` and `platform-version`, or `platform-release`. With neither URL nor explicit release tag, it resolves the unique published release matching `platform-commit`. Missing or ambiguous releases fail; the sample does not discover releases, poll publication or build from source. Candidate ZIP URLs point to a bundle containing the three release assets listed above, such as the GitHub Actions artifact download endpoint. This endpoint requires Actions read permission; its ZIP digest comes from the build's upload-artifact output.
-
-## Prerequisites
-
-Use PowerShell 7.4+, Hugo Extended 0.146+ and Go supporting the declared module toolchains. CI uses the configured HUGO_BUILD_VERSION (or latest) and Go >=1.24.5. Platform tests require Pester 5.7.1 and powershell-yaml 0.4.12:
+Sign in and install the currently required PowerShell YAML dependency:
 
 ```powershell
-./.build/Install-PlatformTestDependencies.ps1
-./build.ps1 -Versions
+gh auth login
+Install-Module powershell-yaml -RequiredVersion 0.4.12 -Scope CurrentUser
 ```
 
-GitHub Release restoration also requires authenticated `gh` access to the public repository. PDF generation separately requires Pandoc, XeLaTeX and the appropriate fonts.
-
-## Build the platform locally
+On Windows, enable **Developer Mode** or use an account with symbolic-link privileges, then run this before cloning:
 
 ```powershell
-./build.ps1
+git config --global core.symlinks true
 ```
 
-This runs Prepare, Build, Package and local package Validate. It does **not** publish a release or build the sample. Output goes to a fresh directory under `.processing/platform/`.
+The platform uses symbolic links for its shared agent instructions. Linux and macOS normally need no additional setup. See [Windows troubleshooting](docs/using/first-adoption.md#windows-symbolic-links) for an existing clone.
 
-Individual stages are available through `-Stage Prepare|Build|Package|Validate`. Use the same explicit `-OutputPath` for Package and Validate. Release publication is an explicit CI stage, never part of the bare local command.
+**First installation?** Your maintainer must prepare `guide-site.policy.json`, which describes your site's guides, languages, downloads and publication rules. Follow [first-time site setup](docs/using/first-adoption.md) before running the installer. It does not create this policy for you.
 
-The archive includes the named system components, runtime build entry points, licence and documentation. `release-manifest.json` records the version, source commit and archive SHA256. Package verification extracts into a fresh location and loads the distributed PowerShell modules.
+## Install or update
 
-
-## Install or update a guide site remotely
-
-From the guide-site repository, run:
+Run the same command for both:
 
 ```powershell
 irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/main/bootstrap.ps1 | iex
 ```
 
-The same command installs on first use and updates an existing installation. The bootstrap selects the newest installable preview release, downloads and verifies its package, and proposes the managed files on your local review branch. It downloads the standalone bootstrap asset itself; you do not fetch the package, inspect release metadata or verify checksums by hand.
+It selects the newest installable preview release and verifies the download. On `main` or `master`, it creates a review branch; otherwise it uses your current branch. Existing files that conflict with the installation are reported for review.
 
-Prerequisites: PowerShell 7.4+, authenticated GitHub CLI (`gh auth login`), Git and a reviewed `guide-site.policy.json`. Windows symbolic-link requirements are documented below. On main/master the automatic entry point creates a local adoption/update branch. Existing consumer files and locally edited managed files produce explicit conflicts, with no partial replacement. First adoption includes reviewing the site's policy and integrating existing instructions/workflows; the bootstrap does not guess those decisions.
-
-Before this branch is merged, test its remote entry point with:
+Then check the changes and build both targets:
 
 ```powershell
-irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/codex/open-guide-platform/bootstrap.ps1 | iex
+git diff
+./build.ps1 -Target preview
+./build.ps1 -Target production
 ```
 
-After installation or update, review `git diff`, run `./build.ps1 -Target preview` and `./build.ps1 -Target production`, and commit the adoption/update PR. The bootstrap never commits, pushes or deploys a guide site.
+Review the results, commit your changes and open a pull request. Neither the installer nor these build commands publishes your site. Your maintainer configures preview and production deployment during first adoption.
 
-Advanced local operations use the installed bootstrap:
+If the installer is not yet available on `main`, use the [development-branch instructions](docs/platform-development.md#try-the-unmerged-installer).
 
-```powershell
-./bootstrap.ps1 -Update -Channel preview -WhatIf
-./bootstrap.ps1 -Update -ReleaseTag 'v<selected-release>'
-./bootstrap.ps1 -Restore
-```
+## Everyday use
 
-Restore uses the recorded release, rechecks its cached ZIP checksum and extracts fresh code; it can work offline. Routine builds restore and never select an update. `-WhatIf` downloads/verifies the candidate and lists destinations without changing tracked files. Cache and extraction use ignored `.processing/` directories.
+Once installed, run these commands from your guide-site repository:
 
-Managed files include the build adapter, bootstrap, thin shared-workflow caller, skills, agent instructions and `open-guide-platform.installation.json`. AGENTS.md and CLAUDE.md are symbolic links to `.agents/agents.md`. Content, supplied/protected PDFs, bespoke wrapper and existing Hugo dependency files remain consumer-owned.
-
-This is preview installation. Native Hugo module publication, coordinated agent controls and independent enforcement remain explicit adoption blockers in the installation record. The candidate resolves Hugo from the verified package overlay. Generated CI validates one preview target per run; site-specific deployment/cleanup integration is reviewed during adoption. Stable adoption is not claimed.
-
-
-## Build a guide site from a release
-
-Use an exact release and its source commit. These are the same operations the shared workflow performs:
-
-```powershell
-./.build/Restore-OpenGuidePlatform.ps1 -ReleaseTag 'v<GitVersion-SemVer>' -ExpectedCommit '<40-character-commit>' -OutputPath .processing/platform
-./.processing/platform/build.ps1 -Product GuideSite -WorkspaceRoot $PWD -PolicyPath examples/reference-guide-site/guide-site.policy.json -Target preview -Version '<GitVersion-SemVer>' -OutputPath .processing/sample-preview
-```
-
-Replace the placeholders with an actual published candidate. Restore verifies release, manifest and installed identities plus the package digest. Existing installation/build output is refused; choose a fresh directory.
-
-A guide-site workflow in another repository calls `nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@<platform-version-tag>`, passing its source ref, policy path, site name, platform release and matching platform commit. The sample calls the same workflow directly from main.yaml with the candidate build ZIP URL and expected identity instead of a published release.
-
-## Develop the sample locally
-
-For an unpublished local edit, explicitly select the source build tooling:
-
-```powershell
-./build.ps1 -Product GuideSite -PolicyPath examples/reference-guide-site/guide-site.policy.json -Target preview
-./build.ps1 -Product GuideSite -PolicyPath examples/reference-guide-site/guide-site.policy.json -Target production
-./build.ps1 -Product GuideSite -PolicyPath examples/reference-guide-site/guide-site.policy.json -Stage Serve
-```
-
-Serve runs Prepare, then starts Hugo's initial build and watch loop. Stop with Ctrl+C. Run a full guide-site build before committing. Local source testing does not substitute for the sample CI candidate-package check.
-
-## Reports and current limits
-
-Guide-site evidence includes `prepare/assessment.json`, `prepare/assessment.md`, `hugo.log`, `artifact-identity.json`, `artifact-validation.json` and the generated `site/`. Actions retains separate preview and production artifacts.
-
-Prepare assesses the wrapper, guide editions, translations and declared downloads. It checks permanent production exclusions even during a preview build. Effective i18n evidence comes from isolated Hugo probes using the actual catalogues and module; resolved text does not prove translation quality. Expected failure tests have isolated summary destinations.
-
-Validate checks declared wrapper routes and optional requiredPageContent route/text expectations (including guide bodies on language fallback pages), generated JSON, unresolved tokens, duplicate target paths, prohibited language directories, artifact size and identity. Build evidence is not browser or hosting approval. Deploy uploads only the validated artifact to an explicitly configured Azure Static Web App. Verify compares the served identity, required pages and PDFs against that artifact and checks forbidden language routes. Each sample run selects one target (preview by default; production only by explicit manual selection), then deploys only preview to the supplied Blue Field Static Web App (a PR-specific named environment) and verifies it. Its production deployment remains disabled. Trusted external enforcement and full adoption remain open work; this change does not modify deployed consumer sites.
-
-The module keeps its historical identity `github.com/nkdAgility/HugoGuides/module` for now. The candidate build resolves the module from the verified package through an output-only configuration overlay. Canonical native module publication and the full coordinated adoption lock remain required before consumer adoption is declared complete. No Hugo rendering internals are refactored here.
-
-## Repository responsibilities
-
-| Location | Purpose |
+| Task | Command |
 |---|---|
-| `build.ps1` | Human and CI stage entry point |
-| `.build/` | Platform lifecycle and guide-site orchestration |
-| `system/OpenGuidePlatform.Hugo.Guides/` | Existing shared Hugo rendering |
-| `system/OpenGuidePlatform.PowerShell.Core/` | Guide publishing rules and operations |
-| `system/OpenGuidePlatform.PowerShell.Build/` | External-tool, build and reporting adapters |
-| `system/OpenGuidePlatform.AgentSkills/` | Shared publishing skills |
-| `examples/reference-guide-site/` | Independent sample wrapper and guides |
-| `tests/` | Platform regression tests |
-| `docs/architecture/` | Approved plan, decisions and evidence |
+| Check and build the site locally | `./build.ps1` |
+| Start the local site and watch for edits | `./build.ps1 -Stage Serve` |
+| Check preview output | `./build.ps1 -Target preview` |
+| Check production output | `./build.ps1 -Target production` |
+| Check inputs without building pages | `./build.ps1 -Stage Prepare` |
+| Preview an update's file changes | `./bootstrap.ps1 -Update -WhatIf` |
 
-Read [Core commands](system/OpenGuidePlatform.PowerShell.Core/README.md), [skill usage](system/OpenGuidePlatform.AgentSkills/USAGE.md), the [execution plan](docs/architecture/open-guide-platform-execution-plan.md) and [cross-consumer evidence](docs/architecture/baselines/2026-09-13-relocation/README.md).
+Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. Routine builds use your installed platform version; rerun the install/update command when you want an update.
 
-Keep this README updated with commands, prerequisites, workflow responsibilities and report changes. Preserve supplied/protected PDFs and the deliberately structured multilingual Hugo module. Existing legacy download aliases remain consumer compatibility behavior; do not extend them to new languages.
+For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.AgentSkills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
 
-The shared workflow accepts `target`, `deploy`, `deployment-environment` and the explicitly mapped `static-web-app-token` secret. Named preview environments are required for nonproduction deployment. Deploy rechecks artifact hashes immediately before the hosting action; no Hugo build runs in Deploy or Verify. Each stage retains its own evidence artifact. HTTP verification has bounded retries; unavailable or mismatching evidence fails verification.
-The Azure-generated workflow is retained unchanged under `.github/workflow-reference/azure-static-web-apps-blue-field-06cea8c03.yml`; outside the workflows directory it cannot trigger a competing deployment.
-Sample URLs follow the existing guide-site convention: production `https://blue-field-06cea8c03.6.azurestaticapps.net/`, preview `https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/`, and PR `https://blue-field-06cea8c03-<number>.westeurope.6.azurestaticapps.net/`. The selected URL is passed into the generated Hugo overlay; Verify uses the actual URL returned by Azure.
-`sample-close-pr.yaml` is the thin sample caller for shared `guide-site-close-pr.yaml`. Closing a same-repository PR cancels its in-flight platform/sample run and deletes only its matching PR-number environment. Cleanup never builds or checks out PR code. The open PR is not closed merely to test cleanup.
-Azure confirmed the PR 35 environment as `35`, at `https://blue-field-06cea8c03-35.westeurope.6.azurestaticapps.net/`. The shared sample uses this observed PR environment convention; existing consumers declare canary names, but those declarations are not evidence of the hosting URL.
-### Windows checkouts and agent instruction shims
+## When something fails
 
-AGENTS.md and CLAUDE.md are relative symbolic links to `.agents/agents.md`. Reading any of the three returns the same source bytes. There are no generated copies or synchronization jobs.
+Read the finding and its suggested fix in the terminal or GitHub Actions job summary. Build reports are saved beneath `.processing/guidesite/` by default; a failed Prepare also prints its report paths.
 
-On Windows, enable **Developer Mode** (Settings → System → Advanced → For developers; older Windows versions place this under Privacy & security), or use a shell with symbolic-link privileges. Clone with:
+| Problem | What to do |
+|---|---|
+| Missing `guide-site.policy.json` | Complete [first-time setup](docs/using/first-adoption.md) with your maintainer. |
+| Installation or update conflicts | Review the listed files with your maintainer. Preserve local edits; the installer will not overwrite them. |
+| Missing tool, PowerShell module or PDF font | Install the named dependency, then rerun the command. |
+| Missing translation, file or download | Follow the report's suggested fix. Ask your maintainer if the absence is intentional. |
+| Publication rule blocks a build | Resolve the finding with your maintainer; do not enable an excluded language to bypass it. |
+| An output directory already exists | Omit `-OutputPath` to let the build choose a fresh directory. |
 
-```powershell
-git clone -c core.symlinks=true https://github.com/nkdAgility/OpenGuidePlatform.git
-```
+If you need help, include the command, finding and relevant report in a [GitHub issue](https://github.com/nkdAgility/OpenGuidePlatform/issues).
 
-For an existing checkout whose two root files contain only the link target, first preserve any local instruction edits, then recreate just those tracked links:
+## Sample and further help
 
-```powershell
-git config --global core.symlinks true
-git restore --source=HEAD --worktree -- AGENTS.md CLAUDE.md
-Get-Item AGENTS.md, CLAUDE.md | Select-Object Name, LinkType, Target
-```
-
-Both must report `SymbolicLink` targeting `.agents/agents.md`. If Git leaves the materialized files unchanged, remove only those two unchanged root pointer files and repeat `git restore`. Never delete the canonical file. The platform tests reject materialized pointers or copies. The remote installer checks symlink creation before modifying tracked files. Linux and macOS normally need no additional setup.
+- [Sample preview](https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/) — the shared preview environment when deployed. PR previews use their own URL, provided by the deployment comment.
+- [First-time site setup](docs/using/first-adoption.md) — policy, existing files and deployment setup.
+- [Platform development](docs/platform-development.md) — build this repository, run the sample locally and understand releases.
+- [Execution plan and current progress](docs/architecture/open-guide-platform-execution-plan.md).
