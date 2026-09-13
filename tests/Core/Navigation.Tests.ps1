@@ -11,6 +11,17 @@ Describe 'Guide-site navigation validation' {
         $result.Outcome | Should -Be fail
         $result.Findings.Count | Should -Be 3
     }
+    It 'rejects an existing page that renders the wrong guide body' {
+        $site=Join-Path $TestDrive 'wrong-body'
+        [IO.Directory]::CreateDirectory($site)|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",'<h1>Translations</h1><p>No guide body</p>')
+        $expectations=@(@{route='/';text='Expected guide chapter'})
+        $result=& $checker -ArtifactRoot $site -BaseUri https://preview.example/ -RequiredPageContent $expectations
+        $result.Outcome | Should -Be fail
+        $result.Findings.Code | Should -Contain REQUIRED_PAGE_CONTENT_MISSING
+        [IO.File]::WriteAllText("$site/index.html",'<h1>Expected guide chapter</h1>')
+        (& $checker -ArtifactRoot $site -BaseUri https://preview.example/ -RequiredPageContent $expectations).Outcome | Should -Be pass
+    }
     It 'accepts existing directory routes and assets while ignoring external resources' {
         $site=Join-Path $TestDrive 'valid'
         [IO.Directory]::CreateDirectory("$site/min/guide1")|Out-Null

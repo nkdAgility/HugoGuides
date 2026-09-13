@@ -45,7 +45,33 @@
       "breadcrumb_home",
       "read_online_title"
     ],
-    "integrationPoints": []
+    "integrationPoints": [],
+    "requiredPageContent": [
+      {
+        "text": "The Shift from Physical to Digital Workspaces",
+        "route": "/guide1/"
+      },
+      {
+        "text": "Neural Networks and Deep Learning",
+        "route": "/guide2/"
+      },
+      {
+        "text": "The Shift from Physical to Digital Workspaces",
+        "route": "/ja/guide1/"
+      },
+      {
+        "text": "Neural Networks and Deep Learning",
+        "route": "/ja/guide2/"
+      },
+      {
+        "text": "Workie-work not same anymore!",
+        "route": "/min/guide1/"
+      },
+      {
+        "text": "Brainy Noodles",
+        "route": "/min/guide2/"
+      }
+    ]
   },
   "guides": [
     {

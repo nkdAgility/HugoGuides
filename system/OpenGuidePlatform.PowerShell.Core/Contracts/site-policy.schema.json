@@ -52,6 +52,27 @@
             "minLength": 1
           },
           "minItems": 0
+        },
+        "requiredPageContent": {
+          "items": {
+            "additionalProperties": false,
+            "required": [
+              "route",
+              "text"
+            ],
+            "type": "object",
+            "properties": {
+              "text": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "route": {
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
         }
       },
       "required": [

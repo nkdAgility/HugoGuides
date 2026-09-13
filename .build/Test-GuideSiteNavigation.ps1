@@ -1,6 +1,6 @@
 #Requires -Version 7.4
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$ArtifactRoot,[Parameter(Mandatory)][uri]$BaseUri)
+param([Parameter(Mandatory)][string]$ArtifactRoot,[Parameter(Mandatory)][uri]$BaseUri,[object[]]$RequiredPageContent=@())
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($ArtifactRoot)
 $files=@(Get-ChildItem -LiteralPath $root -Recurse -File -Force)
@@ -25,6 +25,17 @@ foreach($file in $files|Where-Object Extension -EQ '.html'){
         if(-not @($candidates|Where-Object {$paths.Contains($_)}).Count){
             $findings.Add([pscustomobject]@{Code='INTERNAL_LINK_MISSING';Page=$relative;Target=$value})
         }
+    }
+}
+foreach($expectation in $RequiredPageContent){
+    $route=[string]$expectation.route
+    if(-not $route.StartsWith('/') -or $route -match '(^//|\\|:|[?#%]|(^|/)\.\.(/|$))'){throw "Unsafe expected-content route: $route"}
+    $path=$route.Trim('/')
+    $candidates=if($path){@($path,($path+'/index.html'))}else{@('index.html')}
+    $found=@($candidates|Where-Object {$paths.Contains($_)})
+    $text=if($found.Count){[Net.WebUtility]::HtmlDecode(([IO.File]::ReadAllText((Join-Path $root $found[0])) -replace '<[^>]+>',' '))}else{''}
+    if(-not $text.Contains([string]$expectation.text)){
+        $findings.Add([pscustomobject]@{Code='REQUIRED_PAGE_CONTENT_MISSING';Page=$route;Target=[string]$expectation.text})
     }
 }
 [pscustomobject]@{Outcome=if($findings.Count){'fail'}else{'pass'};Pages=@($files|Where-Object Extension -EQ '.html').Count;Links=$checked;Findings=$findings.ToArray()}
