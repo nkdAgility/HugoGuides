@@ -9,6 +9,9 @@ $output=[IO.Path]::GetFullPath((Join-Path $root $OutputPath))
 $cursor=$output
 while($cursor -and $cursor.Length -ge $root.Length){if(Test-Path -LiteralPath $cursor){if((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Linked build output is not supported.'}};$cursor=[IO.Path]::GetDirectoryName($cursor)}
 $site=Join-Path $output 'site'
+Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+$sourceCommit=(& git -C $root rev-parse HEAD).Trim()
+if($LASTEXITCODE -ne 0){throw 'Cannot determine the build source commit.'}
 function Merge-Config([Collections.IDictionary]$base,[Collections.IDictionary]$overlay){
     foreach($key in $overlay.Keys){if($base.Contains($key) -and $base[$key] -is [Collections.IDictionary] -and $overlay[$key] -is [Collections.IDictionary]){Merge-Config $base[$key] $overlay[$key]}else{$base[$key]=$overlay[$key]}}
 }
@@ -37,15 +40,22 @@ if($Stage -in @('All','Build')){
     $override=Get-Content -LiteralPath (Join-Path $root "staticwebapp.config.$hostingTarget.json") -Raw|ConvertFrom-Json -AsHashtable
     Merge-Config $config $override
     [IO.File]::WriteAllText((Join-Path $site 'staticwebapp.config.json'),($config|ConvertTo-Json -Depth 100))
+    $dirty=@(& git -C $root status --porcelain).Count -gt 0
+    if($LASTEXITCODE -ne 0){throw 'Cannot inspect source state.'}
+    $identity=New-GuideArtifactIdentity -ArtifactRoot $site -Target $Target -SourceCommit $sourceCommit -Version $Version -SourceDirty $dirty
+    [IO.File]::WriteAllText((Join-Path $output 'artifact-identity.json'),($identity|ConvertTo-Json -Depth 100))
 }
 if($Stage -in @('All','Validate')){
-    if(-not [IO.File]::Exists((Join-Path $site 'index.html'))){throw 'Build artifact homepage is missing.'}
-    $files=@(Get-ChildItem -LiteralPath $site -Recurse -File)
-    if(($files|Measure-Object -Property Length -Sum).Sum -gt 524288000){throw 'Site artifact exceeds the 500 MB limit.'}
-    foreach($file in $files){
-        if($file.Extension -eq '.json'){$null=Get-Content -LiteralPath $file.FullName -Raw|ConvertFrom-Json -ErrorAction Stop}
-        if($file.Extension -in @('.html','.json','.xml','.yaml','.yml')){if([IO.File]::ReadAllText($file.FullName) -match '#\{[A-Za-z0-9_.]+\}#'){throw "Unresolved build token: $($file.FullName)"}}
+    $validation=Test-GuideArtifact -ArtifactRoot $site -RequiredRoutes @('/') -RequiredDownloads @('staticwebapp.config.json')
+    try {
+        $identity=Get-Content -LiteralPath (Join-Path $output 'artifact-identity.json') -Raw|ConvertFrom-Json -ErrorAction Stop
+        $null=Test-GuideArtifactIdentity -ArtifactRoot $site -Identity $identity -ExpectedTarget $Target -ExpectedSourceCommit $sourceCommit
+    } catch {
+        $validation.Outcome='fail'
+        $validation.Findings+= [pscustomobject]@{Code='ARTIFACT_IDENTITY_INVALID';Path='artifact-identity.json';Message=$_.Exception.Message}
     }
-    if(-not [IO.File]::Exists((Join-Path $site 'staticwebapp.config.json'))){throw 'Final hosting configuration is missing from the artifact.'}
-    "Validated $($files.Count) files in $site. No deployment performed."
+    $report=[ordered]@{Outcome=$validation.Outcome;SourceCommit=$sourceCommit;Target=$Target;SizeBytes=$validation.SizeBytes;FileCount=$validation.Files.Count;Findings=@($validation.Findings)}
+    [IO.File]::WriteAllText((Join-Path $output 'artifact-validation.json'),($report|ConvertTo-Json -Depth 100))
+    if($validation.Outcome -ne 'pass'){$validation.Findings|Format-Table -AutoSize|Out-Host;throw 'Artifact validation failed; inspect artifact-validation.json.'}
+    "Validated $($validation.Files.Count) files in $site. No deployment performed."
 }

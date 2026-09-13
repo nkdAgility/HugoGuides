@@ -72,3 +72,5 @@ function Get-GuideHugoConfiguration {
     } finally {$process.Dispose()}
 }
 Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration
+. (Join-Path $PSScriptRoot 'ArtifactValidation/ArtifactValidation.ps1')
+Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity

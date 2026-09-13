@@ -188,6 +188,20 @@ jobs:
         run: |
           ./build.ps1 -Stage Build -Target $env:GUIDE_BUILD_TARGET -Version $env:GUIDE_BUILD_VERSION -OutputPath .processing/ci-build
           ./build.ps1 -Stage Validate -Target $env:GUIDE_BUILD_TARGET -OutputPath .processing/ci-build
+      - name: Report artifact validation
+        if: always()
+        run: ./.build/Write-ArtifactSummary.ps1 -OutputPath .processing/ci-build
+
+      - name: Retain build and validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Site-Evidence
+          if-no-files-found: warn
+          path: |
+            ./.processing/ci-build/artifact-identity.json
+            ./.processing/ci-build/artifact-validation.json
+            ./.processing/ci-build/hugo.log
       - uses: actions/upload-artifact@v4
         with:
           name: Site
