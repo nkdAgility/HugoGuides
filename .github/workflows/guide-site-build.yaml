@@ -247,6 +247,22 @@ jobs:
           path: .processing/guide-site
       - name: Validate guide site
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Check deployment inputs without deployment credentials
+        if: ${{ inputs.deploy }}
+        env:
+          SITE_DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Deploy -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentEnvironment $env:SITE_DEPLOYMENT_ENVIRONMENT
+      - name: Retain validated deployment files
+        if: ${{ inputs.deploy }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Deployment-${{ inputs.target }}
+          include-hidden-files: true
+          path: |
+            .processing/guide-site/site/
+            .processing/guide-site/artifact-identity.json
+            .processing/guide-site/artifact-validation.json
+          if-no-files-found: error
       - name: Retain artifact validation
         if: always()
         uses: actions/upload-artifact@v4
@@ -266,30 +282,73 @@ jobs:
     runs-on: ubuntu-24.04
     outputs:
       url: ${{ steps.hosting.outputs.static_web_app_url }}
-    env:
-      SITE_DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
     steps:
-      - uses: actions/checkout@v4
+      # Deployment only consumes data. Candidate scripts run in read-only Validate.
+      - uses: actions/download-artifact@v4
         with:
-          ref: ${{ inputs.source-ref }}
-          persist-credentials: false
-      - name: Restore prepared platform and site context
-        uses: actions/download-artifact@v4
+          name: GuideSite-Deployment-${{ inputs.target }}
+          path: deployment
+      - name: Verify deployment data before exposing hosting credentials
+        uses: actions/github-script@v7
+        env:
+          EXPECTED_COMMIT: ${{ inputs.source-ref }}
+          EXPECTED_TARGET: ${{ inputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
         with:
-          name: GuideSite-Prepare-${{ inputs.target }}
-          path: .processing
-      - name: Download built guide site
-        uses: actions/download-artifact@v4
-        with:
-          name: GuideSite-Build-${{ inputs.target }}
-          path: .processing/guide-site
-      - name: Download validation evidence
-        uses: actions/download-artifact@v4
-        with:
-          name: GuideSite-Validate-${{ inputs.target }}
-          path: .processing/guide-site
-      - name: Deploy guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Deploy -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentEnvironment $env:SITE_DEPLOYMENT_ENVIRONMENT
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const crypto = require('node:crypto');
+            const root = path.resolve('deployment');
+            const read = name => {
+              const file = path.join(root, name);
+              const stat = fs.lstatSync(file);
+              if (!stat.isFile() || stat.size > 16 * 1024 * 1024) throw new Error('Invalid deployment evidence file.');
+              return JSON.parse(fs.readFileSync(file, 'utf8'));
+            };
+            const identity = read('artifact-identity.json');
+            const report = read('artifact-validation.json');
+            const commit = process.env.EXPECTED_COMMIT;
+            const target = process.env.EXPECTED_TARGET;
+            if (!/^[a-f0-9]{40}$/.test(commit) || !['preview', 'production'].includes(target) ||
+                (target === 'preview' && !process.env.DEPLOYMENT_ENVIRONMENT) ||
+                identity.schemaVersion !== 1 || identity.sourceCommit !== commit || identity.target !== target ||
+                report.Outcome !== 'pass' || report.SourceCommit !== commit || report.Target !== target ||
+                !Array.isArray(identity.files) || identity.files.length === 0) {
+              throw new Error('Deployment requires passing evidence for the expected source and target.');
+            }
+            const site = path.join(root, 'site');
+            const actual = new Map();
+            let bytes = 0;
+            const walk = directory => {
+              if (!fs.lstatSync(directory).isDirectory()) throw new Error('Linked or invalid site directory.');
+              for (const name of fs.readdirSync(directory)) {
+                const file = path.join(directory, name);
+                const stat = fs.lstatSync(file);
+                if (stat.isDirectory()) { walk(file); continue; }
+                if (!stat.isFile()) throw new Error('Linked or non-regular deployment file.');
+                bytes += stat.size;
+                if (bytes > 524288000) throw new Error('Deployment exceeds the artifact size limit.');
+                actual.set(path.relative(site, file).split(path.sep).join('/'), {
+                  length: stat.size, sha256: crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')
+                });
+              }
+            };
+            walk(site);
+            if (actual.size !== identity.files.length) throw new Error('Deployment file inventory changed.');
+            const seen = new Set();
+            for (const record of identity.files) {
+              const file = actual.get(record.path);
+              if (seen.has(record.path) || !file || file.length !== record.length || file.sha256 !== record.sha256) {
+                throw new Error('Deployment bytes differ from the validated artifact.');
+              }
+              seen.add(record.path);
+            }
+            const published = read('site/.well-known/open-guide-platform.json');
+            if (published.sourceCommit !== commit || published.target !== target || published.platformVersion !== identity.version) {
+              throw new Error('Published deployment identity differs from its evidence.');
+            }
+            core.notice(`Verified ${actual.size} deployment files for ${commit} / ${target}.`);
       - name: Upload validated site to Azure Static Web Apps
         id: hosting
         uses: Azure/static-web-apps-deploy@v1
@@ -297,7 +356,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
           repo_token: ${{ github.token }}
           action: upload
-          app_location: .processing/guide-site/site
+          app_location: deployment/site
           output_location: ''
           skip_app_build: true
           skip_api_build: true

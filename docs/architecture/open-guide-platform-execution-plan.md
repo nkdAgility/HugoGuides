@@ -343,11 +343,11 @@ These are explicit acceptance tasks discovered or clarified during implementatio
 - [x] Publish bootstrap as a standalone release asset, outside the platform ZIP; perform release discovery, integrity checks and package retrieval internally.
 - [x] Test fresh installation, update, cached restore, generated consumer build adapters and conflict refusal. Keep the current installation record explicitly preview-only until the complete release contract is implemented.
 - [ ] Complete coordinated release metadata and adoption updates for the native Hugo dependency, component versions, schemas, toolchain requirements, workflow identity and generated skills/controls. Immutable provenance may record source commits; action references must use version tags with no unnecessary version restriction.
-- [ ] Validate the corrected publication gate: `main.yaml` builds/packages, directly calls the shared guide-site workflow for every sample stage using the build artifact ZIP URL/checksum/version/commit, then publishes the same assets only on success. Remove `sample-main.yaml`; retain published-release resolution for ordinary consumers. Implementation remains uncommitted for maintainer review; CI validation awaits that review.
+- [x] Validate the corrected publication gate: `main.yaml` builds/packages, directly calls the shared guide-site workflow for every sample stage using the build artifact ZIP URL/checksum/version/commit, then publishes the same assets only on success. Remove `sample-main.yaml`; retain published-release resolution for ordinary consumers. Committed and verified by successful runs 34764729959 and 34766032512. Release remains restricted to main pushes; PR validation does not publish.
 - [x] Run distinct Prepare, Build, Validate, Deploy and Verify jobs with one selected target per sample run. Restore released assets rather than building the platform inside the consumer workflow.
 - [ ] Exercise the shared close-PR workflow against an authorised disposable preview and confirm the intended environment is removed. PR #35 cleanup is configured but has not been exercised.
 - [ ] Reconcile existing consumer-owned files explicitly during adoption; do not overwrite them or claim a clean fixture installation proves migration of existing sites.
-- [ ] Keep human README installation, update, local build/serve and sample URL instructions aligned with the shipped interface. Serve remains a stage of the root build entry point.
+- [x] Keep human README installation, update, local build/serve and sample URL instructions aligned with the shipped interface. Serve remains a stage of the root build entry point.
 
 The question about renaming the shared workflow to `OpenGuidePlatform.yaml` has not authorised a rename. Its current filename remains `guide-site-build.yaml`.
 
@@ -369,7 +369,7 @@ The question about renaming the shared workflow to `OpenGuidePlatform.yaml` has 
 
 ### Maintainer verification and action points
 
-- **E01/E06:** agree protected policy ownership and perform administrator-managed controls/required-check setup where repository code cannot grant authority.
+- **E01/E06:** permission changes and GitHub administrative configuration are excluded by the maintainer. Continue implementing and testing repository controls through E08; record independently installed enforcement as pending external action, without making it a prerequisite for repository implementation.
 - **E09/E10/E11:** review each consumer's exact preview and functional/visual comparison before accepting adoption. Routine implementation and local verification continue without an extra permission gate.
 - **E12:** authorise stable promotion and each production deployment separately; preview adoption is not production permission.
 - **E13:** establish updater identity and operational ownership; keep updates reviewable and freshness lookup failures explicitly unknown.
@@ -504,3 +504,8 @@ A regression verifies both the concurrent-edit blocker and an independent missin
 The full platform build passed after adding the replay helper (179 tests plus package verification). Prepare finalization commit `3e2a041f3b82c0f255a91736500c7a1fa5f5dec2` passed [run 34765465645](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34765465645), including the five sample stages and Prepare report; Release was skipped.
 
 [The ownership decision is now concrete](protected-policy-ownership.md): existing technical CODEOWNERS and current repository roles support @MrHinsh as protected technical/publication-policy owner across all three consumers, while preserving editorial ownership. E01/E06 remains open for that explicit decision and independently installed/tested enforcement. No collaborator permission or deployed consumer change has been made.
+### Continuation through E08 — scope and deployment boundary
+
+The maintainer instructed continuation through E08 and explicitly excluded permission and GitHub administrative configuration changes. Repository implementation and validation continue; no roles, rulesets, secrets, environments or other administrative settings are changed. E09–E11 consumer adoption and consumer deployments remain outside this continuation. An unchecked administrative acceptance item does not stop independent implementation work and must not be represented as installed protection.
+
+The shared Validate job now runs the local deployment preflight without write permissions or hosting credentials and retains a deployment-only artifact. Deploy has no checkout, candidate package, PowerShell or candidate script execution. Its workflow-owned data adapter verifies source, target, passing assessment, complete file inventory, bytes and published identity before the hosting action receives credentials. Candidate data is never evaluated as code. This closes the packaged-script privilege exposure; a candidate-editable workflow still requires separately administered independent enforcement to become a tamper-proof gate. Local and committed CI evidence follow before acceptance.
