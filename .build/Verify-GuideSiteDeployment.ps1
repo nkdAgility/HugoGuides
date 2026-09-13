@@ -18,7 +18,10 @@ $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPat
 $identity=Get-Content "$output/artifact-identity.json" -Raw|ConvertFrom-Json
 $forbidden=@()
 if($Target -eq 'production'){$forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object id)}
-$result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $policy.wrapper.requiredRoutes -ForbiddenPaths $forbidden
+$overlay=Get-Content "$output/candidate-platform.json" -Raw|ConvertFrom-Json -AsHashtable
+$arguments=@{}
+if($overlay.Contains('baseURL')){$arguments.ExpectedBaseUri=$overlay.baseURL}
+$result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $policy.wrapper.requiredRoutes -ForbiddenPaths $forbidden @arguments
 [IO.File]::WriteAllText("$output/deployment-verification.json",($result|ConvertTo-Json -Depth 30))
 $markdown="## Verify: $($result.Outcome)`n`nCommit: $($result.SourceCommit)`n`nPlatform: $($result.PlatformVersion)`n`nTarget: $Target`n`nURL: $DeploymentUrl`n"
 Write-Host $markdown

@@ -7,12 +7,15 @@ function Test-GuideSiteDeployment {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][uri]$BaseUri,
-        [Parameter(Mandatory)]$Identity,
+        [Parameter(Mandatory)]$Identity,[uri]$ExpectedBaseUri,
         [string[]]$RequiredRoutes=@('/'),
         [string[]]$ForbiddenPaths=@(),
         [ValidateRange(1,10)][int]$Attempts=5
     )
     if($BaseUri.Scheme -notin @('https','http') -or $BaseUri.Query -or $BaseUri.Fragment -or $BaseUri.UserInfo){throw 'Supply an HTTP(S) deployment base URL without credentials, query or fragment.'}
+    if($ExpectedBaseUri -and $ExpectedBaseUri.AbsoluteUri.TrimEnd('/') -cne $BaseUri.AbsoluteUri.TrimEnd('/')){
+        return [pscustomobject]@{Outcome='fail';SourceCommit=$Identity.sourceCommit;PlatformVersion=$Identity.version;Target=$Identity.target;Url=$BaseUri.AbsoluteUri;Attempts=0;Findings=@(@{Code='DEPLOYED_URL_MISMATCH';Path=$BaseUri.AbsoluteUri;Message="Hosting URL differs from build base URL $($ExpectedBaseUri.AbsoluteUri)."})}
+    }
     $checks=@(@{Route='/.well-known/open-guide-platform.json';Path='.well-known/open-guide-platform.json'})
     foreach($route in $RequiredRoutes){
         $candidates=@(Get-GuideArtifactRouteCandidates $route)

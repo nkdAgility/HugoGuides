@@ -8,6 +8,11 @@ Describe 'Deployed guide-site verification' {
         $identity=@{sourceCommit=('a'*40);version='1.2.3-Preview.4';target='preview';files=@(@{path='index.html';sha256=$hash},@{path='.well-known/open-guide-platform.json';sha256=$hash})}
         Mock Invoke-GuideHttpProbe -ModuleName OpenGuidePlatform.PowerShell.Build { @{StatusCode=200;Bytes=[Text.Encoding]::UTF8.GetBytes('expected')} }
     }
+    It 'rejects a hosting URL inconsistent with the generated site URLs' {
+        $result=Test-GuideSiteDeployment -BaseUri https://wrong.example.test/ -ExpectedBaseUri https://expected.example.test/ -Identity $identity -Attempts 1
+        $result.Findings.Code | Should -Contain DEPLOYED_URL_MISMATCH
+        Should -Invoke Invoke-GuideHttpProbe -ModuleName OpenGuidePlatform.PowerShell.Build -Times 0 -Exactly
+    }
     It 'accepts responses matching the validated artifact' {
         (Test-GuideSiteDeployment -BaseUri https://example.test/ -Identity $identity -Attempts 1).Outcome | Should -Be pass
     }
