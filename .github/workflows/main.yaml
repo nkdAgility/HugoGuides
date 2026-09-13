@@ -23,7 +23,7 @@ defaults:
     shell: pwsh
 jobs:
   build:
-    name: Build and package OpenGuidePlatform
+    name: OpenGuidePlatform Build and package 
     runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.gitversion.outputs.semVer }}
@@ -72,7 +72,7 @@ jobs:
             .processing/platform-package/bootstrap.ps1
           if-no-files-found: error
   sample:
-    name: Validate GuideSiteSample before publication
+    name: OpenGuidePlatform Validation
     needs: build
     uses: ./.github/workflows/guide-site-build.yaml
     with:
@@ -90,7 +90,7 @@ jobs:
     secrets:
       static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}
   release:
-    name: Publish OpenGuidePlatform GitHub Release
+    name: OpenGuidePlatform Release
     needs: [build, sample]
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     permissions:
