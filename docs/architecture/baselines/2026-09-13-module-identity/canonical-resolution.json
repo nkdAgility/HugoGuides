@@ -1,0 +1,37 @@
+[
+  {
+    "mode": "direct",
+    "sourceCommit": "9dc4ad6833ad032e30773c613db8092b9c19d92a",
+    "version": "v0.0.0-20260913175623-9dc4ad6833ad",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides",
+    "sum": "h1:Z8HQVl/FYN1Nl6VOjFsHs29eE70I/qWhiUUpIgfMYAQ=",
+    "goModSum": "h1:rAE0g1D+UCeGL3BUQvtngp1S76QDcVozQoa9V8mAukg=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/OpenGuidePlatform",
+      "Subdir": "system/OpenGuidePlatform.Hugo.Guides",
+      "Hash": "9dc4ad6833ad032e30773c613db8092b9c19d92a",
+      "TagPrefix": "system/OpenGuidePlatform.Hugo.Guides/",
+      "TagSum": "t1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "Ref": "refs/heads/codex/open-guide-platform"
+    },
+    "error": null
+  },
+  {
+    "mode": "proxy",
+    "sourceCommit": "9dc4ad6833ad032e30773c613db8092b9c19d92a",
+    "version": "v0.0.0-20260913175623-9dc4ad6833ad",
+    "exitCode": 0,
+    "modulePath": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides",
+    "sum": "h1:Z8HQVl/FYN1Nl6VOjFsHs29eE70I/qWhiUUpIgfMYAQ=",
+    "goModSum": "h1:rAE0g1D+UCeGL3BUQvtngp1S76QDcVozQoa9V8mAukg=",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://github.com/nkdAgility/OpenGuidePlatform",
+      "Subdir": "system/OpenGuidePlatform.Hugo.Guides",
+      "Hash": "9dc4ad6833ad032e30773c613db8092b9c19d92a"
+    },
+    "error": null
+  }
+]
