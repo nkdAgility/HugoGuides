@@ -45,4 +45,22 @@ Describe 'Artifact verification' {
         $identity.files[1]=$identity.files[0]
         {Test-GuideArtifactIdentity $artifact $identity preview ('a'*40)} | Should -Throw '*duplicate*'
     }
+    It 'resolves dotted edition routes from actual artifact paths' {
+        $directory=Join-Path $artifact 'guide/2026.1'
+        [IO.Directory]::CreateDirectory($directory)|Out-Null
+        [IO.File]::WriteAllText((Join-Path $directory 'index.html'),'<h1>Edition</h1>')
+        (Test-GuideArtifact $artifact -RequiredRoutes @('/guide/2026.1','/guide/2026.1/','/guide.pdf')).Outcome | Should -Be pass
+    }
+    It 'resolves URL-encoded Persian paths without changing artifact filenames' {
+        $directory=Join-Path $artifact 'fa/راهنما'
+        [IO.Directory]::CreateDirectory($directory)|Out-Null
+        [IO.File]::WriteAllText((Join-Path $directory 'index.html'),'<h1>راهنما</h1>')
+        $encoded=[Uri]::EscapeDataString('راهنما')
+        (Test-GuideArtifact $artifact -RequiredRoutes @("/fa/$encoded/",'/fa/راهنما/')).Outcome | Should -Be pass
+    }
+    It 'rejects encoded navigation, malformed escapes and ambiguous authority paths' {
+        foreach($route in @('/%2e%2e/secret','/fa%2foutside/','/fa%5coutside/','//host/','/bad%2/','/a//b/','/a?query=1')){
+            {Test-GuideArtifact $artifact -RequiredRoutes @($route)} | Should -Throw '*Unsafe*'
+        }
+    }
 }

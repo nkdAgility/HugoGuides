@@ -1,3 +1,29 @@
+function Get-GuideArtifactRouteCandidates {
+    param([Parameter(Mandatory)][string]$Route)
+    if(-not $Route.StartsWith('/') -or $Route.StartsWith('//') -or $Route -match '[\\?#\x00-\x20]'){
+        throw "Unsafe root-relative artifact route: $Route"
+    }
+    if($Route -eq '/'){return 'index.html'}
+    $relative=$Route.Substring(1)
+    $directoryRoute=$relative.EndsWith('/')
+    if($directoryRoute){$relative=$relative.Substring(0,$relative.Length-1)}
+    $segments=foreach($segment in $relative.Split('/')){
+        if(-not $segment -or $segment -match '%(?![0-9A-Fa-f]{2})'){throw "Unsafe artifact route segment: $Route"}
+        $decoded=[Uri]::UnescapeDataString($segment)
+        # Decode exactly once. Encoded path separators and traversal are never
+        # interpreted as filesystem navigation; preserve Unicode without normalization.
+        if($decoded -in @('.','..') -or $decoded -match '[/\\:?#\x00-\x1f\x7f]'){
+            throw "Unsafe artifact route segment: $Route"
+        }
+        $decoded
+    }
+    $path=$segments -join '/'
+    if($directoryRoute){return "$path/index.html"}
+    # Hugo can render dotted edition/slug paths as directories. Consult the
+    # actual artifact rather than treating a dot as proof of a file extension.
+    $path
+    "$path/index.html"
+}
 function Get-GuideArtifactFiles {
     param([Parameter(Mandatory)][string]$ArtifactRoot)
     $root=[IO.Path]::GetFullPath($ArtifactRoot)
@@ -24,11 +50,10 @@ function Test-GuideArtifact {
         if([string]::IsNullOrWhiteSpace($path) -or [IO.Path]::IsPathRooted($path) -or $path -match '[\\:?#%]' -or @($path.Split('/')|Where-Object {$_ -in @('..','.','')}).Count){throw "Unsafe artifact expectation: $path"}
     }
     foreach($route in $RequiredRoutes){
-        if(-not $route.StartsWith('/')){throw "Expected a root-relative route: $route"}
-        $relative=$route.TrimStart('/')
-        if(-not $relative){$relative='index.html'}elseif($relative.EndsWith('/')){$relative+='index.html'}elseif(-not [IO.Path]::GetExtension($relative)){$relative+='/index.html'}
-        Assert-RelativeArtifactPath $relative
-        if(-not $paths.Contains($relative)){Add-ArtifactFinding REQUIRED_ROUTE_MISSING $relative "Required route is absent: $route"}
+        $candidates=@(Get-GuideArtifactRouteCandidates $route)
+        if(-not @($candidates|Where-Object {$paths.Contains($_)}).Count){
+            Add-ArtifactFinding REQUIRED_ROUTE_MISSING $candidates[0] "Required route is absent: $route"
+        }
     }
     foreach($path in $RequiredDownloads){Assert-RelativeArtifactPath $path;if(-not $paths.Contains($path)){Add-ArtifactFinding REQUIRED_DOWNLOAD_MISSING $path 'Restore the declared download in the build artifact.'}}
     foreach($path in $ForbiddenPaths){
