@@ -1,0 +1,404 @@
+name: Build & Release (GuideSite)
+on:
+  workflow_call:
+    inputs:
+      source-ref:
+        required: true
+        type: string
+      policy-path:
+        required: true
+        type: string
+      site-name:
+        required: true
+        type: string
+      target:
+        type: string
+        default: preview
+      site-url:
+        description: Absolute public URL for the selected site environment
+        type: string
+        default: ''
+      platform-release:
+        description: Published release tag; omit to resolve the unique release matching platform-commit. Mutually exclusive with a candidate ZIP URL.
+        default: ''
+        type: string
+      platform-package-url:
+        description: HTTPS ZIP URL containing candidate release assets from the platform build.
+        type: string
+        default: ''
+      platform-package-sha256:
+        description: SHA256 of the candidate ZIP supplied by the platform build.
+        type: string
+        default: ''
+      platform-version:
+        description: Expected candidate version supplied by the platform build.
+        type: string
+        default: ''
+      platform-commit:
+        description: Platform source identity recorded in the release manifest
+        required: true
+        type: string
+      deploy:
+        description: Explicitly enable deployment to the configured site environment
+        type: boolean
+        default: false
+      deployment-environment:
+        description: Azure Static Web Apps named environment; empty only for production
+        type: string
+        default: ''
+    secrets:
+      static-web-app-token:
+        required: false
+permissions:
+  contents: read
+  actions: read
+defaults:
+  run:
+    shell: pwsh
+env:
+  SITE_POLICY: ${{ inputs.policy-path }}
+  SITE_TARGET: ${{ inputs.target }}
+  SITE_BASE_URL: ${{ inputs.site-url }}
+jobs:
+  prepare:
+    name: ${{ inputs.site-name }} Prepare
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Get platform installer
+        uses: actions/checkout@v4
+        with:
+          repository: nkdAgility/OpenGuidePlatform
+          ref: ${{ inputs.platform-commit }}
+          path: .processing/platform-installer
+          sparse-checkout: .build/Restore-OpenGuidePlatform.ps1
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
+          extended: true
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.24.5'
+          cache: false
+      - name: Restore and verify OpenGuidePlatform
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM_RELEASE: ${{ inputs.platform-release }}
+          PLATFORM_COMMIT: ${{ inputs.platform-commit }}
+          PLATFORM_PACKAGE_URL: ${{ inputs.platform-package-url }}
+          PLATFORM_PACKAGE_SHA256: ${{ inputs.platform-package-sha256 }}
+          PLATFORM_VERSION: ${{ inputs.platform-version }}
+        run: |
+          $restore = @{ ExpectedCommit=$env:PLATFORM_COMMIT; OutputPath='.processing/platform' }
+          if ($env:PLATFORM_PACKAGE_URL) {
+            if ($env:PLATFORM_RELEASE) { throw 'Select a candidate URL or release tag, not both.' }
+            $restore.PackageUrl=$env:PLATFORM_PACKAGE_URL
+            $restore.PackageSha256=$env:PLATFORM_PACKAGE_SHA256
+            $restore.ExpectedVersion=$env:PLATFORM_VERSION
+          } else {
+            if ($env:PLATFORM_PACKAGE_SHA256 -or $env:PLATFORM_VERSION) { throw 'Candidate identity requires a package URL.' }
+            $restore.ReleaseTag=$env:PLATFORM_RELEASE
+          }
+          & ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 @restore
+      - name: Install guide-site preparation dependencies
+        run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
+      - name: Prepare guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain Prepare report for PR delivery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Assessment-${{ inputs.target }}
+          path: |
+            .processing/guide-site/prepare/assessment.json
+            .processing/guide-site/prepare/assessment.md
+          if-no-files-found: error
+      - name: Retain prepared context and assessment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          include-hidden-files: true
+          path: |
+            .processing/platform/
+            .processing/guide-site/
+            .processing/i18n-probe/
+          if-no-files-found: error
+  prepare-report:
+    name: ${{ inputs.site-name }} Prepare report
+    needs: prepare
+    if: ${{ always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      # Data only: no checkout, restored package, candidate script or shell execution.
+      - uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Assessment-${{ inputs.target }}
+          path: assessment
+      - name: Deliver commit-scoped Prepare assessment
+        uses: actions/github-script@v7
+        env:
+          ASSESSED_COMMIT: ${{ inputs.source-ref }}
+          ASSESSED_TARGET: ${{ inputs.target }}
+          PREPARE_RESULT: ${{ needs.prepare.result }}
+        with:
+          script: |
+            const fs = require('node:fs');
+            try {
+              const read = name => {
+                const path = `assessment/${name}`;
+                const stat = fs.lstatSync(path);
+                if (!stat.isFile() || stat.size > 1024 * 1024) throw new Error('Invalid assessment file or size.');
+                return fs.readFileSync(path, 'utf8');
+              };
+              const assessment = JSON.parse(read('assessment.json'));
+              const markdown = read('assessment.md');
+              const sha = process.env.ASSESSED_COMMIT;
+              const target = process.env.ASSESSED_TARGET;
+              if (!/^[a-f0-9]{40}$/.test(sha) || assessment.sourceCommit !== sha ||
+                  assessment.schemaVersion !== 1 || assessment.stage !== 'Prepare' ||
+                  assessment.target !== target || !['local', 'preview', 'production'].includes(target) ||
+                  !['pass', 'fail', 'blocked'].includes(assessment.outcome) ||
+                  !markdown.startsWith(`## Prepare: ${assessment.outcome}\n`)) {
+                throw new Error('Assessment identity or format does not match this run.');
+              }
+              const number = context.payload.pull_request.number;
+              const scope = { ...context.repo, pull_number: number };
+              const current = async () => {
+                const { data } = await github.rest.pulls.get(scope);
+                return data.state === 'open' && data.head.sha === sha;
+              };
+              if (!(await current())) { core.notice('REPORT_SUPERSEDED: PR closed or head changed.'); return; }
+              const marker = `<!-- openguide-assessment:${target}/Prepare -->`;
+              const run = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+              const state = process.env.PREPARE_RESULT === 'success' ? 'completed' : 'did not complete successfully; recorded findings may be incomplete';
+              const body = `${marker}\nPrepare ${state}. [Workflow evidence](${run}). This is the candidate assessment, not independent policy or deployment approval.\n\n${markdown}`;
+              if (body.length > 65000) throw new Error('Report exceeds GitHub comment size; use retained artifacts.');
+              const comments = await github.paginate(github.rest.issues.listComments, { ...context.repo, issue_number: number, per_page: 100 });
+              const prior = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.startsWith(marker));
+              if (prior && prior.body === body) {
+                core.notice('REPORT_ALREADY_DELIVERED'); return;
+              }
+              if (!(await current())) { core.notice('REPORT_SUPERSEDED: head changed before delivery.'); return; }
+              if (prior) {
+                await github.rest.issues.updateComment({ ...context.repo, comment_id: prior.id, body });
+              } else {
+                await github.rest.issues.createComment({ ...context.repo, issue_number: number, body });
+              }
+              core.notice('REPORT_DELIVERED');
+            } catch (error) {
+              core.setFailed(`REPORT_DELIVERY_FAILED: ${error.message}. Assessment outcome was not changed.`);
+            }
+  build:
+    name: ${{ inputs.site-name }} Build
+    needs: prepare
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
+          extended: true
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.24.5'
+          cache: false
+      - name: Build guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Retain built artifact and identity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          include-hidden-files: true
+          path: .processing/guide-site/
+          if-no-files-found: error
+  validate:
+    name: ${{ inputs.site-name }} Validate
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - name: Download built guide site
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Validate guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site
+      - name: Check deployment inputs without deployment credentials
+        if: ${{ inputs.deploy }}
+        env:
+          SITE_DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Deploy -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentEnvironment $env:SITE_DEPLOYMENT_ENVIRONMENT
+      - name: Retain validated deployment files
+        if: ${{ inputs.deploy }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Deployment-${{ inputs.target }}
+          include-hidden-files: true
+          path: |
+            .processing/guide-site/site/
+            .processing/guide-site/artifact-identity.json
+            .processing/guide-site/artifact-validation.json
+          if-no-files-found: error
+      - name: Retain artifact validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Validate-${{ inputs.target }}
+          path: |
+            .processing/guide-site/artifact-validation.json
+            .processing/guide-site/download-requirements.json
+            .processing/guide-site/runtime-anchor-validation.json
+            .processing/guide-site/runtime/
+          if-no-files-found: error
+  deploy:
+    name: ${{ inputs.site-name }} Deploy
+    permissions:
+      contents: read
+      pull-requests: write
+    needs: validate
+    if: ${{ inputs.deploy && github.event_name != 'merge_group' }}
+    runs-on: ubuntu-24.04
+    outputs:
+      url: ${{ steps.hosting.outputs.static_web_app_url }}
+    steps:
+      # Deployment only consumes data. Candidate scripts run in read-only Validate.
+      - uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Deployment-${{ inputs.target }}
+          path: deployment
+      - name: Verify deployment data before exposing hosting credentials
+        uses: actions/github-script@v7
+        env:
+          EXPECTED_COMMIT: ${{ inputs.source-ref }}
+          EXPECTED_TARGET: ${{ inputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const crypto = require('node:crypto');
+            const root = path.resolve('deployment');
+            const read = name => {
+              const file = path.join(root, name);
+              const stat = fs.lstatSync(file);
+              if (!stat.isFile() || stat.size > 16 * 1024 * 1024) throw new Error('Invalid deployment evidence file.');
+              return JSON.parse(fs.readFileSync(file, 'utf8'));
+            };
+            const identity = read('artifact-identity.json');
+            const report = read('artifact-validation.json');
+            const commit = process.env.EXPECTED_COMMIT;
+            const target = process.env.EXPECTED_TARGET;
+            if (!/^[a-f0-9]{40}$/.test(commit) || !['preview', 'production'].includes(target) ||
+                (target === 'preview' && !process.env.DEPLOYMENT_ENVIRONMENT) ||
+                identity.schemaVersion !== 1 || identity.sourceCommit !== commit || identity.target !== target ||
+                report.Outcome !== 'pass' || report.SourceCommit !== commit || report.Target !== target ||
+                !Array.isArray(identity.files) || identity.files.length === 0) {
+              throw new Error('Deployment requires passing evidence for the expected source and target.');
+            }
+            const site = path.join(root, 'site');
+            const actual = new Map();
+            let bytes = 0;
+            const walk = directory => {
+              if (!fs.lstatSync(directory).isDirectory()) throw new Error('Linked or invalid site directory.');
+              for (const name of fs.readdirSync(directory)) {
+                const file = path.join(directory, name);
+                const stat = fs.lstatSync(file);
+                if (stat.isDirectory()) { walk(file); continue; }
+                if (!stat.isFile()) throw new Error('Linked or non-regular deployment file.');
+                bytes += stat.size;
+                if (bytes > 524288000) throw new Error('Deployment exceeds the artifact size limit.');
+                actual.set(path.relative(site, file).split(path.sep).join('/'), {
+                  length: stat.size, sha256: crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')
+                });
+              }
+            };
+            walk(site);
+            if (actual.size !== identity.files.length) throw new Error('Deployment file inventory changed.');
+            const seen = new Set();
+            for (const record of identity.files) {
+              const file = actual.get(record.path);
+              if (seen.has(record.path) || !file || file.length !== record.length || file.sha256 !== record.sha256) {
+                throw new Error('Deployment bytes differ from the validated artifact.');
+              }
+              seen.add(record.path);
+            }
+            const published = read('site/.well-known/open-guide-platform.json');
+            if (published.sourceCommit !== commit || published.target !== target || published.platformVersion !== identity.version) {
+              throw new Error('Published deployment identity differs from its evidence.');
+            }
+            core.notice(`Verified ${actual.size} deployment files for ${commit} / ${target}.`);
+      - name: Upload validated site to Azure Static Web Apps
+        id: hosting
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
+          repo_token: ${{ github.token }}
+          action: upload
+          app_location: deployment/site
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
+          deployment_environment: ${{ inputs.deployment-environment }}
+  verify:
+    name: ${{ inputs.site-name }} Verify
+    needs: deploy
+    if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
+    runs-on: ubuntu-24.04
+    env:
+      SITE_DEPLOYMENT_URL: ${{ needs.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source-ref }}
+          persist-credentials: false
+      - name: Restore prepared platform and site context
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Prepare-${{ inputs.target }}
+          path: .processing
+      - name: Download built guide site
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Build-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Download validation evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: GuideSite-Validate-${{ inputs.target }}
+          path: .processing/guide-site
+      - name: Verify guide site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -Version (Get-Content .processing/platform/platform.json -Raw | ConvertFrom-Json).version -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
+      - name: Retain deployed-site verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Verify-${{ inputs.target }}
+          path: .processing/guide-site/deployment-verification.json
+          if-no-files-found: error

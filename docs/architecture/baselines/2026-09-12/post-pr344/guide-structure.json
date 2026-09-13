@@ -1,0 +1,3466 @@
+{
+  "schemaVersion": 1,
+  "scope": "Declared source structure and effective language configuration; presence is not translation or publication approval.",
+  "parser": "powershell-yaml 0.4.12",
+  "repositories": [
+    {
+      "repository": "HugoGuides",
+      "commit": "980366a80eb7b9b6a0098229aea43e9401536232",
+      "configurations": [
+        {
+          "ring": "local",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "Guide Pack",
+              "weight": 1
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 2
+            },
+            "min": {
+              "label": "Minionese",
+              "title": "Banana Guides",
+              "weight": 1001
+            }
+          }
+        },
+        {
+          "ring": "preview",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "Guide Pack",
+              "weight": 1
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 2
+            },
+            "min": {
+              "label": "Minionese",
+              "title": "Banana Guides",
+              "weight": 1001
+            }
+          }
+        },
+        {
+          "ring": "production",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "Guide Pack",
+              "weight": 1
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 2
+            },
+            "min": {
+              "label": "Minionese",
+              "title": "Banana Guides",
+              "weight": 1001
+            }
+          }
+        }
+      ],
+      "source": [
+        {
+          "path": "content/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Guides Site"
+          }
+        },
+        {
+          "path": "content/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Banana Guide Bookies"
+          }
+        },
+        {
+          "path": "content/Guide1/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guide 1"
+          }
+        },
+        {
+          "path": "content/Guide1/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Da Guide 1 Booky"
+          }
+        },
+        {
+          "path": "content/Guide1/2020.12/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide 1 (December 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide1/2020.12/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Guide 1 Booky (Deceembah 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide1/2020.7/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide 1 (July 2020)",
+            "aliases": [
+              "/guide-1/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide1/2020.7/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Guide 1 Booky (Joo-ly 2020)",
+            "aliases": [
+              "/guide-1/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide1/2025.5/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide 1 (May 2025)",
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/Guide1/2025.5/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Guide 1 Booky (May 2025)",
+            "aliases": [
+              "/guide-1/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/Guide1/details/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "details",
+            "title": "Details"
+          }
+        },
+        {
+          "path": "content/Guide1/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/Guide1/history/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Oldy Times"
+          }
+        },
+        {
+          "path": "content/Guide1/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/Guide1/translations/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Talky-Talks",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/Guide2/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guide 2 - Extended Edition",
+            "slug": "guide-2"
+          }
+        },
+        {
+          "path": "content/Guide2/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guide 2 Banana Booky - Big Big Edition",
+            "slug": "guide-2"
+          }
+        },
+        {
+          "path": "content/Guide2/2025.7/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide 2 - Extended Edition",
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide2/2025.7/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide 2 Banana Booky – For Smart Worky Stuff",
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/Guide2/details/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "details",
+            "title": "Details"
+          }
+        },
+        {
+          "path": "content/Guide2/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/Guide2/history/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Old Banana Times"
+          }
+        },
+        {
+          "path": "content/Guide2/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/Guide2/translations/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Talky-Talks Galore",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "commit": "cb991c4df952309cea51cb677b5134350c359ba7",
+      "configurations": [
+        {
+          "ring": "local",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "title": "Kanban Guides",
+              "weight": 1
+            },
+            "es-419": {
+              "label": "Spanish (Latin America)",
+              "title": "Guías de Kanban",
+              "weight": 2
+            },
+            "es-es": {
+              "label": "Spanish (Spain)",
+              "title": "Guías de Kanban",
+              "weight": 3
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "Farsi (Persian)",
+              "title": "راهنماهای کانبان",
+              "weight": 6
+            },
+            "fr": {
+              "label": "French",
+              "title": "Guides Kanban",
+              "weight": 4
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 5
+            },
+            "min": {
+              "label": "Minionese",
+              "title": "Banana Kanban Guides",
+              "weight": 1001
+            },
+            "pl": {
+              "label": "Polish",
+              "title": "Kanban Guides",
+              "weight": 7
+            }
+          }
+        },
+        {
+          "ring": "preview",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "title": "Kanban Guides",
+              "weight": 1
+            },
+            "es-419": {
+              "disabled": true,
+              "label": "Spanish (Latin America)",
+              "title": "Guías de Kanban",
+              "weight": 2
+            },
+            "es-es": {
+              "label": "Spanish (Spain)",
+              "title": "Guías de Kanban",
+              "weight": 3
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "Farsi (Persian)",
+              "title": "راهنماهای کانبان",
+              "weight": 6
+            },
+            "fr": {
+              "label": "French",
+              "title": "Guides Kanban",
+              "weight": 4
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 5
+            },
+            "min": {
+              "label": "Minionese",
+              "title": "Banana Kanban Guides",
+              "weight": 1001
+            },
+            "pl": {
+              "label": "Polish",
+              "title": "Kanban Guides",
+              "weight": 7
+            }
+          }
+        },
+        {
+          "ring": "production",
+          "defaultLanguage": "en",
+          "languages": {
+            "de": {
+              "disabled": true
+            },
+            "en": {
+              "label": "English",
+              "title": "Kanban Guides",
+              "weight": 1
+            },
+            "es-419": {
+              "disabled": true,
+              "label": "Spanish (Latin America)",
+              "title": "Guías de Kanban",
+              "weight": 2
+            },
+            "es-es": {
+              "label": "Spanish (Spain)",
+              "title": "Guías de Kanban",
+              "weight": 3
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "Farsi (Persian)",
+              "title": "راهنماهای کانبان",
+              "weight": 6
+            },
+            "fr": {
+              "label": "French",
+              "title": "Guides Kanban",
+              "weight": 4
+            },
+            "ja": {
+              "label": "Japanese",
+              "title": "カンバンガイド",
+              "weight": 5
+            },
+            "min": {
+              "disabled": true,
+              "label": "Minionese",
+              "title": "Banana Kanban Guides",
+              "weight": 1001
+            },
+            "nl": {
+              "disabled": true
+            },
+            "pl": {
+              "disabled": true,
+              "label": "Polish",
+              "title": "Kanban Guides",
+              "weight": 7
+            }
+          }
+        }
+      ],
+      "source": [
+        {
+          "path": "content/_index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Guía Abierta de Kanban | Trabajo del Conocimiento",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Guías Kanban",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "راهنماهای کانبان",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Guides Kanban",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "カンバンガイド",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Kanban Guides",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Banana Kanban Bookies",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Kanban Guides"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guía Abierta de Kanban | En el Contexto del Trabajo del Conocimiento",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guía Abierta de Kanban - En el Contexto del Trabajo del Conocimiento",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "راهنمای آزاد کانبان برای فعالیت‌های دانش‌محور",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guide Ouvert de Kanban dans le contexte du Travail de la Connaissance",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "ナレッジワークのためのオープン版カンバンガイド",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Open Guide to Kanban - In the Context of Knowledge Work",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Open Banana Booky da Kanban - For Smart Worky Stuff",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/_index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Open Guide to Kanban – W kontekście pracy umysłowej (Knowledge Work)",
+            "slug": "open-guide-for-kanban"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Guía Abierta de Kanban - Trabajo del Conocimiento",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guía Abierta de Kanban - En el Contexto del Trabajo del Conocimiento",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-10-30T15:30:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "راهنمای آزاد کانبان در دامنه‌ی کارهای دانش‌محور",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Guide Ouvert de Kanban - Dans le Contexte du Travail de la Connaissance",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "オープン版カンバンガイド（ナレッジワーク向け）",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Open Guide to Kanban - In the Context of Knowledge Work",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Open Banana Booky da Kanban – For Smart Worky Stuff",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/2025.7/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Open Guide to Kanban – w kontekście pracy umysłowej",
+            "aliases": [
+              "/open-guide-to-kanban/latest/"
+            ],
+            "date": "2025-07-02T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historial"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "تاریخچه"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historique"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "履歴"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Old Banana Times"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/history/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historia"
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traducciones",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traducciones",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "ترجمه‌ها",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traductions",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "翻訳",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Talky-Talks Galore",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/open-guide-to-kanban/translations/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Tłumaczenia",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "La Guía de Kanban"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "La Guía Kanban"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "راهنمای کانبان"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Guide Ouvert de Kanban"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "カンバンガイド"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "The Kanban Guide"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Da Kanban Booky"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/_index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "The Kanban Guide"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Kanban Guide (December 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "La Guía Kanban (diciembre de 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "راهنمای کانبان (دسامبر ۲۰۲۰)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Le Guide Kanban (décembre 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "カンバンガイド (2020年12月版)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (December 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Kanban Booky (Deceembah 2020)",
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.12/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (December 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-12-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Kanban Guide (July 2020)",
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "La Guía Kanban (julio de 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "راهنمای کانبان (ژوئیه ۲۰۲۰)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Le Guide Kanban (juillet 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (July 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (July 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Kanban Booky (Joo-ly 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2020.7/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (July 2020)",
+            "aliases": [
+              "/the-kanban-guide/2020.07/"
+            ],
+            "date": "2020-07-01T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Kanban Guide (May 2025)",
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "La Guía Kanban (mayo de 2025)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-10-30T15:30:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "راهنمای کانبان (مه ۲۰۲۵)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Le Guide Kanban (mai 2025)",
+            "aliases": [
+              "/le-guide-kanban/derniere-version"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "カンバンガイド (2025年5月)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (May 2025)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Da Kanban Booky (May 2025)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/2025.5/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "The Kanban Guide (Maj 2025)",
+            "aliases": [
+              "/the-kanban-guide/latest"
+            ],
+            "date": "2025-05-01T09:00:00Z",
+            "version": 2025.5
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historia"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historia"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "تاریخچه"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historique"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "履歴"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Oldy Times"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/history/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "Historia"
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.es-419.md",
+          "filenameLanguage": "es-419",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traducciones",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.es-ES.md",
+          "filenameLanguage": "es-ES",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traducciones",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "ترجمه‌ها",
+            "aliases": [
+              "fa/downloads/",
+              "fa/download/",
+              "fa/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.fr.md",
+          "filenameLanguage": "fr",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Traductions",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "翻訳",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.min.md",
+          "filenameLanguage": "min",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Talky-Talks",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        },
+        {
+          "path": "content/the-kanban-guide/translations/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Tłumaczenia",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "commit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+      "configurations": [
+        {
+          "ring": "local",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "SAFe Delusion",
+              "weight": 1
+            }
+          }
+        },
+        {
+          "ring": "preview",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "SAFe Delusion",
+              "weight": 1
+            }
+          }
+        },
+        {
+          "ring": "production",
+          "defaultLanguage": "en",
+          "languages": {
+            "en": {
+              "label": "English",
+              "locale": "en",
+              "title": "SAFe Delusion",
+              "weight": 1
+            }
+          }
+        }
+      ],
+      "source": [
+        {
+          "path": "content/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "The SAFe Delusion",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/about/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "wrapper",
+            "title": "About"
+          }
+        },
+        {
+          "path": "content/brief/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "wrapper",
+            "title": "What it cost"
+          }
+        },
+        {
+          "path": "content/getting-out/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "wrapper",
+            "title": "Getting out"
+          }
+        },
+        {
+          "path": "content/objections/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "wrapper",
+            "title": "But what about…?"
+          }
+        },
+        {
+          "path": "content/right-of-reply/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "wrapper",
+            "title": "Right of reply"
+          }
+        },
+        {
+          "path": "content/safe-decision-makers/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Information for decision-makers considering SAFe Framework",
+            "aliases": [
+              "/safe-decision-makers/latest",
+              "/safe-decision-makers/details"
+            ]
+          }
+        },
+        {
+          "path": "content/safe-decision-makers/2024.8/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Information for decision-makers considering SAFe",
+            "date": "2024-08-01T09:00:00Z",
+            "version": 2024.8
+          }
+        },
+        {
+          "path": "content/safe-decision-makers/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/safe-decision-makers/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translationsdirectory/"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "commit": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+      "configurations": [
+        {
+          "ring": "local",
+          "defaultLanguage": "en",
+          "languages": {
+            "de": {
+              "label": "Deutsch",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 2
+            },
+            "en": {
+              "label": "English",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 1
+            },
+            "es": {
+              "label": "Spanish",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 4
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "فارسی",
+              "locale": "fa",
+              "title": "مقاله‌ی مکمل راهنمای اسکرام",
+              "weight": 2
+            },
+            "it": {
+              "label": "Italian",
+              "locale": "it",
+              "title": "Pacchetto di Espansione della Guida a Scrum",
+              "weight": 3
+            },
+            "ja": {
+              "label": "日本語",
+              "locale": "ja",
+              "title": "スクラムガイド拡張パック",
+              "weight": 1001
+            },
+            "nl": {
+              "label": "Nederlands",
+              "locale": "nl",
+              "title": "Scrum Guide *Expansion Pack*",
+              "weight": 3
+            },
+            "pl": {
+              "label": "Polski",
+              "locale": "pl",
+              "title": "Scrum Guide: Rozszerzenia",
+              "weight": 3
+            },
+            "pt": {
+              "label": "Português",
+              "locale": "pt",
+              "title": "Pacote de Expansão do Guia Scrum",
+              "weight": 5
+            },
+            "ro": {
+              "label": "Română",
+              "locale": "ro",
+              "title": "Ghidul Scrum Pachetul Extins",
+              "weight": 4
+            },
+            "tlh": {
+              "direction": "ltr",
+              "label": "Klingon (reference)",
+              "locale": "tlh",
+              "title": "pOlonyuS puqloD",
+              "weight": 1000
+            }
+          }
+        },
+        {
+          "ring": "preview",
+          "defaultLanguage": "en",
+          "languages": {
+            "de": {
+              "label": "Deutsch",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 2
+            },
+            "en": {
+              "label": "English",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 1
+            },
+            "es": {
+              "label": "Spanish",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 4
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "فارسی",
+              "locale": "fa",
+              "title": "مقاله‌ی مکمل راهنمای اسکرام",
+              "weight": 2
+            },
+            "it": {
+              "label": "Italian",
+              "locale": "it",
+              "title": "Pacchetto di Espansione della Guida a Scrum",
+              "weight": 3
+            },
+            "ja": {
+              "label": "日本語",
+              "locale": "ja",
+              "title": "スクラムガイド拡張パック",
+              "weight": 1001
+            },
+            "nl": {
+              "label": "Nederlands",
+              "locale": "nl",
+              "title": "Scrum Guide *Expansion Pack*",
+              "weight": 3
+            },
+            "pl": {
+              "label": "Polski",
+              "locale": "pl",
+              "title": "Scrum Guide: Rozszerzenia",
+              "weight": 3
+            },
+            "pt": {
+              "label": "Português",
+              "locale": "pt",
+              "title": "Pacote de Expansão do Guia Scrum",
+              "weight": 5
+            },
+            "ro": {
+              "label": "Română",
+              "locale": "ro",
+              "title": "Ghidul Scrum Pachetul Extins",
+              "weight": 4
+            },
+            "tlh": {
+              "direction": "ltr",
+              "label": "Klingon (reference)",
+              "locale": "tlh",
+              "title": "pOlonyuS puqloD",
+              "weight": 1000
+            }
+          }
+        },
+        {
+          "ring": "production",
+          "defaultLanguage": "en",
+          "languages": {
+            "de": {
+              "disabled": true,
+              "label": "Deutsch",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 2
+            },
+            "en": {
+              "label": "English",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 1
+            },
+            "es": {
+              "label": "Spanish",
+              "title": "Scrum Guide Expansion Pack",
+              "weight": 4
+            },
+            "fa": {
+              "direction": "rtl",
+              "label": "فارسی",
+              "locale": "fa",
+              "title": "مقاله‌ی مکمل راهنمای اسکرام",
+              "weight": 2
+            },
+            "it": {
+              "disabled": true,
+              "label": "Italian",
+              "locale": "it",
+              "title": "Pacchetto di Espansione della Guida a Scrum",
+              "weight": 3
+            },
+            "ja": {
+              "label": "日本語",
+              "locale": "ja",
+              "title": "スクラムガイド拡張パック",
+              "weight": 1001
+            },
+            "nl": {
+              "disabled": true,
+              "label": "Nederlands",
+              "locale": "nl",
+              "title": "Scrum Guide *Expansion Pack*",
+              "weight": 3
+            },
+            "pl": {
+              "label": "Polski",
+              "locale": "pl",
+              "title": "Scrum Guide: Rozszerzenia",
+              "weight": 3
+            },
+            "pt": {
+              "label": "Português",
+              "locale": "pt",
+              "title": "Pacote de Expansão do Guia Scrum",
+              "weight": 5
+            },
+            "ro": {
+              "disabled": true,
+              "label": "Română",
+              "locale": "ro",
+              "title": "Ghidul Scrum Pachetul Extins",
+              "weight": 4
+            },
+            "tlh": {
+              "direction": "ltr",
+              "disabled": true,
+              "label": "Klingon (reference)",
+              "locale": "tlh",
+              "title": "pOlonyuS puqloD",
+              "weight": 1000
+            }
+          }
+        }
+      ],
+      "source": [
+        {
+          "path": "content/_index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Scrum Guide Expansion Pack | Evolucionando Scrum para el Desarrollo de Productos Moderno",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Pacchetto di Espansione della Guida a Scrum | Evolvere Scrum per lo sviluppo di prodotti moderni",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "スクラムガイド拡張パック | 現代のプロダクト開発におけるスクラムの進化",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Scrum Guide Expansion Pack | Evolving Scrum for Modern Product Development",
+            "url": "/",
+            "aliases": [
+              "/topics/",
+              "/engineering/",
+              "/teams/",
+              "/ai/",
+              "/product/",
+              "/value/"
+            ]
+          }
+        },
+        {
+          "path": "content/_index.ro.md",
+          "filenameLanguage": "ro",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Ghidul Scrum Pachetul Extins | Adaptarea Scrum pentru dezvoltarea modernă de produse",
+            "url": "/"
+          }
+        },
+        {
+          "path": "content/adaptive-enterprise/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Adaptive Enterprise",
+            "cascade": [
+              {
+                "build": {
+                  "render": "never",
+                  "list": "never"
+                },
+                "target": {
+                  "environment": "production"
+                }
+              },
+              {
+                "build": {
+                  "render": "never",
+                  "list": "never"
+                },
+                "target": {
+                  "environment": "preview"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "path": "content/adaptive-enterprise/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Adaptive Enterprise (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/adaptive-enterprise/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/adaptive-enterprise/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/adaptive-executive/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Adaptive Executive"
+          }
+        },
+        {
+          "path": "content/adaptive-executive/2026.1/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "L'azienda Capace di Adattarsi (Espansione del SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/adaptive-executive/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Adaptive Executive section (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/adaptive-executive/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/adaptive-executive/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/ai-and-scrum/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "AI and Scrum"
+          }
+        },
+        {
+          "path": "content/ai-and-scrum/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "AI and Scrum (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/ai-and-scrum/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/ai-and-scrum/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/categories/leadership/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Leadership",
+            "slug": "leadership"
+          }
+        },
+        {
+          "path": "content/categories/leadership/_index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "DevwI'",
+            "slug": "leadership"
+          }
+        },
+        {
+          "path": "content/complexity/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Complexity"
+          }
+        },
+        {
+          "path": "content/complexity/2026.1/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Complexity (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/complexity/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Complexity (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/complexity/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/complexity/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/creators/_index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Creadores"
+          }
+        },
+        {
+          "path": "content/creators/_index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "مؤلفین"
+          }
+        },
+        {
+          "path": "content/creators/_index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Creators"
+          }
+        },
+        {
+          "path": "content/creators/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "著者たち"
+          }
+        },
+        {
+          "path": "content/creators/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Creators"
+          }
+        },
+        {
+          "path": "content/creators/_index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Bedenkers"
+          }
+        },
+        {
+          "path": "content/creators/_index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Twórcy"
+          }
+        },
+        {
+          "path": "content/creators/_index.ro.md",
+          "filenameLanguage": "ro",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Creatori"
+          }
+        },
+        {
+          "path": "content/creators/_index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "title": "Creators"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "جِف ساتِرلَند",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/jeff-sutherland/index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Jeff Sutherland",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "جان کولمن",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/john-coleman/index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "John Coleman",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "رالف یوخام",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/creators/ralph-jocham/index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "title": "Ralph Jocham",
+            "date": "2025-06-01"
+          }
+        },
+        {
+          "path": "content/emergent-strategy-and-depoyment/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Emergent Strategy and Depoyment (NOT DONE)",
+            "cascade": [
+              {
+                "build": {
+                  "render": "never",
+                  "list": "never"
+                },
+                "target": {
+                  "environment": "production"
+                }
+              },
+              {
+                "build": {
+                  "render": "never",
+                  "list": "never"
+                },
+                "target": {
+                  "environment": "preview"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "path": "content/emergent-strategy-and-depoyment/2026.1/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Strategia Emergente (Espansione del SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/emergent-strategy-and-depoyment/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Emergent Strategy (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/emergent-strategy-and-depoyment/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/emergent-strategy-and-depoyment/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/holistic-testing/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Holistic Testing"
+          }
+        },
+        {
+          "path": "content/holistic-testing/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Holistic Testing, Quality Engineering, and Scrum (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/holistic-testing/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/holistic-testing/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/multi-team-scrum/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Multi Team Scrum"
+          }
+        },
+        {
+          "path": "content/multi-team-scrum/2026.1/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Multi Team Scrum (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/multi-team-scrum/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Multi Team Scrum (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/multi-team-scrum/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/multi-team-scrum/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/operating-models/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Operating Model as a Leadership Decision"
+          }
+        },
+        {
+          "path": "content/operating-models/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Operating Model as a Leadership Decision (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/operating-models/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/operating-models/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/planguage/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Planguage",
+            "cascade": [
+              {
+                "build": {
+                  "render": "never",
+                  "list": "never"
+                },
+                "target": {
+                  "environment": "production"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "path": "content/planguage/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Planguage (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/planguage/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/planguage/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/product-thinking/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Product Thinking"
+          }
+        },
+        {
+          "path": "content/product-thinking/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Product Thinking (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/product-thinking/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/product-thinking/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/psychological-safety-in-scrum-teams/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Psychological Safety in Scrum Teams"
+          }
+        },
+        {
+          "path": "content/psychological-safety-in-scrum-teams/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Psychological Safety in Scrum Teams (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/psychological-safety-in-scrum-teams/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/psychological-safety-in-scrum-teams/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Das Scrum Guide Expansion Pack",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Paquete de expansión de la Guía Scrum",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "مقاله‌ی مکمل راهنمای اسکرام",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Scrum Guide Expansion Pack",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "スクラムガイド拡張パック",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Scrum Guide Expanded",
+            "slug": "scrum-guide-expanded",
+            "aliases": [
+              "/scrum-guide-expansion-pack/"
+            ]
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Scrum Guide Expansion Pack",
+            "slug": "scrum-guide-expansion-pack"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Scrum Guide: Rozszerzenia",
+            "slug": "scrum-guide-expansion-pack"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.pt.md",
+          "filenameLanguage": "pt",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Pacote de Expansão do Guia Scrum",
+            "slug": "pacote-expansao-guia-scrum"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.ro.md",
+          "filenameLanguage": "ro",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Ghidul Scrum Pachetul Extins",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/_index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "QIpyuS pa'Daq jIbuS",
+            "slug": "scrum-guide-expanded"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Das Scrum Guide Expansion Pack",
+            "aliases": [
+              "/de/scrum-guide-expansion-pack/2025.6/",
+              "/de/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Paquete de expansión de la Guía Scrum",
+            "aliases": [
+              "/es/scrum-guide-expansion-pack/2025.6/",
+              "/es/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "مقاله‌ی مکمل راهنمای اسکرام",
+            "aliases": [
+              "/fa/scrum-guide-expansion-pack/2025.6/",
+              "/fa/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Pacchetto di Espansione della Guida a Scrum",
+            "aliases": [
+              "/it/scrum-guide-expansion-pack/2025.6/",
+              "/it/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "スクラムガイド拡張パック",
+            "aliases": [
+              "/ja/scrum-guide-expansion-pack/2025.6/",
+              "/ja/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide Expansion Pack",
+            "aliases": [
+              "/scrum-guide-expansion-pack/2025.6/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide Expansion Pack",
+            "aliases": [
+              "/nl/scrum-guide-expansion-pack/2025.6/",
+              "/nl/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide: Rozszerzenia",
+            "aliases": [
+              "/pl/scrum-guide-expansion-pack/2025.6/",
+              "/pl/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.pt.md",
+          "filenameLanguage": "pt",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Pacote de Expansão do Guia do Scrum",
+            "aliases": [
+              "/pt/scrum-guide-expansion-pack/2025.6/",
+              "/pt/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-11-03T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.ro.md",
+          "filenameLanguage": "ro",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Ghidul Scrum Pachetul Extins",
+            "aliases": [
+              "/ro/scrum-guide-expansion-pack/2025.6/",
+              "/ro/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2025.6/index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "QIpyuS pa'Daq jIbuS",
+            "aliases": [
+              "/tlh/scrum-guide-expansion-pack/2025.6/",
+              "/tlh/scrum-guide-expansion-pack/"
+            ],
+            "date": "2025-06-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.de.md",
+          "filenameLanguage": "de",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide Erweitert",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.es.md",
+          "filenameLanguage": "es",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Guía de Scrum Ampliada",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.fa.md",
+          "filenameLanguage": "fa",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "راهنمای اسکرام گسترش‌یافته",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.it.md",
+          "filenameLanguage": "it",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Pacchetto di Espansione della Guida a Scrum",
+            "aliases": [
+              "/it/scrum-guide-expansion-pack/2025.6/"
+            ],
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.ja.md",
+          "filenameLanguage": "ja",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "スクラムガイド拡張版",
+            "date": "2025-09-11T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide Expanded",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.nl.md",
+          "filenameLanguage": "nl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Guide Uitgebreid",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Rozszerzona Scrum Guide",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.pt.md",
+          "filenameLanguage": "pt",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Guia Scrum Expandido",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.ro.md",
+          "filenameLanguage": "ro",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Ghidul Scrum Extins",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/2026.1/index.tlh.md",
+          "filenameLanguage": "tlh",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum Qun poQ",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/history/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/scrum-guide-expanded/translations/index.pl.md",
+          "filenameLanguage": "pl",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Tłumaczenia",
+            "aliases": [
+              "/pl/downloads/",
+              "/pl/download/",
+              "/pl/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/scrum-on-one-page/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Scrum on One Page"
+          }
+        },
+        {
+          "path": "content/scrum-on-one-page/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Scrum on One Page (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/scrum-on-one-page/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/scrum-on-one-page/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/software-engineering-practices/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Software Engineering Practices"
+          }
+        },
+        {
+          "path": "content/software-engineering-practices/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Software Engineering Practices for Scrum (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/software-engineering-practices/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/software-engineering-practices/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        },
+        {
+          "path": "content/strategy-as-an-empirical-capability/_index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "root",
+            "title": "Strategy"
+          }
+        },
+        {
+          "path": "content/strategy-as-an-empirical-capability/2026.1/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": true,
+          "declarations": {
+            "type": "guide",
+            "title": "Strategy (Expansion of the SGEP)",
+            "date": "2026-01-18T09:00:00Z"
+          }
+        },
+        {
+          "path": "content/strategy-as-an-empirical-capability/history/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "history",
+            "title": "History"
+          }
+        },
+        {
+          "path": "content/strategy-as-an-empirical-capability/translations/index.md",
+          "filenameLanguage": "en",
+          "bodyHasNonWhitespace": false,
+          "declarations": {
+            "type": "guide",
+            "layout": "translations",
+            "title": "Translations",
+            "aliases": [
+              "/downloads/",
+              "/download/",
+              "/translations/"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

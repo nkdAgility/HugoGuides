@@ -1,0 +1,21 @@
+{
+  "beforeUrl": "https://blue-field-06cea8c03-36.westeurope.6.azurestaticapps.net",
+  "beforeCheckedAt": "2026-09-13T20:46:54.933978Z",
+  "beforeIdentity": {
+    "sourceCommit": "38a29b2fbede893c0f0d38bdfbfe44c62ae65c7f",
+    "platformVersion": "0.5.3-PullRequest0036.172",
+    "target": "preview"
+  },
+  "pr": 36,
+  "buildRun": 34781569243,
+  "cleanupRun": 34781826103,
+  "cleanupConclusion": "success",
+  "afterStatus": 404,
+  "afterCheckedAt": "2026-09-13T20:48:41.4740547Z",
+  "pr35StillAvailable": true,
+  "pr35Identity": {
+    "sourceCommit": "38a29b2fbede893c0f0d38bdfbfe44c62ae65c7f",
+    "platformVersion": "0.5.3-PullRequest0035.172",
+    "target": "preview"
+  }
+}

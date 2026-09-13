@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "siteId": "GuideSiteSample",
+  "wrapper": {
+    "sourcePath": "examples/reference-guide-site",
+    "requiredRoutes": [
+      "/",
+      "/guide1/",
+      "/guide1/history/",
+      "/guide1/translations/",
+      "/guide1/2020.7/",
+      "/guide1/2020.12/",
+      "/guide1/2025.5/",
+      "/guide2/",
+      "/guide2/history/",
+      "/guide2/translations/",
+      "/guide2/2025.7/",
+      "/ja/",
+      "/ja/guide1/",
+      "/ja/guide1/history/",
+      "/ja/guide1/translations/",
+      "/ja/guide1/2020.7/",
+      "/ja/guide1/2020.12/",
+      "/ja/guide1/2025.5/",
+      "/ja/guide2/",
+      "/ja/guide2/history/",
+      "/ja/guide2/translations/",
+      "/ja/guide2/2025.7/",
+      "/min/",
+      "/min/guide1/",
+      "/min/guide1/history/",
+      "/min/guide1/translations/",
+      "/min/guide1/2020.7/",
+      "/min/guide1/2020.12/",
+      "/min/guide1/2025.5/",
+      "/min/guide2/",
+      "/min/guide2/history/",
+      "/min/guide2/translations/",
+      "/min/guide2/2025.7/"
+    ],
+    "requiredFiles": [
+      "examples/reference-guide-site/content/_index.md"
+    ],
+    "requiredI18nKeys": [
+      "breadcrumb_home",
+      "read_online_title"
+    ],
+    "integrationPoints": [],
+    "requiredPageContent": [
+      {
+        "text": "The Shift from Physical to Digital Workspaces",
+        "route": "/guide1/"
+      },
+      {
+        "text": "Neural Networks and Deep Learning",
+        "route": "/guide2/"
+      },
+      {
+        "text": "The Shift from Physical to Digital Workspaces",
+        "route": "/ja/guide1/"
+      },
+      {
+        "text": "Neural Networks and Deep Learning",
+        "route": "/ja/guide2/"
+      },
+      {
+        "text": "Workie-work not same anymore!",
+        "route": "/min/guide1/"
+      },
+      {
+        "text": "Brainy Noodles",
+        "route": "/min/guide2/"
+      }
+    ],
+    "runtimeAnchors": [
+      {
+        "route": "/ja/guide1/",
+        "fragment": "1-the-shift-from-physical-to-digital-workspaces"
+      },
+      {
+        "route": "/min/guide1/",
+        "fragment": "1-bye-office-hello-laptop"
+      }
+    ],
+    "jsonIndexes": [
+      {
+        "route": "/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/translations.json",
+        "requiredRoutes": [
+          "/guide1/",
+          "/guide2/",
+          "/guide1/2025.5/",
+          "/guide2/2025.7/"
+        ]
+      },
+      {
+        "route": "/ja/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/ja/translations.json",
+        "requiredRoutes": [
+          "/ja/guide1/",
+          "/ja/guide2/"
+        ]
+      },
+      {
+        "route": "/min/languages.json",
+        "requiredRoutes": []
+      },
+      {
+        "route": "/min/translations.json",
+        "requiredRoutes": [
+          "/min/guide1/",
+          "/min/guide2/"
+        ]
+      }
+    ],
+    "legacyAliases": [
+      {
+        "source": "examples/reference-guide-site/content/Guide1/translations/index.md",
+        "language": "en",
+        "aliases": [
+          "/downloads/",
+          "/download/"
+        ],
+        "targets": [
+          "downloads/index.html",
+          "download/index.html"
+        ]
+      },
+      {
+        "source": "examples/reference-guide-site/content/Guide1/translations/index.min.md",
+        "language": "min",
+        "aliases": [
+          "/downloads/",
+          "/download/",
+          "/translationsdirectory/"
+        ],
+        "targets": [
+          "min/downloads/index.html",
+          "min/download/index.html",
+          "min/translationsdirectory/index.html"
+        ]
+      }
+    ]
+  },
+  "guides": [
+    {
+      "id": "Guide1",
+      "contentRoot": "examples/reference-guide-site/content/Guide1",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2020.7",
+          "path": "2020.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2020.12",
+          "path": "2020.12",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2025.5",
+          "path": "2025.5",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Guide2",
+      "contentRoot": "examples/reference-guide-site/content/Guide2",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2025.7",
+          "path": "2025.7",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "min",
+              "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "environments": [
+      {
+        "name": "preview",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      },
+      {
+        "name": "production",
+        "excludedLanguages": [
+          "min"
+        ],
+        "excludedGuides": []
+      }
+    ],
+    "permanentExclusions": [
+      {
+        "environment": "production",
+        "subject": "language",
+        "id": "min",
+        "reason": "Minionese must never be published to production."
+      }
+    ]
+  },
+  "protectedPaths": []
+}

@@ -101,10 +101,10 @@ project-root/
 │   ├── Compare-YamlTranslations.ps1
 │   ├── Sync-Translations.ps1
 │   └── README.md
-├── module/
+├── system/OpenGuidePlatform.Hugo.Guides/
 │   └── i18n/
 │       └── en.yaml
-└── site/
+└── examples/reference-guide-site/
     └── i18n/
         └── en.yaml
 ```
@@ -149,7 +149,7 @@ Or use the convenient wrapper:
 
 ```powershell
 # Files in subdirectories (relative to project root)
-.\Sync-Translations.ps1 -SourceFile "translations\master\en.yaml" -TargetFile "site\i18n\en.yaml"
+.\Sync-Translations.ps1 -SourceFile "translations\master\en.yaml" -TargetFile "examples\reference-guide-site\i18n\en.yaml"
 
 # Absolute paths
 .\Sync-Translations.ps1 -SourceFile "C:\translations\master.yaml" -TargetFile "C:\local\site.yaml"

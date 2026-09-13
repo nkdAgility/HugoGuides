@@ -1,0 +1,284 @@
+{
+  "policyLoaded": true,
+  "assets": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\platform\\5caafbe6b00c445b9a3d016a6cf640c4",
+  "cachedPreview": "passed with GitHub transport blocked and GOPROXY=off",
+  "releaseTransport": "Local immutable assets; no GitHub release published",
+  "installedSkills": 7,
+  "production": "passed",
+  "preview": "passed",
+  "identity": {
+    "version": "0.0.0-20260913210307-053ff5b9e2b5",
+    "commit": "053ff5b9e2b509fc97689d0109b39b00b2586c06"
+  },
+  "coreLoaded": true,
+  "inventory": {
+    "SiteId": "GuideSiteSample",
+    "Wrapper": {
+      "Files": [
+        {
+          "Path": "site/content/_index.md",
+          "Exists": true
+        }
+      ],
+      "RequiredRoutes": [
+        "/",
+        "/guide1/",
+        "/guide1/history/",
+        "/guide1/translations/",
+        "/guide1/2020.7/",
+        "/guide1/2020.12/",
+        "/guide1/2025.5/",
+        "/guide2/",
+        "/guide2/history/",
+        "/guide2/translations/",
+        "/guide2/2025.7/",
+        "/ja/",
+        "/ja/guide1/",
+        "/ja/guide1/history/",
+        "/ja/guide1/translations/",
+        "/ja/guide1/2020.7/",
+        "/ja/guide1/2020.12/",
+        "/ja/guide1/2025.5/",
+        "/ja/guide2/",
+        "/ja/guide2/history/",
+        "/ja/guide2/translations/",
+        "/ja/guide2/2025.7/",
+        "/min/",
+        "/min/guide1/",
+        "/min/guide1/history/",
+        "/min/guide1/translations/",
+        "/min/guide1/2020.7/",
+        "/min/guide1/2020.12/",
+        "/min/guide1/2025.5/",
+        "/min/guide2/",
+        "/min/guide2/history/",
+        "/min/guide2/translations/",
+        "/min/guide2/2025.7/"
+      ],
+      "RequiredI18nKeys": [
+        "breadcrumb_home",
+        "read_online_title"
+      ]
+    },
+    "Guides": [
+      {
+        "Id": "Guide1",
+        "Editions": [
+          {
+            "Id": "2020.7",
+            "SourceLanguage": "en",
+            "Translations": [
+              {
+                "Language": "en",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2020.7/index.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "min",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2020.7/index.min.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "ja",
+                "Intent": "fallback",
+                "Source": "site/content/Guide1/2020.7/index.ja.md",
+                "State": "fallback",
+                "Body": "empty",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              }
+            ]
+          },
+          {
+            "Id": "2020.12",
+            "SourceLanguage": "en",
+            "Translations": [
+              {
+                "Language": "en",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2020.12/index.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "min",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2020.12/index.min.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "ja",
+                "Intent": "fallback",
+                "Source": "site/content/Guide1/2020.12/index.ja.md",
+                "State": "fallback",
+                "Body": "empty",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              }
+            ]
+          },
+          {
+            "Id": "2025.5",
+            "SourceLanguage": "en",
+            "Translations": [
+              {
+                "Language": "en",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2025.5/index.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "min",
+                "Intent": "web",
+                "Source": "site/content/Guide1/2025.5/index.min.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "ja",
+                "Intent": "fallback",
+                "Source": "site/content/Guide1/2025.5/index.ja.md",
+                "State": "fallback",
+                "Body": "empty",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Id": "Guide2",
+        "Editions": [
+          {
+            "Id": "2025.7",
+            "SourceLanguage": "en",
+            "Translations": [
+              {
+                "Language": "en",
+                "Intent": "web",
+                "Source": "site/content/Guide2/2025.7/index.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "min",
+                "Intent": "web",
+                "Source": "site/content/Guide2/2025.7/index.min.md",
+                "State": "web",
+                "Body": "populated",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              },
+              {
+                "Language": "ja",
+                "Intent": "fallback",
+                "Source": "site/content/Guide2/2025.7/index.ja.md",
+                "State": "fallback",
+                "Body": "empty",
+                "FindingCode": null,
+                "DeprecatedLang": false,
+                "Downloads": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "fixture": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\e07-installed-f235c7e3588f48e086439ce367f70f19",
+  "logs": {
+    "preview.log": "44507a58e6edc03d243f36fc089e0b5aeb57cad2e6acd74ae5a2a192069bd13b",
+    "production.log": "c98919b2c3e99f74481d541fcd29984439a733b5305af78aafe9bdd25c8f5dba",
+    "cached-preview.log": "008a6d7fb03f487bacf944e2e9728ec719065d111fbcad0cb1541cd555afe602"
+  },
+  "packageManifest": {
+    "schemaVersion": 1,
+    "product": "OpenGuidePlatform",
+    "version": "0.0.0-20260913210307-053ff5b9e2b5",
+    "sourceCommit": "053ff5b9e2b509fc97689d0109b39b00b2586c06",
+    "channel": "preview",
+    "archive": "OpenGuidePlatform.zip",
+    "bootstrapSha256": "db85181a1e2ddfad0a1d50469f456118946267bd230fd91bca619bd0bc3f4ad7",
+    "sha256": "0af1283299c10f297640b281805182a551874d61cf077b45001214e47d3efc59",
+    "nativeHugoModule": {
+      "path": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides",
+      "version": "v0.0.0-20260913210307-053ff5b9e2b5",
+      "tag": "system/OpenGuidePlatform.Hugo.Guides/v0.0.0-20260913210307-053ff5b9e2b5",
+      "sourceCommit": "053ff5b9e2b509fc97689d0109b39b00b2586c06"
+    },
+    "workflow": {
+      "repository": "nkdAgility/OpenGuidePlatform",
+      "path": ".github/workflows/guide-site-build.yaml",
+      "version": "v0.0.0-20260913210307-053ff5b9e2b5",
+      "sourceCommit": "053ff5b9e2b509fc97689d0109b39b00b2586c06"
+    },
+    "components": {
+      "OpenGuidePlatform.AgentControls": "0.0.0-20260913210307-053ff5b9e2b5",
+      "OpenGuidePlatform.AgentSkills": "0.0.0-20260913210307-053ff5b9e2b5",
+      "OpenGuidePlatform.GuideSite.Adoption": "0.0.0-20260913210307-053ff5b9e2b5",
+      "OpenGuidePlatform.Hugo.Guides": "0.0.0-20260913210307-053ff5b9e2b5",
+      "OpenGuidePlatform.PowerShell.Build": "0.0.0-20260913210307-053ff5b9e2b5",
+      "OpenGuidePlatform.PowerShell.Core": "0.0.0-20260913210307-053ff5b9e2b5"
+    },
+    "requirements": {
+      "powerShell": ">=7.4",
+      "hugo": ">=0.146.0",
+      "hugoExtended": true,
+      "go": ">=1.24.5"
+    }
+  },
+  "validationReports": [
+    {
+      "path": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\e07-installed-f235c7e3588f48e086439ce367f70f19\\.processing\\guidesite\\09f9c46cf1cb4dbea9cb3312ae00382e\\artifact-validation.json",
+      "sha256": "19110b5b4c0a79f9d1c7fbf30bd90c7f8960e103923dee56ef1c8a750a6db700",
+      "outcome": "pass",
+      "target": "production"
+    },
+    {
+      "path": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\e07-installed-f235c7e3588f48e086439ce367f70f19\\.processing\\guidesite\\568d71b55818440898149dfc6c2256e1\\artifact-validation.json",
+      "sha256": "e41ec003c5502eb4c7547284ee6fddd8cfb70984f580f6d6c27745067937062f",
+      "outcome": "pass",
+      "target": "preview"
+    },
+    {
+      "path": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\e07-installed-f235c7e3588f48e086439ce367f70f19\\.processing\\guidesite\\70a3b2bfe7aa43edb780557f91a40af4\\artifact-validation.json",
+      "sha256": "e41ec003c5502eb4c7547284ee6fddd8cfb70984f580f6d6c27745067937062f",
+      "outcome": "pass",
+      "target": "preview"
+    }
+  ],
+  "harnessSha256": "2a5427eb2a0a6e2d3f0f8d406ecb36f2aefb4b48769d2eab4680097ac0ea3650",
+  "limits": "The full real package and Go module were used. Only GitHub release discovery/download transport was substituted with local immutable assets. This is not a named-release publication or consumer deployment. Cold-cache browser dependency installation needed network access; the cached test blocked GitHub release access and Go freshness, not every network protocol."
+}

@@ -1,0 +1,5 @@
+{{- $rows := slice -}}
+{{- range .Site.Params.openGuidePlatformProbeKeys -}}
+  {{- $rows = $rows | append (dict "key" . "value" (i18n .)) -}}
+{{- end -}}
+{{- dict "kind" "OpenGuidePlatformI18nProbe" "language" .Site.Language.Lang "keys" $rows | jsonify | safeHTML -}}

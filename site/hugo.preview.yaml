@@ -1,6 +1,0 @@
-Environment: "preview"
-minify:
-  minifyOutput: true
-
-buildDrafts: true
-buildFuture: true

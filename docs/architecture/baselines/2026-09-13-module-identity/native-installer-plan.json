@@ -1,0 +1,82 @@
+{
+  "native": {
+    "sourceCommit": "5272d3b10c41576959aa3ce3825ad03e1b3f5a3a",
+    "path": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides",
+    "version": "v0.0.0-20260913180454-5272d3b10c41"
+  },
+  "sum": "h1:kME7sQcR5KkoCzrckQpC5KNJuIL3C3ehW9aZMSjgyfA=",
+  "plannedFiles": [
+    "site/go.mod",
+    "site/go.sum",
+    "site/hugo.yaml"
+  ],
+  "sourceUnchanged": true,
+  "consumerCommit": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+  "goModSum": "h1:rAE0g1D+UCeGL3BUQvtngp1S76QDcVozQoa9V8mAukg=",
+  "fixture": "C:\\Users\\MartinHinshelwoodNKD\\source\\repos\\HugoGuides\\.processing\\e07-native-install-2b8c7240a7ef44749ae7f32334bc0c82",
+  "build": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 13,
+    "cacheCorrection": "Initial deeply nested Windows cache exceeded Git path length. Short temporary cache succeeded; no global setting changed."
+  },
+  "rawDifferences": [
+    {
+      "path": "css\\style.css",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "iconifier-readme.txt",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "images\\iconifier-readme.txt",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "index.html",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "index.xml",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "js\\footnote-tooltips.js",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "js\\submenu.js",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "pages.json",
+      "kind": "changed",
+      "onlyLineEndings": false
+    },
+    {
+      "path": "safe-decision-makers\\2024.8\\index.html",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "safe-decision-makers\\index.html",
+      "kind": "changed",
+      "onlyLineEndings": true
+    },
+    {
+      "path": "safe-decision-makers\\index.xml",
+      "kind": "changed",
+      "onlyLineEndings": true
+    }
+  ],
+  "addedFiles": [],
+  "semanticDifferences": []
+}

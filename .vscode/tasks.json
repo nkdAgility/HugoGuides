@@ -5,7 +5,7 @@
       "label": "build (hugo)",
       "type": "shell",
       "command": "hugo",
-      "args": ["build", "--source", "site", "--config", "hugo.yaml,hugo.local.yaml"],
+      "args": ["build", "--source", "examples/reference-guide-site", "--config", "hugo.yaml,hugo.local.yaml"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -19,7 +19,7 @@
       "label": "serve (hugo)",
       "type": "shell",
       "command": "hugo",
-      "args": ["server", "--source", "site", "--config", "hugo.yaml,hugo.local.yaml", "--disableFastRender"],
+      "args": ["server", "--source", "examples/reference-guide-site", "--config", "hugo.yaml,hugo.local.yaml", "--disableFastRender"],
       "options": {
         "cwd": "${workspaceFolder}"
       },

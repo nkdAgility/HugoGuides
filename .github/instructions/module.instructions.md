@@ -1,5 +1,5 @@
 ---
-applyTo: "module/**"
+applyTo: "system/OpenGuidePlatform.Hugo.Guides/**"
 ---
 
 ## Module Overview

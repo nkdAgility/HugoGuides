@@ -1,0 +1,337 @@
+{
+  "records": [
+    {
+      "repository": "KanbanGuides",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 335,
+      "differences": [
+        {
+          "path": "download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-419/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/translationsdirectory/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 302,
+      "differences": [
+        {
+          "path": "download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "min/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/downloads/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "KanbanGuides",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 225,
+      "differences": [
+        {
+          "path": "download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es-es/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/download/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "fr/translationsdirectory/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/downloads/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/translationsdirectory/index.html",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 50,
+      "differences": []
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 50,
+      "differences": []
+    },
+    {
+      "repository": "the-safe-delusion",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 50,
+      "differences": []
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "local",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 499,
+      "differences": [
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "preview",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 483,
+      "differences": [
+        {
+          "path": "de/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "de/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "es/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "fa/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "it/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ja/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "nl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "pt/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "ro/sitemap.xml",
+          "kind": "changed"
+        },
+        {
+          "path": "tlh/sitemap.xml",
+          "kind": "changed"
+        }
+      ]
+    },
+    {
+      "repository": "ScrumGuide-ExpansionPack",
+      "ring": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "errors": 0,
+      "files": 329,
+      "differences": [
+        {
+          "path": "pl/scrum-guide-expanded/2026.1/index.html",
+          "kind": "changed"
+        },
+        {
+          "path": "pl/scrum-guide-expanded/index.html",
+          "kind": "changed"
+        }
+      ]
+    }
+  ],
+  "scope": "Same archived source/module paths, same clock/cache/toolchain, new artifact directory. No fields ignored.",
+  "candidateCommit": "84247fd8d0db3837ec067c47261eef99efacfbc1"
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "platformVersion": "fixture",
+  "policyDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "target": "preview",
+  "stage": "Prepare",
+  "outcome": "blocked",
+  "findings": [
+    {
+      "code": "GUIDE_TRANSLATION_UNKNOWN",
+      "severity": "blocker",
+      "scope": "translation",
+      "subject": "example/2026.1/fa",
+      "message": "Translation intent has not been declared.",
+      "remediation": "Declare whether this edition uses a web translation, a supplied PDF or an English fallback.",
+      "evidence": [
+        "Synthetic fixture; not an assessment of a deployed guide."
+      ]
+    }
+  ],
+  "inventory": {
+    "wrapper": {
+      "state": "ready",
+      "languages": [
+        "en",
+        "fa"
+      ]
+    },
+    "guides": [
+      {
+        "id": "example",
+        "editions": [
+          {
+            "id": "2026.1",
+            "translations": [
+              {
+                "language": "fa",
+                "state": "unknown",
+                "body": "empty",
+                "downloads": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "target": "preview",
+    "outcome": "pass",
+    "sourceCommit": "0d787d3a82ab9bc424cf22391411b1503720fcfb",
+    "platformVersion": "0.0.0-20260913180454-5272d3b10c41",
+    "nativeModule": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides@v0.0.0-20260913180454-5272d3b10c41",
+    "overlayHasModuleReplacement": false,
+    "navigation": {
+      "Outcome": "pass",
+      "Pages": 44,
+      "Links": 1620,
+      "Anchors": 395,
+      "Findings": []
+    }
+  },
+  {
+    "target": "production",
+    "outcome": "pass",
+    "sourceCommit": "0d787d3a82ab9bc424cf22391411b1503720fcfb",
+    "platformVersion": "0.0.0-20260913180454-5272d3b10c41",
+    "nativeModule": "github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides@v0.0.0-20260913180454-5272d3b10c41",
+    "overlayHasModuleReplacement": false,
+    "navigation": {
+      "Outcome": "pass",
+      "Pages": 29,
+      "Links": 1058,
+      "Anchors": 240,
+      "Findings": []
+    }
+  }
+]

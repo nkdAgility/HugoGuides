@@ -1,0 +1,1948 @@
+[
+  {
+    "repository": {
+      "allow_merge_commit": true,
+      "allow_rebase_merge": true,
+      "allow_squash_merge": true,
+      "archived": false,
+      "default_branch": "main",
+      "full_name": "nkdAgility/HugoGuides",
+      "has_pages": false,
+      "id": 998853166,
+      "node_id": "R_kgDOO4lKLg",
+      "visibility": "public"
+    },
+    "observations": [
+      {
+        "endpoint": "branches/main/protection",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "hooks",
+        "exitCode": 0,
+        "result": [],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "pages",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "environments",
+        "exitCode": 0,
+        "result": {
+          "total_count": 1,
+          "environments": [
+            {
+              "id": 11210367645,
+              "node_id": "EN_kwDOO4lKLs8AAAACnDCinQ",
+              "name": "copilot",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/environments/copilot",
+              "html_url": "https://github.com/nkdAgility/HugoGuides/deployments/activity_log?environments_filter=copilot",
+              "created_at": "2026-01-12T14:53:09Z",
+              "updated_at": "2026-01-12T14:53:09Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/permissions",
+        "exitCode": 0,
+        "result": {
+          "enabled": true,
+          "allowed_actions": "all",
+          "sha_pinning_required": false
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/secrets",
+        "exitCode": 0,
+        "result": {
+          "total_count": 0,
+          "secrets": []
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "tags?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "name": "v0.5.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/v0.5.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/v0.5.2",
+            "commit": {
+              "sha": "762df9836583fd4add371c4c8aee4b942696e99c",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/762df9836583fd4add371c4c8aee4b942696e99c"
+            },
+            "node_id": "REF_kwDOO4lKLrByZWZzL3RhZ3MvdjAuNS4y"
+          },
+          {
+            "name": "v0.5.1",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/v0.5.1",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/v0.5.1",
+            "commit": {
+              "sha": "43ea5a1041e8c487b8b9f9f9149323b3528bfa61",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/43ea5a1041e8c487b8b9f9f9149323b3528bfa61"
+            },
+            "node_id": "REF_kwDOO4lKLrByZWZzL3RhZ3MvdjAuNS4x"
+          },
+          {
+            "name": "v0.5.0",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/v0.5.0",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/v0.5.0",
+            "commit": {
+              "sha": "58731c8c71d99e32b75cec54a8412302e5dea89e",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/58731c8c71d99e32b75cec54a8412302e5dea89e"
+            },
+            "node_id": "REF_kwDOO4lKLrByZWZzL3RhZ3MvdjAuNS4w"
+          },
+          {
+            "name": "module/v0.8.4",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.8.4",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.8.4",
+            "commit": {
+              "sha": "980366a80eb7b9b6a0098229aea43e9401536232",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/980366a80eb7b9b6a0098229aea43e9401536232"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjguNA"
+          },
+          {
+            "name": "module/v0.8.3",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.8.3",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.8.3",
+            "commit": {
+              "sha": "55eab59c6cad2be62dd0494406e855f1e5cbd1ee",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/55eab59c6cad2be62dd0494406e855f1e5cbd1ee"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjguMw"
+          },
+          {
+            "name": "module/v0.8.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.8.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.8.2",
+            "commit": {
+              "sha": "17583296d74c5b9929ce22f7798e998b784f519e",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/17583296d74c5b9929ce22f7798e998b784f519e"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjguMg"
+          },
+          {
+            "name": "module/v0.8.1",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.8.1",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.8.1",
+            "commit": {
+              "sha": "09efa981e3d2a9d2e53932266f1e63610b765f2f",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/09efa981e3d2a9d2e53932266f1e63610b765f2f"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjguMQ"
+          },
+          {
+            "name": "module/v0.8.0",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.8.0",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.8.0",
+            "commit": {
+              "sha": "31fe5184d47817262df418e2f95598d2aa68f346",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/31fe5184d47817262df418e2f95598d2aa68f346"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjguMA"
+          },
+          {
+            "name": "module/v0.7.11",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.11",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.11",
+            "commit": {
+              "sha": "2cae6fad52d3d03d352d98a8aae6ee7f9ec2c767",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/2cae6fad52d3d03d352d98a8aae6ee7f9ec2c767"
+            },
+            "node_id": "REF_kwDOO4lKLrhyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMTE"
+          },
+          {
+            "name": "module/v0.7.10",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.10",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.10",
+            "commit": {
+              "sha": "0d1b4bb2bedc8739193ad740b0437fcbba244e51",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/0d1b4bb2bedc8739193ad740b0437fcbba244e51"
+            },
+            "node_id": "REF_kwDOO4lKLrhyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMTA"
+          },
+          {
+            "name": "module/v0.7.9",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.9",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.9",
+            "commit": {
+              "sha": "c9f6a37a27da8b344b28ae7402fe8eac2957c610",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/c9f6a37a27da8b344b28ae7402fe8eac2957c610"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuOQ"
+          },
+          {
+            "name": "module/v0.7.8",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.8",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.8",
+            "commit": {
+              "sha": "98063623b22011d04401ede5bf05f9be2880cd05",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/98063623b22011d04401ede5bf05f9be2880cd05"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuOA"
+          },
+          {
+            "name": "module/v0.7.7",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.7",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.7",
+            "commit": {
+              "sha": "ded7526e428a552e9422f3a07b89b01e4a2644e9",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/ded7526e428a552e9422f3a07b89b01e4a2644e9"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuNw"
+          },
+          {
+            "name": "module/v0.7.6",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.6",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.6",
+            "commit": {
+              "sha": "c8c5f5cdb7bcfdd4fb6e7b60893e33e8508f5f7e",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/c8c5f5cdb7bcfdd4fb6e7b60893e33e8508f5f7e"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuNg"
+          },
+          {
+            "name": "module/v0.7.5",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.5",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.5",
+            "commit": {
+              "sha": "57423df045ed59a6624e41691dcd290ef04bb2aa",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/57423df045ed59a6624e41691dcd290ef04bb2aa"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuNQ"
+          },
+          {
+            "name": "module/v0.7.4",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.4",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.4",
+            "commit": {
+              "sha": "46a55b67ea9b3ed4c0c141161c73f411a0e659d5",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/46a55b67ea9b3ed4c0c141161c73f411a0e659d5"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuNA"
+          },
+          {
+            "name": "module/v0.7.3",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.3",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.3",
+            "commit": {
+              "sha": "7d5197f22590e65fdc7362b0549e39d03d538b70",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/7d5197f22590e65fdc7362b0549e39d03d538b70"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMw"
+          },
+          {
+            "name": "module/v0.7.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.2",
+            "commit": {
+              "sha": "b0f96ec2c4f142d84cc766a0dde421fc070afced",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/b0f96ec2c4f142d84cc766a0dde421fc070afced"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMg"
+          },
+          {
+            "name": "module/v0.7.1",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.1",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.1",
+            "commit": {
+              "sha": "1504d97fc1e2bfb97b8cb4f3999e56a62764c00a",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/1504d97fc1e2bfb97b8cb4f3999e56a62764c00a"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMQ"
+          },
+          {
+            "name": "module/v0.7.0",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.7.0",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.7.0",
+            "commit": {
+              "sha": "bb64dfa4f5acd7aa33bae71b9261813304739713",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/bb64dfa4f5acd7aa33bae71b9261813304739713"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjcuMA"
+          },
+          {
+            "name": "module/v0.6.8",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.8",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.8",
+            "commit": {
+              "sha": "85d1948210d8274c68561067cb3ef2ba67e49276",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/85d1948210d8274c68561067cb3ef2ba67e49276"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuOA"
+          },
+          {
+            "name": "module/v0.6.7",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.7",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.7",
+            "commit": {
+              "sha": "cc73fa301e88ec9d4f8ed56432d283f02637e503",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/cc73fa301e88ec9d4f8ed56432d283f02637e503"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuNw"
+          },
+          {
+            "name": "module/v0.6.6",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.6",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.6",
+            "commit": {
+              "sha": "37d0324d9a0b2488e6b4bf83556593e762266d7b",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/37d0324d9a0b2488e6b4bf83556593e762266d7b"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuNg"
+          },
+          {
+            "name": "module/v0.6.5",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.5",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.5",
+            "commit": {
+              "sha": "74b37e692c23edd384ddbedcbb2d48dc1cf1c1d2",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/74b37e692c23edd384ddbedcbb2d48dc1cf1c1d2"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuNQ"
+          },
+          {
+            "name": "module/v0.6.4",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.4",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.4",
+            "commit": {
+              "sha": "443412620b2a7e0c84481393a32fe51079915cad",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/443412620b2a7e0c84481393a32fe51079915cad"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuNA"
+          },
+          {
+            "name": "module/v0.6.3",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.3",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.3",
+            "commit": {
+              "sha": "ed9d88872bc2754133f85283c9e0e62361145e1b",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/ed9d88872bc2754133f85283c9e0e62361145e1b"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuMw"
+          },
+          {
+            "name": "module/v0.6.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.2",
+            "commit": {
+              "sha": "246c2e3623318c29ca1721f315a9d7e201f67390",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/246c2e3623318c29ca1721f315a9d7e201f67390"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuMg"
+          },
+          {
+            "name": "module/v0.6.1",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6.1",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6.1",
+            "commit": {
+              "sha": "d01a48dda43e415cd17e9e1cc1b198823171487c",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/d01a48dda43e415cd17e9e1cc1b198823171487c"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjYuMQ"
+          },
+          {
+            "name": "module/v0.6",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.6",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.6",
+            "commit": {
+              "sha": "d01a48dda43e415cd17e9e1cc1b198823171487c",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/d01a48dda43e415cd17e9e1cc1b198823171487c"
+            },
+            "node_id": "REF_kwDOO4lKLrVyZWZzL3RhZ3MvbW9kdWxlL3YwLjY"
+          },
+          {
+            "name": "module/v0.5.3",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.5.3",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.5.3",
+            "commit": {
+              "sha": "762df9836583fd4add371c4c8aee4b942696e99c",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/762df9836583fd4add371c4c8aee4b942696e99c"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjUuMw"
+          },
+          {
+            "name": "module/v0.5.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/zipball/refs/tags/module/v0.5.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/HugoGuides/tarball/refs/tags/module/v0.5.2",
+            "commit": {
+              "sha": "762df9836583fd4add371c4c8aee4b942696e99c",
+              "url": "https://api.github.com/repos/nkdAgility/HugoGuides/commits/762df9836583fd4add371c4c8aee4b942696e99c"
+            },
+            "node_id": "REF_kwDOO4lKLrdyZWZzL3RhZ3MvbW9kdWxlL3YwLjUuMg"
+          }
+        ],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "releases?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "id": 314687688,
+            "tag_name": "module/v0.8.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-04-28T15:50:02Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.8.4"
+          },
+          {
+            "id": 279104398,
+            "tag_name": "module/v0.8.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T17:53:12Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.8.3"
+          },
+          {
+            "id": 278756497,
+            "tag_name": "module/v0.8.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-21T19:27:09Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.8.2"
+          },
+          {
+            "id": 278455290,
+            "tag_name": "module/v0.8.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-20T22:49:47Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.8.1"
+          },
+          {
+            "id": 278383879,
+            "tag_name": "module/v0.8.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-20T19:12:31Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.8.0"
+          },
+          {
+            "id": 278285493,
+            "tag_name": "module/v0.7.9",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-20T14:21:00Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.9"
+          },
+          {
+            "id": 278383751,
+            "tag_name": "module/v0.7.11",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-20T19:11:56Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.11"
+          },
+          {
+            "id": 278347771,
+            "tag_name": "module/v0.7.10",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-20T17:12:40Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.10"
+          },
+          {
+            "id": 278016228,
+            "tag_name": "module/v0.7.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-19T17:56:28Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.8"
+          },
+          {
+            "id": 276045263,
+            "tag_name": "module/v0.7.7",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-12T14:53:20Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.7"
+          },
+          {
+            "id": 275292606,
+            "tag_name": "module/v0.7.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-08T20:02:10Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.6"
+          },
+          {
+            "id": 275289075,
+            "tag_name": "module/v0.7.5",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-08T19:48:24Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.5"
+          },
+          {
+            "id": 274929231,
+            "tag_name": "module/v0.7.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-07T19:09:54Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.4"
+          },
+          {
+            "id": 238941848,
+            "tag_name": "module/v0.7.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-11T08:54:34Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.3"
+          },
+          {
+            "id": 236521372,
+            "tag_name": "module/v0.7.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-31T09:50:07Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.2"
+          },
+          {
+            "id": 236312931,
+            "tag_name": "module/v0.7.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-30T14:57:36Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.1"
+          },
+          {
+            "id": 236303403,
+            "tag_name": "module/v0.7.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-30T14:28:35Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.7.0"
+          },
+          {
+            "id": 235703989,
+            "tag_name": "module/v0.6.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T16:37:47Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.8"
+          },
+          {
+            "id": 235693652,
+            "tag_name": "module/v0.6.7",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T16:06:05Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.7"
+          },
+          {
+            "id": 235575004,
+            "tag_name": "module/v0.6.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T09:15:49Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.6"
+          },
+          {
+            "id": 235225786,
+            "tag_name": "module/v0.6.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T16:46:17Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.4"
+          },
+          {
+            "id": 235219154,
+            "tag_name": "module/v0.6.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T16:14:25Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.3"
+          },
+          {
+            "id": 235210124,
+            "tag_name": "module/v0.6.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T15:33:47Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.2"
+          },
+          {
+            "id": 235194376,
+            "tag_name": "module/v0.6.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T14:36:15Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6.1"
+          },
+          {
+            "id": 235192867,
+            "tag_name": "module/v0.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T14:30:13Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.6"
+          },
+          {
+            "id": 235151622,
+            "tag_name": "module/v0.5.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-25T12:08:53Z",
+            "html_url": "https://github.com/nkdAgility/HugoGuides/releases/tag/module/v0.5.3"
+          }
+        ],
+        "interpretation": "Observed"
+      }
+    ]
+  },
+  {
+    "repository": {
+      "allow_merge_commit": true,
+      "allow_rebase_merge": false,
+      "allow_squash_merge": false,
+      "archived": false,
+      "default_branch": "main",
+      "full_name": "KanbanGuides/KanbanGuides",
+      "has_pages": false,
+      "id": 1010811884,
+      "node_id": "R_kgDOPD_D7A",
+      "visibility": "public"
+    },
+    "observations": [
+      {
+        "endpoint": "branches/main/protection",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "hooks",
+        "exitCode": 0,
+        "result": [],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "pages",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "environments",
+        "exitCode": 0,
+        "result": {
+          "total_count": 1,
+          "environments": [
+            {
+              "id": 18486205419,
+              "node_id": "EN_kwDOPD_D7M8AAAAETd0b6w",
+              "name": "copilot",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/environments/copilot",
+              "html_url": "https://github.com/KanbanGuides/KanbanGuides/deployments/activity_log?environments_filter=copilot",
+              "created_at": "2026-07-21T08:41:52Z",
+              "updated_at": "2026-07-21T08:41:52Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/permissions",
+        "exitCode": 0,
+        "result": {
+          "enabled": true,
+          "allowed_actions": "all",
+          "sha_pinning_required": false
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/secrets",
+        "exitCode": 0,
+        "result": {
+          "total_count": 1,
+          "secrets": [
+            {
+              "name": "AZURE_STATIC_WEB_APPS_API_TOKEN_RED_POND_0D8225910",
+              "created_at": "2025-06-29T22:14:19Z",
+              "updated_at": "2025-06-29T22:14:19Z"
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "tags?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "name": "v1.2.18",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.18",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.18",
+            "commit": {
+              "sha": "7b5fd5f882680bf098b8bd2c165be155ee772e3e",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/7b5fd5f882680bf098b8bd2c165be155ee772e3e"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xOA"
+          },
+          {
+            "name": "v1.2.17",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.17",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.17",
+            "commit": {
+              "sha": "7ba11f75a2a057608555adc2c1d41112b5a94e1d",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/7ba11f75a2a057608555adc2c1d41112b5a94e1d"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xNw"
+          },
+          {
+            "name": "v1.2.16",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.16",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.16",
+            "commit": {
+              "sha": "702c41abf534e94fae4590645850277ccae8ab27",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/702c41abf534e94fae4590645850277ccae8ab27"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xNg"
+          },
+          {
+            "name": "v1.2.15",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.15",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.15",
+            "commit": {
+              "sha": "752981431a0dfc8b7c9c68a20f0cdbb361b19145",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/752981431a0dfc8b7c9c68a20f0cdbb361b19145"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xNQ"
+          },
+          {
+            "name": "v1.2.14",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.14",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.14",
+            "commit": {
+              "sha": "92ce6cd31ebfa794464102972e2b2f0d2b1be7fb",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/92ce6cd31ebfa794464102972e2b2f0d2b1be7fb"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xNA"
+          },
+          {
+            "name": "v1.2.13",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.13",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.13",
+            "commit": {
+              "sha": "efe97b4eddc8c6150cd73cf210ea73cf18348e7b",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/efe97b4eddc8c6150cd73cf210ea73cf18348e7b"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xMw"
+          },
+          {
+            "name": "v1.2.12",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.12",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.12",
+            "commit": {
+              "sha": "5a94561fc5c75dd348644b16e8145212c198f785",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/5a94561fc5c75dd348644b16e8145212c198f785"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xMg"
+          },
+          {
+            "name": "v1.2.11",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.11",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.11",
+            "commit": {
+              "sha": "25e29227b7022603402a5428bd60b8d7f9cbbc9a",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/25e29227b7022603402a5428bd60b8d7f9cbbc9a"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xMQ"
+          },
+          {
+            "name": "v1.2.10",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.10",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.10",
+            "commit": {
+              "sha": "be90680480381f7e17fb94e51f814035d51ec7ba",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/be90680480381f7e17fb94e51f814035d51ec7ba"
+            },
+            "node_id": "REF_kwDOPD_D7LFyZWZzL3RhZ3MvdjEuMi4xMA"
+          },
+          {
+            "name": "v1.2.9",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.9",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.9",
+            "commit": {
+              "sha": "3e1a1ae8339b46639509f18e6097a0613fbdf5d6",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/3e1a1ae8339b46639509f18e6097a0613fbdf5d6"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi45"
+          },
+          {
+            "name": "v1.2.8",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.8",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.8",
+            "commit": {
+              "sha": "a54aae38fc6ec1253f18784386c86e397c5ebe95",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/a54aae38fc6ec1253f18784386c86e397c5ebe95"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi44"
+          },
+          {
+            "name": "v1.2.7",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.7",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.7",
+            "commit": {
+              "sha": "1ceb2879f4ab2928c0e23735a6d6747b8a1e9da4",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/1ceb2879f4ab2928c0e23735a6d6747b8a1e9da4"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi43"
+          },
+          {
+            "name": "v1.2.6",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.6",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.6",
+            "commit": {
+              "sha": "bae2df41654803438f5dfeacd62e0756ee320ab0",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/bae2df41654803438f5dfeacd62e0756ee320ab0"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi42"
+          },
+          {
+            "name": "v1.2.5",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.5",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.5",
+            "commit": {
+              "sha": "020d69e26b5996588c014aea8f05caa4dee8a983",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/020d69e26b5996588c014aea8f05caa4dee8a983"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi41"
+          },
+          {
+            "name": "v1.2.4",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.4",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.4",
+            "commit": {
+              "sha": "971111bcc756af935fded2ddc8ac64234db01f07",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/971111bcc756af935fded2ddc8ac64234db01f07"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi40"
+          },
+          {
+            "name": "v1.2.3",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.3",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.3",
+            "commit": {
+              "sha": "86453350e1e86c3ea5756a4cfc703d771cd53192",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/86453350e1e86c3ea5756a4cfc703d771cd53192"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi4z"
+          },
+          {
+            "name": "v1.2.2",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.2",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.2",
+            "commit": {
+              "sha": "81575d2689db7659a1341b0c830eb6d407e7aa01",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/81575d2689db7659a1341b0c830eb6d407e7aa01"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi4y"
+          },
+          {
+            "name": "v1.2.1",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.1",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.1",
+            "commit": {
+              "sha": "c9062fdae977ce85a82ca2d887901e82041420a4",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/c9062fdae977ce85a82ca2d887901e82041420a4"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi4x"
+          },
+          {
+            "name": "v1.2.0",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.2.0",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.2.0",
+            "commit": {
+              "sha": "fe0c68e115e64398dd985aa4bd4509f0d4d43ae0",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/fe0c68e115e64398dd985aa4bd4509f0d4d43ae0"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMi4w"
+          },
+          {
+            "name": "v1.1.0",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.1.0",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.1.0",
+            "commit": {
+              "sha": "7cce32f472860353d1fddba7b0a98f50c86c65ea",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/7cce32f472860353d1fddba7b0a98f50c86c65ea"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMS4w"
+          },
+          {
+            "name": "v1.0.3",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.0.3",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.0.3",
+            "commit": {
+              "sha": "04fbbca7a45b840b9fa98f72c242da74b1204129",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/04fbbca7a45b840b9fa98f72c242da74b1204129"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMC4z"
+          },
+          {
+            "name": "v1.0.2",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.0.2",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.0.2",
+            "commit": {
+              "sha": "57807e62ddf0c4146ddbf837c74a1a26ce473e04",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/57807e62ddf0c4146ddbf837c74a1a26ce473e04"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMC4y"
+          },
+          {
+            "name": "v1.0.1",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.0.1",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.0.1",
+            "commit": {
+              "sha": "4fb90b42858f49720de508d09513c473a7f4ee08",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/4fb90b42858f49720de508d09513c473a7f4ee08"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMC4x"
+          },
+          {
+            "name": "v1.0.0",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v1.0.0",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v1.0.0",
+            "commit": {
+              "sha": "326b7a1aebebae19d94ef999036ef56e01602a20",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/326b7a1aebebae19d94ef999036ef56e01602a20"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjEuMC4w"
+          },
+          {
+            "name": "v0.5.2",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v0.5.2",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v0.5.2",
+            "commit": {
+              "sha": "8d24c8cb45a1cba29adcf1351fc55dc42e01f511",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/8d24c8cb45a1cba29adcf1351fc55dc42e01f511"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjAuNS4y"
+          },
+          {
+            "name": "v0.5.1",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v0.5.1",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v0.5.1",
+            "commit": {
+              "sha": "7f22dfa095a9565efcc1649b2e3baf4c33735222",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/7f22dfa095a9565efcc1649b2e3baf4c33735222"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjAuNS4x"
+          },
+          {
+            "name": "v0.5.0",
+            "zipball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/zipball/refs/tags/v0.5.0",
+            "tarball_url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/tarball/refs/tags/v0.5.0",
+            "commit": {
+              "sha": "2e1756c77691f71efc5bdf5cda04161619c28f22",
+              "url": "https://api.github.com/repos/KanbanGuides/KanbanGuides/commits/2e1756c77691f71efc5bdf5cda04161619c28f22"
+            },
+            "node_id": "REF_kwDOPD_D7LByZWZzL3RhZ3MvdjAuNS4w"
+          }
+        ],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "releases?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "id": 387522496,
+            "tag_name": "v1.2.18",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-09-12T09:41:43Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.18"
+          },
+          {
+            "id": 387518370,
+            "tag_name": "v1.2.17",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-09-12T09:24:56Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.17"
+          },
+          {
+            "id": 387489456,
+            "tag_name": "v1.2.16",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-09-12T07:21:27Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.16"
+          },
+          {
+            "id": 357220644,
+            "tag_name": "v1.2.15",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-07-21T09:04:40Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.15"
+          },
+          {
+            "id": 259080030,
+            "tag_name": "v1.2.14",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-11-02T14:14:58Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.14"
+          },
+          {
+            "id": 259079493,
+            "tag_name": "v1.2.13",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-11-02T14:11:10Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.13"
+          },
+          {
+            "id": 244971917,
+            "tag_name": "v1.2.12",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-09-05T04:46:34Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.12"
+          },
+          {
+            "id": 240958478,
+            "tag_name": "v1.2.11",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-19T16:50:24Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.11"
+          },
+          {
+            "id": 240551352,
+            "tag_name": "v1.2.10",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-18T09:50:52Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.10"
+          },
+          {
+            "id": 238952219,
+            "tag_name": "v1.2.9",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-11T09:27:03Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.9"
+          },
+          {
+            "id": 236585143,
+            "tag_name": "v1.2.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-31T13:46:58Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.8"
+          },
+          {
+            "id": 236566082,
+            "tag_name": "v1.2.7",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-31T12:43:37Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.7"
+          },
+          {
+            "id": 235714176,
+            "tag_name": "v1.2.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T17:19:33Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.6"
+          },
+          {
+            "id": 231078763,
+            "tag_name": "v1.2.5",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-09T09:01:27Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.5"
+          },
+          {
+            "id": 230737655,
+            "tag_name": "v1.2.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-08T08:52:38Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.4"
+          },
+          {
+            "id": 230388931,
+            "tag_name": "v1.2.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-07T08:54:01Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.3"
+          },
+          {
+            "id": 230209991,
+            "tag_name": "v1.2.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-05T18:02:10Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.2"
+          },
+          {
+            "id": 230199835,
+            "tag_name": "v1.2.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-05T15:18:37Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.1"
+          },
+          {
+            "id": 230198636,
+            "tag_name": "v1.2.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-05T14:56:48Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.2.0"
+          },
+          {
+            "id": 230099304,
+            "tag_name": "v1.1.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-04T17:53:49Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.1.0"
+          },
+          {
+            "id": 230095423,
+            "tag_name": "v1.0.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-04T17:18:15Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.0.3"
+          },
+          {
+            "id": 229709822,
+            "tag_name": "v1.0.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-03T12:09:03Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.0.2"
+          },
+          {
+            "id": 229697072,
+            "tag_name": "v1.0.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-03T11:19:54Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.0.1"
+          },
+          {
+            "id": 229420636,
+            "tag_name": "v1.0.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-02T14:25:26Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v1.0.0"
+          },
+          {
+            "id": 229415747,
+            "tag_name": "v0.5.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-02T14:09:00Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v0.5.2"
+          },
+          {
+            "id": 229391496,
+            "tag_name": "v0.5.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-02T12:47:27Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v0.5.1"
+          },
+          {
+            "id": 229383880,
+            "tag_name": "v0.5.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-02T12:17:41Z",
+            "html_url": "https://github.com/KanbanGuides/KanbanGuides/releases/tag/v0.5.0"
+          }
+        ],
+        "interpretation": "Observed"
+      }
+    ]
+  },
+  {
+    "repository": {
+      "allow_merge_commit": true,
+      "allow_rebase_merge": false,
+      "allow_squash_merge": true,
+      "archived": false,
+      "default_branch": "main",
+      "full_name": "nkdAgility/the-safe-delusion",
+      "has_pages": false,
+      "id": 888408000,
+      "node_id": "R_kgDONPQHwA",
+      "visibility": "public"
+    },
+    "observations": [
+      {
+        "endpoint": "branches/main/protection",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "hooks",
+        "exitCode": 0,
+        "result": [],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "pages",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "environments",
+        "exitCode": 0,
+        "result": {
+          "total_count": 1,
+          "environments": [
+            {
+              "id": 19465774583,
+              "node_id": "EN_kwDONPQHwM8AAAAEiEAl9w",
+              "name": "copilot",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/environments/copilot",
+              "html_url": "https://github.com/nkdAgility/the-safe-delusion/deployments/activity_log?environments_filter=copilot",
+              "created_at": "2026-08-07T13:23:24Z",
+              "updated_at": "2026-08-07T13:23:24Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/permissions",
+        "exitCode": 0,
+        "result": {
+          "enabled": true,
+          "allowed_actions": "all",
+          "sha_pinning_required": false
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/secrets",
+        "exitCode": 0,
+        "result": {
+          "total_count": 1,
+          "secrets": [
+            {
+              "name": "AZURE_STATIC_WEB_APPS_API_TOKEN",
+              "created_at": "2024-11-14T11:35:15Z",
+              "updated_at": "2024-11-14T11:35:15Z"
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "tags?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "name": "v1.0.8",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/v1.0.8",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/v1.0.8",
+            "commit": {
+              "sha": "1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/1a597cf1eeb5863acec3cdf3f3b8b0c5f1c729bb"
+            },
+            "node_id": "REF_kwDONPQHwLByZWZzL3RhZ3MvdjEuMC44"
+          },
+          {
+            "name": "v1.0.7",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/v1.0.7",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/v1.0.7",
+            "commit": {
+              "sha": "62ec0828e4d4222ae94bb7161e42b81ebe1c8a2c",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/62ec0828e4d4222ae94bb7161e42b81ebe1c8a2c"
+            },
+            "node_id": "REF_kwDONPQHwLByZWZzL3RhZ3MvdjEuMC43"
+          },
+          {
+            "name": "v1.0.2",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/v1.0.2",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/v1.0.2",
+            "commit": {
+              "sha": "bc52be867989909d733a548075e6d155c5493a6c",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/bc52be867989909d733a548075e6d155c5493a6c"
+            },
+            "node_id": "REF_kwDONPQHwLByZWZzL3RhZ3MvdjEuMC4y"
+          },
+          {
+            "name": "v1.0.1",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/v1.0.1",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/v1.0.1",
+            "commit": {
+              "sha": "60da31ac25a1498739ce2c988dd6b947b6796099",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/60da31ac25a1498739ce2c988dd6b947b6796099"
+            },
+            "node_id": "REF_kwDONPQHwLByZWZzL3RhZ3MvdjEuMC4x"
+          },
+          {
+            "name": "v1.0.0",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/v1.0.0",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/v1.0.0",
+            "commit": {
+              "sha": "ee09d18214aaca181ec300917e12452243bb1139",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/ee09d18214aaca181ec300917e12452243bb1139"
+            },
+            "node_id": "REF_kwDONPQHwLByZWZzL3RhZ3MvdjEuMC4w"
+          },
+          {
+            "name": "1.0.6",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/1.0.6",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/1.0.6",
+            "commit": {
+              "sha": "fcc457a2d86c29d93ad11ef4d7170e160665ca47",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/fcc457a2d86c29d93ad11ef4d7170e160665ca47"
+            },
+            "node_id": "REF_kwDONPQHwK9yZWZzL3RhZ3MvMS4wLjY"
+          },
+          {
+            "name": "1.0.5",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/1.0.5",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/1.0.5",
+            "commit": {
+              "sha": "865f1cba0b441b01009d6deeb853055ae628f669",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/865f1cba0b441b01009d6deeb853055ae628f669"
+            },
+            "node_id": "REF_kwDONPQHwK9yZWZzL3RhZ3MvMS4wLjU"
+          },
+          {
+            "name": "1.0.4",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/1.0.4",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/1.0.4",
+            "commit": {
+              "sha": "a1ad49339c88c5f6d92cad9a522d9e13ff5edd8d",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/a1ad49339c88c5f6d92cad9a522d9e13ff5edd8d"
+            },
+            "node_id": "REF_kwDONPQHwK9yZWZzL3RhZ3MvMS4wLjQ"
+          },
+          {
+            "name": "1.0.3",
+            "zipball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/zipball/refs/tags/1.0.3",
+            "tarball_url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/tarball/refs/tags/1.0.3",
+            "commit": {
+              "sha": "7e9a45397f6caadf2f1ad6feb822ab395da50e0d",
+              "url": "https://api.github.com/repos/nkdAgility/the-safe-delusion/commits/7e9a45397f6caadf2f1ad6feb822ab395da50e0d"
+            },
+            "node_id": "REF_kwDONPQHwK9yZWZzL3RhZ3MvMS4wLjM"
+          }
+        ],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "releases?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "id": 366833182,
+            "tag_name": "v1.0.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-08-07T15:14:25Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/v1.0.8"
+          },
+          {
+            "id": 366793626,
+            "tag_name": "v1.0.7",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-08-07T14:12:07Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/v1.0.7"
+          },
+          {
+            "id": 237267182,
+            "tag_name": "1.0.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-04T08:15:05Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/1.0.6"
+          },
+          {
+            "id": 235888331,
+            "tag_name": "1.0.5",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-29T09:01:24Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/1.0.5"
+          },
+          {
+            "id": 235712525,
+            "tag_name": "1.0.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T17:12:17Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/1.0.4"
+          },
+          {
+            "id": 235708336,
+            "tag_name": "1.0.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-28T16:55:37Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/1.0.3"
+          },
+          {
+            "id": 235440256,
+            "tag_name": "v1.0.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-27T10:33:32Z",
+            "html_url": "https://github.com/nkdAgility/the-safe-delusion/releases/tag/v1.0.2"
+          }
+        ],
+        "interpretation": "Observed"
+      }
+    ]
+  },
+  {
+    "repository": {
+      "allow_merge_commit": true,
+      "allow_rebase_merge": false,
+      "allow_squash_merge": true,
+      "archived": false,
+      "default_branch": "main",
+      "full_name": "ScrumGuides/ScrumGuide-ExpansionPack",
+      "has_pages": false,
+      "id": 998406260,
+      "node_id": "R_kgDOO4J4dA",
+      "visibility": "public"
+    },
+    "observations": [
+      {
+        "endpoint": "branches/main/protection",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "hooks",
+        "exitCode": 0,
+        "result": [
+          {
+            "id": 602729090,
+            "name": "web",
+            "active": true,
+            "events": [
+              "*"
+            ]
+          }
+        ],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "pages",
+        "exitCode": 1,
+        "result": null,
+        "interpretation": "Unavailable or absent; not evidence of protection."
+      },
+      {
+        "endpoint": "environments",
+        "exitCode": 0,
+        "result": {
+          "total_count": 4,
+          "environments": [
+            {
+              "id": 7156015938,
+              "node_id": "EN_kwDOO4J4dM8AAAABqogjQg",
+              "name": "AzureStaticSites_Canary",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/environments/AzureStaticSites_Canary",
+              "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/deployments/activity_log?environments_filter=AzureStaticSites_Canary",
+              "created_at": "2025-06-13T10:28:03Z",
+              "updated_at": "2025-06-13T10:28:03Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            },
+            {
+              "id": 7156049791,
+              "node_id": "EN_kwDOO4J4dM8AAAABqoinfw",
+              "name": "AzureStaticSites_Preview",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/environments/AzureStaticSites_Preview",
+              "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/deployments/activity_log?environments_filter=AzureStaticSites_Preview",
+              "created_at": "2025-06-13T10:30:42Z",
+              "updated_at": "2025-06-13T10:30:42Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            },
+            {
+              "id": 7156059311,
+              "node_id": "EN_kwDOO4J4dM8AAAABqojMrw",
+              "name": "AzureStaticSites_Production",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/environments/AzureStaticSites_Production",
+              "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/deployments/activity_log?environments_filter=AzureStaticSites_Production",
+              "created_at": "2025-06-13T10:31:23Z",
+              "updated_at": "2025-06-13T10:31:23Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            },
+            {
+              "id": 7157628780,
+              "node_id": "EN_kwDOO4J4dM8AAAABqqC_bA",
+              "name": "copilot",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/environments/copilot",
+              "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/deployments/activity_log?environments_filter=copilot",
+              "created_at": "2025-06-13T12:24:37Z",
+              "updated_at": "2025-06-13T12:24:37Z",
+              "can_admins_bypass": true,
+              "protection_rules": [],
+              "deployment_branch_policy": null
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/permissions",
+        "exitCode": 0,
+        "result": {
+          "enabled": true,
+          "allowed_actions": "all",
+          "sha_pinning_required": false
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "actions/secrets",
+        "exitCode": 0,
+        "result": {
+          "total_count": 2,
+          "secrets": [
+            {
+              "name": "AZURE_STATIC_WEB_APPS_API_TOKEN_AGREEABLE_ISLAND_0C966E810",
+              "created_at": "2025-06-09T09:00:12Z",
+              "updated_at": "2025-06-09T09:00:12Z"
+            },
+            {
+              "name": "WRITETOWIKIPAT",
+              "created_at": "2025-06-20T10:40:48Z",
+              "updated_at": "2025-06-20T10:40:48Z"
+            }
+          ]
+        },
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "tags?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "name": "v2.0.9",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.9",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.9",
+            "commit": {
+              "sha": "a2965345f365afda03fb68bc5381effa7f1858b8",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/a2965345f365afda03fb68bc5381effa7f1858b8"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC45"
+          },
+          {
+            "name": "v2.0.8",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.8",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.8",
+            "commit": {
+              "sha": "da34ccc54366215aded984813e6a6b8b470a40b0",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/da34ccc54366215aded984813e6a6b8b470a40b0"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC44"
+          },
+          {
+            "name": "v2.0.7",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.7",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.7",
+            "commit": {
+              "sha": "29c3a940ac22609c7d7f16c1a669827ef878d6e3",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/29c3a940ac22609c7d7f16c1a669827ef878d6e3"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC43"
+          },
+          {
+            "name": "v2.0.6",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.6",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.6",
+            "commit": {
+              "sha": "27959a6cb4b0fe42f830d819c022f9937e5dd787",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/27959a6cb4b0fe42f830d819c022f9937e5dd787"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC42"
+          },
+          {
+            "name": "v2.0.5",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.5",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.5",
+            "commit": {
+              "sha": "956ba62e8625a57ed8d4f15cecd13a7d80252c52",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/956ba62e8625a57ed8d4f15cecd13a7d80252c52"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC41"
+          },
+          {
+            "name": "v2.0.4",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.4",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.4",
+            "commit": {
+              "sha": "85ad3338c31d5ab0c02d728b5b508ed051176301",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/85ad3338c31d5ab0c02d728b5b508ed051176301"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC40"
+          },
+          {
+            "name": "v2.0.3",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.3",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.3",
+            "commit": {
+              "sha": "125efa3e8279224eecbcdad7fc940c822deee81b",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/125efa3e8279224eecbcdad7fc940c822deee81b"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC4z"
+          },
+          {
+            "name": "v2.0.2",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.2",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.2",
+            "commit": {
+              "sha": "4a20c5dcd2f20e0ce6a5ccab69f395f45ede3d5b",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/4a20c5dcd2f20e0ce6a5ccab69f395f45ede3d5b"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC4y"
+          },
+          {
+            "name": "v2.0.1",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.1",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.1",
+            "commit": {
+              "sha": "9c5805197632bfd9fe6785d42b428e1ccb118a7b",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/9c5805197632bfd9fe6785d42b428e1ccb118a7b"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC4x"
+          },
+          {
+            "name": "v2.0.0",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v2.0.0",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v2.0.0",
+            "commit": {
+              "sha": "bc07b6892ff5515998c3fe83b43fc069025b0573",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/bc07b6892ff5515998c3fe83b43fc069025b0573"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjIuMC4w"
+          },
+          {
+            "name": "v1.0.8",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.8",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.8",
+            "commit": {
+              "sha": "3607d9a90b1ea1ed3b87704ce62f892d22a8ac5d",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/3607d9a90b1ea1ed3b87704ce62f892d22a8ac5d"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC44"
+          },
+          {
+            "name": "v1.0.7",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.7",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.7",
+            "commit": {
+              "sha": "bfaed1801fdaf3e88c4fee8508b4202b7e7f19dc",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/bfaed1801fdaf3e88c4fee8508b4202b7e7f19dc"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC43"
+          },
+          {
+            "name": "v1.0.6",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.6",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.6",
+            "commit": {
+              "sha": "7b2b534fbec6dc5b6811a697d434fb1323ff33f0",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/7b2b534fbec6dc5b6811a697d434fb1323ff33f0"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC42"
+          },
+          {
+            "name": "v1.0.5",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.5",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.5",
+            "commit": {
+              "sha": "2bb02641e050f93b1c837c21917013d3c54cb7a6",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/2bb02641e050f93b1c837c21917013d3c54cb7a6"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC41"
+          },
+          {
+            "name": "v1.0.4",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.4",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.4",
+            "commit": {
+              "sha": "aae7c841fc2e50e96f8bc12b441c4281b6e4ba4b",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/aae7c841fc2e50e96f8bc12b441c4281b6e4ba4b"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC40"
+          },
+          {
+            "name": "v1.0.3",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.3",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.3",
+            "commit": {
+              "sha": "75d1d773b3d42b5c093e61744a32f5b0c84fdf9d",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/75d1d773b3d42b5c093e61744a32f5b0c84fdf9d"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC4z"
+          },
+          {
+            "name": "v1.0.2",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.2",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.2",
+            "commit": {
+              "sha": "8c16b12d7f645003c266a23c53d358ac5ad44ff2",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/8c16b12d7f645003c266a23c53d358ac5ad44ff2"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC4y"
+          },
+          {
+            "name": "v1.0.1",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.1",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.1",
+            "commit": {
+              "sha": "2132f1ad19d74a5d129e2c7ff1fc16934cfae0e2",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/2132f1ad19d74a5d129e2c7ff1fc16934cfae0e2"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC4x"
+          },
+          {
+            "name": "v1.0.0",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v1.0.0",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v1.0.0",
+            "commit": {
+              "sha": "92867c7909748d7981505280df14236d2baf5b52",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/92867c7909748d7981505280df14236d2baf5b52"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjEuMC4w"
+          },
+          {
+            "name": "v0.5.2",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v0.5.2",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v0.5.2",
+            "commit": {
+              "sha": "29d980c0dcb64d07b82bcb1565fb52c2634b4a18",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/29d980c0dcb64d07b82bcb1565fb52c2634b4a18"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjAuNS4y"
+          },
+          {
+            "name": "v0.5.1",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v0.5.1",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v0.5.1",
+            "commit": {
+              "sha": "71e2bdf4c30f8e87ba09e1e6a943f7097494d817",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/71e2bdf4c30f8e87ba09e1e6a943f7097494d817"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjAuNS4x"
+          },
+          {
+            "name": "v0.5.0",
+            "zipball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/zipball/refs/tags/v0.5.0",
+            "tarball_url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/tarball/refs/tags/v0.5.0",
+            "commit": {
+              "sha": "c5e0428160c19a43f0e628c48beeaf85003ec128",
+              "url": "https://api.github.com/repos/ScrumGuides/ScrumGuide-ExpansionPack/commits/c5e0428160c19a43f0e628c48beeaf85003ec128"
+            },
+            "node_id": "REF_kwDOO4J4dLByZWZzL3RhZ3MvdjAuNS4w"
+          }
+        ],
+        "interpretation": "Observed"
+      },
+      {
+        "endpoint": "releases?per_page=100",
+        "exitCode": 0,
+        "result": [
+          {
+            "id": 287684127,
+            "tag_name": "v2.0.9",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-02-18T13:18:19Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.9"
+          },
+          {
+            "id": 287475420,
+            "tag_name": "v2.0.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-02-18T00:37:32Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.8"
+          },
+          {
+            "id": 287451079,
+            "tag_name": "v2.0.7",
+            "draft": false,
+            "prerelease": true,
+            "published_at": "2026-02-17T22:42:14Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.7"
+          },
+          {
+            "id": 284934857,
+            "tag_name": "v2.0.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-02-10T17:40:53Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.6"
+          },
+          {
+            "id": 280791132,
+            "tag_name": "v2.0.5",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-28T16:52:34Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.5"
+          },
+          {
+            "id": 279161839,
+            "tag_name": "v2.0.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T21:01:32Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.4"
+          },
+          {
+            "id": 279107242,
+            "tag_name": "v2.0.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T18:02:26Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.3"
+          },
+          {
+            "id": 279068314,
+            "tag_name": "v2.0.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T16:06:53Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.2"
+          },
+          {
+            "id": 279064873,
+            "tag_name": "v2.0.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T15:58:00Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.1"
+          },
+          {
+            "id": 279060908,
+            "tag_name": "v2.0.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2026-01-22T15:48:55Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v2.0.0"
+          },
+          {
+            "id": 258496406,
+            "tag_name": "v1.0.8",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-10-30T14:23:58Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.8"
+          },
+          {
+            "id": 257255707,
+            "tag_name": "v1.0.7",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-10-25T20:44:58Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.7"
+          },
+          {
+            "id": 254875413,
+            "tag_name": "v1.0.6",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-10-16T03:35:42Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.6"
+          },
+          {
+            "id": 242765855,
+            "tag_name": "v1.0.5",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-08-27T04:34:37Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.5"
+          },
+          {
+            "id": 235441804,
+            "tag_name": "v1.0.4",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-07-27T11:08:53Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.4"
+          },
+          {
+            "id": 228614534,
+            "tag_name": "v1.0.3",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-06-29T17:39:09Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.3"
+          },
+          {
+            "id": 226912485,
+            "tag_name": "v1.0.2",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-06-22T18:37:44Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.2"
+          },
+          {
+            "id": 226505910,
+            "tag_name": "v1.0.1",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-06-19T17:27:47Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.1"
+          },
+          {
+            "id": 224323913,
+            "tag_name": "v1.0.0",
+            "draft": false,
+            "prerelease": false,
+            "published_at": "2025-06-11T13:35:36Z",
+            "html_url": "https://github.com/ScrumGuides/ScrumGuide-ExpansionPack/releases/tag/v1.0.0"
+          }
+        ],
+        "interpretation": "Observed"
+      }
+    ]
+  }
+]

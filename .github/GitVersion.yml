@@ -18,7 +18,6 @@ branches:
     track-merge-target: false
     regex: ^release(s)?[\/-]
     source-branches:
-    - master
     - main
     is-release-branch: true
     is-mainline: false

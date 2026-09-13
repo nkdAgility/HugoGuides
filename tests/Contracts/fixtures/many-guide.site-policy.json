@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "siteId": "ScrumGuide-ExpansionPack",
+  "wrapper": {
+    "sourcePath": "site",
+    "requiredRoutes": [
+      "/",
+      "/creators/"
+    ],
+    "requiredFiles": [],
+    "requiredI18nKeys": [],
+    "integrationPoints": [
+      "guide-navigation"
+    ]
+  },
+  "guides": [
+    {
+      "id": "adaptive-enterprise",
+      "contentRoot": "site/content/adaptive-enterprise",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adaptive-executive",
+      "contentRoot": "site/content/adaptive-executive",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-and-scrum",
+      "contentRoot": "site/content/ai-and-scrum",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complexity",
+      "contentRoot": "site/content/complexity",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "emergent-strategy-and-depoyment",
+      "contentRoot": "site/content/emergent-strategy-and-depoyment",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holistic-testing",
+      "contentRoot": "site/content/holistic-testing",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multi-team-scrum",
+      "contentRoot": "site/content/multi-team-scrum",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operating-models",
+      "contentRoot": "site/content/operating-models",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "planguage",
+      "contentRoot": "site/content/planguage",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "product-thinking",
+      "contentRoot": "site/content/product-thinking",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psychological-safety-in-scrum-teams",
+      "contentRoot": "site/content/psychological-safety-in-scrum-teams",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scrum-guide-expanded",
+      "contentRoot": "site/content/scrum-guide-expanded",
+      "relationship": {
+        "kind": "core"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2025.6",
+          "path": "2025.6",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        },
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scrum-on-one-page",
+      "contentRoot": "site/content/scrum-on-one-page",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-engineering-practices",
+      "contentRoot": "site/content/software-engineering-practices",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategy-as-an-empirical-capability",
+      "contentRoot": "site/content/strategy-as-an-empirical-capability",
+      "relationship": {
+        "kind": "extension",
+        "parentGuideId": "scrum-guide-expanded"
+      },
+      "protectSource": false,
+      "editions": [
+        {
+          "id": "2026.1",
+          "path": "2026.1",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "environments": [
+      {
+        "name": "preview",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      },
+      {
+        "name": "production",
+        "excludedLanguages": [
+          "tlh"
+        ],
+        "excludedGuides": []
+      }
+    ],
+    "permanentExclusions": []
+  },
+  "protectedPaths": []
+}

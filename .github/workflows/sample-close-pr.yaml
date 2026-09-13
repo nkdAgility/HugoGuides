@@ -1,0 +1,20 @@
+name: Close PR (GuideSiteSample)
+on:
+  pull_request:
+    types: [closed]
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: open-guide-platform-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  close:
+    name: GuideSiteSample
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: ./.github/workflows/guide-site-close-pr.yaml
+    with:
+      site-name: GuideSiteSample
+      deployment-environment: ${{ format('{0}', github.event.pull_request.number) }}
+    secrets:
+      static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}

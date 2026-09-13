@@ -1,0 +1,293 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenGuidePlatform assessment v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sourceCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "platformVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policyDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "target": {
+      "enum": [
+        "local",
+        "preview",
+        "production"
+      ]
+    },
+    "stage": {
+      "enum": [
+        "Prepare",
+        "Build",
+        "Validate",
+        "Deploy",
+        "Verify"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "pass",
+        "fail",
+        "blocked"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "enum": [
+              "blocker",
+              "warning",
+              "info"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "platform",
+              "wrapper",
+              "guide",
+              "edition",
+              "translation",
+              "download"
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "remediation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "scope",
+          "subject",
+          "message",
+          "remediation",
+          "evidence"
+        ]
+      },
+      "minItems": 0
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wrapper": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "enum": [
+                "ready",
+                "incomplete",
+                "unknown"
+              ]
+            },
+            "languages": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "state",
+            "languages"
+          ]
+        },
+        "guides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "editions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "translations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "language": {
+                            "type": "string",
+                            "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+                          },
+                          "state": {
+                            "enum": [
+                              "web",
+                              "pdf-only",
+                              "fallback",
+                              "scaffold",
+                              "excluded",
+                              "unknown"
+                            ]
+                          },
+                          "body": {
+                            "enum": [
+                              "populated",
+                              "empty",
+                              "missing"
+                            ]
+                          },
+                          "downloads": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:]).+$"
+                                },
+                                "handling": {
+                                  "enum": [
+                                    "supplied",
+                                    "generated",
+                                    "protected"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "handling"
+                              ]
+                            },
+                            "minItems": 0
+                          }
+                        },
+                        "required": [
+                          "language",
+                          "state",
+                          "body",
+                          "downloads"
+                        ]
+                      },
+                      "minItems": 0
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "translations"
+                  ]
+                },
+                "minItems": 0
+              }
+            },
+            "required": [
+              "id",
+              "editions"
+            ]
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "wrapper",
+        "guides"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "sourceCommit",
+    "platformVersion",
+    "policyDigest",
+    "target",
+    "stage",
+    "outcome",
+    "findings",
+    "inventory"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "pass"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "findings": {
+            "items": {
+              "properties": {
+                "severity": {
+                  "enum": [
+                    "warning",
+                    "info"
+                  ]
+                }
+              }
+            }
+          },
+          "policyDigest": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

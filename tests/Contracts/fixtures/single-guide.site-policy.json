@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "siteId": "the-safe-delusion",
+  "wrapper": {
+    "sourcePath": "site",
+    "requiredRoutes": [
+      "/",
+      "/getting-out/",
+      "/brief/",
+      "/objections/"
+    ],
+    "requiredFiles": [],
+    "requiredI18nKeys": [],
+    "integrationPoints": [
+      "guide-navigation"
+    ]
+  },
+  "guides": [
+    {
+      "id": "safe-decision-makers",
+      "contentRoot": "site/content/safe-decision-makers",
+      "relationship": {
+        "kind": "independent"
+      },
+      "protectSource": true,
+      "editions": [
+        {
+          "id": "2024.8",
+          "path": "2024.8",
+          "sourceLanguage": "en",
+          "translations": [
+            {
+              "language": "en",
+              "intent": "web",
+              "downloads": [
+                {
+                  "path": "pdf/safe-decision-makers.2024.8.en.pdf",
+                  "handling": "protected"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "environments": [
+      {
+        "name": "preview",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      },
+      {
+        "name": "production",
+        "excludedLanguages": [],
+        "excludedGuides": []
+      }
+    ],
+    "permanentExclusions": []
+  },
+  "protectedPaths": [
+    "site/content/safe-decision-makers"
+  ]
+}

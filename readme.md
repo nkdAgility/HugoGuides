@@ -1,23 +1,89 @@
-# Hugo Guides Module
+# OpenGuidePlatform
 
-The **Hugo Guides Module** is designed to power a multi-language, multi-guide, multi-version platform for serving authoritative guides and resources. Its goal is to provide a flexible, scalable engine for publishing and maintaining guides such as:
+Build and maintain guide websites with shared Hugo rendering, publishing tools, translation checks and agent skills. Your site keeps its own design, content and any number of guides.
 
-- **The Kanban Guide**
-- **Open Guide to Kanban**
-- **Information for Decision Makers**
-- **Scrum Expansion Pack**
+**Current status: preview.** Installation and updates are available for evaluation on a branch. First adoption needs maintainer setup; stable adoption and independently enforced agent controls are not yet complete.
 
-This module enables organizations and communities to deliver guides in multiple languages, support multiple versions, and manage several guides from a single platform.
+## Before you start
 
-It uses [Hugo](https://gohugo.io/) to generate a static site, which can be deployed anywhere (such as Azure Static Web Apps, Netlify, Vercel, GitHub Pages, or any static hosting provider).
+Work from the root of your **guide-site repository**, using PowerShell 7.4 or newer. You need Git, [GitHub CLI](https://cli.github.com/), Hugo Extended 0.146 or newer, and Go 1.24.5 or newer (or the newer version required by your site's modules).
 
-### Translation Flexibility
+Sign in and install the currently required PowerShell YAML dependency:
 
-- You can provide PDF-only translations for any guide or version, allowing for translated content even if a full web version is not available.
-- Individual versions of a guide can be translated independently, without requiring other versions or other guides to be translated as well.
+```powershell
+gh auth login
+Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser
+```
 
-## Current sites using this module
+On Windows, enable **Developer Mode** or use an account with symbolic-link privileges, then run this before cloning:
 
-- [Kanban Guides](https://kanbanguides.org) – [GitHub](https://github.com/KanbanGuides/KanbanGuides)
-- [Scrum Expansion Pack](https://scrumexpansion.org) – [GitHub](https://github.com/ScrumGuides/ScrumGuide-ExpansionPack)
-- [Safe Delusion](https://safedelusion.com) –
+```powershell
+git config --global core.symlinks true
+```
+
+The platform uses symbolic links for its shared agent instructions. Linux and macOS normally need no additional setup. See [Windows troubleshooting](docs/using/first-adoption.md#windows-symbolic-links) for an existing clone.
+
+**First installation?** Your maintainer must prepare `guide-site.policy.json`, which describes your site's guides, languages, downloads and publication rules. Follow [first-time site setup](docs/using/first-adoption.md) before running the installer. It does not create this policy for you.
+
+## Install or update
+
+Run the same command for both:
+
+```powershell
+irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/main/bootstrap.ps1 | iex
+```
+
+It selects the newest installable preview release and verifies the download. On `main` or `master`, it creates a review branch; otherwise it uses your current branch. It updates the native Hugo dependency to the same release and preserves your wrapper YAML formatting. Existing files that conflict with the installation are reported for review.
+
+Then check the changes and build both targets:
+
+```powershell
+git diff
+./build.ps1 -Target preview
+./build.ps1 -Target production
+```
+
+Review the results, commit your changes and open a pull request. Neither the installer nor these build commands publishes your site. Your maintainer configures preview and production deployment during first adoption.
+
+If the installer is not yet available on `main`, use the [development-branch instructions](docs/platform-development.md#try-the-unmerged-installer).
+
+## Everyday use
+
+Once installed, run these commands from your guide-site repository:
+
+| Task | Command |
+|---|---|
+| Check and build the site locally | `./build.ps1` |
+| Start the local site and watch for edits | `./build.ps1 -Stage Serve` |
+| Check preview output | `./build.ps1 -Target preview` |
+| Check production output | `./build.ps1 -Target production` |
+| Check inputs without building pages | `./build.ps1 -Stage Prepare` |
+| Preview an update's file changes | `./bootstrap.ps1 -Update -WhatIf` |
+
+Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. Routine builds use your installed platform version; rerun the install/update command when you want an update.
+
+For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.AgentSkills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
+
+Sites with declared JavaScript-created anchors also need Node.js 20 or newer and npm. Validate restores its browser tools into `.processing/` on first use and checks the built pages without contacting the live site. Later runs reuse that cache.
+
+## When something fails
+
+Read the finding and its suggested fix in the terminal or GitHub Actions job summary. For a PR opened from the same repository, Prepare maintains one current report per target with the assessed commit and workflow link. Earlier reports remain in workflow artifacts. Use the report for your current commit; a reporting failure is shown separately in the Prepare report job. Fork PRs retain their reports in Actions artifacts. Build reports are saved beneath `.processing/guidesite/` by default; a failed Prepare also prints its report paths.
+
+| Problem | What to do |
+|---|---|
+| Missing `guide-site.policy.json` | Complete [first-time setup](docs/using/first-adoption.md) with your maintainer. |
+| Installation or update conflicts | Review the listed files with your maintainer. Preserve local edits; the installer will not overwrite them. |
+| Missing tool, PowerShell module or PDF font | Install the named dependency, then rerun the command. |
+| Missing translation, file or download | Follow the report's suggested fix. Ask your maintainer if the absence is intentional. |
+| Publication rule blocks a build | Resolve the finding with your maintainer; do not enable an excluded language to bypass it. |
+| An output directory already exists | Omit `-OutputPath` to let the build choose a fresh directory. |
+
+If you need help, include the command, finding and relevant report in a [GitHub issue](https://github.com/nkdAgility/OpenGuidePlatform/issues).
+
+## Sample and further help
+
+- [Sample preview](https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/) — the shared preview environment when deployed. PR previews use their own URL, provided by the deployment comment.
+- [First-time site setup](docs/using/first-adoption.md) — policy, existing files and deployment setup.
+- [Platform development](docs/platform-development.md) — build this repository, run the sample locally and understand releases.
+- [Execution plan and current progress](docs/architecture/open-guide-platform-execution-plan.md).

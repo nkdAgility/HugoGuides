@@ -1,0 +1,40 @@
+{
+  "base": "https://agreeable-island-0c966e810-preview.centralus.6.azurestaticapps.net/",
+  "head": "7ce0683dd1548af108e391a31e34fe43c6f10d90",
+  "run": 34723426309,
+  "checked": 201,
+  "htmlChecked": 167,
+  "pdfChecked": 31,
+  "matches": 201,
+  "failures": [],
+  "aliasFilesNotByteCompared": 35,
+  "uniqueInternalPdfLinks": 29,
+  "missingInternalLinks": [
+    {
+      "from": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+      "target": "/emergent-strategy-and-depoyment/translations/"
+    },
+    {
+      "from": "it/emergent-strategy-and-depoyment/2026.1/index.html",
+      "target": "/emergent-strategy-and-depoyment/history/"
+    }
+  ],
+  "missingAnchors": [
+    {
+      "from": "planguage/2026.1/index.html",
+      "target": "/planguage/2026.1/#36"
+    },
+    {
+      "from": "planguage/2026.1/index.html",
+      "target": "/planguage/2026.1/#60"
+    },
+    {
+      "from": "planguage/index.html",
+      "target": "/planguage/#36"
+    },
+    {
+      "from": "planguage/index.html",
+      "target": "/planguage/#60"
+    }
+  ]
+}

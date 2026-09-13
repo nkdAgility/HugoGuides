@@ -1,0 +1,11 @@
+baseURL: https://blue-field-06cea8c03.6.azurestaticapps.net/
+Environment: "production"
+minify:
+  minifyOutput: true
+
+buildDrafts: true
+buildFuture: true
+
+languages:
+  min:
+    disabled: true

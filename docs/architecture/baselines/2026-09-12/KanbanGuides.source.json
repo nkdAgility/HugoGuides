@@ -1,0 +1,1022 @@
+[
+  {
+    "path": ".agents/skills/guide.contributions/Manage-GuideContributions.ps1",
+    "sha256": "3928d0565246a65357ece13ef91e2d4a70ebf505142e6be1e8f0321f095a5346",
+    "bytes": 3458
+  },
+  {
+    "path": ".agents/skills/guide.contributions/SKILL.md",
+    "sha256": "66009144db4f4c77cc5b28ae2181a66c3b40ce0d39dc2a1ba25049fa83f9d83a",
+    "bytes": 3055
+  },
+  {
+    "path": ".agents/skills/guide.genpdfs/cover-page.tex",
+    "sha256": "815c0bc167502a80fcef775362a416c7a88ca7d209fa1df227f95b6c8c430f2c",
+    "bytes": 725
+  },
+  {
+    "path": ".agents/skills/guide.genpdfs/Create-GuidePDFs.ps1",
+    "sha256": "a0bce3f242e486cbbaa908d2ce12cf7b79d333979adf33bcf770a8d175e88989",
+    "bytes": 16131
+  },
+  {
+    "path": ".agents/skills/guide.genpdfs/SKILL.md",
+    "sha256": "084f2f267ab31ebb0a850eadd68b7100b4c3099ecdffc970f2efb7aab3c9128e",
+    "bytes": 3017
+  },
+  {
+    "path": ".agents/skills/guide.gravatar/Get-GravatarHash.ps1",
+    "sha256": "9efbbaeebddbd518d68fec6f4eaf20244b5c98316686a362e6dc86344912924a",
+    "bytes": 4872
+  },
+  {
+    "path": ".agents/skills/guide.gravatar/SKILL.md",
+    "sha256": "9c5fc7dc7530dae2c03b7babb8992d8684d0e730f138ab0078b085b14bb7449e",
+    "bytes": 2886
+  },
+  {
+    "path": ".agents/skills/guide.historicalversion/Create-HistoricalVersion.ps1",
+    "sha256": "192075271949eba95fa019ee010e1d48c5bdbc593dba958caeae3e3a35e2a57c",
+    "bytes": 8774
+  },
+  {
+    "path": ".agents/skills/guide.historicalversion/SKILL.md",
+    "sha256": "68e50714137fd8ef8814e092d54aecb244e3d5ffb98eb64f2d2effc9af90358c",
+    "bytes": 3074
+  },
+  {
+    "path": ".agents/skills/guide.transcreate/SKILL.md",
+    "sha256": "4c390b09aa8685cbf3762f7553a23abe633b001755086044719d70f4b8ad237f",
+    "bytes": 10530
+  },
+  {
+    "path": ".agents/skills/guide.transreconcile/SKILL.md",
+    "sha256": "3771a856fd7735cc503ccbac3ba14e67dfb01218fb124badd2004dfc92b9093f",
+    "bytes": 8487
+  },
+  {
+    "path": ".agents/skills/guide.transstatus/SKILL.md",
+    "sha256": "077c7366da87286ac54b7903e804df5e8fb49c323509b244fe3bef641332cbd6",
+    "bytes": 5578
+  },
+  {
+    "path": ".gitattributes",
+    "sha256": "f80dcc94402f38c7b9be9d27d83a5f3010189ba041cdc5f27094480b4f909d0d",
+    "bytes": 13
+  },
+  {
+    "path": ".github/CODEOWNERS",
+    "sha256": "317405ac4d846411e4beb6043acd6627b169d78fec71d72922d5acaf731e8ce6",
+    "bytes": 925
+  },
+  {
+    "path": ".github/copilot-instructions.md",
+    "sha256": "9797dd6edb03966a8283860c507064dd1bdf9b150b0577c1232aaaa30d48d36f",
+    "bytes": 12819
+  },
+  {
+    "path": ".github/GitVersion.yml",
+    "sha256": "f894e4e6b87e529b06bf83833f24d3d52444f2345e64e50308e1b0d88bde0221",
+    "bytes": 663
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/config.yml",
+    "sha256": "b4683dc0a2014b51523b8f4ab153db51e88ccf04e616318a000dff5a1f952c54",
+    "bytes": 485
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/guide-change.yml",
+    "sha256": "0a1fe8d4acfcf311f240646d6f7eecdaf28afc45b768a88ccdd04cc083947178",
+    "bytes": 6807
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/new-translation.yml",
+    "sha256": "6c9706bce4d67f16a284bb4212612166450c93d524ef7d2b6e41847f3b9e20dd",
+    "bytes": 8080
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/translation-error.yml",
+    "sha256": "6cf937ae1c08843f9e340a4b727a87c9fd7d4659d9ff4ed63d5540744440ee7c",
+    "bytes": 3545
+  },
+  {
+    "path": ".github/workflows/close-pr.yaml",
+    "sha256": "77efeea4075d297b60b0fd22398857003dac5972a74ea812c6137f25c631b636",
+    "bytes": 621
+  },
+  {
+    "path": ".github/workflows/copilot-setup-steps.yml",
+    "sha256": "2e8b633a6e52acdb3b13486dad430c6d25de7c8c62f127f4a7446851427a6733",
+    "bytes": 778
+  },
+  {
+    "path": ".github/workflows/main.yaml",
+    "sha256": "10f3e8adcee484225ae23f55da39e63fc9ee1c8af7e4ab7f756abdb6862eee69",
+    "bytes": 15510
+  },
+  {
+    "path": ".github/workflows/stale-issues.yml",
+    "sha256": "1bf714f8b014182ac6120fce8d5e56eb317f4fc90a3ad78cde22d0f30cfed438",
+    "bytes": 1895
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "fd46842e9c8b63980473fb858e3d17c61d4bc82642bd8d33538159f34dabbf84",
+    "bytes": 171
+  },
+  {
+    "path": ".prettierrc",
+    "sha256": "479d3181c5fcbac731818a78fc75c6fa78b55b3904cd7dd7b8e81903d50695f1",
+    "bytes": 292
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "4297554fc2d2d56307f5d5ebdfc4bc4733061f4b09490b1838af438e8a2c4d34",
+    "bytes": 2263
+  },
+  {
+    "path": "CODE_OF_CONDUCT.md",
+    "sha256": "7ea6a92956dc8470d9abe45e71a05957da9f0896ebf59276ccb2cf6a624d51ab",
+    "bytes": 4409
+  },
+  {
+    "path": "docs/contributing.md",
+    "sha256": "a73e003ecee0deb6a364a2de08a9db642a8f0b31cf21ffe34c114cd1d9c2ced6",
+    "bytes": 3436
+  },
+  {
+    "path": "docs/maintainer.md",
+    "sha256": "85e8417ef28a844a607bdfaa9053c45410a406ba7048cfe39c8e6e887dce7c82",
+    "bytes": 10194
+  },
+  {
+    "path": "docs/README.md",
+    "sha256": "0c1e2fb896dc029187439343d83e135135c566a1d945919a4003f814ea3a94e4",
+    "bytes": 2091
+  },
+  {
+    "path": "docs/translations-code-of-conduct.md",
+    "sha256": "ebba04974c3b24dfbaa5022ec434dc58294413612d367a1d70d6809eb8e027e2",
+    "bytes": 14560
+  },
+  {
+    "path": "docs/translations.md",
+    "sha256": "97ec46b4d6baa6a38fa7c5e37915030526b64f8960eb5a41205bfa5a327d7a17",
+    "bytes": 7460
+  },
+  {
+    "path": "LICENSE",
+    "sha256": "26ba5ffce761f72fb48e6d9989c853d15e8d2491f3129c33c2dbe8e36ddbd6c5",
+    "bytes": 1098
+  },
+  {
+    "path": "readme.md",
+    "sha256": "3a223e653e45905635005fc60c12138f0cc7787a41c78ae718dfccc114905ab7",
+    "bytes": 4297
+  },
+  {
+    "path": "site/.hugo_build.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "site/content/_index.es-419.md",
+    "sha256": "c3b821f216de574001942d372d637b2e822a0754edf9f8b0809bf49c1ac69661",
+    "bytes": 415
+  },
+  {
+    "path": "site/content/_index.es-ES.md",
+    "sha256": "a3bd45dc23024a3fd0cd4e43fea234e39e2e651cacf86a46bf6dc97922b588f5",
+    "bytes": 377
+  },
+  {
+    "path": "site/content/_index.fa.md",
+    "sha256": "e6236c56640630553202ec74a601c8e5132dd5686ba970e768b30c840cf16ac4",
+    "bytes": 593
+  },
+  {
+    "path": "site/content/_index.fr.md",
+    "sha256": "960574affe04486cb1604cc2c8119f91a5ba74faa94121f985142d9798de55d4",
+    "bytes": 396
+  },
+  {
+    "path": "site/content/_index.ja.md",
+    "sha256": "01733a751503d4860d148d9fb74a9ff8a6636e238ad92181b4f7a086db5524b1",
+    "bytes": 935
+  },
+  {
+    "path": "site/content/_index.md",
+    "sha256": "712d434a6ad88db5b5a961a9b7cb2c4481ea226af1098cf0d0d12f3acecff4c7",
+    "bytes": 334
+  },
+  {
+    "path": "site/content/_index.min.md",
+    "sha256": "e81dd6e9172e2318cde9ed27a7a6da0f9d25de576427e978ab48738bd90ed29f",
+    "bytes": 347
+  },
+  {
+    "path": "site/content/_index.pl.md",
+    "sha256": "470058ac1852c1551f1753317980923a7542ae6d96db6d150f919dddffb11eb3",
+    "bytes": 371
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.es-419.md",
+    "sha256": "406f8e64470503368be68b28fd616b19f17910ecb6c66d48f9a0838e3f7c7f4a",
+    "bytes": 3299
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.es-ES.md",
+    "sha256": "9e8adf880c413450a7ad53916cf835ba70cccd2f1644e2ad9bdf2f77815d0e36",
+    "bytes": 4117
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.fa.md",
+    "sha256": "4fc7f2a377e492cd3a65def6723dfb7a670cf65f3eb737d72b9caa4833bc9efa",
+    "bytes": 5976
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.fr.md",
+    "sha256": "3639ee7955f51621d0ad7f51cda1e270a422aab0ee7f0cb8623488a8b4fd1788",
+    "bytes": 4382
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.ja.md",
+    "sha256": "8acf91abf9c69e9c48a6af7d05b766205612a57eccd49fd394a3e370006dc311",
+    "bytes": 8480
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.md",
+    "sha256": "d971806852f68e2539a1d0518a8183968f8e134309fdf3ed57dedd32cc0578bf",
+    "bytes": 3825
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.min.md",
+    "sha256": "116a3f2a1b75eeca2e689eeaaa6633516ec690fa5ec050c08f513e4fee24d5f1",
+    "bytes": 2643
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/_index.pl.md",
+    "sha256": "a57efb34b895122ce5ea211f51e032806c2a6c05f08dd232eca81c9eb76a9ff9",
+    "bytes": 4380
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.es-419.md",
+    "sha256": "9240c5c4cdd85d9c00a319393ca587bdfdf2be3879ac9cbb1eed9f33610c9727",
+    "bytes": 962
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.es-ES.md",
+    "sha256": "276ffdea113b410653353073fead851f50265f3384a6b342f0f901b5ec3dfb14",
+    "bytes": 61181
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.fa.md",
+    "sha256": "037de33d4fcedee90924d7bdacf8ed601d15923ab62c915f1fcd5c027999e1ba",
+    "bytes": 81552
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.fr.md",
+    "sha256": "70b68b04d11df35f1c695e0e4083e27cbbf32f77d7f0cdddd594743bfde0bc37",
+    "bytes": 62870
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.ja.md",
+    "sha256": "e4218e371362b739c9812731bfd003a743125269f34f9ea107634ea4e5ea3306",
+    "bytes": 113575
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.md",
+    "sha256": "1dbaec8ae4fbc20cbcaa1207a8ef24e8ad6306ccde110f7f57f461e30e1b90fa",
+    "bytes": 47941
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.min.md",
+    "sha256": "78e5f2f4b880299bf3e7fbdd5d5e6221ae03b4de38ec820434421ed118dc0903",
+    "bytes": 46354
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/index.pl.md",
+    "sha256": "9aaee13a4e2bd14c2237d8045516bb0ea8c261e40907bffedffbeb76e97f52f2",
+    "bytes": 56942
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/.DS_Store",
+    "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3",
+    "bytes": 6148
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en-us.pdf",
+    "sha256": "d0a4fbc02c88e8833b13b835b04afc05cbc930cddbb574a01d5ff1439789ca0c",
+    "bytes": 327013
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.en.pdf",
+    "sha256": "63399d242fdacd2d1a44090d94004f5935f71160885cf9b6c637927be5d20a80",
+    "bytes": 326954
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.es-ES.pdf",
+    "sha256": "d17b351f984d54ff51f7fa0b692d94094fe8184dfa1e85ff2062622f9e8848ea",
+    "bytes": 201250
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fa.pdf",
+    "sha256": "11fb775bde9f9bc5ed8a702bd4ef0218ef4e4a5054ea7a9beeed689440c73e62",
+    "bytes": 115778
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.fr.pdf",
+    "sha256": "6e3e6c77bc8c7a75d9dd1537e4d66a178a12e0fd18ab5c5e77314d404e1c0fdb",
+    "bytes": 279252
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.ja.pdf",
+    "sha256": "c1e3f4e28e879cd318293449764709025d1edd4c2db6cea581cdfa9823a2221d",
+    "bytes": 509941
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.min.pdf",
+    "sha256": "673116f996784b1d238cf1fbde3a21769f3c926aa5ac6036208b4bb28424780e",
+    "bytes": 175717
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/2025.7/pdf/open-guide-to-kanban.pl.pdf",
+    "sha256": "22593fe4b8854921e7a24d439a5510d9f19e0e2cf55a9b5957fad4b4278a4064",
+    "bytes": 162315
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.es-419.md",
+    "sha256": "a2d9c9e795c075dd2782e532ed66cddeff9ef155627ef9b267ed491f773b23b1",
+    "bytes": 490
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.es-ES.md",
+    "sha256": "d30b664561e0f01e940ab4e2900ae26dd40b38414c2a64ced9314beb33017e42",
+    "bytes": 483
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.fa.md",
+    "sha256": "abb1e60fb59f8c46b86017861997842eb5cacb068603c803807413ccabcc8d22",
+    "bytes": 710
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.fr.md",
+    "sha256": "373ebd444487c90f9a61465988113566b856ee6c78b7ac69d3965b607d2e1315",
+    "bytes": 495
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.ja.md",
+    "sha256": "c2e789c69aae5e3bc2b9e3b4b85f353ce4e70e03b05bfd3ee8b74e09ef8c9abe",
+    "bytes": 995
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.md",
+    "sha256": "0a2b31b9d385d598cca82d8f54bf88cbf534dd66c9c42b6f27afda3320dfb75c",
+    "bytes": 433
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.min.md",
+    "sha256": "26815c1d2b0fdd4614924a88f89ecd3e9bc21954ad5851c547785eb543a2d31a",
+    "bytes": 387
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/history/index.pl.md",
+    "sha256": "42415cd93684343497bcdad187560d22589d7a7fa4cf9601a31a066a9d7d492e",
+    "bytes": 497
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/images/open-guide-to-kanban-logo-dark.png",
+    "sha256": "502d2dde1d0dcdbd90e8cdd3af65c9a54848c8d9e2d249b4e090417769d0ca49",
+    "bytes": 79261
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/images/open-guide-to-kanban-logo-light.png",
+    "sha256": "9da2a1204034062c672f4bb0ff7e28a3a4ebce0a59e3db6eb8fdc6b88fe95291",
+    "bytes": 98514
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/images/open-guide-to-kanban-logo.png",
+    "sha256": "7b4b34c475ab7e7817ce88e8c1b41a95090f90e3074507fd67a289e4c42fa816",
+    "bytes": 170969
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.es-419.md",
+    "sha256": "b4c8ab5a988ea7c3c830dd59c58662dfcbab5397b8ce26ddbfc6277d8dbb506f",
+    "bytes": 208
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.es-ES.md",
+    "sha256": "9da8760541ac811ba1ce97ff946ff5cb9d3c33739c35ac3ec5ac9372319b4b14",
+    "bytes": 210
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.fa.md",
+    "sha256": "d44775a268ebfd82648f42303bc92aac045a1ef346368a606ef58972dfa88900",
+    "bytes": 244
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.fr.md",
+    "sha256": "970d8d1617971653969a5f88c908fc80a6b7c3ec054abc253cd63134ee4e0cb6",
+    "bytes": 294
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.ja.md",
+    "sha256": "09aa954235b3446c055954630307fc6a33f9170cb4a6a15c871859d6e96ae73a",
+    "bytes": 298
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.md",
+    "sha256": "979da709648d005bcca02eda996d1468148d19ff2a680bb79f0ad874bb811b4a",
+    "bytes": 205
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.min.md",
+    "sha256": "9a8f44ccb16ec9bb006d876989fe6fb93feb56ea272567889cd5e3c4fefcf0ce",
+    "bytes": 228
+  },
+  {
+    "path": "site/content/open-guide-to-kanban/translations/index.pl.md",
+    "sha256": "c20dbc6cdd5a934237ecec66bde1dff5788e2f7e73c850dfc60b80f8ba68a59e",
+    "bytes": 201
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.es-419.md",
+    "sha256": "c218fbd8444d6fbe09cab4f87d19fc798446fa51a5c164abb2dca155a3e1c666",
+    "bytes": 2511
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.es-ES.md",
+    "sha256": "587c3e070633982c4e67876187dd44bec5a713073258d75b75ab61a853362a75",
+    "bytes": 2902
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.fa.md",
+    "sha256": "989445e623e35ee24e742ed9da44615fb21e212e8f13b9a7723b3ed156ef1eef",
+    "bytes": 4079
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.fr.md",
+    "sha256": "d3f7c56c13a2776a2914390757cb1665439e5a02db7a4afc3a95a9f30e4f1262",
+    "bytes": 3057
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.ja.md",
+    "sha256": "d2a43c004ebecb07a3a3fb4c0af5b819d17b294075b08f26e1ad0ee2bb983265",
+    "bytes": 5488
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.md",
+    "sha256": "949235a49e64667e0e44d992fd140af895491cac178fd29645f4043ad66c750e",
+    "bytes": 2581
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.min.md",
+    "sha256": "9bf7bf29801add98b918452480ad2e555093987316d63b08431e490c6211d8db",
+    "bytes": 2122
+  },
+  {
+    "path": "site/content/the-kanban-guide/_index.pl.md",
+    "sha256": "032f3d24fa2492156bdd4e4fa9c97ddb5946f798b74d5b9cb98e1bf84392af33",
+    "bytes": 2877
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.es-419.md",
+    "sha256": "99603c8ba4ad6186f23377e2b7d4742cc35a1e12701c2d731e698b46ac72646c",
+    "bytes": 543
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.es-ES.md",
+    "sha256": "9825fd73e1718708e596946ad684941e931b2fc5f4a8252528b3483f5ccaf0f0",
+    "bytes": 480
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.fa.md",
+    "sha256": "d542cf0c6de487966c53711860e052f6b2d9b661ea94a8054cfbd840828b9d08",
+    "bytes": 684
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.fr.md",
+    "sha256": "a4dff9a3eb11c432333053f14e1ebac6bdf25efdf830fcdd34da2ba158d33746",
+    "bytes": 763
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.ja.md",
+    "sha256": "60725bfea59d8d6092dae656ba1019b8fba20e809cc649c1e035db86d122d133",
+    "bytes": 873
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.md",
+    "sha256": "305fb07ecbb140d123c0c367a7fa0d4b69246e57abb1715b0a0de74042403f3d",
+    "bytes": 4982
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.min.md",
+    "sha256": "62f35cc6ea60f818f842c3abb7b79f33a016c86ccaf378bb92593e80a827432d",
+    "bytes": 5290
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/index.pl.md",
+    "sha256": "7a1a76d9f3425b7d54d0f06f5a955026629cb434547934f094c1a17778ed1117",
+    "bytes": 514
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ca.pdf",
+    "sha256": "dd46af459efdecee74bd5b1146dd421d05092ae370794c2ee9bc5034373ab665",
+    "bytes": 252950
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.cz.pdf",
+    "sha256": "fb6ff31cd8ca91112506e85a9d58e8383b5b595ad9cdb180d961ce1627fa236a",
+    "bytes": 217716
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.de.pdf",
+    "sha256": "8b438f5f2ae08cfa18955fb913486455323ca7806627fd6c5e264ac93c903e87",
+    "bytes": 166694
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.en.pdf",
+    "sha256": "7237107dfd5a55efd1f52742cf9471b8a3ef0a86ccbe8b97e6e394c754370c23",
+    "bytes": 157097
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es-419.pdf",
+    "sha256": "ac59a0c3a116d53b7b0fb54acf81e0975caed7454b5aa40b3267b6644c16bcae",
+    "bytes": 93464
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.es.pdf",
+    "sha256": "99ecc736ff7a7b09c5c9c1c900e4a4ec0c0440512aa1f639fb2b4c34653ea845",
+    "bytes": 84160
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.fr.pdf",
+    "sha256": "4c7d136fc68c389f21e24d172f128374bce0ab6a76378fc85fa8d88c38c1938f",
+    "bytes": 296372
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ja.pdf",
+    "sha256": "9cd543a2006b47400a97d3102d6016bcc17f078c46626dc6ecabfc918288d9af",
+    "bytes": 1171203
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.min.pdf",
+    "sha256": "e245ffe7feaf779d9c90e7b2e5b21e1111219521a6824dddebcfa9f442eb88ed",
+    "bytes": 72044
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.mr.pdf",
+    "sha256": "3d33a6c1f7b8c0551d57bdbdae2cb363d10d9e019cc511f36c252f71ada52331",
+    "bytes": 424809
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.nl.pdf",
+    "sha256": "c83567a06593576df6b29b8cc321a9f29aa1c08ea7c3ec5e0ef640662ff38cb2",
+    "bytes": 128877
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pl.pdf",
+    "sha256": "a453e105a694e932b710d7e31eaea91ae475e5586f36e18006fff094ae10efe2",
+    "bytes": 135845
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.pt-BR.pdf",
+    "sha256": "296a21f35324ee9dfef63dda89f1797b35f4182ce0cd3a36a7ee5c87c5e30530",
+    "bytes": 144641
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ro.pdf",
+    "sha256": "b79260eb6484cc78ff7294057e44f4419005cf9022a39f6005816911b8e0a33b",
+    "bytes": 301859
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.ru.pdf",
+    "sha256": "4106e33ae9344a5c3e6b9b4ede77a67077ee319e47d557becdcdb45acb026ba3",
+    "bytes": 135120
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hans.pdf",
+    "sha256": "7ca32ef2fdc7e7214435ef8664480c1cc37b4ac63d2d9934603504ca4f839533",
+    "bytes": 635619
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kanban-guide.v2020.12.zh-Hant.pdf",
+    "sha256": "3220661f0967672abf15d32a58a5a9123032f668486d8f7c990b45a0a22a515a",
+    "bytes": 783148
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.12/pdf/kkanban-guide.v2020.12.it.pdf",
+    "sha256": "69111e9a7bb4ee21c8edb2269126a33335accc2abe02a7c01bb586b9bc1fb7a4",
+    "bytes": 112982
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.es-419.md",
+    "sha256": "e21e2181dd3369f0c47d1c8a4bf5bc99c8b17f83f8d4ad75a0c142fda2c35020",
+    "bytes": 539
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.es-ES.md",
+    "sha256": "70de2ac928c9e45e263554300b6f248295eaa55d849da3f4faf3228f70b34368",
+    "bytes": 518
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.fa.md",
+    "sha256": "53965443bdd63af22ecd110d187a2361aec8384447b707895cd5d4654da5bede",
+    "bytes": 724
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.fr.md",
+    "sha256": "31200f02b6de3c3f398d4dc4b9cc8689e6b0d3126eca7c24d5c2597b0adf1213",
+    "bytes": 799
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.ja.md",
+    "sha256": "06b7bbec4b3e22e13f261e341d8a1920876ddce08f246bdcdaf307f7ba755663",
+    "bytes": 515
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.md",
+    "sha256": "46014b8c9643829ca5494028c38ae167494230401674ed40d4bd800120239011",
+    "bytes": 5089
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.min.md",
+    "sha256": "47cb6550af6bbb6ac9029a541edce37a2b03b006b3bf89d31faac70c1276c682",
+    "bytes": 5274
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/index.pl.md",
+    "sha256": "02069bb97a97d8913da2c68a91eb8a8cb1f07babb186c88540dcbf14c798daf3",
+    "bytes": 511
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/pdf/kanban-guide-v2020.7.en.pdf",
+    "sha256": "a89d6066b12c72dd94789b61e57a59ff5ce56889774793b633cf1c6d4a8530e5",
+    "bytes": 155438
+  },
+  {
+    "path": "site/content/the-kanban-guide/2020.7/pdf/kanban-guide.v2020.7.min.pdf",
+    "sha256": "cc6a66dac3e183803406659b3d4a3cd4a4c1c7bef1c25fe225878e77aac212fd",
+    "bytes": 72146
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.es-419.md",
+    "sha256": "3b88ebfa954a8e2932bed47f23c2b236e0d42f6a1e1d9469aaa79c9475a58507",
+    "bytes": 555
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.es-ES.md",
+    "sha256": "dce165c2c65c00cab2d425b5f26586382a2f8349c43c0b4e8918c54f8048bd9a",
+    "bytes": 19551
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.fa.md",
+    "sha256": "f8dfef9a6c0cef7e7be7c28182662aa9f87dc23b819beddb3e1764fb979947c5",
+    "bytes": 26657
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.fr.md",
+    "sha256": "40349fc1bdacce4e29a710b92d77baac7c561e7a60f051894ee0e07431178599",
+    "bytes": 17310
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.ja.md",
+    "sha256": "91b19075bc57f0d30d7c61ddc1fba0481fc75de0715292de59238160175471cc",
+    "bytes": 34794
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.md",
+    "sha256": "797f9e60ed425d33ba104b4dd8e2f5fc02d7b86759022b8cc55352fdd34d6905",
+    "bytes": 13913
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.min.md",
+    "sha256": "9b9da0ceaa323f14e35bfbfd40e99b366e2f6ae98941095208e9b54eb95a761a",
+    "bytes": 14035
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/index.pl.md",
+    "sha256": "a800d33e13bc3be95c801533e9fceab2d0de3641e4c3a61cc61023c610507d99",
+    "bytes": 17488
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.en.pdf",
+    "sha256": "72d75e95227f148b72f97b6f07be7b14cb9db41704b29ea13664847c8d2c429d",
+    "bytes": 1849560
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.es-ES.pdf",
+    "sha256": "9f5645e4c9c71533596897b599c1f8a5ded56ceea9555299dfe6a93387eeca6f",
+    "bytes": 93250
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fa.pdf",
+    "sha256": "77376290c0a0cff860b79368c836fa2812e61c8c596243359f328b2998266642",
+    "bytes": 45985
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.fr.pdf",
+    "sha256": "354debd4ad19148d05161468bf9d1f1d2afb64214fac27be5c939aa9e38cd6b2",
+    "bytes": 117806
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.ja.pdf",
+    "sha256": "19aa54ed8ac56445b01869463a96be96b184c9f4dc39620c8ebee2c1609967c9",
+    "bytes": 220652
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.min.pdf",
+    "sha256": "80fc0597a753080ce737c4beb8db84fb462f237dd825b400a47c108d55c7766a",
+    "bytes": 79817
+  },
+  {
+    "path": "site/content/the-kanban-guide/2025.5/pdf/kanban-guide.v2025.5.pl.pdf",
+    "sha256": "5c1f0400028df16a8f7605d21f8923d04ee485ba0da5b9ec0ec00eda5c0cd624",
+    "bytes": 67641
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.es-419.md",
+    "sha256": "774539aba09bbf288e4ee87158c218658c5d4c80ca2f77c16f47422244bd3eb4",
+    "bytes": 496
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.es-ES.md",
+    "sha256": "86f7b9727dd879c49ad2279e7ed9133c13860b6c43f977a30c539568293e0092",
+    "bytes": 526
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.fa.md",
+    "sha256": "2e6fc8d51a9471af272759548bcc250a08cbc06de2237e2f5193209be3b5dd49",
+    "bytes": 910
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.fr.md",
+    "sha256": "a9255ecb421f7a71af040ff4f0fc646506fe2f055612cb23f2e19fc48c9370c5",
+    "bytes": 572
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.ja.md",
+    "sha256": "8a586a0b4284a61fea5c05e1b9062915630d48057a5262c636b6da9698a012e3",
+    "bytes": 1076
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.md",
+    "sha256": "e4445a8bc402dea3b51564a47c1bc9035ad167bef423a6c8070e9e5a04680783",
+    "bytes": 496
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.min.md",
+    "sha256": "73de223b79bc1601562844116abd42ff4ff555fd90fdc583e4b0ab11fa8f0dab",
+    "bytes": 435
+  },
+  {
+    "path": "site/content/the-kanban-guide/history/index.pl.md",
+    "sha256": "3fdcc1e555b1eff03694db92f515f5d5f44ec38ef0ace94d1e24b738a3dd196c",
+    "bytes": 564
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.es-419.md",
+    "sha256": "b4c8ab5a988ea7c3c830dd59c58662dfcbab5397b8ce26ddbfc6277d8dbb506f",
+    "bytes": 208
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.es-ES.md",
+    "sha256": "19a259ebb87dc53d0a3d5a3ccd190190888361b377ea241149d107f93a4cbc60",
+    "bytes": 199
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.fa.md",
+    "sha256": "cebbcb8ce9e43bdf924aa338baeaca152aa51f7ef6fba9db30e20c0b737cfe94",
+    "bytes": 241
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.fr.md",
+    "sha256": "62665ca7b3983544dcd84d73b5ded178c1611a1f4c569923e73b47755710c1e6",
+    "bytes": 276
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.ja.md",
+    "sha256": "3ea0abce1f4d9fb1ecd0d70b5bba5a687bf956178175f3d00b2cb96d66db7cf5",
+    "bytes": 275
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.md",
+    "sha256": "4711a17a4b535859b9de06c9e8fbe209785f151a48b351f29611bfdc5eaac302",
+    "bytes": 197
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.min.md",
+    "sha256": "44cbe34c71938aee64e80089079f6509015c9f660af965a24eafc29a942951a5",
+    "bytes": 210
+  },
+  {
+    "path": "site/content/the-kanban-guide/translations/index.pl.md",
+    "sha256": "aa5d30973c0ca44584844721b3f6d502b4c363717c9a0dcccca000f60bef0849",
+    "bytes": 193
+  },
+  {
+    "path": "site/data/contributions/open-guide-to-kanban.yml",
+    "sha256": "75b89248b9fddef93b506b2dfe1420e977cd3a1742600c78f4e4f98cf67b3cbc",
+    "bytes": 2537
+  },
+  {
+    "path": "site/data/contributions/the-kanban-guide.yml",
+    "sha256": "e029b19332980d7c9b99039f4ea2a8694dc669fa118188c62ba08695de291eec",
+    "bytes": 3522
+  },
+  {
+    "path": "site/go.mod",
+    "sha256": "abc35a59101c621e2310631e59ba7bee97e51e8620742dfa528c0fc34847e0a2",
+    "bytes": 133
+  },
+  {
+    "path": "site/go.sum",
+    "sha256": "5c81eb86b890297d72961f96903f5a8f58558a551feffb824dc969be24d2b962",
+    "bytes": 1990
+  },
+  {
+    "path": "site/hugo.canary.yaml",
+    "sha256": "0e5aa528142b89373297d6797b62c683534c55ba4866b9c707e03821073b32b0",
+    "bytes": 116
+  },
+  {
+    "path": "site/hugo.local.yaml",
+    "sha256": "219fabafb8df379a09cc23131660d60d6668e202d1b3b5ec9cbeb7165a4d2f71",
+    "bytes": 113
+  },
+  {
+    "path": "site/hugo.preview.yaml",
+    "sha256": "6f322471e6aab0bc060ce16a3cf461b54f61e864caf5a1e0ca9f6fc7272bbafc",
+    "bytes": 180
+  },
+  {
+    "path": "site/hugo.production.yaml",
+    "sha256": "0f73077dca39f91bdf187bf02378f43f59307e15a0cd9902466cd4ba2f7fad18",
+    "bytes": 431
+  },
+  {
+    "path": "site/hugo.yaml",
+    "sha256": "41ae0e46ab6b88f0618d26791cf08f698849cf9e62774d5c9dc3024ff3008f73",
+    "bytes": 9515
+  },
+  {
+    "path": "site/i18n/en.yaml",
+    "sha256": "a71ae61d6b7e5b54bb85faf2650b5d13c6f1f8301aa004626946d0438c21d398",
+    "bytes": 14753
+  },
+  {
+    "path": "site/i18n/es-419.yaml",
+    "sha256": "cdb8d93b5769ca128de327497529ff2cb9f24697859bf2616a3b946ab20a6f33",
+    "bytes": 14874
+  },
+  {
+    "path": "site/i18n/es-ES.yaml",
+    "sha256": "9313100d762112e35887ceba4710e4090732c7a23fb4c6773f251918a00df555",
+    "bytes": 14881
+  },
+  {
+    "path": "site/i18n/fa.yaml",
+    "sha256": "78f8860f41abcd89f0763195dcb01fec12b8e93d808d4ef6ef5256df88320ab9",
+    "bytes": 19607
+  },
+  {
+    "path": "site/i18n/fr.yaml",
+    "sha256": "66a9baac201e1cebf6dbe986b3aa9e0cfe8574b2e80cc463dd484f350f689dcb",
+    "bytes": 15880
+  },
+  {
+    "path": "site/i18n/ja.yaml",
+    "sha256": "aebd38b98de2182a4fb325daad55ba412098dad16f661b443deac54f5c05453f",
+    "bytes": 26543
+  },
+  {
+    "path": "site/i18n/min.yaml",
+    "sha256": "32665a99a0a90c377c184a5d2041a5faaed8c9605d2e6ad89e6e4da3446b47ef",
+    "bytes": 13316
+  },
+  {
+    "path": "site/i18n/pl.yaml",
+    "sha256": "bab48c4d3a971edda762c72dadd65f3e1e19e24804a382c84a8f7906576ab12f",
+    "bytes": 15125
+  },
+  {
+    "path": "site/static/apple-touch-icon-114x114.png",
+    "sha256": "6b3036aa1338980826cfc50e74970cc40ed0af4d17f3cd95ee7277a6799231d1",
+    "bytes": 13203
+  },
+  {
+    "path": "site/static/apple-touch-icon-120x120.png",
+    "sha256": "2fb529f68635312da4cc7d17e5fefccd86361e5f6d03f567d65be89bb0658bc9",
+    "bytes": 14682
+  },
+  {
+    "path": "site/static/apple-touch-icon-144x144.png",
+    "sha256": "624498c86e4aea844862877d533b993f066cb0278cd1bc201f9726a00ed4d91d",
+    "bytes": 20688
+  },
+  {
+    "path": "site/static/apple-touch-icon-152x152.png",
+    "sha256": "07669d30a75bb2f40cec97e4a7324c84b388443f6de1d0262e168992b0726887",
+    "bytes": 22781
+  },
+  {
+    "path": "site/static/apple-touch-icon-180x180.png",
+    "sha256": "73aa1871723750aa13d2ecdf0869816749a7861db365cc6110a1508a93bf40ab",
+    "bytes": 31959
+  },
+  {
+    "path": "site/static/apple-touch-icon-57x57.png",
+    "sha256": "ffe385d83cbe966996d59a35ae8470f80713ef8946c5dc393c8a78c64a33c8d6",
+    "bytes": 4139
+  },
+  {
+    "path": "site/static/apple-touch-icon-72x72.png",
+    "sha256": "75d1c9f60d3093e3f6090c23a60b5e1c76cad82b6b486b2936e3bd2e2ace99b0",
+    "bytes": 6130
+  },
+  {
+    "path": "site/static/apple-touch-icon-76x76.png",
+    "sha256": "03ffe4d9e68e72ba3180b72ca7f96a169f0c2ef0a057af4fe3065fd19095d094",
+    "bytes": 6583
+  },
+  {
+    "path": "site/static/apple-touch-icon.png",
+    "sha256": "ffe385d83cbe966996d59a35ae8470f80713ef8946c5dc393c8a78c64a33c8d6",
+    "bytes": 4139
+  },
+  {
+    "path": "site/static/css/style.css",
+    "sha256": "da863cb9c71971b151b2fce8d36e33a20413b60a8c6c96b18d560a6dd85cd326",
+    "bytes": 9810
+  },
+  {
+    "path": "site/static/favicon.ico",
+    "sha256": "dcd3e1a7786eb5f53042cd0bcb2fde3e9856de79a0f10fb7355ac6a091c496c3",
+    "bytes": 34494
+  },
+  {
+    "path": "site/static/iconifier-readme.txt",
+    "sha256": "62185cc3255d275f70c22db11ca2c317de9bc0b5586f36dc20aa456a6cfafbc2",
+    "bytes": 2809
+  },
+  {
+    "path": "site/static/images/iconifier-readme.txt",
+    "sha256": "62185cc3255d275f70c22db11ca2c317de9bc0b5586f36dc20aa456a6cfafbc2",
+    "bytes": 2809
+  },
+  {
+    "path": "site/static/images/kanban-guides-500.png",
+    "sha256": "fa03dede9a7fb400369caef16b47efb2a62ff26f07686fcc490391d0534fe1c7",
+    "bytes": 284550
+  },
+  {
+    "path": "site/static/images/kanban-guides-logo-dark.png",
+    "sha256": "cb1c88bcd6456b5264411759a6887a2989d63aff0c656bf1d85950859d450a38",
+    "bytes": 275899
+  },
+  {
+    "path": "site/static/images/kanban-guides-logo-light-1280x640.png",
+    "sha256": "7411deceb7567d4eca6e5da4b043a29bda5d0fabe05a96aad40ef6ac4ff7b4cf",
+    "bytes": 368225
+  },
+  {
+    "path": "site/static/images/kanban-guides-logo-light.png",
+    "sha256": "a45d48c21bd819e7d6f7d684f064211e8a6f684d70a37351c55729ccc671d3c6",
+    "bytes": 294048
+  },
+  {
+    "path": "site/static/images/kanban-guides.png",
+    "sha256": "3d521909b1ef08bd45de57afae33ad15223b01796d8b46241360ead4685e2402",
+    "bytes": 863088
+  },
+  {
+    "path": "site/static/images/missing-user.png",
+    "sha256": "cf660c656e085b0af7493d9c3915d0510629498bcb96572cdf9f877390f68df4",
+    "bytes": 3163
+  },
+  {
+    "path": "site/static/js/submenu.js",
+    "sha256": "2b7dd8cd7fbd0a33e51018fef4ccf151eda823503a37d0f1c1a6fe7d6704b5b4",
+    "bytes": 2351
+  },
+  {
+    "path": "staticwebapp.config.canary.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.json",
+    "sha256": "bcd968d1c8341ab01346395333e8de71a8f4fbedb30c7be7d5f94910e7b2becf",
+    "bytes": 8333
+  },
+  {
+    "path": "staticwebapp.config.preview.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  },
+  {
+    "path": "staticwebapp.config.production.json",
+    "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "bytes": 4
+  }
+]
