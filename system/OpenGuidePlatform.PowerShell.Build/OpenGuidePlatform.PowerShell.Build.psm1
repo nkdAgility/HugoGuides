@@ -75,4 +75,5 @@ function Get-GuideHugoConfiguration {
 
 . (Join-Path $PSScriptRoot 'BuildContext/Get-GuideBuildContext.ps1')
 . (Join-Path $PSScriptRoot 'Toolchain/Get-GuideHugoToolchain.ps1')
-Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext,Get-GuideHugoToolchain
+. (Join-Path $PSScriptRoot 'AssessmentReporting/Write-GuideAssessmentSummary.ps1')
+Export-ModuleMember -Function ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideBuildContext,Get-GuideHugoToolchain,Write-GuideAssessmentSummary

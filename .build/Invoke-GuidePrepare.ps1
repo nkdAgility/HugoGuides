@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$WorkspaceRoot,
     [Parameter(Mandatory)][string]$PolicyPath,
     [string]$EffectiveProductionPath,
+    [string]$SummaryPath=$env:GITHUB_STEP_SUMMARY,
     [string]$ModulePath='github.com/nkdAgility/HugoGuides/module',
     [string[]]$Languages,
     [string[]]$ConfigFiles,
@@ -40,6 +41,19 @@ try {
 } catch {
     $assessment=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion='0.0.0';policyDigest=$policyDigest;target=$Target;stage='Prepare';outcome='blocked';findings=@([ordered]@{code='PREPARE_INPUT_UNAVAILABLE';severity='blocker';scope='platform';subject='Prepare inputs';message=$_.Exception.Message;remediation='Correct the policy/configuration or install the missing dependency and rerun Prepare.';evidence=@()});inventory=@{wrapper=@{state='unknown';languages=@()};guides=@()}}
 }
-$report=Write-GuideAssessmentReport -Assessment $assessment -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath
-Write-Output (Get-Content -LiteralPath $report.MarkdownPath -Raw)
+$deliveryFailures=[Collections.Generic.List[string]]::new()
+try {
+    $report=Write-GuideAssessmentReport -Assessment $assessment -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath
+} catch {
+    $deliveryFailures.Add("Local report: $($_.Exception.Message)")
+}
+# Console/Actions still receive the assessment if local report storage fails.
+Write-Output (ConvertTo-GuideAssessmentMarkdown $assessment)
+if($SummaryPath){
+    $delivery=Write-GuideAssessmentSummary -Assessment $assessment -SummaryPath $SummaryPath
+    if($delivery.Outcome -ne 'delivered'){$deliveryFailures.Add("$($delivery.Channel): $($delivery.Message)")}
+}
+if($deliveryFailures.Count){
+    throw "REPORT_DELIVERY_FAILED. Prepare assessment remains $($assessment.outcome). $($deliveryFailures -join '; ')"
+}
 if($assessment.outcome -ne 'pass'){throw "Prepare $($assessment.outcome). Reports: $($report.JsonPath), $($report.MarkdownPath)"}
