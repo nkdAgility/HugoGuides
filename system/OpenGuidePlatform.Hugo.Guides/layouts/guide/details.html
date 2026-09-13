@@ -90,7 +90,7 @@
               </div>
               <p class="card-text flex-grow-1 text-muted">{{ i18n "read_online_description" . }}</p>
               <div class="mt-auto">
-                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path $latestVersion) }}" class="btn btn-primary btn-lg w-100">
+                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Section $latestVersion) }}" class="btn btn-primary btn-lg w-100">
                   <i class="fa-solid fa-play me-2"></i>{{ i18n "read_online_button" . }}
                 </a>
               </div>
@@ -137,7 +137,7 @@
               <h6 class="card-title">{{ i18n "translations_title" . }}</h6>
               <p class="card-text flex-grow-1 text-muted small">{{ i18n "translations_description" . }}</p>
               <div class="mt-auto">
-                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path "translations") }}" class="btn btn-outline-warning btn-sm">{{ i18n "nav_translations" . }}</a>
+                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Section "translations") }}" class="btn btn-outline-warning btn-sm">{{ i18n "nav_translations" . }}</a>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
               <h6 class="card-title">{{ i18n "history_title" . }}</h6>
               <p class="card-text flex-grow-1 text-muted small">{{ i18n "history_description" . }}</p>
               <div class="mt-auto">
-                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path "history") }}" class="btn btn-outline-info btn-sm">{{ i18n "nav_history" . }}</a>
+                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Section "history") }}" class="btn btn-outline-info btn-sm">{{ i18n "nav_history" . }}</a>
               </div>
             </div>
           </div>
@@ -295,7 +295,7 @@
                   {{- end }}
                 </div>
                 <p class="text-muted mb-4">{{ i18n "current_version_description" . }}</p>
-                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Path $latestVersion) }}" class="btn btn-primary btn-lg"> <i class="fa-solid fa-book-open me-2"></i>{{ i18n "read_current_version_button" . }} </a>
+                <a href="{{ partial "functions/safe-page-link.html" (path.Join .Section $latestVersion) }}" class="btn btn-primary btn-lg"> <i class="fa-solid fa-book-open me-2"></i>{{ i18n "read_current_version_button" . }} </a>
               {{- else }}
                 <p class="text-muted">{{ i18n "version_info_not_available" . }}</p>
               {{- end }}

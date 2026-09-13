@@ -10,16 +10,12 @@ permissions:
   contents: read
 jobs:
   guide-site:
-    strategy:
-      fail-fast: false
-      matrix:
-        target: [preview, production]
     uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@__RELEASE__
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
       site-name: __SITE__
       policy-path: __POLICY__
-      target: ${{ matrix.target }}
+      target: preview
       platform-release: __RELEASE__
       platform-commit: __COMMIT__
       deploy: false

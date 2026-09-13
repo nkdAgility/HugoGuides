@@ -1,9 +1,10 @@
 #Requires -Version 7.4
-[CmdletBinding(SupportsShouldProcess)]
+function Invoke-OpenGuidePlatformBootstrap {
+[CmdletBinding(SupportsShouldProcess,DefaultParameterSetName='Auto')]
 param(
-    [Parameter(Mandatory,ParameterSetName='Install')][switch]$Install,
-    [Parameter(Mandatory,ParameterSetName='Update')][switch]$Update,
-    [Parameter(Mandatory,ParameterSetName='Restore')][switch]$Restore,
+    [Parameter(ParameterSetName='Install')][switch]$Install,
+    [Parameter(ParameterSetName='Update')][switch]$Update,
+    [Parameter(ParameterSetName='Restore')][switch]$Restore,
     [ValidateSet('preview','stable')][string]$Channel='preview',
     [ValidatePattern('^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$ReleaseTag,
     [string]$WorkspaceRoot=$PWD,
@@ -18,7 +19,10 @@ function Resolve-InstallPath([string]$Relative) {
     $path=[IO.Path]::GetFullPath((Join-Path $root $Relative))
     $cursor=$path
     while($cursor){
-        if((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)){throw "Linked installation path: $Relative"}
+        if((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)){
+            $item=Get-Item -LiteralPath $cursor -Force
+            if($cursor -cne $path -or $Relative -notin @('AGENTS.md','CLAUDE.md') -or $item.LinkTarget.Replace('\','/') -cne '.agents/agents.md'){throw "Linked installation path: $Relative"}
+        }
         $cursor=[IO.Path]::GetDirectoryName($cursor)
     }
     return $path
@@ -31,12 +35,22 @@ function Invoke-GitHub([string[]]$Arguments) {
 }
 $lockPath=Resolve-InstallPath 'open-guide-platform.installation.json'
 $previous=if(Test-Path -LiteralPath $lockPath){Get-Content -LiteralPath $lockPath -Raw|ConvertFrom-Json -AsHashtable}else{$null}
+$automatic=-not ($Install -or $Update -or $Restore)
+if($automatic){
+    if($previous){$Update=$true}else{$Install=$true}
+}
 if($previous -and ($previous.kind -cne 'preview-installation' -or $previous.schemaVersion -ne 1)){throw 'Unsupported installation record.'}
 if($Restore -or $Update){if(-not $previous){throw 'No installation found; run -Install first.'}}
 if($Install -and $previous){throw 'Already installed; use -Update.'}
 if(-not $Restore){
     if($Channel -ne 'preview'){throw 'Stable adoption is not available: native Hugo publication and coordinated agent controls remain adoption blockers.'}
     $branch=(& git -C $root branch --show-current).Trim()
+    if($automatic -and $branch -in @('main','master')){
+        $reviewBranch='codex/platform-adoption-'+[guid]::NewGuid().ToString('N').Substring(0,8)
+        & git -C $root switch -c $reviewBranch
+        if($LASTEXITCODE -ne 0){throw 'Could not create the adoption/update review branch.'}
+        $branch=$reviewBranch
+    }
     if($LASTEXITCODE -ne 0 -or -not $branch -or $branch -in @('main','master')){throw 'Install/update requires a checked-out review branch, not main/master or detached HEAD.'}
     if($Update){$PolicyPath=$previous.policyPath}
     $policyFile=Resolve-InstallPath $PolicyPath
@@ -90,8 +104,7 @@ if($Restore){return $package}
 foreach($required in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','system/OpenGuidePlatform.GuideSite.Adoption/main.yaml')){
     if(-not (Test-Path -LiteralPath "$package/$required" -PathType Leaf)){throw 'This release predates guide-site installation support; choose a newer release.'}
 }
-Import-Module "$package/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-$null=Import-GuidePolicy -Path $policyFile
+if(-not (Test-Json -Json (Get-Content $policyFile -Raw) -SchemaFile "$package/system/OpenGuidePlatform.PowerShell.Core/Contracts/site-policy.schema.json" -ErrorAction Stop)){throw 'Invalid guide-site policy.'}
 $files=[ordered]@{}
 $null=Invoke-GitHub @('release','download',$ReleaseTag,'--repo',$repository,'--pattern','bootstrap.ps1','--dir',$work)
 if((Get-Digest "$work/bootstrap.ps1") -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
@@ -104,11 +117,14 @@ foreach($item in Get-ChildItem "$package/system/OpenGuidePlatform.AgentSkills" -
     $relative=[IO.Path]::GetRelativePath("$package/system/OpenGuidePlatform.AgentSkills",$item.FullName).Replace('\','/')
     $files[".agents/skills/$relative"]=[IO.File]::ReadAllBytes($item.FullName)
 }
-$instruction="Read and follow .agents/OpenGuidePlatform.md before working in this repository."+[Environment]::NewLine
-$files['AGENTS.md']=[Text.Encoding]::UTF8.GetBytes($instruction)
-$files['CLAUDE.md']=$files['AGENTS.md']
-$files['.github/copilot-instructions.md']=$files['AGENTS.md']
-$files['.agents/OpenGuidePlatform.md']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/AgentInstructions.md")
+$instructions=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/AgentInstructions.md")
+$files['.agents/agents.md']=$instructions
+$files['AGENTS.md']=$instructions
+$files['CLAUDE.md']=$instructions
+# Fail before any tracked changes if this machine cannot create Git-compatible shims.
+try{New-Item -ItemType SymbolicLink -Path (Join-Path $work 'shim-test') -Target '.agents/agents.md' -WhatIf:$false | Out-Null}
+catch{throw 'Symbolic links are required. Enable Windows Developer Mode (or use an elevated shell), and clone with git -c core.symlinks=true.'}
+$files['.github/copilot-instructions.md']=$instructions
 # Preflight ALL managed destinations. Never silently replace consumer work.
 $conflicts=[Collections.Generic.List[string]]::new()
 if($previous){
@@ -138,13 +154,19 @@ try{
         $original[$name]=if(Test-Path -LiteralPath $path){[IO.File]::ReadAllBytes($path)}else{$null}
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($path))|Out-Null
         $written.Add($name)
-        [IO.File]::WriteAllBytes($path,$files[$name])
+        if($name -in @('AGENTS.md','CLAUDE.md')){
+            [IO.File]::Delete($path)
+            New-Item -ItemType SymbolicLink -Path $path -Target '.agents/agents.md' -WhatIf:$false | Out-Null
+        }else{[IO.File]::WriteAllBytes($path,$files[$name])}
     }
 }catch{
     foreach($name in $written){
         $path=Resolve-InstallPath $name
-        if($null -eq $original[$name]){[IO.File]::Delete($path)}else{[IO.File]::WriteAllBytes($path,$original[$name])}
+        if($null -eq $original[$name]){[IO.File]::Delete($path)}elseif($name -in @('AGENTS.md','CLAUDE.md')){[IO.File]::Delete($path);New-Item -ItemType SymbolicLink -Path $path -Target '.agents/agents.md' -WhatIf:$false | Out-Null}else{[IO.File]::WriteAllBytes($path,$original[$name])}
     }
     throw
 }
 Write-Host "Installed $ReleaseTag. Review git diff, run ./build.ps1, then commit the adoption/update PR. No deployment was enabled."
+
+}
+Invoke-OpenGuidePlatformBootstrap @args

@@ -37,6 +37,42 @@ Individual stages are available through `-Stage Prepare|Build|Package|Validate`.
 
 The archive includes the named system components, runtime build entry points, licence and documentation. `release-manifest.json` records the version, source commit and archive SHA256. Package verification extracts into a fresh location and loads the distributed PowerShell modules.
 
+
+## Install or update a guide site remotely
+
+From the guide-site repository, run:
+
+```powershell
+irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/main/bootstrap.ps1 | iex
+```
+
+The same command installs on first use and updates an existing installation. The bootstrap selects the newest installable preview release, downloads and verifies its package, and proposes the managed files on your local review branch. It downloads the standalone bootstrap asset itself; you do not fetch the package, inspect release metadata or verify checksums by hand.
+
+Prerequisites: PowerShell 7.4+, authenticated GitHub CLI (`gh auth login`), Git and a reviewed `guide-site.policy.json`. Windows symbolic-link requirements are documented below. On main/master the automatic entry point creates a local adoption/update branch. Existing consumer files and locally edited managed files produce explicit conflicts, with no partial replacement. First adoption includes reviewing the site's policy and integrating existing instructions/workflows; the bootstrap does not guess those decisions.
+
+Before this branch is merged, test its remote entry point with:
+
+```powershell
+irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/codex/open-guide-platform/bootstrap.ps1 | iex
+```
+
+After installation or update, review `git diff`, run `./build.ps1 -Target preview` and `./build.ps1 -Target production`, and commit the adoption/update PR. The bootstrap never commits, pushes or deploys a guide site.
+
+Advanced local operations use the installed bootstrap:
+
+```powershell
+./bootstrap.ps1 -Update -Channel preview -WhatIf
+./bootstrap.ps1 -Update -ReleaseTag 'v<selected-release>'
+./bootstrap.ps1 -Restore
+```
+
+Restore uses the recorded release, rechecks its cached ZIP checksum and extracts fresh code; it can work offline. Routine builds restore and never select an update. `-WhatIf` downloads/verifies the candidate and lists destinations without changing tracked files. Cache and extraction use ignored `.processing/` directories.
+
+Managed files include the build adapter, bootstrap, thin shared-workflow caller, skills, agent instructions and `open-guide-platform.installation.json`. AGENTS.md and CLAUDE.md are symbolic links to `.agents/agents.md`. Content, supplied/protected PDFs, bespoke wrapper and existing Hugo dependency files remain consumer-owned.
+
+This is preview installation. Native Hugo module publication, coordinated agent controls and independent enforcement remain explicit adoption blockers in the installation record. The candidate resolves Hugo from the verified package overlay. Generated CI validates one preview target per run; site-specific deployment/cleanup integration is reviewed during adoption. Stable adoption is not claimed.
+
+
 ## Build a guide site from a release
 
 Use an exact release and its source commit. These are the same operations the shared workflow performs:
@@ -68,7 +104,7 @@ Guide-site evidence includes `prepare/assessment.json`, `prepare/assessment.md`,
 
 Prepare assesses the wrapper, guide editions, translations and declared downloads. It checks permanent production exclusions even during a preview build. Effective i18n evidence comes from isolated Hugo probes using the actual catalogues and module; resolved text does not prove translation quality. Expected failure tests have isolated summary destinations.
 
-Validate checks declared wrapper routes, generated JSON, unresolved tokens, duplicate target paths, prohibited language directories, artifact size and identity. Build evidence is not browser or hosting approval. Deploy uploads only the validated artifact to an explicitly configured Azure Static Web App. Verify compares the served identity, required pages and PDFs against that artifact and checks forbidden language routes. The sample validates preview and production artifacts, then deploys only preview to the supplied Blue Field Static Web App (a PR-specific named environment) and verifies it. Its production deployment remains disabled. Trusted external enforcement and full adoption remain open work; this change does not modify deployed consumer sites.
+Validate checks declared wrapper routes, generated JSON, unresolved tokens, duplicate target paths, prohibited language directories, artifact size and identity. Build evidence is not browser or hosting approval. Deploy uploads only the validated artifact to an explicitly configured Azure Static Web App. Verify compares the served identity, required pages and PDFs against that artifact and checks forbidden language routes. Each sample run selects one target (preview by default; production only by explicit manual selection), then deploys only preview to the supplied Blue Field Static Web App (a PR-specific named environment) and verifies it. Its production deployment remains disabled. Trusted external enforcement and full adoption remain open work; this change does not modify deployed consumer sites.
 
 The module keeps its historical identity `github.com/nkdAgility/HugoGuides/module` for now. The candidate build resolves the module from the verified package through an output-only configuration overlay. Canonical native module publication and the full coordinated adoption lock remain required before consumer adoption is declared complete. No Hugo rendering internals are refactored here.
 
@@ -95,3 +131,22 @@ The Azure-generated workflow is retained unchanged under `.github/workflow-refer
 Sample URLs follow the existing guide-site convention: production `https://blue-field-06cea8c03.6.azurestaticapps.net/`, preview `https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/`, and PR `https://blue-field-06cea8c03-<number>.westeurope.6.azurestaticapps.net/`. The selected URL is passed into the generated Hugo overlay; Verify uses the actual URL returned by Azure.
 `sample-close-pr.yaml` is the thin sample caller for shared `guide-site-close-pr.yaml`. Closing a same-repository PR cancels its in-flight sample run and deletes only its matching PR-number environment. Cleanup never builds or checks out PR code. The open PR is not closed merely to test cleanup.
 Azure confirmed the PR 35 environment as `35`, at `https://blue-field-06cea8c03-35.westeurope.6.azurestaticapps.net/`. The shared sample uses this observed PR environment convention; existing consumers declare canary names, but those declarations are not evidence of the hosting URL.
+### Windows checkouts and agent instruction shims
+
+AGENTS.md and CLAUDE.md are relative symbolic links to `.agents/agents.md`. Reading any of the three returns the same source bytes. There are no generated copies or synchronization jobs.
+
+On Windows, enable **Developer Mode** (Settings → System → Advanced → For developers; older Windows versions place this under Privacy & security), or use a shell with symbolic-link privileges. Clone with:
+
+```powershell
+git clone -c core.symlinks=true https://github.com/nkdAgility/OpenGuidePlatform.git
+```
+
+For an existing checkout whose two root files contain only the link target, first preserve any local instruction edits, then recreate just those tracked links:
+
+```powershell
+git config --global core.symlinks true
+git restore --source=HEAD --worktree -- AGENTS.md CLAUDE.md
+Get-Item AGENTS.md, CLAUDE.md | Select-Object Name, LinkType, Target
+```
+
+Both must report `SymbolicLink` targeting `.agents/agents.md`. If Git leaves the materialized files unchanged, remove only those two unchanged root pointer files and repeat `git restore`. Never delete the canonical file. The platform tests reject materialized pointers or copies. The remote installer checks symlink creation before modifying tracked files. Linux and macOS normally need no additional setup.

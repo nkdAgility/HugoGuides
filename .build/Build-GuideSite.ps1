@@ -71,7 +71,15 @@ if($Stage -in @('All','Validate')){
     if($Target -eq 'production'){
         $forbidden=@($policy.publication.permanentExclusions|Where-Object { $_.environment -eq 'production' -and $_.subject -eq 'language' }|ForEach-Object {$_.id})
     }
-    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $policy.wrapper.requiredRoutes -ForbiddenPaths $forbidden
+    $requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
+    $report=Get-GuideArtifactAssessment -ArtifactRoot $site -IdentityPath "$output/artifact-identity.json" -HugoLogPath "$output/hugo.log" -SourceCommit $commit -Target $Target -RequiredRoutes $requiredRoutes -ForbiddenPaths $forbidden
+    $navigationBase=if($BaseUrl){$BaseUrl}else{(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration.baseurl}
+    $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase
+    [IO.File]::WriteAllText("$output/navigation-validation.json",($navigation|ConvertTo-Json -Depth 10))
+    if($navigation.Outcome -ne 'pass'){
+        $report.Outcome='fail'
+        $report.Findings+=@($navigation.Findings|ForEach-Object {[pscustomobject]@{Code=$_.Code;Path=$_.Page;Message="Repair local target $($_.Target)"}})
+    }
     [IO.File]::WriteAllText("$output/artifact-validation.json",($report|ConvertTo-Json -Depth 100))
     & "$PSScriptRoot/Write-GuideSiteValidationSummary.ps1" -OutputPath $output
     if($report.Outcome -ne 'pass'){throw "Guide-site validation $($report.Outcome). See $output/artifact-validation.json"}

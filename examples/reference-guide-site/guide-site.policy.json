@@ -6,11 +6,37 @@
     "requiredRoutes": [
       "/",
       "/guide1/",
+      "/guide1/history/",
+      "/guide1/translations/",
       "/guide1/2020.7/",
       "/guide1/2020.12/",
       "/guide1/2025.5/",
       "/guide2/",
-      "/guide2/2025.7/"
+      "/guide2/history/",
+      "/guide2/translations/",
+      "/guide2/2025.7/",
+      "/ja/",
+      "/ja/guide1/",
+      "/ja/guide1/history/",
+      "/ja/guide1/translations/",
+      "/ja/guide1/2020.7/",
+      "/ja/guide1/2020.12/",
+      "/ja/guide1/2025.5/",
+      "/ja/guide2/",
+      "/ja/guide2/history/",
+      "/ja/guide2/translations/",
+      "/ja/guide2/2025.7/",
+      "/min/",
+      "/min/guide1/",
+      "/min/guide1/history/",
+      "/min/guide1/translations/",
+      "/min/guide1/2020.7/",
+      "/min/guide1/2020.12/",
+      "/min/guide1/2025.5/",
+      "/min/guide2/",
+      "/min/guide2/history/",
+      "/min/guide2/translations/",
+      "/min/guide2/2025.7/"
     ],
     "requiredFiles": [
       "examples/reference-guide-site/content/_index.md"
@@ -44,6 +70,12 @@
               "language": "min",
               "intent": "web",
               "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
             }
           ]
         },
@@ -61,6 +93,12 @@
               "language": "min",
               "intent": "web",
               "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
+              "downloads": []
             }
           ]
         },
@@ -77,6 +115,12 @@
             {
               "language": "min",
               "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
               "downloads": []
             }
           ]
@@ -104,6 +148,12 @@
             {
               "language": "min",
               "intent": "web",
+              "downloads": []
+            },
+            {
+              "language": "ja",
+              "intent": "fallback",
+              "fallbackLanguage": "en",
               "downloads": []
             }
           ]

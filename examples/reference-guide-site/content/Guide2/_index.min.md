@@ -12,13 +12,13 @@ brand:
   bg_colour: "#0072B2"
 
 guide_whatis: |
-  [Guide 2 Banana Booky](/min/guide-2/latest) = practical, banana-filled, team-huggy book.  
+  [Guide 2 Banana Booky](/min/guide2/) = practical, banana-filled, team-huggy book.  
   Teaches da fancy bits for running da work machine in smarty work land.  
-  Based on da [Da Guide 1 Booky](/min/guide-1/latest) but with moar juice!  
+  Based on da [Da Guide 1 Booky](/min/guide1/) but with moar juice!  
   Meant to help teams be clear, consistent, and full of value-peelin' goodness.
 
 guide_overview: |
-  [Guide 2 Banana Booky](/min/guide-2/latest) = practical, community-built, full of fancy banana wisdom for smart workies. 🍌
+  [Guide 2 Banana Booky](/min/guide2/) = practical, community-built, full of fancy banana wisdom for smart workies. 🍌
 
 weight: 2
 
@@ -42,16 +42,16 @@ guide_comparison:
     content: "Sometimes we polish da banana"
 
 which_to_use_summary: |
-  Choose [Guide 2 Banana Booky](/min/guide-2/latest) if you play with Agile, Scrum, Lean, or like mixy setups.  
+  Choose [Guide 2 Banana Booky](/min/guide2/) if you play with Agile, Scrum, Lean, or like mixy setups.  
   Great for banana coaches, curious teams, and folks who need flexibility to work their own way.
 
 layman_description: |
-  [Guide 2 Banana Booky](/min/guide-2/latest) helps you use fancy work stuff and make it better!  
+  [Guide 2 Banana Booky](/min/guide2/) helps you use fancy work stuff and make it better!  
   Got tools, got fun, works with Scrum, Lean, and other teamy stuff.  
   Made by more bananas than just two. Good for when one-size no fit all!
 
 practitioner_description: |
-  [Guide 2 Banana Booky](/min/guide-2/latest) = smart banana handbook!  
+  [Guide 2 Banana Booky](/min/guide2/) = smart banana handbook!  
   Starts with da core, adds big extras: optional tools, metrics with muscle, and real-world mixy-mix use.  
   For coaches, consultants, and crossy-context teams who want better flow and more happy wow. 💥🍌
 ---

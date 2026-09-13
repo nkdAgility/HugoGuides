@@ -17,4 +17,4 @@ Hugo front matter must not contain lang; Pandoc receives language metadata separ
 Questions request answers, not edits. Prefer good engineering over shortcuts. Use action version tags with only necessary version restrictions.
 Work on a review branch, commit verified changes and keep preview evidence distinct from production approval.
 Do not change or deploy consumer sites as a side effect of platform work.
-Root AGENTS.md and CLAUDE.md remain identical shims to this file. Maintain human README instructions whenever commands change.
+Root AGENTS.md and CLAUDE.md are symbolic links to this canonical file. Keep the links; edit only this file. Windows checkouts require symbolic link support and git core.symlinks=true. Maintain human README instructions whenever commands change.

@@ -8,10 +8,10 @@ brand:
   bg_colour: "#b10002"
 
 guide_whatis: |
-  [Da Guide 1 Booky](/min/guide-1/latest) is da helpful banana book for work stuff in brainy worky land. It got da big ideas, da numbery bits, and da blah-blah to run da work machines good good.
+  [Da Guide 1 Booky](/min/guide1/) is da helpful banana book for work stuff in brainy worky land. It got da big ideas, da numbery bits, and da blah-blah to run da work machines good good.
 
 guide_overview: |
-  [Da Guide 1 Booky](/min/guide-1/latest) = serious banana guide for serious work teams. 🍌📘
+  [Da Guide 1 Booky](/min/guide1/) = serious banana guide for serious work teams. 🍌📘
 
 guide_logo: "guide-1-logo.png"
 weight: 1
@@ -32,12 +32,12 @@ guide_comparison:
   - title: Update Model
     content: "Sometimes we polish da banana"
 which_to_use_summary: |
-  First time worky? Start-y with [Da Guide 1](/min/guide-1/latest).  
+  First time worky? Start-y with [Da Guide 1](/min/guide1/).  
   Need clear n' simple? Dis one's your jam.
 
 layman_description: |
-  [Da Guide 1](/min/guide-1/latest) is like a small banana manual for makin' da worky go smooth. Helps teams see stuff, no multi-tasky, and ship ship ship. Just da good bits, no brain hurt.
+  [Da Guide 1](/min/guide1/) is like a small banana manual for makin' da worky go smooth. Helps teams see stuff, no multi-tasky, and ship ship ship. Just da good bits, no brain hurt.
 
 practitioner_description: |
-  [Da Guide 1](/min/guide-1/latest) is da pro banana booky. Say how to flow da value like a river of pudding. Got da 3 big things: see da work, manage da work, fix da work. All clean, all shiny. If you need clear, stable, no-headache work stuff, dis da one.
+  [Da Guide 1](/min/guide1/) is da pro banana booky. Say how to flow da value like a river of pudding. Got da 3 big things: see da work, manage da work, fix da work. All clean, all shiny. If you need clear, stable, no-headache work stuff, dis da one.
 ---

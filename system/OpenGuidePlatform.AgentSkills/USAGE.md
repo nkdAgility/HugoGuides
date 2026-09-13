@@ -1,6 +1,6 @@
 # Using the shared publishing commands
 
-These are platform candidate skills, not yet an installed consumer release. E07 will supply the pinned bootstrap/package paths. Do not import an arbitrary globally installed Core version or invent policy from test fixtures.
+Preview installation distributes these skills through bootstrap.ps1. In the consumer root, run $platform = ./bootstrap.ps1 -Restore and import "$platform/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1". Stable adoption and independent agent controls remain unfinished in E07/E08. Do not import an arbitrary globally installed Core version or invent policy from test fixtures.
 
 In the platform development checkout, load `system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1`. In an adopted site, load Core through its version-locked bootstrap. Set WorkspaceRoot to the consumer repository root and load its reviewed site policy with `Import-GuidePolicy -Path $PolicyPath`.
 

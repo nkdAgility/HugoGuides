@@ -97,6 +97,15 @@ Describe 'Guide-site installation and update' {
         { & $bootstrap -Install @parameters -Channel stable } | Should -Throw '*Stable adoption is not available*'
         { & $bootstrap -Install @parameters -PolicyPath '../outside.json' } | Should -Throw '*Unsafe installation path*'
     }
+    It 'supports the no-argument remote execution entry point for install and update' {
+        Push-Location $workspace
+        try{
+            Invoke-Expression ([IO.File]::ReadAllText($bootstrap))
+            (Get-Content open-guide-platform.installation.json -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+            Invoke-Expression ([IO.File]::ReadAllText($bootstrap))
+            (Get-Item AGENTS.md).LinkType | Should -Be SymbolicLink
+        }finally{Pop-Location}
+    }
     It 'requires a review branch' {
         & git -C $workspace symbolic-ref HEAD refs/heads/main
         { & $bootstrap -Install @parameters } | Should -Throw '*review branch*'

@@ -21,7 +21,8 @@ if($Target -eq 'production'){$forbidden=@($policy.publication.permanentExclusion
 $overlay=Get-Content "$output/candidate-platform.json" -Raw|ConvertFrom-Json -AsHashtable
 $arguments=@{}
 if($overlay.Contains('baseURL')){$arguments.ExpectedBaseUri=$overlay.baseURL}
-$result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $policy.wrapper.requiredRoutes -ForbiddenPaths $forbidden @arguments
+$requiredRoutes=@($policy.wrapper.requiredRoutes|Where-Object { $route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })
+$result=Test-GuideSiteDeployment -BaseUri $DeploymentUrl -Identity $identity -RequiredRoutes $requiredRoutes -ForbiddenPaths $forbidden @arguments
 [IO.File]::WriteAllText("$output/deployment-verification.json",($result|ConvertTo-Json -Depth 30))
 $markdown="## Verify: $($result.Outcome)`n`nCommit: $($result.SourceCommit)`n`nPlatform: $($result.PlatformVersion)`n`nTarget: $Target`n`nURL: $DeploymentUrl`n"
 Write-Host $markdown
