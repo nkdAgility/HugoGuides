@@ -55,6 +55,10 @@ Remaining gates:
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
 
+### Actionable failure reporting
+
+Platform test reports now carry explicitly authored **Why** and **How to fix** fields in local output and Actions summaries/annotations. The workflow-input failure is explained at the check rather than inferred from a low-level exception. Technical error/location remains supporting evidence. Unknown errors are explicitly undiagnosed; authoring explanations for every existing failure path remains ongoing work, not a completed universal diagnosis guarantee.
+
 ### Platform and guide-site build modules
 
 The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.Build` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. Both ship in the same package and version. Existing build/test/package scripts in `.build/` are forwarding entry points.

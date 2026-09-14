@@ -1,3 +1,4 @@
+. (Join-Path $PSScriptRoot 'Diagnostics/BuildFailure.ps1')
 # Platform engineering depends on the consumer Build module, never the reverse.
 function Invoke-PlatformBuildOperation {
     [CmdletBinding()]
@@ -72,4 +73,4 @@ function Invoke-PlatformBuild {
         & "$WorkspaceRoot/.build/Restore-OpenGuidePlatform.ps1" -ReleaseTag $ReleaseTag -ExpectedCommit $commit -OutputPath $OutputPath
     }
 }
-Export-ModuleMember -Function Invoke-PlatformBuild,Invoke-PlatformBuildOperation,Test-PlatformCandidateSample
+Export-ModuleMember -Function New-PlatformBuildFailure,Write-PlatformTestSummary,Invoke-PlatformBuild,Invoke-PlatformBuildOperation,Test-PlatformCandidateSample

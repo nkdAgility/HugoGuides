@@ -7,3 +7,9 @@ Run `./build.ps1 -Version 0.0.0-local` from the platform checkout. All runs test
 `Invoke-PlatformBuild` accepts WorkspaceRoot, Stage, OutputPath and Version explicitly. `Invoke-PlatformBuildOperation` exposes individual platform operations to existing thin `.build/` entry points. Repository identity for release publication is an explicit parameter, independent of the CI runner.
 
 Packaging includes module implementations. Platform tests and the sample are inputs from WorkspaceRoot, not embedded fixtures in the distribution. Actual Azure upload still belongs to the existing workflow adapter; cross-provider deployment and macOS/TeamCity/Azure Pipelines acceptance remain separate gaps, not claims made by this module split.
+
+## Failure explanations
+
+Failing platform checks should throw `New-PlatformBuildFailure -Why <plain-language cause> -HowToFix <concrete repair>`. The test reporter retains those fields in local output, `.processing/platform-tests/<run>/summary.md`, machine-readable findings and the Actions summary/annotation. It handles test, setup and discovery failures. Unclassified exceptions are identified as undiagnosed and retain technical detail; the reporter must never invent a repair from an unfamiliar exception.
+
+The workflow validator explains malformed workflow input and inline-script violations at their source. The Node deprecation notice emitted by third-party Actions is separate from a failed platform check.
