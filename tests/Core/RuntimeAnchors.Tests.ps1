@@ -52,6 +52,10 @@ Describe 'Current artifact runtime anchors' {
         $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath '.processing/not-created'
         $result.outcome | Should -Be 'not-required'
     }
+    It 'accepts an explicitly null anchor collection from optional policy fields' {
+        $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath '.processing/not-created' -Anchors $null
+        $result.outcome | Should -Be 'not-required'
+    }
     It 'rejects a changed artifact before collecting fresh browser evidence' {
         [IO.File]::AppendAllText("$site/index.html",'changed')
         try{

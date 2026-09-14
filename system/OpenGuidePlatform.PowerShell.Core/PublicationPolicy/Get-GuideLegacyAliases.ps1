@@ -3,7 +3,7 @@ function Get-GuideLegacyAliasTargets {
     $counts=@{}
     if($Policy.wrapper.Contains('legacyAliases')){
         foreach($entry in $Policy.wrapper.legacyAliases){
-            if($entry.language -cnotin $EnabledLanguages){continue}
+            if($entry.language -notin $EnabledLanguages){continue}
             foreach($target in $entry.targets){
                 if($target -cnotmatch '^(?:[A-Za-z0-9-]+/)?(?:download|downloads|translationsdirectory)/index\.html$'){throw "Not a legacy alias target: $target"}
                 if(-not $counts.ContainsKey($target)){$counts[$target]=0}

@@ -18,7 +18,7 @@ function Test-GuideRuntimeAnchors {
     $artifactIdentity=Get-Content -LiteralPath $IdentityPath -Raw|ConvertFrom-Json
     $null=Test-GuideArtifactIdentity -ArtifactRoot $ArtifactRoot -Identity $artifactIdentity -ExpectedTarget $artifactIdentity.target -ExpectedSourceCommit $artifactIdentity.sourceCommit
     $identity=(Get-FileHash -LiteralPath $IdentityPath).Hash.ToLowerInvariant()
-    if(-not $Anchors.Count){return [pscustomobject]@{schemaVersion=1;outcome='not-required';artifactIdentitySha256=$identity;observations=@()}}
+    if(-not $Anchors -or -not $Anchors.Count){return [pscustomobject]@{schemaVersion=1;outcome='not-required';artifactIdentitySha256=$identity;observations=@()}}
     $evidence=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
     [IO.Directory]::CreateDirectory($evidence)|Out-Null
     $lock=(Get-FileHash "$PSScriptRoot/package-lock.json").Hash.ToLowerInvariant()
