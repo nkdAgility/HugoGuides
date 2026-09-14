@@ -1,4 +1,12 @@
 BeforeAll {
+    function ConvertTo-PackageManifest($Manifest) {
+        $copy=@{}+$Manifest
+        $copy.schemaVersion=2
+        $copy.packages=@{GuideSite=@{archive='OpenGuidePlatform-GuideSite.zip';version=$copy.version;sha256=$copy.sha256}}
+        $copy.Remove('archive');$copy.Remove('sha256');$copy.Remove('bootstrapSha256')
+        return $copy
+    }
+
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     $installer=Join-Path $root '.build/Restore-OpenGuidePlatform.ps1'
     function Write-CandidateFixture {
@@ -10,12 +18,11 @@ BeforeAll {
         [IO.Directory]::CreateDirectory("$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption")|Out-Null
         Copy-Item "$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" "$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/"
         @{product='OpenGuidePlatform';version=$Version;sourceCommit=if($WrongMetadata){'b'*40}else{$Commit}}|ConvertTo-Json|Set-Content "$payload/platform.json"
-        'fixture bootstrap'|Set-Content "$assets/bootstrap.ps1"
         if($Traversal){
-            $zip=[IO.Compression.ZipFile]::Open("$assets/OpenGuidePlatform.zip",[IO.Compression.ZipArchiveMode]::Create)
+            $zip=[IO.Compression.ZipFile]::Open("$assets/OpenGuidePlatform-GuideSite.zip",[IO.Compression.ZipArchiveMode]::Create)
             try{$null=$zip.CreateEntry('../escaped.txt')}finally{$zip.Dispose()}
-        }else{[IO.Compression.ZipFile]::CreateFromDirectory($payload,"$assets/OpenGuidePlatform.zip")}
-        @{product='OpenGuidePlatform';version=$Version;sourceCommit=$Commit;archive='OpenGuidePlatform.zip';sha256=if($CorruptInner){'0'*64}else{(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()};bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant()}|ConvertTo-Json|Set-Content "$assets/release-manifest.json"
+        }else{[IO.Compression.ZipFile]::CreateFromDirectory($payload,"$assets/OpenGuidePlatform-GuideSite.zip")}
+        ConvertTo-PackageManifest @{product='OpenGuidePlatform';version=$Version;sourceCommit=$Commit;archive='OpenGuidePlatform-GuideSite.zip';sha256=if($CorruptInner){'0'*64}else{(Get-FileHash "$assets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant()};}|ConvertTo-Json -Depth 10|Set-Content "$assets/release-manifest.json"
         $bundle=Join-Path $Directory 'candidate.zip'
         [IO.Compression.ZipFile]::CreateFromDirectory($assets,$bundle)
         return $bundle

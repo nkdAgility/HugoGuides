@@ -20,7 +20,7 @@ The platform build runs preparation, tests, packaging and package verification. 
 
 Both root build entry points accept `-PlatformSource Local|Preview|Production|Path`, `-PlatformRelease <tag>` and `-PlatformPath <directory-or-zip>`. Platform checkouts default to their local module. Installed consumers default to their installation lock. An explicit override does not change that lock. Preview/Production without a tag select the latest eligible release once at startup; Production means a non-prerelease platform package, independently of the site's `-Target`.
 
-A path points to a platform checkout, a restored platform directory, or `OpenGuidePlatform.zip` alongside its `release-manifest.json`. ZIP bytes are verified and extracted into a fresh workspace directory. Release selection uses the standalone bootstrap to verify the package before importing module code.
+A path points to a platform checkout, a restored platform directory, or `OpenGuidePlatform-GuideSite.zip` alongside its `release-manifest.json`. ZIP bytes are verified and extracted into a fresh workspace directory. The shared loader verifies selected packages before importing module code. Platform engineering also restores `OpenGuidePlatform-PlatformBuild.zip`, which depends on the exact GuideSite package from the same release. Both ZIPs and their manifest must be available when using an explicit ZIP path for a platform build.
 
 For a consumer-owned build, import the selected Build module and invoke its stages around the consumer's other operations. PlatformBuild uses the newly built package for sample acceptance; consumers do not need PlatformBuild or the platform test dependencies.
 
@@ -44,7 +44,7 @@ Prepare report is a separate delivery job beside Prepare so its comment-writing 
 
 The shared workflow exposes Prepare, Build, Validate, Deploy and Verify; preview and production use the same stages. The target remains visible in assessment summaries and artifact names.
 
-The sample directly calls the [shared guide-site workflow](../.github/workflows/guide-site-build.yaml). It receives the build artifact ZIP URL, SHA256, GitVersion version and source commit. The ZIP contains `OpenGuidePlatform.zip`, `release-manifest.json` and standalone `bootstrap.ps1`. Restoration validates both archive checksums and the expected identities before using the packaged tooling.
+The sample directly calls the [shared guide-site workflow](../.github/workflows/guide-site-build.yaml). It receives the build artifact ZIP URL, SHA256, GitVersion version and source commit. The artifact ZIP contains `OpenGuidePlatform-GuideSite.zip`, `OpenGuidePlatform-PlatformBuild.zip` and `release-manifest.json`. The sample restores only the GuideSite package. Bootstrap is source-only infrastructure fetched from `main`; it is neither a release asset nor an installed file. Restoration validates both archive checksums and the expected identities before using the packaged tooling.
 
 Publication depends on sample success and downloads the same artifact ID without rebuilding it. Publication runs only on pushes to main. PRs build and validate the candidate artifact and may deploy their sample preview, but never create a platform release. Manual workflow runs do not publish. Preview runs deploy only trusted changes to the sample preview; the manual production target validates output without production deployment.
 
@@ -87,14 +87,14 @@ Repository administrators can separately enable **Settings → Actions → Polic
 
 These are configured destinations, not a claim that each environment is deployed. PR 35 uses [its own preview](https://blue-field-06cea8c03-35.westeurope.6.azurestaticapps.net/). The sample's production deployment is disabled. [PR cleanup](../.github/workflows/sample-close-pr.yaml) cancels the matching run and closes that PR's preview environment.
 
-## Try the unmerged installer
+## Installer changes before publication
 
-Until the installer is available on `main`, run this from a prepared guide-site repository to evaluate the current implementation branch:
+Bootstrap fetches the shared loader from `main` and selects a compatible published release. Until a change is merged and a release passes sample validation, the public install command continues to use the published system. The platform tests exercise first installation, local self-update, conflict handling and cached builds against candidate fixture packages before publication.
 
-```powershell
-irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/codex/open-guide-platform/bootstrap.ps1 | iex
-```
+## Distribution contract
 
-It still downloads a published preview package. Changing the bootstrap source URL does not build or install arbitrary uncommitted platform code.
+Each release has one version and source commit. `release-manifest.json` schema 2 lists each package's filename, version, SHA256 and component inventory. `OpenGuidePlatform-GuideSite.zip` contains consumer build, adoption, Core, agent controls/integration and candidate Hugo resources. `OpenGuidePlatform-PlatformBuild.zip` contains platform engineering and declares its dependency on that exact GuideSite version and checksum. Guide-site builds do not restore PlatformBuild.
 
-See the [execution plan](architecture/open-guide-platform-execution-plan.md) for remaining adoption work and acceptance evidence, and the [architecture proposal](architecture/open-guide-platform-proposal.md) for component responsibilities.
+Bootstrap remains a remote source entry point. Installation and migration decisions live in the released GuideSiteAdoption module. The installed build launcher and shared loader support `./build.ps1 Update -ring preview` without fetching bootstrap or loader source from `main`. `-WhatIf` previews managed changes; `-PlatformRelease` selects an exact release. Ordinary builds never update the installation lock.
+
+Updating an older installation removes its managed `bootstrap.ps1` only if its recorded checksum still matches. A locally edited bootstrap blocks the update with a conflict, and failed installation writes restore the retired file. Unmanaged files are preserved. Existing immutable releases are not modified; the new loader selects releases containing the new GuideSite asset. Stable adoption remains the separately tracked acceptance gate.

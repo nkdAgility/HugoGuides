@@ -3,9 +3,12 @@
 param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath,[string]$Repository='nkdAgility/OpenGuidePlatform')
 $ErrorActionPreference='Stop'
 $manifest=Get-Content "$OutputPath/release-manifest.json" -Raw|ConvertFrom-Json
-if($manifest.channel -cne 'preview' -or $manifest.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$' -or $manifest.archive -cne 'OpenGuidePlatform.zip'){throw 'Only GitVersion prerelease packages can be published by this entry point.'}
-if((Get-FileHash "$OutputPath/OpenGuidePlatform.zip").Hash.ToLowerInvariant() -cne $manifest.sha256){throw 'Release package digest mismatch.'}
-if((Get-FileHash "$OutputPath/bootstrap.ps1").Hash.ToLowerInvariant() -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
+if($manifest.channel -cne 'preview' -or $manifest.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$' -or $manifest.schemaVersion -ne 2){throw 'Only GitVersion prerelease packages can be published by this entry point.'}
+$assets=@('OpenGuidePlatform-GuideSite.zip','OpenGuidePlatform-PlatformBuild.zip','release-manifest.json')
+foreach($name in @('GuideSite','PlatformBuild')){
+    $part=$manifest.packages.$name
+    if($part.archive -cne "OpenGuidePlatform-$name.zip" -or $part.version -cne $manifest.version -or (Get-FileHash "$OutputPath/$($part.archive)").Hash -ine $part.sha256){throw "Release $name package identity or digest mismatch. Rebuild and validate the complete release."}
+}
 $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0 -or $commit -cne $manifest.sourceCommit){throw 'Release checkout does not match the package.'}
 $tag="v$($manifest.version)"
@@ -28,11 +31,14 @@ if($LASTEXITCODE -eq 0){
     $release=$existing|ConvertFrom-Json
     if($release.targetCommitish -cne $commit -or $release.isDraft){throw 'Existing release identity differs.'}
     $verify=Join-Path $OutputPath ('existing-'+[guid]::NewGuid().ToString('N'))
-    & gh release download $tag --repo $Repository --pattern OpenGuidePlatform.zip --pattern release-manifest.json --pattern bootstrap.ps1 --dir $verify
+    & gh release download $tag --repo $Repository --pattern OpenGuidePlatform-GuideSite.zip --pattern OpenGuidePlatform-PlatformBuild.zip --pattern release-manifest.json --dir $verify
     if($LASTEXITCODE -ne 0){throw 'Cannot verify existing release assets.'}
     $prior=Get-Content "$verify/release-manifest.json" -Raw|ConvertFrom-Json
-    if($prior.sha256 -cne $manifest.sha256 -or (Get-FileHash "$verify/OpenGuidePlatform.zip").Hash.ToLowerInvariant() -cne $manifest.sha256){throw 'Existing release bytes differ; publish a new source commit, never overwrite.'}
-    if((Get-FileHash "$verify/bootstrap.ps1").Hash.ToLowerInvariant() -cne $manifest.bootstrapSha256){throw 'Existing bootstrap asset differs.'}
+    if((Get-FileHash "$verify/release-manifest.json").Hash -cne (Get-FileHash "$OutputPath/release-manifest.json").Hash){throw 'Existing release manifest differs; publish a new version, never overwrite.'}
+    foreach($name in @('GuideSite','PlatformBuild')){
+        $part=$manifest.packages.$name
+        if((Get-FileHash "$verify/$($part.archive)").Hash -ine $part.sha256){throw 'Existing release bytes differ; publish a new source commit, never overwrite.'}
+    }
     Write-Host "Existing immutable release $tag verified."
     return
 }
@@ -44,5 +50,5 @@ Platform component tests and package verification passed. Before publication, Gu
 This prerelease does not deploy or update any guide instance. Hosting/browser verification and stable promotion remain separate acceptance steps.
 "@
 [IO.File]::WriteAllText("$OutputPath/release-notes.md",$notes)
-& gh release create $tag "$OutputPath/OpenGuidePlatform.zip" "$OutputPath/release-manifest.json" "$OutputPath/bootstrap.ps1" --repo $Repository --target $commit --prerelease --latest=false --title "OpenGuidePlatform $($manifest.version)" --notes-file "$OutputPath/release-notes.md"
+& gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit --prerelease --latest=false --title "OpenGuidePlatform $($manifest.version)" --notes-file "$OutputPath/release-notes.md"
 if($LASTEXITCODE -ne 0){throw 'Preview release publication failed.'}

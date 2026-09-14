@@ -23,11 +23,7 @@ function Test-PlatformCandidateSample {
     param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath,[string[]]$Targets=@('preview','production'))
     $output=Join-Path $WorkspaceRoot $OutputPath
     $manifest=Get-Content "$output/release-manifest.json" -Raw|ConvertFrom-Json
-    if((Get-FileHash "$output/OpenGuidePlatform.zip").Hash -ine $manifest.sha256){throw 'Candidate package digest mismatch.'}
-    $candidate=Join-Path $output ('sample-platform-'+[guid]::NewGuid().ToString('N'))
-    Expand-Archive -LiteralPath "$output/OpenGuidePlatform.zip" -DestinationPath $candidate
-    $null=& "$candidate/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $candidate -Manifest $manifest
-    @{schemaVersion=1;mode='candidate';sourceCommit=$manifest.sourceCommit;version=$manifest.version}|ConvertTo-Json|Set-Content "$candidate/platform-resolution.json"
+    $candidate=& "$PSScriptRoot/../OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformPath "$output/OpenGuidePlatform-GuideSite.zip"
     foreach($target in $Targets){
         # A fresh PowerShell process prevents the source Build module from satisfying candidate imports.
         & (Join-Path $PSHOME $(if($IsWindows){'pwsh.exe'}else{'pwsh'})) -NoProfile -File "$candidate/build.ps1" -Product GuideSite -WorkspaceRoot $WorkspaceRoot -PolicyPath examples/reference-guide-site/guide-site.policy.json -Target $target -OutputPath "$OutputPath/sample-$target"
@@ -70,7 +66,9 @@ function Invoke-PlatformBuild {
     if($Stage -eq 'Validate' -and $ReleaseTag){
         $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
         if($LASTEXITCODE -ne 0){throw 'Cannot resolve platform source commit.'}
-        & "$WorkspaceRoot/.build/Restore-OpenGuidePlatform.ps1" -ReleaseTag $ReleaseTag -ExpectedCommit $commit -OutputPath $OutputPath
+        $restored=& "$PSScriptRoot/../OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformRelease $ReleaseTag -Product Platform
+        if((Get-Content "$restored/platform.json" -Raw|ConvertFrom-Json).sourceCommit -cne $commit){throw 'Published release source differs from this checkout.'}
+        Write-Host "Verified both published packages for $ReleaseTag."
     }
 }
 Export-ModuleMember -Function New-PlatformBuildFailure,Write-PlatformTestSummary,Invoke-PlatformBuild,Invoke-PlatformBuildOperation,Test-PlatformCandidateSample

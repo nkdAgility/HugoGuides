@@ -4,6 +4,17 @@ Initial implementation: `codex/open-guide-platform`, merged PR #35. Adoption-rea
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
+## Active distribution follow-up
+
+Approved after the initial E07 implementation: split consumer and platform engineering release packages while keeping one coordinated version; remove bootstrap from release/install assets; move adoption into its released PowerShell module; share restoration across local and Actions entry points. Installed consumers update with `./build.ps1 Update -ring preview`; remote bootstrap remains the first-install and recovery entry point. This supersedes the earlier single-ZIP distribution detail, without changing the E00–E14 stage scope.
+
+- [x] Implement split packages, manifest dependencies and thin installation/build entry points.
+- [x] Implement local self-update, conflict checks and retirement of an unchanged legacy bootstrap.
+- [x] Complete full platform, package and sample acceptance: 276 tests passed; both packages validated; sample preview (119 files) and production (87 files) passed from the exact GuideSite ZIP. Workflow lock coverage passed for all four workflows. Local report: `.processing/platform-tests/da7039c8b0c143ecadd3ca82b79588e3/summary.md`.
+- [ ] Verify the branch CI candidate through deployed sample checks before merge.
+
+No guide-site adoption, Hugo internals, production promotion or GitHub administrative settings are changed by this follow-up.
+
 ## Outcome
 
 Rename the existing public `nkdAgility/HugoGuides` repository to `nkdAgility/OpenGuidePlatform`, preserve its Git history and releases, move its reusable code into named `system/` components, and adopt the resulting platform in KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack.

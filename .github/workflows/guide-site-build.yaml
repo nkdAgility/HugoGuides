@@ -81,7 +81,9 @@ jobs:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ inputs.platform-commit }}
           path: .processing/platform-installer
-          sparse-checkout: .build/Restore-OpenGuidePlatform.ps1
+          sparse-checkout: |
+            .build/Restore-OpenGuidePlatform.ps1
+            system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - uses: peaceiris/actions-hugo@v3
@@ -136,7 +138,9 @@ jobs:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ inputs.platform-commit }}
           path: .processing/platform-installer
-          sparse-checkout: .build/Restore-OpenGuidePlatform.ps1
+          sparse-checkout: |
+            .build/Restore-OpenGuidePlatform.ps1
+            system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - name: Restore and verify OpenGuidePlatform
@@ -254,7 +258,9 @@ jobs:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ inputs.platform-commit }}
           path: .processing/platform-installer
-          sparse-checkout: .build/Restore-OpenGuidePlatform.ps1
+          sparse-checkout: |
+            .build/Restore-OpenGuidePlatform.ps1
+            system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - name: Restore and verify OpenGuidePlatform

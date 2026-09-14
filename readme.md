@@ -27,13 +27,15 @@ The platform uses symbolic links for its shared agent instructions. Linux and ma
 
 ## Install or update
 
-Run the same command for both:
+For first installation, run:
 
 ```powershell
 irm https://raw.githubusercontent.com/nkdAgility/OpenGuidePlatform/main/bootstrap.ps1 | iex
 ```
 
 It selects the newest installable preview release and verifies the download. On `main` or `master`, it creates a review branch; otherwise it uses your current branch. It updates the native Hugo dependency to the same release and preserves your wrapper YAML formatting. Existing files that conflict with the installation are reported for review.
+
+Once installed, update on your review branch with `./build.ps1 Update -ring preview`. The remote bootstrap command also supports updates. Bootstrap is not installed into your repository or shipped as a release asset.
 
 Then check the changes and build both targets:
 
@@ -45,7 +47,7 @@ git diff
 
 Review the results, commit your changes and open a pull request. Neither the installer nor these build commands publishes your site. Your maintainer configures preview and production deployment during first adoption.
 
-If the installer is not yet available on `main`, use the [development-branch instructions](docs/platform-development.md#try-the-unmerged-installer).
+New installer features become available after the change is merged and its release passes sample validation. See [platform development](docs/platform-development.md#installer-changes-before-publication) for prepublication testing.
 
 ## Everyday use
 
@@ -58,9 +60,10 @@ Once installed, run these commands from your guide-site repository:
 | Check preview output | `./build.ps1 -Target preview` |
 | Check production output | `./build.ps1 -Target production` |
 | Check inputs without building pages | `./build.ps1 -Stage Prepare` |
-| Preview an update's file changes | `./bootstrap.ps1 -Update -WhatIf` |
+| Update the installed platform | `./build.ps1 Update -ring preview` |
+| Preview an update's file changes | `./build.ps1 Update -ring preview -WhatIf` |
 
-Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version; rerun the install/update command when you want an update.
+Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
 
 To test another platform without changing your installation lock:
 
@@ -68,7 +71,7 @@ To test another platform without changing your installation lock:
 ./build.ps1 -PlatformSource Local -PlatformPath ../OpenGuidePlatform -Target preview
 ./build.ps1 -PlatformSource Preview -Target preview
 ./build.ps1 -PlatformSource Production -Target preview
-./build.ps1 -PlatformPath ./candidate/OpenGuidePlatform.zip -Target preview
+./build.ps1 -PlatformPath ./candidate/OpenGuidePlatform-GuideSite.zip -Target preview
 ```
 
 Add `-PlatformRelease` with a specific release tag to select an exact version. The ZIP must have its `release-manifest.json` alongside it. Release overrides require an available compatible release and its coordinated Hugo dependency; use the installer to adopt a different dependency permanently. `Production` selects a non-prerelease platform package; it does not deploy the site. A release predating these module entry points cannot provide the new operations.

@@ -1,4 +1,13 @@
 BeforeAll {
+    function ConvertTo-PackageManifest($Manifest) {
+        $copy=@{}+$Manifest
+        $copy.schemaVersion=2
+        $copy.packages=@{GuideSite=@{archive='OpenGuidePlatform-GuideSite.zip';version=$copy.version;sha256=$copy.sha256}}
+        $copy.packages.PlatformBuild=@{archive='OpenGuidePlatform-PlatformBuild.zip';version=$copy.version;sha256=(Get-FileHash "$assets/OpenGuidePlatform-PlatformBuild.zip").Hash.ToLowerInvariant()}
+        $copy.Remove('archive');$copy.Remove('sha256');$copy.Remove('bootstrapSha256')
+        return $copy
+    }
+
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     $publisher=Join-Path $root 'system/OpenGuidePlatform.PowerShell.PlatformBuild/Release/Publish-PlatformPreviewRelease.ps1'
     function git {
@@ -26,10 +35,10 @@ Describe 'Coordinated native module publication' {
         $global:OgpNativeTagFailure=$false
         $assets=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($assets)|Out-Null
-        [IO.File]::WriteAllText("$assets/OpenGuidePlatform.zip",'already validated package bytes')
-        [IO.File]::WriteAllText("$assets/bootstrap.ps1",'bootstrap bytes')
-        $manifest=@{version='0.1.0-Preview.1';channel='preview';archive='OpenGuidePlatform.zip';sourceCommit=('a'*40);sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant();bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version='v0.1.0-Preview.1';tag='system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1';sourceCommit=('a'*40)}}
-        [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 10))
+        [IO.File]::WriteAllText("$assets/OpenGuidePlatform-GuideSite.zip",'already validated package bytes')
+        [IO.File]::WriteAllText("$assets/OpenGuidePlatform-PlatformBuild.zip",'platform engineering bytes')
+        $manifest=@{version='0.1.0-Preview.1';channel='preview';archive='OpenGuidePlatform-GuideSite.zip';sourceCommit=('a'*40);sha256=(Get-FileHash "$assets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant();nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version='v0.1.0-Preview.1';tag='system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1';sourceCommit=('a'*40)}}
+        [IO.File]::WriteAllText("$assets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         $priorRepo=$env:GITHUB_REPOSITORY
         $env:GITHUB_REPOSITORY='example/platform'
     }
@@ -56,7 +65,7 @@ Describe 'Coordinated native module publication' {
     }
     It 'rejects a module version inconsistent with the tested package' {
         $manifest.nativeHugoModule.version='v9.0.0'
-        [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 10))
+        [IO.File]::WriteAllText("$assets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         { & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets } | Should -Throw '*Native Hugo publication identity differs*'
         $global:OgpNativeTagCalls.Count | Should -Be 0
     }

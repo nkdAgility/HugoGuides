@@ -6,7 +6,7 @@ Describe 'Shared installed package identity' {
     BeforeEach {
         $package=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($package)|Out-Null
-        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.1';sourceCommit=('a'*40);workflow=@{version='v1.2.3-Preview.1'}}
+        $manifest=@{schemaVersion=2;packages=@{GuideSite=@{version='1.2.3-Preview.1'}};product='OpenGuidePlatform';version='1.2.3-Preview.1';sourceCommit=('a'*40);workflow=@{version='v1.2.3-Preview.1'}}
         [IO.File]::WriteAllText("$package/platform.json",($manifest|ConvertTo-Json -Depth 10))
     }
     It 'accepts matching package and release identities' {

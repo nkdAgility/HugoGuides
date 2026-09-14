@@ -11,7 +11,7 @@ Do not modify generated platform adapters, skills or the installation record by 
 Install/update them using ./bootstrap.ps1 on a review branch and review the complete diff.
 
 Shared skills are in .agents/skills. To load the installed Core module in PowerShell:
-    $platform = ./bootstrap.ps1 -Restore
+    $platform = ./Resolve-OpenGuidePlatform.ps1 -WorkspaceRoot $PWD
     Import-Module "$platform/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1"
 Load the reviewed policy with Import-GuidePolicy before invoking publishing operations.
 

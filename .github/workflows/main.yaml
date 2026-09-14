@@ -74,9 +74,9 @@ jobs:
         with:
           name: OpenGuidePlatform-ReleaseAssets
           path: |
-            .processing/platform-package/OpenGuidePlatform.zip
+            .processing/platform-package/OpenGuidePlatform-GuideSite.zip
             .processing/platform-package/release-manifest.json
-            .processing/platform-package/bootstrap.ps1
+            .processing/platform-package/OpenGuidePlatform-PlatformBuild.zip
           if-no-files-found: error
   sample:
     name: Validate

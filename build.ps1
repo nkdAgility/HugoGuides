@@ -14,7 +14,7 @@ param(
     [switch]$Versions
 )
 $ErrorActionPreference='Stop'
-$platform=& "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease -DefaultPlatformRoot $PSScriptRoot -BootstrapPath "$PSScriptRoot/bootstrap.ps1"
+$platform=& "$PSScriptRoot/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease -DefaultPlatformRoot $PSScriptRoot -Product $Product
 if($Product -eq 'GuideSite'){
     Import-Module "$platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1"
     Invoke-GuideSiteBuild -Stage $Stage -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version -BaseUrl $BaseUrl -DeploymentUrl $DeploymentUrl -DeploymentEnvironment $DeploymentEnvironment

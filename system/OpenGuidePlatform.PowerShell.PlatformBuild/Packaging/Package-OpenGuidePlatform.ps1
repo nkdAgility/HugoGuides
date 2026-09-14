@@ -12,9 +12,12 @@ if($LASTEXITCODE -ne 0){throw 'Cannot resolve platform source commit.'}
 [IO.Directory]::CreateDirectory($output)|Out-Null
 $stage=Join-Path $output 'package'
 [IO.Directory]::CreateDirectory($stage)|Out-Null
-foreach($path in @('system','build.ps1','LICENSE','readme.md')){
+foreach($path in @('build.ps1','LICENSE','readme.md')){
     Copy-Item -LiteralPath (Join-Path $root $path) -Destination $stage -Recurse
 }
+$guideComponents=@('OpenGuidePlatform.Hugo.Guides','OpenGuidePlatform.PowerShell.Core','OpenGuidePlatform.PowerShell.GuideSiteBuild','OpenGuidePlatform.PowerShell.GuideSiteAdoption','OpenGuidePlatform.PowerShell.AgentControls','OpenGuidePlatform.Agents.Integration')
+[IO.Directory]::CreateDirectory("$stage/system")|Out-Null
+foreach($component in $guideComponents){Copy-Item "$root/system/$component" "$stage/system/" -Recurse}
 $metadata=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=if($Version.Contains('-')){'preview'}else{'stable'};hugoModule='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides'}
 $metadata.nativeHugoModule=[ordered]@{path=$metadata.hugoModule;version="v$Version";tag="system/OpenGuidePlatform.Hugo.Guides/v$Version";sourceCommit=$commit}
 $metadata.workflow=[ordered]@{repository='nkdAgility/OpenGuidePlatform';path='.github/workflows/guide-site-build.yaml';version="v$Version";sourceCommit=$commit}
@@ -22,8 +25,7 @@ $metadata.components=[ordered]@{}
 foreach($component in Get-ChildItem "$stage/system" -Directory|Sort-Object Name){$metadata.components[$component.Name]=$Version}
 $metadata.requirements=[ordered]@{powerShell='>=7.4';hugo='>=0.146.0';hugoExtended=$true;go='>=1.24.5'}
 [IO.File]::WriteAllText("$stage/platform.json",($metadata|ConvertTo-Json -Depth 10))
-Copy-Item -LiteralPath "$root/bootstrap.ps1" -Destination "$output/bootstrap.ps1"
-$archive=Join-Path $output 'OpenGuidePlatform.zip'
+function New-DistributionArchive([string]$stage,[string]$archive) {
 $zip=[IO.Compression.ZipFile]::Open($archive,[IO.Compression.ZipArchiveMode]::Create)
 try{
     foreach($file in Get-ChildItem -LiteralPath $stage -File -Recurse -Force|Sort-Object FullName){
@@ -34,7 +36,22 @@ try{
         try{$inputStream.CopyTo($outputStream)}finally{$inputStream.Dispose();$outputStream.Dispose()}
     }
 }finally{$zip.Dispose()}
-$manifest=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=$metadata.channel;archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$output/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()}
-foreach($field in @('nativeHugoModule','workflow','components','requirements')){$manifest[$field]=$metadata[$field]}
+}
+$guideArchive='OpenGuidePlatform-GuideSite.zip'
+New-DistributionArchive $stage (Join-Path $output $guideArchive)
+$guideHash=(Get-FileHash "$output/$guideArchive").Hash.ToLowerInvariant()
+$platformStage=Join-Path $output 'platform-build'
+[IO.Directory]::CreateDirectory("$platformStage/system")|Out-Null
+Copy-Item "$root/system/OpenGuidePlatform.PowerShell.PlatformBuild" "$platformStage/system/" -Recurse
+$dependency=[ordered]@{version=$Version;sha256=$guideHash}
+$platformMetadata=[ordered]@{schemaVersion=1;product='OpenGuidePlatform';package='PlatformBuild';version=$Version;sourceCommit=$commit;dependencies=@{GuideSite=$dependency}}
+[IO.File]::WriteAllText("$platformStage/platform-build.json",($platformMetadata|ConvertTo-Json -Depth 10))
+$platformArchive='OpenGuidePlatform-PlatformBuild.zip'
+New-DistributionArchive $platformStage (Join-Path $output $platformArchive)
+$manifest=[ordered]@{schemaVersion=2;product='OpenGuidePlatform';version=$Version;sourceCommit=$commit;channel=$metadata.channel;packages=[ordered]@{
+    GuideSite=[ordered]@{archive=$guideArchive;version=$Version;sha256=$guideHash;components=$metadata.components}
+    PlatformBuild=[ordered]@{archive=$platformArchive;version=$Version;sha256=(Get-FileHash "$output/$platformArchive").Hash.ToLowerInvariant();components=@{'OpenGuidePlatform.PowerShell.PlatformBuild'=$Version};dependencies=@{GuideSite=$dependency}}
+}}
+foreach($field in @('nativeHugoModule','workflow','requirements')){$manifest[$field]=$metadata[$field]}
 [IO.File]::WriteAllText("$output/release-manifest.json",($manifest|ConvertTo-Json -Depth 10))
 "Packaged OpenGuidePlatform $Version from $commit"
