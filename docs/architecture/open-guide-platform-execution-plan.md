@@ -23,8 +23,8 @@ The user authorized closing the remaining CI gaps after distribution cleanup. Az
 - [x] Implement shared GitVersion calculation and dependency setup; retain GitVersion 5 compatibility for the existing configuration.
 - [x] Implement complete platform execution with explicit sample deployment/publication, preserving candidate package identity and failure gates.
 - [x] Separate source inputs from runtime package dependencies and keep GitHub context in workflow adapters.
-- [x] Complete local regression and sample acceptance: 288 tests, both distribution packages, sample preview (119 files) and production (87 files) passed. Local GitVersion calculation and workflow lock coverage also passed. Evidence: `.processing/platform-tests/47ec229fab7a43ec9c5acd667f3327d3/summary.md`.
-- [ ] Verify the changed Actions sample deployment adapter through live Verify.
+- [x] Complete local regression and sample acceptance: 290 tests, both distribution packages, sample preview (119 files) and production (87 files) passed. Local GitVersion calculation and workflow lock coverage also passed. Evidence: `.processing/platform-tests/bde689573c4f4c87a0ce5d6a7ceeb738/summary.md`.
+- [x] Verify the changed Actions sample deployment adapter through live Verify: commit `98d853a`, [run 34842428612](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34842428612), passed platform Build and all sample stages, including module-owned Deploy and live Verify. Release was correctly skipped on the PR. Deployment diagnostics now retain redacted logs and reject a successful process exit without a confirmed deployment URL.
 
 ## Outcome
 

@@ -291,6 +291,15 @@ jobs:
           EXPECTED_TARGET: ${{ inputs.target }}
           DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy
+      - name: Retain deployment result and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuideSite-Hosting-${{ inputs.target }}
+          path: |
+            deployment/deployment.json
+            .processing/deployment-client/**/deploy.log
+          if-no-files-found: warn
   verify:
     name: Verify
     needs: deploy

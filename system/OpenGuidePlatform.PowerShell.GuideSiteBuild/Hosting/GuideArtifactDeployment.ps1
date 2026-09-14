@@ -48,9 +48,9 @@ function Invoke-AzureGuideDeployment {
         $log=($stdout.GetAwaiter().GetResult()+"`n"+$stderr.GetAwaiter().GetResult()).Replace($env:SWA_CLI_DEPLOYMENT_TOKEN,'[redacted]')
         $log=[regex]::Replace($log,'\x1B\[[0-?]*[ -/]*[@-~]','')
         [IO.File]::WriteAllText("$work/deploy.log",$log)
-        if($process.ExitCode -ne 0){throw "Azure upload failed ($($process.ExitCode)). Check $work/deploy.log, correct the reported hosting problem, and retry Deploy."}
+        if($process.ExitCode -ne 0){Write-Host $log;throw "Azure upload failed ($($process.ExitCode)). Check $work/deploy.log, correct the reported hosting problem, and retry Deploy."}
         $matches=[regex]::Matches($log,'Project deployed to\s+(https://[a-zA-Z0-9.-]+(?:/[^\s]*)?)')
-        if($matches.Count -ne 1){throw "Azure did not confirm a deployment URL. A zero exit code is insufficient. Check $work/deploy.log and verify the hosting service before retrying."}
+        if($matches.Count -ne 1){Write-Host $log;throw "Azure did not confirm a deployment URL. A zero exit code is insufficient. Check $work/deploy.log and verify the hosting service before retrying."}
         [pscustomobject]@{Url=$matches[0].Groups[1].Value.TrimEnd('/');Provider='AzureStaticWebApps'}
     }finally{$process.Dispose()}
 }
