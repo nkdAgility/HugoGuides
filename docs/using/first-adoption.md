@@ -2,22 +2,15 @@
 
 This page is for the maintainer adopting OpenGuidePlatform into an existing guide site. Contributors to an already adopted site can use the [README commands](../../readme.md#everyday-use).
 
-Adoption is currently a preview migration. Keep it on a branch and verify the site's existing content, design, routes and downloads before accepting it. The installer does not create a new website or infer publication policy.
+Adoption is currently a preview migration. Keep it on a branch and verify the site's existing content, design, routes and downloads before accepting it. The installer does not create a new website or rewrite the guide structure.
 
-## Prepare the site policy
+## Use the existing Hugo source
 
-Create `guide-site.policy.json` in the guide-site repository root. Use the [reference site's policy](../../examples/reference-guide-site/guide-site.policy.json) as a worked example and the [policy contract](../../system/OpenGuidePlatform.PowerShell.Core/Contracts/README.md) for field meanings. Validate against the [site-policy schema](../../system/OpenGuidePlatform.PowerShell.Core/Contracts/site-policy.schema.json).
+No site policy file is required. The default source is `site/`; supply `-SourcePath` for another Hugo directory. Keep language enablement in Hugo YAML and content metadata in the existing bundles.
 
-Describe your own site:
+Prepare discovers guide roots, editions, translation bodies, PDF resources and Hugo public URLs. It checks the root, history and translations scaffolding for active guide languages. The resulting inventory is build evidence under `.processing/`, not a second set of content declarations to maintain.
 
-1. Its identity, Hugo source folder, required wrapper files, routes and translation keys.
-2. Every guide and edition, its source language, and each translation's intended state: web, PDF-only, fallback, scaffold or excluded.
-3. Existing download source paths, their `publishedPaths` in the built site, and whether each PDF is supplied, generated or protected.
-4. Production exclusions, protected content and the permitted publishing operations.
-
-Paths must reflect the existing site. Most paths are repository-relative; edition paths are relative to the guide's content root and download `path` values are relative to the edition. Each download's `publishedPaths` lists its existing public file paths relative to the built site, without a leading slash; for example `downloads/guide.en.pdf`. Record those from the current site/baseline, preserving URLs rather than deriving them from content folder names. Do not copy the sample's guide names, content paths or publication rules unchanged. Test fixtures are incomplete examples, not installation policies.
-
-Have the site's maintainers review these declarations. A policy file describes requirements; it does not install independent enforcement or grant an agent maintainer authority.
+Keep destination settings in `.OpenGuidePlatform/delivery.yaml`. Installation writes its record and resolver under `.OpenGuidePlatform/`; the thin root `build.ps1` remains the command people run.
 
 ## Install and integrate
 

@@ -4,7 +4,7 @@ param(
     [ValidateSet('All','Prepare','Build','Validate','Serve')][string]$Stage='All',
     [ValidateSet('local','canary','preview','production')][string]$Target='local',
     [Parameter(Mandatory)][string]$WorkspaceRoot,
-    [Parameter(Mandatory)][string]$PolicyPath,
+    [string]$PolicyPath,[string]$SourcePath='site',
     [Parameter(Mandatory)][string]$OutputPath,
     $DeliveryContext,[string]$Version='0.0.0-local',[string]$SiteVersion,[string]$BaseUrl
 )
@@ -20,12 +20,14 @@ $commit=(& git -C $root rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0){throw 'Cannot resolve guide-site source commit.'}
 $site=Join-Path $output 'site'
 $overlay=Join-Path $output 'candidate-platform.json'
+$inferred=-not $PolicyPath
+if($inferred){$PolicyPath="$OutputPath/discovered-site.json"}
 $configs=@('hugo.yaml',"hugo.$Target.yaml",$overlay)
 if($Stage -in @('All','Prepare','Serve')){
     if(Test-Path -LiteralPath $output){throw 'Guide-site output exists; choose a fresh evidence directory.'}
     [IO.Directory]::CreateDirectory($output)|Out-Null
     try {
-        $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
+        $policy=if($inferred){@{wrapper=@{sourcePath=$SourcePath}}}else{Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)}
         $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
         $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
         $resolution=Get-GuideModuleResolution -PlatformRoot $platformRoot -SourcePath $source -Version $Version
@@ -44,6 +46,11 @@ if($Stage -in @('All','Prepare','Serve')){
         if($resolution.Mode -eq 'release'){
             $effective=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $configs -Target $Target).Configuration
             if(@($effective.module.replacements|Where-Object { $_ -match '^\s*github\.com/nkdAgility/(?:HugoGuides/module|OpenGuidePlatform/system/OpenGuidePlatform\.Hugo\.Guides)\s*->' }).Count -or -not @($effective.module.imports|Where-Object { $_.path -ceq $resolution.ModulePath }).Count){throw 'Released builds require a canonical Hugo import without a configuration replacement.'}
+        }
+        if($inferred){
+            $policy=New-GuideSiteDiscovery -WorkspaceRoot $root -SourcePath $SourcePath -ConfigFiles $configs -Target $Target -OutputPath $OutputPath
+            $policy|ConvertTo-Json -Depth 100|Set-Content (Join-Path $root $PolicyPath)
+            $inputArguments.Policy=$policy
         }
         $null=Get-GuideHugoToolchain
         $preparedTools=Get-GuidePreparedBuildTools
@@ -113,7 +120,7 @@ if($Stage -in @('All','Validate')){
     $jsonReport=Test-GuideJsonIndexes -ArtifactRoot $site -BaseUri $navigationBase -Indexes $indexes -EnabledLanguages @($assessment.inventory.wrapper.languages) -ForbiddenPaths $forbidden
     [IO.File]::WriteAllText("$output/json-index-validation.json",($jsonReport|ConvertTo-Json -Depth 10))
     if($jsonReport.Outcome -ne 'pass'){$report.Outcome='fail';$report.Findings+=@($jsonReport.Findings)}
-    $runtimeAnchors=if($policy.wrapper.Contains('runtimeAnchors')){@($policy.wrapper.runtimeAnchors|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
+    $runtimeAnchors=if($inferred){@($navigation.Findings|Where-Object Code -eq 'INTERNAL_ANCHOR_MISSING'|ForEach-Object {@{route=('/'+$_.TargetPage);fragment=$_.Fragment}}|Sort-Object { $_.route+ '#'+$_.fragment } -Unique)}elseif($policy.wrapper.Contains('runtimeAnchors')){@($policy.wrapper.runtimeAnchors|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()}
     try{
         $runtime=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri $navigationBase -IdentityPath "$output/artifact-identity.json" -OutputPath "$OutputPath/runtime" -Anchors $runtimeAnchors
         $navigation=Resolve-GuideRuntimeNavigation -Navigation $navigation -Runtime $runtime

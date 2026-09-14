@@ -36,9 +36,9 @@ BeforeAll {
         foreach($name in @('OpenGuidePlatform.PowerShell.GuideSiteAdoption','OpenGuidePlatform.Agents.Integration','OpenGuidePlatform.PowerShell.Core')){
             Copy-Item "$root/system/$name" "$stage/system/" -Recurse
         }
-        [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
+        [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$SourcePath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$SourcePath"')
         [IO.Directory]::CreateDirectory("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild")|Out-Null
-        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$PolicyPath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$SourcePath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$SourcePath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
         [IO.File]::WriteAllText("$stage/platform.json",(@{product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
         [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1", @'
 param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion)
@@ -60,19 +60,18 @@ Describe 'Guide-site installation and update' {
         $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         & git init -q -b codex/adoption $workspace
-        Copy-Item "$root/tests/Contracts/fixtures/single-guide.site-policy.json" "$workspace/guide-site.policy.json"
         [IO.Directory]::CreateDirectory("$workspace/site")|Out-Null
         [IO.File]::WriteAllText("$workspace/site/go.mod",'module fixture')
+        [IO.File]::WriteAllText("$workspace/site/hugo.yaml",'baseURL: https://example.test/')
         $parameters=@{WorkspaceRoot=$workspace;ReleaseTag='v1.2.3-Preview.1'}
     }
     AfterEach {
         # The installed fixture imports a fake Build module; do not leak it into other tests.
         Get-Module OpenGuidePlatform.PowerShell.GuideSiteBuild,OpenGuidePlatform.PowerShell.GuideSiteAdoption -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
     }
-    It 'installs matching workflow and identical root agent shims without touching policy' {
-        $before=(Get-FileHash "$workspace/guide-site.policy.json").Hash
+    It 'installs matching workflow and identical root agent shims without requiring a policy file' {
         & $bootstrap -Install @parameters
-        $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
         $record.releaseTag | Should -Be 'v1.2.3-Preview.1'
         $record.nativeHugoModule.version | Should -Be 'v1.2.3-Preview.1'
         $record.managedFiles.PSObject.Properties.Name | Should -Not -Contain 'site/go.mod'
@@ -82,60 +81,60 @@ Describe 'Guide-site installation and update' {
         Test-Path "$workspace/.agents/skills/skills" | Should -BeFalse
         Test-Path "$workspace/.agents/skills/instructions" | Should -BeFalse
         (Get-FileHash "$workspace/AGENTS.md").Hash | Should -Be (Get-FileHash "$workspace/CLAUDE.md").Hash
-        (Get-FileHash "$workspace/guide-site.policy.json").Hash | Should -Be $before
+        Test-Path "$workspace/guide-site.policy.json" | Should -BeFalse
     }
     It 'updates all managed identities to a selected release' {
         & $bootstrap -Install @parameters
         & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
-        (Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
         Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '@v1.2.3-Preview.2'
     }
     It 'restores offline from the locked cache and runs the installed GuideSite entry point' {
         & $bootstrap -Install @parameters
         $global:OgpBootstrapOffline=$true
-        & "$workspace/build.ps1" -Target preview | Should -Be 'GuideSite|1.2.3-Preview.1|preview|guide-site.policy.json'
+        & "$workspace/build.ps1" -Target preview | Should -Be 'GuideSite|1.2.3-Preview.1|preview|site'
     }
     It 'updates from the installed launcher without fetching remote bootstrap or loader source' {
         & $bootstrap -Install @parameters
         Mock Invoke-RestMethod { throw 'Installed update must not fetch bootstrap or loader source.' }
         & "$workspace/build.ps1" Update -ring preview -PlatformRelease v1.2.3-Preview.2
-        (Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
         Test-Path "$workspace/bootstrap.ps1" | Should -BeFalse
     }
     It 'previews a local update without changing the installation record' {
         & $bootstrap -Install @parameters
-        $before=(Get-FileHash "$workspace/open-guide-platform.installation.json").Hash
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
         & "$workspace/build.ps1" Update -ring preview -WhatIf
-        (Get-FileHash "$workspace/open-guide-platform.installation.json").Hash | Should -Be $before
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash | Should -Be $before
     }
     It 'retires an unchanged bootstrap managed by the previous installation' {
         & $bootstrap -Install @parameters
         [IO.File]::WriteAllText("$workspace/bootstrap.ps1",'# old managed bootstrap')
-        $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
         $record.managedFiles['bootstrap.ps1']=(Get-FileHash "$workspace/bootstrap.ps1").Hash.ToLowerInvariant()
-        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/open-guide-platform.installation.json"
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
         & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
         Test-Path "$workspace/bootstrap.ps1" | Should -BeFalse
-        (Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json -AsHashtable).managedFiles.ContainsKey('bootstrap.ps1') | Should -BeFalse
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable).managedFiles.ContainsKey('bootstrap.ps1') | Should -BeFalse
     }
     It 'preserves a modified legacy bootstrap and refuses the entire update' {
         & $bootstrap -Install @parameters
         [IO.File]::WriteAllText("$workspace/bootstrap.ps1",'# consumer modification')
-        $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
         $record.managedFiles['bootstrap.ps1']='0'*64
-        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/open-guide-platform.installation.json"
-        $before=(Get-FileHash "$workspace/open-guide-platform.installation.json").Hash
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
         { & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2 } | Should -Throw '*Managed-file conflicts*bootstrap.ps1*'
-        (Get-FileHash "$workspace/open-guide-platform.installation.json").Hash | Should -Be $before
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash | Should -Be $before
         Get-Content "$workspace/bootstrap.ps1" -Raw | Should -Be '# consumer modification'
     }
     It 'restores the retired bootstrap and previous files when an update write fails' {
         & $bootstrap -Install @parameters
         [IO.File]::WriteAllText("$workspace/bootstrap.ps1",'# old managed bootstrap')
-        $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
         $record.managedFiles['bootstrap.ps1']=(Get-FileHash "$workspace/bootstrap.ps1").Hash.ToLowerInvariant()
-        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/open-guide-platform.installation.json"
-        $before=(Get-FileHash "$workspace/open-guide-platform.installation.json").Hash
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
         $buildBefore=(Get-FileHash "$workspace/build.ps1").Hash
         $package=& $resolver -WorkspaceRoot $workspace -PlatformRelease v1.2.3-Preview.2
         Get-Module OpenGuidePlatform.PowerShell.GuideSiteAdoption -All | Remove-Module -Force
@@ -146,16 +145,16 @@ Describe 'Guide-site installation and update' {
             Microsoft.PowerShell.Management\New-Item -ItemType SymbolicLink -Path $Path -Target '.agents/agents.md' -WhatIf:$false
         }
         { Invoke-GuideSiteAdoption -PackageRoot $package -WorkspaceRoot $workspace -Update } | Should -Throw '*Simulated update write failure*'
-        (Get-FileHash "$workspace/open-guide-platform.installation.json").Hash | Should -Be $before
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash | Should -Be $before
         (Get-FileHash "$workspace/build.ps1").Hash | Should -Be $buildBefore
         Get-Content "$workspace/bootstrap.ps1" -Raw | Should -Be '# old managed bootstrap'
     }
     It 'rejects modified managed files before changing any tracked file' {
         & $bootstrap -Install @parameters
-        $before=[IO.File]::ReadAllText("$workspace/open-guide-platform.installation.json")
+        $before=[IO.File]::ReadAllText("$workspace/.OpenGuidePlatform/installation.json")
         [IO.File]::AppendAllText("$workspace/build.ps1",'# consumer edit')
         { & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2 } | Should -Throw '*Managed-file conflicts*'
-        [IO.File]::ReadAllText("$workspace/open-guide-platform.installation.json") | Should -Be $before
+        [IO.File]::ReadAllText("$workspace/.OpenGuidePlatform/installation.json") | Should -Be $before
     }
     It 'refuses existing consumer instructions without partial installation' {
         [IO.File]::WriteAllText("$workspace/AGENTS.md",'Consumer instructions')
@@ -173,7 +172,7 @@ Describe 'Guide-site installation and update' {
     It 'previews installation without writing managed files' {
         & $bootstrap -Install @parameters -WhatIf
         Test-Path "$workspace/build.ps1" | Should -BeFalse
-        Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeFalse
+        Test-Path "$workspace/.OpenGuidePlatform/installation.json" | Should -BeFalse
         [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
     }
     It 'previews automatic installation on main without creating a branch or changing managed files' {
@@ -182,7 +181,7 @@ Describe 'Guide-site installation and update' {
         (& git -C $workspace branch --show-current).Trim() | Should -Be main
         @(& git -C $workspace for-each-ref refs/heads/codex/ --format='%(refname)').Count | Should -Be 0
         Test-Path "$workspace/build.ps1" | Should -BeFalse
-        Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeFalse
+        Test-Path "$workspace/.OpenGuidePlatform/installation.json" | Should -BeFalse
         [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
     }
     It 'creates the automatic review branch only after successful preflight' {
@@ -193,28 +192,42 @@ Describe 'Guide-site installation and update' {
         [IO.File]::Delete("$workspace/AGENTS.md")
         & $bootstrap @parameters
         (& git -C $workspace branch --show-current).Trim() | Should -Match '^codex/platform-adoption-'
-        Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeTrue
+        Test-Path "$workspace/.OpenGuidePlatform/installation.json" | Should -BeTrue
     }
 
+    It 'migrates the verified legacy root resolver and record into .OpenGuidePlatform' {
+        & $bootstrap -Install @parameters
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record.managedFiles['Resolve-OpenGuidePlatform.ps1']=$record.managedFiles['.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1']
+        $record.managedFiles.Remove('.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1')
+        Move-Item "$workspace/.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1" "$workspace/Resolve-OpenGuidePlatform.ps1"
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/open-guide-platform.installation.json"
+        Remove-Item "$workspace/.OpenGuidePlatform/installation.json"
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        Test-Path "$workspace/open-guide-platform.installation.json"|Should -BeFalse
+        Test-Path "$workspace/Resolve-OpenGuidePlatform.ps1"|Should -BeFalse
+        Test-Path "$workspace/.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1"|Should -BeTrue
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).sourcePath|Should -Be site
+    }
     It 'rejects a corrupt cached archive instead of executing cached code' {
         & $bootstrap -Install @parameters
-        $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
         [IO.File]::AppendAllText("$workspace/.processing/platform-cache/$($record.release.packages.GuideSite.sha256)/OpenGuidePlatform-GuideSite.zip",'corrupt')
         { & $resolver -WorkspaceRoot $workspace } | Should -Throw '*Cached package digest mismatch*'
     }
     It 'selects an installable preview when no release tag is supplied' {
         & $bootstrap -Install -WorkspaceRoot $workspace
-        (Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
     }
-    It 'rejects stable adoption and unsafe policy paths before modifying the site' {
+    It 'rejects stable adoption and unsafe source paths before modifying the site' {
         { & $bootstrap -Install -WorkspaceRoot $workspace -Channel stable -ReleaseTag v1.2.3 } | Should -Throw '*Stable adoption is not available*'
-        { & $bootstrap -Install @parameters -PolicyPath '../outside.json' } | Should -Throw '*Unsafe installation path*'
+        { & $bootstrap -Install @parameters -SourcePath '../outside' } | Should -Throw '*Unsafe installation path*'
     }
     It 'supports the no-argument remote execution entry point for install and update' {
         Push-Location $workspace
         try{
             Invoke-Expression ([IO.File]::ReadAllText($bootstrap))
-            (Get-Content open-guide-platform.installation.json -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+            (Get-Content .OpenGuidePlatform/installation.json -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
             Invoke-Expression ([IO.File]::ReadAllText($bootstrap))
             (Get-Item AGENTS.md).LinkType | Should -Be SymbolicLink
         }finally{Pop-Location}
@@ -229,13 +242,13 @@ Describe 'Guide-site installation and update' {
     It 'resolves latest within the requested channel' -ForEach @(@{Channel='preview';Expected='1.2.3-Preview.2'},@{Channel='stable';Expected='1.2.3'}) {
         $package=& $resolver -PlatformSource $(if($Channel -eq 'stable'){'Production'}else{'Preview'}) -WorkspaceRoot $workspace
         (Get-Content "$package/platform.json" -Raw|ConvertFrom-Json).version|Should -Be $Expected
-        Test-Path "$workspace/open-guide-platform.installation.json"|Should -BeFalse
+        Test-Path "$workspace/.OpenGuidePlatform/installation.json"|Should -BeFalse
     }
     It 'lets the installed launcher select local platform code without updating the lock' {
         & $bootstrap -Install @parameters
-        $before=(Get-FileHash "$workspace/open-guide-platform.installation.json").Hash
-        & "$workspace/build.ps1" -PlatformPath "$TestDrive/1.2.3-Preview.2/package" -Target preview|Should -Be 'GuideSite|1.2.3-Preview.2|preview|guide-site.policy.json'
-        (Get-FileHash "$workspace/open-guide-platform.installation.json").Hash|Should -Be $before
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
+        & "$workspace/build.ps1" -PlatformPath "$TestDrive/1.2.3-Preview.2/package" -Target preview|Should -Be 'GuideSite|1.2.3-Preview.2|preview|site'
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash|Should -Be $before
     }
     It 'requires a review branch'  {
         & git -C $workspace symbolic-ref HEAD refs/heads/main

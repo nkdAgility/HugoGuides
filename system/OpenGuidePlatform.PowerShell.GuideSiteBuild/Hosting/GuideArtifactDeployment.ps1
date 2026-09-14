@@ -60,7 +60,7 @@ function Invoke-GuideArtifactDeployment {
         [Parameter(Mandatory)][string]$SourceCommit,[Parameter(Mandatory)][ValidateSet('canary','preview','production')][string]$Target,
         [string]$DeploymentEnvironment,[string]$DeploymentAdapter,[string]$ExpectedUrl)
     $ErrorActionPreference='Stop'
-    if($Target -in @('canary','preview') -and ([string]::IsNullOrWhiteSpace($DeploymentEnvironment) -or $DeploymentEnvironment -in @('prod','production'))){throw 'Preview deployment requires a named preview environment. Supply DeploymentEnvironment; production aliases are forbidden.'}
+    if($Target -in @('canary','preview') -and ([string]::IsNullOrWhiteSpace($DeploymentEnvironment) -or $DeploymentEnvironment -in @('prod','production'))){throw "$Target deployment requires a named non-production environment. Supply DeploymentEnvironment; production aliases are forbidden."}
     if($Target -eq 'production' -and $DeploymentEnvironment -and $DeploymentEnvironment -notin @('prod','production')){throw 'Production deployment cannot select a preview environment. Correct Target or DeploymentEnvironment.'}
     $null=Confirm-GuideDeploymentData -DeploymentRoot $DeploymentRoot -SourceCommit $SourceCommit -Target $Target -DeploymentEnvironment $DeploymentEnvironment
     $identity=Read-GuideEvidence "$DeploymentRoot/artifact-identity.json" -Json -MaximumBytes 16777216

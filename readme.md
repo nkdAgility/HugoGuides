@@ -23,7 +23,7 @@ git config --global core.symlinks true
 
 The platform uses symbolic links for its shared agent instructions. Linux and macOS normally need no additional setup. See [Windows troubleshooting](docs/using/first-adoption.md#windows-symbolic-links) for an existing clone.
 
-**First installation?** Your maintainer must prepare `guide-site.policy.json`, which describes your site's guides, languages, downloads and publication rules. Follow [first-time site setup](docs/using/first-adoption.md) before running the installer. It does not create this policy for you.
+**First installation?** Run from a guide-site repository with Hugo configuration in `site/hugo.yaml` (or supply `-SourcePath` for another Hugo directory). Prepare discovers guides, editions, languages, pages and PDF resources. There is no site policy inventory to author or maintain.
 
 ## Install or update
 
@@ -64,7 +64,7 @@ Once installed, run these commands from your guide-site repository:
 | Update the installed platform | `./build.ps1 Update -ring preview` |
 | Preview an update's file changes | `./build.ps1 Update -ring preview -WhatIf` |
 
-Build runs **Prepare → Build → Validate**. Prepare uses GitVersion to select canary, preview or production and reads destinations from `guide-site.delivery.yaml`. Install dependencies first with `./build.ps1 Dependencies` (.NET SDK required); use `-PullRequestNumber 111` to reproduce a PR destination locally, or `-Target local` for local configuration. The shared workflow runs one chain through Deploy and Verify. Its optional `platform-ring` defaults to `production`; `platform-release` defaults to the latest installable release in that ring. Preview adoption sets only `platform-ring: preview`. See [delivery configuration](system/OpenGuidePlatform.PowerShell.GuideSiteBuild/README.md#one-delivery-pipeline). Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
+Build runs **Prepare → Build → Validate**. Prepare uses GitVersion to select canary, preview or production and reads destinations from `.OpenGuidePlatform/delivery.yaml`. Install dependencies first with `./build.ps1 Dependencies` (.NET SDK required); use `-PullRequestNumber 111` to reproduce a PR destination locally, or `-Target local` for local configuration. The shared workflow runs one chain through Deploy and Verify. Its optional `platform-ring` defaults to `production`; `platform-release` defaults to the latest installable release in that ring. Preview adoption sets only `platform-ring: preview`. See [delivery configuration](system/OpenGuidePlatform.PowerShell.GuideSiteBuild/README.md#one-delivery-pipeline). Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
 
 To test another platform without changing your installation lock:
 
@@ -107,7 +107,7 @@ Read the finding and its suggested fix in the terminal or GitHub Actions job sum
 
 | Problem | What to do |
 |---|---|
-| Missing `guide-site.policy.json` | Complete [first-time setup](docs/using/first-adoption.md) with your maintainer. |
+| Hugo source not found | Supply the Hugo directory with `-SourcePath`; no policy file is required. |
 | Installation or update conflicts | Review the listed files with your maintainer. Preserve local edits; the installer will not overwrite them. |
 | Missing tool, PowerShell module or PDF font | Install the named dependency, then rerun the command. |
 | Missing translation, file or download | Follow the report's suggested fix. Ask your maintainer if the absence is intentional. |

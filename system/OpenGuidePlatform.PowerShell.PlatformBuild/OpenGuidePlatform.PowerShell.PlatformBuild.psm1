@@ -27,7 +27,7 @@ function Test-PlatformCandidateSample {
     $candidate=& "$PSScriptRoot/../OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformPath "$output/OpenGuidePlatform-GuideSite.zip"
     foreach($target in $Targets){
         # A fresh PowerShell process prevents the source Build module from satisfying candidate imports.
-        $arguments=@('-NoProfile','-File',"$candidate/build.ps1",'-Product','GuideSite','-WorkspaceRoot',$WorkspaceRoot,'-PolicyPath','examples/reference-guide-site/guide-site.policy.json','-Target',$target,'-OutputPath',"$OutputPath/sample-$target")
+        $arguments=@('-NoProfile','-File',"$candidate/build.ps1",'-Product','GuideSite','-WorkspaceRoot',$WorkspaceRoot,'-SourcePath','examples/reference-guide-site','-Target',$target,'-OutputPath',"$OutputPath/sample-$target")
         if($Deploy -and $target -eq 'preview'){
             $arguments+=@('-Deploy','-DeploymentEnvironment',$DeploymentEnvironment)
             if($DeploymentUrl){$arguments+=@('-BaseUrl',$DeploymentUrl,'-DeploymentUrl',$DeploymentUrl)}

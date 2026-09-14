@@ -1,0 +1,15 @@
+{{- $pages := slice -}}
+{{- range hugo.Sites -}}
+  {{- range .Pages -}}
+    {{- $resources := slice -}}
+    {{- range .Resources -}}
+      {{- if eq .MediaType.SubType "pdf" -}}
+        {{- $resources = $resources | append (dict "name" .Name "url" .RelPermalink) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $file := "" -}}{{- with .File -}}{{- $file = .Path -}}{{- end -}}
+    {{- $formats := slice -}}{{- range .OutputFormats -}}{{- $formats = $formats | append (dict "name" .Name "url" .RelPermalink) -}}{{- end -}}
+    {{- $pages = $pages | append (dict "file" $file "language" .Language.Lang "kind" .Kind "type" .Type "layout" .Layout "url" .RelPermalink "resources" $resources "formats" $formats) -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "pages" $pages | jsonify -}}

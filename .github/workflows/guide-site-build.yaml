@@ -7,9 +7,9 @@ on:
       source-ref:
         required: true
         type: string
-      policy-path:
-        required: true
+      source-path:
         type: string
+        default: site
       target:
         type: string
         default: auto
@@ -55,7 +55,7 @@ defaults:
   run:
     shell: pwsh
 env:
-  SITE_POLICY: ${{ inputs.policy-path }}
+  SITE_SOURCE: ${{ inputs.source-path }}
   SITE_TARGET: ${{ inputs.target }}
   SITE_BASE_URL: ${{ inputs.site-url }}
   PLATFORM_RING: ${{ inputs.platform-ring }}
@@ -104,7 +104,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
       - name: Install guide-site preparation dependencies
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Dependencies -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Dependencies -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE
       - name: Determine delivery context
         id: delivery
         env:
@@ -115,7 +115,7 @@ jobs:
         env:
           SITE_TARGET: ${{ steps.delivery.outputs.target }}
           SITE_BASE_URL: ${{ steps.delivery.outputs.url }}
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -DeliveryContextPath .processing/delivery-context.json -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -DeliveryContextPath .processing/delivery-context.json -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain Prepare report for PR delivery
         if: always()
         uses: actions/upload-artifact@v4
@@ -205,7 +205,7 @@ jobs:
           go-version: '>=1.24.5'
           cache: false
       - name: Build guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain built artifact and identity
         if: always()
         uses: actions/upload-artifact@v4
@@ -239,7 +239,7 @@ jobs:
           name: GuideSite-Build
           path: .processing/guide-site
       - name: Validate guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Check deployment inputs without deployment credentials
         if: ${{ inputs.deploy }}
         env:
@@ -364,7 +364,7 @@ jobs:
           name: GuideSite-Validate
           path: .processing/guide-site
       - name: Verify guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
       - name: Retain deployed-site verification
         if: always()
         uses: actions/upload-artifact@v4
