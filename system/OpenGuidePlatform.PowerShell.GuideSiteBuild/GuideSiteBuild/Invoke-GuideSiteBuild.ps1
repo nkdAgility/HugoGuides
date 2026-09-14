@@ -2,10 +2,10 @@ function Invoke-GuideSiteBuild {
     [CmdletBinding()]
     param(
         [ValidateSet('All','Prepare','Build','Validate','Serve','Deploy','Verify','Dependencies')][string]$Stage='All',
-        [ValidateSet('local','preview','production')][string]$Target='local',
+        [ValidateSet('auto','local','canary','preview','production')][string]$Target='auto',
         [string]$WorkspaceRoot=$PWD,[Parameter(Mandatory)][string]$PolicyPath,
         [string]$OutputPath,[string]$Version,
-        [string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment,[switch]$Deploy,[string]$DeploymentAdapter
+        [string]$DeliveryContextPath,[int]$PullRequestNumber,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment,[switch]$Deploy,[string]$DeploymentAdapter
     )
     $ErrorActionPreference='Stop'
     if(-not $Version){
@@ -15,6 +15,20 @@ function Invoke-GuideSiteBuild {
     if(-not $OutputPath){$OutputPath='.processing/guidesite/'+[guid]::NewGuid().ToString('N')}
     if(-not $PolicyPath){throw 'GuideSite requires a reviewed site policy (-PolicyPath).'}
     if($Stage -eq 'Dependencies'){Install-GuideBuildDependencies -WorkspaceRoot $WorkspaceRoot -Deployment:$Deploy;return}
+    $contextPath=Join-Path $WorkspaceRoot "$OutputPath/delivery-context.json"
+    $delivery=$null
+    if($DeliveryContextPath){$contextPath=Join-Path $WorkspaceRoot $DeliveryContextPath}
+    if($Target -eq 'auto' -or $DeliveryContextPath){
+        if(-not $DeliveryContextPath -and $Stage -in @('All','Prepare','Serve')){
+            $delivery=Resolve-GuideDeliveryContext -WorkspaceRoot $WorkspaceRoot -PullRequestNumber $PullRequestNumber -BaseUrl $BaseUrl -DeploymentEnvironment $DeploymentEnvironment
+        }else{
+            $delivery=Get-Content $contextPath -Raw|ConvertFrom-Json
+            $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
+            if($delivery.sourceCommit -cne $commit){throw 'Prepared delivery context belongs to another commit. Rerun Prepare.'}
+        }
+        $Target=$delivery.target;$BaseUrl=$delivery.baseUrl;$DeploymentEnvironment=$delivery.deploymentEnvironment
+        if(-not $DeploymentUrl){$DeploymentUrl=$BaseUrl}
+    }
     if($Deploy -and $Stage -ne 'All'){throw '-Deploy enables deployment after an All run. Use the Deploy operation for existing validated output.'}
     if(($Deploy -or $Stage -eq 'Deploy') -and $Target -eq 'local'){throw 'Deployment requires an explicit preview or production target.'}
     if($Stage -eq 'Deploy'){
@@ -28,7 +42,7 @@ function Invoke-GuideSiteBuild {
         & "$script:GuideBuildModuleRoot/GuideSiteBuild/Verify-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -PolicyPath $PolicyPath -DeploymentUrl $DeploymentUrl -Target $Target -Version $Version
         return
     }
-    & "$script:GuideBuildModuleRoot/GuideSiteBuild/Build-GuideSite.ps1" -Stage $Stage -BaseUrl $BaseUrl -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
+    & "$script:GuideBuildModuleRoot/GuideSiteBuild/Build-GuideSite.ps1" -Stage $Stage -DeliveryContext $delivery -SiteVersion $(if($delivery){$delivery.siteVersion}else{$null}) -BaseUrl $BaseUrl -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version
     if($Stage -eq 'All' -and $Deploy){
         $result=Invoke-GuideSiteBuild -Stage Deploy -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version -DeploymentEnvironment $DeploymentEnvironment -DeploymentAdapter $DeploymentAdapter -DeploymentUrl $DeploymentUrl
         Invoke-GuideSiteBuild -Stage Verify -Target $Target -WorkspaceRoot $WorkspaceRoot -PolicyPath $PolicyPath -OutputPath $OutputPath -Version $Version -DeploymentUrl $result.url

@@ -2,11 +2,11 @@
 [CmdletBinding()]
 param(
     [ValidateSet('All','Prepare','Build','Validate','Serve')][string]$Stage='All',
-    [ValidateSet('local','preview','production')][string]$Target='local',
+    [ValidateSet('local','canary','preview','production')][string]$Target='local',
     [Parameter(Mandatory)][string]$WorkspaceRoot,
     [Parameter(Mandatory)][string]$PolicyPath,
     [Parameter(Mandatory)][string]$OutputPath,
-    [string]$Version='0.0.0-local',[string]$BaseUrl
+    $DeliveryContext,[string]$Version='0.0.0-local',[string]$SiteVersion,[string]$BaseUrl
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
@@ -29,7 +29,7 @@ if($Stage -in @('All','Prepare','Serve')){
         $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
         $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
         $resolution=Get-GuideModuleResolution -PlatformRoot $platformRoot -SourcePath $source -Version $Version
-        $values=@{params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$Version"}}
+        $values=@{params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$(if($SiteVersion){$SiteVersion}else{$Version})"}}
         if($resolution.Mode -ne 'release'){$values.module=@{replacements=@($resolution.Replacements)}}
         if($BaseUrl){
             $address=[uri]$BaseUrl
@@ -57,6 +57,7 @@ if($Stage -in @('All','Prepare','Serve')){
     & "$PSScriptRoot/Prepare-GuideSite.ps1" -WorkspaceRoot $root -PolicyPath (Join-Path $root $PolicyPath) -SourceCommit $commit -OutputPath "$OutputPath/prepare" -Target $Target -PlatformVersion $Version -ModulePath $resolution.ModulePath -ConfigFiles $configs -ProductionConfigFiles @('hugo.yaml','hugo.production.yaml',$overlay) -ExpectedInputs $preparedInputs -InputArguments $inputArguments
     [IO.File]::WriteAllText("$output/prepare/inputs.json",($preparedInputs|ConvertTo-Json -Depth 10))
     [IO.File]::WriteAllText("$output/prepare/tools.json",($preparedTools|ConvertTo-Json -Depth 10))
+    if($DeliveryContext){$DeliveryContext|ConvertTo-Json|Set-Content "$output/delivery-context.json"}
 }
 if($Stage -in @('Build','Validate')){
     $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)

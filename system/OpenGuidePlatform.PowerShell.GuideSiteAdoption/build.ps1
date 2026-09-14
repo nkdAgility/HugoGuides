@@ -2,12 +2,12 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
     [Parameter(Position=0)][ValidateSet('All','Prepare','Build','Validate','Serve','Deploy','Verify','Update','Dependencies')][string]$Stage='All',
-    [ValidateSet('local','preview','production')][string]$Target='local',
+    [ValidateSet('auto','local','canary','preview','production')][string]$Target='auto',
     [ValidateSet('Auto','Local','Preview','Production','Path')][string]$PlatformSource='Auto',
     [string]$PlatformPath,[string]$PlatformRelease,
     [ValidateSet('preview','production')][string]$Ring,
     [switch]$Deploy,[string]$DeploymentAdapter,
-    [string]$OutputPath,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment
+    [int]$PullRequestNumber,[string]$OutputPath,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment
 )
 $ErrorActionPreference='Stop'
 $lock=Get-Content "$PSScriptRoot/open-guide-platform.installation.json" -Raw|ConvertFrom-Json

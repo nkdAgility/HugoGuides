@@ -10,18 +10,19 @@ on:
       policy-path:
         required: true
         type: string
-      site-name:
-        required: true
-        type: string
       target:
         type: string
-        default: preview
+        default: auto
       site-url:
         description: Absolute public URL for the selected site environment
         type: string
         default: ''
+      platform-ring:
+        description: Platform release channel used when platform-release is omitted
+        type: string
+        default: production
       platform-release:
-        description: Published release tag; omit to resolve the unique release matching platform-commit. Mutually exclusive with a candidate ZIP URL.
+        description: Optional published release tag; otherwise use the latest release in platform-ring. Mutually exclusive with a candidate ZIP URL.
         default: ''
         type: string
       platform-package-url:
@@ -36,10 +37,6 @@ on:
         description: Expected candidate version supplied by the platform build.
         type: string
         default: ''
-      platform-commit:
-        description: Platform source identity recorded in the release manifest
-        required: true
-        type: string
       deploy:
         description: Explicitly enable deployment to the configured site environment
         type: boolean
@@ -61,25 +58,32 @@ env:
   SITE_POLICY: ${{ inputs.policy-path }}
   SITE_TARGET: ${{ inputs.target }}
   SITE_BASE_URL: ${{ inputs.site-url }}
+  PLATFORM_RING: ${{ inputs.platform-ring }}
   PLATFORM_RELEASE: ${{ inputs.platform-release }}
-  PLATFORM_COMMIT: ${{ inputs.platform-commit }}
   PLATFORM_PACKAGE_URL: ${{ inputs.platform-package-url }}
   PLATFORM_PACKAGE_SHA256: ${{ inputs.platform-package-sha256 }}
   PLATFORM_VERSION: ${{ inputs.platform-version }}
 jobs:
   prepare:
     name: Prepare
+    outputs:
+      platform-source: ${{ steps.platform.outputs.source-commit }}
+      platform-release: ${{ steps.platform.outputs.release-tag }}
+      target: ${{ steps.delivery.outputs.target }}
+      url: ${{ steps.delivery.outputs.url }}
+      environment: ${{ steps.delivery.outputs.environment }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
+          fetch-depth: 0
           persist-credentials: false
       - name: Get platform installer
         uses: actions/checkout@v4
         with:
           repository: nkdAgility/OpenGuidePlatform
-          ref: ${{ inputs.platform-commit }}
+          ref: ${{ github.repository == 'nkdAgility/OpenGuidePlatform' && inputs.platform-package-url != '' && github.sha || 'main' }}
           path: .processing/platform-installer
           sparse-checkout: |
             .build/Restore-OpenGuidePlatform.ps1
@@ -95,18 +99,28 @@ jobs:
           go-version: '>=1.24.5'
           cache: false
       - name: Restore and verify OpenGuidePlatform
+        id: platform
         env:
           GH_TOKEN: ${{ github.token }}
-        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform
+        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
       - name: Install guide-site preparation dependencies
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Dependencies -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY
+      - name: Determine delivery context
+        id: delivery
+        env:
+          SITE_PULL_REQUEST: ${{ github.event.pull_request.number || 0 }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ResolveDelivery
       - name: Prepare guide site
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
+        env:
+          SITE_TARGET: ${{ steps.delivery.outputs.target }}
+          SITE_BASE_URL: ${{ steps.delivery.outputs.url }}
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -DeliveryContextPath .processing/delivery-context.json -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain Prepare report for PR delivery
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Assessment-${{ inputs.target }}
+          name: GuideSite-Assessment
           path: |
             .processing/guide-site/prepare/assessment.json
             .processing/guide-site/prepare/assessment.md
@@ -115,7 +129,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Prepare-${{ inputs.target }}
+          name: GuideSite-Prepare
           include-hidden-files: true
           path: |
             .processing/platform/
@@ -130,13 +144,17 @@ jobs:
     permissions:
       actions: read
       pull-requests: write
+    env:
+      PLATFORM_RELEASE: ${{ needs.prepare.outputs.platform-release }}
+      SITE_TARGET: ${{ needs.prepare.outputs.target }}
+      SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
       # Restore platform code separately; the site supplies assessment data only.
       - name: Get platform installer
         uses: actions/checkout@v4
         with:
           repository: nkdAgility/OpenGuidePlatform
-          ref: ${{ inputs.platform-commit }}
+          ref: ${{ needs.prepare.outputs.platform-source }}
           path: .processing/platform-installer
           sparse-checkout: |
             .build/Restore-OpenGuidePlatform.ps1
@@ -146,16 +164,16 @@ jobs:
       - name: Restore and verify OpenGuidePlatform
         env:
           GH_TOKEN: ${{ github.token }}
-        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform
+        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
       - uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Assessment-${{ inputs.target }}
+          name: GuideSite-Assessment
           path: assessment
       - name: Deliver commit-scoped Prepare assessment
         env:
           GH_TOKEN: ${{ github.token }}
           ASSESSED_COMMIT: ${{ inputs.source-ref }}
-          ASSESSED_TARGET: ${{ inputs.target }}
+          ASSESSED_TARGET: ${{ needs.prepare.outputs.target }}
           PREPARE_RESULT: ${{ needs.prepare.result }}
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation PublishPrepare
 
@@ -163,15 +181,20 @@ jobs:
     name: Build
     needs: prepare
     runs-on: ubuntu-24.04
+    env:
+      PLATFORM_RELEASE: ${{ needs.prepare.outputs.platform-release }}
+      SITE_TARGET: ${{ needs.prepare.outputs.target }}
+      SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
+          fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Prepare-${{ inputs.target }}
+          name: GuideSite-Prepare
           path: .processing
       - uses: peaceiris/actions-hugo@v3
         with:
@@ -187,28 +210,33 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Build-${{ inputs.target }}
+          name: GuideSite-Build
           include-hidden-files: true
           path: .processing/guide-site/
           if-no-files-found: error
   validate:
     name: Validate
-    needs: build
+    needs: [prepare, build]
     runs-on: ubuntu-24.04
+    env:
+      PLATFORM_RELEASE: ${{ needs.prepare.outputs.platform-release }}
+      SITE_TARGET: ${{ needs.prepare.outputs.target }}
+      SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
+          fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Prepare-${{ inputs.target }}
+          name: GuideSite-Prepare
           path: .processing
       - name: Download built guide site
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Build-${{ inputs.target }}
+          name: GuideSite-Build
           path: .processing/guide-site
       - name: Validate guide site
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Validate -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
@@ -216,15 +244,15 @@ jobs:
         if: ${{ inputs.deploy }}
         env:
           EXPECTED_COMMIT: ${{ inputs.source-ref }}
-          EXPECTED_TARGET: ${{ inputs.target }}
-          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+          EXPECTED_TARGET: ${{ needs.prepare.outputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ needs.prepare.outputs.environment }}
           DEPLOYMENT_ROOT: .processing/guide-site
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
       - name: Retain validated deployment files
         if: ${{ inputs.deploy }}
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Deployment-${{ inputs.target }}
+          name: GuideSite-Deployment
           include-hidden-files: true
           path: |
             .processing/guide-site/site/
@@ -235,7 +263,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Validate-${{ inputs.target }}
+          name: GuideSite-Validate
           path: |
             .processing/guide-site/artifact-validation.json
             .processing/guide-site/download-requirements.json
@@ -248,18 +276,22 @@ jobs:
       actions: read
       contents: read
       pull-requests: write
-    needs: validate
+    needs: [prepare, validate]
     if: ${{ inputs.deploy && github.event_name != 'merge_group' }}
     runs-on: ubuntu-24.04
     outputs:
       url: ${{ steps.hosting.outputs.url }}
+    env:
+      PLATFORM_RELEASE: ${{ needs.prepare.outputs.platform-release }}
+      SITE_TARGET: ${{ needs.prepare.outputs.target }}
+      SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
       # Restore platform code separately; never execute code from the site artifact.
       - name: Get platform installer
         uses: actions/checkout@v4
         with:
           repository: nkdAgility/OpenGuidePlatform
-          ref: ${{ inputs.platform-commit }}
+          ref: ${{ needs.prepare.outputs.platform-source }}
           path: .processing/platform-installer
           sparse-checkout: |
             .build/Restore-OpenGuidePlatform.ps1
@@ -269,16 +301,16 @@ jobs:
       - name: Restore and verify OpenGuidePlatform
         env:
           GH_TOKEN: ${{ github.token }}
-        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform
+        run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
       - uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Deployment-${{ inputs.target }}
+          name: GuideSite-Deployment
           path: deployment
       - name: Verify deployment data before exposing hosting credentials
         env:
           EXPECTED_COMMIT: ${{ inputs.source-ref }}
-          EXPECTED_TARGET: ${{ inputs.target }}
-          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+          EXPECTED_TARGET: ${{ needs.prepare.outputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ needs.prepare.outputs.environment }}
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
       - name: Install deployment dependencies
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation InstallDeploymentDependencies
@@ -288,44 +320,48 @@ jobs:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.static-web-app-token }}
           GH_TOKEN: ${{ github.token }}
           EXPECTED_COMMIT: ${{ inputs.source-ref }}
-          EXPECTED_TARGET: ${{ inputs.target }}
-          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+          EXPECTED_TARGET: ${{ needs.prepare.outputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ needs.prepare.outputs.environment }}
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy
       - name: Retain deployment result and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Hosting-${{ inputs.target }}
+          name: GuideSite-Hosting
           path: |
             deployment/deployment.json
             .processing/deployment-client/**/deploy.log
           if-no-files-found: warn
   verify:
     name: Verify
-    needs: deploy
+    needs: [prepare, deploy]
     if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
     runs-on: ubuntu-24.04
     env:
+      PLATFORM_RELEASE: ${{ needs.prepare.outputs.platform-release }}
+      SITE_TARGET: ${{ needs.prepare.outputs.target }}
+      SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
       SITE_DEPLOYMENT_URL: ${{ needs.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source-ref }}
+          fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Prepare-${{ inputs.target }}
+          name: GuideSite-Prepare
           path: .processing
       - name: Download built guide site
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Build-${{ inputs.target }}
+          name: GuideSite-Build
           path: .processing/guide-site
       - name: Download validation evidence
         uses: actions/download-artifact@v4
         with:
-          name: GuideSite-Validate-${{ inputs.target }}
+          name: GuideSite-Validate
           path: .processing/guide-site
       - name: Verify guide site
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
@@ -333,6 +369,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: GuideSite-Verify-${{ inputs.target }}
+          name: GuideSite-Verify
           path: .processing/guide-site/deployment-verification.json
           if-no-files-found: error

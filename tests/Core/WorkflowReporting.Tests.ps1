@@ -35,9 +35,9 @@ Describe 'Prepare reporting through the released PowerShell module' {
         $checkouts=@($job.steps|Where-Object { $_['uses'] -like 'actions/checkout@*' })
         $checkouts.Count|Should -Be 1
         $checkouts[0].with.repository|Should -Be 'nkdAgility/OpenGuidePlatform'
-        $checkouts[0].with.ref|Should -Be '${{ inputs.platform-commit }}'
+        $checkouts[0].with.ref|Should -Be '${{ needs.prepare.outputs.platform-source }}'
         $checkouts[0].with['persist-credentials']|Should -BeFalse
-        ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Assessment-${{ inputs.target }}'
+        ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Assessment'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Restore-OpenGuidePlatform.ps1 -FromWorkflow'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation PublishPrepare'
     }

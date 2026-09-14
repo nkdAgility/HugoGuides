@@ -14,7 +14,7 @@ param(
     [string[]]$ProductionConfigFiles=@('hugo.yaml','hugo.production.yaml'),
     [Parameter(Mandatory)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,
     [Parameter(Mandatory)][string]$OutputPath,
-    [ValidateSet('local','preview','production')][string]$Target='local'
+    [ValidateSet('local','canary','preview','production')][string]$Target='local'
 )
 $ErrorActionPreference='Stop'
 $platformRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent

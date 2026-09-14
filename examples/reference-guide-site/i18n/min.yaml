@@ -493,3 +493,6 @@
   translation: "Helper Minions"
 - id: download_table_contributed_by
   translation: "Made by da Helpers"
+
+- id: download_reference_status
+  translation: 'Reference'

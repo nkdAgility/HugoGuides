@@ -12,10 +12,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   close:
-    name: GuideSiteSample
+    name: Close PR preview
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     uses: ./.github/workflows/guide-site-close-pr.yaml
-    with:
-      site-name: GuideSiteSample
     secrets:
       static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}

@@ -18,9 +18,5 @@ jobs:
     uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@__RELEASE__
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      site-name: __SITE__
       policy-path: __POLICY__
-      target: preview
-      platform-release: __RELEASE__
-      platform-commit: __COMMIT__
       deploy: false
