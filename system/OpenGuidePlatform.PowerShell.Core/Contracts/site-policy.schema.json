@@ -15,6 +15,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "discovery": { "const": "source" },
         "sourcePath": {
           "type": "string",
           "minLength": 1,
@@ -285,6 +286,7 @@
                                 "protected"
                               ]
                             },
+                            "publicationRoots": { "type": "array", "items": { "type": "string" } },
                             "publishedPaths": {
                               "type": "array",
                               "uniqueItems": true,

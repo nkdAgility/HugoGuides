@@ -5,24 +5,12 @@ function New-GuideSiteDiscovery {
     $configuration=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles $ConfigFiles -Target $Target).Configuration
     $default=[string]$configuration.defaultcontentlanguage
     $languages=@($configuration.languages.Keys|Where-Object {$configuration.languages[$_].disabled -ne $true})
-    $probe=Join-Path $WorkspaceRoot "$OutputPath/discovery-probe"
-    New-Item "$probe/layouts" -ItemType Directory -Force|Out-Null
-    Copy-Item "$PSScriptRoot/home.html" "$probe/layouts/home.html"
-    $overlay=@{disableKinds=@('RSS','sitemap','robotsTXT','404');outputs=@{home=@('HTML')};minify=@{minifyOutput=$false}}
-    $overlay|ConvertTo-Json -Depth 10|Set-Content "$probe/overlay.json"
-    $lines=@(& hugo --source $source --config (($ConfigFiles+@("$probe/overlay.json"))-join ',') --environment $Target --layoutDir "$probe/layouts" --destination "$probe/site" 2>&1)
-    if($LASTEXITCODE -ne 0){throw "Hugo discovery failed: $($lines -join '`n')"}
-    $recordFile=Get-ChildItem "$probe/site" -Filter index.html -Recurse -File|Where-Object {([IO.File]::ReadAllText($_.FullName)).TrimStart().StartsWith('{')}|Select-Object -First 1
-    if(-not $recordFile){throw 'Hugo did not produce the source inventory. Check the site home output configuration.'}
-    $observed=Get-Content $recordFile.FullName -Raw|ConvertFrom-Json -AsHashtable
-    $observed|ConvertTo-Json -Depth 30|Set-Content (Join-Path $WorkspaceRoot "$OutputPath/discovered-pages.json")
     $content=Join-Path $source $(if($configuration.contentdir){$configuration.contentdir}else{'content'})
     if([IO.Path]::IsPathRooted([string]$configuration.contentdir)){$content=$configuration.contentdir}
+    $pages=@(Get-GuideSourcePages -SourcePath $source -ConfigFiles $ConfigFiles -Target $Target -Configuration $configuration)
     function ArtifactRoute($url){
         $base=[uri]$configuration.baseurl
-        $prefix=if($base.IsAbsoluteUri){$base.AbsolutePath.TrimEnd('/')}else{([string]$configuration.baseurl).TrimEnd('/')}
-        if($prefix -and $url.StartsWith($prefix+'/',[StringComparison]::Ordinal)){return $url.Substring($prefix.Length)}
-        return $url
+        Get-GuideArtifactRouteFromUri -Uri ([uri]$url) -BaseUri $base
     }
     function Relative($path){[IO.Path]::GetRelativePath($WorkspaceRoot,$path).Replace('\','/')}
     function Language($name){if($name -match '^(?:_?index)\.([A-Za-z0-9-]+)\.md$'){return $Matches[1]};return $default}
@@ -47,9 +35,12 @@ function New-GuideSiteDiscovery {
                     $pdfLanguage=if($pdf.Name -match '\.([A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*)\.pdf$'){$Matches[1]}else{$default}
                     if($pdfLanguage -ne $language){continue}
                     $relative=[IO.Path]::GetRelativePath($editionDirectory.FullName,$pdf.FullName).Replace('\','/')
-                    $urls=@($observed.pages|Where-Object {$_.file.Replace('\','/') -like "$([IO.Path]::GetRelativePath($content,$editionDirectory.FullName).Replace('\','/'))/index*"}|ForEach-Object resources|Where-Object {$_.name -eq $relative -or $_.name.EndsWith('/'+$relative,[StringComparison]::OrdinalIgnoreCase)}|ForEach-Object {(ArtifactRoute $_.url).TrimStart('/')}|Sort-Object -Unique)
-                    $download=@{path=$relative;handling='supplied'}
-                    if($urls.Count){$download.publishedPaths=$urls}
+                    $owners=@($pages|Where-Object {
+                        $pageFile=[IO.Path]::GetFullPath((Join-Path $source $_.path))
+                        [IO.Path]::GetDirectoryName($pageFile) -ieq $editionDirectory.FullName
+                    }|ForEach-Object {ArtifactRoute $_.permalink}|Sort-Object -Unique)
+                    $download=@{path=$relative;handling='supplied';publicationRoots=$owners}
+
                     $download
                 })
                 $intent=if(-not [string]::IsNullOrWhiteSpace($body)){'web'}elseif($downloads.Count){'pdf-only'}elseif($language -eq $default){'web'}else{'fallback'}
@@ -85,7 +76,23 @@ function New-GuideSiteDiscovery {
         if($effective.languages.Contains('min')){$hasMin=$true}
         @{name=$ring;excludedLanguages=@($effective.languages.Keys|Where-Object {$effective.languages[$_].disabled -eq $true});excludedGuides=@()}
     })
-    $routes=@($observed.pages|ForEach-Object formats|Where-Object name -eq 'HTML'|ForEach-Object {ArtifactRoute $_.url}|Sort-Object -Unique)
+    $routes=@($pages|ForEach-Object {ArtifactRoute $_.permalink}|Sort-Object -Unique)
+    $indexes=@(foreach($language in $languages){
+        $prefix=if($language -eq $default -and -not $configuration.defaultcontentlanguageinsubdir){'/'}else{"/$language/"}
+        $homeFormats=@($configuration.outputs.home)
+        $homeFile=Join-Path $content $(if($language -eq $default){'_index.md'}else{"_index.$language.md"})
+        if(Test-Path $homeFile){
+            $home=Read-GuideDocument $homeFile
+            if($home.Metadata.Contains('outputs')){$homeFormats=@($home.Metadata.outputs)}
+        }
+        foreach($format in $homeFormats){
+            $definition=$configuration.outputformats[$format]
+            if($definition.mediatype -notmatch 'json'){continue}
+            $formatPath=([string]$definition['path']).Trim('/')
+            $suffix=@($configuration.mediatypes[$definition.mediatype].suffixes)[0]
+            @{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+'.'+$suffix;requiredRoutes=@()}
+        }
+    })
     # Alias pages are not members of Hugo .Pages; require their generated routes explicitly.
     foreach($guide in $guides){
         $guideRoute=[IO.Path]::GetRelativePath($content,(Join-Path $WorkspaceRoot $guide.contentRoot)).Replace('\','/').ToLowerInvariant()
@@ -101,6 +108,6 @@ function New-GuideSiteDiscovery {
             }
         }
     }
-    $inventory=@{schemaVersion=1;siteId=(Split-Path $WorkspaceRoot -Leaf);wrapper=@{sourcePath=$SourcePath;requiredRoutes=$routes;requiredFiles=@($requiredFiles);requiredI18nKeys=@();integrationPoints=@();legacyAliases=$aliases};guides=$guides;publication=@{environments=$environments;permanentExclusions=@(if($hasMin){@{environment='production';subject='language';id='min';reason='Minionese must never be published to production.'}})};protectedPaths=@()}
+    $inventory=@{schemaVersion=1;siteId=(Split-Path $WorkspaceRoot -Leaf);wrapper=@{discovery='source';jsonIndexes=$indexes;sourcePath=$SourcePath;requiredRoutes=$routes;requiredFiles=@($requiredFiles);requiredI18nKeys=@();integrationPoints=@();legacyAliases=$aliases};guides=$guides;publication=@{environments=$environments;permanentExclusions=@(if($hasMin){@{environment='production';subject='language';id='min';reason='Minionese must never be published to production.'}})};protectedPaths=@()}
     return $inventory
 }

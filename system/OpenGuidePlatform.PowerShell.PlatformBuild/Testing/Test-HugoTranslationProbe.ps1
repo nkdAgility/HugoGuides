@@ -31,3 +31,13 @@ if(($regional.Keys|Where-Object Key -EQ home).Value -cne 'Wrapper home' -or ($re
 if(($fa.Keys|Where-Object Key -EQ missing).State -ne 'missing'){throw 'Missing translation was not identified.'}
 if((Get-FileHash (Join-Path $source 'go.mod')).Hash -cne $hash){throw 'Translation probe changed the module pin.'}
 Write-Host 'PASS Hugo translation probe: wrapper override, module catalogue, Persian, numeric region, fallback, missing key and unchanged pin.'
+$sourceRows=@(Get-GuideSourceTranslations -SourcePath $source -ConfigFiles @('hugo.json') -RequiredKeys @('home','module_only','fallback','missing') -Target preview)
+foreach($row in $sourceRows){
+    $rendered=$result.Languages|Where-Object Language -EQ $row.Language
+    foreach($key in $row.Keys){
+        $expected=$rendered.Keys|Where-Object Key -EQ $key.Key
+        if([string]$key.Value -cne [string]$expected.Value){throw "Source catalogue evidence differs for $($row.Language)/$($key.Key)."}
+        if(($key.State -eq 'missing') -ne ($expected.State -eq 'missing')){throw "Source catalogue state differs for $($row.Language)/$($key.Key)."}
+    }
+}
+Write-Host 'PASS source catalogue inspection agrees with rendered diagnostic for wrapper overrides, module catalogues, Persian, numeric region and fallback.'
