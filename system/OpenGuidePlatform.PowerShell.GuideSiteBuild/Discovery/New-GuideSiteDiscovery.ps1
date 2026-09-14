@@ -96,20 +96,6 @@ function New-GuideSiteDiscovery {
             @{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+$delimiter+$suffix;requiredRoutes=@()}
         }
     })
-    foreach($page in $pages|Where-Object kind -ne 'home'){
-        $document=Read-GuideDocument ([IO.Path]::GetFullPath((Join-Path $source $page.path)))
-        $formats=if($document.Metadata.Contains('outputs')){@($document.Metadata.outputs)}else{@($configuration.outputs[$page.kind])}
-        $pageRoute=ArtifactRoute $page.permalink
-        $prefix=if($pageRoute.EndsWith('/')){$pageRoute}else{$pageRoute.Substring(0,$pageRoute.LastIndexOf('/')+1)}
-        foreach($format in $formats){
-            $definition=$configuration.outputformats[$format]
-            if($definition.mediatype -notmatch 'json'){continue}
-            $media=$configuration.mediatypes[$definition.mediatype]
-            $delimiter=if($media.Contains('delimiter')){[string]$media.delimiter}else{'.'}
-            $formatPath=([string]$definition['path']).Trim('/')
-            $indexes+=@{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+$delimiter+@($media.suffixes)[0];requiredRoutes=@()}
-        }
-    }
     $indexes=@($indexes|Sort-Object route -Unique)
     # Alias pages are not members of Hugo .Pages; require their generated routes explicitly.
     foreach($guide in $guides){
@@ -126,6 +112,6 @@ function New-GuideSiteDiscovery {
             }
         }
     }
-    $inventory=@{schemaVersion=1;siteId=(Split-Path $WorkspaceRoot -Leaf);wrapper=@{discovery='source';jsonIndexes=$indexes;sourcePath=$SourcePath;requiredRoutes=$routes;requiredFiles=@($requiredFiles);requiredI18nKeys=@();integrationPoints=@();legacyAliases=$aliases};guides=$guides;publication=@{environments=$environments;permanentExclusions=@(if($hasMin){@{environment='production';subject='language';id='min';reason='Minionese must never be published to production.'}})};protectedPaths=@()}
+    $inventory=@{schemaVersion=1;siteId=(Split-Path $WorkspaceRoot -Leaf);wrapper=@{discovery='source';jsonIndexes=$indexes;jsonFileNames=@(Get-GuideJsonFileNames -Configuration $configuration);sourcePath=$SourcePath;requiredRoutes=$routes;requiredFiles=@($requiredFiles);requiredI18nKeys=@();integrationPoints=@();legacyAliases=$aliases};guides=$guides;publication=@{environments=$environments;permanentExclusions=@(if($hasMin){@{environment='production';subject='language';id='min';reason='Minionese must never be published to production.'}})};protectedPaths=@()}
     return $inventory
 }

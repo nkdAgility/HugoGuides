@@ -42,11 +42,14 @@ function Get-GuideSourceTranslations {
         }
     }}
     foreach($language in $configuration.languages.Keys|Where-Object {$configuration.languages[$_].disabled -ne $true}){
+        $direct=@([string]$configuration.languages[$language]['locale'],$language)|Where-Object {$_}|Select-Object -Unique
+        $fallbackLanguage=[string]$configuration.defaultcontentlanguage
+        $fallback=@([string]$configuration.languages[$fallbackLanguage]['locale'],$fallbackLanguage)|Where-Object {$_}|Select-Object -Unique
         $keys=@(foreach($key in @($RequiredKeys|Select-Object -Unique)){
             $value=$null;$state='missing'
-            foreach($candidate in @($language,[string]$configuration.defaultcontentlanguage)|Select-Object -Unique){
+            foreach($candidate in @(@($direct)+@($fallback))|Select-Object -Unique){
                 if($catalogues.ContainsKey($candidate) -and $catalogues[$candidate].ContainsKey($key) -and $catalogues[$candidate][$key]){
-                    $value=$catalogues[$candidate][$key];$state=if($candidate -eq $language){'available'}else{'fallback'};break
+                    $value=$catalogues[$candidate][$key];$state=if($candidate -in $direct){'available'}else{'fallback'};break
                 }
             }
             [pscustomobject]@{Key=$key;Value=$value;State=$state}

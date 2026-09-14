@@ -12,12 +12,13 @@ $catalogues=Join-Path $fixture 'catalogues'
 Write-Fixture (Join-Path $catalogues 'go.mod') "module example.org/probe/catalogues`n`ngo 1.24.4`n"
 $replacement=$catalogues.Replace('\','/')
 Write-Fixture (Join-Path $source 'go.mod') "module example.org/probe/site`n`ngo 1.24.4`n`nrequire example.org/probe/catalogues v0.0.0`nreplace example.org/probe/catalogues => `"$replacement`"`n"
-$config=@{baseURL='https://example.invalid/';defaultContentLanguage='en';languages=@{en=@{weight=1};fa=@{weight=2};'es-419'=@{weight=3}};module=@{imports=@(@{path='example.org/probe/catalogues'})}}
+$config=@{baseURL='https://example.invalid/';defaultContentLanguage='en';languages=@{en=@{weight=1};fa=@{weight=2};'es-419'=@{weight=3};fr=@{weight=4;locale='fr-CA'}};module=@{imports=@(@{path='example.org/probe/catalogues'})}}
 Write-Fixture (Join-Path $source 'hugo.json') ($config|ConvertTo-Json -Depth 20)
 Write-Fixture (Join-Path $source 'i18n/en.yaml') "- id: home`n  translation: Wrapper home`n"
 Write-Fixture (Join-Path $source 'i18n/fa.yaml') "- id: home`n  translation: خانه`n"
 Write-Fixture (Join-Path $catalogues 'i18n/en.yaml') "- id: home`n  translation: Module home`n- id: module_only`n  translation: English module`n- id: fallback`n  translation: English fallback`n"
 Write-Fixture (Join-Path $catalogues 'i18n/fa.yaml') "- id: module_only`n  translation: پیام ماژول`n"
+Write-Fixture (Join-Path $catalogues 'i18n/fr-CA.yaml') "- id: home`n  translation: Accueil canadien`n"
 $hash=(Get-FileHash (Join-Path $source 'go.mod')).Hash
 $result=Get-GuideEffectiveTranslations -SourcePath $source -ConfigFiles @('hugo.json') -RequiredKeys @('home','module_only','fallback','missing') -WorkspaceRoot $root -OutputPath "$relative/evidence" -Target preview
 $fa=$result.Languages|Where-Object Language -EQ fa
@@ -31,8 +32,9 @@ if(($regional.Keys|Where-Object Key -EQ home).Value -cne 'Wrapper home' -or ($re
 if(($fa.Keys|Where-Object Key -EQ missing).State -ne 'missing'){throw 'Missing translation was not identified.'}
 if((Get-FileHash (Join-Path $source 'go.mod')).Hash -cne $hash){throw 'Translation probe changed the module pin.'}
 Write-Host 'PASS Hugo translation probe: wrapper override, module catalogue, Persian, numeric region, fallback, missing key and unchanged pin.'
-$sourceRows=@(Get-GuideSourceTranslations -SourcePath $source -ConfigFiles @('hugo.json') -RequiredKeys @('home','module_only','fallback','missing') -Target preview)
+$sourceRows=@(Get-GuideSourceTranslations -SourcePath $source -ConfigFiles @('hugo.json') -RequiredKeys @('home','module_only','fallback','missing','home') -Target preview)
 foreach($row in $sourceRows){
+    if($row.Keys.Count -ne 4){throw 'Duplicate required keys produced ambiguous source evidence.'}
     $rendered=$result.Languages|Where-Object Language -EQ $row.Language
     foreach($key in $row.Keys){
         $expected=$rendered.Keys|Where-Object Key -EQ $key.Key

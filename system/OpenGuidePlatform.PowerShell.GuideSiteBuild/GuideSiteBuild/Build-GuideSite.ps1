@@ -118,6 +118,10 @@ if($Stage -in @('All','Validate')){
     $navigation=& "$PSScriptRoot/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri $navigationBase -RequiredPageContent $requiredContent
     [IO.File]::WriteAllText("$output/navigation-validation.json",($navigation|ConvertTo-Json -Depth 10))
     $indexes=@(if($policy.wrapper.Contains('jsonIndexes')){@($policy.wrapper.jsonIndexes|Where-Object { $route=$_.route; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count })}else{@()})
+    if($inferred -and $policy.wrapper.Contains('jsonFileNames')){
+        # Additional emitted indexes are checked as artifacts, not trusted as PDF ownership evidence.
+        $indexes+=@($artifactFiles|Where-Object {[IO.Path]::GetFileName($_.Path) -in $policy.wrapper.jsonFileNames}|ForEach-Object {@{route='/'+$_.Path;requiredRoutes=@()}})
+    }
     $indexes=@($indexes|Sort-Object route -Unique|ForEach-Object {
         [pscustomobject]@{route=$_.route;requiredRoutes=@($_.requiredRoutes|Where-Object {$route=$_; -not @($forbidden|Where-Object {$route.StartsWith("/$_/")}).Count})}
     })

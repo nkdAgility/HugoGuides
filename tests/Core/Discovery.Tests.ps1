@@ -16,14 +16,20 @@ Describe 'Inferred guide-site validation' {
     It 'respects a configured directory and suffix for home JSON output' {
         $fixture=Join-Path $TestDrive 'json-path'
         New-Item "$fixture/content/guide/2024.1" -ItemType Directory -Force|Out-Null
+        ""|Set-Content "$fixture/hugo.preview.yaml"
         "---`ntype: guide`nlayout: root`n---"|Set-Content "$fixture/content/guide/_index.md"
         "---`ntype: guide`nversion: 2024.1`n---`nBody"|Set-Content "$fixture/content/guide/2024.1/index.md"
         Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { @() }
         Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
-            @{Configuration=@{contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false}};outputs=@{home=@('catalogue')};outputformats=@{catalogue=@{path='api';basename='catalogue';mediatype='application/json'}};mediatypes=@{'application/json'=@{suffixes=@('jsn')}}}}
+            @{Configuration=@{contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false}};outputs=@{home=@('catalogue')};outputformats=@{html=@{mediatype='text/html'};catalogue=@{path='api';basename='catalogue';mediatype='application/json'}};mediatypes=@{'application/json'=@{suffixes=@('jsn')}}}}
         }
         $found=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath json-path -ConfigFiles @('hugo.yaml') -Target preview -OutputPath .processing/discovery
         $found.wrapper.jsonIndexes.route|Should -Contain '/api/catalogue.jsn'
+        $found|ConvertTo-Json -Depth 50|Set-Content "$fixture/policy.json"
+        {Import-GuidePolicy "$fixture/policy.json"}|Should -Not -Throw
+        "---`ntitle: Home`noutputs: [html]`n---"|Set-Content "$fixture/content/_index.md"
+        $withoutJson=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath json-path -ConfigFiles @('hugo.yaml') -Target preview -OutputPath .processing/discovery
+        @($withoutJson.wrapper.jsonIndexes).Count|Should -Be 0
     }
     It 'requires configured JSON outputs even when no output file exists' {
         $result=Test-GuideJsonIndexes -ArtifactRoot $TestDrive -BaseUri https://example.test/ -Indexes $inventory.wrapper.jsonIndexes
@@ -54,7 +60,7 @@ Describe 'Source-only discovery' {
         "---`ntitle: Guide`ntype: guide`nlayout: root`n---"|Set-Content "$fixture/content/guide/_index.md"
         "---`ntitle: Published`ntype: guide`nversion: 2024.1`n---`n{{< consumer-shortcode >}}"|Set-Content "$fixture/content/guide/2024.1/index.md"
         Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
-            @{Configuration=@{contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false}};outputs=@{home=@()}}}
+            @{Configuration=@{contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false}};outputs=@{home=@()};outputformats=@{};mediatypes=@{}}}
         }
         Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { @() }
         $found=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath source-only -ConfigFiles @('hugo.yaml') -Target preview -OutputPath .processing/discovery

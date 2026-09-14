@@ -4,7 +4,8 @@ function Get-GuideJsonFileNames {
         $format=$_
         $media=$Configuration.mediatypes[$format.mediatype]
         $delimiter=if($media.Contains('delimiter')){[string]$media.delimiter}else{'.'}
-        foreach($suffix in $media.suffixes){$format.basename+$delimiter+$suffix}
+        $suffix=@($media.suffixes)[0]
+        if($suffix){$format.basename+$delimiter+$suffix}
     }|Select-Object -Unique)
 }
 function Get-GuidePublishedDownloads {
