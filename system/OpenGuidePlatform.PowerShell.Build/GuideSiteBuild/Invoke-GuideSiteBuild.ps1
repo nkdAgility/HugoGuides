@@ -14,7 +14,6 @@ function Invoke-GuideSiteBuild {
     }
     if(-not $OutputPath){$OutputPath='.processing/guidesite/'+[guid]::NewGuid().ToString('N')}
     if(-not $PolicyPath){throw 'GuideSite requires a reviewed site policy (-PolicyPath).'}
-    if($Stage -in @('Package','Release')){throw 'GuideSite produces a validated site artifact, not a platform release.'}
     if($Stage -eq 'Deploy'){
         if($Target -eq 'local' -or ($Target -ne 'production' -and [string]::IsNullOrWhiteSpace($DeploymentEnvironment))){throw 'Preview deployment requires an explicit named hosting environment; local builds cannot deploy.'}
         & "$script:GuideBuildModuleRoot/GuideSiteBuild/Confirm-GuideSiteDeployment.ps1" -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Target $Target -Version $Version

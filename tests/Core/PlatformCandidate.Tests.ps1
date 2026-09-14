@@ -23,6 +23,11 @@ BeforeAll {
 }
 Describe 'Candidate ZIP restoration before publication' {
     BeforeEach {
+        $workflowEnvironment=@{}
+        foreach($name in @('PLATFORM_RELEASE','PLATFORM_PACKAGE_URL','PLATFORM_PACKAGE_SHA256','PLATFORM_VERSION')){
+            $workflowEnvironment[$name]=[Environment]::GetEnvironmentVariable($name)
+            [Environment]::SetEnvironmentVariable($name,$null)
+        }
         $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         Push-Location $workspace
@@ -31,7 +36,30 @@ Describe 'Candidate ZIP restoration before publication' {
         $global:OgpCandidateFixtureZip=$null
         $arguments=@{PackageUrl='https://api.github.com/repos/example/platform/actions/artifacts/123/zip';ExpectedVersion='1.2.3-Preview.4';ExpectedCommit=('a'*40);OutputPath='.processing/install'}
     }
-    AfterEach { Pop-Location }
+    AfterEach {
+        Pop-Location
+        foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$workflowEnvironment[$name])}
+    }
+    It 'selects the verified candidate from workflow inputs without YAML branching' {
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
+        $env:PLATFORM_PACKAGE_URL=$arguments.PackageUrl
+        $env:PLATFORM_PACKAGE_SHA256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
+        $env:PLATFORM_VERSION=$arguments.ExpectedVersion
+        & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath
+        (Get-Content .processing/install/platform.json -Raw|ConvertFrom-Json).version|Should -Be $arguments.ExpectedVersion
+        Should -Invoke Invoke-WebRequest -Times 1 -Exactly
+    }
+    It 'rejects conflicting workflow package selection before network access' {
+        $env:PLATFORM_PACKAGE_URL=$arguments.PackageUrl
+        $env:PLATFORM_RELEASE='v1.2.3'
+        { & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath }|Should -Throw '*not both*'
+        Should -Invoke Invoke-WebRequest -Times 0 -Exactly
+    }
+    It 'rejects candidate identity without a workflow package URL' {
+        $env:PLATFORM_VERSION='1.2.3'
+        { & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath }|Should -Throw '*requires a package URL*'
+        Should -Invoke Invoke-WebRequest -Times 0 -Exactly
+    }
     It 'restores the verified build ZIP without querying any release' {
         $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
         $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash

@@ -13,15 +13,7 @@ $configuration.TestResult.Enabled=$false
 $stepSummary=$env:GITHUB_STEP_SUMMARY
 try {
     $env:GITHUB_STEP_SUMMARY=$null
-    $previousSummary=$env:GITHUB_STEP_SUMMARY
-$testSummary=Join-Path ([IO.Path]::GetTempPath()) ('ogp-test-summary-'+[guid]::NewGuid().ToString('N')+'.md')
-try{
-    $env:GITHUB_STEP_SUMMARY=$testSummary
     $result=Invoke-Pester -Configuration $configuration
-}finally{
-    $env:GITHUB_STEP_SUMMARY=$previousSummary
-    if(Test-Path -LiteralPath $testSummary){[IO.File]::Delete($testSummary)}
-}
 } finally {
     $env:GITHUB_STEP_SUMMARY=$stepSummary
 }

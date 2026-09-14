@@ -60,7 +60,7 @@ Once installed, run these commands from your guide-site repository:
 | Check inputs without building pages | `./build.ps1 -Stage Prepare` |
 | Preview an update's file changes | `./bootstrap.ps1 -Update -WhatIf` |
 
-Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. Routine builds use your installed platform version; rerun the install/update command when you want an update.
+Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version; rerun the install/update command when you want an update.
 
 For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.AgentSkills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
 

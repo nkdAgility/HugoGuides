@@ -1,5 +1,6 @@
 $script:GuideBuildModuleRoot=$PSScriptRoot
 Set-StrictMode -Version Latest
+Import-Module (Join-Path $PSScriptRoot '../OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1')
 function ConvertTo-GuideAssessmentMarkdown {
     [CmdletBinding()]
     param([Parameter(Mandatory)]$Assessment)

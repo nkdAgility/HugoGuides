@@ -56,6 +56,10 @@ Describe 'Guide-site installation and update' {
         [IO.File]::WriteAllText("$workspace/site/go.mod",'module fixture')
         $parameters=@{WorkspaceRoot=$workspace;ReleaseTag='v1.2.3-Preview.1'}
     }
+    AfterEach {
+        # The installed fixture imports a fake Build module; do not leak it into other tests.
+        Get-Module OpenGuidePlatform.PowerShell.Build -All | Where-Object { $_.Path.StartsWith($workspace+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
+    }
     It 'installs matching workflow and identical root agent shims without touching policy' {
         $before=(Get-FileHash "$workspace/guide-site.policy.json").Hash
         & $bootstrap -Install @parameters

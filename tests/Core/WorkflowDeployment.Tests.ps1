@@ -1,62 +1,54 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module powershell-yaml
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
     $workflow=ConvertFrom-Yaml (Get-Content "$root/.github/workflows/guide-site-build.yaml" -Raw)
 }
-Describe 'Deployment consumes validated data without executing candidate code' {
-    It 'keeps candidate code and checkout out of the privileged job' {
-        $deploy=$workflow.jobs.deploy
-        @($deploy.steps|Where-Object { $_.Contains('run') -or $_.uses -match 'checkout' }).Count | Should -Be 0
-        @($deploy.steps|Where-Object { $_['with']['name'] -match 'Prepare|Build' }).Count | Should -Be 0
-        ($deploy.steps|Where-Object uses -Like 'Azure/*').with.app_location | Should -Be 'deployment/site'
-        ($workflow.jobs.validate.steps|Where-Object { $_['name'] -eq 'Check deployment inputs without deployment credentials' }).run | Should -Match '-Stage Deploy'
-        $workflow.jobs.validate.Contains('permissions') | Should -BeFalse
+Describe 'Deployment validates site data using the selected platform package' {
+    BeforeEach {
+        $deployment=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
+        New-Item "$deployment/site/.well-known" -ItemType Directory -Force|Out-Null
+        '<script>throw new Error("Never execute site data")</script>'|Set-Content "$deployment/site/index.html"
+        @{sourceCommit=('a'*40);target='preview';platformVersion='1.0.0-preview'}|ConvertTo-Json|Set-Content "$deployment/site/.well-known/open-guide-platform.json"
+        $identity=New-GuideArtifactIdentity -ArtifactRoot "$deployment/site" -SourceCommit ('a'*40) -Target preview -Version '1.0.0-preview'
+        $identity|ConvertTo-Json -Depth 10|Set-Content "$deployment/artifact-identity.json"
+        $report=@{Outcome='pass';SourceCommit=('a'*40);Target='preview'}
+        $report|ConvertTo-Json|Set-Content "$deployment/artifact-validation.json"
+        $arguments=@{DeploymentRoot=$deployment;SourceCommit=('a'*40);Target='preview';DeploymentEnvironment='35'}
     }
-    It 'checks the actual uploaded bytes, identity and validation outcome as data' {
-        $script=($workflow.jobs.deploy.steps|Where-Object uses -Like 'actions/github-script@*').with.script
-        $scriptPath=Join-Path $TestDrive 'deployment-script.json'
-        [IO.File]::WriteAllText($scriptPath,(ConvertTo-Json -InputObject $script))
-        $runner=@'
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const crypto = require('node:crypto');
-const script = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
-const run = new Function('require','process','core', script);
-process.chdir(path.dirname(process.argv[2]));
-const sha = 'a'.repeat(40);
-const env = {EXPECTED_COMMIT:sha, EXPECTED_TARGET:'preview', DEPLOYMENT_ENVIRONMENT:'35'};
-fs.mkdirSync('deployment/site/.well-known', {recursive:true});
-const content = '<script>throw new Error("This must never execute")</script>';
-const published = {sourceCommit:sha,target:'preview',platformVersion:'1.0.0-preview'};
-const write = (name,value) => fs.writeFileSync(`deployment/${name}`, typeof value==='string'?value:JSON.stringify(value));
-write('site/index.html',content);
-write('site/.well-known/open-guide-platform.json',published);
-const identity = {schemaVersion:1,sourceCommit:sha,target:'preview',version:published.platformVersion,files:['index.html','.well-known/open-guide-platform.json'].map(p=>{
-  const bytes=fs.readFileSync(`deployment/site/${p}`);
-  return {path:p,length:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex')};
-})};
-const report = {Outcome:'pass',SourceCommit:sha,Target:'preview'};
-const reset = () => {write('artifact-identity.json',identity);write('artifact-validation.json',report);write('site/index.html',content);};
-const invoke = (options={}) => run(name=> {
-  if(name==='node:fs' && options.link) return {...fs,lstatSync:p=>String(p).endsWith('index.html')?{isFile:()=>false,isDirectory:()=>false}:fs.lstatSync(p)};
-  return require(name);
-},{env:{...env,...options.env}},{notice:()=>{}});
-reset();invoke();
-write('site/index.html',content+'tampered');assert.throws(()=>invoke(),/bytes differ/);reset();
-write('site/extra.txt','extra');assert.throws(()=>invoke(),/inventory changed/);fs.unlinkSync('deployment/site/extra.txt');
-write('artifact-validation.json',{...report,Outcome:'fail'});assert.throws(()=>invoke(),/passing evidence/);reset();
-write('artifact-validation.json',{...report,SourceCommit:'b'.repeat(40)});assert.throws(()=>invoke(),/passing evidence/);reset();
-write('artifact-identity.json',{...identity,files:[identity.files[0],identity.files[0]]});assert.throws(()=>invoke(),/bytes differ/);reset();
-write('artifact-identity.json',{...identity,version:'another-version'});assert.throws(()=>invoke(),/Published deployment identity/);reset();
-assert.throws(()=>invoke({env:{EXPECTED_TARGET:'production'}}),/passing evidence/);
-assert.throws(()=>invoke({env:{DEPLOYMENT_ENVIRONMENT:''}}),/passing evidence/);
-assert.throws(()=>invoke({link:true}),/non-regular deployment file/);
-console.log('PASS deployment data isolation and tamper rejection');
-'@
-        $runnerPath=Join-Path $TestDrive 'deployment-test.cjs'
-        [IO.File]::WriteAllText($runnerPath,$runner)
-        & node $runnerPath $scriptPath
-        $LASTEXITCODE | Should -Be 0
+    It 'restores platform code separately from the site deployment data' {
+        $job=$workflow.jobs.deploy
+        $checkout=@($job.steps|Where-Object { $_['uses'] -like 'actions/checkout@*' })
+        $checkout.Count|Should -Be 1
+        $checkout[0].with.repository|Should -Be 'nkdAgility/OpenGuidePlatform'
+        $checkout[0].with.ref|Should -Be '${{ inputs.platform-commit }}'
+        ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Deployment-${{ inputs.target }}'
+        (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Restore-OpenGuidePlatform.ps1 -FromWorkflow'
+        (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment'
+        ($job.steps|Where-Object { $_['uses'] -like 'Azure/*' }).with.app_location|Should -Be 'deployment/site'
+    }
+    It 'accepts matching bytes and passing evidence' {
+        Confirm-GuideDeploymentData @arguments|Should -Match 'Verified 2 deployment files'
+    }
+    It 'rejects changes to the validated artifact' -ForEach @('tamper','extra','missing','duplicate','version','link') {
+        switch($_){
+            tamper { Add-Content "$deployment/site/index.html" tampered }
+            extra { 'extra'|Set-Content "$deployment/site/extra.txt" }
+            missing { Remove-Item "$deployment/site/index.html" }
+            duplicate { $identity.files=@($identity.files[0],$identity.files[0]);$identity|ConvertTo-Json -Depth 10|Set-Content "$deployment/artifact-identity.json" }
+            version { $identity.version='another';$identity|ConvertTo-Json -Depth 10|Set-Content "$deployment/artifact-identity.json" }
+            link { Remove-Item "$deployment/site/index.html";New-Item "$deployment/site/index.html" -ItemType SymbolicLink -Target "$deployment/artifact-validation.json"|Out-Null }
+        }
+        {Confirm-GuideDeploymentData @arguments}|Should -Throw
+    }
+    It 'requires passing evidence for the requested source and environment' -ForEach @('failed','source','target','environment') {
+        switch($_){
+            failed { $report.Outcome='fail' }
+            source { $report.SourceCommit='b'*40 }
+            target { $arguments.Target='production' }
+            environment { $arguments.DeploymentEnvironment='' }
+        }
+        $report|ConvertTo-Json|Set-Content "$deployment/artifact-validation.json"
+        {Confirm-GuideDeploymentData @arguments}|Should -Throw '*passing evidence*'
     }
 }

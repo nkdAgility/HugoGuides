@@ -4,7 +4,7 @@ These commands run in the **OpenGuidePlatform repository**. For an installed gui
 
 ## Build and test
 
-Install the tools listed in the README and Node.js 20 or newer and npm (for reporting adapter and real browser validation tests), then the platform test dependencies:
+Install the tools listed in the README and Node.js 20 or newer and npm (for real browser validation tests), then the platform test dependencies:
 
 ```powershell
 ./.build/Install-PlatformTestDependencies.ps1
@@ -30,13 +30,17 @@ Serve prints the local address. Stop it with Ctrl+C. Shared Hugo changes require
 
 **Build and package OpenGuidePlatform → sample Prepare → Build → Validate → Deploy → Verify → Publish OpenGuidePlatform GitHub Release**
 
-Prepare report is a separate delivery job beside Prepare so its comment-writing token is never given to guide-site build code. It downloads only the assessment data, posts the common Markdown report, and never checks out or executes candidate scripts. It runs for same-repository PRs even when Prepare fails; fork PRs retain Actions artifacts. One comment per target shows the current assessment and its source commit, with duplicate and stale-head protection. Historical reports remain in workflow artifacts. A report is candidate evidence, not the independent E06 policy gate.
+Prepare report is a separate delivery job beside Prepare so its comment-writing token is never given to guide-site build code. It restores the selected platform package independently, downloads assessment data and calls the packaged PowerShell reporting adapter. It does not execute code supplied in the guide-site artifacts. The selected platform itself remains within the deferred E06/E08 trust boundary. It runs for same-repository PRs even when Prepare fails; fork PRs retain Actions artifacts. One comment per target shows the current assessment and its source commit, with duplicate and stale-head protection. Historical reports remain in workflow artifacts. A report is candidate evidence, not the independent E06 policy gate.
 
-Required stage check names contain the site name and stage only; preview and production report the same checks. The target remains visible in assessment summaries and artifact names.
+The shared workflow exposes Prepare, Build, Validate, Deploy and Verify; preview and production use the same stages. The target remains visible in assessment summaries and artifact names.
 
 The sample directly calls the [shared guide-site workflow](../.github/workflows/guide-site-build.yaml). It receives the build artifact ZIP URL, SHA256, GitVersion version and source commit. The ZIP contains `OpenGuidePlatform.zip`, `release-manifest.json` and standalone `bootstrap.ps1`. Restoration validates both archive checksums and the expected identities before using the packaged tooling.
 
 Publication depends on sample success and downloads the same artifact ID without rebuilding it. Publication runs only on pushes to main. PRs build and validate the candidate artifact and may deploy their sample preview, but never create a platform release. Manual workflow runs do not publish. Preview runs deploy only trusted changes to the sample preview; the manual production target validates output without production deployment.
+
+Installed guide-site `build.ps1` restores the locked release, imports `OpenGuidePlatform.PowerShell.Build` and calls `Invoke-GuideSiteBuild`. The platform root build delegates guide-site stages to the same module. In CI, YAML contains action wiring and single PowerShell calls; package selection, build decisions, PR reporting and deployment validation are implemented in scripts. The standalone restore script must validate the download before importing any package code.
+
+Reporting and deployment independently restore the selected package rather than executing code from a guide-site artifact. Preview cleanup binds Azure's environment directly to the closed PR number. Browser validation still executes browser code to inspect site behavior; it is not pipeline orchestration.
 
 Ordinary consumers can pass an explicit published release tag. Without a ZIP URL or tag, restoration resolves the unique published release matching the supplied platform commit. Missing or ambiguous releases fail.
 

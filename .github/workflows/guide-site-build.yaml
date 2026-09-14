@@ -236,6 +236,7 @@ jobs:
   deploy:
     name: Deploy
     permissions:
+      actions: read
       contents: read
       pull-requests: write
     needs: validate

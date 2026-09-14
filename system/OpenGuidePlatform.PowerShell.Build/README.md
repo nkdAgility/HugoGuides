@@ -1,8 +1,10 @@
 # Guide-site build and reporting adapters
 
-Core owns publishing rules and structured assessments. This component owns Hugo configuration/probe execution, artifact validation and report delivery. Root `build.ps1 -Product GuideSite` orchestrates these operations through `system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Build-GuideSite.ps1` and `system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Prepare-GuideSite.ps1`.
+Core owns publishing rules and structured assessments. This module owns guide-site preparation, Hugo execution, artifact validation and reporting. `Invoke-GuideSiteBuild` is the entry point used by the root build and installed guide-site launcher. The launcher restores its locked release, imports this module and passes the requested stage and target.
 
-The shared guide-site workflow restores an immutable GitHub Release before invoking its distributed build entry point. The sample has no separate packaging or source-build path in CI. See the root README for the platform/consumer workflow boundary and local commands.
+The shared workflow restores either the selected GitHub Release or the exact candidate ZIP produced by the platform build. All sample stages consume that candidate before publication. YAML contains action orchestration and PowerShell calls; build decisions and GitHub API operations live in PowerShell, with no authored JavaScript in the workflows.
+
+`GitHubActions` adapts assessment delivery and deployment checks to GitHub. Reporting and deployment restore platform code independently from the selected package and treat site artifacts as data. `Publish-GuidePrepareAssessment` maintains the current commit-scoped PR report; `Confirm-GuideDeploymentData` checks the artifact inventory, hashes and identity before upload. These checks do not provide independent policy enforcement against changes to the selected platform itself.
 
 `WrapperTranslations/probe.html` is an adapter resource: PowerShell installs it in isolated scratch layouts and Hugo resolves required i18n keys against actual mounted catalogues. Normal and missing-placeholder passes produce per-language evidence. The probe never edits the rendering module or enters the deployed artifact. Text availability, fallback and translation quality are different claims.
 

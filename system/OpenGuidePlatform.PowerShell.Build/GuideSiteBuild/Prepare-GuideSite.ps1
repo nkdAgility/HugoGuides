@@ -18,11 +18,11 @@ param(
 )
 $ErrorActionPreference='Stop'
 $platformRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
-Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1')
 $policyDigest=$null;$pdfReceipts=$null
 try {
     if($InputFailure){throw $InputFailure}
-    Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
+    Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1')
     $policyDigest=(Get-FileHash -LiteralPath $PolicyPath -Algorithm SHA256).Hash.ToLowerInvariant()
     $policy=Import-GuidePolicy -Path $PolicyPath
     $source=Join-Path $WorkspaceRoot $policy.wrapper.sourcePath
