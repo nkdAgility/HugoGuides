@@ -7,8 +7,8 @@ Describe 'Required guide-site check identities' {
         $workflow=Get-Content "$root/.github/workflows/guide-site-build.yaml" -Raw|ConvertFrom-Yaml
         foreach($stage in @('Prepare','Build','Validate','Deploy','Verify')){
             $name=$workflow.jobs[$stage.ToLowerInvariant()].name
-            # Site identity distinguishes consumers; environment must not change the required check.
-            $name | Should -Be ('${{ inputs.site-name }} '+$stage)
+            # The caller identifies the site; shared jobs use plain, environment-independent stage names.
+            $name | Should -Be $stage
             $name | Should -Not -Match 'inputs\.target|preview|production'
         }
     }
