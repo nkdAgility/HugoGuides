@@ -79,7 +79,7 @@ jobs:
             .processing/platform-package/bootstrap.ps1
           if-no-files-found: error
   sample:
-    name: Validate
+    name: Sample
     needs: build
     uses: ./.github/workflows/guide-site-build.yaml
     with:
