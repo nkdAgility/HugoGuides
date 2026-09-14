@@ -20,7 +20,7 @@ This module enforces the supplied policy, not the authenticity of that policy. T
 
 Set-GuideWrapperTranslation creates or applies exact reviewed candidate text to language-specific wrapper Markdown, YAML catalogues and selected Hugo language configuration entries. Existing files require ExpectedSha256; guide content and supplied-policy protected paths are refused. New languages must be disabled in production, unrelated configuration is preserved, and legacy shared download aliases cannot be extended. Changes are staged per file; a multi-file adoption is not one transaction.
 
-Use the installed `./build.ps1 -Stage Prepare` assessment for both human/skill translation status and CI. It supplies effective Hugo catalogue/fallback evidence to Core. Local catalogue diagnostics alone must not replace that assessment. See [shared skill usage](../OpenGuidePlatform.AgentSkills/USAGE.md).
+Use the installed `./build.ps1 -Stage Prepare` assessment for both human/skill translation status and CI. It supplies effective Hugo catalogue/fallback evidence to Core. Local catalogue diagnostics alone must not replace that assessment. See [shared skill usage](../OpenGuidePlatform.Agents.Integration/skills/USAGE.md).
 
 PDF replacement and cache-evidence checks are implemented. Prepare collects and validates declared generated-PDF receipts and retains them as build evidence. Supplied/protected PDFs do not require generation receipts or a PDF toolchain. Abrupt termination can leave staging/lock evidence for inspection; automatic crash recovery is not claimed. Translation quality, full plural-form coverage and runtime integration readiness are not inferred from available strings.
 

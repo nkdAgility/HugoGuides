@@ -1,12 +1,12 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $resolver="$root/system/OpenGuidePlatform.GuideSite.Adoption/Resolve-OpenGuidePlatform.ps1"
+    $resolver="$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1"
 }
 Describe 'Platform and consumer module boundary' {
     It 'imports the consumer module without the platform engineering module' {
         $scriptPath=Join-Path $TestDrive 'consumer.ps1'
         @"
-Import-Module '$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1'
+Import-Module '$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1'
 if(Get-Module OpenGuidePlatform.PowerShell.PlatformBuild){throw 'Consumer loaded platform engineering.'}
 if(-not (Get-Command Invoke-GuideSiteBuild)){throw 'Consumer stages unavailable.'}
 "@|Set-Content $scriptPath

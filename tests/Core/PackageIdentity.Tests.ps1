@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $validator="$root/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1"
+    $validator="$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1"
 }
 Describe 'Shared installed package identity' {
     BeforeEach {

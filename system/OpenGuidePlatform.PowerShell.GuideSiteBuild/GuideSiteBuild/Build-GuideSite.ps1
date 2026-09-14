@@ -13,7 +13,7 @@ Set-StrictMode -Version Latest
 $platformRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
 $root=[IO.Path]::GetFullPath($WorkspaceRoot)
 Import-Module "$platformRoot/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1"
-Import-Module "$platformRoot/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1"
+Import-Module "$platformRoot/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1"
 if($OutputPath -notmatch '^\.processing/[A-Za-z0-9/_-]+$'){throw 'Guide-site evidence must use a named directory under .processing.'}
 $output=Resolve-GuideWorkspacePath $root $OutputPath
 $commit=(& git -C $root rev-parse HEAD).Trim()

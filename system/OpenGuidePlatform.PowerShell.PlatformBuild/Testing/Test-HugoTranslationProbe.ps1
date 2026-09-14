@@ -3,7 +3,7 @@
 param([Parameter(Mandatory)][string]$WorkspaceRoot)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($WorkspaceRoot)
-Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1') -Force
 $relative='.processing/i18n-integration-'+[guid]::NewGuid().ToString('N')
 $fixture=Join-Path $root $relative
 function Write-Fixture($path,$text){[IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($path))|Out-Null;[IO.File]::WriteAllText($path,$text)}

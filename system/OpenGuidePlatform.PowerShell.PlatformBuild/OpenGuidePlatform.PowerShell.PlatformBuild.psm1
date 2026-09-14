@@ -26,7 +26,7 @@ function Test-PlatformCandidateSample {
     if((Get-FileHash "$output/OpenGuidePlatform.zip").Hash -ine $manifest.sha256){throw 'Candidate package digest mismatch.'}
     $candidate=Join-Path $output ('sample-platform-'+[guid]::NewGuid().ToString('N'))
     Expand-Archive -LiteralPath "$output/OpenGuidePlatform.zip" -DestinationPath $candidate
-    $null=& "$candidate/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $candidate -Manifest $manifest
+    $null=& "$candidate/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $candidate -Manifest $manifest
     @{schemaVersion=1;mode='candidate';sourceCommit=$manifest.sourceCommit;version=$manifest.version}|ConvertTo-Json|Set-Content "$candidate/platform-resolution.json"
     foreach($target in $Targets){
         # A fresh PowerShell process prevents the source Build module from satisfying candidate imports.
@@ -55,7 +55,7 @@ function Invoke-PlatformBuild {
         return
     }
     if($Stage -in @('All','Prepare')){
-        Import-Module "$PSScriptRoot/../OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1"
+        Import-Module "$PSScriptRoot/../OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1"
         Get-GuideHugoToolchain
     }
     if($Stage -in @('All','Build')){

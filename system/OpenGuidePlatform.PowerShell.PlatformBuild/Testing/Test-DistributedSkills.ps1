@@ -7,7 +7,7 @@ $root=[IO.Path]::GetFullPath($WorkspaceRoot)
 Import-Module powershell-yaml -MinimumVersion 0.4.12
 Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
 $expected=@('guide.contributions','guide.genpdfs','guide.gravatar','guide.historicalversion','guide.transcreate','guide.transreconcile','guide.transstatus')
-$directory=Join-Path $root 'system/OpenGuidePlatform.AgentSkills'
+$directory=Join-Path $root 'system/OpenGuidePlatform.Agents.Integration/skills'
 $actual=@(Get-ChildItem $directory -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') })
 if (@(Compare-Object $expected @($actual.Name)).Count) { throw 'Distributed skill identities differ from the seven retained names.' }
 $commands=@(Get-Command -Module OpenGuidePlatform.PowerShell.Core | Select-Object -ExpandProperty Name)

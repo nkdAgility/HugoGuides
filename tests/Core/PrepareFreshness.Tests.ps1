@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
 }
 Describe 'Prepare input freshness' {
     BeforeEach {
@@ -54,11 +54,11 @@ Describe 'Prepare input freshness' {
 }
 Describe 'Build-only tool fingerprints' {
     It 'does not require the YAML parser installed only in Prepare' {
-        Mock Import-Module { throw 'Prepare-only dependency must not be loaded by Build fingerprinting.' } -ModuleName OpenGuidePlatform.PowerShell.Build
+        Mock Import-Module { throw 'Prepare-only dependency must not be loaded by Build fingerprinting.' } -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild
         $tools=Get-GuidePreparedBuildTools
         $tools.Tools.Keys | Should -Contain hugo
         $tools.Tools.Keys | Should -Contain go
         $tools.Tools.Keys | Should -Not -Contain powershell-yaml
-        Should -Invoke Import-Module -ModuleName OpenGuidePlatform.PowerShell.Build -Times 0 -Exactly
+        Should -Invoke Import-Module -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild -Times 0 -Exactly
     }
 }

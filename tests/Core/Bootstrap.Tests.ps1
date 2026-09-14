@@ -24,15 +24,15 @@ BeforeAll {
         $assets=Join-Path $TestDrive $version
         $stage=Join-Path $assets 'package'
         [IO.Directory]::CreateDirectory("$stage/system")|Out-Null
-        foreach($name in @('OpenGuidePlatform.GuideSite.Adoption','OpenGuidePlatform.AgentSkills','OpenGuidePlatform.PowerShell.Core')){
+        foreach($name in @('OpenGuidePlatform.PowerShell.GuideSiteAdoption','OpenGuidePlatform.Agents.Integration','OpenGuidePlatform.PowerShell.Core')){
             Copy-Item "$root/system/$name" "$stage/system/" -Recurse
         }
         Copy-Item $bootstrap "$assets/bootstrap.ps1"
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
-        [IO.Directory]::CreateDirectory("$stage/system/OpenGuidePlatform.PowerShell.Build")|Out-Null
-        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$PolicyPath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
+        [IO.Directory]::CreateDirectory("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild")|Out-Null
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$PolicyPath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
         [IO.File]::WriteAllText("$stage/platform.json",(@{product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
-        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", @'
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1", @'
 param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion)
 $path="$WorkspaceRoot/site/go.mod"
 $expected=(Get-FileHash $path).Hash.ToLowerInvariant()
@@ -58,7 +58,7 @@ Describe 'Guide-site installation and update' {
     }
     AfterEach {
         # The installed fixture imports a fake Build module; do not leak it into other tests.
-        Get-Module OpenGuidePlatform.PowerShell.Build -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
+        Get-Module OpenGuidePlatform.PowerShell.GuideSiteBuild -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
     }
     It 'installs matching workflow and identical root agent shims without touching policy' {
         $before=(Get-FileHash "$workspace/guide-site.policy.json").Hash
@@ -69,6 +69,9 @@ Describe 'Guide-site installation and update' {
         $record.managedFiles.PSObject.Properties.Name | Should -Not -Contain 'site/go.mod'
         Get-Content "$workspace/site/go.mod" -Raw | Should -Match 'v1.2.3-Preview.1'
         Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '@v1.2.3-Preview.1'
+        Test-Path "$workspace/.agents/skills/guide.transcreate/SKILL.md" | Should -BeTrue
+        Test-Path "$workspace/.agents/skills/skills" | Should -BeFalse
+        Test-Path "$workspace/.agents/skills/instructions" | Should -BeFalse
         (Get-FileHash "$workspace/AGENTS.md").Hash | Should -Be (Get-FileHash "$workspace/CLAUDE.md").Hash
         (Get-FileHash "$workspace/guide-site.policy.json").Hash | Should -Be $before
     }

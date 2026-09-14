@@ -7,8 +7,8 @@ BeforeAll {
         $payload=Join-Path $Directory 'payload'
         [IO.Directory]::CreateDirectory($assets)|Out-Null
         [IO.Directory]::CreateDirectory($payload)|Out-Null
-        [IO.Directory]::CreateDirectory("$payload/system/OpenGuidePlatform.GuideSite.Adoption")|Out-Null
-        Copy-Item "$root/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" "$payload/system/OpenGuidePlatform.GuideSite.Adoption/"
+        [IO.Directory]::CreateDirectory("$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption")|Out-Null
+        Copy-Item "$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" "$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/"
         @{product='OpenGuidePlatform';version=$Version;sourceCommit=if($WrongMetadata){'b'*40}else{$Commit}}|ConvertTo-Json|Set-Content "$payload/platform.json"
         'fixture bootstrap'|Set-Content "$assets/bootstrap.ps1"
         if($Traversal){

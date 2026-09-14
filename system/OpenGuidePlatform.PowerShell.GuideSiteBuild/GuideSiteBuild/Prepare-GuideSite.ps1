@@ -18,7 +18,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 $platformRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
-Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1')
+Import-Module (Join-Path $platformRoot 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1')
 $policyDigest=$null;$pdfReceipts=$null
 try {
     if($InputFailure){throw $InputFailure}

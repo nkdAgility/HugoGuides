@@ -73,7 +73,7 @@ To test another platform without changing your installation lock:
 
 Add `-PlatformRelease` with a specific release tag to select an exact version. The ZIP must have its `release-manifest.json` alongside it. Release overrides require an available compatible release and its coordinated Hugo dependency; use the installer to adopt a different dependency permanently. `Production` selects a non-prerelease platform package; it does not deploy the site. A release predating these module entry points cannot provide the new operations.
 
-For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.AgentSkills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
+For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.Agents.Integration/skills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
 
 Sites with declared JavaScript-created anchors also need Node.js 20 or newer and npm. Validate restores its browser tools into `.processing/` on first use and checks the built pages without contacting the live site. Later runs reuse that cache.
 

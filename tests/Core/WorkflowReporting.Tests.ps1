@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module powershell-yaml
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
     $workflow=ConvertFrom-Yaml (Get-Content "$root/.github/workflows/guide-site-build.yaml" -Raw)
 }
 Describe 'Prepare reporting through the released PowerShell module' {
@@ -13,7 +13,7 @@ Describe 'Prepare reporting through the released PowerShell module' {
         [IO.File]::WriteAllText("$assessmentRoot/assessment.md", "## Prepare: pass`n`n"+'$(throw "Report text is data")')
         $arguments=@{AssessmentRoot=$assessmentRoot;Repository='org/repo';PullRequest=35;RunId=100;SourceCommit=$sha;Target='preview';PrepareResult='success'}
         $global:OgpReportTest=@{Gets=0;StaleAt=0;Comments=@();Writes=@();Failure=$false}
-        Mock Invoke-GuideGitHubApi -ModuleName OpenGuidePlatform.PowerShell.Build {
+        Mock Invoke-GuideGitHubApi -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
             param($Path,$Method='GET',$Body)
             $state=$global:OgpReportTest
             if($Method -in @('POST','PATCH')){

@@ -2,7 +2,7 @@
 
 Status: wrapper publishing and shared Prepare readiness are now implemented; final acceptance follows the reconciled checklist and current validation evidence below.
 
-The Core module groups commands under GuideInventory, TranslationReadiness, PublicationPolicy, AgentGovernance, ContributorManagement, EditionManagement and PdfPublishing. Filesystem and native-tool operations are separate from pure readiness and publication decisions. The seven existing dotted skill identities are retained in OpenGuidePlatform.AgentSkills. Their provenance manifest records original source paths and hashes; MIT attribution accompanies the extraction.
+The Core module groups commands under GuideInventory, TranslationReadiness, PublicationPolicy, AgentGovernance, ContributorManagement, EditionManagement and PdfPublishing. Filesystem and native-tool operations are separate from pure readiness and publication decisions. The seven existing dotted skill identities are retained in OpenGuidePlatform.Agents.Integration. Their provenance manifest records original source paths and hashes; MIT attribution accompanies the extraction.
 
 The candidates remove fixed guide counts and edition conventions, require an explicit workspace and policy, preserve existing destinations, and distinguish populated, empty, PDF-only and fallback content. Translation scaffolding requires production to be explicitly disabled, keeps aliases unchanged, and removes deprecated lang metadata only from the new scaffold. Edition snapshots remain drafts. No consumer skills, content or configuration were changed.
 

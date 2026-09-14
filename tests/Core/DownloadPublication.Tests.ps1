@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
     function Read-DownloadFiles($directory){@(Get-ChildItem $directory -File -Recurse|ForEach-Object {[pscustomobject]@{Path=[IO.Path]::GetRelativePath($directory,$_.FullName).Replace('\','/');Sha256=(Get-FileHash $_.FullName).Hash.ToLowerInvariant()}})}
 }
 Describe 'Declared download publication' {

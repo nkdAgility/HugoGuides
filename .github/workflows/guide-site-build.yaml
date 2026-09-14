@@ -153,7 +153,7 @@ jobs:
           ASSESSED_COMMIT: ${{ inputs.source-ref }}
           ASSESSED_TARGET: ${{ inputs.target }}
           PREPARE_RESULT: ${{ needs.prepare.result }}
-        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.Build/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation PublishPrepare
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation PublishPrepare
 
   build:
     name: Build
@@ -270,7 +270,7 @@ jobs:
           EXPECTED_COMMIT: ${{ inputs.source-ref }}
           EXPECTED_TARGET: ${{ inputs.target }}
           DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
-        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.Build/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
       - name: Upload validated site to Azure Static Web Apps
         id: hosting
         uses: Azure/static-web-apps-deploy@v1

@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1') -Force
-    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1') -Force
 }
 Describe 'Shared Prepare assessment and reports' {
     BeforeEach {
@@ -23,8 +23,8 @@ Describe 'Shared Prepare assessment and reports' {
         $inputArguments=@{WorkspaceRoot=$workspace;Policy=$policy;PolicyPath='policy.json';PlatformRoot=$root;OverlayPath=(Join-Path $workspace 'overlay.json');Version='0.0.0';Target='preview'}
         $expected=Get-GuidePreparedInputs @inputArguments
         [IO.File]::WriteAllText((Join-Path $directory 'index.md'),"---`ntitle: Changed`n---`nChanged while preparing")
-        Mock Get-GuideModuleFreshness -ModuleName OpenGuidePlatform.PowerShell.Build { [pscustomobject]@{Code='MODULE_CURRENT';Severity='info';Module='fixture';Installed='v1';Latest='v1';Message='Fixture'} }
-        $entry=Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Prepare-GuideSite.ps1'
+        Mock Get-GuideModuleFreshness -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { [pscustomobject]@{Code='MODULE_CURRENT';Severity='info';Module='fixture';Installed='v1';Latest='v1';Message='Fixture'} }
+        $entry=Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Prepare-GuideSite.ps1'
         { & $entry -WorkspaceRoot $workspace -PolicyPath $policyPath -Languages @('en') -EffectiveProductionPath (Join-Path $workspace 'production.json') -SourceCommit ('a'*40) -OutputPath '.processing/drift' -Target preview -ExpectedInputs $expected -InputArguments $inputArguments -SummaryPath (Join-Path $workspace 'summary.md') } | Should -Throw '*Prepare blocked*'
         $record=Get-Content "$workspace/.processing/drift/assessment.json" -Raw|ConvertFrom-Json
         $record.outcome | Should -Be blocked
@@ -99,7 +99,7 @@ Describe 'Shared Prepare assessment and reports' {
         $readBack.inventory.guides[0].editions[0].translations[0].state | Should -Be $report.inventory.guides[0].editions[0].translations[0].state
     }
     It 'writes a blocked report for missing policy input and rejects unknown digest on success' {
-        $entry=Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Prepare-GuideSite.ps1'
+        $entry=Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Prepare-GuideSite.ps1'
         { & $entry -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing-policy.json') -SourceCommit ('a'*40) -OutputPath '.processing/blocked-input' -SummaryPath (Join-Path $workspace 'fixture-summary.md') } | Should -Throw '*Prepare blocked*'
         $report=Get-Content (Join-Path $workspace '.processing/blocked-input/assessment.json') -Raw|ConvertFrom-Json -AsHashtable
         $report.policyDigest | Should -BeNullOrEmpty

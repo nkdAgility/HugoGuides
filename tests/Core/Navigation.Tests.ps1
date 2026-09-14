@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $checker=Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1'
+    $checker=Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Test-GuideSiteNavigation.ps1'
 }
 Describe 'Guide-site navigation validation' {
     It 'resolves directory, asset, Unicode and fragment links beneath <base>' -ForEach @(

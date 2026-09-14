@@ -16,7 +16,7 @@ The platform build runs preparation, tests, packaging and package verification. 
 
 ## Build module ownership
 
-`OpenGuidePlatform.PowerShell.PlatformBuild` owns platform engineering. `OpenGuidePlatform.PowerShell.Build` owns guide-site stages and remains independently importable. Both ship in one coordinated release. Root scripts dispatch to the selected module; existing `.build/` build/test/package entry points forward to PlatformBuild.
+`OpenGuidePlatform.PowerShell.PlatformBuild` owns platform engineering. `OpenGuidePlatform.PowerShell.GuideSiteBuild` owns guide-site stages and remains independently importable. Both ship in one coordinated release. Root scripts dispatch to the selected module; existing `.build/` build/test/package entry points forward to PlatformBuild.
 
 Both root build entry points accept `-PlatformSource Local|Preview|Production|Path`, `-PlatformRelease <tag>` and `-PlatformPath <directory-or-zip>`. Platform checkouts default to their local module. Installed consumers default to their installation lock. An explicit override does not change that lock. Preview/Production without a tag select the latest eligible release once at startup; Production means a non-prerelease platform package, independently of the site's `-Target`.
 
@@ -48,7 +48,7 @@ The sample directly calls the [shared guide-site workflow](../.github/workflows/
 
 Publication depends on sample success and downloads the same artifact ID without rebuilding it. Publication runs only on pushes to main. PRs build and validate the candidate artifact and may deploy their sample preview, but never create a platform release. Manual workflow runs do not publish. Preview runs deploy only trusted changes to the sample preview; the manual production target validates output without production deployment.
 
-Installed guide-site `build.ps1` restores the locked release, imports `OpenGuidePlatform.PowerShell.Build` and calls `Invoke-GuideSiteBuild`. The platform root build delegates guide-site stages to the same module. In CI, YAML contains action wiring and single PowerShell calls; package selection, build decisions, PR reporting and deployment validation are implemented in scripts. The standalone restore script must validate the download before importing any package code.
+Installed guide-site `build.ps1` restores the locked release, imports `OpenGuidePlatform.PowerShell.GuideSiteBuild` and calls `Invoke-GuideSiteBuild`. The platform root build delegates guide-site stages to the same module. In CI, YAML contains action wiring and single PowerShell calls; package selection, build decisions, PR reporting and deployment validation are implemented in scripts. The standalone restore script must validate the download before importing any package code.
 
 Reporting and deployment independently restore the selected package rather than executing code from a guide-site artifact. Preview cleanup binds Azure's environment directly to the closed PR number. Browser validation still executes browser code to inspect site behavior; it is not pipeline orchestration.
 

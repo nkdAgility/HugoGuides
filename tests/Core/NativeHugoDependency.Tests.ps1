@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    Import-Module "$root/system/OpenGuidePlatform.GuideSite.Adoption/NativeHugoDependency.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/NativeHugoDependency.psm1" -Force
 }
 Describe 'Coordinated native Hugo dependency plan' {
     BeforeEach {

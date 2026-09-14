@@ -59,9 +59,13 @@ Remaining gates:
 
 Platform test reports now carry explicitly authored **Why** and **How to fix** fields in local output and Actions summaries/annotations. The workflow-input failure is explained at the check rather than inferred from a low-level exception. Technical error/location remains supporting evidence. Unknown errors are explicitly undiagnosed; authoring explanations for every existing failure path remains ongoing work, not a completed universal diagnosis guarantee.
 
+### Approved component naming
+
+The component convention is `OpenGuidePlatform.<TechnologyOrEcosystem>.<Responsibility>`. Active code, import names, package checks and documentation now use `PowerShell.GuideSiteAdoption`, `PowerShell.AgentControls`, `Agents.GuideSkills` and `PowerShell.GuideSiteBuild`. `PowerShell.PlatformBuild`, `PowerShell.Core` and `Hugo.Guides` retain their names. No compatibility modules or duplicate component folders are retained. Historical baseline observations and execution history retain the names that existed when their evidence was collected.
+
 ### Platform and guide-site build modules
 
-The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.Build` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. Both ship in the same package and version. Existing build/test/package scripts in `.build/` are forwarding entry points.
+The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.GuideSiteBuild` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. Both ship in the same package and version. Existing build/test/package scripts in `.build/` are forwarding entry points.
 
 A shared loader supports local code, explicit directory/ZIP paths, installation locks, and specific/latest preview or production package resolution without changing a consumer lock. Production release selection is not authorization to publish or deploy production. Released Hugo dependencies must still match the selected release; overrides do not silently change consumer dependency files.
 
@@ -163,9 +167,9 @@ Adopt these named components:
 ```text
 system/OpenGuidePlatform.Hugo.Guides/
 system/OpenGuidePlatform.PowerShell.Core/
-system/OpenGuidePlatform.PowerShell.Build/
-system/OpenGuidePlatform.AgentSkills/
-system/OpenGuidePlatform.AgentControls/
+system/OpenGuidePlatform.PowerShell.GuideSiteBuild/
+system/OpenGuidePlatform.Agents.Integration/
+system/OpenGuidePlatform.PowerShell.AgentControls/
 ```
 
 Define and test schemas for site policy, wrapper requirements, guide inventory, edition/translation/download state, findings and release locks. Record the future publication-manifest contract as E14 work; do not require Hugo to consume a new manifest during adoption. Each schema has a version and migration behavior.
@@ -195,7 +199,7 @@ Create a move manifest, then use explicit path moves with Git history retained. 
 | HugoGuides `site/` | `examples/reference-guide-site/` | Move demo source, then remove accidental production-consumer coupling through a separately reviewed change. |
 | HugoGuides demo hosting configuration | Reference-site configuration or explicit hosting adapter inputs | Inspect usage before relocating; preserve any deployed demo route/domain contract. |
 | HugoGuides `serve.ps1` and useful `.powershell/` helpers | Platform development commands / Build adapters | Inventory first; preserve supported entry points during transition. |
-| KanbanGuides `.agents/skills/*/SKILL.md` | `system/OpenGuidePlatform.AgentSkills/` | Initially copy with provenance; retire consumer originals only after adoption installs replacements. |
+| KanbanGuides `.agents/skills/*/SKILL.md` | `system/OpenGuidePlatform.Agents.Integration/` | Initially copy with provenance; retire consumer originals only after adoption installs replacements. |
 | Kanban PDF/history/contributor/avatar scripts | Core capability directories | Extract implementation, retain authorship/licence information and add parameterised operations. |
 | Kanban `cover-page.tex` | Core `PdfPublishing/templates/` | Shared default; consumer overrides explicit. |
 | Assessment and execution documents | Platform `docs/architecture/` | Transfer the accepted versions when the platform working branch exists; avoid maintaining divergent copies. |

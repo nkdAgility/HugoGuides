@@ -29,7 +29,7 @@ switch($selection){
             Expand-Archive -LiteralPath $selected -DestinationPath $destination
             $metadata=Get-Content "$destination/platform.json" -Raw|ConvertFrom-Json
             if($metadata.sourceCommit -cne $manifest.sourceCommit -or $metadata.version -cne $manifest.version){throw 'Explicit package metadata differs.'}
-            $null=& "$destination/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $destination -Manifest $manifest
+            $null=& "$destination/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $destination -Manifest $manifest
             @{schemaVersion=1;mode='candidate';sourceCommit=$metadata.sourceCommit;version=$metadata.version}|ConvertTo-Json|Set-Content "$destination/platform-resolution.json"
             $selected=$destination
         }
@@ -44,6 +44,6 @@ switch($selection){
         }
     }
 }
-if(-not (Test-Path -LiteralPath "$selected/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -PathType Leaf)){throw 'Selected platform does not contain the guide-site Build module.'}
+if(-not (Test-Path -LiteralPath "$selected/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -PathType Leaf)){throw 'Selected platform does not contain the guide-site Build module.'}
 Write-Host "Platform source: $selection; path: $selected"
 return $selected

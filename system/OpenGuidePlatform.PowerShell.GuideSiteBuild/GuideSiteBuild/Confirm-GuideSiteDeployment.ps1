@@ -9,7 +9,7 @@ param(
 $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
 Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1"
-Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1"
+Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1"
 $output=Resolve-GuideWorkspacePath $WorkspaceRoot $OutputPath
 $identity=Get-Content "$output/artifact-identity.json" -Raw|ConvertFrom-Json
 if(-not $identity.PSObject.Properties['sourceDirty'] -or $identity.sourceDirty -isnot [bool] -or $identity.sourceDirty){throw 'Deploy requires an explicitly clean source identity; commit changes and rebuild.'}

@@ -78,11 +78,11 @@ Expand-VerifiedPlatformArchive "$assets/OpenGuidePlatform.zip" $output
 # Check source identity before running the checksum-verified package validator.
 $metadata=Get-Content "$output/platform.json" -Raw|ConvertFrom-Json
 if($metadata.product -cne 'OpenGuidePlatform' -or $metadata.sourceCommit -cne $ExpectedCommit -or $metadata.version -cne $manifest.version){throw 'Installed platform identity mismatch.'}
-$metadata=& "$output/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $output -Manifest $manifest
+$metadata=& "$output/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $output -Manifest $manifest
 if((Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant() -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
 $resolution=[ordered]@{schemaVersion=1;mode=if($PSCmdlet.ParameterSetName -eq 'Candidate'){'candidate'}else{'release'};version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$output/platform-resolution.json",($resolution|ConvertTo-Json))
 Import-Module "$output/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-Import-Module "$output/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+Import-Module "$output/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
 Write-Host "Restored OpenGuidePlatform $ExpectedVersion ($($PSCmdlet.ParameterSetName)); SHA256 $($manifest.sha256)."
 if($env:GITHUB_STEP_SUMMARY){[IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,"## Platform restored`n`nSource: $($PSCmdlet.ParameterSetName)`n`nVersion: $ExpectedVersion`n`nCommit: $ExpectedCommit`n`nPackage SHA256: $($manifest.sha256)`n")}

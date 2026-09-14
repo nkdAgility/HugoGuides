@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
     $site=Join-Path $TestDrive 'site'
     [IO.Directory]::CreateDirectory("$site/other")|Out-Null
     [IO.File]::WriteAllText("$site/index.html",'<a href="/other/#content">Content</a><a href="#content">Wrong page</a>')
@@ -12,7 +12,7 @@ BeforeAll {
 }
 Describe 'Current artifact runtime anchors' {
     It 'observes JavaScript anchors, blocks external requests and never waives another page or missing ID' {
-        $navigation=& "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
+        $navigation=& "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
         $navigation.Findings.Count | Should -Be 2
         $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')) -Anchors @(@{route='/other/';fragment='content'},@{route='/other/';fragment='missing'})
         $result.outcome | Should -Be fail

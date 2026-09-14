@@ -99,11 +99,11 @@ $package=Join-Path $work 'package'
 [IO.Compression.ZipFile]::ExtractToDirectory($archivePath,$package)
 $metadata=Get-Content "$package/platform.json" -Raw|ConvertFrom-Json
 if($metadata.version -cne $manifest.version -or $metadata.sourceCommit -cne $manifest.sourceCommit){throw 'Installed package identity mismatch.'}
-$metadata=& "$package/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $package -Manifest $manifest
+$metadata=& "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $package -Manifest $manifest
 $resolution=[ordered]@{schemaVersion=1;mode='release';version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$package/platform-resolution.json",($resolution|ConvertTo-Json))
 if($Restore -or $Resolve){return $package}
-foreach($required in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','system/OpenGuidePlatform.GuideSite.Adoption/main.yaml')){
+foreach($required in @('system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/build.ps1','system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/main.yaml')){
     if(-not (Test-Path -LiteralPath "$package/$required" -PathType Leaf)){throw 'This release predates guide-site installation support; choose a newer release.'}
 }
 if(-not (Test-Json -Json (Get-Content $policyFile -Raw) -SchemaFile "$package/system/OpenGuidePlatform.PowerShell.Core/Contracts/site-policy.schema.json" -ErrorAction Stop)){throw 'Invalid guide-site policy.'}
@@ -112,21 +112,21 @@ $native=$manifest.nativeHugoModule
 if($native.path -cne $metadata.nativeHugoModule.path -or $native.version -cne ('v'+$manifest.version) -or $native.version -cne $metadata.nativeHugoModule.version -or $native.sourceCommit -cne $manifest.sourceCommit -or $native.sourceCommit -cne $metadata.nativeHugoModule.sourceCommit){throw 'Native Hugo package and release identities disagree.'}
 $nativeArguments=@{WorkspaceRoot=$root;SourcePath=$policy.wrapper.sourcePath;NativeModule=$native}
 if($previous -and $previous.ContainsKey('nativeHugoModule')){$nativeArguments.PreviousVersion=$previous.nativeHugoModule.version}
-$nativePlan=& "$package/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1" @nativeArguments
+$nativePlan=& "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1" @nativeArguments
 $files=[ordered]@{}
 $null=Invoke-GitHub @('release','download',$ReleaseTag,'--repo',$repository,'--pattern','bootstrap.ps1','--dir',$work)
 if((Get-Digest "$work/bootstrap.ps1") -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
 $files['bootstrap.ps1']=[IO.File]::ReadAllBytes("$work/bootstrap.ps1")
-$files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/build.ps1")
-$files['Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/Resolve-OpenGuidePlatform.ps1")
-$workflow=[IO.File]::ReadAllText("$package/system/OpenGuidePlatform.GuideSite.Adoption/main.yaml")
+$files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/build.ps1")
+$files['Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1")
+$workflow=[IO.File]::ReadAllText("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/main.yaml")
 $workflow=$workflow.Replace('__RELEASE__',$ReleaseTag).Replace('__COMMIT__',$manifest.sourceCommit).Replace('__POLICY__',($PolicyPath|ConvertTo-Json -Compress)).Replace('__SITE__',([string]$policy.siteId|ConvertTo-Json -Compress))
 $files['.github/workflows/main.yaml']=[Text.Encoding]::UTF8.GetBytes($workflow)
-foreach($item in Get-ChildItem "$package/system/OpenGuidePlatform.AgentSkills" -File -Recurse){
-    $relative=[IO.Path]::GetRelativePath("$package/system/OpenGuidePlatform.AgentSkills",$item.FullName).Replace('\','/')
+foreach($item in Get-ChildItem "$package/system/OpenGuidePlatform.Agents.Integration/skills" -File -Recurse){
+    $relative=[IO.Path]::GetRelativePath("$package/system/OpenGuidePlatform.Agents.Integration/skills",$item.FullName).Replace('\','/')
     $files[".agents/skills/$relative"]=[IO.File]::ReadAllBytes($item.FullName)
 }
-$instructions=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/AgentInstructions.md")
+$instructions=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.Agents.Integration/instructions/guide-site.md")
 $files['.agents/agents.md']=$instructions
 $files['AGENTS.md']=$instructions
 $files['CLAUDE.md']=$instructions

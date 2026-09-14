@@ -113,9 +113,9 @@ OpenGuidePlatform/
       Contracts/
       Adapters/
       tests/
-    OpenGuidePlatform.PowerShell.Build/
-      OpenGuidePlatform.PowerShell.Build.psd1
-      OpenGuidePlatform.PowerShell.Build.psm1
+    OpenGuidePlatform.PowerShell.GuideSiteBuild/
+      OpenGuidePlatform.PowerShell.GuideSiteBuild.psd1
+      OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1
       Prepare/
       Build/
       Validate/
@@ -123,7 +123,7 @@ OpenGuidePlatform/
       Reporting/
       Adapters/
       tests/
-    OpenGuidePlatform.AgentSkills/
+    OpenGuidePlatform.Agents.Integration/
       guide.transcreate/
       guide.transreconcile/
       guide.transstatus/
@@ -131,7 +131,7 @@ OpenGuidePlatform/
       guide.historicalversion/
       guide.contributions/
       guide.gravatar/
-    OpenGuidePlatform.AgentControls/
+    OpenGuidePlatform.PowerShell.AgentControls/
       codex/
       claude/
       copilot/
