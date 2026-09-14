@@ -11,7 +11,7 @@ Approved after the initial E07 implementation: split consumer and platform engin
 - [x] Implement split packages, manifest dependencies and thin installation/build entry points.
 - [x] Implement local self-update, conflict checks and retirement of an unchanged legacy bootstrap.
 - [x] Complete full platform, package and sample acceptance: 276 tests passed; both packages validated; sample preview (119 files) and production (87 files) passed from the exact GuideSite ZIP. Workflow lock coverage passed for all four workflows. Local report: `.processing/platform-tests/da7039c8b0c143ecadd3ca82b79588e3/summary.md`.
-- [ ] Verify the branch CI candidate through deployed sample checks before merge.
+- [x] Verify the branch CI candidate through deployed sample checks: commit `6496b4a`, [run 34839561829](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34839561829), passed platform Build and sample Prepare, Build, Validate, Deploy, Verify and PR report delivery. Release was correctly skipped on the PR. Publication and real released installation remain post-merge verification.
 
 No guide-site adoption, Hugo internals, production promotion or GitHub administrative settings are changed by this follow-up.
 
