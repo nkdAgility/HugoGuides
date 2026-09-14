@@ -43,7 +43,11 @@ function Get-GuideAssessment {
                 $observed=(Get-GuideInventory $WorkspaceRoot $subset).Guides[0].Editions[0]
                 $translations=@(foreach($translation in $observed.Translations) {
                     $subject="$($guide.id)/$($edition.id)/$($translation.Language)"
-                    if($translation.FindingCode){Add-Finding $translation.FindingCode translation $subject "Declared $($translation.Intent) content is not ready (body: $($translation.Body))." 'Restore the required body/resource or review the declared publication intent; preserve intentional PDF-only and fallback states.'}
+                    if($translation.FindingCode){
+                        if($translation.FindingCode -eq 'PDF_RESOURCE_MISSING'){
+                            Add-Finding PDF_RESOURCE_MISSING translation $subject 'This PDF-only translation has no available PDF. A web body is not required.' 'Restore the declared PDF at its expected path; generate it only if it is declared generated.'
+                        }else{Add-Finding $translation.FindingCode translation $subject "Declared $($translation.Intent) content is not ready (body: $($translation.Body))." 'Restore the required body/resource or review the declared publication intent; preserve intentional PDF-only and fallback states.'}
+                    }
                     if($translation.DeprecatedLang){Add-Finding DEPRECATED_LANG translation $subject 'The document contains deprecated lang front matter.' 'Remove lang from Hugo front matter; pass the filename/default language through Pandoc metadata.'}
                     foreach($download in $translation.Downloads){if(-not $download.Exists){Add-Finding DOWNLOAD_MISSING download "$subject/$($download.Path)" 'A declared download is missing.' 'Restore supplied/protected downloads; generate only resources declared generated.' $(if($download.Handling -eq 'generated'){'warning'}else{'blocker'})}}
                     [ordered]@{language=$translation.Language;state=$translation.State;body=$translation.Body;downloads=@($translation.Downloads|ForEach-Object {[ordered]@{path=$_.Path;handling=$_.Handling}})}

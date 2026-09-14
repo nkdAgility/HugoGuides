@@ -13,6 +13,37 @@ Describe 'Shared Prepare assessment and reports' {
         [IO.File]::WriteAllText((Join-Path $directory 'index.md'),"---`ntitle: Guide`n---`nBody")
         $edition.translations[0].downloads=@()
     }
+    It 'omits healthy web and PDF-only translations from guide fixes but retains their JSON inventory' {
+        $edition.translations+=@{language='fa';intent='pdf-only';downloads=@(@{path='guide.fa.pdf';handling='supplied'})}
+        [IO.File]::WriteAllText("$directory/guide.fa.pdf",'supplied PDF fixture')
+        $result=Get-GuideAssessment $workspace $policy @('en','fa') @{} ('a'*40) '0.0.0'
+        @($result.findings|Where-Object scope -in @('translation','download')).Count|Should -Be 0
+        $result.inventory.guides[0].editions[0].translations.Count|Should -Be 2
+        $markdown=ConvertTo-GuideAssessmentMarkdown $result
+        $markdown|Should -Match 'No guide fixes identified'
+        $markdown|Should -Not -Match '\| Body \||pdf-only|guide.fa.pdf'
+    }
+    It 'reports a missing PDF as a PDF problem, without asking for a web body' {
+        $edition.translations+=@{language='fa';intent='pdf-only';downloads=@(@{path='guide.fa.pdf';handling='supplied'})}
+        $result=Get-GuideAssessment $workspace $policy @('en','fa') @{} ('a'*40) '0.0.0'
+        $markdown=ConvertTo-GuideAssessmentMarkdown $result
+        $markdown|Should -Match 'PDF-only translation has no available PDF'
+        $markdown|Should -Match 'A web body is not required'
+        $markdown|Should -Match 'Restore the declared PDF'
+        $markdown|Should -Not -Match 'body: missing'
+    }
+    It 'includes actionable warnings and blockers once without listing unaffected translations' {
+        $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0'
+        $result.findings=@(
+            @{severity='warning';scope='download';subject='guide/edition/fa/generated.pdf';code='DOWNLOAD_MISSING';message='Missing generated PDF';remediation='Generate the PDF'},
+            @{severity='blocker';scope='edition';subject='guide/broken';code='EDITION_ASSESSMENT_FAILED';message='Unreadable edition';remediation='Repair the document'}
+        )
+        $markdown=ConvertTo-GuideAssessmentMarkdown $result
+        ([regex]::Matches($markdown,'DOWNLOAD_MISSING')).Count|Should -Be 1
+        $markdown|Should -Match 'Generate the PDF'
+        $markdown|Should -Match 'Repair the document'
+        $markdown|Should -Not -Match '\| web \||\| populated \|'
+    }
     It 'blocks final input drift before publishing a report and retains independent findings' {
         $policy.wrapper.requiredFiles=@('site/missing.txt')
         $policy.wrapper.requiredI18nKeys=@()
