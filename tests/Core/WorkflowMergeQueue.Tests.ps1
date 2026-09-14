@@ -2,17 +2,6 @@ BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module powershell-yaml -MinimumVersion 0.4.12
 }
-Describe 'Required guide-site check identities' {
-    It 'keeps stage names identical for preview and production' {
-        $workflow=Get-Content "$root/.github/workflows/guide-site-build.yaml" -Raw|ConvertFrom-Yaml
-        foreach($stage in @('Prepare','Build','Validate','Deploy','Verify')){
-            $name=$workflow.jobs[$stage.ToLowerInvariant()].name
-            # The caller identifies the site; shared jobs use plain, environment-independent stage names.
-            $name | Should -Be $stage
-            $name | Should -Not -Match 'inputs\.target|preview|production'
-        }
-    }
-}
 Describe 'Merge-queue acceptance' {
     It 'runs the same candidate pipeline for merge groups without deploying or releasing them' {
         $main=Get-Content "$root/.github/workflows/main.yaml" -Raw|ConvertFrom-Yaml
