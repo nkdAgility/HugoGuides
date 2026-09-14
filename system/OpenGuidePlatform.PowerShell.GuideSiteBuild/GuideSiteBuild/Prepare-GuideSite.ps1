@@ -58,6 +58,8 @@ try {
         $assessment.findings+=[ordered]@{code=$finding.Code;severity='blocker';scope='download';subject=$finding.Path;message=$finding.Message;remediation=$finding.Message;evidence=@()}
         $assessment.outcome='fail'
     }
+    $latestFindings=@(Test-GuideLatestAliases -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages)
+    if($latestFindings.Count){$assessment.findings+=$latestFindings;$assessment.outcome='fail'}
     $assessment.policyDigest=$policyDigest
     $freshness=Get-GuideModuleFreshness -SourcePath $source -ModulePath $ModulePath
     $assessment.findings+= [ordered]@{code=$freshness.Code;severity=$freshness.Severity;scope='platform';subject=$freshness.Module;message=$freshness.Message;remediation='Review the module version through the coordinated platform update process; never change the pin during Prepare.';evidence=@("Installed: $($freshness.Installed)","Latest resolved by Go: $($freshness.Latest)")}

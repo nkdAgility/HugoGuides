@@ -14,6 +14,8 @@ sansfont: "Arial"
 monofont: "Courier New"
 sitemap:
   priority: 1.0
+aliases:
+  - /guide2/latest
 ---
 
 Guide 2 - Extended Edition

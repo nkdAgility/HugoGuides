@@ -86,6 +86,21 @@ function New-GuideSiteDiscovery {
         @{name=$ring;excludedLanguages=@($effective.languages.Keys|Where-Object {$effective.languages[$_].disabled -eq $true});excludedGuides=@()}
     })
     $routes=@($observed.pages|ForEach-Object formats|Where-Object name -eq 'HTML'|ForEach-Object {ArtifactRoute $_.url}|Sort-Object -Unique)
+    # Alias pages are not members of Hugo .Pages; require their generated routes explicitly.
+    foreach($guide in $guides){
+        $guideRoute=[IO.Path]::GetRelativePath($content,(Join-Path $WorkspaceRoot $guide.contentRoot)).Replace('\','/').ToLowerInvariant()
+        foreach($language in @($guide.editions.translations.language|Where-Object {$_ -in $languages}|Sort-Object -Unique)){
+            $suffix=if($language -eq $default){''}else{".$language"}
+            $hasAlias=@($guide.editions|Where-Object {
+                $file=Join-Path $WorkspaceRoot "$($guide.contentRoot)/$($_.path)/index$suffix.md"
+                (Test-Path $file) -and @((Read-GuideDocument $file).Metadata['aliases']|Where-Object {([string]$_).TrimEnd('/') -ceq "/$guideRoute/latest"}).Count
+            }).Count
+            if($hasAlias){
+                $prefix=if($language -eq $default -and -not $configuration.defaultcontentlanguageinsubdir){''}else{"$($language.ToLowerInvariant())/"}
+                $routes+= "/$prefix$guideRoute/latest/"
+            }
+        }
+    }
     $inventory=@{schemaVersion=1;siteId=(Split-Path $WorkspaceRoot -Leaf);wrapper=@{sourcePath=$SourcePath;requiredRoutes=$routes;requiredFiles=@($requiredFiles);requiredI18nKeys=@();integrationPoints=@();legacyAliases=$aliases};guides=$guides;publication=@{environments=$environments;permanentExclusions=@(if($hasMin){@{environment='production';subject='language';id='min';reason='Minionese must never be published to production.'}})};protectedPaths=@()}
     return $inventory
 }

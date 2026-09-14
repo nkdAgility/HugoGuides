@@ -26,6 +26,8 @@ guide_whatis: |
 
   Dis booky got termy-term lingo. Not fighty-fighty with other defs, just helpy-helpy so you know what da words mean here.
 
+aliases:
+  - /guide1/latest
 ---
 
 Da Guide 1 Booky (May 2025)
