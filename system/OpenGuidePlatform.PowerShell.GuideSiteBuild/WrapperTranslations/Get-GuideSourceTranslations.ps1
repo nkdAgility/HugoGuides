@@ -42,7 +42,7 @@ function Get-GuideSourceTranslations {
         }
     }}
     foreach($language in $configuration.languages.Keys|Where-Object {$configuration.languages[$_].disabled -ne $true}){
-        $keys=@(foreach($key in $RequiredKeys){
+        $keys=@(foreach($key in @($RequiredKeys|Select-Object -Unique)){
             $value=$null;$state='missing'
             foreach($candidate in @($language,[string]$configuration.defaultcontentlanguage)|Select-Object -Unique){
                 if($catalogues.ContainsKey($candidate) -and $catalogues[$candidate].ContainsKey($key) -and $catalogues[$candidate][$key]){

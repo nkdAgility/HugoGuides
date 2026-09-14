@@ -37,7 +37,8 @@ function New-GuideSiteDiscovery {
                     $relative=[IO.Path]::GetRelativePath($editionDirectory.FullName,$pdf.FullName).Replace('\','/')
                     $owners=@($pages|Where-Object {
                         $pageFile=[IO.Path]::GetFullPath((Join-Path $source $_.path))
-                        [IO.Path]::GetDirectoryName($pageFile) -ieq $editionDirectory.FullName
+                        [IO.Path]::GetDirectoryName($pageFile) -ieq $editionDirectory.FullName -and
+                        [IO.Path]::GetFileName($pageFile) -iin @('index.md',"index.$language.md")
                     }|ForEach-Object {ArtifactRoute $_.permalink}|Sort-Object -Unique)
                     $download=@{path=$relative;handling='supplied';publicationRoots=$owners}
 
@@ -82,17 +83,34 @@ function New-GuideSiteDiscovery {
         $homeFormats=@($configuration.outputs.home)
         $homeFile=Join-Path $content $(if($language -eq $default){'_index.md'}else{"_index.$language.md"})
         if(Test-Path $homeFile){
-            $home=Read-GuideDocument $homeFile
-            if($home.Metadata.Contains('outputs')){$homeFormats=@($home.Metadata.outputs)}
+            $homeDocument=Read-GuideDocument $homeFile
+            if($homeDocument.Metadata.Contains('outputs')){$homeFormats=@($homeDocument.Metadata.outputs)}
         }
         foreach($format in $homeFormats){
             $definition=$configuration.outputformats[$format]
             if($definition.mediatype -notmatch 'json'){continue}
             $formatPath=([string]$definition['path']).Trim('/')
-            $suffix=@($configuration.mediatypes[$definition.mediatype].suffixes)[0]
-            @{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+'.'+$suffix;requiredRoutes=@()}
+            $media=$configuration.mediatypes[$definition.mediatype]
+            $suffix=@($media.suffixes)[0]
+            $delimiter=if($media.Contains('delimiter')){[string]$media.delimiter}else{'.'}
+            @{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+$delimiter+$suffix;requiredRoutes=@()}
         }
     })
+    foreach($page in $pages|Where-Object kind -ne 'home'){
+        $document=Read-GuideDocument ([IO.Path]::GetFullPath((Join-Path $source $page.path)))
+        $formats=if($document.Metadata.Contains('outputs')){@($document.Metadata.outputs)}else{@($configuration.outputs[$page.kind])}
+        $pageRoute=ArtifactRoute $page.permalink
+        $prefix=if($pageRoute.EndsWith('/')){$pageRoute}else{$pageRoute.Substring(0,$pageRoute.LastIndexOf('/')+1)}
+        foreach($format in $formats){
+            $definition=$configuration.outputformats[$format]
+            if($definition.mediatype -notmatch 'json'){continue}
+            $media=$configuration.mediatypes[$definition.mediatype]
+            $delimiter=if($media.Contains('delimiter')){[string]$media.delimiter}else{'.'}
+            $formatPath=([string]$definition['path']).Trim('/')
+            $indexes+=@{route=$prefix+$(if($formatPath){$formatPath+'/'})+$definition.basename+$delimiter+@($media.suffixes)[0];requiredRoutes=@()}
+        }
+    }
+    $indexes=@($indexes|Sort-Object route -Unique)
     # Alias pages are not members of Hugo .Pages; require their generated routes explicitly.
     foreach($guide in $guides){
         $guideRoute=[IO.Path]::GetRelativePath($content,(Join-Path $WorkspaceRoot $guide.contentRoot)).Replace('\','/').ToLowerInvariant()
