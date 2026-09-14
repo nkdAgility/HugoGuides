@@ -19,6 +19,8 @@ guide_whatis: |
   This document aims to be a unifying reference for the community by offering the minimal guidance for best practices. Depending on the context, various approaches can complement this methodology, allowing it to accommodate the full spectrum of value delivery and organizational challenges.
 
    This guide has conventions for some terms. They are not meant to replace any other existing definitions but to clarify how they are intended to be applied here.
+aliases:
+  - /guide1/latest
 ---
 
 Guide 1 (May 2025)

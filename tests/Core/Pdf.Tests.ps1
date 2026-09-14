@@ -12,7 +12,7 @@ Describe 'Generated PDF replacement and evidence' {
         $directory=Join-Path $workspace "$($guide.contentRoot)/$($edition.path)"
         [IO.Directory]::CreateDirectory((Join-Path $directory 'pdf'))|Out-Null
         $source=Join-Path $directory 'index.md'
-        [IO.File]::WriteAllText($source,"---`ntitle: Example`n---`nBody")
+        [IO.File]::WriteAllText($source,"---`ntitle: Example`naliases: [/safe-decision-makers/latest]`n---`nBody")
         $output=Join-Path $directory 'pdf/guide.pdf'
         [IO.File]::WriteAllText($output,'%PDF-original')
         $hash=(Get-FileHash $output).Hash
@@ -51,7 +51,7 @@ Describe 'Generated PDF replacement and evidence' {
         {Save-GuidePdfReceipt -WorkspaceRoot $workspace -Policy $policy -Receipt $result -ReceiptPath $receiptPath} | Should -Throw '*already exists*'
         [IO.File]::AppendAllText($source,'changed')
         (Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements).Outcome | Should -Be blocked
-        [IO.File]::WriteAllText($source,"---`ntitle: Example`n---`nBody")
+        [IO.File]::WriteAllText($source,"---`ntitle: Example`naliases: [/safe-decision-makers/latest]`n---`nBody")
         $requirements.Required[0].GenerationReceipt.environmentSha256='c'*64
         (Get-GuidePdfReceipts -WorkspaceRoot $workspace -Policy $policy -Requirements $requirements).Outcome | Should -Be blocked
     }
