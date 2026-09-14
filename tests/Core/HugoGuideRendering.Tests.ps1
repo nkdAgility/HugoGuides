@@ -52,11 +52,21 @@ languages:
     $html=[IO.File]::ReadAllText("$fixture/public/min/guide/latest/index.html")
     $json=[regex]::Match($html,'(?s)<script id="catalogue" type="application/json">(.*?)</script>').Groups[1].Value
     $catalogue=ConvertFrom-Json $json
+    Copy-Item "$root/examples/reference-guide-site/layouts/index.html" "$fixture/layouts/index.html"
+    $log=@(& hugo --source $fixture --destination "$fixture/sample-public" 2>&1)
+    if($LASTEXITCODE -ne 0 -or @($log|Where-Object {$_ -match '^ERROR'}).Count){throw "Sample wrapper fixture failed: $($log -join [Environment]::NewLine)"}
 }
 Describe 'Guide contributor rendering' {
     It 'renders creator names and avatars from the real creator partial' {
         $html | Should -Match 'Fixture Creator'
         $html | Should -Match 'avatars.githubusercontent.com/fixture-creator'
+    }
+    It 'renders visible contributor names in the sample homepage override' {
+        $rendered=[IO.File]::ReadAllText("$fixture/sample-public/index.html")
+        $rendered | Should -Match '<strong>Fixture Creator</strong>'
+        $rendered | Should -Match '<strong>Fixture Contributor</strong>'
+        $rendered | Should -Match 'avatars.githubusercontent.com/fixture-creator'
+        $rendered | Should -Match 'gravatar.com/avatar/fixture-hash'
     }
     It 'renders contributor identities on the homepage and guide details page' {
         foreach($page in @('index.html','guide/index.html')){
