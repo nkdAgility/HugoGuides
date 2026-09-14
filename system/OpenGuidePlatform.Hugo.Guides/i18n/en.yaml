@@ -373,3 +373,6 @@
 
 - id: view_archive_button
   translation: "View Archive"
+
+- id: download_reference_status
+  translation: "Reference"

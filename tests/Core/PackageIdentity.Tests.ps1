@@ -1,12 +1,12 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $validator="$root/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1"
+    $validator="$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1"
 }
 Describe 'Shared installed package identity' {
     BeforeEach {
         $package=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($package)|Out-Null
-        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.1';sourceCommit=('a'*40);workflow=@{version='v1.2.3-Preview.1'}}
+        $manifest=@{schemaVersion=2;packages=@{GuideSite=@{version='1.2.3-Preview.1'}};product='OpenGuidePlatform';version='1.2.3-Preview.1';sourceCommit=('a'*40);workflow=@{version='v1.2.3-Preview.1'}}
         [IO.File]::WriteAllText("$package/platform.json",($manifest|ConvertTo-Json -Depth 10))
     }
     It 'accepts matching package and release identities' {

@@ -1,8 +1,42 @@
 # OpenGuidePlatform execution plan
 
-Implementation branch: `codex/open-guide-platform`, PR #35. The checklist below is the authoritative stage status. [Historical reconciliations and evidence](open-guide-platform-execution-history.md) preserve prior findings and acceptance decisions.
+Initial implementation: `codex/open-guide-platform`, merged PR #35. Adoption-readiness fixes: `codex/adoption-validation-fixes`, [PR #37](https://github.com/nkdAgility/OpenGuidePlatform/pull/37) (new branch from current `main`). The checklist below is the authoritative stage status. [Historical reconciliations and evidence](open-guide-platform-execution-history.md) preserve prior findings and acceptance decisions.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
+
+## Active distribution follow-up
+
+Approved after the initial E07 implementation: split consumer and platform engineering release packages while keeping one coordinated version; remove bootstrap from release/install assets; move adoption into its released PowerShell module; share restoration across local and Actions entry points. Installed consumers update with `./build.ps1 Update -ring preview`; remote bootstrap remains the first-install and recovery entry point. This supersedes the earlier single-ZIP distribution detail, without changing the E00–E14 stage scope.
+
+- [x] Implement split packages, manifest dependencies and thin installation/build entry points.
+- [x] Implement local self-update, conflict checks and retirement of an unchanged legacy bootstrap.
+- [x] Complete full platform, package and sample acceptance: 276 tests passed; both packages validated; sample preview (119 files) and production (87 files) passed from the exact GuideSite ZIP. Workflow lock coverage passed for all four workflows. Local report: `.processing/platform-tests/da7039c8b0c143ecadd3ca82b79588e3/summary.md`.
+- [x] Verify the branch CI candidate through deployed sample checks: commit `6496b4a`, [run 34839561829](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34839561829), passed platform Build and sample Prepare, Build, Validate, Deploy, Verify and PR report delivery. Release was correctly skipped on the PR. Publication and real released installation remain post-merge verification.
+
+No guide-site adoption, Hugo internals, production promotion or GitHub administrative settings are changed by this follow-up.
+
+## Active local CI parity follow-up
+
+The user authorized closing the remaining CI gaps after distribution cleanup. Azure Pipelines and TeamCity execution verification is not required; the acceptance criterion is that build operations take explicit inputs and do not require GitHub context, except release access. No new provider configuration, permissions or consumer deployment is authorized.
+
+- [x] Implement actual module-owned deployment, custom hosting adapters and complete guide-site execution through Verify.
+- [x] Implement shared GitVersion calculation and dependency setup; retain GitVersion 5 compatibility for the existing configuration.
+- [x] Implement complete platform execution with explicit sample deployment/publication, preserving candidate package identity and failure gates.
+- [x] Separate source inputs from runtime package dependencies and keep GitHub context in workflow adapters.
+- [x] Complete local regression and sample acceptance: 290 tests, both distribution packages, sample preview (119 files) and production (87 files) passed. Local GitVersion calculation and workflow lock coverage also passed. Evidence: `.processing/platform-tests/bde689573c4f4c87a0ce5d6a7ceeb738/summary.md`.
+- [x] Verify the changed Actions sample deployment adapter through live Verify: commit `98d853a`, [run 34842428612](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34842428612), passed platform Build and all sample stages, including module-owned Deploy and live Verify. Release was correctly skipped on the PR. Deployment diagnostics now retain redacted logs and reject a successful process exit without a confirmed deployment URL.
+
+## Next steps and retained work
+
+- [x] Verify implementation head `a4bec59`: [run 34843277088](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34843277088) passed through live Verify. Release was correctly skipped on the PR.
+- [ ] Finish PR #37 review, then merge and verify the resulting named release through clean remote installation and installed update (E08).
+- [ ] Extract remaining historical baseline/comparison orchestration from `.build/` into PlatformBuild; retain thin local entry points and the existing evidence (tooling cleanup).
+- [ ] Complete managed agent enforcement and the independent deployment/policy boundary later (E06/E08); administrative changes remain outside this run.
+- [ ] Adopt KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack on separate branches with preview acceptance (E09–E11).
+- [ ] Complete stable promotion and operational handover/update automation (E12–E13).
+- [ ] Refactor Hugo internals after verified adoption across all three sites (E14).
+
+The original stage IDs and scope below remain unchanged. Earlier test counts and commits are dated evidence, not current-head acceptance. The latest local acceptance is 290 tests; named-release installation is still a distinct post-merge check.
 
 ## Outcome
 
@@ -14,13 +48,13 @@ This is an execution plan, not authorisation inferred to rename or deploy immedi
 
 ## Current acceptance status
 
-**Run boundary agreed 14 September 2026:** the current platform implementation run is complete within its agreed scope. The following work remains in the execution plan but is explicitly deferred outside this run:
+**Run boundary agreed 14 September 2026:** the initial platform implementation run was complete within its agreed scope. The user subsequently merged PR #35 and authorized a separate branch to assess and fix adoption-readiness findings and the two stale scan PRs (#33 and #34). The following work remains in the execution plan but is explicitly deferred outside this run:
 
-- GitHub administrative changes, required-check replacement, review/merge actions and the resulting release cutover (E08).
+- Further GitHub administrative and required-check changes (E08); no configuration changes are authorized by this follow-up.
 - The trusted deployment boundary that prevents PR-controlled code from accessing Azure deployment credentials (E06/E08).
 - Installation and live verification of managed Codex, Claude and Copilot restrictions on contributor machines, to be addressed during guide-site adoption (E06/E09–E11).
 
-These are retained requirements, not completed acceptance or active requests for permission. Do not resume them merely because this run was previously instructed to close blockers. E06 and E08 remain unchecked. After the deferred release work, the next adoption stage is E09, KanbanGuides. No consumer adoption, production promotion or Hugo internal refactoring is authorized by this status record.
+These are retained requirements, not completed acceptance or active requests for permission. Do not resume them merely because this run was previously instructed to close blockers. E06 and E08 remain unchecked. After the remaining E08 released-installation verification, the next adoption stage is E09, KanbanGuides. No consumer adoption, production promotion or Hugo internal refactoring is authorized by this status record.
 
 - [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
 - [x] E01 Contracts and policy ownership agreed.
@@ -40,7 +74,7 @@ These are retained requirements, not completed acceptance or active requests for
 
 The approved simplification pass is implemented and verified at `85c1db805ebfb78f2a621c4a00815c2582f949a8`: unused adapters removed; shared stages moved into the Build component; package identity validation consolidated; prepared inputs deduplicated; one current PR assessment per target; execution history separated. No Hugo internals or consumer repositories changed.
 
-Acceptance: **216 tests**, package validation and both local sample targets passed. [CI run 34787509971](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34787509971) passed platform packaging and all five sample stages through live Verify; release was skipped. Actual reporting created current preview comment `5656678132`. Tests exercise its update, target isolation, stale-head refusal and delivery failure paths.
+Historical acceptance before PR #37: **216 tests**, package validation and both local sample targets passed. [CI run 34787509971](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34787509971) passed platform packaging and all five sample stages through live Verify; release was skipped. Actual reporting created current preview comment `5656678132`. Tests exercise its update, target isolation, stale-head refusal and delivery failure paths.
 
 A fresh installed sample fixture also passed preview, production, cached restore with GitHub access blocked and `GOPROXY=off`, and same-version update; all seven skills loaded. It consumed version `0.0.0-20260913224036-85c1db805ebf`, ZIP SHA256 `8e6a086498bb4d7a85eccb8430618e604d4e1a3064917b7da539f6c2ccee3848`. Only release download transport used local assets; native Go resolution, bootstrap and installed builds were real. No named release was published. Local evidence is retained in `.processing/simplify-installed-consumer-evidence.json`.
 
@@ -50,10 +84,64 @@ Remaining gates:
 
 - **E06:** managed client/OS enforcement and an independently administered required gate are uninstalled/unverified. No permission or GitHub administrative changes are authorized. The recorded exception permits repository implementation through E08.
 - **E07 / E09–E11:** fresh-fixture acceptance is complete; each existing consumer's file conflicts and deployment integration must still be reconciled in its own adoption PR.
-- **E08:** the GitHub rename is complete, but a complete coordinated named preview release, nested Hugo tag and clean released installation remain outstanding. Earlier preview releases predate the complete current manifest. PR #35 remains draft; obsolete required checks and review-thread requirements block merging. The subsequent instruction to close blockers authorizes merge-queue support: `merge_group` now runs packaging and sample validation, with deployment and release disabled for queue candidates. Local acceptance passed 217 tests and package validation; commit `5d6256718492d32665398ca3a2233e4ef75a7680` passed [CI run 34788772030](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34788772030) through live Verify. Actual merge-queue verification remains deferred with the administrative cutover. The required-check proposal, deployment credential boundary and managed-client rollout are explicitly outside this completed run, as agreed above.
+- **E08:** the GitHub rename and initial coordinated preview publication are complete. PR #35 merged at `d859a32c8e3dbf4c154aef4a6c5079d6acd634d0`; [main run 34791229184](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34791229184) passed and published `v0.5.3-Preview.1`. Its nested Go module tag `system/OpenGuidePlatform.Hugo.Guides/v0.5.3-Preview.1` resolves to that same commit, verified with a fresh Go module cache. A clean installation from a named release remains outstanding. The new adoption-readiness fixes must pass review and preview validation and be included in a subsequent release before adoption uses them. E08 remains unchecked. No administrative or deployment-boundary changes are included in this fix branch.
 - **E09–E11:** accept each exact consumer preview and functional/visual comparison before adoption. Safe Delusion's recorded old-module upgrade differences are accepted; the corrected Persian CSS capture is the valid baseline.
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
+
+### PR #37 review closure
+
+The site-prefixed naming request was explicitly removed by the maintainer; retain the approved plain stage names. The lock-tool finding is not applicable: the installed official CLI help lists `--no-narrow`, `--verify` and `--verify-local`, and all four workflows pass offline coverage verification.
+
+The remaining code findings are corrected: release asset paths resolve relative to `WorkspaceRoot` while preserving explicit absolute paths; package validation owns a temporary restoration workspace and removes it on success or failure without deleting input assets. Packaged-module imports are checked in a separate PowerShell process so cleanup cannot replace or invalidate the active build modules. Regression tests exercise outside-directory publication, identity failure and partial restoration failure. These changes do not alter repository settings or the required-check configuration.
+
+### Actionable failure reporting
+
+Platform test reports now carry explicitly authored **Why** and **How to fix** fields in local output and Actions summaries/annotations. The workflow-input failure is explained at the check rather than inferred from a low-level exception. Technical error/location remains supporting evidence. Unknown errors are explicitly undiagnosed; authoring explanations for every existing failure path remains ongoing work, not a completed universal diagnosis guarantee.
+
+### Approved component naming
+
+The component convention is `OpenGuidePlatform.<TechnologyOrEcosystem>.<Responsibility>`. Active code, import names, package checks and documentation now use `PowerShell.GuideSiteAdoption`, `PowerShell.AgentControls`, `Agents.Integration` and `PowerShell.GuideSiteBuild`. `PowerShell.PlatformBuild`, `PowerShell.Core` and `Hugo.Guides` retain their names. No compatibility modules or duplicate component folders are retained. Historical baseline observations and execution history retain the names that existed when their evidence was collected.
+
+### Platform and guide-site build modules
+
+The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.GuideSiteBuild` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. They ship in separate `OpenGuidePlatform-GuideSite.zip` and `OpenGuidePlatform-PlatformBuild.zip` assets under one coordinated version and manifest. PlatformBuild depends on the exact GuideSite package; consumers do not restore PlatformBuild. Existing build/test/package scripts in `.build/` are forwarding entry points.
+
+A shared loader supports local code, explicit directory/ZIP paths, installation locks, and specific/latest preview or production package resolution without changing a consumer lock. Production release selection is not authorization to publish or deploy production. Released Hugo dependencies must still match the selected release; overrides do not silently change consumer dependency files.
+
+Local platform `All` tests, packages, validates and runs preview/production sample builds from the exact candidate GuideSite ZIP in fresh PowerShell processes. Deployment and publication are opt-in: `-DeploySample` deploys and verifies the sample preview; `-Publish` requires that acceptance before publishing and verifying both released packages. Guide sites use `-Deploy` to run through deployment and Verify, with an optional consumer-owned hosting adapter. GitVersion and dependency setup also run through the modules. See [platform development](../platform-development.md) for commands. Core operations take explicit inputs; GitHub context belongs to workflow adapters, except release access. Azure Pipelines and TeamCity execution verification is not required. Windows local acceptance and hosted Linux acceptance are recorded above; no dedicated macOS run is claimed.
+
+Remaining tooling cleanup: the historical baseline/comparison utilities in `.build/` still contain implementation, including PowerShell, Python and a browser JavaScript diagnostic. They are outside the normal build/release path. Moving their orchestration into PlatformBuild and leaving thin entry points remains outstanding under the thin-local-script requirement; the completed CI follow-up does not claim that extraction is done.
+
+### PowerShell workflow consolidation — 14 September 2026
+
+Bounded E04/E07 follow-up requested during PR #37: installed guide-site launchers restore the selected platform package and call `Invoke-GuideSiteBuild` from its Build module. Shared CI uses the same module from either the published release or the exact candidate ZIP. GitHub reporting and deployment data validation moved from inline JavaScript into that released module. YAML retains action wiring and single PowerShell calls. Root and component documentation describe the supported entry points.
+
+The cleanup workflow now binds its environment directly to the closed PR number. The user specifically authorized adding `actions: read` to Deploy so it can restore the candidate artifact independently. No repository settings or additional write permissions changed. Independent trust enforcement remains deferred as recorded above.
+
+- [x] Replace the JavaScript reporting/deployment harnesses with PowerShell behavioral tests for current/stale reports, failed delivery, artifact tampering and identity mismatch.
+- [x] Isolate installer fixture modules and suppress fixture output in the real Actions summary. These caused failures and misleading summary identities in run 34832774246.
+- [x] Local platform build: 257 tests and package validation passed. Preview sample: 119 files; production sample: 87 files. Both passed through the module entry point; production excludes Minionese.
+- [x] Commit `978e32f48ac638089b4e5378b63c9796c41000be`: [CI run 34833482798](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34833482798) passed platform packaging, Prepare, Build, Validate, Deploy, Verify and PowerShell PR reporting. The sample consumed candidate `0.5.3-PullRequest0037.193`; Release was correctly skipped on the PR. This accepts the PowerShell consolidation only, not the deferred E06/E08 or consumer adoption gates.
+
+### Adoption-readiness findings — 14 September 2026
+
+The user authorized fixes on a new branch from latest `main`, including issues in the two stale scan PRs if still present. This is a bounded E07/E08 follow-up, not consumer adoption or E14 refactoring.
+
+| Report | Assessment against merged main | Correction and regression coverage |
+|---|---|---|
+| PR #35 Copilot: automatic bootstrap `-WhatIf` switches branch | Confirmed; it creates a review branch before preflight and `ShouldProcess`. | Defer branch creation until all preflight checks pass and the operation is confirmed. Test automatic dry-run on main, failed preflight, and successful automatic installation. |
+| PR #35 Copilot: navigation under a base path | Confirmed; `/docs/guide/` was looked up as `docs/guide/index.html`. | Strip the site base path before artifact lookup. Cover root/subpath URLs, relative links, Unicode, fragments, invalid encoded separators and sibling applications. Preserve existing extra-leading-slash handling. |
+| PR #35 Copilot: JSON indexes under a base path | Confirmed; required entries and target files were incorrectly reported missing. | Use the same origin/base-path conversion; test required and forbidden routes and out-of-scope URLs. |
+| PR #35 Copilot: runtime anchors under a base path | Confirmed with a real browser; page navigation dropped the prefix and resource interception retained it. | Join artifact routes beneath the base path and strip it for file lookup. A browser regression loads a real script and blocks sibling/external requests. |
+| PR #33: contributor context | Still present at all three relocated call sites. | Pass the existing partial's expected author dictionary. Real Hugo rendering tests verify creator/contributor names and avatars on the homepage, guide details and creator partial. |
+| PR #34: translation PDF fallback | Still selects the first shared PDF, potentially English for another language. | Match the requested language only. Real Hugo tests cover Persian, Japanese, French, Minionese, regional language codes, PDF-only English and an online Spanish translation without a PDF. Missing PDFs remain unavailable. |
+| PR #37 Copilot: sample homepage override | Confirmed; the bespoke sample homepage retained a bare author-partial call even after the module was fixed. | Apply the same dictionary at that call site and test actual visible names in the overriding homepage with real Hugo. |
+| Full production sample validation: `download_reference_status` | Existing status partials reference a missing shared catalogue key. | Add the English `Reference` fallback; keep the production language exclusions. |
+
+The initial four Hugo rendering assertions fail against the original `main` templates and pass against the corrected templates. The changes port the stale PR fixes into current component paths; they do not merge the stale branches or modify deployed consumer sites. PR #34 also mentions a separate Spanish PDF path problem in KanbanGuides; that consumer-specific claim is not claimed fixed here and remains an E09 check against its exact adoption artifact. The additional catalogue entry is justified by the failing production acceptance build. The initial URL implementation also exposed existing double-leading-slash links; compatibility was restored without changing Hugo route generation.
+
+Local acceptance after the sample-override review fix: **234 tests**, package verification, the Hugo translation probe and both full sample targets passed on this fix branch (Hugo Extended 0.164.0). Preview produced 119 files; production produced 87 files with Minionese excluded. [CI run 34792835067](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34792835067) passed platform packaging and all five sample stages through live Verify at fix commit `672462efcf5d786d30dc3b6c521857611a29c4ee`. The [PR #37 preview](https://blue-field-06cea8c03-37.westeurope.6.azurestaticapps.net/) consumed the exact candidate package. Release was correctly skipped. This is fix-branch validation, not publication or consumer-adoption acceptance. The earlier 216/217-test evidence above remains historical; it is not acceptance of these follow-up changes. The sample-override follow-up also passed both local sample targets; current-head CI and review evidence is available on PR #37. Review, merge and a subsequent named release remain distinct from local validation.
 
 Detailed additions to the original acceptance criteria remain in the [implementation follow-up register](open-guide-platform-execution-history.md#16b-implementation-follow-ups-within-the-existing-work-packages). They remain requirements, including publication/download exclusions, prepared-input freshness, dynamic anchors, PDF receipts, legacy alias limits, report delivery and cleanup. Moving their historical checkmarks here does not remove or reopen accepted work.
 
@@ -63,7 +151,7 @@ Detailed additions to the original acceptance criteria remain in the [implementa
 - Preserve all existing releases and tags. Never retag historical module versions or replace their assets.
 - Move shared implementation and example content into OpenGuidePlatform. Keep published guide content and bespoke wrappers in their consumer repositories.
 - Implement changes on feature branches with reviewable PRs and immutable preview candidates. Preview verification is not production deployment authorisation; repository rename remains an explicit administrative cutover.
-- During migration and adoption, keep Hugo module internals unchanged apart from the minimum path/reference changes needed for mechanical relocation and identity updates. Preserve functionality and visual output.
+- During migration and adoption, keep Hugo module internals unchanged apart from minimum relocation/identity updates and specifically authorized bug fixes. Preserve intended functionality and visual output; record each intentional correction with regression evidence. Broad internal refactoring remains E14.
 - The existing multilingual guide and edition structure is deliberate, even where it differs from conventional Hugo usage. Do not normalise language resolution, fallbacks, cascades or content organisation during adoption.
 - Keep the proposed refactoring of Hugo module contents in E14, after the rest of the platform has been built and verified against the guide sites. Production adoption and operational handover are not prerequisites.
 - Make content/layout moves separately reviewable from behavioral changes.
@@ -98,7 +186,7 @@ E05 adds tests and baseline evidence only and can run alongside E03/E04 after th
 
 Execution may deviate from this order when justified. Record the reason, affected work packages, scope, validation and effect on outstanding acceptance before acting. A deviation does not close unfinished criteria or authorize administrative changes or consumer deployments.
 
-Each work package should become an issue with this document's ID, and one or more bounded PRs. Mark a package complete only after its acceptance criteria are evidenced. Current implementation is tracked in PR #35.
+Each work package should become an issue with this document's ID, and one or more bounded PRs. Mark a package complete only after its acceptance criteria are evidenced. The original implementation is preserved in merged PR #35; the current follow-up branch is recorded at the top of this plan.
 
 ## 3. E00 — Refresh and establish the baseline
 
@@ -121,9 +209,9 @@ Adopt these named components:
 ```text
 system/OpenGuidePlatform.Hugo.Guides/
 system/OpenGuidePlatform.PowerShell.Core/
-system/OpenGuidePlatform.PowerShell.Build/
-system/OpenGuidePlatform.AgentSkills/
-system/OpenGuidePlatform.AgentControls/
+system/OpenGuidePlatform.PowerShell.GuideSiteBuild/
+system/OpenGuidePlatform.Agents.Integration/
+system/OpenGuidePlatform.PowerShell.AgentControls/
 ```
 
 Define and test schemas for site policy, wrapper requirements, guide inventory, edition/translation/download state, findings and release locks. Record the future publication-manifest contract as E14 work; do not require Hugo to consume a new manifest during adoption. Each schema has a version and migration behavior.
@@ -153,7 +241,7 @@ Create a move manifest, then use explicit path moves with Git history retained. 
 | HugoGuides `site/` | `examples/reference-guide-site/` | Move demo source, then remove accidental production-consumer coupling through a separately reviewed change. |
 | HugoGuides demo hosting configuration | Reference-site configuration or explicit hosting adapter inputs | Inspect usage before relocating; preserve any deployed demo route/domain contract. |
 | HugoGuides `serve.ps1` and useful `.powershell/` helpers | Platform development commands / Build adapters | Inventory first; preserve supported entry points during transition. |
-| KanbanGuides `.agents/skills/*/SKILL.md` | `system/OpenGuidePlatform.AgentSkills/` | Initially copy with provenance; retire consumer originals only after adoption installs replacements. |
+| KanbanGuides `.agents/skills/*/SKILL.md` | `system/OpenGuidePlatform.Agents.Integration/` | Initially copy with provenance; retire consumer originals only after adoption installs replacements. |
 | Kanban PDF/history/contributor/avatar scripts | Core capability directories | Extract implementation, retain authorship/licence information and add parameterised operations. |
 | Kanban `cover-page.tex` | Core `PdfPublishing/templates/` | Shared default; consumer overrides explicit. |
 | Assessment and execution documents | Platform `docs/architecture/` | Transfer the accepted versions when the platform working branch exists; avoid maintaining divergent copies. |

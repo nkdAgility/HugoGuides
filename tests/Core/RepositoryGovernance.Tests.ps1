@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $evaluator=Join-Path $root 'system/OpenGuidePlatform.AgentControls/RepositoryGovernance/Test-GuideRepositoryGovernance.ps1'
+    $evaluator=Join-Path $root 'system/OpenGuidePlatform.PowerShell.AgentControls/RepositoryGovernance/Test-GuideRepositoryGovernance.ps1'
     function Commit-Fixture {
         & git -C $workspace add --all
         & git -C $workspace -c user.name=Fixture -c user.email=fixture@example.invalid commit -q -m fixture

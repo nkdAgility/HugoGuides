@@ -1,11 +1,10 @@
-name: Close PR (GuideSite)
+# This workflow is managed by gh actions-lock.
+
+name: GuideSite Close PR
 on:
   workflow_call:
     inputs:
       site-name:
-        required: true
-        type: string
-      deployment-environment:
         required: true
         type: string
     secrets:
@@ -20,22 +19,13 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Confirm PR environment
-        shell: pwsh
-        env:
-          SITE_ENVIRONMENT: ${{ inputs.deployment-environment }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          if ($env:SITE_ENVIRONMENT -cne $env:PR_NUMBER) {
-            throw 'PR cleanup must target only the matching canary environment.'
-          }
       - name: Close Azure PR environment
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
           repo_token: ${{ github.token }}
           action: close
-          deployment_environment: ${{ inputs.deployment-environment }}
+          deployment_environment: ${{ github.event.pull_request.number }}
           app_location: ''
           skip_app_build: true
           skip_api_build: true

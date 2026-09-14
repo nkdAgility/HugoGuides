@@ -77,9 +77,14 @@
 
   // Fallback: check the translation page’s own resources
   {{ if (and (not $pdfResource) $page) }}
-    {{ $pagePdfResources := $page.Resources.Match $pdfPattern }}
-    {{ if gt (len $pagePdfResources) 0 }}
-      {{ $pdfResource = index $pagePdfResources 0 }}
+    {{/* Untagged resources are shared across languages. Select only this
+         language's PDF, never the first PDF in the translation's resources. */}}
+    {{ $langPdfResources := $page.Resources.Match (printf "pdf/*.%s.pdf" $lang) }}
+    {{ if eq (len $langPdfResources) 0 }}
+      {{ $langPdfResources = $page.Resources.Match (printf "pdf/*.%s.pdf" (lower $lang)) }}
+    {{ end }}
+    {{ if gt (len $langPdfResources) 0 }}
+      {{ $pdfResource = index $langPdfResources 0 }}
     {{ end }}
   {{ end }}
 

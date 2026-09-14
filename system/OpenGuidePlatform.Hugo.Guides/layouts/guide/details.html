@@ -321,7 +321,7 @@
                 {{- $contributors = where $contributors "role" "in" (slice "contributor" "creator") -}}
                 <div class="d-flex flex-wrap justify-content-center mb-4">
                   {{- range sort $contributors "weight" "asc" }}
-                    {{ partial "components/guide/guide-author.html" . }}
+                    {{ partial "components/guide/guide-author.html" (dict "author" . "lightList" false) }}
                   {{- end }}
                 </div>
                 <div class="text-center">

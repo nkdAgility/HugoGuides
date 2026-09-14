@@ -44,7 +44,7 @@ Describe 'Generated PDF replacement and evidence' {
         @($evidence.Records|Where-Object State -eq verified).Count | Should -Be 1
         [IO.File]::WriteAllText("$workspace/policy.json",($policy|ConvertTo-Json -Depth 40))
         [IO.File]::WriteAllText("$workspace/production.json",'{"languages":{"en":{"disabled":false}}}')
-        & "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Prepare-GuideSite.ps1" -WorkspaceRoot $workspace -PolicyPath "$workspace/policy.json" -EffectiveProductionPath "$workspace/production.json" -Languages en -SourceCommit ('a'*40) -Target preview -OutputPath '.processing/receipt-prepare' | Out-Null
+        & "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Prepare-GuideSite.ps1" -WorkspaceRoot $workspace -PolicyPath "$workspace/policy.json" -EffectiveProductionPath "$workspace/production.json" -Languages en -SourceCommit ('a'*40) -Target preview -OutputPath '.processing/receipt-prepare' | Out-Null
         $retained=Get-Content "$workspace/.processing/receipt-prepare/pdf-receipts.json" -Raw|ConvertFrom-Json
         $retained.Outcome | Should -Be pass
         @($retained.Records|Where-Object State -eq verified).Count | Should -Be 1

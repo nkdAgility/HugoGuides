@@ -1,4 +1,12 @@
 BeforeAll {
+    function ConvertTo-PackageManifest($Manifest) {
+        $copy=@{}+$Manifest
+        $copy.schemaVersion=2
+        $copy.packages=@{GuideSite=@{archive='OpenGuidePlatform-GuideSite.zip';version=$copy.version;sha256=$copy.sha256}}
+        $copy.Remove('archive');$copy.Remove('sha256');$copy.Remove('bootstrapSha256')
+        return $copy
+    }
+
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     $installer=Join-Path $root '.build/Restore-OpenGuidePlatform.ps1'
     function Write-CandidateFixture {
@@ -7,15 +15,14 @@ BeforeAll {
         $payload=Join-Path $Directory 'payload'
         [IO.Directory]::CreateDirectory($assets)|Out-Null
         [IO.Directory]::CreateDirectory($payload)|Out-Null
-        [IO.Directory]::CreateDirectory("$payload/system/OpenGuidePlatform.GuideSite.Adoption")|Out-Null
-        Copy-Item "$root/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" "$payload/system/OpenGuidePlatform.GuideSite.Adoption/"
+        [IO.Directory]::CreateDirectory("$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption")|Out-Null
+        Copy-Item "$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" "$payload/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/"
         @{product='OpenGuidePlatform';version=$Version;sourceCommit=if($WrongMetadata){'b'*40}else{$Commit}}|ConvertTo-Json|Set-Content "$payload/platform.json"
-        'fixture bootstrap'|Set-Content "$assets/bootstrap.ps1"
         if($Traversal){
-            $zip=[IO.Compression.ZipFile]::Open("$assets/OpenGuidePlatform.zip",[IO.Compression.ZipArchiveMode]::Create)
+            $zip=[IO.Compression.ZipFile]::Open("$assets/OpenGuidePlatform-GuideSite.zip",[IO.Compression.ZipArchiveMode]::Create)
             try{$null=$zip.CreateEntry('../escaped.txt')}finally{$zip.Dispose()}
-        }else{[IO.Compression.ZipFile]::CreateFromDirectory($payload,"$assets/OpenGuidePlatform.zip")}
-        @{product='OpenGuidePlatform';version=$Version;sourceCommit=$Commit;archive='OpenGuidePlatform.zip';sha256=if($CorruptInner){'0'*64}else{(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()};bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant()}|ConvertTo-Json|Set-Content "$assets/release-manifest.json"
+        }else{[IO.Compression.ZipFile]::CreateFromDirectory($payload,"$assets/OpenGuidePlatform-GuideSite.zip")}
+        ConvertTo-PackageManifest @{product='OpenGuidePlatform';version=$Version;sourceCommit=$Commit;archive='OpenGuidePlatform-GuideSite.zip';sha256=if($CorruptInner){'0'*64}else{(Get-FileHash "$assets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant()};}|ConvertTo-Json -Depth 10|Set-Content "$assets/release-manifest.json"
         $bundle=Join-Path $Directory 'candidate.zip'
         [IO.Compression.ZipFile]::CreateFromDirectory($assets,$bundle)
         return $bundle
@@ -23,6 +30,11 @@ BeforeAll {
 }
 Describe 'Candidate ZIP restoration before publication' {
     BeforeEach {
+        $workflowEnvironment=@{}
+        foreach($name in @('PLATFORM_RELEASE','PLATFORM_PACKAGE_URL','PLATFORM_PACKAGE_SHA256','PLATFORM_VERSION')){
+            $workflowEnvironment[$name]=[Environment]::GetEnvironmentVariable($name)
+            [Environment]::SetEnvironmentVariable($name,$null)
+        }
         $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         Push-Location $workspace
@@ -31,7 +43,30 @@ Describe 'Candidate ZIP restoration before publication' {
         $global:OgpCandidateFixtureZip=$null
         $arguments=@{PackageUrl='https://api.github.com/repos/example/platform/actions/artifacts/123/zip';ExpectedVersion='1.2.3-Preview.4';ExpectedCommit=('a'*40);OutputPath='.processing/install'}
     }
-    AfterEach { Pop-Location }
+    AfterEach {
+        Pop-Location
+        foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$workflowEnvironment[$name])}
+    }
+    It 'selects the verified candidate from workflow inputs without YAML branching' {
+        $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
+        $env:PLATFORM_PACKAGE_URL=$arguments.PackageUrl
+        $env:PLATFORM_PACKAGE_SHA256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash
+        $env:PLATFORM_VERSION=$arguments.ExpectedVersion
+        & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath
+        (Get-Content .processing/install/platform.json -Raw|ConvertFrom-Json).version|Should -Be $arguments.ExpectedVersion
+        Should -Invoke Invoke-WebRequest -Times 1 -Exactly
+    }
+    It 'rejects conflicting workflow package selection before network access' {
+        $env:PLATFORM_PACKAGE_URL=$arguments.PackageUrl
+        $env:PLATFORM_RELEASE='v1.2.3'
+        { & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath }|Should -Throw '*not both*'
+        Should -Invoke Invoke-WebRequest -Times 0 -Exactly
+    }
+    It 'rejects candidate identity without a workflow package URL' {
+        $env:PLATFORM_VERSION='1.2.3'
+        { & $installer -FromWorkflow -ExpectedCommit $arguments.ExpectedCommit -OutputPath $arguments.OutputPath }|Should -Throw '*requires a package URL*'
+        Should -Invoke Invoke-WebRequest -Times 0 -Exactly
+    }
     It 'restores the verified build ZIP without querying any release' {
         $global:OgpCandidateFixtureZip=Write-CandidateFixture $workspace
         $arguments.PackageSha256=(Get-FileHash $global:OgpCandidateFixtureZip).Hash

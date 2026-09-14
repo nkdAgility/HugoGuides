@@ -1,4 +1,12 @@
 BeforeAll {
+    function ConvertTo-PackageManifest($Manifest) {
+        $copy=@{}+$Manifest
+        $copy.schemaVersion=2
+        $copy.packages=@{GuideSite=@{archive='OpenGuidePlatform-GuideSite.zip';version=$copy.version;sha256=$copy.sha256}}
+        $copy.Remove('archive');$copy.Remove('sha256');$copy.Remove('bootstrapSha256')
+        return $copy
+    }
+
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     $installer=Join-Path $root '.build/Restore-OpenGuidePlatform.ps1'
     function gh {
@@ -24,9 +32,9 @@ Describe 'Released platform restoration boundary' {
         $global:OgpReleaseTestAssets=Join-Path $workspace 'assets'
         [IO.Directory]::CreateDirectory($global:OgpReleaseTestAssets)|Out-Null
         $global:OgpReleaseTestCommit='a'*40
-        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.4';sourceCommit=('a'*40);archive='OpenGuidePlatform.zip';sha256='invalid'}
-        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/OpenGuidePlatform.zip",'not a zip')
-        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",($manifest|ConvertTo-Json))
+        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.4';sourceCommit=('a'*40);archive='OpenGuidePlatform-GuideSite.zip';sha256='invalid'}
+        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip",'not a zip')
+        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         Push-Location $workspace
     }
     AfterEach { Pop-Location }
@@ -44,11 +52,11 @@ Describe 'Released platform restoration boundary' {
         Test-Path .processing/install | Should -BeFalse
     }
     It 'rejects archive traversal even when its checksum matches' {
-        Remove-Item "$global:OgpReleaseTestAssets/OpenGuidePlatform.zip"
-        $zip=[IO.Compression.ZipFile]::Open("$global:OgpReleaseTestAssets/OpenGuidePlatform.zip",[IO.Compression.ZipArchiveMode]::Create)
+        Remove-Item "$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip"
+        $zip=[IO.Compression.ZipFile]::Open("$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip",[IO.Compression.ZipArchiveMode]::Create)
         try{$null=$zip.CreateEntry('../escaped.txt')}finally{$zip.Dispose()}
-        $manifest.sha256=(Get-FileHash "$global:OgpReleaseTestAssets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()
-        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",($manifest|ConvertTo-Json))
+        $manifest.sha256=(Get-FileHash "$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant()
+        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         { & $installer -ReleaseTag v1.2.3-Preview.4 -ExpectedCommit ('a'*40) -OutputPath .processing/install } | Should -Throw '*Unsafe release archive*'
         Test-Path .processing/escaped.txt | Should -BeFalse
     }

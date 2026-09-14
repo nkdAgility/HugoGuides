@@ -1,6 +1,6 @@
 # OpenGuidePlatform: architecture and adoption proposal
 
-Status: proposed for review. Prepared 12 September 2026. No platform implementation, repository rename, consumer migration or GitHub policy change has been performed.
+Status: architecture proposal, reconciled 14 September 2026. The repository rename and initial platform implementation are complete; PR #37 contains subsequent distribution and CI improvements. Consumer adoption, managed enforcement and later Hugo refactoring remain outstanding. The execution plan is authoritative for acceptance and sequencing; proposed capability layouts below are not claims that deferred work has shipped.
 
 Execution companion: [ordered work packages, repository rename and migration runbook](open-guide-platform-execution-plan.md).
 
@@ -113,9 +113,9 @@ OpenGuidePlatform/
       Contracts/
       Adapters/
       tests/
-    OpenGuidePlatform.PowerShell.Build/
-      OpenGuidePlatform.PowerShell.Build.psd1
-      OpenGuidePlatform.PowerShell.Build.psm1
+    OpenGuidePlatform.PowerShell.GuideSiteBuild/
+      OpenGuidePlatform.PowerShell.GuideSiteBuild.psd1
+      OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1
       Prepare/
       Build/
       Validate/
@@ -123,7 +123,7 @@ OpenGuidePlatform/
       Reporting/
       Adapters/
       tests/
-    OpenGuidePlatform.AgentSkills/
+    OpenGuidePlatform.Agents.Integration/
       guide.transcreate/
       guide.transreconcile/
       guide.transstatus/
@@ -131,7 +131,7 @@ OpenGuidePlatform/
       guide.historicalversion/
       guide.contributions/
       guide.gravatar/
-    OpenGuidePlatform.AgentControls/
+    OpenGuidePlatform.PowerShell.AgentControls/
       codex/
       claude/
       copilot/
@@ -147,7 +147,7 @@ OpenGuidePlatform/
 
 Component names identify distributable units. Capability directories identify reasons for change. `Core` is restricted to guide-publishing operations and contracts; it is not a general-purpose utility collection. Its schemas live under `Contracts/` and are packaged for consumers rather than maintained in duplicate. `Hugo.Guides` supplies guide rendering and presentation data to bespoke wrappers; it is not the owner of their site design.
 
-`PowerShell.Build` depends on Core. Core's policy and readiness functions accept data and return structured results without GitHub environment variables, workflow output, network calls or Hugo execution. Filesystem, Pandoc, Hugo and external integrations enter through adapters. Pure decisions and side-effecting use cases have separate tests.
+`PowerShell.GuideSiteBuild` depends on Core. `PowerShell.PlatformBuild` owns platform engineering and depends on the coordinated GuideSite distribution; consumers do not depend on PlatformBuild. Core's policy and readiness functions accept data and return structured results without GitHub environment variables, workflow output, network calls or Hugo execution. Filesystem, Pandoc, Hugo and external integrations enter through adapters. Pure decisions and side-effecting use cases have separate tests.
 
 The root platform `build.ps1` builds and tests OpenGuidePlatform. The consumer bootstrap imports the released Build module to build a guide site. These are different roles even though they share the familiar command name.
 
@@ -237,7 +237,7 @@ Stages: **Prepare -> Build -> Validate -> Deploy -> Verify**. Prepare evaluates 
 
 Build owns generated overlays, Hugo execution, native command exit checks, asset packaging and the final merged Static Web Apps configuration inside the deployment artifact. Validate checks routes, links, indexes, downloads, unresolved tokens, size and publication exclusions. Deploy consumes the validated artifact without rebuilding. Verify checks the deployment identity and behavior.
 
-OpenGuidePlatform provides reusable `guide-site.yaml`, cleanup and update workflows. Consumers retain thin callers with triggers, minimum permissions and explicit secret mappings. The shared workflow provisions tools, invokes PowerShell, moves artifacts and calls the deployment action. It does not contain another copy of domain validation logic. Site-specific discussion/wiki workflows remain local.
+OpenGuidePlatform provides reusable `guide-site-build.yaml` and cleanup workflows, with update automation retained for E13. Consumers retain thin callers with triggers, minimum permissions and explicit secret mappings. The shared workflow provisions tools, invokes PowerShell, moves artifacts and invokes the packaged PowerShell deployment operation. It does not contain another copy of domain validation logic. Site-specific discussion/wiki workflows remain local.
 
 Proposed ring mapping: PR -> canary, main -> preview, stable site-release tag -> production. Make merge_group validation-only. Manual runs must resolve an authorised target explicitly. Test this against each site's current GitVersion and trigger behavior before switching. Platform prerelease status is independent of site deployment ring.
 
@@ -277,7 +277,7 @@ Skill definitions and supporting references ship with the tooling release. Agent
 
 ## 10. Agent protection and trust boundaries
 
-One canonical site instruction document under `.agents/` supplies identical root `AGENTS.md` and `CLAUDE.md` entry points plus a Copilot adapter. Prefer generated full entry documents when they remain compact; otherwise include critical rules in the identical bootstraps and explicitly reference the canonical document. Validate consistency and referenced files.
+One canonical `.agents/agents.md` supplies root `AGENTS.md` and `CLAUDE.md` through symbolic links, plus a Copilot adapter. The root files resolve to the same bytes, without synchronized copies or pointer instructions. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning. Validate link targets and referenced files.
 
 Core holds portable governance checks. AgentControls adapts them to Codex, Claude and Copilot. Support is a tested matrix of client, version, OS and execution surface; a syntactically valid file alone is insufficient proof that the client enforces it.
 
@@ -383,7 +383,9 @@ Use public GitHub Releases as the release catalogue. PR builds produce temporary
 Each coordinated release binds:
 
 - `release-manifest.json`: exact source/workflow commit, component versions, schema versions and minimum toolchain requirements.
-- `OpenGuidePlatform.Tooling.zip`: Core, Build, AgentSkills, AgentControls and consumer templates.
+- `OpenGuidePlatform-GuideSite.zip`: consumer build, adoption, Core, agent integration/control components and consumer templates.
+- `OpenGuidePlatform-PlatformBuild.zip`: platform engineering, depending on the exact GuideSite package in the manifest.
+- Remote `bootstrap.ps1` stays on main; it is neither a release asset nor an installed file. Installed updates use `./build.ps1 Update -ring preview`.
 - Checksums and provenance/attestation where supported.
 - Compatibility report and migration notes.
 - A native Hugo module tag at the matching source revision.
@@ -392,7 +394,7 @@ For the selected layout, the initial pre-v2 import path is `github.com/<owner>/O
 
 Upload complete release assets before publication; enable immutable releases. Preview and stable labels are discovery aids, not moving build inputs. A stable release is validated from the selected source; do not assume version-stamped preview and stable package bytes are identical. Rebuild/retest where metadata changes require it.
 
-Consumers commit `guide-platform.yaml`, `guide-platform.lock.json`, a small `build.ps1` bootstrap, native Hugo `go.mod`/`go.sum` and generated adapters. Their bespoke wrapper templates, styling, navigation and editorial content remain consumer-owned files. Clearly separate generated platform entry points from adopted starter files: only the former are regenerated by updates. Restore tooling into a versioned ignored cache, verify it, import by exact path and preserve offline reuse. Do not require machine-global module installation or PowerShell Gallery for v1.
+Consumers commit `guide-site.policy.json`, `platform-lock.json`, a thin `build.ps1` launcher, native Hugo `go.mod`/`go.sum` and generated adapters. Their bespoke wrapper templates, styling, navigation and editorial content remain consumer-owned files. Clearly separate generated platform entry points from adopted starter files: only the former are regenerated by updates. Restore tooling into a versioned ignored cache, verify it, import by exact path and preserve offline reuse. Do not require machine-global module installation or PowerShell Gallery for v1.
 
 GitHub reusable workflows use version tags with separately recorded source-commit provenance. Use the broadest supported version label unless evaluating a particular coordinated preview requires its release tag. The caller reference cannot be dynamically loaded from a lock file; the updater changes both and validates their consistency. A default checkout in a reusable workflow is the consumer: platform tooling must be restored explicitly from the pinned release, not assumed present in the checkout.
 
@@ -442,7 +444,7 @@ Acceptance: compare the refactored module against the working pre-refactor build
 
 ## 15. Decisions for review
 
-The recommended defaults are named `system/` components, one coordinated release, one Hugo module, Core plus Build PowerShell modules, shared workflows and versioned skills. No extra platform service or private package registry is required initially.
+The recommended defaults are named `system/` components, one coordinated release, one Hugo module, Core plus separate GuideSiteBuild and PlatformBuild PowerShell modules, shared workflows and versioned skills. No extra platform service or private package registry is required initially.
 
 Before implementation, settle:
 

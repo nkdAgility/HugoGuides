@@ -1,7 +1,7 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
     $site=Join-Path $TestDrive 'site'
     [IO.Directory]::CreateDirectory("$site/other")|Out-Null
     [IO.File]::WriteAllText("$site/index.html",'<a href="/other/#content">Content</a><a href="#content">Wrong page</a>')
@@ -12,7 +12,7 @@ BeforeAll {
 }
 Describe 'Current artifact runtime anchors' {
     It 'observes JavaScript anchors, blocks external requests and never waives another page or missing ID' {
-        $navigation=& "$root/system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
+        $navigation=& "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Test-GuideSiteNavigation.ps1" -ArtifactRoot $site -BaseUri https://preview.example/
         $navigation.Findings.Count | Should -Be 2
         $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $site -BaseUri https://preview.example/ -IdentityPath $identityPath -OutputPath ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')) -Anchors @(@{route='/other/';fragment='content'},@{route='/other/';fragment='missing'})
         $result.outcome | Should -Be fail
@@ -25,6 +25,20 @@ Describe 'Current artifact runtime anchors' {
         $resolved.Findings[0].TargetPage | Should -Be 'index.html'
         $resolved.Outcome | Should -Be fail
     }
+    It 'loads the page and its script beneath a base path while blocking sibling applications' {
+        $artifact=Join-Path $TestDrive 'subpath'
+        [IO.Directory]::CreateDirectory("$artifact/guide")|Out-Null
+        [IO.File]::WriteAllText("$artifact/guide/index.html",'<body><script src="/docs/anchor.js"></script></body>')
+        [IO.File]::WriteAllText("$artifact/anchor.js",'document.body.insertAdjacentHTML("beforeend", "<h2 id=dynamic>Heading</h2>");fetch("/docs-other/secret").catch(()=>{});fetch("/secret").catch(()=>{});')
+        $identity=New-GuideArtifactIdentity -ArtifactRoot $artifact -Target preview -SourceCommit ('a'*40) -Version fixture
+        $identityFile=Join-Path $TestDrive 'subpath-identity.json'
+        [IO.File]::WriteAllText($identityFile,($identity|ConvertTo-Json -Depth 20))
+        $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $artifact -BaseUri https://preview.example/docs/ -IdentityPath $identityFile -OutputPath ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')) -Anchors @(@{route='/guide/';fragment='dynamic'})
+        $result.outcome | Should -Be pass
+        $result.blockedRequests | Should -Contain 'https://preview.example/docs-other/secret'
+        $result.blockedRequests | Should -Contain 'https://preview.example/secret'
+    }
+
     It 'launches browser validation from a deeply nested Windows workspace' -Skip:(-not $IsWindows) {
         $deep=Join-Path $root ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')+'/'+('deep'*24))
         [IO.Directory]::CreateDirectory($deep)|Out-Null

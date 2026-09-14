@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1') -Force
 }
 Describe 'Assessment delivery is independent of validation' {
     BeforeEach {
@@ -41,7 +41,7 @@ Describe 'Assessment delivery is independent of validation' {
         $workspace=Join-Path $TestDrive 'workspace'
         [IO.Directory]::CreateDirectory((Join-Path $workspace '.processing/occupied'))|Out-Null
         $summary=Join-Path $TestDrive 'entry-summary.md'
-        { & (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Prepare-GuideSite.ps1') -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing.json') -SourceCommit ('a'*40) -OutputPath '.processing/occupied' -SummaryPath $summary } | Should -Throw '*REPORT_DELIVERY_FAILED*assessment remains blocked*'
+        { & (Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GuideSiteBuild/Prepare-GuideSite.ps1') -WorkspaceRoot $workspace -PolicyPath (Join-Path $workspace 'missing.json') -SourceCommit ('a'*40) -OutputPath '.processing/occupied' -SummaryPath $summary } | Should -Throw '*REPORT_DELIVERY_FAILED*assessment remains blocked*'
         Get-Content $summary -Raw | Should -Match 'PREPARE_INPUT_UNAVAILABLE'
     }
 }

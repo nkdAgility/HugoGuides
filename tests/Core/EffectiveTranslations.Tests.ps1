@@ -1,13 +1,13 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1') -Force
+    Import-Module (Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1') -Force
 }
 Describe 'Effective translation evidence' {
     BeforeEach {
         $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
-        Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.Build { @{Configuration=@{languages=@{en=@{disabled=$false};fa=@{disabled=$false};min=@{disabled=$true}}}} }
-        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.Build {
+        Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { @{Configuration=@{languages=@{en=@{disabled=$false};fa=@{disabled=$false};min=@{disabled=$true}}}} }
+        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
             param($Pass)
             foreach($language in @('en','fa')){
                 @{language=$language;keys=@(
@@ -28,11 +28,11 @@ Describe 'Effective translation evidence' {
         $persian.TranslationQualityAssessed | Should -BeFalse
     }
     It 'rejects missing language evidence rather than assuming fallback' {
-        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.Build { }
+        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { }
         {Get-GuideEffectiveTranslations $workspace @('hugo.yaml') @('home') $workspace '.processing/probe'} | Should -Throw '*unique evidence*'
     }
     It 'rejects duplicate key observations' {
-        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.Build {
+        Mock Invoke-GuideTranslationProbe -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
             foreach($language in @('en','fa')){@{language=$language;keys=@(@{key='home';value='One'},@{key='home';value='Two'})}}
         }
         {Get-GuideEffectiveTranslations $workspace @('hugo.yaml') @('home') $workspace '.processing/probe'} | Should -Throw '*unique evidence*'

@@ -1,6 +1,6 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    Import-Module "$root/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+    Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
 }
 Describe 'Released native dependency and candidate overlay separation' {
     BeforeEach {
@@ -11,7 +11,7 @@ Describe 'Released native dependency and candidate overlay separation' {
         [IO.File]::WriteAllText("$platform/platform.json",($metadata|ConvertTo-Json -Depth 5))
         [IO.File]::WriteAllText("$platform/platform-resolution.json",($resolution|ConvertTo-Json))
         $parameters=@{PlatformRoot=$platform;SourcePath=$TestDrive;Version=$metadata.version}
-        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.Build { [pscustomobject]@{Version='v1.0.0-preview'} }
+        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { [pscustomobject]@{Version='v1.0.0-preview'} }
     }
     It 'uses a matching native release without source replacements' {
         $result=Get-GuideModuleResolution @parameters
@@ -20,9 +20,9 @@ Describe 'Released native dependency and candidate overlay separation' {
         $result.ModuleVersion | Should -Be 'v1.0.0-preview'
     }
     It 'refuses a different native version or a Go replacement' {
-        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.Build { [pscustomobject]@{Version='v1.0.0-preview';Replace=@{Dir='/some/local/path'}} }
+        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { [pscustomobject]@{Version='v1.0.0-preview';Replace=@{Dir='/some/local/path'}} }
         {Get-GuideModuleResolution @parameters} | Should -Throw '*without a Go replacement*'
-        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.Build { [pscustomobject]@{Version='v0.9.0'} }
+        Mock Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { [pscustomobject]@{Version='v0.9.0'} }
         {Get-GuideModuleResolution @parameters} | Should -Throw '*coordinated native Hugo dependency*'
     }
     It 'fails when restoration identity is absent or inconsistent' {
@@ -38,7 +38,7 @@ Describe 'Released native dependency and candidate overlay separation' {
         $result=Get-GuideModuleResolution @parameters
         $result.Mode | Should -Be candidate
         @($result.Replacements).Count | Should -Be 2
-        Should -Invoke Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.Build -Times 0 -Exactly
+        Should -Invoke Invoke-GuideGoModuleQuery -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild -Times 0 -Exactly
     }
     It 'supports source development without a fabricated release identity' {
         [IO.File]::Delete("$platform/platform.json")
