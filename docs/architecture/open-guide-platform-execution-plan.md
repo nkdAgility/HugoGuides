@@ -55,6 +55,17 @@ Remaining gates:
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
 
+### PowerShell workflow consolidation — 14 September 2026
+
+Bounded E04/E07 follow-up requested during PR #37: installed guide-site launchers restore the selected platform package and call `Invoke-GuideSiteBuild` from its Build module. Shared CI uses the same module from either the published release or the exact candidate ZIP. GitHub reporting and deployment data validation moved from inline JavaScript into that released module. YAML retains action wiring and single PowerShell calls. Root and component documentation describe the supported entry points.
+
+The cleanup workflow now binds its environment directly to the closed PR number. The user specifically authorized adding `actions: read` to Deploy so it can restore the candidate artifact independently. No repository settings or additional write permissions changed. Independent trust enforcement remains deferred as recorded above.
+
+- [x] Replace the JavaScript reporting/deployment harnesses with PowerShell behavioral tests for current/stale reports, failed delivery, artifact tampering and identity mismatch.
+- [x] Isolate installer fixture modules and suppress fixture output in the real Actions summary. These caused failures and misleading summary identities in run 34832774246.
+- [x] Local platform build: 257 tests and package validation passed. Preview sample: 119 files; production sample: 87 files. Both passed through the module entry point; production excludes Minionese.
+- [x] Commit `978e32f48ac638089b4e5378b63c9796c41000be`: [CI run 34833482798](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34833482798) passed platform packaging, Prepare, Build, Validate, Deploy, Verify and PowerShell PR reporting. The sample consumed candidate `0.5.3-PullRequest0037.193`; Release was correctly skipped on the PR. This accepts the PowerShell consolidation only, not the deferred E06/E08 or consumer adoption gates.
+
 ### Adoption-readiness findings — 14 September 2026
 
 The user authorized fixes on a new branch from latest `main`, including issues in the two stale scan PRs if still present. This is a bounded E07/E08 follow-up, not consumer adoption or E14 refactoring.
