@@ -89,6 +89,12 @@ Remaining gates:
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
 
+### PR #37 review closure
+
+The site-prefixed naming request was explicitly removed by the maintainer; retain the approved plain stage names. The lock-tool finding is not applicable: the installed official CLI help lists `--no-narrow`, `--verify` and `--verify-local`, and all four workflows pass offline coverage verification.
+
+The remaining code findings are corrected: release asset paths resolve relative to `WorkspaceRoot` while preserving explicit absolute paths; package validation owns a temporary restoration workspace and removes it on success or failure without deleting input assets. Packaged-module imports are checked in a separate PowerShell process so cleanup cannot replace or invalidate the active build modules. Regression tests exercise outside-directory publication, identity failure and partial restoration failure. These changes do not alter repository settings or the required-check configuration.
+
 ### Actionable failure reporting
 
 Platform test reports now carry explicitly authored **Why** and **How to fix** fields in local output and Actions summaries/annotations. The workflow-input failure is explained at the check rather than inferred from a low-level exception. Technical error/location remains supporting evidence. Unknown errors are explicitly undiagnosed; authoring explanations for every existing failure path remains ongoing work, not a completed universal diagnosis guarantee.

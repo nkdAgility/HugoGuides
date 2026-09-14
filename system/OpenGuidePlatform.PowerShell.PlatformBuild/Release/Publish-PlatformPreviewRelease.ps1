@@ -2,6 +2,8 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath,[string]$Repository='nkdAgility/OpenGuidePlatform')
 $ErrorActionPreference='Stop'
+$WorkspaceRoot=[IO.Path]::GetFullPath($WorkspaceRoot)
+$OutputPath=[IO.Path]::GetFullPath($OutputPath,$WorkspaceRoot)
 $manifest=Get-Content "$OutputPath/release-manifest.json" -Raw|ConvertFrom-Json
 if($manifest.channel -cne 'preview' -or $manifest.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$' -or $manifest.schemaVersion -ne 2){throw 'Only GitVersion prerelease packages can be published by this entry point.'}
 $assets=@('OpenGuidePlatform-GuideSite.zip','OpenGuidePlatform-PlatformBuild.zip','release-manifest.json')

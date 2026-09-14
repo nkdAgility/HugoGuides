@@ -53,4 +53,18 @@ Describe 'Consumer and platform package separation' {
         [IO.File]::AppendAllText("$assets/OpenGuidePlatform-PlatformBuild.zip",'corrupt')
         { & $resolver -WorkspaceRoot $workspace -PlatformPath "$assets/OpenGuidePlatform-GuideSite.zip" -Product Platform }|Should -Throw '*digest mismatch*'
     }
+    It 'cleans validation extraction after a package identity failure without deleting input assets' {
+        $checker="$root/system/OpenGuidePlatform.PowerShell.PlatformBuild/Packaging/Test-OpenGuidePlatformPackage.ps1"
+        { & $checker -WorkspaceRoot $workspace -OutputPath 'assets' } | Should -Throw
+        @(Get-ChildItem "$workspace/.processing/package-validation" -Directory).Count | Should -Be 0
+        Test-Path "$assets/OpenGuidePlatform-GuideSite.zip" | Should -BeTrue
+    }
+    It 'cleans partial restoration when the second package is corrupt' {
+        [IO.File]::AppendAllText("$assets/OpenGuidePlatform-PlatformBuild.zip",'corrupt')
+        $checker="$root/system/OpenGuidePlatform.PowerShell.PlatformBuild/Packaging/Test-OpenGuidePlatformPackage.ps1"
+        { & $checker -WorkspaceRoot $workspace -OutputPath 'assets' } | Should -Throw '*digest mismatch*'
+        @(Get-ChildItem "$workspace/.processing/package-validation" -Directory).Count | Should -Be 0
+        Test-Path "$assets/OpenGuidePlatform-GuideSite.zip" | Should -BeTrue
+    }
+
 }

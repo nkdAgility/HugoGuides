@@ -48,6 +48,15 @@ Describe 'Coordinated native module publication' {
         $global:OgpNativeTagCalls[0] | Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1'
         $global:OgpNativeTagCalls[-1] | Should -Match '^release create v0.1.0-Preview.1 '
     }
+    It 'publishes workspace-relative assets when invoked from another working directory' {
+        $workspace=Split-Path $assets -Parent
+        $relativeAssets=Split-Path $assets -Leaf
+        Push-Location $root
+        try { & $publisher -WorkspaceRoot $workspace -Repository example/platform -OutputPath $relativeAssets }
+        finally { Pop-Location }
+        Test-Path "$assets/release-notes.md" | Should -BeTrue
+        $global:OgpNativeTagCalls[-1] | Should -Match ([regex]::Escape("$assets/OpenGuidePlatform-GuideSite.zip"))
+    }
     It 'reuses an existing matching tag without moving or recreating it' {
         $global:OgpNativeTagExisting=@(('a'*40)+"`trefs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1")
         & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets
