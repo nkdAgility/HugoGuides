@@ -3,7 +3,7 @@ function Resolve-GuideDeliveryContext {
     param([Parameter(Mandatory)][string]$WorkspaceRoot,
         [ValidateSet('auto','local','canary','preview','production')][string]$Target='auto',
         [int]$PullRequestNumber,[string]$BaseUrl,[string]$DeploymentEnvironment,
-        [string]$ConfigurationPath='guide-site.delivery.yaml')
+        [string]$ConfigurationPath='.OpenGuidePlatform/delivery.yaml')
     $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
     if($LASTEXITCODE -ne 0){throw 'Cannot identify the guide-site checkout. Run from a Git repository.'}
     $version=$null

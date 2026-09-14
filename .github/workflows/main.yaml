@@ -75,7 +75,7 @@ jobs:
     uses: ./.github/workflows/guide-site-build.yaml
     with:
       source-ref: ${{ needs.build.outputs.source-commit }}
-      policy-path: examples/reference-guide-site/guide-site.policy.json
+      source-path: examples/reference-guide-site
       deploy: ${{ github.event_name != 'merge_group' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
       platform-version: ${{ needs.build.outputs.version }}
       platform-package-url: ${{ needs.build.outputs.package-url }}

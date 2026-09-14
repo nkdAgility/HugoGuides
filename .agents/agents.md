@@ -3,10 +3,10 @@
 Use the root PowerShell entry point for builds and validation.
 
 - Platform changes: run `./build.ps1 -Version 0.0.0-local`. This tests and packages; it does not publish.
-- Sample content, configuration or template changes: run `./build.ps1 -Product GuideSite -PolicyPath examples/reference-guide-site/guide-site.policy.json -Target preview` and repeat with `-Target production`.
+- Sample content, configuration or template changes: run `./build.ps1 -Product GuideSite -SourcePath examples/reference-guide-site -Target preview` and repeat with `-Target production`.
 - Shared Hugo changes require both sample targets as well as platform checks.
 - Require exit code 0 with no ERROR lines before committing. Warnings must be understood.
-- Use `./build.ps1 -Product GuideSite -PolicyPath examples/reference-guide-site/guide-site.policy.json -Stage Serve` for the sample development server.
+- Use `./build.ps1 -Product GuideSite -SourcePath examples/reference-guide-site -Stage Serve` for the sample development server.
 - CI and local work use the same stages. Direct Hugo commands are diagnostics, not the acceptance build.
 
 Preserve Hugo module internals and deliberate multilingual guide behavior. Internal refactoring is deferred until all consumers have adopted and been verified.
