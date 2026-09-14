@@ -61,7 +61,7 @@ env:
   SITE_BASE_URL: ${{ inputs.site-url }}
 jobs:
   prepare:
-    name: ${{ inputs.site-name }} Prepare
+    name: Prepare
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -130,7 +130,7 @@ jobs:
             .processing/i18n-probe/
           if-no-files-found: error
   prepare-report:
-    name: ${{ inputs.site-name }} Prepare report
+    name: Prepare report
     needs: prepare
     if: ${{ always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
@@ -198,7 +198,7 @@ jobs:
               core.setFailed(`REPORT_DELIVERY_FAILED: ${error.message}. Assessment outcome was not changed.`);
             }
   build:
-    name: ${{ inputs.site-name }} Build
+    name: Build
     needs: prepare
     runs-on: ubuntu-24.04
     steps:
@@ -230,7 +230,7 @@ jobs:
           path: .processing/guide-site/
           if-no-files-found: error
   validate:
-    name: ${{ inputs.site-name }} Validate
+    name: Validate
     needs: build
     runs-on: ubuntu-24.04
     steps:
@@ -278,7 +278,7 @@ jobs:
             .processing/guide-site/runtime/
           if-no-files-found: error
   deploy:
-    name: ${{ inputs.site-name }} Deploy
+    name: Deploy
     permissions:
       contents: read
       pull-requests: write
@@ -367,7 +367,7 @@ jobs:
           skip_api_build: true
           deployment_environment: ${{ inputs.deployment-environment }}
   verify:
-    name: ${{ inputs.site-name }} Verify
+    name: Verify
     needs: deploy
     if: ${{ inputs.deploy && needs.deploy.result == 'success' }}
     runs-on: ubuntu-24.04
