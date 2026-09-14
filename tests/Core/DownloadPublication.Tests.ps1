@@ -41,6 +41,39 @@ Describe 'Declared download publication' {
         $edition.translations[0].downloads[0].Remove('publishedPaths')|Out-Null
         (Get-GuideDownloadRequirements @argsForDownloads).Findings.Code | Should -Contain DOWNLOAD_PUBLICATION_PATH_UNDECLARED
     }
+    It 'defers inferred PDF destinations until the actual artifact exists and rejects absent bytes' {
+        $policy.wrapper.discovery='source'
+        $edition.translations[0].downloads[0].publicationRoots=@('/downloads/')
+        $edition.translations[0].downloads[0].Remove('publishedPaths')|Out-Null
+        @( (Get-GuideDownloadRequirements @argsForDownloads).Findings ).Count|Should -Be 0
+        (Get-GuideDownloadRequirements @argsForDownloads -ArtifactFiles @()).Findings.Code|Should -Contain DOWNLOAD_PUBLICATION_PATH_UNDECLARED
+        Copy-Item "$source/approved.pdf" "$artifact/downloads/approved.pdf"
+        $requirements=Get-GuideDownloadRequirements @argsForDownloads -ArtifactFiles @(Read-DownloadFiles $artifact)
+        $requirements.RequiredPaths|Should -Contain 'downloads/approved.pdf'
+        (Test-GuideDownloadPublication $requirements (Read-DownloadFiles $artifact)).Outcome|Should -Be pass
+    }
+    It 'does not authorize arbitrary extra copies of shared excluded bytes when inferring paths' {
+        $policy.wrapper.discovery='source'
+        $edition.translations[0].downloads[0].Remove('publishedPaths')|Out-Null
+        $edition.translations[0].downloads[0].publicationRoots=@('/downloads/')
+        $edition.translations+=@{language='min';intent='excluded';downloads=@(@{path='fallback.pdf';handling='supplied';publicationRoots=@('/min/')})}
+        Copy-Item "$source/approved.pdf" "$source/fallback.pdf"
+        Copy-Item "$source/approved.pdf" "$artifact/downloads/approved.pdf"
+        Copy-Item "$source/approved.pdf" "$artifact/downloads/extra.pdf"
+        $requirements=Get-GuideDownloadRequirements @argsForDownloads -ArtifactFiles @(Read-DownloadFiles $artifact)
+        $requirements.RequiredPaths|Should -Not -Contain 'downloads/extra.pdf'
+        (Test-GuideDownloadPublication $requirements (Read-DownloadFiles $artifact)).Findings.Code|Should -Contain FORBIDDEN_DOWNLOAD_PRESENT
+    }
+    It 'accepts an owner-qualified custom PDF URL from the built translation catalogue' {
+        $policy.wrapper.discovery='source'
+        $edition.translations[0].downloads[0].Remove('publishedPaths')|Out-Null
+        Copy-Item "$source/approved.pdf" "$artifact/downloads/renamed.pdf"
+        $mapping=@{VersionPath="$($policy.guides[0].id)/$($edition.path)";Language='en';Path='downloads/renamed.pdf'}
+        $requirements=Get-GuideDownloadRequirements @argsForDownloads -ArtifactFiles @(Read-DownloadFiles $artifact) -PublishedDownloads @($mapping)
+        $requirements.RequiredPaths|Should -Contain 'downloads/renamed.pdf'
+        $mapping.Language='min'
+        (Get-GuideDownloadRequirements @argsForDownloads -ArtifactFiles @(Read-DownloadFiles $artifact) -PublishedDownloads @($mapping)).Findings.Code|Should -Contain DOWNLOAD_PUBLICATION_PATH_UNDECLARED
+    }
     It 'rejects prohibited PDFs copied outside language directories, including renamed copies' {
         $policy.publication.permanentExclusions=@(@{environment='production';subject='language';id='min';reason='Never production'})
         $edition.translations+=@{language='min';intent='web';downloads=@(@{path='guide.min.pdf';handling='supplied';publishedPaths=@('min/guide.min.pdf')})}

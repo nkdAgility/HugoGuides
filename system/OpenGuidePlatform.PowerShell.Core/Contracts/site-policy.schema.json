@@ -15,6 +15,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "discovery": { "const": "source" },
         "sourcePath": {
           "type": "string",
           "minLength": 1,
@@ -96,6 +97,7 @@
             }
           }
         },
+        "jsonFileNames": { "type": "array", "items": { "type": "string", "minLength": 1 } },
         "jsonIndexes": {
           "type": "array",
           "items": {
@@ -108,7 +110,7 @@
             "properties": {
               "route": {
                 "type": "string",
-                "pattern": "^/(?!/)(?!.*(?:\\\\|[?#%]|(?:^|/)\\.\\.(?:/|$))).*\\.json$"
+                "pattern": "^/(?!/)(?!.*(?:\\\\|[?#%]|(?:^|/)\\.\\.(?:/|$))).*$"
               },
               "requiredRoutes": {
                 "type": "array",
@@ -285,6 +287,7 @@
                                 "protected"
                               ]
                             },
+                            "publicationRoots": { "type": "array", "items": { "type": "string" } },
                             "publishedPaths": {
                               "type": "array",
                               "uniqueItems": true,
