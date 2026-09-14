@@ -1,4 +1,4 @@
-name: Close PR (GuideSiteSample)
+name: Close PR
 on:
   pull_request:
     types: [closed]

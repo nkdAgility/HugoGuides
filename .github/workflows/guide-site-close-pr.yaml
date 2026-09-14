@@ -1,4 +1,4 @@
-name: Close PR (GuideSite)
+name: GuideSite Close PR
 on:
   workflow_call:
     inputs:
