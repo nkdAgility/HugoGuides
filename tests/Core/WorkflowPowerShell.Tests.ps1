@@ -4,7 +4,7 @@ BeforeAll {
 }
 Describe 'Thin PowerShell workflow adapters' {
     It 'keeps authored pipeline code in PowerShell files' {
-        $files=@(Get-ChildItem "$root/.github/workflows" -File)+@(Get-Item "$root/system/OpenGuidePlatform.GuideSite.Adoption/main.yaml")
+        $files=@(Get-ChildItem "$root/.github/workflows" -File | Where-Object Extension -In '.yml','.yaml')+@(Get-Item "$root/system/OpenGuidePlatform.GuideSite.Adoption/main.yaml")
         foreach($file in $files){
             $workflow=Get-Content $file.FullName -Raw|ConvertFrom-Yaml
             foreach($job in $workflow.jobs.Values){foreach($step in $job['steps']){

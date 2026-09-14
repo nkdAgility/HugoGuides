@@ -87,5 +87,4 @@ If you need help, include the command, finding and relevant report in a [GitHub 
 - [First-time site setup](docs/using/first-adoption.md) — policy, existing files and deployment setup.
 - [Platform development](docs/platform-development.md) — build this repository, run the sample locally and understand releases.
 - [Workflow dependency locking](docs/platform-development.md#workflow-dependency-lockfile) — regenerate, verify and review Actions dependency locks when changing platform workflows.
-- [Workflow dependency locking](docs/platform-development.md#workflow-dependency-lockfile) — regenerate, verify and review Actions dependency locks when changing platform workflows.
 - [Execution plan and current progress](docs/architecture/open-guide-platform-execution-plan.md).

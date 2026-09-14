@@ -67,27 +67,6 @@ All four workflows are scanned. The generator records the three workflows with e
 
 Repository administrators can separately enable **Settings → Actions → Policies → Require lockfile**. Adding these files does not enable that setting. Evaluate the policy and verify PR, manual, merge-queue and cleanup runs before enforcing it. Consumer repositories and their policies are managed separately.
 
-## Workflow dependency lockfile
-
-This repository uses GitHub's Actions dependency lockfile at `.github/workflows/actions.lock`. It records exact commits and repository identities for external actions while workflow YAML retains readable version tags. It does not freeze workflow edits or approve dependencies: review workflow and lockfile changes together.
-
-From the OpenGuidePlatform repository root, install the official extension once and regenerate after adding, changing or removing workflow dependencies:
-
-```powershell
-gh extension install github/gh-actions-lock
-gh actions-lock --no-narrow
-gh actions-lock --verify
-git diff -- .github/workflows
-```
-
-`--no-narrow` preserves our major-version tag convention. Normal regeneration keeps existing locks for moving tags. To deliberately refresh those dependencies, run `gh actions-lock --relock --no-narrow`, verify, and review the new commits before committing. Do not hand-edit the generated lockfile or automatically accept suspicious moved/unreachable pins.
-
-For an offline coverage check, run `gh actions-lock --verify-local`. Full `--verify` checks upstream pins and requires GitHub access. Commit generated workflow headers and the lockfile together. The initial lockfile was generated with extension v0.1.6 (format v0.0.2); this is technical-preview tooling, so consult the [official documentation](https://github.com/github/gh-actions-lock) when upgrading it.
-
-All four workflows are scanned. The generator records the three workflows with external dependencies; `sample-close-pr.yaml` only calls the local `guide-site-close-pr.yaml`, whose Azure action is locked. Local reusable calls retain their existing syntax. Successful CLI verification is local evidence, not proof of GitHub runtime enforcement or reusable-workflow execution.
-
-Repository administrators can separately enable **Settings → Actions → Policies → Require lockfile**. Adding these files does not enable that setting. Evaluate the policy and verify PR, manual, merge-queue and cleanup runs before enforcing it. Consumer repositories and their policies are managed separately.
-
 ## Sample hosting
 
 | Environment | Address |
