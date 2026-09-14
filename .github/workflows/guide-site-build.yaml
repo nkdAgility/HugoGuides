@@ -1,4 +1,4 @@
-name: Build & Release (GuideSite)
+name: GuideSite Pipeline
 on:
   workflow_call:
     inputs:
