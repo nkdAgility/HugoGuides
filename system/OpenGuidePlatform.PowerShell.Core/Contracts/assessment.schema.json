@@ -25,6 +25,7 @@
     "target": {
       "enum": [
         "local",
+        "canary",
         "preview",
         "production"
       ]

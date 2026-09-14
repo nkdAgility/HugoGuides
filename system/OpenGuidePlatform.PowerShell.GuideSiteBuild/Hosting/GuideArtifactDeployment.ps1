@@ -12,8 +12,8 @@ function Confirm-GuideDeploymentData {
         [Parameter(Mandatory)][string]$Target,[string]$DeploymentEnvironment)
     $identity=Read-GuideEvidence "$DeploymentRoot/artifact-identity.json" -Json -MaximumBytes 16777216
     $report=Read-GuideEvidence "$DeploymentRoot/artifact-validation.json" -Json -MaximumBytes 16777216
-    if($SourceCommit -cnotmatch '^[a-f0-9]{40}$' -or $Target -cnotin @('preview','production') -or
-        ($Target -ceq 'preview' -and -not $DeploymentEnvironment) -or
+    if($SourceCommit -cnotmatch '^[a-f0-9]{40}$' -or $Target -cnotin @('canary','preview','production') -or
+        ($Target -in @('canary','preview') -and -not $DeploymentEnvironment) -or
         $report.Outcome -cne 'pass' -or $report.SourceCommit -cne $SourceCommit -or $report.Target -cne $Target -or
         -not $identity.files -or $identity.files -isnot [array]){throw 'Deployment requires passing evidence for the expected source and target.'}
     $null=Test-GuideArtifactIdentity -ArtifactRoot "$DeploymentRoot/site" -Identity $identity -ExpectedTarget $Target -ExpectedSourceCommit $SourceCommit
@@ -57,10 +57,10 @@ function Invoke-AzureGuideDeployment {
 function Invoke-GuideArtifactDeployment {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$DeploymentRoot,[Parameter(Mandatory)][string]$WorkspaceRoot,
-        [Parameter(Mandatory)][string]$SourceCommit,[Parameter(Mandatory)][ValidateSet('preview','production')][string]$Target,
+        [Parameter(Mandatory)][string]$SourceCommit,[Parameter(Mandatory)][ValidateSet('canary','preview','production')][string]$Target,
         [string]$DeploymentEnvironment,[string]$DeploymentAdapter,[string]$ExpectedUrl)
     $ErrorActionPreference='Stop'
-    if($Target -eq 'preview' -and ([string]::IsNullOrWhiteSpace($DeploymentEnvironment) -or $DeploymentEnvironment -in @('prod','production'))){throw 'Preview deployment requires a named preview environment. Supply DeploymentEnvironment; production aliases are forbidden.'}
+    if($Target -in @('canary','preview') -and ([string]::IsNullOrWhiteSpace($DeploymentEnvironment) -or $DeploymentEnvironment -in @('prod','production'))){throw 'Preview deployment requires a named preview environment. Supply DeploymentEnvironment; production aliases are forbidden.'}
     if($Target -eq 'production' -and $DeploymentEnvironment -and $DeploymentEnvironment -notin @('prod','production')){throw 'Production deployment cannot select a preview environment. Correct Target or DeploymentEnvironment.'}
     $null=Confirm-GuideDeploymentData -DeploymentRoot $DeploymentRoot -SourceCommit $SourceCommit -Target $Target -DeploymentEnvironment $DeploymentEnvironment
     $identity=Read-GuideEvidence "$DeploymentRoot/artifact-identity.json" -Json -MaximumBytes 16777216

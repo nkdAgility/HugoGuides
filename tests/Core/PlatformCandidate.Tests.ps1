@@ -138,9 +138,9 @@ Describe 'Platform publication dependency' {
         $download=@($main.jobs.release.steps|Where-Object { $_.Contains('uses') -and $_['uses'] -like 'actions/download-artifact@*' })[0]
         $download.with['artifact-ids'] | Should -Match 'needs.build.outputs.artifact-id'
         $shared.jobs.build.needs | Should -Be prepare
-        $shared.jobs.validate.needs | Should -Be build
-        $shared.jobs.deploy.needs | Should -Be validate
-        $shared.jobs.verify.needs | Should -Be deploy
+        $shared.jobs.validate.needs | Should -Contain build
+        $shared.jobs.deploy.needs | Should -Contain validate
+        $shared.jobs.verify.needs | Should -Contain deploy
         Test-Path "$root/.github/workflows/sample-main.yaml" | Should -BeFalse
     }
 }

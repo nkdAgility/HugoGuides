@@ -18,3 +18,13 @@ Artifact validation checks identity, configured routes, forbidden directories, J
 Declare enabled JSON outputs under `wrapper.jsonIndexes` in the site policy. Each entry names a `route` (such as `/translations.json`) and `requiredRoutes` that must appear in that index. Validate checks nested public URL fields against the artifact, rejects prohibited targets and compares language catalogues with the languages observed during Prepare. Results are included in the normal validation report; `json-index-validation.json` also holds local detail. This does not change Hugo output formats or enable an index.
 
 Prepared inputs use one physical-file inventory even when guide and wrapper roots overlap. Publication evidence is still rejected after source drift.
+
+## One delivery pipeline
+
+The site calls the shared workflow once. Prepare calculates GitVersion using `.github/GitVersion.yml`: an empty prerelease label means production, `Preview` means preview, and other labels mean canary. PR builds select canary even when their source branch is a release branch. There is one Build, Validate, Deploy and Verify; they consume Prepare outputs and the same validated artifact.
+
+Declare `guide-site.delivery.yaml` in the site repository with `canary`, `preview` and `production` objects, each containing `url` and `environment`. `{pr}` is replaced by the PR number, or `canary` for a branch run without a PR; locally supply `-PullRequestNumber` to reproduce a PR destination. Production uses an empty environment; non-production must use a named environment. Prepare uses `hugo.<target>.yaml`. GitVersion 5 is installed by `Dependencies` because the existing repository configuration uses that version's schema; .NET SDK is required.
+
+`./build.ps1 -Target auto -PullRequestNumber 111 -OutputPath .processing/pr-111` reproduces PR preparation, build and validation locally. To use separate stages, retain this output path; later auto stages read the saved `delivery-context.json`. `-Target local` remains available for local Hugo configuration and Serve. Deployment remains explicit (`-Deploy`) locally.
+
+The workflow's optional `platform-ring` defaults to `production`. Omit `platform-release` to select the newest installable release in that ring, or supply a tag explicitly. Preview adoption sets `platform-ring: preview`. There is no `platform-commit` or `site-name` input. Prepare records verified release provenance internally and later stages restore that exact release, never another latest lookup. Candidate package URL, digest and version remain the prepublication transport for the platform's sample validation.

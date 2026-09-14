@@ -1,6 +1,6 @@
 function Get-GuideAssessment {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string[]]$Languages,[Parameter(Mandatory)][Collections.IDictionary]$EffectiveProduction,[Parameter(Mandatory)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,[Parameter(Mandatory)][string]$PlatformVersion,[ValidateSet('local','preview','production')][string]$Target='local',[object[]]$EffectiveTranslations)
+    param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string[]]$Languages,[Parameter(Mandatory)][Collections.IDictionary]$EffectiveProduction,[Parameter(Mandatory)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,[Parameter(Mandatory)][string]$PlatformVersion,[ValidateSet('local','canary','preview','production')][string]$Target='local',[object[]]$EffectiveTranslations)
     $findings=[Collections.Generic.List[object]]::new()
     function Add-Finding($code,$scope,$subject,$message,$fix,$severity='blocker') {
         $findings.Add([ordered]@{code=$code;severity=$severity;scope=$scope;subject=$subject;message=$message;remediation=$fix;evidence=@()})

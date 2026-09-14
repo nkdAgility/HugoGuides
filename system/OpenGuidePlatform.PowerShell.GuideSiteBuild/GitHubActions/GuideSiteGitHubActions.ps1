@@ -20,7 +20,7 @@ function Publish-GuidePrepareAssessment {
         $markdown=Read-GuideEvidence "$AssessmentRoot/assessment.md"
         if($SourceCommit -cnotmatch '^[a-f0-9]{40}$' -or $assessment.sourceCommit -cne $SourceCommit -or
             $assessment.schemaVersion -ne 1 -or $assessment.stage -cne 'Prepare' -or $assessment.target -cne $Target -or
-            $Target -cnotin @('local','preview','production') -or $assessment.outcome -cnotin @('pass','fail','blocked') -or
+            $Target -cnotin @('local','canary','preview','production') -or $assessment.outcome -cnotin @('pass','fail','blocked') -or
             -not $markdown.StartsWith("## Prepare: $($assessment.outcome)`n",[StringComparison]::Ordinal)){
             throw 'Assessment identity or format does not match this run.'
         }
@@ -49,9 +49,17 @@ function Publish-GuidePrepareAssessment {
 }
 function Invoke-GuideSiteGitHubAction {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][ValidateSet('PublishPrepare','ConfirmDeployment','InstallDeploymentDependencies','Deploy')][string]$Operation)
+    param([Parameter(Mandatory)][ValidateSet('ResolveDelivery','PublishPrepare','ConfirmDeployment','InstallDeploymentDependencies','Deploy')][string]$Operation)
     $ErrorActionPreference='Stop'
     switch($Operation){
+        ResolveDelivery {
+            $context=Resolve-GuideDeliveryContext -WorkspaceRoot $PWD -Target $env:SITE_TARGET -PullRequestNumber ([int]$env:SITE_PULL_REQUEST) -BaseUrl $env:SITE_BASE_URL -DeploymentEnvironment $env:DEPLOYMENT_ENVIRONMENT
+            $context|ConvertTo-Json|Set-Content .processing/delivery-context.json
+            foreach($entry in @{target=$context.target;url=$context.baseUrl;environment=$context.deploymentEnvironment}.GetEnumerator()){
+                if($env:GITHUB_OUTPUT){[IO.File]::AppendAllText($env:GITHUB_OUTPUT,"$($entry.Key)=$($entry.Value)`n")}
+            }
+            Write-Host "Prepare selected $($context.target): $($context.baseUrl) (site version $($context.siteVersion))."
+        }
         InstallDeploymentDependencies { Install-GuideBuildDependencies -WorkspaceRoot $PWD -Deployment }
         Deploy {
             $result=Invoke-GuideArtifactDeployment -DeploymentRoot (Join-Path $PWD 'deployment') -WorkspaceRoot $PWD -SourceCommit $env:EXPECTED_COMMIT -Target $env:EXPECTED_TARGET -DeploymentEnvironment $env:DEPLOYMENT_ENVIRONMENT -ExpectedUrl $env:SITE_BASE_URL

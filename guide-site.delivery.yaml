@@ -1,0 +1,10 @@
+# Destinations for the reference guide site. Prepare selects one using GitVersion.
+canary:
+  url: https://blue-field-06cea8c03-{pr}.westeurope.6.azurestaticapps.net/
+  environment: '{pr}'
+preview:
+  url: https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/
+  environment: preview
+production:
+  url: https://blue-field-06cea8c03.6.azurestaticapps.net/
+  environment: ''

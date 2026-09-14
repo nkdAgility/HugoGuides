@@ -12,7 +12,7 @@ BeforeAll {
     function gh {
         $global:LASTEXITCODE=0
         if($args[0] -eq 'api'){
-            return (ConvertTo-Json -InputObject @(@(@{tag_name='v1.2.3-Preview.4';target_commitish=$global:OgpReleaseTestCommit;draft=$false})) -Depth 5)
+            return (ConvertTo-Json -InputObject @(@(@{tag_name='v1.2.3-Preview.4';target_commitish=$global:OgpReleaseTestCommit;draft=$false;prerelease=$false;assets=@(@{name='OpenGuidePlatform-GuideSite.zip'});published_at='2026-09-01T00:00:00Z'})) -Depth 5)
         }
         if($args[0] -eq 'release' -and $args[1] -eq 'view'){
             return (@{tagName='v1.2.3-Preview.4';targetCommitish=$global:OgpReleaseTestCommit;isDraft=$false}|ConvertTo-Json)
@@ -43,8 +43,8 @@ Describe 'Released platform restoration boundary' {
         { & $installer -ReleaseTag v1.2.3-Preview.4 -ExpectedCommit ('a'*40) -OutputPath .processing/install } | Should -Throw '*source/tag*'
         Test-Path .processing/install | Should -BeFalse
     }
-    It 'resolves a published release from its exact commit when no tag was supplied' {
-        { & $installer -ExpectedCommit ('a'*40) -OutputPath .processing/install } | Should -Throw '*digest mismatch*'
+    It 'discovers the latest installable production release without a caller commit' {
+        { & $installer -OutputPath .processing/install } | Should -Throw '*digest mismatch*'
         Test-Path .processing/install | Should -BeFalse
     }
     It 'rejects a corrupt published asset before extraction' {

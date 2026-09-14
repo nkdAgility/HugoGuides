@@ -46,7 +46,7 @@ function Get-GuidePreparedInputs {
     foreach($guide in $Policy.guides){Add-InputTree (Resolve-GuideWorkspacePath $WorkspaceRoot $guide.contentRoot) "guide/$($guide.id)"}
     foreach($path in $Policy.wrapper.requiredFiles){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $path)}
     Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath)
-    foreach($path in @('go.mod','go.sum','go.work','go.work.sum','staticwebapp.config.json','staticwebapp.config.canary.json','staticwebapp.config.preview.json','staticwebapp.config.production.json')){
+    foreach($path in @('guide-site.delivery.yaml','.github/GitVersion.yml','go.mod','go.sum','go.work','go.work.sum','staticwebapp.config.json','staticwebapp.config.canary.json','staticwebapp.config.preview.json','staticwebapp.config.production.json')){
         Add-InputFile (Join-Path $WorkspaceRoot $path)
     }
     foreach($component in @('OpenGuidePlatform.PowerShell.Core','OpenGuidePlatform.PowerShell.GuideSiteBuild','OpenGuidePlatform.Hugo.Guides')){

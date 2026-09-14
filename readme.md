@@ -57,14 +57,14 @@ Once installed, run these commands from your guide-site repository:
 |---|---|
 | Install build dependencies | `./build.ps1 Dependencies` |
 | Check and build the site locally | `./build.ps1` |
-| Start the local site and watch for edits | `./build.ps1 -Stage Serve` |
+| Start the local site and watch for edits | `./build.ps1 -Stage Serve -Target local` |
 | Check preview output | `./build.ps1 -Target preview` |
 | Check production output | `./build.ps1 -Target production` |
 | Check inputs without building pages | `./build.ps1 -Stage Prepare` |
 | Update the installed platform | `./build.ps1 Update -ring preview` |
 | Preview an update's file changes | `./build.ps1 Update -ring preview -WhatIf` |
 
-Build runs **Prepare → Build → Validate**. Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
+Build runs **Prepare → Build → Validate**. Prepare uses GitVersion to select canary, preview or production and reads destinations from `guide-site.delivery.yaml`. Install dependencies first with `./build.ps1 Dependencies` (.NET SDK required); use `-PullRequestNumber 111` to reproduce a PR destination locally, or `-Target local` for local configuration. The shared workflow runs one chain through Deploy and Verify. Its optional `platform-ring` defaults to `production`; `platform-release` defaults to the latest installable release in that ring. Preview adoption sets only `platform-ring: preview`. See [delivery configuration](system/OpenGuidePlatform.PowerShell.GuideSiteBuild/README.md#one-delivery-pipeline). Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
 
 To test another platform without changing your installation lock:
 

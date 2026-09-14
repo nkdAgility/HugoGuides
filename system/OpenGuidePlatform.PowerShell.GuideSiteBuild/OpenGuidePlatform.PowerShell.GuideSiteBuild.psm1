@@ -54,7 +54,7 @@ function Write-GuideAssessmentReport {
 }
 function Get-GuideHugoConfiguration {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$SourcePath,[Parameter(Mandatory)][string[]]$ConfigFiles,[ValidateSet('local','preview','production')][string]$Target='local')
+    param([Parameter(Mandatory)][string]$SourcePath,[Parameter(Mandatory)][string[]]$ConfigFiles,[ValidateSet('local','canary','preview','production')][string]$Target='local')
     $command=Get-Command hugo -CommandType Application -ErrorAction Stop|Select-Object -First 1
     $start=[Diagnostics.ProcessStartInfo]::new()
     $start.FileName=$command.Source;$start.UseShellExecute=$false;$start.CreateNoWindow=$true
@@ -88,4 +88,5 @@ function Get-GuideHugoConfiguration {
 . (Join-Path $PSScriptRoot 'Hosting/GuideArtifactDeployment.ps1')
 . (Join-Path $PSScriptRoot 'Toolchain/Install-GuideBuildDependencies.ps1')
 . (Join-Path $PSScriptRoot 'GitHubActions/GuideSiteGitHubActions.ps1')
-Export-ModuleMember -Function Install-GuideBuildDependencies,Invoke-GuideArtifactDeployment,Invoke-GuideSiteBuild,Publish-GuidePrepareAssessment,Confirm-GuideDeploymentData,Invoke-GuideSiteGitHubAction,Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations
+. (Join-Path $PSScriptRoot 'BuildContext/Resolve-GuideDeliveryContext.ps1')
+Export-ModuleMember -Function Resolve-GuideDeliveryContext,Get-GuideDeliveryRing,Install-GuideBuildDependencies,Invoke-GuideArtifactDeployment,Invoke-GuideSiteBuild,Publish-GuidePrepareAssessment,Confirm-GuideDeploymentData,Invoke-GuideSiteGitHubAction,Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations

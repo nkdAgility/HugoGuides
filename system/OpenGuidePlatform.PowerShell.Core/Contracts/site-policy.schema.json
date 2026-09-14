@@ -405,6 +405,7 @@
               "name": {
                 "enum": [
                   "local",
+                  "canary",
                   "preview",
                   "production"
                 ]
@@ -442,6 +443,7 @@
             "properties": {
               "environment": {
                 "enum": [
+                  "canary",
                   "preview",
                   "production"
                 ]

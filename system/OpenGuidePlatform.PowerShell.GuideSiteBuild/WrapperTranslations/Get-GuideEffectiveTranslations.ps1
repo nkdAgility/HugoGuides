@@ -41,7 +41,7 @@ function Get-GuideEffectiveTranslations {
         [Parameter(Mandatory)][string[]]$RequiredKeys,
         [Parameter(Mandatory)][string]$WorkspaceRoot,
         [Parameter(Mandatory)][string]$OutputPath,
-        [ValidateSet('local','preview','production')][string]$Target='local'
+        [ValidateSet('local','canary','preview','production')][string]$Target='local'
     )
     if($OutputPath -notmatch '^\.processing/[A-Za-z0-9/_-]+$'){throw 'Translation probe output must be a fresh directory under .processing.'}
     $probe=[IO.Path]::GetFullPath((Join-Path $WorkspaceRoot $OutputPath))

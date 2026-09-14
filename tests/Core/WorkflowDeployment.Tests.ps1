@@ -21,8 +21,8 @@ Describe 'Deployment validates site data using the selected platform package' {
         $checkout=@($job.steps|Where-Object { $_['uses'] -like 'actions/checkout@*' })
         $checkout.Count|Should -Be 1
         $checkout[0].with.repository|Should -Be 'nkdAgility/OpenGuidePlatform'
-        $checkout[0].with.ref|Should -Be '${{ inputs.platform-commit }}'
-        ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Deployment-${{ inputs.target }}'
+        $checkout[0].with.ref|Should -Be '${{ needs.prepare.outputs.platform-source }}'
+        ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Deployment'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Restore-OpenGuidePlatform.ps1 -FromWorkflow'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy'

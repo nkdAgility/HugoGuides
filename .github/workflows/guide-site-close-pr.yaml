@@ -3,10 +3,6 @@
 name: GuideSite Close PR
 on:
   workflow_call:
-    inputs:
-      site-name:
-        required: true
-        type: string
     secrets:
       static-web-app-token:
         required: true
@@ -15,7 +11,7 @@ permissions:
   pull-requests: write
 jobs:
   close:
-    name: Close PR preview (${{ inputs.site-name }})
+    name: Close PR preview
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
     runs-on: ubuntu-latest
     steps:
