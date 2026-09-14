@@ -99,7 +99,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -ExpectedCommit $env:PLATFORM_COMMIT -OutputPath .processing/platform
       - name: Install guide-site preparation dependencies
-        run: Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
+        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Dependencies -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY
       - name: Prepare guide site
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain Prepare report for PR delivery
@@ -215,8 +215,11 @@ jobs:
       - name: Check deployment inputs without deployment credentials
         if: ${{ inputs.deploy }}
         env:
-          SITE_DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
-        run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Deploy -WorkspaceRoot $PWD -PolicyPath $env:SITE_POLICY -Target $env:SITE_TARGET -OutputPath .processing/guide-site -DeploymentEnvironment $env:SITE_DEPLOYMENT_ENVIRONMENT
+          EXPECTED_COMMIT: ${{ inputs.source-ref }}
+          EXPECTED_TARGET: ${{ inputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+          DEPLOYMENT_ROOT: .processing/guide-site
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
       - name: Retain validated deployment files
         if: ${{ inputs.deploy }}
         uses: actions/upload-artifact@v4
@@ -249,7 +252,7 @@ jobs:
     if: ${{ inputs.deploy && github.event_name != 'merge_group' }}
     runs-on: ubuntu-24.04
     outputs:
-      url: ${{ steps.hosting.outputs.static_web_app_url }}
+      url: ${{ steps.hosting.outputs.url }}
     steps:
       # Restore platform code separately; never execute code from the site artifact.
       - name: Get platform installer
@@ -277,18 +280,17 @@ jobs:
           EXPECTED_TARGET: ${{ inputs.target }}
           DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
-      - name: Upload validated site to Azure Static Web Apps
+      - name: Install deployment dependencies
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation InstallDeploymentDependencies
+      - name: Deploy validated site
         id: hosting
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
-          repo_token: ${{ github.token }}
-          action: upload
-          app_location: deployment/site
-          output_location: ''
-          skip_app_build: true
-          skip_api_build: true
-          deployment_environment: ${{ inputs.deployment-environment }}
+        env:
+          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.static-web-app-token }}
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_COMMIT: ${{ inputs.source-ref }}
+          EXPECTED_TARGET: ${{ inputs.target }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.deployment-environment }}
+        run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy
   verify:
     name: Verify
     needs: deploy

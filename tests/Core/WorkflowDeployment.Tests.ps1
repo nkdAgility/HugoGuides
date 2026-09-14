@@ -25,7 +25,33 @@ Describe 'Deployment validates site data using the selected platform package' {
         ($job.steps|Where-Object { $_['uses'] -like 'actions/download-artifact@*' }).with.name|Should -Be 'GuideSite-Deployment-${{ inputs.target }}'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Restore-OpenGuidePlatform.ps1 -FromWorkflow'
         (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment'
-        ($job.steps|Where-Object { $_['uses'] -like 'Azure/*' }).with.app_location|Should -Be 'deployment/site'
+        (($job.steps|ForEach-Object { $_['run'] }) -join "`n")|Should -Match 'Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy'
+        @($job.steps|Where-Object { $_['uses'] -like 'Azure/*' }).Count|Should -Be 0
+    }
+    It 'deploys through a consumer adapter without any GitHub environment' {
+        $adapter=Join-Path $TestDrive 'hosting.ps1'
+        'param($ArtifactRoot,$Target,$Environment,$ExpectedUrl) if(-not (Test-Path "$ArtifactRoot/index.html")){throw "Missing artifact"}; [pscustomobject]@{Url="https://preview.example.test/"}'|Set-Content $adapter
+        $before=@{}
+        foreach($item in @(Get-ChildItem Env:GITHUB_* -ErrorAction SilentlyContinue)){$before[$item.Name]=$item.Value;[Environment]::SetEnvironmentVariable($item.Name,$null)}
+        try{
+            $result=Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter $adapter -ExpectedUrl https://preview.example.test/
+            $result.url|Should -Be 'https://preview.example.test/'
+            (Get-Content "$deployment/deployment.json" -Raw|ConvertFrom-Json).sourceCommit|Should -Be ('a'*40)
+        }finally{foreach($key in $before.Keys){[Environment]::SetEnvironmentVariable($key,$before[$key])}}
+    }
+    It 'rejects production aliases before calling a preview hosting adapter' -ForEach @('prod','production','Production') {
+        $arguments.DeploymentEnvironment=$_
+        {Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter missing.ps1}|Should -Throw '*production aliases are forbidden*'
+    }
+    It 'refuses dirty source before invoking hosting' {
+        $identity.sourceDirty=$true;$identity|ConvertTo-Json -Depth 10|Set-Content "$deployment/artifact-identity.json"
+        {Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter missing.ps1}|Should -Throw '*clean source evidence*'
+    }
+    It 'rejects an adapter that reports an unexpected destination' {
+        $adapter=Join-Path $TestDrive 'wrong-host.ps1'
+        'param($ArtifactRoot,$Target,$Environment,$ExpectedUrl) [pscustomobject]@{Url="https://wrong.example.test/"}'|Set-Content $adapter
+        {Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter $adapter -ExpectedUrl https://expected.example.test/}|Should -Throw '*different URL*'
+        Test-Path "$deployment/deployment.json"|Should -BeFalse
     }
     It 'accepts matching bytes and passing evidence' {
         Confirm-GuideDeploymentData @arguments|Should -Match 'Verified 2 deployment files'

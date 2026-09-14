@@ -1,11 +1,12 @@
 #Requires -Version 7.4
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(Position=0)][ValidateSet('All','Prepare','Build','Validate','Serve','Deploy','Verify','Update')][string]$Stage='All',
+    [Parameter(Position=0)][ValidateSet('All','Prepare','Build','Validate','Serve','Deploy','Verify','Update','Dependencies')][string]$Stage='All',
     [ValidateSet('local','preview','production')][string]$Target='local',
     [ValidateSet('Auto','Local','Preview','Production','Path')][string]$PlatformSource='Auto',
     [string]$PlatformPath,[string]$PlatformRelease,
     [ValidateSet('preview','production')][string]$Ring,
+    [switch]$Deploy,[string]$DeploymentAdapter,
     [string]$OutputPath,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment
 )
 $ErrorActionPreference='Stop'

@@ -3,7 +3,7 @@
 param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath,[Parameter(Mandatory)][ValidatePattern('^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$Version)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($WorkspaceRoot)
-Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
+Import-Module "$PSScriptRoot/../../OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
 if($OutputPath -notmatch '^\.processing/[A-Za-z0-9/_-]+$'){throw 'Package output must be a fresh directory under .processing.'}
 $output=Resolve-GuideWorkspacePath $root $OutputPath
 if(Test-Path -LiteralPath $output){throw 'Package output already exists.'}

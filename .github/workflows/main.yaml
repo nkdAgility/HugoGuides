@@ -50,10 +50,7 @@ jobs:
           versionSpec: '5.x'
       - name: Calculate release version
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v3
-        with:
-          useConfigFile: true
-          configFilePath: .github/GitVersion.yml
+        run: ./.build/Get-PlatformVersion.ps1
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}

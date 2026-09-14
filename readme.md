@@ -55,6 +55,7 @@ Once installed, run these commands from your guide-site repository:
 
 | Task | Command |
 |---|---|
+| Install build dependencies | `./build.ps1 Dependencies` |
 | Check and build the site locally | `./build.ps1` |
 | Start the local site and watch for edits | `./build.ps1 -Stage Serve` |
 | Check preview output | `./build.ps1 -Target preview` |
@@ -79,6 +80,26 @@ Add `-PlatformRelease` with a specific release tag to select an exact version. T
 For translations, contributors, guide editions and PDFs, use the [publishing commands](system/OpenGuidePlatform.PowerShell.Core/README.md) or the [shared agent skills](system/OpenGuidePlatform.Agents.Integration/skills/USAGE.md). PDF generation additionally needs Pandoc, XeLaTeX and the fonts required by your guide. Supplied and protected PDFs are preserved.
 
 Sites with declared JavaScript-created anchors also need Node.js 20 or newer and npm. Validate restores its browser tools into `.processing/` on first use and checks the built pages without contacting the live site. Later runs reuse that cache.
+
+## Run the complete CI locally
+
+The same PowerShell operations run locally and in CI. An ordinary build stops after Validate. To include Azure deployment and live verification, first install the deployment tools:
+
+```powershell
+./build.ps1 Dependencies -Deploy
+```
+
+Set `SWA_CLI_DEPLOYMENT_TOKEN` through your shell or CI secret mechanism. Commit your source changes, then run against your configured preview environment:
+
+```powershell
+./build.ps1 -Target preview -Deploy -DeploymentEnvironment my-preview -BaseUrl https://your-preview.example/ -DeploymentUrl https://your-preview.example/ -OutputPath .processing/preview-run
+```
+
+This runs Prepare → Build → Validate → Deploy → Verify. Deploy uploads the validated files without rebuilding and saves the returned URL in `deployment.json`. Verify checks the deployed identity, required routes and excluded content. A failed earlier stage stops the sequence. Production requires an explicit production target; preview deployment rejects production environment names.
+
+To run stages separately, use the same `-OutputPath` and `-Target` for every command: `Prepare`, `Build`, `Validate`, `Deploy`, then `Verify`. Supply the preview environment on Deploy. Verify can read the returned URL from the saved deployment record. Keep the source and selected platform version unchanged between stages.
+
+A site with its own hosting can supply `-DeploymentAdapter ./path/to/deploy.ps1`. The script receives `ArtifactRoot`, `Target`, `Environment` and `ExpectedUrl`, uploads those files, and returns an object with an absolute HTTPS `Url`. It must throw on failure and must not rebuild or modify the artifact. This lets your own build compose the guide stages with other site concerns.
 
 ## When something fails
 

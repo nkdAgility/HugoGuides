@@ -7,12 +7,30 @@ These commands run in the **OpenGuidePlatform repository**. For an installed gui
 Install the tools listed in the README and Node.js 20 or newer and npm (for real browser validation tests), then the platform test dependencies:
 
 ```powershell
-./.build/Install-PlatformTestDependencies.ps1
+./build.ps1 Dependencies
 ./build.ps1 -Versions
 ./build.ps1 -Version 0.0.0-local
 ```
 
+Without a version override, the platform calculates GitVersion using the same module operation as Actions. The repository currently uses GitVersion 5 configuration, so Dependencies installs a compatible 5.x tool beneath `.processing/tools/` without changing a global GitVersion installation. `-Version` remains an explicit override.
+
 The platform build runs preparation, tests, packaging and package verification. It writes to a fresh directory under `.processing/platform/`, then builds and validates the sample in preview and production from the exact package ZIP it produced. It does not publish a release or deploy the sample. Pester is a platform-development dependency, not an everyday guide-site requirement.
+
+## Complete execution and publication
+
+`./build.ps1` runs version/preparation, tests, package validation and both sample targets. It does not publish or deploy by default. To additionally deploy and verify the sample preview, configure `SWA_CLI_DEPLOYMENT_TOKEN`, run `./build.ps1 Dependencies -DeploySample`, then:
+
+```powershell
+./build.ps1 -DeploySample -DeploymentEnvironment my-preview -DeploymentUrl https://your-preview.example/
+```
+
+The sample uses the exact candidate GuideSite ZIP, its returned hosting URL and one evidence directory throughout. A consumer hosting script can be selected with `-DeploymentAdapter`.
+
+Add `-Publish` only when deliberately publishing the platform after successful sample deployment and live verification. Publication uploads the tested packages, then downloads and verifies both published packages against the source identity. GitHub authentication is required for release operations. For separate jobs, `Package`, `Sample`, `Release` and `Validate -ReleaseTag` remain independently callable; the orchestrator must preserve their dependency order and exact artifact identity, as main.yaml does.
+
+The platform's source checkout is the input being built and tested. Runtime build dependencies come from the selected module distribution; packaging still reads the source components to be packaged. Core build operations do not require GitHub environment variables. Workflow adapters own Actions outputs and PR delivery; release retrieval/publication deliberately uses GitHub. Azure Pipelines and TeamCity need only invoke the PowerShell entry points and provide paths, credentials and options. Dedicated provider verification was explicitly excluded from this change.
+
+The built-in hosting adapter follows the [Azure Static Web Apps CLI deployment contract](https://azure.github.io/static-web-apps-cli/docs/cli/swa-deploy/). It runs outside the source directory, passes credentials through the environment, strips GitHub context from the child process, and requires a confirmed HTTPS URL rather than accepting exit code zero alone.
 
 ## Build module ownership
 

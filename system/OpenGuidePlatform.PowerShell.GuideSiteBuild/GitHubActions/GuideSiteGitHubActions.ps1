@@ -1,12 +1,4 @@
 # GitHub is an adapter. Assessment text and deployment artifacts remain data.
-function Read-GuideWorkflowEvidence {
-    param([string]$Path,[long]$MaximumBytes=1048576,[switch]$Json)
-    $file=Get-Item -LiteralPath $Path -Force -ErrorAction Stop
-    if($file.PSIsContainer -or ($file.Attributes -band [IO.FileAttributes]::ReparsePoint) -or $file.Length -gt $MaximumBytes){throw 'Invalid evidence file or size.'}
-    $text=[IO.File]::ReadAllText($file.FullName)
-    if($Json){return ($text|ConvertFrom-Json -AsHashtable -ErrorAction Stop)}
-    return $text
-}
 function Invoke-GuideGitHubApi {
     param([string]$Path,[ValidateSet('GET','POST','PATCH')][string]$Method='GET',[hashtable]$Body)
     if(-not $env:GH_TOKEN){throw 'GitHub report delivery requires GH_TOKEN.'}
@@ -24,8 +16,8 @@ function Publish-GuidePrepareAssessment {
         [Parameter(Mandatory)][string]$PrepareResult
     )
     try{
-        $assessment=Read-GuideWorkflowEvidence "$AssessmentRoot/assessment.json" -Json
-        $markdown=Read-GuideWorkflowEvidence "$AssessmentRoot/assessment.md"
+        $assessment=Read-GuideEvidence "$AssessmentRoot/assessment.json" -Json
+        $markdown=Read-GuideEvidence "$AssessmentRoot/assessment.md"
         if($SourceCommit -cnotmatch '^[a-f0-9]{40}$' -or $assessment.sourceCommit -cne $SourceCommit -or
             $assessment.schemaVersion -ne 1 -or $assessment.stage -cne 'Prepare' -or $assessment.target -cne $Target -or
             $Target -cnotin @('local','preview','production') -or $assessment.outcome -cnotin @('pass','fail','blocked') -or
@@ -55,34 +47,34 @@ function Publish-GuidePrepareAssessment {
         return 'REPORT_DELIVERED'
     }catch{throw "REPORT_DELIVERY_FAILED: $($_.Exception.Message). Assessment outcome was not changed."}
 }
-function Confirm-GuideDeploymentData {
-    [CmdletBinding()]
-    param([Parameter(Mandatory)][string]$DeploymentRoot,[Parameter(Mandatory)][string]$SourceCommit,
-        [Parameter(Mandatory)][string]$Target,[string]$DeploymentEnvironment)
-    $identity=Read-GuideWorkflowEvidence "$DeploymentRoot/artifact-identity.json" -Json -MaximumBytes 16777216
-    $report=Read-GuideWorkflowEvidence "$DeploymentRoot/artifact-validation.json" -Json -MaximumBytes 16777216
-    if($SourceCommit -cnotmatch '^[a-f0-9]{40}$' -or $Target -cnotin @('preview','production') -or
-        ($Target -ceq 'preview' -and -not $DeploymentEnvironment) -or
-        $report.Outcome -cne 'pass' -or $report.SourceCommit -cne $SourceCommit -or $report.Target -cne $Target -or
-        -not $identity.files -or $identity.files -isnot [array]){throw 'Deployment requires passing evidence for the expected source and target.'}
-    $null=Test-GuideArtifactIdentity -ArtifactRoot "$DeploymentRoot/site" -Identity $identity -ExpectedTarget $Target -ExpectedSourceCommit $SourceCommit
-    $bytes=(Get-GuideArtifactFiles "$DeploymentRoot/site"|Measure-Object Length -Sum).Sum
-    if($bytes -gt 524288000){throw 'Deployment exceeds the artifact size limit.'}
-    $published=Read-GuideWorkflowEvidence "$DeploymentRoot/site/.well-known/open-guide-platform.json" -Json
-    if($published.sourceCommit -cne $SourceCommit -or $published.target -cne $Target -or $published.platformVersion -cne $identity.version){throw 'Published deployment identity differs from its evidence.'}
-    return "Verified $($identity.files.Count) deployment files for $SourceCommit / $Target."
-}
 function Invoke-GuideSiteGitHubAction {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][ValidateSet('PublishPrepare','ConfirmDeployment')][string]$Operation)
+    param([Parameter(Mandatory)][ValidateSet('PublishPrepare','ConfirmDeployment','InstallDeploymentDependencies','Deploy')][string]$Operation)
     $ErrorActionPreference='Stop'
     switch($Operation){
+        InstallDeploymentDependencies { Install-GuideBuildDependencies -WorkspaceRoot $PWD -Deployment }
+        Deploy {
+            $result=Invoke-GuideArtifactDeployment -DeploymentRoot (Join-Path $PWD 'deployment') -WorkspaceRoot $PWD -SourceCommit $env:EXPECTED_COMMIT -Target $env:EXPECTED_TARGET -DeploymentEnvironment $env:DEPLOYMENT_ENVIRONMENT -ExpectedUrl $env:SITE_BASE_URL
+            if($env:GITHUB_OUTPUT){[IO.File]::AppendAllText($env:GITHUB_OUTPUT,"url=$($result.url)`n")}
+            if($env:GITHUB_STEP_SUMMARY){[IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,"## Deploy: uploaded`n`n[$($result.url)]($($result.url))`n`nCommit: $($result.sourceCommit)`n")}
+            if($env:GITHUB_EVENT_PATH -and $env:GH_TOKEN){
+                $event=Get-Content $env:GITHUB_EVENT_PATH -Raw|ConvertFrom-Json
+                if($event.PSObject.Properties['pull_request']){
+                    $pr=Invoke-GuideGitHubApi -Path "repos/$env:GITHUB_REPOSITORY/pulls/$($event.pull_request.number)"
+                    if($pr.state -ceq 'open' -and $pr.head.sha -ceq $result.sourceCommit){
+                        $body="Preview deployed for commit $($result.sourceCommit): [$($result.url)]($($result.url)). Live verification follows in Actions."
+                        $null=Invoke-GuideGitHubApi -Path "repos/$env:GITHUB_REPOSITORY/issues/$($event.pull_request.number)/comments" -Method POST -Body @{body=$body}
+                    }
+                }
+            }
+            $result
+        }
         PublishPrepare {
             $event=Get-Content -LiteralPath $env:GITHUB_EVENT_PATH -Raw|ConvertFrom-Json
             Publish-GuidePrepareAssessment -AssessmentRoot assessment -Repository $env:GITHUB_REPOSITORY -PullRequest $event.pull_request.number -RunId $env:GITHUB_RUN_ID -SourceCommit $env:ASSESSED_COMMIT -Target $env:ASSESSED_TARGET -PrepareResult $env:PREPARE_RESULT
         }
         ConfirmDeployment {
-            Confirm-GuideDeploymentData -DeploymentRoot deployment -SourceCommit $env:EXPECTED_COMMIT -Target $env:EXPECTED_TARGET -DeploymentEnvironment $env:DEPLOYMENT_ENVIRONMENT
+            Confirm-GuideDeploymentData -DeploymentRoot $(if($env:DEPLOYMENT_ROOT){$env:DEPLOYMENT_ROOT}else{'deployment'}) -SourceCommit $env:EXPECTED_COMMIT -Target $env:EXPECTED_TARGET -DeploymentEnvironment $env:DEPLOYMENT_ENVIRONMENT
         }
     }
 }

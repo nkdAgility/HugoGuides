@@ -3,7 +3,7 @@
 param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($WorkspaceRoot)
-Import-Module "$root/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
+Import-Module "$PSScriptRoot/../../OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
 $output=Resolve-GuideWorkspacePath $root $OutputPath
 $manifest=Get-Content "$output/release-manifest.json" -Raw|ConvertFrom-Json
 $destination=& "$PSScriptRoot/../../OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $root -PlatformPath "$output/OpenGuidePlatform-GuideSite.zip" -Product Platform

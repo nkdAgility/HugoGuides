@@ -15,6 +15,17 @@ Approved after the initial E07 implementation: split consumer and platform engin
 
 No guide-site adoption, Hugo internals, production promotion or GitHub administrative settings are changed by this follow-up.
 
+## Active local CI parity follow-up
+
+The user authorized closing the remaining CI gaps after distribution cleanup. Azure Pipelines and TeamCity execution verification is not required; the acceptance criterion is that build operations take explicit inputs and do not require GitHub context, except release access. No new provider configuration, permissions or consumer deployment is authorized.
+
+- [x] Implement actual module-owned deployment, custom hosting adapters and complete guide-site execution through Verify.
+- [x] Implement shared GitVersion calculation and dependency setup; retain GitVersion 5 compatibility for the existing configuration.
+- [x] Implement complete platform execution with explicit sample deployment/publication, preserving candidate package identity and failure gates.
+- [x] Separate source inputs from runtime package dependencies and keep GitHub context in workflow adapters.
+- [x] Complete local regression and sample acceptance: 288 tests, both distribution packages, sample preview (119 files) and production (87 files) passed. Local GitVersion calculation and workflow lock coverage also passed. Evidence: `.processing/platform-tests/47ec229fab7a43ec9c5acd667f3327d3/summary.md`.
+- [ ] Verify the changed Actions sample deployment adapter through live Verify.
+
 ## Outcome
 
 Rename the existing public `nkdAgility/HugoGuides` repository to `nkdAgility/OpenGuidePlatform`, preserve its Git history and releases, move its reusable code into named `system/` components, and adopt the resulting platform in KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack.
