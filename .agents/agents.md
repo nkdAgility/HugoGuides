@@ -31,3 +31,5 @@ Keep workflow YAML thin: action wiring and PowerShell entry-point calls only. Do
 Work on a review branch, commit verified changes and keep preview evidence distinct from production approval.
 Do not change or deploy consumer sites as a side effect of platform work.
 Root AGENTS.md and CLAUDE.md are symbolic links to this canonical file. Keep the links; edit only this file. Windows checkouts require symbolic link support and git core.symlinks=true. Maintain human README instructions whenever commands change.
+
+Do not create or use Git worktrees without the user's explicit permission. Work in the existing HugoGuides checkout; never place a repository checkout inside another repository.
