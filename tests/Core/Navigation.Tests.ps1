@@ -3,6 +3,29 @@ BeforeAll {
     $checker=Join-Path $root 'system/OpenGuidePlatform.PowerShell.Build/GuideSiteBuild/Test-GuideSiteNavigation.ps1'
 }
 Describe 'Guide-site navigation validation' {
+    It 'resolves directory, asset, Unicode and fragment links beneath <base>' -ForEach @(
+        @{base='https://preview.example/';prefix=''},
+        @{base='https://preview.example/docs/';prefix='/docs'},
+        @{base='https://preview.example/docs';prefix='/docs'}
+    ) {
+        $site=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
+        [IO.Directory]::CreateDirectory("$site/فا")|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",('<a href="'+$prefix+'/%D9%81%D8%A7/#heading">Guide</a><img src="'+$prefix+'/logo.png"><a href="https://external.example/missing">External</a>'))
+        [IO.File]::WriteAllText("$site/فا/index.html",'<h2 id="heading">Heading</h2><a href="../logo.png">Relative asset</a>')
+        [IO.File]::WriteAllText("$site/logo.png",'fixture')
+        (& $checker -ArtifactRoot $site -BaseUri $base).Outcome | Should -Be pass
+        [IO.File]::AppendAllText("$site/index.html",'<a href="'+$prefix+'/missing/">Broken</a>')
+        (& $checker -ArtifactRoot $site -BaseUri $base).Findings.Code | Should -Contain INTERNAL_LINK_MISSING
+    }
+    It 'ignores sibling applications but rejects encoded separators inside the site' {
+        $site=Join-Path $TestDrive 'path-boundary'
+        [IO.Directory]::CreateDirectory($site)|Out-Null
+        [IO.File]::WriteAllText("$site/index.html",'<a href="/docs-other/missing">Sibling</a><a href="/missing">Host</a><a href="/docs/%2f../secret">Unsafe</a>')
+        $result=& $checker -ArtifactRoot $site -BaseUri https://preview.example/docs/
+        $result.Findings.Count | Should -Be 1
+        $result.Findings[0].Code | Should -Be INTERNAL_LINK_INVALID
+    }
+
     It 'rejects missing language pages, broken canonical links and missing assets' {
         $site=Join-Path $TestDrive 'broken'
         [IO.Directory]::CreateDirectory($site)|Out-Null
@@ -49,7 +72,7 @@ Describe 'Guide-site navigation validation' {
     It 'accepts existing directory routes and assets while ignoring external resources' {
         $site=Join-Path $TestDrive 'valid'
         [IO.Directory]::CreateDirectory("$site/min/guide1")|Out-Null
-        [IO.File]::WriteAllText("$site/index.html",'<a href="/min/guide1/">Minionese</a><img src="/logo.png"><script src="https://cdn.example/script.js"></script>')
+        [IO.File]::WriteAllText("$site/index.html",'<a href="/min/guide1/">Minionese</a><a href="https://preview.example//min/guide1/">Existing absolute URL</a><img src="/logo.png"><script src="https://cdn.example/script.js"></script>')
         [IO.File]::WriteAllText("$site/min/guide1/index.html",'<a href="/">Home</a>')
         [IO.File]::WriteAllText("$site/logo.png",'fixture')
         (& $checker -ArtifactRoot $site -BaseUri https://preview.example/).Outcome | Should -Be pass

@@ -1,6 +1,7 @@
 function Test-GuideJsonIndexes {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$ArtifactRoot,[Parameter(Mandatory)][uri]$BaseUri,[object[]]$Indexes=@(),[string[]]$EnabledLanguages=@(),[string[]]$ForbiddenPaths=@())
+    $siteBase=[uri]($BaseUri.GetLeftPart([UriPartial]::Path).TrimEnd('/')+'/')
     $files=@(Get-GuideArtifactFiles $ArtifactRoot)
     $paths=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach($file in $files){$null=$paths.Add($file.Path)}
@@ -19,11 +20,12 @@ function Test-GuideJsonIndexes {
                         $value=$node[$key]
                         if($key -in @('url','RelPermalink','Permalink','PathPdf') -and $value -is [string] -and $value){
                             $url=$null
-                            if(-not [uri]::TryCreate($BaseUri,$value,[ref]$url) -or $url.Scheme -notin @('http','https')){$findings.Add([pscustomobject]@{Code='JSON_INDEX_URL_INVALID';Path=$index.route;Message="Repair invalid indexed URL $value"});continue}
-                            if($url.Authority -ceq $BaseUri.Authority){
-                                $route=[uri]::UnescapeDataString($url.AbsolutePath)
-                                $null=$observed.Add($route)
+                            if(-not [uri]::TryCreate($siteBase,$value,[ref]$url) -or $url.Scheme -notin @('http','https')){$findings.Add([pscustomobject]@{Code='JSON_INDEX_URL_INVALID';Path=$index.route;Message="Repair invalid indexed URL $value"});continue}
+                            $route=Get-GuideArtifactRouteFromUri -Uri $url -BaseUri $BaseUri
+                            if($null -ne $route){
                                 $targets=@(Get-GuideArtifactRouteCandidates $route)
+                                $route=[uri]::UnescapeDataString($route)
+                                $null=$observed.Add($route)
                                 if(-not @($targets|Where-Object {$paths.Contains($_)}).Count){$findings.Add([pscustomobject]@{Code='JSON_INDEX_TARGET_MISSING';Path=$index.route;Message="Repair missing indexed target $route"})}
                                 $relative=$route.TrimStart('/')
                                 if(@($ForbiddenPaths|Where-Object {$relative -ceq $_.TrimEnd('/') -or $relative.StartsWith($_.TrimEnd('/')+'/',[StringComparison]::Ordinal)}).Count){$findings.Add([pscustomobject]@{Code='JSON_INDEX_FORBIDDEN_TARGET';Path=$index.route;Message="Remove prohibited indexed target $route"})}

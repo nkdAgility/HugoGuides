@@ -25,6 +25,20 @@ Describe 'Current artifact runtime anchors' {
         $resolved.Findings[0].TargetPage | Should -Be 'index.html'
         $resolved.Outcome | Should -Be fail
     }
+    It 'loads the page and its script beneath a base path while blocking sibling applications' {
+        $artifact=Join-Path $TestDrive 'subpath'
+        [IO.Directory]::CreateDirectory("$artifact/guide")|Out-Null
+        [IO.File]::WriteAllText("$artifact/guide/index.html",'<body><script src="/docs/anchor.js"></script></body>')
+        [IO.File]::WriteAllText("$artifact/anchor.js",'document.body.insertAdjacentHTML("beforeend", "<h2 id=dynamic>Heading</h2>");fetch("/docs-other/secret").catch(()=>{});fetch("/secret").catch(()=>{});')
+        $identity=New-GuideArtifactIdentity -ArtifactRoot $artifact -Target preview -SourceCommit ('a'*40) -Version fixture
+        $identityFile=Join-Path $TestDrive 'subpath-identity.json'
+        [IO.File]::WriteAllText($identityFile,($identity|ConvertTo-Json -Depth 20))
+        $result=Test-GuideRuntimeAnchors -WorkspaceRoot $root -ArtifactRoot $artifact -BaseUri https://preview.example/docs/ -IdentityPath $identityFile -OutputPath ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')) -Anchors @(@{route='/guide/';fragment='dynamic'})
+        $result.outcome | Should -Be pass
+        $result.blockedRequests | Should -Contain 'https://preview.example/docs-other/secret'
+        $result.blockedRequests | Should -Contain 'https://preview.example/secret'
+    }
+
     It 'launches browser validation from a deeply nested Windows workspace' -Skip:(-not $IsWindows) {
         $deep=Join-Path $root ('.processing/runtime-tests/'+[guid]::NewGuid().ToString('N')+'/'+('deep'*24))
         [IO.Directory]::CreateDirectory($deep)|Out-Null

@@ -103,6 +103,26 @@ Describe 'Guide-site installation and update' {
         Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeFalse
         [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
     }
+    It 'previews automatic installation on main without creating a branch or changing managed files' {
+        & git -C $workspace symbolic-ref HEAD refs/heads/main
+        & $bootstrap @parameters -WhatIf
+        (& git -C $workspace branch --show-current).Trim() | Should -Be main
+        @(& git -C $workspace for-each-ref refs/heads/codex/ --format='%(refname)').Count | Should -Be 0
+        Test-Path "$workspace/build.ps1" | Should -BeFalse
+        Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeFalse
+        [IO.File]::ReadAllText("$workspace/site/go.mod") | Should -Be 'module fixture'
+    }
+    It 'creates the automatic review branch only after successful preflight' {
+        & git -C $workspace symbolic-ref HEAD refs/heads/main
+        [IO.File]::WriteAllText("$workspace/AGENTS.md",'Consumer instructions')
+        { & $bootstrap @parameters } | Should -Throw '*Managed-file conflicts*'
+        (& git -C $workspace branch --show-current).Trim() | Should -Be main
+        [IO.File]::Delete("$workspace/AGENTS.md")
+        & $bootstrap @parameters
+        (& git -C $workspace branch --show-current).Trim() | Should -Match '^codex/platform-adoption-'
+        Test-Path "$workspace/open-guide-platform.installation.json" | Should -BeTrue
+    }
+
     It 'rejects a corrupt cached archive instead of executing cached code' {
         & $bootstrap -Install @parameters
         $record=Get-Content "$workspace/open-guide-platform.installation.json" -Raw|ConvertFrom-Json

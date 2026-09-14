@@ -42,16 +42,14 @@ if($automatic){
 if($previous -and ($previous.kind -cne 'preview-installation' -or $previous.schemaVersion -ne 1)){throw 'Unsupported installation record.'}
 if($Restore -or $Update){if(-not $previous){throw 'No installation found; run -Install first.'}}
 if($Install -and $previous){throw 'Already installed; use -Update.'}
+$reviewBranch=$null
 if(-not $Restore){
     if($Channel -ne 'preview'){throw 'Stable adoption is not available: native Hugo publication and coordinated agent controls remain adoption blockers.'}
     $branch=(& git -C $root branch --show-current).Trim()
     if($automatic -and $branch -in @('main','master')){
         $reviewBranch='codex/platform-adoption-'+[guid]::NewGuid().ToString('N').Substring(0,8)
-        & git -C $root switch -c $reviewBranch
-        if($LASTEXITCODE -ne 0){throw 'Could not create the adoption/update review branch.'}
-        $branch=$reviewBranch
     }
-    if($LASTEXITCODE -ne 0 -or -not $branch -or $branch -in @('main','master')){throw 'Install/update requires a checked-out review branch, not main/master or detached HEAD.'}
+    if($LASTEXITCODE -ne 0 -or -not $branch -or ($branch -in @('main','master') -and -not $reviewBranch)){throw 'Install/update requires a checked-out review branch, not main/master or detached HEAD.'}
     if($Update){$PolicyPath=$previous.policyPath}
     $policyFile=Resolve-InstallPath $PolicyPath
     if(-not (Test-Path -LiteralPath $policyFile -PathType Leaf)){throw "Supply an existing reviewed guide-site policy with -PolicyPath; missing $PolicyPath"}
@@ -167,8 +165,16 @@ $record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$Relea
 $files['open-guide-platform.installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
 Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); managed files:"
 $files.Keys|ForEach-Object {Write-Host "  $_"}
-if(-not $PSCmdlet.ShouldProcess($root,"Install coordinated preview files from $ReleaseTag")){return}
+$action="Install coordinated preview files from $ReleaseTag"
+if($reviewBranch){$action="Create review branch $reviewBranch and $action"}
+if(-not $PSCmdlet.ShouldProcess($root,$action)){return}
 Confirm-NativeSnapshot
+$currentBranch=(& git -C $root branch --show-current).Trim()
+if($LASTEXITCODE -ne 0 -or $currentBranch -cne $branch){throw 'Checkout changed during installation; retry from the intended branch.'}
+if($reviewBranch){
+    & git -C $root switch -c $reviewBranch
+    if($LASTEXITCODE -ne 0){throw 'Could not create the adoption/update review branch.'}
+}
 # Roll back tracked files if a write fails. The installation record is written last.
 $original=@{};$written=[Collections.Generic.List[string]]::new()
 try{

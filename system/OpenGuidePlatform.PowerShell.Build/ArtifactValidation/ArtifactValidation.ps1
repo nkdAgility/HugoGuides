@@ -1,3 +1,13 @@
+# Convert a published URL to an escaped artifact-relative route. A site owns
+# only its origin and base-path subtree; sibling applications are external.
+function Get-GuideArtifactRouteFromUri {
+    param([Parameter(Mandatory)][uri]$Uri,[Parameter(Mandatory)][uri]$BaseUri)
+    if($Uri.Scheme -cne $BaseUri.Scheme -or $Uri.Authority -cne $BaseUri.Authority){return $null}
+    $prefix=$BaseUri.AbsolutePath.TrimEnd('/')
+    if($Uri.AbsolutePath -ceq $prefix){return '/'}
+    if(-not $Uri.AbsolutePath.StartsWith($prefix+'/',[StringComparison]::Ordinal)){return $null}
+    return $Uri.AbsolutePath.Substring($prefix.Length)
+}
 function Get-GuideArtifactRouteCandidates {
     param([Parameter(Mandatory)][string]$Route)
     if(-not $Route.StartsWith('/') -or $Route.StartsWith('//') -or $Route -match '[\\?#\x00-\x20]'){

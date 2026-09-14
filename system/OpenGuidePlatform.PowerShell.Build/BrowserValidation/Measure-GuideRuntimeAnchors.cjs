@@ -6,6 +6,9 @@ const [requestFile, toolRoot] = process.argv.slice(2);
 const input = JSON.parse(fs.readFileSync(requestFile, 'utf8'));
 const root = fs.realpathSync(input.artifactRoot);
 const base = new URL(input.baseUri);
+base.pathname=base.pathname.replace(/\/$/,'')+'/';
+base.search='';base.hash='';
+const prefix=base.pathname.slice(0,-1);
 if (!['https:', 'http:'].includes(base.protocol)) throw Error('Invalid artifact origin.');
 const tools = createRequire(path.join(toolRoot, 'package.json'));
 const {chromium} = tools('playwright');
@@ -26,7 +29,12 @@ const deadline = setTimeout(()=>{console.error('Runtime anchor validation timed 
         await context.route('**/*', async route=>{
           const request=route.request(), url=new URL(request.url());
           if (url.origin!==base.origin || !['GET','HEAD'].includes(request.method())) {blocked.add(url.href);return route.abort();}
-          let file=path.resolve(root,'.'+decodeURIComponent(url.pathname));
+          if(url.pathname!==prefix && !url.pathname.startsWith(prefix+'/')) {blocked.add(url.href);return route.abort();}
+          const artifactPath=url.pathname.slice(prefix.length)||'/';
+          let segments;
+          try{segments=artifactPath.split('/').map(decodeURIComponent);}catch{return route.abort();}
+          if(segments.some(segment=>segment==='.'||segment==='..'||/[\\/:\x00-\x1f]/.test(segment)))return route.abort();
+          let file=path.resolve(root,'.'+segments.join('/'));
           if (!file.startsWith(root+path.sep) && file!==root) return route.abort();
           if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');
           if(!fs.existsSync(file)||!fs.statSync(file).isFile())return route.fulfill({status:404,body:'Missing artifact resource'});
@@ -36,7 +44,7 @@ const deadline = setTimeout(()=>{console.error('Runtime anchor validation timed 
           await route.fulfill({status:200,contentType:types[path.extname(file)]||'application/octet-stream',body:fs.readFileSync(file)});
         });
         const page=await context.newPage();
-        const response=await page.goto(new URL(expected.route,base).href,{waitUntil:'load',timeout:15000});
+        const response=await page.goto(new URL(expected.route.slice(1),base).href,{waitUntil:'load',timeout:15000});
         let exists=false, error=null;
         if(response?.status()===200){
           try{await page.waitForFunction(id=>!!document.getElementById(id)||[...document.querySelectorAll('a[name]')].some(a=>a.name===id),expected.fragment,{timeout:3000});exists=true;}

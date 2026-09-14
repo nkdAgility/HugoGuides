@@ -1,6 +1,6 @@
 # OpenGuidePlatform execution plan
 
-Implementation branch: `codex/open-guide-platform`, PR #35. The checklist below is the authoritative stage status. [Historical reconciliations and evidence](open-guide-platform-execution-history.md) preserve prior findings and acceptance decisions.
+Initial implementation: `codex/open-guide-platform`, merged PR #35. Adoption-readiness fixes: `codex/adoption-validation-fixes` (new branch from current `main`). The checklist below is the authoritative stage status. [Historical reconciliations and evidence](open-guide-platform-execution-history.md) preserve prior findings and acceptance decisions.
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
@@ -14,13 +14,13 @@ This is an execution plan, not authorisation inferred to rename or deploy immedi
 
 ## Current acceptance status
 
-**Run boundary agreed 14 September 2026:** the current platform implementation run is complete within its agreed scope. The following work remains in the execution plan but is explicitly deferred outside this run:
+**Run boundary agreed 14 September 2026:** the initial platform implementation run was complete within its agreed scope. The user subsequently merged PR #35 and authorized a separate branch to assess and fix adoption-readiness findings and the two stale scan PRs (#33 and #34). The following work remains in the execution plan but is explicitly deferred outside this run:
 
-- GitHub administrative changes, required-check replacement, review/merge actions and the resulting release cutover (E08).
+- Further GitHub administrative and required-check changes (E08); no configuration changes are authorized by this follow-up.
 - The trusted deployment boundary that prevents PR-controlled code from accessing Azure deployment credentials (E06/E08).
 - Installation and live verification of managed Codex, Claude and Copilot restrictions on contributor machines, to be addressed during guide-site adoption (E06/E09–E11).
 
-These are retained requirements, not completed acceptance or active requests for permission. Do not resume them merely because this run was previously instructed to close blockers. E06 and E08 remain unchecked. After the deferred release work, the next adoption stage is E09, KanbanGuides. No consumer adoption, production promotion or Hugo internal refactoring is authorized by this status record.
+These are retained requirements, not completed acceptance or active requests for permission. Do not resume them merely because this run was previously instructed to close blockers. E06 and E08 remain unchecked. After the remaining E08 released-installation verification, the next adoption stage is E09, KanbanGuides. No consumer adoption, production promotion or Hugo internal refactoring is authorized by this status record.
 
 - [x] E00 Baselines refreshed and recorded, with known findings and explicit later verification/recovery gates.
 - [x] E01 Contracts and policy ownership agreed.
@@ -50,10 +50,28 @@ Remaining gates:
 
 - **E06:** managed client/OS enforcement and an independently administered required gate are uninstalled/unverified. No permission or GitHub administrative changes are authorized. The recorded exception permits repository implementation through E08.
 - **E07 / E09–E11:** fresh-fixture acceptance is complete; each existing consumer's file conflicts and deployment integration must still be reconciled in its own adoption PR.
-- **E08:** the GitHub rename is complete, but a complete coordinated named preview release, nested Hugo tag and clean released installation remain outstanding. Earlier preview releases predate the complete current manifest. PR #35 remains draft; obsolete required checks and review-thread requirements block merging. The subsequent instruction to close blockers authorizes merge-queue support: `merge_group` now runs packaging and sample validation, with deployment and release disabled for queue candidates. Local acceptance passed 217 tests and package validation; commit `5d6256718492d32665398ca3a2233e4ef75a7680` passed [CI run 34788772030](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34788772030) through live Verify. Actual merge-queue verification remains deferred with the administrative cutover. The required-check proposal, deployment credential boundary and managed-client rollout are explicitly outside this completed run, as agreed above.
+- **E08:** the GitHub rename and initial coordinated preview publication are complete. PR #35 merged at `d859a32c8e3dbf4c154aef4a6c5079d6acd634d0`; [main run 34791229184](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34791229184) passed and published `v0.5.3-Preview.1`. Its nested Go module tag `system/OpenGuidePlatform.Hugo.Guides/v0.5.3-Preview.1` resolves to that same commit, verified with a fresh Go module cache. A clean installation from a named release remains outstanding. The new adoption-readiness fixes must pass review and preview validation and be included in a subsequent release before adoption uses them. E08 remains unchecked. No administrative or deployment-boundary changes are included in this fix branch.
 - **E09–E11:** accept each exact consumer preview and functional/visual comparison before adoption. Safe Delusion's recorded old-module upgrade differences are accepted; the corrected Persian CSS capture is the valid baseline.
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
+
+### Adoption-readiness findings — 14 September 2026
+
+The user authorized fixes on a new branch from latest `main`, including issues in the two stale scan PRs if still present. This is a bounded E07/E08 follow-up, not consumer adoption or E14 refactoring.
+
+| Report | Assessment against merged main | Correction and regression coverage |
+|---|---|---|
+| PR #35 Copilot: automatic bootstrap `-WhatIf` switches branch | Confirmed; it creates a review branch before preflight and `ShouldProcess`. | Defer branch creation until all preflight checks pass and the operation is confirmed. Test automatic dry-run on main, failed preflight, and successful automatic installation. |
+| PR #35 Copilot: navigation under a base path | Confirmed; `/docs/guide/` was looked up as `docs/guide/index.html`. | Strip the site base path before artifact lookup. Cover root/subpath URLs, relative links, Unicode, fragments, invalid encoded separators and sibling applications. Preserve existing extra-leading-slash handling. |
+| PR #35 Copilot: JSON indexes under a base path | Confirmed; required entries and target files were incorrectly reported missing. | Use the same origin/base-path conversion; test required and forbidden routes and out-of-scope URLs. |
+| PR #35 Copilot: runtime anchors under a base path | Confirmed with a real browser; page navigation dropped the prefix and resource interception retained it. | Join artifact routes beneath the base path and strip it for file lookup. A browser regression loads a real script and blocks sibling/external requests. |
+| PR #33: contributor context | Still present at all three relocated call sites. | Pass the existing partial's expected author dictionary. Real Hugo rendering tests verify creator/contributor names and avatars on the homepage, guide details and creator partial. |
+| PR #34: translation PDF fallback | Still selects the first shared PDF, potentially English for another language. | Match the requested language only. Real Hugo tests cover Persian, Japanese, French, Minionese, regional language codes, PDF-only English and an online Spanish translation without a PDF. Missing PDFs remain unavailable. |
+| Full production sample validation: `download_reference_status` | Existing status partials reference a missing shared catalogue key. | Add the English `Reference` fallback; keep the production language exclusions. |
+
+All four new Hugo rendering assertions fail against the original `main` templates and pass against the corrected templates. The changes port the stale PR fixes into current component paths; they do not merge the stale branches or modify deployed consumer sites. PR #34 also mentions a separate Spanish PDF path problem in KanbanGuides; that consumer-specific claim is not claimed fixed here and remains an E09 check against its exact adoption artifact. The additional catalogue entry is justified by the failing production acceptance build. The initial URL implementation also exposed existing double-leading-slash links; compatibility was restored without changing Hugo route generation.
+
+Local acceptance: **233 tests**, package verification, the Hugo translation probe and both full sample targets passed on this fix branch (Hugo Extended 0.164.0). Preview produced 119 files; production produced 87 files with Minionese excluded. The new PR's deployment/CI acceptance remains pending. The earlier 216/217-test evidence above remains historical; it is not acceptance of these follow-up changes. Review, merge and a subsequent named release remain distinct from local validation.
 
 Detailed additions to the original acceptance criteria remain in the [implementation follow-up register](open-guide-platform-execution-history.md#16b-implementation-follow-ups-within-the-existing-work-packages). They remain requirements, including publication/download exclusions, prepared-input freshness, dynamic anchors, PDF receipts, legacy alias limits, report delivery and cleanup. Moving their historical checkmarks here does not remove or reopen accepted work.
 
@@ -63,7 +81,7 @@ Detailed additions to the original acceptance criteria remain in the [implementa
 - Preserve all existing releases and tags. Never retag historical module versions or replace their assets.
 - Move shared implementation and example content into OpenGuidePlatform. Keep published guide content and bespoke wrappers in their consumer repositories.
 - Implement changes on feature branches with reviewable PRs and immutable preview candidates. Preview verification is not production deployment authorisation; repository rename remains an explicit administrative cutover.
-- During migration and adoption, keep Hugo module internals unchanged apart from the minimum path/reference changes needed for mechanical relocation and identity updates. Preserve functionality and visual output.
+- During migration and adoption, keep Hugo module internals unchanged apart from minimum relocation/identity updates and specifically authorized bug fixes. Preserve intended functionality and visual output; record each intentional correction with regression evidence. Broad internal refactoring remains E14.
 - The existing multilingual guide and edition structure is deliberate, even where it differs from conventional Hugo usage. Do not normalise language resolution, fallbacks, cascades or content organisation during adoption.
 - Keep the proposed refactoring of Hugo module contents in E14, after the rest of the platform has been built and verified against the guide sites. Production adoption and operational handover are not prerequisites.
 - Make content/layout moves separately reviewable from behavioral changes.
@@ -98,7 +116,7 @@ E05 adds tests and baseline evidence only and can run alongside E03/E04 after th
 
 Execution may deviate from this order when justified. Record the reason, affected work packages, scope, validation and effect on outstanding acceptance before acting. A deviation does not close unfinished criteria or authorize administrative changes or consumer deployments.
 
-Each work package should become an issue with this document's ID, and one or more bounded PRs. Mark a package complete only after its acceptance criteria are evidenced. Current implementation is tracked in PR #35.
+Each work package should become an issue with this document's ID, and one or more bounded PRs. Mark a package complete only after its acceptance criteria are evidenced. The original implementation is preserved in merged PR #35; the current follow-up branch is recorded at the top of this plan.
 
 ## 3. E00 — Refresh and establish the baseline
 

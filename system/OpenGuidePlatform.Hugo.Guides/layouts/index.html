@@ -129,7 +129,7 @@
                   <div class="mb-4">
                     <div class="d-flex flex-wrap justify-content-center gap-2">
                       {{ range sort $contributors "weight" "asc" }}
-                        {{ partial "components/guide/guide-author.html" . }}
+                        {{ partial "components/guide/guide-author.html" (dict "author" . "lightList" false) }}
                       {{ end }}
                     </div>
                   </div>

@@ -2,6 +2,8 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$ArtifactRoot,[Parameter(Mandatory)][uri]$BaseUri,[object[]]$RequiredPageContent=@())
 $ErrorActionPreference='Stop'
+. (Join-Path $PSScriptRoot '../ArtifactValidation/ArtifactValidation.ps1')
+$siteBase=[uri]($BaseUri.GetLeftPart([UriPartial]::Path).TrimEnd('/')+'/')
 $root=[IO.Path]::GetFullPath($ArtifactRoot)
 $files=@(Get-ChildItem -LiteralPath $root -Recurse -File -Force)
 $paths=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -33,7 +35,7 @@ function Get-PageAnchors([string]$RelativePath){
 }
 foreach($file in $files|Where-Object Extension -EQ '.html'){
     $relative=[IO.Path]::GetRelativePath($root,$file.FullName).Replace('\','/')
-    $page=[uri]::new($BaseUri,$relative)
+    $page=[uri]::new($siteBase,$relative)
     $html=[IO.File]::ReadAllText($file.FullName)
     foreach($match in [regex]::Matches($html,'(?is)<(?:a|link|script|img)\b[^>]*?\b(?:href|src)\s*=\s*(?:"([^"]*)"|''([^'']*)''|([^\s>]+))')){
         $value=($match.Groups[1..3]|Where-Object Success|Select-Object -First 1).Value
@@ -41,9 +43,14 @@ foreach($file in $files|Where-Object Extension -EQ '.html'){
         if(-not $value){continue}
         $uri=$null
         if(-not [uri]::TryCreate($page,$value,[ref]$uri) -or $uri.Scheme -notin @('https','http') -or $uri.Authority -cne $BaseUri.Authority){continue}
-        $path=[uri]::UnescapeDataString($uri.AbsolutePath).TrimStart('/')
-        $candidates=@($path,($path.TrimEnd('/')+'/index.html'))
-        if(-not $path){$candidates=@('index.html')}
+        $route=Get-GuideArtifactRouteFromUri -Uri $uri -BaseUri $BaseUri
+        if($null -eq $route){continue}
+        # Preserve existing handling of absolute URLs with extra leading slashes.
+        try{$candidates=@(Get-GuideArtifactRouteCandidates ('/'+$route.TrimStart('/')))}
+        catch{
+            $findings.Add([pscustomobject]@{Code='INTERNAL_LINK_INVALID';Page=$relative;Target=$value})
+            continue
+        }
         $checked++
         $found=@($candidates|Where-Object {$paths.Contains($_)})
         if(-not $found.Count){
