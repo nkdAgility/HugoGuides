@@ -44,6 +44,20 @@ Describe 'Shared Prepare assessment and reports' {
         $markdown|Should -Match 'Repair the document'
         $markdown|Should -Not -Match '\| web \||\| populated \|'
     }
+    It 'keeps informational observations in JSON without presenting them as fixes' {
+        $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) '0.0.0'
+        $result.findings=@(
+            @{severity='info';scope='platform';subject='module';code='MODULE_CURRENT';message='Current';remediation='Review the module'},
+            @{severity='info';scope='wrapper';subject='site';code='WRAPPER_BUILD_EVIDENCE_PENDING';message='Pending';remediation='Run Build'},
+            @{severity='warning';scope='platform';subject='module';code='MODULE_FRESHNESS_UNAVAILABLE';message='Lookup failed';remediation='Check connectivity'}
+        )
+        $markdown=ConvertTo-GuideAssessmentMarkdown $result
+        $markdown|Should -Not -Match 'MODULE_CURRENT|WRAPPER_BUILD_EVIDENCE_PENDING|Review the module|readiness: unknown'
+        $markdown|Should -Match 'Hugo module: current'
+        $markdown|Should -Match 'MODULE_FRESHNESS_UNAVAILABLE'
+        $markdown|Should -Match 'Check connectivity'
+        $result.findings.Count|Should -Be 3
+    }
     It 'blocks final input drift before publishing a report and retains independent findings' {
         $policy.wrapper.requiredFiles=@('site/missing.txt')
         $policy.wrapper.requiredI18nKeys=@()

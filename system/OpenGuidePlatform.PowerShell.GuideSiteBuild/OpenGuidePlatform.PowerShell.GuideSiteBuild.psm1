@@ -12,7 +12,7 @@ function ConvertTo-GuideAssessmentMarkdown {
     $lines.Add('')
     $guideScopes=@('guide','edition','translation','download')
     $guideFindings=@($Assessment.findings | Where-Object { $_.scope -in $guideScopes -and $_.severity -in @('warning','blocker') })
-    $otherFindings=@($Assessment.findings | Where-Object { $_.scope -notin $guideScopes -or $_.severity -notin @('warning','blocker') })
+    $otherFindings=@($Assessment.findings | Where-Object { $_.scope -notin $guideScopes -and $_.severity -in @('warning','blocker') })
     if($otherFindings.Count){
         $lines.Add('| Severity | Scope | Subject | Finding | What to fix |')
         $lines.Add('|---|---|---|---|---|')
@@ -24,7 +24,8 @@ function ConvertTo-GuideAssessmentMarkdown {
         $lines.Add('|---|---|---|---|')
         foreach($finding in $guideFindings){$lines.Add("| $(Escape-ReportText $finding.severity) | $(Escape-ReportText $finding.subject) | $(Escape-ReportText $finding.code): $(Escape-ReportText $finding.message) | $(Escape-ReportText $finding.remediation) |")}
     }else{$lines.Add('No guide fixes identified by these checks.')}
-    $lines.Add('');$lines.Add("Wrapper runtime readiness: $(Escape-ReportText $Assessment.inventory.wrapper.state). A Prepare result is not a deployment or visual approval.")
+    if(@($Assessment.findings | Where-Object code -eq 'MODULE_CURRENT').Count){$lines.Add('');$lines.Add('Hugo module: current.')}
+    $lines.Add('');$lines.Add('Artifact and live-site checks run in later stages.')
     $lines -join "`n"
 }
 function Write-GuideAssessmentReport {
