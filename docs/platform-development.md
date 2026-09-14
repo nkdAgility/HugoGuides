@@ -118,3 +118,9 @@ Each release has one version and source commit. `release-manifest.json` schema 2
 Bootstrap remains a remote source entry point. Installation and migration decisions live in the released GuideSiteAdoption module. The installed build launcher and shared loader support `./build.ps1 Update -ring preview` without fetching bootstrap or loader source from `main`. `-WhatIf` previews managed changes; `-PlatformRelease` selects an exact release. Ordinary builds never update the installation lock.
 
 Updating an older installation removes its managed `bootstrap.ps1` only if its recorded checksum still matches. A locally edited bootstrap blocks the update with a conflict, and failed installation writes restore the retired file. Unmanaged files are preserved. Existing immutable releases are not modified; the new loader selects releases containing the new GuideSite asset. Stable adoption remains the separately tracked acceptance gate.
+
+## Version-driven publication
+
+GitVersion supplies the version for both branch and tag builds. A prerelease suffix produces a preview GitHub Release; a stable version produces a normal GitHub Release. The same publisher handles both and creates the matching Hugo subdirectory tag. The version determines the release channel, independently of the triggering ref.
+
+The platform workflow runs for main branch pushes, root version tags such as `v0.5.3`, PRs and manual dispatch. PR, merge-group and manual-dispatch runs validate only. Eligible publication always waits for Build and the sample stages to succeed. Hugo subdirectory tags do not trigger another platform build. Existing tags are not moved by this change.

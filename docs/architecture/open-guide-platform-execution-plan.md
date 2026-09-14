@@ -38,6 +38,19 @@ The user authorized closing the remaining CI gaps after distribution cleanup. Az
 
 The original stage IDs and scope below remain unchanged. Earlier test counts and commits are dated evidence, not current-head acceptance. The latest local acceptance is 290 tests; named-release installation is still a distinct post-merge check.
 
+## Release detection repair — PR #42
+
+Requested scope: build root version tags and infer preview versus stable publication from the GitVersion version using one publisher. Main pushes and root version-tag pushes may publish only after the candidate sample succeeds; PR, merge-group and manual-dispatch runs remain validation-only. A stable version produced on a branch uses the same publisher as a stable tag. No consumer or repository-administration changes are included.
+
+Independent audit identified the following significant matters for maintainer decision. They are not silently included in this repair:
+
+- Stable installation/update is still rejected by the adoption module, despite a production-ring option being exposed. Removing this gate changes the previously recorded adoption boundary.
+- Direct local Release verifies package identity but relies on the operator/orchestrator to supply already accepted sample output. Adding candidate-bound verification evidence to the publisher is a separate enforcement change.
+- Explicit local version overrides can reach publication; enforcing fresh GitVersion recalculation at that boundary would tighten the existing API contract.
+- The complete local run currently deploys the preview sample when deployment is requested, even when packaging a stable version. Changing this to the production sample would change its deployment behavior.
+
+These findings await approval; managed agent enforcement and Hugo internal refactoring remain separately deferred. The existing `v0.5.3` tag points to source that predates this workflow repair. No tag is moved or replayed by this PR.
+
 ## Outcome
 
 Rename the existing public `nkdAgility/HugoGuides` repository to `nkdAgility/OpenGuidePlatform`, preserve its Git history and releases, move its reusable code into named `system/` components, and adopt the resulting platform in KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack.

@@ -17,7 +17,7 @@ Describe 'Complete platform execution decisions' {
         Invoke-PlatformBuild -WorkspaceRoot $TestDrive -OutputPath .processing/run
         $global:OgpPlatformOperations[-2]|Should -Be 'Test-OpenGuidePlatformPackage'
         $global:OgpPlatformOperations[-1]|Should -Be 'Sample'
-        $global:OgpPlatformOperations|Should -Not -Contain 'Publish-PlatformPreviewRelease'
+        $global:OgpPlatformOperations|Should -Not -Contain 'Publish-PlatformRelease'
     }
     It 'requires explicit sample deployment for complete-run publication' {
         {Invoke-PlatformBuild -WorkspaceRoot $TestDrive -Publish}|Should -Throw '*sample deployment and live verification*'
@@ -26,7 +26,7 @@ Describe 'Complete platform execution decisions' {
     It 'does not publish when sample acceptance fails' {
         $global:OgpSampleFails=$true
         {Invoke-PlatformBuild -WorkspaceRoot $TestDrive -OutputPath .processing/run -Publish -DeploySample -DeploymentEnvironment preview}|Should -Throw '*Sample rejected*'
-        $global:OgpPlatformOperations|Should -Not -Contain 'Publish-PlatformPreviewRelease'
+        $global:OgpPlatformOperations|Should -Not -Contain 'Publish-PlatformRelease'
     }
 }
 AfterAll {Remove-Variable OgpPlatformOperations,OgpSampleFails -Scope Global -ErrorAction SilentlyContinue}

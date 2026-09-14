@@ -7,13 +7,13 @@ function Invoke-PlatformBuildOperation {
     $operations=@{
         'Test-PlatformContracts'='Testing';'Test-PlatformCore'='Testing';'Test-HugoTranslationProbe'='Testing';'Test-DistributedSkills'='Testing'
         'Package-OpenGuidePlatform'='Packaging';'Test-OpenGuidePlatformPackage'='Packaging'
-        'Publish-PlatformPreviewRelease'='Release';'Install-PlatformTestDependencies'='Toolchain'
+        'Publish-PlatformRelease'='Release';'Install-PlatformTestDependencies'='Toolchain'
     }
     if(-not $operations.ContainsKey($Operation)){throw "Unsupported platform operation: $Operation"}
     $arguments=@{WorkspaceRoot=$WorkspaceRoot}
     if($PSBoundParameters.ContainsKey('OutputPath')){$arguments.OutputPath=$OutputPath}
     if($PSBoundParameters.ContainsKey('Version')){$arguments.Version=$Version}
-    if($Operation -eq 'Publish-PlatformPreviewRelease'){$arguments.Repository=$Repository}
+    if($Operation -eq 'Publish-PlatformRelease'){$arguments.Repository=$Repository}
     if($Operation -eq 'Test-PlatformCore'){
         & (Join-Path $PSHOME $(if($IsWindows){'pwsh.exe'}else{'pwsh'})) -NoProfile -File "$PSScriptRoot/Testing/Test-PlatformCore.ps1" -WorkspaceRoot $WorkspaceRoot
         if($LASTEXITCODE -ne 0){throw 'Platform Core acceptance failed.'}
@@ -86,7 +86,7 @@ function Invoke-PlatformBuild {
     if($Stage -in @('All','Package')){Invoke-PlatformBuildOperation -Operation Package-OpenGuidePlatform -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Version $Version}
     if($Stage -in @('All','Validate') -and -not $ReleaseTag){Invoke-PlatformBuildOperation -Operation Test-OpenGuidePlatformPackage -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath}
     if($Stage -in @('All','Sample')){Test-PlatformCandidateSample -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Deploy:$DeploySample -DeploymentEnvironment $DeploymentEnvironment -DeploymentUrl $DeploymentUrl -DeploymentAdapter $DeploymentAdapter}
-    if($Stage -eq 'Release' -or ($Stage -eq 'All' -and $Publish)){Invoke-PlatformBuildOperation -Operation Publish-PlatformPreviewRelease -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Repository $Repository}
+    if($Stage -eq 'Release' -or ($Stage -eq 'All' -and $Publish)){Invoke-PlatformBuildOperation -Operation Publish-PlatformRelease -WorkspaceRoot $WorkspaceRoot -OutputPath $OutputPath -Repository $Repository}
     if($Stage -eq 'All' -and $Publish){$ReleaseTag='v'+$Version}
     if(($Stage -eq 'Validate' -and $ReleaseTag) -or ($Stage -eq 'All' -and $Publish)){
         $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()

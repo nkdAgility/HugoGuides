@@ -5,7 +5,10 @@ $ErrorActionPreference='Stop'
 $WorkspaceRoot=[IO.Path]::GetFullPath($WorkspaceRoot)
 $OutputPath=[IO.Path]::GetFullPath($OutputPath,$WorkspaceRoot)
 $manifest=Get-Content "$OutputPath/release-manifest.json" -Raw|ConvertFrom-Json
-if($manifest.channel -cne 'preview' -or $manifest.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$' -or $manifest.schemaVersion -ne 2){throw 'Only GitVersion prerelease packages can be published by this entry point.'}
+if($manifest.schemaVersion -ne 2 -or $manifest.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$'){throw 'Invalid coordinated release version or manifest schema.'}
+$prerelease=$manifest.version.Contains('-')
+$channel=if($prerelease){'preview'}else{'stable'}
+if($manifest.channel -cne $channel){throw 'Release channel disagrees with the built version. Rebuild the coordinated package.'}
 $assets=@('OpenGuidePlatform-GuideSite.zip','OpenGuidePlatform-PlatformBuild.zip','release-manifest.json')
 foreach($name in @('GuideSite','PlatformBuild')){
     $part=$manifest.packages.$name
@@ -28,10 +31,10 @@ if($prior.Count){
     if($LASTEXITCODE -ne 0){throw 'Native Hugo tag publication failed; no platform release was created.'}
 }
 # Reruns verify an existing immutable release; they never replace assets or move tags.
-$existing=& gh release view $tag --repo $Repository --json targetCommitish,isDraft 2>$null
+$existing=& gh release view $tag --repo $Repository --json targetCommitish,isDraft,isPrerelease 2>$null
 if($LASTEXITCODE -eq 0){
     $release=$existing|ConvertFrom-Json
-    if($release.targetCommitish -cne $commit -or $release.isDraft){throw 'Existing release identity differs.'}
+    if($release.targetCommitish -cne $commit -or $release.isDraft -or [bool]$release.isPrerelease -ne $prerelease){throw 'Existing release identity differs.'}
     $verify=Join-Path $OutputPath ('existing-'+[guid]::NewGuid().ToString('N'))
     & gh release download $tag --repo $Repository --pattern OpenGuidePlatform-GuideSite.zip --pattern OpenGuidePlatform-PlatformBuild.zip --pattern release-manifest.json --dir $verify
     if($LASTEXITCODE -ne 0){throw 'Cannot verify existing release assets.'}
@@ -45,12 +48,13 @@ if($LASTEXITCODE -eq 0){
     return
 }
 $notes=@"
-Preview candidate from commit $commit.
+OpenGuidePlatform $($manifest.version) ($channel) from commit $commit.
 
 Platform component tests and package verification passed. Before publication, GuideSiteSample consumed this build's candidate artifact through the shared guide-site workflow. Publication depends on that workflow succeeding; the release reuses the validated build assets without repackaging.
 
-This prerelease does not deploy or update any guide instance. Hosting/browser verification and stable promotion remain separate acceptance steps.
+This release does not deploy or update consumer guide sites.
 "@
 [IO.File]::WriteAllText("$OutputPath/release-notes.md",$notes)
-& gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit --prerelease --latest=false --title "OpenGuidePlatform $($manifest.version)" --notes-file "$OutputPath/release-notes.md"
-if($LASTEXITCODE -ne 0){throw 'Preview release publication failed.'}
+$releaseFlags=if($prerelease){@('--prerelease','--latest=false')}else{@()}
+& gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit @releaseFlags --title "OpenGuidePlatform $($manifest.version)" --notes-file "$OutputPath/release-notes.md"
+if($LASTEXITCODE -ne 0){throw 'Platform release publication failed.'}

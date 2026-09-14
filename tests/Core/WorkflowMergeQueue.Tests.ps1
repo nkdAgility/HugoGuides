@@ -7,7 +7,7 @@ Describe 'Merge-queue acceptance' {
         $main=Get-Content "$root/.github/workflows/main.yaml" -Raw|ConvertFrom-Yaml
         $main.on.merge_group.types | Should -Contain checks_requested
         $main.jobs.sample.with.deploy | Should -Match "github.event_name != 'merge_group'"
-        $main.jobs.release['if'] | Should -Be '${{ github.event_name == ''push'' && github.ref == ''refs/heads/main'' }}'
+        $main.jobs.release['if'] | Should -Be '${{ github.event_name == ''push'' }}'
         $main.jobs.sample.needs | Should -Be build
     }
 }

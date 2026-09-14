@@ -9,7 +9,7 @@ BeforeAll {
     }
 
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $publisher=Join-Path $root 'system/OpenGuidePlatform.PowerShell.PlatformBuild/Release/Publish-PlatformPreviewRelease.ps1'
+    $publisher=Join-Path $root 'system/OpenGuidePlatform.PowerShell.PlatformBuild/Release/Publish-PlatformRelease.ps1'
     function git {
         $global:LASTEXITCODE=0
         if($args -contains 'rev-parse'){return 'a'*40}
@@ -23,7 +23,7 @@ BeforeAll {
             if($global:OgpNativeTagFailure){$global:LASTEXITCODE=1}
             return
         }
-        if($args[0] -eq 'release' -and $args[1] -eq 'view'){$global:LASTEXITCODE=1;return}
+        if($args[0] -eq 'release' -and $args[1] -eq 'view'){if($global:OgpExistingRelease){return ($global:OgpExistingRelease|ConvertTo-Json)};$global:LASTEXITCODE=1;return}
         if($args[0] -eq 'release' -and $args[1] -eq 'create'){return}
         throw 'Unexpected GitHub operation.'
     }
@@ -31,7 +31,7 @@ BeforeAll {
 Describe 'Coordinated native module publication' {
     BeforeEach {
         $global:OgpNativeTagCalls=[Collections.Generic.List[string]]::new()
-        $global:OgpNativeTagExisting=@()
+        $global:OgpNativeTagExisting=@();$global:OgpExistingRelease=$null
         $global:OgpNativeTagFailure=$false
         $assets=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($assets)|Out-Null
@@ -47,6 +47,30 @@ Describe 'Coordinated native module publication' {
         & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets
         $global:OgpNativeTagCalls[0] | Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1'
         $global:OgpNativeTagCalls[-1] | Should -Match '^release create v0.1.0-Preview.1 '
+    }
+    It 'publishes a stable version as a normal release with the matching module tag' {
+        $manifest.version='0.1.0';$manifest.channel='stable'
+        $manifest.nativeHugoModule.version='v0.1.0';$manifest.nativeHugoModule.tag='system/OpenGuidePlatform.Hugo.Guides/v0.1.0'
+        ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10|Set-Content "$assets/release-manifest.json"
+        & $publisher -WorkspaceRoot $root -OutputPath $assets
+        $global:OgpNativeTagCalls[0]|Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0'
+        $global:OgpNativeTagCalls[-1]|Should -Match '^release create v0.1.0 '
+        $global:OgpNativeTagCalls[-1]|Should -Not -Match '--prerelease|--latest=false'
+    }
+    It 'keeps prerelease versions as preview releases' {
+        & $publisher -WorkspaceRoot $root -OutputPath $assets
+        $global:OgpNativeTagCalls[-1]|Should -Match '--prerelease --latest=false'
+    }
+    It 'rejects a manifest channel inconsistent with its version' {
+        $manifest.channel='stable'
+        ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10|Set-Content "$assets/release-manifest.json"
+        { & $publisher -WorkspaceRoot $root -OutputPath $assets }|Should -Throw '*channel disagrees*'
+        $global:OgpNativeTagCalls.Count|Should -Be 0
+    }
+    It 'rejects an existing release with the wrong prerelease classification' {
+        $global:OgpExistingRelease=@{targetCommitish=('a'*40);isDraft=$false;isPrerelease=$false}
+        { & $publisher -WorkspaceRoot $root -OutputPath $assets }|Should -Throw '*Existing release identity differs*'
+        @($global:OgpNativeTagCalls|Where-Object {$_ -match '^release create '}).Count|Should -Be 0
     }
     It 'publishes workspace-relative assets when invoked from another working directory' {
         $workspace=Split-Path $assets -Parent
@@ -79,4 +103,4 @@ Describe 'Coordinated native module publication' {
         $global:OgpNativeTagCalls.Count | Should -Be 0
     }
 }
-AfterAll { Remove-Variable OgpNativeTagCalls,OgpNativeTagExisting,OgpNativeTagFailure -Scope Global -ErrorAction SilentlyContinue }
+AfterAll { Remove-Variable OgpNativeTagCalls,OgpNativeTagExisting,OgpExistingRelease,OgpNativeTagFailure -Scope Global -ErrorAction SilentlyContinue }
