@@ -55,6 +55,14 @@ Remaining gates:
 - **E12:** stable promotion and consumer production deployments need separate authorization.
 - **E14:** internal Hugo refactoring remains after verified adoption previews across all three sites; production promotion is not a prerequisite.
 
+### Platform and guide-site build modules
+
+The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.Build` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. Both ship in the same package and version. Existing build/test/package scripts in `.build/` are forwarding entry points.
+
+A shared loader supports local code, explicit directory/ZIP paths, installation locks, and specific/latest preview or production package resolution without changing a consumer lock. Production release selection is not authorization to publish or deploy production. Released Hugo dependencies must still match the selected release; overrides do not silently change consumer dependency files.
+
+Local platform All now tests, packages, validates and runs preview/production sample builds from that exact package in fresh PowerShell processes. It does not deploy or publish. CI continues to run the independent deployment and live verification stages before publication. Complete local deployment parity, remaining baseline utility extraction, and macOS/Azure Pipelines/TeamCity verification remain open gaps; this module boundary does not mark those complete.
+
 ### PowerShell workflow consolidation — 14 September 2026
 
 Bounded E04/E07 follow-up requested during PR #37: installed guide-site launchers restore the selected platform package and call `Invoke-GuideSiteBuild` from its Build module. Shared CI uses the same module from either the published release or the exact candidate ZIP. GitHub reporting and deployment data validation moved from inline JavaScript into that released module. YAML retains action wiring and single PowerShell calls. Root and component documentation describe the supported entry points.

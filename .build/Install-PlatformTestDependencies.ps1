@@ -1,4 +1,5 @@
 #Requires -Version 7.4
-$ErrorActionPreference='Stop'
-Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -Repository PSGallery
-Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery
+[CmdletBinding()]
+param([string]$WorkspaceRoot=(Split-Path $PSScriptRoot -Parent))
+Import-Module "$PSScriptRoot/../system/OpenGuidePlatform.PowerShell.PlatformBuild/OpenGuidePlatform.PowerShell.PlatformBuild.psm1"
+Invoke-PlatformBuildOperation -Operation Install-PlatformTestDependencies -WorkspaceRoot $WorkspaceRoot

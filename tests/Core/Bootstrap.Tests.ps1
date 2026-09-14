@@ -6,10 +6,10 @@ BeforeAll {
         if($args -contains '--slurp' -and $args -contains '--jq'){throw 'GitHub CLI forbids combining --slurp and --jq.'}
         if($global:OgpBootstrapOffline){throw 'Unexpected network access.'}
         if($args[0] -eq 'api'){
-            return (@(@{draft=$false;prerelease=$true;tag_name='v1.2.3-Preview.2';published_at='2026-09-13';assets=@(@{name='bootstrap.ps1'})})|ConvertTo-Json -Depth 5)
+            return (@(@{draft=$false;prerelease=$true;tag_name='v1.2.3-Preview.2';published_at='2026-09-13';assets=@(@{name='bootstrap.ps1'})},@{draft=$false;prerelease=$false;tag_name='v1.2.3';published_at='2026-09-14';assets=@(@{name='bootstrap.ps1'})})|ConvertTo-Json -Depth 5)
         }
         if($args[1] -eq 'view'){
-            return (@{tagName=$args[2];targetCommitish=('a'*40);isDraft=$false;isPrerelease=$true}|ConvertTo-Json)
+            return (@{tagName=$args[2];targetCommitish=('a'*40);isDraft=$false;isPrerelease=$args[2].Contains('-')}|ConvertTo-Json)
         }
         if($args[1] -eq 'download'){
             $directory=$args[[Array]::IndexOf($args,'--dir')+1]
@@ -20,7 +20,7 @@ BeforeAll {
         throw 'Unexpected GitHub invocation.'
     }
     $global:OgpBootstrapAssets=@{}
-    foreach($version in @('1.2.3-Preview.1','1.2.3-Preview.2')){
+    foreach($version in @('1.2.3-Preview.1','1.2.3-Preview.2','1.2.3')){
         $assets=Join-Path $TestDrive $version
         $stage=Join-Path $assets 'package'
         [IO.Directory]::CreateDirectory("$stage/system")|Out-Null
@@ -30,7 +30,7 @@ BeforeAll {
         Copy-Item $bootstrap "$assets/bootstrap.ps1"
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$PolicyPath"')
         [IO.Directory]::CreateDirectory("$stage/system/OpenGuidePlatform.PowerShell.Build")|Out-Null
-        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) "GuideSite|$Version|$Target|$PolicyPath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
+        [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$PolicyPath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$PolicyPath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
         [IO.File]::WriteAllText("$stage/platform.json",(@{product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
         [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.GuideSite.Adoption/New-NativeHugoUpdate.ps1", @'
 param($WorkspaceRoot,$SourcePath,$NativeModule,$PreviousVersion)
@@ -40,7 +40,7 @@ if(Test-Path "$WorkspaceRoot/simulate-stale-snapshot"){ $expected='0'*64 }
 [pscustomobject]@{Files=[ordered]@{'site/go.mod'=[Text.Encoding]::UTF8.GetBytes("module fixture`nrequire $($NativeModule.path) $($NativeModule.version)`n")};ExpectedHashes=[ordered]@{'site/go.mod'=$expected};Sum='fixture-sum';GoModSum='fixture-mod-sum'}
 '@)
         [IO.Compression.ZipFile]::CreateFromDirectory($stage,"$assets/OpenGuidePlatform.zip")
-        $manifest=@{nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)};schemaVersion=1;product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);channel='preview';archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()}
+        $manifest=@{nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)};schemaVersion=1;product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);channel=if($version.Contains('-')){'preview'}else{'stable'};archive='OpenGuidePlatform.zip';bootstrapSha256=(Get-FileHash "$assets/bootstrap.ps1").Hash.ToLowerInvariant();sha256=(Get-FileHash "$assets/OpenGuidePlatform.zip").Hash.ToLowerInvariant()}
         [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 5))
         $global:OgpBootstrapAssets["v$version"]=$assets
     }
@@ -58,7 +58,7 @@ Describe 'Guide-site installation and update' {
     }
     AfterEach {
         # The installed fixture imports a fake Build module; do not leak it into other tests.
-        Get-Module OpenGuidePlatform.PowerShell.Build -All | Where-Object { $_.Path.StartsWith($workspace+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
+        Get-Module OpenGuidePlatform.PowerShell.Build -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
     }
     It 'installs matching workflow and identical root agent shims without touching policy' {
         $before=(Get-FileHash "$workspace/guide-site.policy.json").Hash
@@ -153,7 +153,25 @@ Describe 'Guide-site installation and update' {
             (Get-Item AGENTS.md).LinkType | Should -Be SymbolicLink
         }finally{Pop-Location}
     }
-    It 'requires a review branch' {
+    It 'resolves a specific release without installing or changing the branch' -ForEach @(@{Channel='preview';Tag='v1.2.3-Preview.2'},@{Channel='stable';Tag='v1.2.3'}) {
+        & git -C $workspace symbolic-ref HEAD refs/heads/main
+        $package=& $bootstrap -Resolve -Channel $Channel -ReleaseTag $Tag -WorkspaceRoot $workspace
+        (Get-Content "$package/platform.json" -Raw|ConvertFrom-Json).version|Should -Be $Tag.Substring(1)
+        Test-Path "$workspace/build.ps1"|Should -BeFalse
+        (& git -C $workspace branch --show-current).Trim()|Should -Be main
+    }
+    It 'resolves latest within the requested channel' -ForEach @(@{Channel='preview';Expected='1.2.3-Preview.2'},@{Channel='stable';Expected='1.2.3'}) {
+        $package=& $bootstrap -Resolve -Channel $Channel -WorkspaceRoot $workspace
+        (Get-Content "$package/platform.json" -Raw|ConvertFrom-Json).version|Should -Be $Expected
+        Test-Path "$workspace/open-guide-platform.installation.json"|Should -BeFalse
+    }
+    It 'lets the installed launcher select local platform code without updating the lock' {
+        & $bootstrap -Install @parameters
+        $before=(Get-FileHash "$workspace/open-guide-platform.installation.json").Hash
+        & "$workspace/build.ps1" -PlatformPath "$TestDrive/1.2.3-Preview.2/package" -Target preview|Should -Be 'GuideSite|1.2.3-Preview.2|preview|guide-site.policy.json'
+        (Get-FileHash "$workspace/open-guide-platform.installation.json").Hash|Should -Be $before
+    }
+    It 'requires a review branch'  {
         & git -C $workspace symbolic-ref HEAD refs/heads/main
         { & $bootstrap -Install @parameters } | Should -Throw '*review branch*'
     }

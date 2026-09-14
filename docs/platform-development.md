@@ -12,7 +12,17 @@ Install the tools listed in the README and Node.js 20 or newer and npm (for real
 ./build.ps1 -Version 0.0.0-local
 ```
 
-The platform build runs preparation, tests, packaging and package verification. It writes to a fresh directory under `.processing/platform/`; it does not publish a release or build the sample. Pester is a platform-development dependency, not an everyday guide-site requirement.
+The platform build runs preparation, tests, packaging and package verification. It writes to a fresh directory under `.processing/platform/`, then builds and validates the sample in preview and production from the exact package ZIP it produced. It does not publish a release or deploy the sample. Pester is a platform-development dependency, not an everyday guide-site requirement.
+
+## Build module ownership
+
+`OpenGuidePlatform.PowerShell.PlatformBuild` owns platform engineering. `OpenGuidePlatform.PowerShell.Build` owns guide-site stages and remains independently importable. Both ship in one coordinated release. Root scripts dispatch to the selected module; existing `.build/` build/test/package entry points forward to PlatformBuild.
+
+Both root build entry points accept `-PlatformSource Local|Preview|Production|Path`, `-PlatformRelease <tag>` and `-PlatformPath <directory-or-zip>`. Platform checkouts default to their local module. Installed consumers default to their installation lock. An explicit override does not change that lock. Preview/Production without a tag select the latest eligible release once at startup; Production means a non-prerelease platform package, independently of the site's `-Target`.
+
+A path points to a platform checkout, a restored platform directory, or `OpenGuidePlatform.zip` alongside its `release-manifest.json`. ZIP bytes are verified and extracted into a fresh workspace directory. Release selection uses the standalone bootstrap to verify the package before importing module code.
+
+For a consumer-owned build, import the selected Build module and invoke its stages around the consumer's other operations. PlatformBuild uses the newly built package for sample acceptance; consumers do not need PlatformBuild or the platform test dependencies.
 
 ## Run the sample
 

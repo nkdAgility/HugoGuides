@@ -1,9 +1,9 @@
 BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-    $publisher=Join-Path $root '.build/Publish-PlatformPreviewRelease.ps1'
+    $publisher=Join-Path $root 'system/OpenGuidePlatform.PowerShell.PlatformBuild/Release/Publish-PlatformPreviewRelease.ps1'
     function git {
         $global:LASTEXITCODE=0
-        if($args[0] -eq 'rev-parse'){return 'a'*40}
+        if($args -contains 'rev-parse'){return 'a'*40}
         if($args[0] -eq 'ls-remote'){return $global:OgpNativeTagExisting}
         throw 'Unexpected Git operation.'
     }
@@ -35,29 +35,29 @@ Describe 'Coordinated native module publication' {
     }
     AfterEach { $env:GITHUB_REPOSITORY=$priorRepo }
     It 'publishes a nested module tag before making its coordinated release available' {
-        & $publisher -OutputPath $assets
+        & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets
         $global:OgpNativeTagCalls[0] | Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1'
         $global:OgpNativeTagCalls[-1] | Should -Match '^release create v0.1.0-Preview.1 '
     }
     It 'reuses an existing matching tag without moving or recreating it' {
         $global:OgpNativeTagExisting=@(('a'*40)+"`trefs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1")
-        & $publisher -OutputPath $assets
+        & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets
         @($global:OgpNativeTagCalls|Where-Object {$_ -match '^api '}).Count | Should -Be 0
     }
     It 'refuses a conflicting immutable module tag' {
         $global:OgpNativeTagExisting=@(('b'*40)+"`trefs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1")
-        { & $publisher -OutputPath $assets } | Should -Throw '*Existing native Hugo tag differs*'
+        { & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets } | Should -Throw '*Existing native Hugo tag differs*'
         $global:OgpNativeTagCalls.Count | Should -Be 0
     }
     It 'does not publish the platform when module publication fails' {
         $global:OgpNativeTagFailure=$true
-        { & $publisher -OutputPath $assets } | Should -Throw '*Native Hugo tag publication failed*'
+        { & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets } | Should -Throw '*Native Hugo tag publication failed*'
         @($global:OgpNativeTagCalls|Where-Object {$_ -match '^release create '}).Count | Should -Be 0
     }
     It 'rejects a module version inconsistent with the tested package' {
         $manifest.nativeHugoModule.version='v9.0.0'
         [IO.File]::WriteAllText("$assets/release-manifest.json",($manifest|ConvertTo-Json -Depth 10))
-        { & $publisher -OutputPath $assets } | Should -Throw '*Native Hugo publication identity differs*'
+        { & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets } | Should -Throw '*Native Hugo publication identity differs*'
         $global:OgpNativeTagCalls.Count | Should -Be 0
     }
 }

@@ -5,6 +5,7 @@ param(
     [Parameter(ParameterSetName='Install')][switch]$Install,
     [Parameter(ParameterSetName='Update')][switch]$Update,
     [Parameter(ParameterSetName='Restore')][switch]$Restore,
+    [Parameter(ParameterSetName='Resolve')][switch]$Resolve,
     [ValidateSet('preview','stable')][string]$Channel='preview',
     [ValidatePattern('^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$ReleaseTag,
     [string]$WorkspaceRoot=$PWD,
@@ -35,7 +36,7 @@ function Invoke-GitHub([string[]]$Arguments) {
 }
 $lockPath=Resolve-InstallPath 'open-guide-platform.installation.json'
 $previous=if(Test-Path -LiteralPath $lockPath){Get-Content -LiteralPath $lockPath -Raw|ConvertFrom-Json -AsHashtable}else{$null}
-$automatic=-not ($Install -or $Update -or $Restore)
+$automatic=-not ($Install -or $Update -or $Restore -or $Resolve)
 if($automatic){
     if($previous){$Update=$true}else{$Install=$true}
 }
@@ -43,7 +44,7 @@ if($previous -and ($previous.kind -cne 'preview-installation' -or $previous.sche
 if($Restore -or $Update){if(-not $previous){throw 'No installation found; run -Install first.'}}
 if($Install -and $previous){throw 'Already installed; use -Update.'}
 $reviewBranch=$null
-if(-not $Restore){
+if(-not ($Restore -or $Resolve)){
     if($Channel -ne 'preview'){throw 'Stable adoption is not available: native Hugo publication and coordinated agent controls remain adoption blockers.'}
     $branch=(& git -C $root branch --show-current).Trim()
     if($automatic -and $branch -in @('main','master')){
@@ -62,12 +63,12 @@ if($Restore){
 }else{
     if(-not $ReleaseTag){
         $releases=Invoke-GitHub @('api',"repos/$repository/releases?per_page=100",'--paginate','--slurp') | ConvertFrom-Json | ForEach-Object { foreach($item in $_){$item} }
-        $eligible=@($releases|Where-Object { -not $_.draft -and $_.prerelease -and @($_.assets|Where-Object name -eq 'bootstrap.ps1').Count -eq 1 }|Sort-Object published_at -Descending)
-        if(-not $eligible.Count){throw 'No installable preview release is available.'}
+        $eligible=@($releases|Where-Object { -not $_.draft -and ([bool]$_.prerelease -eq ($Channel -eq 'preview')) -and @($_.assets|Where-Object name -eq 'bootstrap.ps1').Count -eq 1 }|Sort-Object published_at -Descending)
+        if(-not $eligible.Count){throw "No installable $Channel release is available."}
         $ReleaseTag=$eligible[0].tag_name
     }
     $release=Invoke-GitHub @('release','view',$ReleaseTag,'--repo',$repository,'--json','tagName,targetCommitish,isDraft,isPrerelease')|ConvertFrom-Json
-    if($release.isDraft -or -not $release.isPrerelease -or $release.tagName -cne $ReleaseTag){throw 'Select a published preview release.'}
+    if($release.isDraft -or ([bool]$release.isPrerelease -ne ($Channel -eq 'preview')) -or $release.tagName -cne $ReleaseTag){throw "Select a published $Channel release."}
 }
 # Downloads and extraction are disposable; tracked files are untouched until all checks pass.
 $work=Resolve-InstallPath ('.processing/platform-install/'+[guid]::NewGuid().ToString('N'))
@@ -77,7 +78,7 @@ if(-not $Restore){
     $manifest=Get-Content "$work/release-manifest.json" -Raw|ConvertFrom-Json -AsHashtable
     if($manifest.sourceCommit -cne $release.targetCommitish){throw 'Release source does not match manifest.'}
 }
-if($manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ReleaseTag.Substring(1) -or $manifest.channel -cne 'preview' -or $manifest.archive -cne 'OpenGuidePlatform.zip' -or $manifest.sha256 -cnotmatch '^[a-f0-9]{64}$' -or $manifest.sourceCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Invalid release identity.'}
+if($manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ReleaseTag.Substring(1) -or $manifest.channel -cne $(if($Restore){$previous.release.channel}else{$Channel}) -or $manifest.archive -cne 'OpenGuidePlatform.zip' -or $manifest.sha256 -cnotmatch '^[a-f0-9]{64}$' -or $manifest.sourceCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Invalid release identity.'}
 $cache=Resolve-InstallPath ('.processing/platform-cache/'+$manifest.sha256)
 [IO.Directory]::CreateDirectory($cache)|Out-Null
 $archivePath=Join-Path $cache 'OpenGuidePlatform.zip'
@@ -101,7 +102,7 @@ if($metadata.version -cne $manifest.version -or $metadata.sourceCommit -cne $man
 $metadata=& "$package/system/OpenGuidePlatform.GuideSite.Adoption/Confirm-PlatformPackage.ps1" -PackageRoot $package -Manifest $manifest
 $resolution=[ordered]@{schemaVersion=1;mode='release';version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$package/platform-resolution.json",($resolution|ConvertTo-Json))
-if($Restore){return $package}
+if($Restore -or $Resolve){return $package}
 foreach($required in @('system/OpenGuidePlatform.GuideSite.Adoption/build.ps1','system/OpenGuidePlatform.GuideSite.Adoption/main.yaml')){
     if(-not (Test-Path -LiteralPath "$package/$required" -PathType Leaf)){throw 'This release predates guide-site installation support; choose a newer release.'}
 }
@@ -117,6 +118,7 @@ $null=Invoke-GitHub @('release','download',$ReleaseTag,'--repo',$repository,'--p
 if((Get-Digest "$work/bootstrap.ps1") -cne $manifest.bootstrapSha256){throw 'Bootstrap digest mismatch.'}
 $files['bootstrap.ps1']=[IO.File]::ReadAllBytes("$work/bootstrap.ps1")
 $files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/build.ps1")
+$files['Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.GuideSite.Adoption/Resolve-OpenGuidePlatform.ps1")
 $workflow=[IO.File]::ReadAllText("$package/system/OpenGuidePlatform.GuideSite.Adoption/main.yaml")
 $workflow=$workflow.Replace('__RELEASE__',$ReleaseTag).Replace('__COMMIT__',$manifest.sourceCommit).Replace('__POLICY__',($PolicyPath|ConvertTo-Json -Compress)).Replace('__SITE__',([string]$policy.siteId|ConvertTo-Json -Compress))
 $files['.github/workflows/main.yaml']=[Text.Encoding]::UTF8.GetBytes($workflow)
