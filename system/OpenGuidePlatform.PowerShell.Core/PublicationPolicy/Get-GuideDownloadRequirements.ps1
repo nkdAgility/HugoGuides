@@ -3,13 +3,13 @@ function Get-GuideDownloadRequirements {
     param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][Collections.IDictionary]$Policy,[Parameter(Mandatory)][string]$Target,[Parameter(Mandatory)][AllowEmptyCollection()][string[]]$EnabledLanguages)
     $required=[Collections.Generic.List[object]]::new();$forbidden=[Collections.Generic.List[object]]::new();$findings=[Collections.Generic.List[object]]::new()
     foreach($guide in $Policy.guides){foreach($edition in $guide.editions){foreach($translation in $edition.translations){
-        $excluded=$translation.intent -in @('excluded','scaffold') -or ($translation.intent -ne 'pdf-only' -and $translation.language -cnotin $EnabledLanguages)
+        $excluded=$translation.intent -in @('excluded','scaffold') -or ($translation.intent -ne 'pdf-only' -and $translation.language -notin $EnabledLanguages)
         foreach($environment in $Policy.publication.environments|Where-Object name -CEQ $Target){
-            if($translation.language -cin $environment.excludedLanguages -or $guide.id -cin $environment.excludedGuides){$excluded=$true}
+            if($translation.language -in $environment.excludedLanguages -or $guide.id -cin $environment.excludedGuides){$excluded=$true}
         }
         foreach($rule in $Policy.publication.permanentExclusions){
             if($rule.environment -cne $Target){continue}
-            if(($rule.subject -eq 'language' -and $rule.id -ceq $translation.language) -or ($rule.subject -eq 'guide' -and $rule.id -ceq $guide.id) -or ($rule.subject -eq 'edition' -and $rule.id -ceq "$($guide.id)/$($edition.id)")){$excluded=$true}
+            if(($rule.subject -eq 'language' -and $rule.id -eq $translation.language) -or ($rule.subject -eq 'guide' -and $rule.id -ceq $guide.id) -or ($rule.subject -eq 'edition' -and $rule.id -ceq "$($guide.id)/$($edition.id)")){$excluded=$true}
         }
         foreach($download in $translation.downloads){
             $source="$($guide.contentRoot)/$($edition.path)/$($download.path)"

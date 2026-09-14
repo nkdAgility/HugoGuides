@@ -23,6 +23,14 @@ Describe 'Declared download publication' {
         $requirements.RequiredPaths | Should -Contain 'downloads/approved.pdf'
         (Test-GuideDownloadPublication $requirements (Read-DownloadFiles $artifact)).Outcome | Should -Be pass
     }
+    It 'matches regional language casing without weakening exclusion policy' {
+        $edition.translations[0].language='es-ES'
+        $edition.translations[0].intent='web'
+        $argsForDownloads.EnabledLanguages=@('es-es')
+        @( (Get-GuideDownloadRequirements @argsForDownloads).Required ).Count | Should -Be 1
+        $policy.publication.permanentExclusions=@(@{environment='production';subject='language';id='ES-es';reason='Excluded'})
+        @( (Get-GuideDownloadRequirements @argsForDownloads).Forbidden ).Count | Should -Be 1
+    }
     It 'fails missing declared downloads and altered supplied PDF bytes' {
         $requirements=Get-GuideDownloadRequirements @argsForDownloads
         (Test-GuideDownloadPublication $requirements @()).Findings.Code | Should -Contain REQUIRED_DOWNLOAD_MISSING

@@ -8,7 +8,8 @@ Preserve the bespoke wrapper, supplied/protected PDFs and deliberate multilingua
 Do not put lang in Hugo front matter; PDF generation passes Pandoc language metadata separately.
 Never enable permanently excluded languages in production.
 Do not modify generated platform adapters, skills or the installation record by hand.
-Install/update them using ./bootstrap.ps1 on a review branch and review the complete diff.
+Update them using ./build.ps1 Update -ring preview on a review branch and review the complete diff.
+For first installation, use the remote bootstrap command documented in the platform README.
 
 Shared skills are in .agents/skills. To load the installed Core module in PowerShell:
     $platform = ./Resolve-OpenGuidePlatform.ps1 -WorkspaceRoot $PWD

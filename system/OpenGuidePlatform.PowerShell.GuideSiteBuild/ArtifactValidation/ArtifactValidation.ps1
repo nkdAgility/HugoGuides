@@ -77,7 +77,7 @@ function Test-GuideArtifact {
             $reconstructed=($entries|ForEach-Object {$_.Value.TrimStart(',',' ')}) -join ', '
             $approved=$entries.Count -gt 0 -and $reconstructed -ceq $reported
             foreach($entry in $entries){
-                $target=$entry.Groups['path'].Value;$count=[int]$entry.Groups['count'].Value
+                $target=$entry.Groups['path'].Value.Replace('\','/');$count=[int]$entry.Groups['count'].Value
                 if($target -cnotmatch '^(?:[A-Za-z0-9-]+/)?(?:download|downloads|translationsdirectory)/index\.html$' -or -not $AllowedLegacyDuplicates.ContainsKey($target) -or $AllowedLegacyDuplicates[$target] -ne $count){$approved=$false}
             }
             if($approved){continue}

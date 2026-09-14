@@ -22,6 +22,13 @@ Describe 'Frozen legacy alias compatibility' {
         (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: download/index.html (3)') -AllowedLegacyDuplicates $counts).Outcome | Should -Be fail
         (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: download/index.html (2), other/index.html (2)') -AllowedLegacyDuplicates $counts).Outcome | Should -Be fail
     }
+    It 'recognizes Windows separators and regional casing only for declared legacy targets' {
+        foreach($entry in $policy.wrapper.legacyAliases){$entry.language='es-ES';$entry.targets=@('es-es/download/index.html')}
+        $counts=Get-GuideLegacyAliasTargets $policy @('es-es')
+        $counts['es-es/download/index.html'] | Should -Be 2
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: es-es\download\index.html (2)') -AllowedLegacyDuplicates $counts).Outcome | Should -Be pass
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: es-es\other\index.html (2)') -AllowedLegacyDuplicates $counts).Outcome | Should -Be fail
+    }
     It 'rejects adding a legacy alias to a new language or deleting an existing declaration' {
         [IO.File]::WriteAllText("$workspace/site/content/one.fa.md","---`ntitle: Example`naliases:`n  - /download/`n---`nBody")
         (Test-GuideLegacyAliases $workspace $policy).Findings.Code | Should -Contain 'LEGACY_ALIAS_DECLARATION_CHANGED'

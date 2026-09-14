@@ -11,7 +11,7 @@ BeforeAll {
     Copy-Item "$module/layouts/index.html" "$fixture/themes/guides/layouts/index.html"
     Copy-Item "$module/layouts/guide/details.html" "$fixture/layouts/guide/details.html"
     [IO.File]::WriteAllText("$fixture/layouts/baseof.html",'<html><body>{{ block "main" . }}{{ end }}</body></html>')
-    [IO.File]::WriteAllText("$fixture/layouts/guide/probe.html",'{{ define "main" }}{{ partial "components/guide/guide-creators.html" . }}<script id="catalogue" type="application/json">{{ partial "functions/get-guide-translations-for-version.html" . | jsonify | safeJS }}</script>{{ end }}')
+    [IO.File]::WriteAllText("$fixture/layouts/guide/probe.html",'{{ define "main" }}{{ partial "components/guide/guide-creators.html" . }}{{ partial "components/versions/version-card.html" (dict "page" . "itemType" "latest") }}<script id="catalogue" type="application/json">{{ partial "functions/get-guide-translations-for-version.html" . | jsonify | safeJS }}</script>{{ end }}')
     [IO.File]::WriteAllText("$fixture/hugo.yaml",@'
 baseURL: https://fixture.example/
 theme: guides
@@ -57,6 +57,10 @@ languages:
     if($LASTEXITCODE -ne 0 -or @($log|Where-Object {$_ -match '^ERROR'}).Count){throw "Sample wrapper fixture failed: $($log -join [Environment]::NewLine)"}
 }
 Describe 'Guide contributor rendering' {
+    It 'links a version card to its own guide translations' {
+        $html | Should -Match 'href="https://fixture.example/guide/translations/"'
+        $html | Should -Not -Match 'href="https://fixture.example//?translations/"'
+    }
     It 'renders creator names and avatars from the real creator partial' {
         $html | Should -Match 'Fixture Creator'
         $html | Should -Match 'avatars.githubusercontent.com/fixture-creator'
