@@ -14,7 +14,7 @@ Install the tools listed in the README and Node.js 20 or newer and npm (for real
 
 Without a version override, the platform calculates GitVersion using the same module operation as Actions. The repository currently uses GitVersion 5 configuration, so Dependencies installs a compatible 5.x tool beneath `.processing/tools/` without changing a global GitVersion installation. `-Version` remains an explicit override.
 
-The platform build runs preparation, tests, packaging and package verification. It writes to a fresh directory under `.processing/platform/`, then builds and validates the sample in preview and production from the exact package ZIP it produced. It does not publish a release or deploy the sample. Pester is a platform-development dependency, not an everyday guide-site requirement.
+The platform build runs preparation, tests, packaging and package verification. It writes to a fresh directory under `.processing/platform/`, then builds and validates the sample in preview and production from the exact package ZIP it produced. It does not publish a release or deploy the sample by default; the opt-in commands below add those operations. Pester is a platform-development dependency, not an everyday guide-site requirement.
 
 ## Complete execution and publication
 
@@ -34,7 +34,7 @@ The built-in hosting adapter follows the [Azure Static Web Apps CLI deployment c
 
 ## Build module ownership
 
-`OpenGuidePlatform.PowerShell.PlatformBuild` owns platform engineering. `OpenGuidePlatform.PowerShell.GuideSiteBuild` owns guide-site stages and remains independently importable. Both ship in one coordinated release. Root scripts dispatch to the selected module; existing `.build/` build/test/package entry points forward to PlatformBuild.
+`OpenGuidePlatform.PowerShell.PlatformBuild` owns platform engineering. `OpenGuidePlatform.PowerShell.GuideSiteBuild` owns guide-site stages and remains independently importable. They ship as separate GuideSite and PlatformBuild ZIP assets in one coordinated release. Root scripts dispatch to the selected module; existing `.build/` build/test/package entry points forward to PlatformBuild.
 
 Both root build entry points accept `-PlatformSource Local|Preview|Production|Path`, `-PlatformRelease <tag>` and `-PlatformPath <directory-or-zip>`. Platform checkouts default to their local module. Installed consumers default to their installation lock. An explicit override does not change that lock. Preview/Production without a tag select the latest eligible release once at startup; Production means a non-prerelease platform package, independently of the site's `-Target`.
 

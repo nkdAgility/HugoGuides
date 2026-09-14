@@ -26,6 +26,18 @@ The user authorized closing the remaining CI gaps after distribution cleanup. Az
 - [x] Complete local regression and sample acceptance: 290 tests, both distribution packages, sample preview (119 files) and production (87 files) passed. Local GitVersion calculation and workflow lock coverage also passed. Evidence: `.processing/platform-tests/bde689573c4f4c87a0ce5d6a7ceeb738/summary.md`.
 - [x] Verify the changed Actions sample deployment adapter through live Verify: commit `98d853a`, [run 34842428612](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34842428612), passed platform Build and all sample stages, including module-owned Deploy and live Verify. Release was correctly skipped on the PR. Deployment diagnostics now retain redacted logs and reject a successful process exit without a confirmed deployment URL.
 
+## Next steps and retained work
+
+- [x] Verify implementation head `a4bec59`: [run 34843277088](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34843277088) passed through live Verify. Release was correctly skipped on the PR.
+- [ ] Finish PR #37 review, then merge and verify the resulting named release through clean remote installation and installed update (E08).
+- [ ] Extract remaining historical baseline/comparison orchestration from `.build/` into PlatformBuild; retain thin local entry points and the existing evidence (tooling cleanup).
+- [ ] Complete managed agent enforcement and the independent deployment/policy boundary later (E06/E08); administrative changes remain outside this run.
+- [ ] Adopt KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack on separate branches with preview acceptance (E09–E11).
+- [ ] Complete stable promotion and operational handover/update automation (E12–E13).
+- [ ] Refactor Hugo internals after verified adoption across all three sites (E14).
+
+The original stage IDs and scope below remain unchanged. Earlier test counts and commits are dated evidence, not current-head acceptance. The latest local acceptance is 290 tests; named-release installation is still a distinct post-merge check.
+
 ## Outcome
 
 Rename the existing public `nkdAgility/HugoGuides` repository to `nkdAgility/OpenGuidePlatform`, preserve its Git history and releases, move its reusable code into named `system/` components, and adopt the resulting platform in KanbanGuides, the-safe-delusion and ScrumGuide-ExpansionPack.
@@ -62,7 +74,7 @@ These are retained requirements, not completed acceptance or active requests for
 
 The approved simplification pass is implemented and verified at `85c1db805ebfb78f2a621c4a00815c2582f949a8`: unused adapters removed; shared stages moved into the Build component; package identity validation consolidated; prepared inputs deduplicated; one current PR assessment per target; execution history separated. No Hugo internals or consumer repositories changed.
 
-Acceptance: **216 tests**, package validation and both local sample targets passed. [CI run 34787509971](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34787509971) passed platform packaging and all five sample stages through live Verify; release was skipped. Actual reporting created current preview comment `5656678132`. Tests exercise its update, target isolation, stale-head refusal and delivery failure paths.
+Historical acceptance before PR #37: **216 tests**, package validation and both local sample targets passed. [CI run 34787509971](https://github.com/nkdAgility/OpenGuidePlatform/actions/runs/34787509971) passed platform packaging and all five sample stages through live Verify; release was skipped. Actual reporting created current preview comment `5656678132`. Tests exercise its update, target isolation, stale-head refusal and delivery failure paths.
 
 A fresh installed sample fixture also passed preview, production, cached restore with GitHub access blocked and `GOPROXY=off`, and same-version update; all seven skills loaded. It consumed version `0.0.0-20260913224036-85c1db805ebf`, ZIP SHA256 `8e6a086498bb4d7a85eccb8430618e604d4e1a3064917b7da539f6c2ccee3848`. Only release download transport used local assets; native Go resolution, bootstrap and installed builds were real. No named release was published. Local evidence is retained in `.processing/simplify-installed-consumer-evidence.json`.
 
@@ -83,15 +95,17 @@ Platform test reports now carry explicitly authored **Why** and **How to fix** f
 
 ### Approved component naming
 
-The component convention is `OpenGuidePlatform.<TechnologyOrEcosystem>.<Responsibility>`. Active code, import names, package checks and documentation now use `PowerShell.GuideSiteAdoption`, `PowerShell.AgentControls`, `Agents.GuideSkills` and `PowerShell.GuideSiteBuild`. `PowerShell.PlatformBuild`, `PowerShell.Core` and `Hugo.Guides` retain their names. No compatibility modules or duplicate component folders are retained. Historical baseline observations and execution history retain the names that existed when their evidence was collected.
+The component convention is `OpenGuidePlatform.<TechnologyOrEcosystem>.<Responsibility>`. Active code, import names, package checks and documentation now use `PowerShell.GuideSiteAdoption`, `PowerShell.AgentControls`, `Agents.Integration` and `PowerShell.GuideSiteBuild`. `PowerShell.PlatformBuild`, `PowerShell.Core` and `Hugo.Guides` retain their names. No compatibility modules or duplicate component folders are retained. Historical baseline observations and execution history retain the names that existed when their evidence was collected.
 
 ### Platform and guide-site build modules
 
-The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.GuideSiteBuild` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. Both ship in the same package and version. Existing build/test/package scripts in `.build/` are forwarding entry points.
+The approved two-module boundary is implemented: `OpenGuidePlatform.PowerShell.GuideSiteBuild` remains consumer-facing and independent; `OpenGuidePlatform.PowerShell.PlatformBuild` owns platform tests, packaging, release operations and sample acceptance against the produced ZIP. They ship in separate `OpenGuidePlatform-GuideSite.zip` and `OpenGuidePlatform-PlatformBuild.zip` assets under one coordinated version and manifest. PlatformBuild depends on the exact GuideSite package; consumers do not restore PlatformBuild. Existing build/test/package scripts in `.build/` are forwarding entry points.
 
 A shared loader supports local code, explicit directory/ZIP paths, installation locks, and specific/latest preview or production package resolution without changing a consumer lock. Production release selection is not authorization to publish or deploy production. Released Hugo dependencies must still match the selected release; overrides do not silently change consumer dependency files.
 
-Local platform All now tests, packages, validates and runs preview/production sample builds from that exact package in fresh PowerShell processes. It does not deploy or publish. CI continues to run the independent deployment and live verification stages before publication. Complete local deployment parity, remaining baseline utility extraction, and macOS/Azure Pipelines/TeamCity verification remain open gaps; this module boundary does not mark those complete.
+Local platform `All` tests, packages, validates and runs preview/production sample builds from the exact candidate GuideSite ZIP in fresh PowerShell processes. Deployment and publication are opt-in: `-DeploySample` deploys and verifies the sample preview; `-Publish` requires that acceptance before publishing and verifying both released packages. Guide sites use `-Deploy` to run through deployment and Verify, with an optional consumer-owned hosting adapter. GitVersion and dependency setup also run through the modules. See [platform development](../platform-development.md) for commands. Core operations take explicit inputs; GitHub context belongs to workflow adapters, except release access. Azure Pipelines and TeamCity execution verification is not required. Windows local acceptance and hosted Linux acceptance are recorded above; no dedicated macOS run is claimed.
+
+Remaining tooling cleanup: the historical baseline/comparison utilities in `.build/` still contain implementation, including PowerShell, Python and a browser JavaScript diagnostic. They are outside the normal build/release path. Moving their orchestration into PlatformBuild and leaving thin entry points remains outstanding under the thin-local-script requirement; the completed CI follow-up does not claim that extraction is done.
 
 ### PowerShell workflow consolidation — 14 September 2026
 
