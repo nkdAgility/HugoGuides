@@ -115,6 +115,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PLATFORM_VERSION: ${{ needs.build.outputs.version }}
-        run: |
-          ./build.ps1 -Stage Release -OutputPath .processing/platform-release
-          ./build.ps1 -Stage Validate -ReleaseTag "v$env:PLATFORM_VERSION" -OutputPath .processing/published-platform
+        run: ./build.ps1 -Stage Release -OutputPath .processing/platform-release
+      - name: Verify published preview release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM_VERSION: ${{ needs.build.outputs.version }}
+        run: ./build.ps1 -Stage Validate -ReleaseTag "v$env:PLATFORM_VERSION" -OutputPath .processing/published-platform

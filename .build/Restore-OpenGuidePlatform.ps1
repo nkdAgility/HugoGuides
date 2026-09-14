@@ -1,6 +1,7 @@
 #Requires -Version 7.4
 [CmdletBinding(DefaultParameterSetName='Release')]
 param(
+    [Parameter(ParameterSetName='Workflow')][switch]$FromWorkflow,
     [Parameter(ParameterSetName='Release')][ValidatePattern('^(?:v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?)?$')][string]$ReleaseTag,
     [Parameter(Mandatory,ParameterSetName='Candidate')][uri]$PackageUrl,
     [Parameter(Mandatory,ParameterSetName='Candidate')][ValidatePattern('^[a-fA-F0-9]{64}$')][string]$PackageSha256,
@@ -9,6 +10,20 @@ param(
     [Parameter(Mandatory)][string]$OutputPath
 )
 $ErrorActionPreference='Stop'
+if($FromWorkflow){
+    $restore=@{ExpectedCommit=$ExpectedCommit;OutputPath=$OutputPath}
+    if($env:PLATFORM_PACKAGE_URL){
+        if($env:PLATFORM_RELEASE){throw 'Select a candidate URL or release tag, not both.'}
+        $restore.PackageUrl=$env:PLATFORM_PACKAGE_URL
+        $restore.PackageSha256=$env:PLATFORM_PACKAGE_SHA256
+        $restore.ExpectedVersion=$env:PLATFORM_VERSION
+    }else{
+        if($env:PLATFORM_PACKAGE_SHA256 -or $env:PLATFORM_VERSION){throw 'Candidate identity requires a package URL.'}
+        $restore.ReleaseTag=$env:PLATFORM_RELEASE
+    }
+    & $PSCommandPath @restore
+    return
+}
 function Expand-VerifiedPlatformArchive([string]$Path,[string]$Destination) {
     $archive=[IO.Compression.ZipFile]::OpenRead($Path)
     try {

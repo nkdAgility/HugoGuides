@@ -1,3 +1,4 @@
+$script:GuideBuildModuleRoot=$PSScriptRoot
 Set-StrictMode -Version Latest
 function ConvertTo-GuideAssessmentMarkdown {
     [CmdletBinding()]
@@ -82,4 +83,6 @@ function Get-GuideHugoConfiguration {
 . (Join-Path $PSScriptRoot 'BuildContext/Get-GuidePreparedInputs.ps1')
 . (Join-Path $PSScriptRoot 'BrowserValidation/Test-GuideRuntimeAnchors.ps1')
 . (Join-Path $PSScriptRoot 'ArtifactValidation/Test-GuideJsonIndexes.ps1')
-Export-ModuleMember -Function Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations
+. (Join-Path $PSScriptRoot 'GuideSiteBuild/Invoke-GuideSiteBuild.ps1')
+. (Join-Path $PSScriptRoot 'GitHubActions/GuideSiteGitHubActions.ps1')
+Export-ModuleMember -Function Invoke-GuideSiteBuild,Publish-GuidePrepareAssessment,Confirm-GuideDeploymentData,Invoke-GuideSiteGitHubAction,Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations

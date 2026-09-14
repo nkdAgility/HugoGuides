@@ -8,4 +8,5 @@ param(
 $ErrorActionPreference='Stop'
 $lock=Get-Content "$PSScriptRoot/open-guide-platform.installation.json" -Raw|ConvertFrom-Json
 $platform=& "$PSScriptRoot/bootstrap.ps1" -Restore -WorkspaceRoot $PSScriptRoot
-& "$platform/build.ps1" -Product GuideSite -WorkspaceRoot $PSScriptRoot -PolicyPath $lock.policyPath -Version $lock.release.version @PSBoundParameters
+Import-Module "$platform/system/OpenGuidePlatform.PowerShell.Build/OpenGuidePlatform.PowerShell.Build.psm1" -Force
+Invoke-GuideSiteBuild -WorkspaceRoot $PSScriptRoot -PolicyPath $lock.policyPath -Version $lock.release.version @PSBoundParameters

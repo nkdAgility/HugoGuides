@@ -9,6 +9,21 @@ $configuration.Run.Path=Join-Path (Split-Path $PSScriptRoot -Parent) 'tests/Core
 $configuration.Run.PassThru=$true
 $configuration.Output.Verbosity='Detailed'
 $configuration.TestResult.Enabled=$false
-$result=Invoke-Pester -Configuration $configuration
+# Fixture reports must not write into the real workflow summary.
+$stepSummary=$env:GITHUB_STEP_SUMMARY
+try {
+    $env:GITHUB_STEP_SUMMARY=$null
+    $previousSummary=$env:GITHUB_STEP_SUMMARY
+$testSummary=Join-Path ([IO.Path]::GetTempPath()) ('ogp-test-summary-'+[guid]::NewGuid().ToString('N')+'.md')
+try{
+    $env:GITHUB_STEP_SUMMARY=$testSummary
+    $result=Invoke-Pester -Configuration $configuration
+}finally{
+    $env:GITHUB_STEP_SUMMARY=$previousSummary
+    if(Test-Path -LiteralPath $testSummary){[IO.File]::Delete($testSummary)}
+}
+} finally {
+    $env:GITHUB_STEP_SUMMARY=$stepSummary
+}
 if($result.Result -ne 'Passed' -or $result.FailedCount -gt 0 -or $result.TotalCount -eq 0){throw 'Core tests failed or no tests ran.'}
 & (Join-Path $PSScriptRoot 'Test-DistributedSkills.ps1')

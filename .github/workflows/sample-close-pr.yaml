@@ -15,6 +15,5 @@ jobs:
     uses: ./.github/workflows/guide-site-close-pr.yaml
     with:
       site-name: GuideSiteSample
-      deployment-environment: ${{ format('{0}', github.event.pull_request.number) }}
     secrets:
       static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_FIELD_06CEA8C03 }}
