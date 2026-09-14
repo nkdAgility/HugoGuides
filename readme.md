@@ -86,4 +86,6 @@ If you need help, include the command, finding and relevant report in a [GitHub 
 - [Sample preview](https://blue-field-06cea8c03-preview.westeurope.6.azurestaticapps.net/) — the shared preview environment when deployed. PR previews use their own URL, provided by the deployment comment.
 - [First-time site setup](docs/using/first-adoption.md) — policy, existing files and deployment setup.
 - [Platform development](docs/platform-development.md) — build this repository, run the sample locally and understand releases.
+- [Workflow dependency locking](docs/platform-development.md#workflow-dependency-lockfile) — regenerate, verify and review Actions dependency locks when changing platform workflows.
+- [Workflow dependency locking](docs/platform-development.md#workflow-dependency-lockfile) — regenerate, verify and review Actions dependency locks when changing platform workflows.
 - [Execution plan and current progress](docs/architecture/open-guide-platform-execution-plan.md).

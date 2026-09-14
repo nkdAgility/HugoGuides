@@ -1,3 +1,5 @@
+# This workflow is managed by gh actions-lock.
+
 name: Close PR
 on:
   pull_request:

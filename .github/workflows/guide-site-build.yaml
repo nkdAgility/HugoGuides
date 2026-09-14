@@ -1,3 +1,5 @@
+# This workflow is managed by gh actions-lock.
+
 name: GuideSite Pipeline
 on:
   workflow_call:

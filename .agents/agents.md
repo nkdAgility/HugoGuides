@@ -20,8 +20,8 @@ Questions request answers, not edits. Prefer good engineering over shortcuts. Us
 
 Actions policies include a `Require lockfile` workflow execution protection. It requires dependency locking; it does not freeze workflow YAML or approve workflow changes. Workflows can be edited and their lockfile regenerated together. Someone able to change both can introduce different dependencies; locking prevents upstream moving tags from silently changing the locked action code.
 
-- When onboarding workflows or changing their `uses` dependencies, run the official `gh actions-lock` extension and review the workflow changes together with `.github/workflows/actions.lock`. Install the extension with `gh extension install github/gh-actions-lock` if needed.
-- A normal `gh actions-lock` run preserves existing locks for moving references. Use `gh actions-lock --relock` only when intentionally updating those dependencies, and review the resulting dependency changes.
+- When onboarding workflows or changing their `uses` dependencies, run `gh actions-lock --no-narrow` and review the workflow changes together with `.github/workflows/actions.lock`. Install the official extension with `gh extension install github/gh-actions-lock` if needed. `--no-narrow` preserves our existing version-tag convention.
+- Normal regeneration preserves existing locks for moving references. Use `gh actions-lock --relock --no-narrow` only when intentionally updating those dependencies, and review the resulting dependency changes. Run `gh actions-lock --verify` for upstream verification, or `gh actions-lock --verify-local` for offline coverage only.
 - Commit related workflow and lockfile changes together. Verify affected workflows, including reusable calls, and check for skipped or unsupported onboarding before claiming lockfile coverage.
 - Do not infer that the repository has enabled `Require lockfile` merely because this guidance exists. Verify the live policy when its enforcement matters. The tooling is in technical preview; check current official documentation before relying on its format or limitations: https://github.com/github/gh-actions-lock.
 
