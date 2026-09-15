@@ -219,9 +219,24 @@ Describe 'Guide-site installation and update' {
         & $bootstrap -Install -WorkspaceRoot $workspace
         (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
     }
-    It 'rejects stable adoption and unsafe source paths before modifying the site' {
-        { & $bootstrap -Install -WorkspaceRoot $workspace -Channel stable -ReleaseTag v1.2.3 } | Should -Throw '*Stable adoption is not available*'
+    It 'rejects unsafe source paths before modifying the site' {
         { & $bootstrap -Install @parameters -SourcePath '../outside' } | Should -Throw '*Unsafe installation path*'
+    }
+    It 'installs a production release and restores its installed pin' {
+        & $bootstrap -Install -WorkspaceRoot $workspace -Channel stable -ReleaseTag v1.2.3
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
+        $record.releaseTag|Should -Be v1.2.3
+        $record.release.channel|Should -Be stable
+        Get-Content "$workspace/site/go.mod" -Raw|Should -Match 'Guides v1.2.3'
+        $restored=& $resolver -WorkspaceRoot $workspace
+        (Get-Content "$restored/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3'
+    }
+    It 'updates an installed preview to production through the local launcher' {
+        & $bootstrap -Install @parameters
+        & "$workspace/build.ps1" Update -ring production
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag|Should -Be v1.2.3
+        Get-Content "$workspace/site/go.mod" -Raw|Should -Match 'Guides v1.2.3'
+        & "$workspace/build.ps1" -Target production | Should -Contain 'GuideSite|1.2.3|production|site'
     }
     It 'supports the no-argument remote execution entry point for install and update' {
         Push-Location $workspace

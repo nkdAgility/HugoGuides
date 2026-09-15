@@ -47,14 +47,42 @@ if($LASTEXITCODE -eq 0){
     Write-Host "Existing immutable release $tag verified."
     return
 }
+$updateRing=if($prerelease){'preview'}else{'production'}
 $notes=@"
-OpenGuidePlatform $($manifest.version) ($channel) from commit $commit.
+## For guide-site maintainers
 
-Platform component tests and package verification passed. Before publication, GuideSiteSample consumed this build's candidate artifact through the shared guide-site workflow. Publication depends on that workflow succeeding; the release reuses the validated build assets without repackaging.
+This is a $channel release of the shared guide-site build tools, Hugo module and agent skills. The change list below identifies the included fixes and updates.
 
-This release does not deploy or update consumer guide sites.
+### Update an existing site
+
+On a review branch, run:
+
+~~~~powershell
+./build.ps1 Update -ring $updateRing -PlatformRelease $tag
+./build.ps1 -Target preview
+./build.ps1 -Target production
+~~~~
+
+Review and commit the coordinated update. Your installation record pins OGP for local and CI builds; publishing this release does not automatically update your site. A production site using preview OGP receives a warning, not a deployment block.
+
+### First installation
+
+~~~~powershell
+irm https://raw.githubusercontent.com/$Repository/main/bootstrap.ps1 | iex
+~~~~
+
+Bootstrap defaults to preview. To select this exact release afterward, use the update command above. See the [installation and hosting instructions](https://github.com/$Repository/blob/$tag/readme.md) for prerequisites and first-site setup.
+
+### Downloads
+
+- **OpenGuidePlatform-GuideSite.zip**: build tools, Hugo integration and shared agent resources consumed by the installer; site maintainers normally do not download this manually.
+- **OpenGuidePlatform-PlatformBuild.zip**: tooling for developing and packaging OGP itself.
+- **release-manifest.json**: coordinated versions and checksums used to verify the packages.
+
+The corresponding native Hugo module tag is $($module.tag). The platform tests and shared sample pipeline passed before publication. Site deployment remains a separate action.
+
 "@
 [IO.File]::WriteAllText("$OutputPath/release-notes.md",$notes)
 $releaseFlags=if($prerelease){@('--prerelease','--latest=false')}else{@()}
-& gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit @releaseFlags --title "OpenGuidePlatform $($manifest.version)" --notes-file "$OutputPath/release-notes.md"
+& gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit @releaseFlags --title "OpenGuidePlatform $($manifest.version)" --generate-notes --notes-file "$OutputPath/release-notes.md"
 if($LASTEXITCODE -ne 0){throw 'Platform release publication failed.'}

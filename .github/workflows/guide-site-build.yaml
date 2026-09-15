@@ -18,11 +18,11 @@ on:
         type: string
         default: ''
       platform-ring:
-        description: Platform release channel used when platform-release is omitted
+        description: Installation compatibility input; builds use the installed release pin, regardless of ring
         type: string
         default: production
       platform-release:
-        description: Optional published release tag; otherwise use the latest release in platform-ring. Mutually exclusive with a candidate ZIP URL.
+        description: Optional explicit release override; otherwise restore .OpenGuidePlatform/installation.json. Candidate ZIPs are for platform validation.
         default: ''
         type: string
       platform-package-url:

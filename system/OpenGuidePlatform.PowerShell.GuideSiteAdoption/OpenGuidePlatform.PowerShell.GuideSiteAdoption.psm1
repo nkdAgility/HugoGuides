@@ -44,7 +44,6 @@ if($Update){if(-not $previous){throw 'No installation found; run -Install first.
 if($Install -and $previous){throw 'Already installed; use -Update.'}
 $reviewBranch=$null
 if($true){
-    if($Channel -ne 'preview'){throw 'Stable adoption is not available: native Hugo publication and coordinated agent controls remain adoption blockers.'}
     $branch=(& git -C $root branch --show-current).Trim()
     if($automatic -and $branch -in @('main','master')){
         $reviewBranch='codex/platform-adoption-'+[guid]::NewGuid().ToString('N').Substring(0,8)
@@ -114,7 +113,7 @@ $record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$Relea
 $files['.OpenGuidePlatform/installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
 Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); managed files:"
 $files.Keys|ForEach-Object {Write-Host "  $_"}
-$action="Install coordinated preview files from $ReleaseTag"
+$action="Install coordinated platform files from $ReleaseTag"
 if($reviewBranch){$action="Create review branch $reviewBranch and $action"}
 if(-not $PSCmdlet.ShouldProcess($root,$action)){return}
 Confirm-NativeSnapshot

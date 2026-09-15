@@ -32,6 +32,7 @@ param(
     [Parameter(Mandatory)][string]$OutputPath
 )
 $ErrorActionPreference='Stop'
+$installedDigest=$null
 if($FromWorkflow){
     $restore=@{OutputPath=$OutputPath;PlatformRing=$(if($env:PLATFORM_RING){$env:PLATFORM_RING}else{$PlatformRing})}
     if($ExpectedCommit){$restore.ExpectedCommit=$ExpectedCommit}
@@ -67,19 +68,21 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     Expand-VerifiedPlatformArchive $bundle $assets
 }else{
     if(-not $ReleaseTag){
-        $items=& gh api 'repos/nkdAgility/OpenGuidePlatform/releases?per_page=100' --paginate --slurp
-        if($LASTEXITCODE -ne 0){throw 'Cannot discover the platform release.'}
-        $pages=$items|ConvertFrom-Json
-        $ring=$PlatformRing
-        if($ring -notin @('preview','production')){throw 'Platform ring must be preview or production.'}
-        $channel=if($ring -eq 'production'){'stable'}else{'preview'}
-        $matches=@($pages|ForEach-Object { foreach($item in $_){$item} }|Where-Object {
-            -not $_.draft -and ([bool]$_.prerelease -eq ($channel -eq 'preview')) -and
-            @($_.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -eq 1 -and
-            (-not $ExpectedCommit -or $_.target_commitish -ceq $ExpectedCommit)
-        }|Sort-Object published_at -Descending)
-        if(-not $matches.Count){throw "No installable $channel platform release is available."}
-        $ReleaseTag=$matches[0].tag_name
+        $installationPath=Join-Path $WorkspaceRoot '.OpenGuidePlatform/installation.json'
+        if(-not (Test-Path -LiteralPath $installationPath)){
+            throw 'No OGP installation pin was found. Run the platform installer, commit .OpenGuidePlatform/installation.json and its coordinated Hugo dependency, then rerun the build.'
+        }
+        try {$installation=Get-Content -LiteralPath $installationPath -Raw|ConvertFrom-Json -ErrorAction Stop}
+        catch {throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'}
+        $ReleaseTag=[string]$installation.releaseTag
+        $installedCommit=[string]$installation.release.sourceCommit
+        $installedDigest=[string]$installation.release.packages.GuideSite.sha256
+        if($installation.schemaVersion -ne 1 -or $ReleaseTag -cne ('v'+$installation.release.version) -or $ReleaseTag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$' -or $installedCommit -cnotmatch '^[a-f0-9]{40}$' -or $installedDigest -cnotmatch '^[a-f0-9]{64}$'){
+            throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'
+        }
+        if($ExpectedCommit -and $ExpectedCommit -cne $installedCommit){throw 'Prepared platform source differs from the installation pin.'}
+        $ExpectedCommit=$installedCommit
+        Write-Host "Using installed OGP pin $ReleaseTag. Install/update is required to change this version."
     }
     $raw=& gh release view $ReleaseTag --repo nkdAgility/OpenGuidePlatform --json tagName,targetCommitish,isDraft 2>$null
     if($LASTEXITCODE -ne 0){throw "Release $ReleaseTag is unavailable; no source-build fallback is permitted."}
@@ -92,6 +95,7 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     $ExpectedVersion=$ReleaseTag.Substring(1)
 }
 $manifest=Get-Content "$assets/release-manifest.json" -Raw|ConvertFrom-Json
+if($installedDigest -and $manifest.packages.GuideSite.sha256 -cne $installedDigest){throw 'Installed platform package digest mismatch. The release assets differ from the installed pin; restore the original assets or perform a reviewed update.'}
 if(-not $ExpectedCommit){$ExpectedCommit=$manifest.sourceCommit}
 if($ExpectedCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Release source identity is invalid.'}
 if($manifest.schemaVersion -ne 2 -or $manifest.packages.GuideSite.version -cne $manifest.version -or $manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ExpectedVersion -or $manifest.sourceCommit -cne $ExpectedCommit -or $manifest.packages.GuideSite.archive -cne 'OpenGuidePlatform-GuideSite.zip'){throw 'Release manifest does not match the requested platform.'}
