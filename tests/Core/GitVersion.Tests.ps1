@@ -34,6 +34,28 @@ Describe 'GitVersion 6 configuration migration' {
         $converted.Contains('continuous-delivery-fallback-tag')|Should -BeFalse
         $converted.branches.main.Contains('tag')|Should -BeFalse
     }
+    It 'isolates compatibility files for concurrent invocations without editing source' {
+        New-Item -ItemType Directory "$TestDrive/.github" -Force|Out-Null
+        $text="branches:`n  main:`n    tag: Preview`n"
+        [IO.File]::WriteAllText("$TestDrive/.github/GitVersion.yml",$text)
+        $first=Get-GuideGitVersionConfigurationPath $TestDrive
+        $before=[IO.File]::ReadAllText($first)
+        $second=Get-GuideGitVersionConfigurationPath $TestDrive
+        $first|Should -Not -Be $second
+        [IO.File]::ReadAllText($first)|Should -BeExactly $before
+        [IO.File]::ReadAllText($second)|Should -BeExactly $before
+        [IO.File]::ReadAllText("$TestDrive/.github/GitVersion.yml")|Should -BeExactly $text
+    }
+    It 'adds approved message defaults without replacing explicit site expressions' {
+        $text="commit-message-incrementing: Disabled`nminor-version-bump-message: CUSTOM-MINOR`nbranches:`n  main:`n    label: preview`n"
+        $updated=Add-GuideGitVersionMessageDefaults $text
+        $configuration=$updated|ConvertFrom-Yaml
+        $configuration['commit-message-incrementing']|Should -Be Disabled
+        $configuration['minor-version-bump-message']|Should -Be CUSTOM-MINOR
+        'ci!: New runtime'|Should -Match $configuration['major-version-bump-message']
+        'docs: Normal change'|Should -Not -Match $configuration['no-bump-message']
+        Add-GuideGitVersionMessageDefaults $updated|Should -BeExactly $updated
+    }
     It 'accepts configuration that relies entirely on default branches under strict mode' {
         Set-StrictMode -Version Latest
         $text="next-version: 2.0.0`n"
@@ -64,7 +86,7 @@ Describe 'Real GitVersion commit histories' {
         @{site='the-safe-delusion';legacyMode='ContinuousDelivery';seed='0.0.1'}
     ) {
         $legacy="assembly-versioning-scheme: MajorMinorPatch`nmode: $legacyMode`ncontinuous-delivery-fallback-tag: Canary`nnext-version: $seed`nbranches:`n  main:`n    regex: ^master$|^main$`n    mode: $legacyMode`n    tag: Preview`n    increment: Patch`n    is-mainline: true`n    prevent-increment-of-merged-branch-version: false`n    tracks-release-branches: true`n  release:`n    mode: ContinuousDelivery`n    tag: ''`n    increment: Patch`n    regex: ^release(s)?[\/-]`n    source-branches: [master, main]`n    is-release-branch: true`n    is-mainline: false`n"
-        $configuration=ConvertTo-GuideGitVersion6Configuration $legacy|ConvertFrom-Yaml
+        $configuration=Add-GuideGitVersionMessageDefaults (ConvertTo-GuideGitVersion6Configuration $legacy)|ConvertFrom-Yaml
         # Explicitly agreed for these three sites: every main build advances preview.
         # Generic Update preserves custom mode choices for other consumers.
         $configuration.branches.main.mode='ContinuousDelivery'
@@ -101,6 +123,22 @@ Describe 'Real GitVersion commit histories' {
         @{directive='major';expected='2.0.0'},@{directive='breaking';expected='2.0.0'}
     ) {
         Add-FixtureCommit "A change +semver: $directive"
+        (Get-FixtureVersion).MajorMinorPatch|Should -Be $expected
+    }
+    It 'recognizes the approved message <message>' -ForEach @(
+        @{message='feat: Add search';expected='1.3.0'},
+        @{message='feat(search): Add filters';expected='1.3.0'},
+        @{message='fix: Repair routing';expected='1.2.4'},
+        @{message='perf(render): Reduce allocation';expected='1.2.4'},
+        @{message='feat!: Replace protocol';expected='2.0.0'},
+        @{message='ci(runtime)!: Replace runtime';expected='2.0.0'},
+        @{message="Update protocol`n`nBREAKING CHANGE: Clients must upgrade";expected='2.0.0'},
+        @{message='ci: Replace runtime +semver: major';expected='2.0.0'},
+        @{message='docs: Clarify configuration';expected='1.2.4'},
+        @{message='feat: Suppress optional minor bump +semver: none';expected='1.2.4'},
+        @{message='Fix later +semver: skip';expected='1.2.4'}
+    ) {
+        Add-FixtureCommit $message
         (Get-FixtureVersion).MajorMinorPatch|Should -Be $expected
     }
     It 'honors a bump carried in a merged commit' {

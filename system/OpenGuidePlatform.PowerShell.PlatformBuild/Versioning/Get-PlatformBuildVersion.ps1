@@ -16,7 +16,7 @@ function Get-PlatformBuildVersion {
         $actual=& $path /version
         if($LASTEXITCODE -ne 0 -or "$actual" -notmatch '^6\.') {throw 'This repository uses GitVersion 6 configuration. Run ./build.ps1 Dependencies to install a compatible tool locally; do not change the global tool.'}
         $configuration=Get-GuideGitVersionConfigurationPath -WorkspaceRoot $WorkspaceRoot
-        $raw=& $path $WorkspaceRoot /config $configuration /output json /nofetch
+        $raw=& $path $WorkspaceRoot /config $configuration /output json /nofetch 2>&1
         if($LASTEXITCODE -ne 0){
             $detail=(@($raw|Where-Object {$_ -match 'ERROR|Exception|path too long'}|Select-Object -First 3) -join ' '); if(-not $detail){$detail=($raw -join ' ')}
             throw "GitVersion could not calculate this build version. Check the reported cause and full Git history/tags, then rerun build.ps1 Version. Details: $detail"

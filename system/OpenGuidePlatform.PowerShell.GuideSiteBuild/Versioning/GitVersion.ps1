@@ -53,9 +53,8 @@ function Get-GuideGitVersionConfigurationPath {
     if($converted -ceq $original){return $path}
     $directory=Join-Path $WorkspaceRoot '.processing/tools/gitversion/config'
     [IO.Directory]::CreateDirectory($directory)|Out-Null
-    # Immutable, content-addressed configuration supports concurrent local invocations.
-    $digest=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($converted)))
-    $generated=Join-Path $directory "$digest.yml"
+    # Each invocation owns its file; concurrent readers never share a rewritten path.
+    $generated=Join-Path $directory (([guid]::NewGuid().ToString("N"))+".yml")
     [IO.File]::WriteAllText($generated,$converted,[Text.UTF8Encoding]::new($false))
     Write-Verbose 'Using GitVersion 6 compatibility configuration. Update migrates the site-owned configuration; Prepare does not edit it.'
     return $generated
@@ -66,4 +65,22 @@ function Install-GuideGitVersion {
     # update also installs a missing tool and upgrades an existing v5 cache.
     & dotnet tool update GitVersion.Tool --version '6.*' --tool-path $tools
     if($LASTEXITCODE -ne 0){throw 'GitVersion 6 installation failed. Install the .NET SDK, restore NuGet connectivity and rerun ./build.ps1 Dependencies.'}
+}
+function Add-GuideGitVersionMessageDefaults {
+    param([Parameter(Mandatory)][string]$Text)
+    Import-Module powershell-yaml -MinimumVersion 0.4.12
+    $configuration=ConvertFrom-Yaml $Text -Ordered
+    $defaults=[ordered]@{
+        'commit-message-incrementing'='Enabled'
+        'major-version-bump-message'='(\+semver:\s?(breaking|major))|(^[a-z]+(\([^\r\n)]+\))?!:)|(BREAKING[ -]CHANGE:)'
+        'minor-version-bump-message'='(\+semver:\s?(feature|minor))|(^feat(\([^\r\n)]+\))?:)'
+        'patch-version-bump-message'='(\+semver:\s?(fix|patch))|(^(fix|perf)(\([^\r\n)]+\))?:)'
+        'no-bump-message'='\+semver:\s?(none|skip)'
+    }
+    $changed=$false
+    foreach($key in $defaults.Keys){
+        if(-not $configuration.Contains($key)){$configuration[$key]=$defaults[$key];$changed=$true}
+    }
+    if(-not $changed){return $Text}
+    return ($configuration|ConvertTo-Yaml)
 }

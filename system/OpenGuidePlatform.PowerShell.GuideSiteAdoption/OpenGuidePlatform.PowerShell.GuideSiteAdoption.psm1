@@ -71,7 +71,7 @@ $versionHash=if(Test-Path $versionPath){Get-Digest $versionPath}else{$null}
 $versionFiles=@{}
 if($versionHash){
     $versionOriginal=[IO.File]::ReadAllText($versionPath)
-    $versionUpdated=ConvertTo-GuideGitVersion6Configuration -Text $versionOriginal
+    $versionUpdated=Add-GuideGitVersionMessageDefaults -Text (ConvertTo-GuideGitVersion6Configuration -Text $versionOriginal)
     if($versionOriginal -cne $versionUpdated){$versionFiles[$versionFile]=[Text.Encoding]::UTF8.GetBytes($versionUpdated)}
 }
 $files=[ordered]@{}
