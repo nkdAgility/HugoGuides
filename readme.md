@@ -113,7 +113,7 @@ Set `SWA_CLI_DEPLOYMENT_TOKEN` through your shell or CI secret mechanism. Commit
 ./build.ps1 -Target preview -Deploy -DeploymentEnvironment my-preview -BaseUrl https://your-preview.example/ -DeploymentUrl https://your-preview.example/ -OutputPath .processing/preview-run
 ```
 
-This runs Prepare → Build → Validate → Deploy → Verify. Deploy uploads the validated files without rebuilding and saves the returned URL in `deployment.json`. Verify checks the deployed identity, required routes and excluded content. A failed earlier stage stops the sequence. Production requires an explicit production target; preview deployment rejects production environment names.
+This runs Prepare → Build → Validate → Deploy → Verify. Deploy uploads the validated files without rebuilding and saves the provider URL as `url` and the supplied public URL as `publicUrl` in `deployment.json`. These URLs can differ when using a custom domain. Verify checks the identity at the provider URL and checks the deployed identity, required routes and excluded content at the build's configured public URL. A provider identity redirect is accepted only to that exact public identity URL. A failed earlier stage stops the sequence. Production requires an explicit production target; preview deployment rejects production environment names.
 
 To run stages separately, use the same `-OutputPath` and `-Target` for every command: `Prepare`, `Build`, `Validate`, `Deploy`, then `Verify`. Supply the preview environment on Deploy. Verify can read the returned URL from the saved deployment record. Keep the source and selected platform version unchanged between stages.
 

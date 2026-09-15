@@ -47,11 +47,14 @@ Describe 'Deployment validates site data using the selected platform package' {
         $identity.sourceDirty=$true;$identity|ConvertTo-Json -Depth 10|Set-Content "$deployment/artifact-identity.json"
         {Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter missing.ps1}|Should -Throw '*clean source evidence*'
     }
-    It 'rejects an adapter that reports an unexpected destination' {
+    It 'retains the provider URL separately from the configured custom domain' {
         $adapter=Join-Path $TestDrive 'wrong-host.ps1'
         'param($ArtifactRoot,$Target,$Environment,$ExpectedUrl) [pscustomobject]@{Url="https://wrong.example.test/"}'|Set-Content $adapter
-        {Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter $adapter -ExpectedUrl https://expected.example.test/}|Should -Throw '*different URL*'
-        Test-Path "$deployment/deployment.json"|Should -BeFalse
+        $result=Invoke-GuideArtifactDeployment @arguments -WorkspaceRoot $TestDrive -DeploymentAdapter $adapter -ExpectedUrl https://expected.example.test/
+        $result.url|Should -Be 'https://wrong.example.test/'
+        $record=Get-Content "$deployment/deployment.json" -Raw|ConvertFrom-Json
+        $record.url|Should -Be $result.url
+        $record.publicUrl|Should -Be 'https://expected.example.test/'
     }
     It 'accepts matching bytes and passing evidence' {
         Confirm-GuideDeploymentData @arguments|Should -Match 'Verified 2 deployment files'
