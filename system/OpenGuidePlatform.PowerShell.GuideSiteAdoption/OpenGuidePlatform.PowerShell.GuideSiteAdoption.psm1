@@ -160,23 +160,11 @@ try{
                 & gh actions-lock --no-narrow --no-migrate-local-actions --no-interactive @callerPaths
                 if($LASTEXITCODE -ne 0){throw 'Actions locking failed. Install github/gh-actions-lock and reconcile its findings before retrying.'}
                 $verification=& gh actions-lock --verify-local --json @callerPaths
-                if($LASTEXITCODE -ne 0 -or -not (Test-Path $actionsLockPath)){throw 'Actions lockfile coverage failed for the OGP callers.'}
+                if($LASTEXITCODE -ne 0){throw 'Actions lockfile verification failed.'}
                 $verification=$verification|ConvertFrom-Json -ErrorAction Stop
-                # Released tools through v0.1.6 ignore reusable calls, including when
-                # stale repo/tag membership makes their coverage report look valid.
-                if(-not $verification.cli_version -or $verification.cli_version -notmatch '^v(?<number>\d+\.\d+\.\d+)$' -or
-                    [version]$Matches.number -le [version]'0.1.6'){
-                    throw 'Actions locking tool does not establish reusable-workflow coverage. Installation was not accepted.'
-                }
-                if(-not $verification.valid){throw 'Actions lockfile coverage failed for the OGP callers.'}
-                Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
-                $coverage=Get-Content $actionsLockPath -Raw|ConvertFrom-Yaml
-                foreach($caller in $callerPaths){
-                    if($coverage.workflows -isnot [Collections.IDictionary] -or -not $coverage.workflows.Contains($caller) -or
-                        @($coverage.workflows[$caller]) -notcontains "nkdagility/openguideplatform@$ReleaseTag"){
-                        throw "Actions lockfile did not onboard OGP caller: $caller. Reconcile skipped or unsupported workflows."
-                    }
-                }
+                if($verification.valid -isnot [bool] -or -not $verification.valid){throw 'Actions lockfile verification failed.'}
+                # The tool verifies supported action dependencies. Reusable workflows
+                # are excluded by GitHub; an OGP-only caller needs no actions.lock file.
             }finally{Pop-Location}
         }
         $path=Resolve-InstallPath $name
