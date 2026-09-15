@@ -122,7 +122,17 @@ Describe 'Guide-site installation and update' {
         $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
         $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
         $local=& $resolver -WorkspaceRoot $workspace
-        $ci=& $resolver -WorkspaceRoot $workspace -FromWorkflow -OutputPath '.processing/ci-platform'
+        # Exercise a normal site workflow, independent of the enclosing platform build's inputs.
+        $workflowEnvironment=@{}
+        foreach($name in @('PLATFORM_RING','PLATFORM_RELEASE','PLATFORM_PACKAGE_URL','PLATFORM_PACKAGE_SHA256','PLATFORM_VERSION','GITHUB_OUTPUT')){
+            $workflowEnvironment[$name]=[Environment]::GetEnvironmentVariable($name)
+        }
+        try{
+            foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$null)}
+            $ci=& $resolver -WorkspaceRoot $workspace -FromWorkflow -OutputPath '.processing/ci-platform'
+        }finally{
+            foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$workflowEnvironment[$name])}
+        }
         (Get-Content "$local/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3-Preview.2'
         (Get-Content "$ci/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3-Preview.2'
         (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash|Should -Be $before
