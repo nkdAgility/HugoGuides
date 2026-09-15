@@ -2,7 +2,7 @@
 
 Build and maintain guide websites with shared Hugo rendering, publishing tools, translation checks and agent skills. Your site keeps its own design, content and any number of guides.
 
-**Current status: preview.** Installation and updates are available for evaluation on a branch. First adoption needs maintainer setup; stable adoption and independently enforced agent controls are not yet complete.
+Installation and updates support published preview and production releases. First adoption needs maintainer setup; independently enforced agent controls remain separate work.
 
 ## Before you start
 
@@ -61,7 +61,8 @@ Once installed, run these commands from your guide-site repository:
 | Check preview output | `./build.ps1 -Target preview` |
 | Check production output | `./build.ps1 -Target production` |
 | Check inputs without building pages | `./build.ps1 -Stage Prepare` |
-| Update the installed platform | `./build.ps1 Update -ring preview` |
+| Update to the latest preview platform | `./build.ps1 Update -ring preview` |
+| Update to the latest production platform | `./build.ps1 Update -ring production` |
 | Preview an update's file changes | `./build.ps1 Update -ring preview -WhatIf` |
 
 Build runs **Prepare → Build → Validate**. Prepare uses GitVersion to select canary, preview or production and reads destinations from `.OpenGuidePlatform/delivery.yaml`. Install dependencies first with `./build.ps1 Dependencies` (.NET SDK required); use `-PullRequestNumber 111` to reproduce a PR destination locally, or `-Target local` for local configuration. The shared workflow runs one chain through Deploy and Verify. OGP builds restore the release pinned in `.OpenGuidePlatform/installation.json`, locally and in GitHub Actions. `platform-ring` does not advance that pin. Install/update selects the release; publishing a newer OGP release does not change existing site builds. See [delivery configuration](system/OpenGuidePlatform.PowerShell.GuideSiteBuild/README.md#one-delivery-pipeline). Serve performs preparation and Hugo's initial build, then watches for changes; open the address printed in the terminal and press **Ctrl+C** to stop it. The installed `build.ps1` is a thin launcher: it restores your locked platform package and calls its PowerShell Build module. GitHub Actions uses that same module. Routine builds use your installed platform version and can restore it offline once cached. Run `./build.ps1 Update -ring preview` to adopt the latest compatible preview, or add `-PlatformRelease vX.Y.Z-Preview.N` to select a release. Updates run the target release’s adoption module and report conflicts before changing managed files.
@@ -75,7 +76,7 @@ To test another platform without changing your installation lock:
 ./build.ps1 -PlatformPath ./candidate/OpenGuidePlatform-GuideSite.zip -Target preview
 ```
 
-The installation record is the shared version pin. Change it through `./build.ps1 Update -ring preview` (or `-ring production`), review the coordinated changes and commit them. Do not edit the record or the Hugo dependency independently. The workflow definition's `uses: ...@version` selects workflow wiring, not a newer build package. The site ring still controls publishing exclusions and deployment, independently of the installed OGP version.
+The installation record is the shared version pin. Change it through `./build.ps1 Update -ring preview` (or `-ring production`), review the coordinated changes and commit them. Do not edit the record or the Hugo dependency independently. The workflow definition's `uses: ...@version` selects workflow wiring, not a newer build package. The site ring still controls publishing exclusions and deployment, independently of the installed OGP version. A production site using a preview OGP release receives a Prepare warning; it does not block the build or deployment.
 
 For an explicit diagnostic override, use `-PlatformRelease` locally or `platform-release` in the workflow. This does not update the installation; the selected release must still match the site's native Hugo dependency. Routine builds need neither override. Add `-PlatformRelease` to an Update command to install a specific release. The ZIP must have its `release-manifest.json` alongside it. Release overrides require an available compatible release and its coordinated Hugo dependency; use the installer to adopt a different dependency permanently. `Production` selects a non-prerelease platform package; it does not deploy the site. A release predating these module entry points cannot provide the new operations.
 

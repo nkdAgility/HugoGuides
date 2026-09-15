@@ -47,6 +47,10 @@ Describe 'Coordinated native module publication' {
         & $publisher -WorkspaceRoot $root -Repository example/platform -OutputPath $assets
         $global:OgpNativeTagCalls[0] | Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0-Preview.1'
         $global:OgpNativeTagCalls[-1] | Should -Match '^release create v0.1.0-Preview.1 '
+        $global:OgpNativeTagCalls[-1] | Should -Match '--generate-notes'
+        $notes=Get-Content "$assets/release-notes.md" -Raw
+        $notes|Should -Match 'Update -ring preview -PlatformRelease v0.1.0-Preview.1'
+        $notes|Should -Match 'First installation|OpenGuidePlatform-GuideSite.zip|installation record pins'
     }
     It 'publishes a stable version as a normal release with the matching module tag' {
         $manifest.version='0.1.0';$manifest.channel='stable'
@@ -56,6 +60,7 @@ Describe 'Coordinated native module publication' {
         $global:OgpNativeTagCalls[0]|Should -Match 'refs/tags/system/OpenGuidePlatform.Hugo.Guides/v0.1.0'
         $global:OgpNativeTagCalls[-1]|Should -Match '^release create v0.1.0 '
         $global:OgpNativeTagCalls[-1]|Should -Not -Match '--prerelease|--latest=false'
+        Get-Content "$assets/release-notes.md" -Raw|Should -Match 'Update -ring production -PlatformRelease v0.1.0'
     }
     It 'keeps prerelease versions as preview releases' {
         & $publisher -WorkspaceRoot $root -OutputPath $assets

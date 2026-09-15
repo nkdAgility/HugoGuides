@@ -5,6 +5,9 @@ function Get-GuideAssessment {
     function Add-Finding($code,$scope,$subject,$message,$fix,$severity='blocker') {
         $findings.Add([ordered]@{code=$code;severity=$severity;scope=$scope;subject=$subject;message=$message;remediation=$fix;evidence=@()})
     }
+    if($Target -eq 'production' -and $PlatformVersion -match '^[0-9]+\.[0-9]+\.[0-9]+-'){
+        Add-Finding PRODUCTION_SITE_PREVIEW_PLATFORM platform OpenGuidePlatform "This production site build uses preview OGP $PlatformVersion. Production publishing rules still apply; this warning does not block the build or deployment." 'Use a reviewed install/update to select a production OGP release when appropriate, or continue with this preview intentionally.' warning
+    }
     foreach($finding in @(Get-GuidePolicyFinding $Policy)) { Add-Finding $finding.Code platform $finding.Subject 'The declared policy relationship is inconsistent.' 'Correct the reported policy relationship in the reviewed site policy.' }
     foreach($finding in @(Test-GuidePublicationPolicy $Policy $EffectiveProduction)) { Add-Finding $finding.Code platform $finding.Subject $finding.Reason 'Keep permanently excluded subjects disabled in effective production configuration and provide exclusion evidence.' $finding.Severity }
     foreach($environment in @($Policy.publication.environments | Where-Object name -EQ $Target)) {

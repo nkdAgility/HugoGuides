@@ -34,7 +34,7 @@ Describe 'Released platform restoration boundary' {
         [IO.Directory]::CreateDirectory($global:OgpReleaseTestAssets)|Out-Null
         $global:OgpReleaseTestCalls=[Collections.Generic.List[string]]::new()
         $global:OgpReleaseTestCommit='a'*40
-        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.4';sourceCommit=('a'*40);archive='OpenGuidePlatform-GuideSite.zip';sha256='invalid'}
+        $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.4';sourceCommit=('a'*40);archive='OpenGuidePlatform-GuideSite.zip';sha256=('0'*64)}
         [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip",'not a zip')
         [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         Push-Location $workspace
@@ -52,7 +52,7 @@ Describe 'Released platform restoration boundary' {
     }
     It 'honors the installed preview pin even with production ring input and does not query latest' {
         New-Item .OpenGuidePlatform -ItemType Directory|Out-Null
-        @{schemaVersion=1;releaseTag='v1.2.3-Preview.4';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40)}}|ConvertTo-Json|Set-Content .OpenGuidePlatform/installation.json
+        @{schemaVersion=1;releaseTag='v1.2.3-Preview.4';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40);packages=@{GuideSite=@{sha256=('0'*64)}}}}|ConvertTo-Json -Depth 8|Set-Content .OpenGuidePlatform/installation.json
         $before=Get-FileHash .OpenGuidePlatform/installation.json
         { & $installer -PlatformRing production -OutputPath .processing/install } | Should -Throw '*digest mismatch*'
         $global:OgpReleaseTestCalls[0] | Should -Match '^release view v1.2.3-Preview.4 '
@@ -61,7 +61,7 @@ Describe 'Released platform restoration boundary' {
     }
     It 'uses the same installed pin from a workflow without changing the site target' {
         New-Item .OpenGuidePlatform -ItemType Directory|Out-Null
-        @{schemaVersion=1;releaseTag='v1.2.3-Preview.4';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40)}}|ConvertTo-Json|Set-Content .OpenGuidePlatform/installation.json
+        @{schemaVersion=1;releaseTag='v1.2.3-Preview.4';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40);packages=@{GuideSite=@{sha256=('0'*64)}}}}|ConvertTo-Json -Depth 8|Set-Content .OpenGuidePlatform/installation.json
         $saved=@{};foreach($name in @('PLATFORM_RING','PLATFORM_RELEASE','PLATFORM_PACKAGE_URL','PLATFORM_PACKAGE_SHA256','PLATFORM_VERSION','SITE_TARGET')){$saved[$name]=[Environment]::GetEnvironmentVariable($name);[Environment]::SetEnvironmentVariable($name,$null)}
         try{
             $env:PLATFORM_RING='production';$env:SITE_TARGET='production'
@@ -73,8 +73,22 @@ Describe 'Released platform restoration boundary' {
     }
     It 'rejects a malformed installation pin before contacting releases' {
         New-Item .OpenGuidePlatform -ItemType Directory|Out-Null
-        @{schemaVersion=1;releaseTag='v1.2.3-Preview.5';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40)}}|ConvertTo-Json|Set-Content .OpenGuidePlatform/installation.json
+        @{schemaVersion=1;releaseTag='v1.2.3-Preview.5';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40);packages=@{GuideSite=@{sha256=('0'*64)}}}}|ConvertTo-Json -Depth 8|Set-Content .OpenGuidePlatform/installation.json
         { & $installer -OutputPath .processing/install } | Should -Throw '*installation pin is invalid*'
+        $global:OgpReleaseTestCalls.Count|Should -Be 0
+    }
+    It 'rejects replacement assets under the same installed release tag' {
+        New-Item .OpenGuidePlatform -ItemType Directory|Out-Null
+        @{schemaVersion=1;releaseTag='v1.2.3-Preview.4';release=@{version='1.2.3-Preview.4';sourceCommit=('a'*40);packages=@{GuideSite=@{sha256=('0'*64)}}}}|ConvertTo-Json -Depth 8|Set-Content .OpenGuidePlatform/installation.json
+        $manifest.sha256=(Get-FileHash "$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant()
+        [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
+        { & $installer -OutputPath .processing/install } | Should -Throw '*Installed platform package digest mismatch*'
+        Test-Path .processing/install | Should -BeFalse
+    }
+    It 'reports how to fix syntactically invalid installation JSON' {
+        New-Item .OpenGuidePlatform -ItemType Directory|Out-Null
+        Set-Content .OpenGuidePlatform/installation.json '{broken'
+        { & $installer -OutputPath .processing/install } | Should -Throw '*installation pin is invalid*reviewed platform install/update*'
         $global:OgpReleaseTestCalls.Count|Should -Be 0
     }
     It 'rejects a corrupt published asset before extraction' {

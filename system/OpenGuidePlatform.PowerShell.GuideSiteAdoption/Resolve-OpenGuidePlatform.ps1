@@ -32,6 +32,7 @@ param(
     [Parameter(Mandatory)][string]$OutputPath
 )
 $ErrorActionPreference='Stop'
+$installedDigest=$null
 if($FromWorkflow){
     $restore=@{OutputPath=$OutputPath;PlatformRing=$(if($env:PLATFORM_RING){$env:PLATFORM_RING}else{$PlatformRing})}
     if($ExpectedCommit){$restore.ExpectedCommit=$ExpectedCommit}
@@ -71,10 +72,12 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
         if(-not (Test-Path -LiteralPath $installationPath)){
             throw 'No OGP installation pin was found. Run the platform installer, commit .OpenGuidePlatform/installation.json and its coordinated Hugo dependency, then rerun the build.'
         }
-        $installation=Get-Content -LiteralPath $installationPath -Raw|ConvertFrom-Json
+        try {$installation=Get-Content -LiteralPath $installationPath -Raw|ConvertFrom-Json -ErrorAction Stop}
+        catch {throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'}
         $ReleaseTag=[string]$installation.releaseTag
         $installedCommit=[string]$installation.release.sourceCommit
-        if($installation.schemaVersion -ne 1 -or $ReleaseTag -cne ('v'+$installation.release.version) -or $ReleaseTag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$' -or $installedCommit -cnotmatch '^[a-f0-9]{40}$'){
+        $installedDigest=[string]$installation.release.packages.GuideSite.sha256
+        if($installation.schemaVersion -ne 1 -or $ReleaseTag -cne ('v'+$installation.release.version) -or $ReleaseTag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$' -or $installedCommit -cnotmatch '^[a-f0-9]{40}$' -or $installedDigest -cnotmatch '^[a-f0-9]{64}$'){
             throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'
         }
         if($ExpectedCommit -and $ExpectedCommit -cne $installedCommit){throw 'Prepared platform source differs from the installation pin.'}
@@ -92,6 +95,7 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     $ExpectedVersion=$ReleaseTag.Substring(1)
 }
 $manifest=Get-Content "$assets/release-manifest.json" -Raw|ConvertFrom-Json
+if($installedDigest -and $manifest.packages.GuideSite.sha256 -cne $installedDigest){throw 'Installed platform package digest mismatch. The release assets differ from the installed pin; restore the original assets or perform a reviewed update.'}
 if(-not $ExpectedCommit){$ExpectedCommit=$manifest.sourceCommit}
 if($ExpectedCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Release source identity is invalid.'}
 if($manifest.schemaVersion -ne 2 -or $manifest.packages.GuideSite.version -cne $manifest.version -or $manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ExpectedVersion -or $manifest.sourceCommit -cne $ExpectedCommit -or $manifest.packages.GuideSite.archive -cne 'OpenGuidePlatform-GuideSite.zip'){throw 'Release manifest does not match the requested platform.'}

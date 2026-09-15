@@ -13,6 +13,21 @@ Describe 'Shared Prepare assessment and reports' {
         [IO.File]::WriteAllText((Join-Path $directory 'index.md'),"---`ntitle: Guide`n---`nBody")
         $edition.translations[0].downloads=@()
     }
+    It 'warns without blocking a production site using prerelease OGP <Version>' -ForEach @(@{Version='1.2.3-Preview.4'},@{Version='1.2.3-rc.1'}) {
+        $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) $Version -Target production
+        $result.outcome|Should -Be pass
+        $result.target|Should -Be production
+        $warning=@($result.findings|Where-Object code -eq PRODUCTION_SITE_PREVIEW_PLATFORM)
+        $warning.Count|Should -Be 1
+        $warning[0].severity|Should -Be warning
+        ConvertTo-GuideAssessmentMarkdown $result|Should -Match 'PRODUCTION_SITE_PREVIEW_PLATFORM'
+    }
+    It 'does not warn for production OGP or a non-production site' {
+        foreach($case in @(@{Target='production';Version='1.2.3'},@{Target='preview';Version='1.2.3-Preview.4'},@{Target='canary';Version='1.2.3-Preview.4'})){
+            $result=Get-GuideAssessment $workspace $policy @('en') @{} ('a'*40) $case.Version -Target $case.Target
+            @($result.findings|Where-Object code -eq PRODUCTION_SITE_PREVIEW_PLATFORM).Count|Should -Be 0
+        }
+    }
     It 'omits healthy web and PDF-only translations from guide fixes but retains their JSON inventory' {
         $edition.translations+=@{language='fa';intent='pdf-only';downloads=@(@{path='guide.fa.pdf';handling='supplied'})}
         [IO.File]::WriteAllText("$directory/guide.fa.pdf",'supplied PDF fixture')
