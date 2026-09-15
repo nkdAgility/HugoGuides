@@ -8,6 +8,7 @@ Preserve the bespoke wrapper, supplied/protected PDFs and deliberate multilingua
 Do not put lang in Hugo front matter; PDF generation passes Pandoc language metadata separately.
 Never enable permanently excluded languages in production.
 Do not modify generated platform adapters, skills or the installation record by hand.
+Workflow callers are site-owned. Preserve site triggers, inputs and secrets; use the coordinated update to change OGP release references and regenerate the Actions lockfile.
 Update them using ./build.ps1 Update -ring preview on a review branch and review the complete diff.
 For first installation, use the remote bootstrap command documented in the platform README.
 
