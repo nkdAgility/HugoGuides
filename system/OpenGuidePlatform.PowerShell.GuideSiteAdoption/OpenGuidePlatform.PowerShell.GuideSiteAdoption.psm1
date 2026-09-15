@@ -67,7 +67,11 @@ $files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.P
 $files['.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1")
 $workflow=[IO.File]::ReadAllText("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/main.yaml")
 $workflow=$workflow.Replace('__RELEASE__',$ReleaseTag).Replace('__COMMIT__',$manifest.sourceCommit).Replace('__SOURCE__',($SourcePath|ConvertTo-Json -Compress))
-$files['.github/workflows/main.yaml']=[Text.Encoding]::UTF8.GetBytes($workflow)
+Import-Module "$PSScriptRoot/WorkflowCallers.psm1" -Force
+$callerPlan=New-GuideWorkflowCallerPlan -WorkspaceRoot $root -ReleaseTag $ReleaseTag -Previous $previous -Starter $workflow
+foreach($name in $callerPlan.Files.Keys){$files[$name]=$callerPlan.Files[$name]}
+$actionsLockPath=Resolve-InstallPath '.github/workflows/actions.lock'
+$actionsLockBefore=if(Test-Path $actionsLockPath){Get-Digest $actionsLockPath}else{$null}
 foreach($item in Get-ChildItem "$package/system/OpenGuidePlatform.Agents.Integration/skills" -File -Recurse){
     $relative=[IO.Path]::GetRelativePath("$package/system/OpenGuidePlatform.Agents.Integration/skills",$item.FullName).Replace('\','/')
     $files[".agents/skills/$relative"]=[IO.File]::ReadAllBytes($item.FullName)
@@ -91,12 +95,21 @@ function Confirm-NativeSnapshot {
         $actual=if(Test-Path -LiteralPath $path -PathType Leaf){Get-Digest $path}else{$null}
         if($actual -cne $nativePlan.ExpectedHashes[$name]){throw "Consumer file changed during native update: $name"}
     }
+    foreach($name in $callerPlan.ExpectedHashes.Keys){
+        $path=Resolve-InstallPath $name
+        $actual=if(Test-Path -LiteralPath $path -PathType Leaf){Get-Digest $path}else{$null}
+        if($actual -cne $callerPlan.ExpectedHashes[$name]){throw "Consumer workflow changed during update: $name"}
+    }
+    $lockDigest=if(Test-Path $actionsLockPath){Get-Digest $actionsLockPath}else{$null}
+    if($lockDigest -cne $actionsLockBefore){throw 'Actions lockfile changed during update.'}
 }
 Confirm-NativeSnapshot
 # Preflight ALL managed destinations. Never silently replace consumer work.
 $conflicts=[Collections.Generic.List[string]]::new()
 if($previous){
     foreach($name in $previous.managedFiles.Keys){
+        # Legacy whole-file callers become site-owned after semantic preflight.
+        if($callerPlan.Files.Contains($name)){continue}
         if(-not $files.Contains($name) -and $name -cnotin @('bootstrap.ps1','Resolve-OpenGuidePlatform.ps1')){throw "Managed file retirement needs explicit migration: $name"}
         $path=Resolve-InstallPath $name
         if(-not (Test-Path -LiteralPath $path -PathType Leaf) -or (Get-Digest $path) -cne $previous.managedFiles[$name]){$conflicts.Add($name)}
@@ -104,14 +117,15 @@ if($previous){
 }
 foreach($name in $files.Keys){
     $path=Resolve-InstallPath $name
-    if(-not $nativePlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
+    if(-not $nativePlan.Files.Contains($name) -and -not $callerPlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
 }
 if($conflicts.Count){throw "Managed-file conflicts; reconcile on your review branch before retrying: $($conflicts -join ', ')"}
 $hashes=[ordered]@{}
-foreach($name in $files.Keys){if($nativePlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
+foreach($name in $files.Keys){if($nativePlan.Files.Contains($name) -or $callerPlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
 $record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;sourcePath=$SourcePath;release=$manifest;hugoResolution='native-module';nativeHugoModule=$native;nativeChecksums=@{sum=$nativePlan.Sum;goModSum=$nativePlan.GoModSum};adoptionBlockers=@('Coordinated agent controls and independent enforcement');managedFiles=$hashes}
+$record.workflowCallers=$callerPlan.Callers
 $files['.OpenGuidePlatform/installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
-Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); managed files:"
+Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); planned files (including site-owned caller references):"
 $files.Keys|ForEach-Object {Write-Host "  $_"}
 $action="Install coordinated platform files from $ReleaseTag"
 if($reviewBranch){$action="Create review branch $reviewBranch and $action"}
@@ -126,6 +140,9 @@ if($reviewBranch){
 # Roll back tracked files if a write fails. The installation record is written last.
 $original=@{};$written=[Collections.Generic.List[string]]::new()
 try{
+    $lockName='.github/workflows/actions.lock'
+    $original[$lockName]=if(Test-Path $actionsLockPath){[IO.File]::ReadAllBytes($actionsLockPath)}else{$null}
+    $written.Add($lockName)
     $retired=@()
     if($previous){$retired=@(@('bootstrap.ps1','Resolve-OpenGuidePlatform.ps1')|Where-Object {$previous.managedFiles.ContainsKey($_)})}
     if($previousPath -eq $legacyLockPath -and (Test-Path $legacyLockPath)){$retired+=@('open-guide-platform.installation.json')}
@@ -135,6 +152,21 @@ try{
         [IO.File]::Delete($path)
     }
     foreach($name in $files.Keys){
+        # Lock the new references before committing the installation record.
+        if($name -eq '.OpenGuidePlatform/installation.json'){
+            Push-Location $root
+            try{
+                $callerPaths=@($callerPlan.Files.Keys)
+                & gh actions-lock --no-narrow --no-migrate-local-actions --no-interactive @callerPaths
+                if($LASTEXITCODE -ne 0){throw 'Actions locking failed. Install github/gh-actions-lock and reconcile its findings before retrying.'}
+                $verification=& gh actions-lock --verify-local --json @callerPaths
+                if($LASTEXITCODE -ne 0){throw 'Actions lockfile verification failed.'}
+                $verification=$verification|ConvertFrom-Json -ErrorAction Stop
+                if($verification.valid -isnot [bool] -or -not $verification.valid){throw 'Actions lockfile verification failed.'}
+                # The tool verifies supported action dependencies. Reusable workflows
+                # are excluded by GitHub; an OGP-only caller needs no actions.lock file.
+            }finally{Pop-Location}
+        }
         $path=Resolve-InstallPath $name
         $original[$name]=if(Test-Path -LiteralPath $path){[IO.File]::ReadAllBytes($path)}else{$null}
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($path))|Out-Null

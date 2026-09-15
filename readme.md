@@ -50,6 +50,8 @@ It selects the newest installable preview release and verifies the download. On 
 
 Once installed, update on your review branch with `./build.ps1 Update -ring preview`. The remote bootstrap command also supports updates. Bootstrap is not installed into your repository or shipped as a release asset.
 
+Workflow callers are site-owned: configure their triggers, inputs and secrets without losing those settings on update. Install `gh extension install github/gh-actions-lock` first. OGP updates recognised caller release references and regenerates their Actions lockfile alongside the native dependency; ambiguous callers or locking failures stop the update. See [caller ownership and updates](docs/using/first-adoption.md#caller-ownership-and-updates).
+
 Then check the changes and build both targets:
 
 ```powershell

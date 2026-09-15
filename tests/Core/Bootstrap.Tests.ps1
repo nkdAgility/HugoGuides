@@ -10,8 +10,22 @@ BeforeAll {
     $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     $bootstrap=Join-Path $root 'bootstrap.ps1'
     $resolver=Join-Path $root 'system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1'
+    $global:OgpRealGh=(Get-Command gh -CommandType Application).Source
     function global:gh {
         $global:LASTEXITCODE=0
+        if($args[0] -eq 'actions-lock'){
+            if($global:OgpUseRealLock){ & $global:OgpRealGh @args; return }
+            if($args -contains '--verify-local'){
+                return (@{cli_version='v0.1.6';valid=(-not $global:OgpVerificationFailure)}|ConvertTo-Json)
+            }
+            $args | Should -Contain '--no-narrow'
+            $args | Should -Contain '--no-migrate-local-actions'
+            if($global:OgpNoLockFile){return}
+            $lock=[ordered]@{workflows=[ordered]@{}}
+            [IO.File]::WriteAllText((Join-Path $PWD '.github/workflows/actions.lock'),($lock|ConvertTo-Yaml))
+            if($global:OgpLockFailure){$global:LASTEXITCODE=1}
+            return
+        }
         if($args -contains '--slurp' -and $args -contains '--jq'){throw 'GitHub CLI forbids combining --slurp and --jq.'}
         if($global:OgpBootstrapOffline){throw 'Unexpected network access.'}
         if($args[0] -eq 'api'){
@@ -57,6 +71,10 @@ Describe 'Guide-site installation and update' {
     BeforeEach {
         Mock Invoke-RestMethod { [IO.File]::ReadAllText($resolver) }
         $global:OgpBootstrapOffline=$false
+        $global:OgpLockFailure=$false
+        $global:OgpNoLockFile=$false
+        $global:OgpVerificationFailure=$false
+        $global:OgpUseRealLock=$false
         $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($workspace)|Out-Null
         & git init -q -b codex/adoption $workspace
@@ -75,6 +93,8 @@ Describe 'Guide-site installation and update' {
         $record.releaseTag | Should -Be 'v1.2.3-Preview.1'
         $record.nativeHugoModule.version | Should -Be 'v1.2.3-Preview.1'
         $record.managedFiles.PSObject.Properties.Name | Should -Not -Contain 'site/go.mod'
+        $record.managedFiles.PSObject.Properties.Name | Should -Not -Contain '.github/workflows/main.yaml'
+        $record.workflowCallers.PSObject.Properties.Name | Should -Contain '.github/workflows/main.yaml'
         Get-Content "$workspace/site/go.mod" -Raw | Should -Match 'v1.2.3-Preview.1'
         Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '@v1.2.3-Preview.1'
         Test-Path "$workspace/.agents/skills/guide.transcreate/SKILL.md" | Should -BeTrue
@@ -88,6 +108,97 @@ Describe 'Guide-site installation and update' {
         & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
         (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
         Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '@v1.2.3-Preview.2'
+    }
+    It 'preserves customised build and cleanup callers byte-for-byte except release references' {
+        & $bootstrap -Install @parameters
+        $path="$workspace/.github/workflows/main.yaml"
+        $custom=[IO.File]::ReadAllText($path).Replace('  push:',"  merge_group:`n  push:").Replace('      deploy: false','      deploy: true')
+        $custom += "`nconcurrency:`n  group: site-preview`n  cancel-in-progress: true`n"
+        [IO.File]::WriteAllText($path,$custom)
+        $cleanup=@'
+name: Cleanup
+on: [pull_request]
+jobs:
+  close:
+    uses: 'nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-close-pr.yaml@v1.2.3-Preview.1' # keep comment
+    secrets:
+      static-web-app-token: ${{ secrets.SITE_TOKEN }}
+'@
+        [IO.File]::WriteAllText("$workspace/.github/workflows/cleanup.yml",$cleanup)
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        [IO.File]::ReadAllText($path) | Should -BeExactly $custom.Replace('@v1.2.3-Preview.1','@v1.2.3-Preview.2')
+        [IO.File]::ReadAllText("$workspace/.github/workflows/cleanup.yml") | Should -BeExactly $cleanup.Replace('@v1.2.3-Preview.1','@v1.2.3-Preview.2')
+    }
+    It 'migrates a customised legacy managed caller without accepting edits to other managed files' {
+        & $bootstrap -Install @parameters
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record.Remove('workflowCallers')
+        $record.managedFiles['.github/workflows/main.yaml']='0'*64
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
+        Add-Content "$workspace/.github/workflows/main.yaml" '# Site customisation'
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        $updated=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $updated.managedFiles.ContainsKey('.github/workflows/main.yaml') | Should -BeFalse
+        Get-Content "$workspace/.github/workflows/main.yaml" -Raw | Should -Match '# Site customisation'
+    }
+    It 'rolls back callers native dependency and lockfile if locking fails' {
+        & $bootstrap -Install @parameters
+        $paths=@('.github/workflows/main.yaml','.github/workflows/actions.lock','site/go.mod','.OpenGuidePlatform/installation.json','build.ps1')
+        $before=@{};foreach($path in $paths){$before[$path]=(Get-FileHash "$workspace/$path").Hash}
+        $global:OgpLockFailure=$true
+        { & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2 } | Should -Throw '*Actions locking failed*'
+        foreach($path in $paths){(Get-FileHash "$workspace/$path").Hash | Should -Be $before[$path]}
+    }
+    It 'refuses a conflicting caller version without changing the installation' {
+        & $bootstrap -Install @parameters
+        $path="$workspace/.github/workflows/main.yaml"
+        [IO.File]::WriteAllText($path,[IO.File]::ReadAllText($path).Replace('@v1.2.3-Preview.1','@v9.0.0'))
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
+        { & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2 } | Should -Throw '*Conflicting OGP caller version*'
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash | Should -Be $before
+    }
+    It 'rolls back when supported action verification fails' {
+        & $bootstrap -Install @parameters
+        $before=(Get-FileHash "$workspace/.github/workflows/actions.lock").Hash
+        $record=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
+        $global:OgpVerificationFailure=$true
+        { & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2 } | Should -Throw '*Actions lockfile verification failed*'
+        (Get-FileHash "$workspace/.github/workflows/actions.lock").Hash | Should -Be $before
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash | Should -Be $record
+    }
+    It 'installs and upgrades reusable-only callers without an actions lockfile' {
+        $global:OgpNoLockFile=$true
+        & $bootstrap -Install @parameters
+        Test-Path "$workspace/.github/workflows/actions.lock" | Should -BeFalse
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+        Test-Path "$workspace/.github/workflows/actions.lock" | Should -BeFalse
+    }
+    It 'installs and upgrades with released Actions locking while preserving caller settings' -Skip:($env:OGP_TEST_REAL_ACTIONS_LOCK -ne '1') {
+        $global:OgpUseRealLock=$true
+        & $bootstrap -Install @parameters
+        Test-Path "$workspace/.github/workflows/actions.lock" | Should -BeFalse
+        $path="$workspace/.github/workflows/main.yaml"
+        $custom=[IO.File]::ReadAllText($path).Replace('  push:',"  merge_group:`n  push:")
+        $custom=$custom.Replace('jobs:',@'
+jobs:
+  site-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+'@)
+        [IO.File]::WriteAllText($path,$custom)
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        [IO.File]::ReadAllText($path) | Should -BeExactly $custom.Replace('@v1.2.3-Preview.1','@v1.2.3-Preview.2')
+        $lock=Get-Content "$workspace/.github/workflows/actions.lock" -Raw|ConvertFrom-Yaml
+        $lock.workflows['.github/workflows/main.yaml'] | Should -Contain 'actions/checkout@v4'
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).releaseTag | Should -Be 'v1.2.3-Preview.2'
+    }
+    It 'preserves an existing unrelated main workflow and refuses first installation' {
+        New-Item -ItemType Directory "$workspace/.github/workflows" -Force | Out-Null
+        Set-Content "$workspace/.github/workflows/main.yaml" 'name: Bespoke workflow'
+        { & $bootstrap -Install @parameters } | Should -Throw '*Existing site workflow conflicts*'
+        Test-Path "$workspace/build.ps1" | Should -BeFalse
     }
     It 'restores offline from the locked cache and runs the installed GuideSite entry point' {
         & $bootstrap -Install @parameters
