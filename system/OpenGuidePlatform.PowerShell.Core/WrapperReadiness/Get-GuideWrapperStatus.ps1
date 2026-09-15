@@ -53,7 +53,7 @@ function Get-GuideWrapperStatus {
         $scope='local-wrapper-yaml'
         if($PSBoundParameters.ContainsKey('EffectiveTranslations')){
             $effective=@($EffectiveTranslations|Where-Object Language -CEQ $language)
-            if($effective.Count -ne 1 -or $effective[0].Scope -ne 'hugo-effective-i18n'){throw "Missing or ambiguous effective catalogue evidence for $language."}
+            if($effective.Count -ne 1 -or $effective[0].Scope -notin @('hugo-effective-i18n','source-i18n')){throw "Missing or ambiguous effective catalogue evidence for $language."}
             $keys=@(foreach($key in $Policy.wrapper.requiredI18nKeys){
                 $entry=@($effective[0].Keys|Where-Object Key -CEQ $key)
                 if($entry.Count -ne 1){throw "Missing or ambiguous effective translation evidence for $language/$key."}
@@ -61,7 +61,7 @@ function Get-GuideWrapperStatus {
                 [pscustomobject]@{Key=$key;State=if($present){'present'}else{'missing'};Resolution=$entry[0].State;Fix="Supply a reviewed translation or intended fallback for '$key'."}
             })
             if($catalogState -in @('present','missing')){$catalogState='present'}
-            $scope='hugo-effective-i18n'
+            $scope=$effective[0].Scope
         }
         [pscustomobject]@{Language=$language;Catalogue=$catalogState;LocalCatalogue=$localCatalogue;Detail=$detail;Keys=$keys;RequiredKeys=@($Policy.wrapper.requiredI18nKeys);Scope=$scope}
     })

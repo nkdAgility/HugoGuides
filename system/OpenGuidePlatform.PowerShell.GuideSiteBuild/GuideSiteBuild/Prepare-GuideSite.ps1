@@ -38,19 +38,14 @@ try {
         $Languages=@($observed.Configuration.languages.Keys | Where-Object { $observed.Configuration.languages[$_].disabled -ne $true })
         if($observed.Diagnostics){Write-Warning $observed.Diagnostics}
     }
-    $effectiveArguments=@{};$probeError=$null
+    # Prepare inspects authored catalogue files. It must not render scratch sites to
+    # establish effective runtime translations; those are not source evidence.
+    $sourceEvidence=@{}
     if($policy.wrapper.requiredI18nKeys.Count){
-        try {
-            if(-not $ConfigFiles){$ConfigFiles=@('hugo.yaml',"hugo.$Target.yaml")}
-            $probe=Get-GuideEffectiveTranslations -SourcePath $source -ConfigFiles $ConfigFiles -RequiredKeys $policy.wrapper.requiredI18nKeys -WorkspaceRoot $WorkspaceRoot -OutputPath ('.processing/i18n-probe/'+[guid]::NewGuid().ToString('N')) -Target $Target
-            $effectiveArguments.EffectiveTranslations=$probe.Languages
-        } catch {$probeError=$_.Exception.Message}
+        if(-not $ConfigFiles){$ConfigFiles=@('hugo.yaml',"hugo.$Target.yaml")}
+        $sourceEvidence.EffectiveTranslations=@(Get-GuideSourceTranslations -SourcePath $source -ConfigFiles $ConfigFiles -Target $Target -RequiredKeys $policy.wrapper.requiredI18nKeys)
     }
-    $assessment=Get-GuideAssessment -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages -EffectiveProduction $production -SourceCommit $SourceCommit -PlatformVersion $PlatformVersion -Target $Target @effectiveArguments
-    if($probeError){
-        $assessment.findings+= [ordered]@{code='WRAPPER_EFFECTIVE_EVIDENCE_UNAVAILABLE';severity='blocker';scope='wrapper';subject=$policy.siteId;message=$probeError;remediation='Inspect the isolated Hugo translation probe logs and restore effective catalogue evidence.';evidence=@()}
-        if($assessment.outcome -eq 'pass'){$assessment.outcome='blocked'}
-    }
+    $assessment=Get-GuideAssessment -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages -EffectiveProduction $production -SourceCommit $SourceCommit -PlatformVersion $PlatformVersion -Target $Target @sourceEvidence
     $downloads=Get-GuideDownloadRequirements -WorkspaceRoot $WorkspaceRoot -Policy $policy -Target $Target -EnabledLanguages $Languages
     $pdfReceipts=Get-GuidePdfReceipts -WorkspaceRoot $WorkspaceRoot -Policy $policy -Requirements $downloads
     $legacyAliases=Test-GuideLegacyAliases -WorkspaceRoot $WorkspaceRoot -Policy $policy

@@ -8,6 +8,25 @@ Describe 'JSON publication indexes' {
         [IO.Directory]::CreateDirectory("$site/guide")|Out-Null
         [IO.File]::WriteAllText("$site/guide/index.html",'<h1>Guide</h1>')
     }
+    It 'validates a non-home index using the configured JSON media suffix' {
+        $config=@{outputformats=@{catalogue=@{basename='catalogue';mediatype='application/json'}};mediatypes=@{'application/json'=@{suffixes=@('jsn')}}}
+        $names=@(Get-GuideJsonFileNames -Configuration $config)
+        $names|Should -Contain 'catalogue.jsn'
+        '[{"url":"/missing/"}]'|Set-Content "$site/guide/catalogue.jsn"
+        $indexes=@(Get-GuideArtifactFiles $site|Where-Object {[IO.Path]::GetFileName($_.Path) -in $names}|ForEach-Object {@{route='/'+$_.Path;requiredRoutes=@()}})
+        (Test-GuideJsonIndexes -ArtifactRoot $site -BaseUri https://example.test/ -Indexes $indexes).Findings.Code|Should -Contain JSON_INDEX_TARGET_MISSING
+    }
+    It 'does not authorize PDF mappings from a static index impostor' {
+        New-Item "$site/static" -ItemType Directory|Out-Null
+        '[{"VersionPath":"guide/2024.1","Language":"en","PathPdf":"/extra.pdf"}]'|Set-Content "$site/static/translations.json"
+        '[]'|Set-Content "$site/translations.json"
+        $files=@(Get-GuideArtifactFiles $site)
+        @(Get-GuidePublishedDownloads -ArtifactFiles $files -BaseUri https://example.test/ -Indexes @(@{route='/translations.json';requiredRoutes=@()})).Count|Should -Be 0
+    }
+    It 'preserves an explicitly empty media delimiter' {
+        $config=@{outputformats=@{catalogue=@{basename='catalogue';mediatype='application/json'}};mediatypes=@{'application/json'=@{suffixes=@('jsn');delimiter=''}}}
+        @(Get-GuideJsonFileNames -Configuration $config)|Should -Contain 'cataloguejsn'
+    }
     It 'checks artifact-relative required and forbidden routes beneath <base>' -ForEach @(
         @{base='https://preview.example/';prefix=''},
         @{base='https://preview.example/docs/';prefix='/docs'},
