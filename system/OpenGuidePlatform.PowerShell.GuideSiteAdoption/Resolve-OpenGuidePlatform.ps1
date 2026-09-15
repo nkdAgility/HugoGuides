@@ -67,19 +67,19 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     Expand-VerifiedPlatformArchive $bundle $assets
 }else{
     if(-not $ReleaseTag){
-        $items=& gh api 'repos/nkdAgility/OpenGuidePlatform/releases?per_page=100' --paginate --slurp
-        if($LASTEXITCODE -ne 0){throw 'Cannot discover the platform release.'}
-        $pages=$items|ConvertFrom-Json
-        $ring=$PlatformRing
-        if($ring -notin @('preview','production')){throw 'Platform ring must be preview or production.'}
-        $channel=if($ring -eq 'production'){'stable'}else{'preview'}
-        $matches=@($pages|ForEach-Object { foreach($item in $_){$item} }|Where-Object {
-            -not $_.draft -and ([bool]$_.prerelease -eq ($channel -eq 'preview')) -and
-            @($_.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -eq 1 -and
-            (-not $ExpectedCommit -or $_.target_commitish -ceq $ExpectedCommit)
-        }|Sort-Object published_at -Descending)
-        if(-not $matches.Count){throw "No installable $channel platform release is available."}
-        $ReleaseTag=$matches[0].tag_name
+        $installationPath=Join-Path $WorkspaceRoot '.OpenGuidePlatform/installation.json'
+        if(-not (Test-Path -LiteralPath $installationPath)){
+            throw 'No OGP installation pin was found. Run the platform installer, commit .OpenGuidePlatform/installation.json and its coordinated Hugo dependency, then rerun the build.'
+        }
+        $installation=Get-Content -LiteralPath $installationPath -Raw|ConvertFrom-Json
+        $ReleaseTag=[string]$installation.releaseTag
+        $installedCommit=[string]$installation.release.sourceCommit
+        if($installation.schemaVersion -ne 1 -or $ReleaseTag -cne ('v'+$installation.release.version) -or $ReleaseTag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$' -or $installedCommit -cnotmatch '^[a-f0-9]{40}$'){
+            throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'
+        }
+        if($ExpectedCommit -and $ExpectedCommit -cne $installedCommit){throw 'Prepared platform source differs from the installation pin.'}
+        $ExpectedCommit=$installedCommit
+        Write-Host "Using installed OGP pin $ReleaseTag. Install/update is required to change this version."
     }
     $raw=& gh release view $ReleaseTag --repo nkdAgility/OpenGuidePlatform --json tagName,targetCommitish,isDraft 2>$null
     if($LASTEXITCODE -ne 0){throw "Release $ReleaseTag is unavailable; no source-build fallback is permitted."}
