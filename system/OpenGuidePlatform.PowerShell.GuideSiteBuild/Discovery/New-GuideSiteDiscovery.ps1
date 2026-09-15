@@ -69,14 +69,61 @@ function New-GuideSiteDiscovery {
             @{source=(Relative $file.FullName);language=$language;aliases=@($legacy|ForEach-Object {$_.TrimEnd('/')+'/'});targets=@($legacy|ForEach-Object {$prefix+$_.Trim('/')+'/index.html'})}
         }
     })
+    # A whole-guide exclusion must be explicit in the source and confirmed by Hugo.
+    # Do not interpret a missing artifact, draft, or a path-specific cascade as one.
+    $excludedByRing=@{}
+    foreach($guide in $guides){
+        $metadata=(Read-GuideDocument (Join-Path $WorkspaceRoot "$($guide.contentRoot)/_index.md")).Metadata
+        foreach($cascade in @($metadata['cascade'])){
+            if($cascade -isnot [Collections.IDictionary]){continue}
+            $build=$cascade['build'];$match=$cascade['target']
+            if($build -isnot [Collections.IDictionary] -or $match -isnot [Collections.IDictionary]){continue}
+            if($build['render'] -ne 'never' -or $build['list'] -ne 'never' -or @($match.Keys|Where-Object {$_ -ne 'environment'}).Count){continue}
+            $ring=[string]$match['environment']
+            if($ring -notin @('canary','preview','production')){continue}
+            if(-not $excludedByRing.ContainsKey($ring)){$excludedByRing[$ring]=@()}
+            $excludedByRing[$ring]+=$guide.id
+        }
+    }
+    $pagesByRing=@{};$pagesByRing[$Target]=$pages
+    $baseByRing=@{};$baseByRing[$Target]=$configuration['baseurl']
     $hasMin=$configuration.languages.Contains('min')
     $environments=@(foreach($ring in @('canary','preview','production')){
         $config=Join-Path $source "hugo.$ring.yaml"
         if(-not (Test-Path $config)){continue}
         $effective=(Get-GuideHugoConfiguration -SourcePath $source -ConfigFiles @('hugo.yaml',"hugo.$ring.yaml",$ConfigFiles[-1]) -Target $ring).Configuration
         if($effective.languages.Contains('min')){$hasMin=$true}
+        $baseByRing[$ring]=$effective['baseurl']
+        if($excludedByRing.Count -and -not $pagesByRing.ContainsKey($ring)){
+            $pagesByRing[$ring]=@(Get-GuideSourcePages -SourcePath $source -ConfigFiles @('hugo.yaml',"hugo.$ring.yaml",$ConfigFiles[-1]) -Target $ring -Configuration $effective)
+        }
         @{name=$ring;excludedLanguages=@($effective.languages.Keys|Where-Object {$effective.languages[$_].disabled -eq $true});excludedGuides=@()}
     })
+    foreach($environment in $environments){foreach($id in @($excludedByRing[$environment.name])){
+        if(-not $id){continue}
+        $guide=$guides|Where-Object id -CEQ $id
+        $directory=[IO.Path]::GetFullPath((Join-Path $WorkspaceRoot $guide.contentRoot))+[IO.Path]::DirectorySeparatorChar
+        $published=@($pagesByRing[$environment.name]|Where-Object {[IO.Path]::GetFullPath((Join-Path $source $_.path)).StartsWith($directory,[StringComparison]::OrdinalIgnoreCase)})
+        if($published.Count){continue} # A descendant may override its parent's cascade.
+        $knownPages=@(foreach($ring in $pagesByRing.Keys){foreach($page in $pagesByRing[$ring]){
+            if([IO.Path]::GetFullPath((Join-Path $source $page.path)).StartsWith($directory,[StringComparison]::OrdinalIgnoreCase)){
+                @{path=$page.path;route=(Get-GuideArtifactRouteFromUri -Uri ([uri]$page.permalink) -BaseUri ([uri]$baseByRing[$ring]))}
+            }
+        }})
+        $prefixes=@($knownPages|ForEach-Object {
+            # Each permalink retains Hugo's custom URLs and language directories.
+            if($_.route){$_.route.Trim('/')}
+            $document=Read-GuideDocument ([IO.Path]::GetFullPath((Join-Path $source $_.path)))
+            $language=Language ([IO.Path]::GetFileName($_.path))
+            $prefix=if($language -eq $default -and -not $configuration.defaultcontentlanguageinsubdir){''}else{"$($language.ToLowerInvariant())/"}
+            foreach($alias in @($document.Metadata['aliases'])){
+                if($alias -and ([string]$alias).StartsWith('/')){$prefix+([string]$alias).Trim('/')}
+            }
+        }|Where-Object {$_}|Sort-Object -Unique)
+        if(-not $prefixes.Count){throw "Cannot discover public paths for excluded guide '$id'; provide a source environment where it is published."}
+        $guide.artifactPrefixes=$prefixes
+        $environment.excludedGuides+= $id
+    }}
     $routes=@($pages|ForEach-Object {ArtifactRoute $_.permalink}|Sort-Object -Unique)
     $indexes=@(foreach($language in $languages){
         $prefix=if($language -eq $default -and -not $configuration.defaultcontentlanguageinsubdir){'/'}else{"/$language/"}
@@ -99,6 +146,7 @@ function New-GuideSiteDiscovery {
     $indexes=@($indexes|Sort-Object route -Unique)
     # Alias pages are not members of Hugo .Pages; require their generated routes explicitly.
     foreach($guide in $guides){
+        if(@($environments|Where-Object name -CEQ $Target|ForEach-Object excludedGuides) -ccontains $guide.id){continue}
         $guideRoute=[IO.Path]::GetRelativePath($content,(Join-Path $WorkspaceRoot $guide.contentRoot)).Replace('\','/').ToLowerInvariant()
         foreach($language in @($guide.editions.translations.language|Where-Object {$_ -in $languages}|Sort-Object -Unique)){
             $suffix=if($language -eq $default){''}else{".$language"}

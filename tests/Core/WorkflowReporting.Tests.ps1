@@ -4,6 +4,22 @@ BeforeAll {
     Import-Module "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
     $workflow=ConvertFrom-Yaml (Get-Content "$root/.github/workflows/guide-site-build.yaml" -Raw)
 }
+Describe 'GitHub REST response enumeration' {
+    It 'enumerates REST comment arrays, including an empty first page' {
+        InModuleScope OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            $previousToken=$env:GH_TOKEN
+            try {
+                $env:GH_TOKEN='test-token'
+                Mock Invoke-RestMethod { return ,@() }
+                @(Invoke-GuideGitHubApi -Path 'repos/org/repo/issues/35/comments').Count|Should -Be 0
+                Mock Invoke-RestMethod { return ,@([pscustomobject]@{id=1},[pscustomobject]@{id=2}) }
+                $comments=@(Invoke-GuideGitHubApi -Path 'repos/org/repo/issues/35/comments')
+                $comments.Count|Should -Be 2
+                $comments[0].id|Should -Be 1
+            } finally { $env:GH_TOKEN=$previousToken }
+        }
+    }
+}
 Describe 'Prepare reporting through the released PowerShell module' {
     BeforeEach {
         $assessmentRoot=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))

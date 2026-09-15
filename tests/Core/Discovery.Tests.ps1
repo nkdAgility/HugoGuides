@@ -54,6 +54,66 @@ Describe 'Inferred guide-site validation' {
 }
 
 Describe 'Source-only discovery' {
+    It 'honours whole-guide environment exclusions while retaining download enforcement' {
+        $fixture=Join-Path $TestDrive 'excluded-guide'
+        New-Item "$fixture/content/guide/2024.1" -ItemType Directory -Force|Out-Null
+        foreach($ring in @('canary','preview','production')){''|Set-Content "$fixture/hugo.$ring.yaml"}
+        @'
+---
+type: guide
+layout: root
+cascade:
+  - build:
+      list: never
+      render: never
+    target:
+      environment: production
+---
+'@|Set-Content "$fixture/content/guide/_index.md"
+        "---`ntype: guide`nversion: 2024.1`nurl: /bespoke/edition/`naliases: [/guide/latest/]`n---`nBody"|Set-Content "$fixture/content/guide/2024.1/index.md"
+        'supplied PDF bytes'|Set-Content "$fixture/content/guide/2024.1/guide.en.pdf"
+        Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            param($Target)
+            @{Configuration=@{baseurl="https://$Target.example.test/docs/";contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false}};outputs=@{home=@()};outputformats=@{};mediatypes=@{}}}
+        }
+        Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            param($Target)
+            if($Target -ne 'production'){@{path='content/guide/2024.1/index.md';permalink="https://$Target.example.test/docs/bespoke/edition/"}}
+        }
+        $found=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath excluded-guide -ConfigFiles @('hugo.yaml') -Target production
+        ($found.publication.environments|Where-Object name -eq production).excludedGuides|Should -Contain guide
+        $found.guides[0].artifactPrefixes|Should -Contain 'bespoke/edition'
+        $found.wrapper.requiredRoutes|Should -Not -Contain '/guide/latest/'
+        $found|ConvertTo-Json -Depth 50|Set-Content "$fixture/policy.json"
+        {Import-GuidePolicy "$fixture/policy.json"}|Should -Not -Throw
+        $requirements=Get-GuideDownloadRequirements -WorkspaceRoot $TestDrive -Policy $found -Target production -EnabledLanguages @('en') -ArtifactFiles @()
+        $requirements.Required.Count|Should -Be 0
+        $requirements.Forbidden.Count|Should -Be 1
+        (Test-GuideDownloadPublication $requirements @()).Outcome|Should -Be pass
+        (Test-GuideDownloadPublication $requirements @(@{Path='leaked/guide.en.pdf';Sha256=$requirements.Forbidden[0].Sha256})).Outcome|Should -Be fail
+        $preview=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath excluded-guide -ConfigFiles @('hugo.yaml') -Target preview
+        $preview.wrapper.requiredRoutes|Should -Contain '/guide/latest/'
+        $required=Get-GuideDownloadRequirements -WorkspaceRoot $TestDrive -Policy $preview -Target preview -EnabledLanguages @('en') -ArtifactFiles @()
+        $required.Findings.Code|Should -Contain DOWNLOAD_PUBLICATION_PATH_UNDECLARED
+        $rootFile="$fixture/content/guide/_index.md"
+        (Get-Content $rootFile -Raw).Replace('environment: production','environment: preview')|Set-Content $rootFile
+        Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            param($Target)
+            if($Target -ne 'preview'){@{path='content/guide/2024.1/index.md';permalink="https://$Target.example.test/docs/bespoke/edition/"}}
+        }
+        $excludedPreview=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath excluded-guide -ConfigFiles @('hugo.yaml') -Target preview
+        ($excludedPreview.publication.environments|Where-Object name -eq preview).excludedGuides|Should -Contain guide
+        $excludedPreview.wrapper.requiredRoutes|Should -Not -Contain '/guide/latest/'
+        (Get-Content $rootFile -Raw).Replace('environment: preview','environment: production')|Set-Content $rootFile
+        # A descendant that overrides the root cascade must still be validated.
+        Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            param($Target)
+            @{path='content/guide/2024.1/index.md';permalink="https://$Target.example.test/docs/bespoke/edition/"}
+        }
+        $overridden=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath excluded-guide -ConfigFiles @('hugo.yaml') -Target production
+        ($overridden.publication.environments|Where-Object name -eq production).excludedGuides|Should -BeNullOrEmpty
+        $overridden.wrapper.requiredRoutes|Should -Contain '/guide/latest/'
+    }
     It 'validates discovered Polish aliases without rewriting their existing public paths' {
         $fixture=Join-Path $TestDrive 'polish-alias'
         New-Item "$fixture/content/guide/2024.1","$fixture/content/guide/translations" -ItemType Directory -Force|Out-Null

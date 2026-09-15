@@ -4,7 +4,10 @@ function Invoke-GuideGitHubApi {
     if(-not $env:GH_TOKEN){throw 'GitHub report delivery requires GH_TOKEN.'}
     $arguments=@{Uri="https://api.github.com/$Path";Method=$Method;Headers=@{Authorization="Bearer $env:GH_TOKEN";Accept='application/vnd.github+json'};ErrorAction='Stop'}
     if($Body){$arguments.Body=$Body|ConvertTo-Json -Depth 20 -Compress;$arguments.ContentType='application/json; charset=utf-8'}
-    Invoke-RestMethod @arguments
+    # Invoke-RestMethod preserves JSON arrays as one pipeline object, including [].
+    # Enumerate here so callers receive zero comments for an empty response.
+    $response=Invoke-RestMethod @arguments
+    foreach($item in $response){$item}
 }
 function Publish-GuidePrepareAssessment {
     [CmdletBinding()]
