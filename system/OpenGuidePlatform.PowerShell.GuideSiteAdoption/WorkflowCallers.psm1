@@ -21,6 +21,35 @@ function New-GuideWorkflowCallerPlan {
             $stream.Load([IO.StringReader]::new($text))
             if($stream.Documents.Count -ne 1){throw "Expected one workflow document in $($item.Name)."}
             $yaml=$stream.Documents[0].RootNode
+            # Inspect merge sources before discovery: YamlStream resolves aliases,
+            # but does not expose inherited uses entries as direct job children.
+            $pending=[Collections.Generic.Queue[object]]::new()
+            $pending.Enqueue(@{Node=$yaml;Merged=$false;Context='root'})
+            $directSeen=[Collections.Generic.HashSet[object]]::new([Collections.Generic.ReferenceEqualityComparer]::Instance)
+            $mergedSeen=[Collections.Generic.HashSet[object]]::new([Collections.Generic.ReferenceEqualityComparer]::Instance)
+            while($pending.Count){
+                $entry=$pending.Dequeue();$node=$entry.Node
+                $seen=$directSeen; if($entry.Merged){$seen=$mergedSeen}
+                if(-not $seen.Add($node)){continue}
+                if($node -is [YamlDotNet.RepresentationModel.YamlMappingNode]){
+                    foreach($pair in $node.Children.GetEnumerator()){
+                        if($entry.Context -eq 'job' -and $entry.Merged -and $pair.Key.Value -eq 'uses' -and
+                            $pair.Value -is [YamlDotNet.RepresentationModel.YamlScalarNode] -and
+                            $pair.Value.Value.StartsWith('nkdAgility/OpenGuidePlatform/',[StringComparison]::OrdinalIgnoreCase)){
+                            throw "Ambiguous OGP caller syntax in $($item.Name). Use literal block-style job uses entries instead of YAML merges or aliases."
+                        }
+                        if($pair.Key.Value -eq '<<'){
+                            $pending.Enqueue(@{Node=$pair.Value;Merged=$true;Context=$entry.Context})
+                        }elseif($entry.Context -eq 'root' -and $pair.Key.Value -eq 'jobs'){
+                            $pending.Enqueue(@{Node=$pair.Value;Merged=$entry.Merged;Context='jobs'})
+                        }elseif($entry.Context -eq 'jobs'){
+                            $pending.Enqueue(@{Node=$pair.Value;Merged=$entry.Merged;Context='job'})
+                        }
+                    }
+                }elseif($node -is [YamlDotNet.RepresentationModel.YamlSequenceNode]){
+                    foreach($child in $node.Children){$pending.Enqueue(@{Node=$child;Merged=$entry.Merged;Context=$entry.Context})}
+                }
+            }
             $references=@();$spans=@()
             $jobs=$null
             if($yaml -is [YamlDotNet.RepresentationModel.YamlMappingNode]){$jobs=$yaml.Children[[YamlDotNet.RepresentationModel.YamlScalarNode]::new('jobs')]}
@@ -64,7 +93,13 @@ function New-GuideWorkflowCallerPlan {
     if($Previous){
         if($Previous.ContainsKey('workflowCallers')){$required=@($Previous.workflowCallers.Keys)}
         elseif($Previous.managedFiles.ContainsKey('.github/workflows/main.yaml')){$required=@('.github/workflows/main.yaml')}
-        foreach($path in $required){if(-not $callers.Contains($path)){throw "Missing or unrecognised OGP caller: $path. Reconcile the caller manually."}}
+        foreach($path in $required){
+            if(-not $callers.Contains($path)){throw "Missing or unrecognised OGP caller: $path. Reconcile the caller manually."}
+            if($Previous.ContainsKey('workflowCallers')){
+                $missing=@($Previous.workflowCallers[$path]|Where-Object {$_ -cnotin @($callers[$path])})
+                if($missing.Count){throw "Missing or unrecognised OGP caller reference in ${path}: $($missing -join ', '). Reconcile the caller manually."}
+            }
+        }
     }
     if(-not $callers.Count){
         if($Previous){throw 'No OGP workflow caller found. Reconcile the caller manually.'}

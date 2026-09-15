@@ -79,3 +79,52 @@ jobs:
         {New-GuideWorkflowCallerPlan $workspace v1.0.1 $previous}|Should -Throw '*Linked workflow paths*'
     }
 }
+
+Describe 'Recorded references and inherited callers' {
+    BeforeEach {
+        $workspace=Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
+        New-Item -ItemType Directory "$workspace/.github/workflows" -Force|Out-Null
+        $path="$workspace/.github/workflows/custom.yaml"
+        $build='nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml'
+        $cleanup='nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-close-pr.yaml'
+    }
+    It 'rejects a removed reference even when another recorded reference remains' {
+        Set-Content $path "jobs:`n  build:`n    uses: ${build}@v1.0.0"
+        $previous=@{releaseTag='v1.0.0';workflowCallers=@{'.github/workflows/custom.yaml'=@($build,$cleanup)}}
+        {New-GuideWorkflowCallerPlan $workspace v1.0.1 $previous}|Should -Throw '*Missing or unrecognised OGP caller reference*'
+        Test-Path "$workspace/.github/workflows/main.yaml"|Should -BeFalse
+    }
+    It 'rejects replacement of a recorded build reference with cleanup' {
+        Set-Content $path "jobs:`n  build:`n    uses: ${cleanup}@v1.0.0"
+        $previous=@{releaseTag='v1.0.0';workflowCallers=@{'.github/workflows/custom.yaml'=@($build)}}
+        {New-GuideWorkflowCallerPlan $workspace v1.0.1 $previous}|Should -Throw '*Missing or unrecognised OGP caller reference*'
+    }
+    It 'allows new references while retaining every recorded reference' {
+        Set-Content $path "jobs:`n  build:`n    uses: ${build}@v1.0.0`n  cleanup:`n    uses: ${cleanup}@v1.0.0"
+        $previous=@{releaseTag='v1.0.0';workflowCallers=@{'.github/workflows/custom.yaml'=@($build)}}
+        $plan=New-GuideWorkflowCallerPlan $workspace v1.0.1 $previous
+        $plan.Callers['.github/workflows/custom.yaml'].Count|Should -Be 2
+    }
+    It 'rejects inherited OGP calls on first install before creating a starter' -ForEach @(
+        @{Yaml="shared: &call`n  uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1.0.0`njobs:`n  build:`n    <<: *call"}
+        @{Yaml="shared: &jobs`n  build:`n    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1.0.0`njobs:`n  <<: *jobs"}
+        @{Yaml="shared: &root`n  jobs:`n    build:`n      uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1.0.0`n<<: *root"}
+        @{Yaml="shared: &call`n  uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1.0.0`njobs:`n  build: *call"}
+    ) {
+        Set-Content $path $Yaml
+        {New-GuideWorkflowCallerPlan $workspace v1.0.0 $null 'starter'}|Should -Throw '*Ambiguous OGP caller syntax*'
+        Test-Path "$workspace/.github/workflows/main.yaml"|Should -BeFalse
+    }
+    It 'rejects an unrecorded inherited caller during update' {
+        Set-Content $path "jobs:`n  build:`n    uses: ${build}@v1.0.0"
+        Set-Content "$workspace/.github/workflows/cleanup.yaml" "shared: &call`n  uses: ${cleanup}@v1.0.0`njobs:`n  cleanup:`n    <<: [*call]"
+        $previous=@{releaseTag='v1.0.0';workflowCallers=@{'.github/workflows/custom.yaml'=@($build)}}
+        {New-GuideWorkflowCallerPlan $workspace v1.0.1 $previous}|Should -Throw '*Ambiguous OGP caller syntax*'
+    }
+    It 'preserves unrelated aliases merges and script text' {
+        $yaml="env-values: &environment`n  uses: ${cleanup}@v1.0.0`nenv:`n  <<: *environment`nshared: &settings`n  timeout-minutes: 10`njobs:`n  build:`n    <<: *settings`n    uses: ${build}@v1.0.0`n  notes:`n    steps:`n      - run: |`n          uses: ${cleanup}@v1.0.0"
+        Set-Content $path $yaml -NoNewline
+        $plan=New-GuideWorkflowCallerPlan $workspace v1.0.0 $null
+        [Text.Encoding]::UTF8.GetString($plan.Files['.github/workflows/custom.yaml'])|Should -BeExactly $yaml
+    }
+}
