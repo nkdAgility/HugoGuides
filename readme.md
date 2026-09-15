@@ -178,3 +178,9 @@ If you need help, include the command, finding and relevant report in a [GitHub 
 - [Platform development](docs/platform-development.md) — build this repository, run the sample locally and understand releases.
 - [Workflow dependency locking](docs/platform-development.md#workflow-dependency-lockfile) — regenerate, verify and review Actions dependency locks when changing platform workflows.
 - [Execution plan and current progress](docs/architecture/open-guide-platform-execution-plan.md).
+
+## Versioning builds
+
+Platform and guide-site builds use GitVersion 6. Run `./build.ps1 Dependencies` to install or upgrade the repository-local tool; global tools are not changed. Update migrates old GitVersion configuration while preserving site settings. Migration rewrites YAML formatting/comments; review the diff. All adopted sites should commit the migrated configuration.
+
+Main builds increment the preview counter automatically, with Patch as the default next version. Use `+semver: patch` (or `fix`), `+semver: minor` (or `feature`), or `+semver: major` (or `breaking`) anywhere in a commit message to request a bump. These directives also work in merged commits. A stable release tag keeps its exact version and selects production; PRs remain canary.

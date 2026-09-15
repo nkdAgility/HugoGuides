@@ -2,6 +2,7 @@
 # only its origin and base-path subtree; sibling applications are external.
 function Get-GuideArtifactRouteFromUri {
     param([Parameter(Mandatory)][uri]$Uri,[Parameter(Mandatory)][uri]$BaseUri)
+    if(-not $BaseUri.IsAbsoluteUri -or -not $Uri.IsAbsoluteUri){throw 'Route discovery requires an absolute base URL. Set the delivery URL in .OpenGuidePlatform/settings.yaml or pass -BaseUrl to build.ps1.'}
     if($Uri.Scheme -cne $BaseUri.Scheme -or $Uri.Authority -cne $BaseUri.Authority){return $null}
     $prefix=$BaseUri.AbsolutePath.TrimEnd('/')
     if($Uri.AbsolutePath -ceq $prefix){return '/'}

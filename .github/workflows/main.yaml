@@ -34,35 +34,35 @@ jobs:
       package-url: ${{ format('https://api.github.com/repos/{0}/actions/artifacts/{1}/zip', github.repository, steps.assets.outputs.artifact-id) }}
       package-sha256: ${{ steps.assets.outputs.artifact-digest }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3
+        uses: gittools/actions/gitversion/setup@v4
         with:
-          versionSpec: '5.x'
-      - name: Calculate release version
-        id: gitversion
-        run: ./.build/Get-PlatformVersion.ps1
+          versionSpec: '6.x'
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
           extended: true
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version: '>=1.24.5'
           cache: false
       - name: Install build dependencies
         run: ./.build/Install-PlatformTestDependencies.ps1
+      - name: Calculate release version
+        id: gitversion
+        run: ./.build/Get-PlatformVersion.ps1
       - name: Build, package and verify distribution
         env:
           PLATFORM_VERSION: ${{ steps.gitversion.outputs.semVer }}
         run: ./build.ps1 -Version $env:PLATFORM_VERSION -OutputPath .processing/platform-package
       - name: Retain candidate release assets
         id: assets
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: OpenGuidePlatform-ReleaseAssets
           path: |
@@ -91,11 +91,11 @@ jobs:
       contents: write
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.build.outputs.source-commit }}
           persist-credentials: false
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           artifact-ids: ${{ needs.build.outputs.artifact-id }}
           merge-multiple: true

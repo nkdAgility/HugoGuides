@@ -64,7 +64,18 @@ if($native.path -cne $metadata.nativeHugoModule.path -or $native.version -cne ('
 $nativeArguments=@{WorkspaceRoot=$root;SourcePath=$SourcePath;NativeModule=$native}
 if($previous -and $previous.ContainsKey('nativeHugoModule')){$nativeArguments.PreviousVersion=$previous.nativeHugoModule.version}
 $nativePlan=& "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1" @nativeArguments
+. "$PSScriptRoot/../OpenGuidePlatform.PowerShell.GuideSiteBuild/Versioning/GitVersion.ps1"
+$versionFile='.github/GitVersion.yml'
+$versionPath=Resolve-InstallPath $versionFile
+$versionHash=if(Test-Path $versionPath){Get-Digest $versionPath}else{$null}
+$versionFiles=@{}
+if($versionHash){
+    $versionOriginal=[IO.File]::ReadAllText($versionPath)
+    $versionUpdated=ConvertTo-GuideGitVersion6Configuration -Text $versionOriginal
+    if($versionOriginal -cne $versionUpdated){$versionFiles[$versionFile]=[Text.Encoding]::UTF8.GetBytes($versionUpdated)}
+}
 $files=[ordered]@{}
+foreach($name in $versionFiles.Keys){$files[$name]=$versionFiles[$name]}
 foreach($name in $settingsPlan.Files.Keys){$files[$name]=$settingsPlan.Files[$name]}
 $files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/build.ps1")
 $files['.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1")
@@ -93,6 +104,8 @@ foreach($name in $nativePlan.Files.Keys){
     $files[$name]=$nativePlan.Files[$name]
 }
 function Confirm-NativeSnapshot {
+    $actual=if(Test-Path $versionPath){Get-Digest $versionPath}else{$null}
+    if($actual -cne $versionHash){throw "GitVersion configuration changed during update. Rerun Update from the intended revision."}
     foreach($name in $settingsPlan.ExpectedHashes.Keys){
         $path=Resolve-InstallPath $name
         $actual=if(Test-Path $path){Get-Digest $path}else{$null}
@@ -125,11 +138,11 @@ if($previous){
 }
 foreach($name in $files.Keys){
     $path=Resolve-InstallPath $name
-    if(-not $settingsPlan.Files.Contains($name) -and -not $nativePlan.Files.Contains($name) -and -not $callerPlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
+    if(-not $versionFiles.ContainsKey($name) -and -not $settingsPlan.Files.Contains($name) -and -not $nativePlan.Files.Contains($name) -and -not $callerPlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
 }
 if($conflicts.Count){throw "Managed-file conflicts; reconcile on your review branch before retrying: $($conflicts -join ', ')"}
 $hashes=[ordered]@{}
-foreach($name in $files.Keys){if($settingsPlan.Files.Contains($name) -or $nativePlan.Files.Contains($name) -or $callerPlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
+foreach($name in $files.Keys){if($versionFiles.ContainsKey($name) -or $settingsPlan.Files.Contains($name) -or $nativePlan.Files.Contains($name) -or $callerPlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
 $record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;sourcePath=$SourcePath;release=$manifest;hugoResolution='native-module';nativeHugoModule=$native;nativeChecksums=@{sum=$nativePlan.Sum;goModSum=$nativePlan.GoModSum};adoptionBlockers=@('Coordinated agent controls and independent enforcement');managedFiles=$hashes}
 $record.workflowCallers=$callerPlan.Callers
 $record.workflowReference=$settingsPlan.WorkflowReference

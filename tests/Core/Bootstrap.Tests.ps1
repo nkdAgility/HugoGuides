@@ -56,6 +56,7 @@ BeforeAll {
         }
         [IO.File]::WriteAllText("$stage/build.ps1",'param($Product,$WorkspaceRoot,$SourcePath,$Version,$Target,$Stage,$OutputPath) "$Product|$Version|$Target|$SourcePath"')
         [IO.Directory]::CreateDirectory("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild")|Out-Null
+        Copy-Item "$root/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/Versioning" "$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/" -Recurse
         [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1",'function Invoke-GuideSiteBuild { param($WorkspaceRoot,$SourcePath,$Version,$Target,$Stage,$OutputPath) $Version=(Get-Content "$PSScriptRoot/../../platform.json" -Raw|ConvertFrom-Json).version; "GuideSite|$Version|$Target|$SourcePath" }; Export-ModuleMember -Function Invoke-GuideSiteBuild')
         [IO.File]::WriteAllText("$stage/platform.json",(@{product='OpenGuidePlatform';version=$version;sourceCommit=('a'*40);nativeHugoModule=@{path='github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides';version="v$version";sourceCommit=('a'*40)}}|ConvertTo-Json -Depth 5))
         [IO.File]::WriteAllText("$stage/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1", @'
@@ -161,6 +162,28 @@ Describe 'Guide-site installation and update' {
         Test-Path "$workspace/.OpenGuidePlatform/settings.yaml"|Should -BeFalse
         (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash|Should -Be $before
         (Get-FileHash "$workspace/.OpenGuidePlatform/delivery.yaml").Hash|Should -Be $delivery
+    }
+    It 'migrates site-owned GitVersion configuration during update without managing it' {
+        & $bootstrap -Install @parameters
+        New-Item -ItemType Directory "$workspace/.github" -Force|Out-Null
+        Set-Content "$workspace/.github/GitVersion.yml" "next-version: 2.3.4`nbranches:`n  main:`n    mode: ContinuousDeployment`n    tag: preview`n    increment: Minor`n"
+        & $bootstrap -Update @parameters
+        $configuration=Get-Content "$workspace/.github/GitVersion.yml" -Raw|ConvertFrom-Yaml
+        $configuration.branches.main.mode|Should -Be ContinuousDelivery
+        $configuration.branches.main.label|Should -Be preview
+        $configuration.branches.main.increment|Should -Be Minor
+        $configuration['next-version']|Should -Be '2.3.4'
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json -AsHashtable
+        $record.managedFiles.ContainsKey('.github/GitVersion.yml')|Should -BeFalse
+    }
+    It 'restores the exact old GitVersion configuration when update locking fails' {
+        & $bootstrap -Install @parameters
+        New-Item -ItemType Directory "$workspace/.github" -Force|Out-Null
+        $text="# site-owned`nbranches:`n  main:`n    tag: preview`n"
+        [IO.File]::WriteAllText("$workspace/.github/GitVersion.yml",$text)
+        $global:OgpLockFailure=$true
+        {& $bootstrap -Update @parameters}|Should -Throw '*Actions locking failed*'
+        [IO.File]::ReadAllText("$workspace/.github/GitVersion.yml")|Should -BeExactly $text
     }
     It 'preserves edited settings and prevents contradictory legacy delivery migration' {
         & $bootstrap -Install @parameters
