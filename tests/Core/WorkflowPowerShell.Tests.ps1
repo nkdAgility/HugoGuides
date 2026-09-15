@@ -27,7 +27,10 @@ Describe 'Thin PowerShell workflow adapters' {
     It 'closes only the environment belonging to the closed pull request' {
         $workflow=Get-Content "$root/.github/workflows/guide-site-close-pr.yaml" -Raw|ConvertFrom-Yaml
         $step=@($workflow.jobs.Values.steps|Where-Object { $_['uses'] -like 'Azure/*' })[0]
-        $step.with.deployment_environment|Should -Be '${{ github.event.pull_request.number }}'
-        ($workflow.jobs.Values.if -join ' ')|Should -Match "closed"
+        $workflow.on.workflow_call.inputs['deployment-environment'].type|Should -Be string
+        $workflow.on.workflow_call.inputs['deployment-environment'].required|Should -BeFalse
+        $workflow.on.workflow_call.inputs['deployment-environment'].default|Should -Be ''
+        $step.with.deployment_environment|Should -Be '${{ inputs.deployment-environment || github.event.pull_request.number }}'
+        $workflow.jobs.close.if|Should -Be '${{ github.event_name == ''pull_request'' && github.event.action == ''closed'' }}'
     }
 }

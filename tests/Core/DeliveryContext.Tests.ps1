@@ -29,3 +29,16 @@ Describe 'One GitVersion-selected delivery context' {
         $workflow.jobs['guide-site'].with.Contains('target')|Should -BeFalse
     }
 }
+
+Describe 'User-owned settings delivery' {
+    It 'reads delivery from settings without coupling the site target to the platform ring' {
+        $workspace=Join-Path $TestDrive 'settings-delivery'
+        New-Item -ItemType Directory "$workspace/.OpenGuidePlatform" -Force|Out-Null
+        git init -q $workspace
+        git -C $workspace -c user.name=Test -c user.email=test@example.test commit --allow-empty -qm fixture
+        Set-Content "$workspace/.OpenGuidePlatform/settings.yaml" "platform:`n  version: v1`n  ring: preview`nsite:`n  source: site`ndelivery:`n  production:`n    url: https://example.test/`n    environment: production"
+        $context=Resolve-GuideDeliveryContext -WorkspaceRoot $workspace -Target production
+        $context.target|Should -Be production
+        $context.baseUrl|Should -Be 'https://example.test/'
+    }
+}

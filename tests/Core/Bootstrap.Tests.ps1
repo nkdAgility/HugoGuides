@@ -36,8 +36,12 @@ BeforeAll {
         }
         if($args[1] -eq 'download'){
             $directory=$args[[Array]::IndexOf($args,'--dir')+1]
-            $pattern=$args[[Array]::IndexOf($args,'--pattern')+1]
-            [IO.File]::Copy((Join-Path $global:OgpBootstrapAssets[$args[2]] $pattern),(Join-Path $directory $pattern))
+            for($index=0;$index -lt $args.Count;$index++){
+                if($args[$index] -eq '--pattern'){
+                    $pattern=$args[$index+1]
+                    [IO.File]::Copy((Join-Path $global:OgpBootstrapAssets[$args[2]] $pattern),(Join-Path $directory $pattern))
+                }
+            }
             return
         }
         throw 'Unexpected GitHub invocation.'
@@ -85,7 +89,99 @@ Describe 'Guide-site installation and update' {
     }
     AfterEach {
         # The installed fixture imports a fake Build module; do not leak it into other tests.
-        Get-Module OpenGuidePlatform.PowerShell.GuideSiteBuild,OpenGuidePlatform.PowerShell.GuideSiteAdoption -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
+        Get-Module OpenGuidePlatform.PowerShell.GuideSiteBuild,OpenGuidePlatform.PowerShell.GuideSiteAdoption,OpenGuidePlatform.PowerShell.Core -All | Where-Object { $_.Path.StartsWith($TestDrive+[IO.Path]::DirectorySeparatorChar) } | Remove-Module -Force
+    }
+    It 'installs a minor preview selection and records a floating caller with exact installed identity' {
+        & $bootstrap -Install -WorkspaceRoot $workspace -ReleaseTag v1.2
+        $settings=Get-Content "$workspace/.OpenGuidePlatform/settings.yaml" -Raw|ConvertFrom-Yaml
+        $settings.platform.version|Should -Be v1.2
+        $settings.platform.ring|Should -Be preview
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
+        $record.releaseTag|Should -Be v1.2.3-Preview.2
+        $record.workflowReference|Should -Be v1.2-preview
+        $record.managedFiles.PSObject.Properties.Name|Should -Not -Contain '.OpenGuidePlatform/settings.yaml'
+        Get-Content "$workspace/.github/workflows/main.yaml" -Raw|Should -Match '@v1.2-preview'
+        & "$workspace/build.ps1" -Target production|Should -Be 'GuideSite|1.2.3-Preview.2|production|site'
+    }
+    It 'preserves a configured minor family when remote bootstrap changes only its channel' {
+        & $bootstrap -Install -WorkspaceRoot $workspace -ReleaseTag v1.2
+        & $bootstrap -Update -WorkspaceRoot $workspace -Channel stable
+        $settings=& $resolver -WorkspaceRoot $workspace -ReadSettings
+        $settings.platform.version|Should -Be v1.2
+        $settings.platform.ring|Should -Be production
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).workflowReference|Should -Be v1.2
+    }
+    It 'selects the same newer minor-family release locally and in CI without changing the installation' {
+        & $bootstrap -Install @parameters
+        # Model a previously installed family whose next release became available afterwards.
+        $settings=Get-Content "$workspace/.OpenGuidePlatform/settings.yaml" -Raw|ConvertFrom-Yaml
+        $settings.platform.version='v1.2'
+        $settings|ConvertTo-Yaml|Set-Content "$workspace/.OpenGuidePlatform/settings.yaml"
+        $record=Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
+        $record.workflowReference='v1.2-preview'
+        $record|ConvertTo-Json -Depth 30|Set-Content "$workspace/.OpenGuidePlatform/installation.json"
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
+        $local=& $resolver -WorkspaceRoot $workspace
+        # Exercise a normal site workflow, independent of the enclosing platform build's inputs.
+        $workflowEnvironment=@{}
+        foreach($name in @('PLATFORM_RING','PLATFORM_RELEASE','PLATFORM_PACKAGE_URL','PLATFORM_PACKAGE_SHA256','PLATFORM_VERSION','GITHUB_OUTPUT')){
+            $workflowEnvironment[$name]=[Environment]::GetEnvironmentVariable($name)
+        }
+        try{
+            foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$null)}
+            $ci=& $resolver -WorkspaceRoot $workspace -FromWorkflow -OutputPath '.processing/ci-platform'
+        }finally{
+            foreach($name in $workflowEnvironment.Keys){[Environment]::SetEnvironmentVariable($name,$workflowEnvironment[$name])}
+        }
+        (Get-Content "$local/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3-Preview.2'
+        (Get-Content "$ci/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3-Preview.2'
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash|Should -Be $before
+    }
+    It 'migrates legacy delivery during upgrade without putting editable settings in the record hashes' {
+        & $bootstrap -Install @parameters
+        Remove-Item "$workspace/.OpenGuidePlatform/settings.yaml"
+        Set-Content "$workspace/.OpenGuidePlatform/delivery.yaml" "canary:`n  url: https://example-{pr}.test/`n  environment: '{pr}'`nproduction:`n  url: https://example.test/`n  environment: production"
+        & $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2
+        $settings=Get-Content "$workspace/.OpenGuidePlatform/settings.yaml" -Raw|ConvertFrom-Yaml
+        $settings.platform.version|Should -Be v1.2.3-Preview.2
+        $settings.site.source|Should -Be site
+        $settings.delivery.canary.url|Should -Be 'https://example-{pr}.test/'
+        $settings.delivery.production.environment|Should -Be production
+        Test-Path "$workspace/.OpenGuidePlatform/delivery.yaml"|Should -BeFalse
+        Test-Path "$workspace/.OpenGuidePlatform/installation.json"|Should -BeTrue
+    }
+    It 'restores legacy delivery and installation if locking fails during settings migration' {
+        & $bootstrap -Install @parameters
+        Remove-Item "$workspace/.OpenGuidePlatform/settings.yaml"
+        Set-Content "$workspace/.OpenGuidePlatform/delivery.yaml" "production:`n  url: https://example.test/"
+        $before=(Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash
+        $delivery=(Get-FileHash "$workspace/.OpenGuidePlatform/delivery.yaml").Hash
+        $global:OgpLockFailure=$true
+        {& $bootstrap -Update -WorkspaceRoot $workspace -ReleaseTag v1.2.3-Preview.2}|Should -Throw '*Actions locking failed*'
+        Test-Path "$workspace/.OpenGuidePlatform/settings.yaml"|Should -BeFalse
+        (Get-FileHash "$workspace/.OpenGuidePlatform/installation.json").Hash|Should -Be $before
+        (Get-FileHash "$workspace/.OpenGuidePlatform/delivery.yaml").Hash|Should -Be $delivery
+    }
+    It 'preserves edited settings and prevents contradictory legacy delivery migration' {
+        & $bootstrap -Install @parameters
+        Add-Content "$workspace/.OpenGuidePlatform/settings.yaml" '# preserve this note'
+        $before=[IO.File]::ReadAllText("$workspace/.OpenGuidePlatform/settings.yaml")
+        & $bootstrap -Update @parameters
+        [IO.File]::ReadAllText("$workspace/.OpenGuidePlatform/settings.yaml")|Should -BeExactly $before
+        $data=Get-Content "$workspace/.OpenGuidePlatform/settings.yaml" -Raw|ConvertFrom-Yaml
+        $data.delivery.production=@{url='https://new.test/'}
+        $data|ConvertTo-Yaml|Set-Content "$workspace/.OpenGuidePlatform/settings.yaml"
+        Set-Content "$workspace/.OpenGuidePlatform/delivery.yaml" "production:`n  url: https://old.test/"
+        {& $bootstrap -Update @parameters}|Should -Throw '*Conflicting delivery settings*'
+    }
+    It 'resumes local stages from the prepared package without another release lookup' {
+        & $bootstrap -Install -WorkspaceRoot $workspace -ReleaseTag v1.2
+        $platform=& "$workspace/.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $workspace
+        New-Item -ItemType Directory "$workspace/.processing/evidence"|Out-Null
+        @{version='1.2.3-Preview.2';sourceCommit=('a'*40);platformRoot=[IO.Path]::GetRelativePath($workspace,$platform).Replace('\','/')}|ConvertTo-Json|Set-Content "$workspace/.processing/evidence/platform-context.json"
+        $global:OgpBootstrapOffline=$true
+        & "$workspace/build.ps1" Build -OutputPath .processing/evidence -Target production|Should -Be 'GuideSite|1.2.3-Preview.2|production|site'
+        & "$workspace/build.ps1" Validate -OutputPath .processing/evidence -Target production|Should -Be 'GuideSite|1.2.3-Preview.2|production|site'
     }
     It 'installs matching workflow and identical root agent shims without requiring a policy file' {
         & $bootstrap -Install @parameters
@@ -341,6 +437,22 @@ jobs:
         Get-Content "$workspace/site/go.mod" -Raw|Should -Match 'Guides v1.2.3'
         $restored=& $resolver -WorkspaceRoot $workspace
         (Get-Content "$restored/platform.json" -Raw|ConvertFrom-Json).version|Should -Be '1.2.3'
+    }
+    It 'updates settings and callers together when an explicit package path is supplied' {
+        & $bootstrap -Install @parameters
+        $package=& $resolver -WorkspaceRoot $workspace -PlatformRelease v1.2.3-Preview.2
+        Remove-Item "$package/platform-selection.json"
+        & "$workspace/build.ps1" Update -PlatformPath $package
+        $settings=& $resolver -WorkspaceRoot $workspace -ReadSettings
+        $settings.platform.version|Should -Be v1.2.3-Preview.2
+        (Get-Content "$workspace/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json).workflowReference|Should -Be v1.2.3-Preview.2
+        & "$workspace/build.ps1" -Target preview|Should -Contain 'GuideSite|1.2.3-Preview.2|preview|site'
+    }
+    It 'rejects an exact preview selection labelled as production before restoration' {
+        & $bootstrap -Install @parameters
+        $path="$workspace/.OpenGuidePlatform/settings.yaml"
+        (Get-Content $path -Raw).Replace('ring: preview','ring: production')|Set-Content $path
+        {& $resolver -WorkspaceRoot $workspace}|Should -Throw '*exact OGP version belongs to the preview ring*'
     }
     It 'updates an installed preview to production through the local launcher' {
         & $bootstrap -Install @parameters

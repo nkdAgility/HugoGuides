@@ -10,6 +10,7 @@ function ConvertTo-GuideAssessmentMarkdown {
     $lines.Add('')
     $lines.Add("Commit: $(Escape-ReportText $Assessment.sourceCommit) · Platform: $(Escape-ReportText $Assessment.platformVersion) · Target: $(Escape-ReportText $Assessment.target)")
     $lines.Add('')
+    foreach($selection in @($Assessment.findings|Where-Object code -eq 'PLATFORM_VERSION_SELECTED')){$lines.Add((Escape-ReportText $selection.message));$lines.Add('')}
     $guideScopes=@('guide','edition','translation','download')
     $guideFindings=@($Assessment.findings | Where-Object { $_.scope -in $guideScopes -and $_.severity -in @('warning','blocker') })
     $otherFindings=@($Assessment.findings | Where-Object { $_.scope -notin $guideScopes -and $_.severity -in @('warning','blocker') })
@@ -83,6 +84,7 @@ function Get-GuideHugoConfiguration {
 
 . (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleFreshness.ps1')
 . (Join-Path $PSScriptRoot 'ModuleVersions/Get-GuideModuleResolution.ps1')
+. (Join-Path $PSScriptRoot 'ModuleVersions/Initialize-GuideResolvedModule.ps1')
 
 . (Join-Path $PSScriptRoot 'Toolchain/Get-GuideHugoToolchain.ps1')
 . (Join-Path $PSScriptRoot 'AssessmentReporting/Write-GuideAssessmentSummary.ps1')
@@ -102,4 +104,4 @@ function Get-GuideHugoConfiguration {
 . (Join-Path $PSScriptRoot 'Discovery/Get-GuideSourcePages.ps1')
 . (Join-Path $PSScriptRoot 'Discovery/New-GuideSiteDiscovery.ps1')
 . (Join-Path $PSScriptRoot 'Discovery/Test-GuideLatestAliases.ps1')
-Export-ModuleMember -Function Get-GuideJsonFileNames,Get-GuideSourceTranslations,Get-GuidePublishedDownloads,Get-GuideArtifactFiles,Test-GuideLatestAliases,New-GuideSiteDiscovery,Resolve-GuideDeliveryContext,Get-GuideDeliveryRing,Install-GuideBuildDependencies,Invoke-GuideArtifactDeployment,Invoke-GuideSiteBuild,Publish-GuidePrepareAssessment,Confirm-GuideDeploymentData,Invoke-GuideSiteGitHubAction,Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations
+Export-ModuleMember -Function Initialize-GuideResolvedModule,Get-GuideJsonFileNames,Get-GuideSourceTranslations,Get-GuidePublishedDownloads,Get-GuideArtifactFiles,Test-GuideLatestAliases,New-GuideSiteDiscovery,Resolve-GuideDeliveryContext,Get-GuideDeliveryRing,Install-GuideBuildDependencies,Invoke-GuideArtifactDeployment,Invoke-GuideSiteBuild,Publish-GuidePrepareAssessment,Confirm-GuideDeploymentData,Invoke-GuideSiteGitHubAction,Test-GuideJsonIndexes,Resolve-GuideRuntimeNavigation,Test-GuideRuntimeAnchors,Get-GuideModuleResolution,Get-GuidePreparedInputs,Assert-GuidePreparedInputs,Get-GuidePreparedBuildTools,Test-GuideSiteDeployment, ConvertTo-GuideAssessmentMarkdown,Write-GuideAssessmentReport,Get-GuideHugoConfiguration,Test-GuideArtifact,New-GuideArtifactIdentity,Test-GuideArtifactIdentity,Get-GuideModuleFreshness,Get-GuideHugoToolchain,Write-GuideAssessmentSummary,Get-GuideArtifactAssessment,Get-GuideEffectiveTranslations

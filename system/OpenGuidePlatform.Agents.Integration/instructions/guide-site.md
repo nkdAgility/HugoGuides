@@ -1,6 +1,6 @@
 # Guide-site contributor instructions
 
-The installation record is .OpenGuidePlatform/installation.json. Prepare infers the site inventory from Hugo configuration and source content; do not maintain a page or translation inventory by hand.
+The generated installation record is .OpenGuidePlatform/installation.json; do not edit it by hand. User-owned platform selection, site source and delivery destinations are in .OpenGuidePlatform/settings.yaml. Prepare infers the site inventory from Hugo configuration and source content; do not maintain a page or translation inventory by hand.
 Use ./build.ps1 to prepare, build and validate after content, template or configuration changes.
 Use ./build.ps1 -Stage Serve -Target local for local development. Run a full build before committing.
 

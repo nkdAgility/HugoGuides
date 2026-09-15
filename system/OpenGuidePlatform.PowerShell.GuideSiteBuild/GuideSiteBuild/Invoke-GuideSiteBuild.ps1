@@ -8,6 +8,9 @@ function Invoke-GuideSiteBuild {
         [string]$DeliveryContextPath,[int]$PullRequestNumber,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment,[switch]$Deploy,[string]$DeploymentAdapter
     )
     $ErrorActionPreference='Stop'
+    $platformRoot=Split-Path (Split-Path $script:GuideBuildModuleRoot -Parent) -Parent
+    $settings=if(Test-Path (Join-Path $WorkspaceRoot '.OpenGuidePlatform/settings.yaml')){& "$platformRoot/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -ReadSettings}
+    if($settings){$SourcePath=[string]$settings.site.source}
     if(-not $Version){
         $metadata=Join-Path (Split-Path (Split-Path $script:GuideBuildModuleRoot -Parent) -Parent) 'platform.json'
         $Version=if(Test-Path -LiteralPath $metadata){(Get-Content $metadata -Raw|ConvertFrom-Json).version}else{'0.0.0-local'}

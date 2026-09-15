@@ -26,6 +26,9 @@
       {{ if eq $topSection.Type "guide" }}
         {{ if eq .Type "guide" }}
           {{- $version := partial "functions/get-guide-version.html" . -}}
+          {{- if eq .Layout "root" -}}
+            {{- $version = partial "functions/get-latest-version.html" . -}}
+          {{- end -}}
           {{- $allVersions := partial "functions/get-all-versions.html" . -}}
           {{- $currentVersionObj := "" -}}
           {{- range $allVersions -}}
@@ -44,11 +47,14 @@
           {{- else -}}
             {{- /* Fallback for non-version pages - use page title */ -}}
             {{- $guideVersionBit = .Title -}}
+            {{- if eq .Layout "root" -}}
+              {{- $guideVersionBit = "latest" -}}
+            {{- end -}}
           {{- end }}
-          {{- if eq .Layout "root" }}
-            {{ $title = printf "%s | %s | %s" "latest" $topSection.Title  .Site.Title }}
+          {{- if or $version (eq .Layout "root") }}
+            {{ $title = printf "%s | %s | %s" $topSection.Title $guideVersionBit .Site.Title }}
           {{- else }}
-            {{ $title = printf "%s | %s | %s" $guideVersionBit $topSection.Title  .Site.Title }}
+            {{ $title = printf "%s | %s | %s" $guideVersionBit $topSection.Title .Site.Title }}
           {{- end }}
         {{ else }}
           {{ $title = printf "%s | %s | %s" (.Params.short_title | default .Title) $topSection.Title  .Site.Title }}

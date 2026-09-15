@@ -73,8 +73,9 @@ function Invoke-GuideArtifactDeployment {
     }else{$result=Invoke-AzureGuideDeployment -ArtifactRoot "$DeploymentRoot/site" -WorkspaceRoot $WorkspaceRoot -Environment $environment}
     $url=[uri]$result.Url
     if(-not $url.IsAbsoluteUri -or $url.Scheme -cne 'https' -or $url.UserInfo -or $url.Query -or $url.Fragment){throw 'Hosting adapter returned an invalid deployment URL. Return an absolute HTTPS Url without credentials or query parameters.'}
-    if($ExpectedUrl -and $url.AbsoluteUri.TrimEnd('/') -cne ([uri]$ExpectedUrl).AbsoluteUri.TrimEnd('/')){throw 'Hosting uploaded to a different URL from the configured site. Correct the environment/base URL before accepting the deployment.'}
-    $record=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion=$identity.version;target=$Target;environment=$environment;url=$url.AbsoluteUri}
+    # The hosting URL may be the provider hostname rather than the site's custom domain.
+    # Verify checks the uploaded identity and the configured public site separately.
+    $record=[ordered]@{schemaVersion=1;sourceCommit=$SourceCommit;platformVersion=$identity.version;target=$Target;environment=$environment;url=$url.AbsoluteUri;publicUrl=$ExpectedUrl}
     [IO.File]::WriteAllText("$DeploymentRoot/deployment.json",($record|ConvertTo-Json))
     [pscustomobject]$record
 }

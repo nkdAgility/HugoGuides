@@ -78,7 +78,7 @@ function Test-GuideArtifact {
             $approved=$entries.Count -gt 0 -and $reconstructed -ceq $reported
             foreach($entry in $entries){
                 $target=$entry.Groups['path'].Value.Replace('\','/');$count=[int]$entry.Groups['count'].Value
-                if($target -cnotmatch '^(?:[A-Za-z0-9-]+/)?(?:download|downloads|translationsdirectory)/index\.html$' -or -not $AllowedLegacyDuplicates.ContainsKey($target) -or $AllowedLegacyDuplicates[$target] -ne $count){$approved=$false}
+                if($target -cnotmatch '^(?:[A-Za-z0-9-]+/){0,2}(?:download|downloads|translationsdirectory)/index\.html$' -or -not $AllowedLegacyDuplicates.ContainsKey($target) -or $AllowedLegacyDuplicates[$target] -ne $count){$approved=$false}
             }
             if($approved){continue}
             Add-ArtifactFinding HUGO_DUPLICATE_TARGETS 'Hugo output paths' "Assign one owner to each output path; remove conflicting aliases or routes. Hugo reported: $reported"

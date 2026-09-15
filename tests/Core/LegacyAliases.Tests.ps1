@@ -35,6 +35,22 @@ Describe 'Frozen legacy alias compatibility' {
         [IO.File]::WriteAllText("$workspace/site/content/one.md","---`ntitle: Example`n---`nBody")
         (Test-GuideLegacyAliases $workspace $policy).Findings.Code | Should -Contain 'LEGACY_ALIAS_DECLARATION_MISSING'
     }
+    It 'preserves a language-prefixed alias with the additional Hugo language directory' {
+        foreach($entry in $policy.wrapper.legacyAliases){$entry.language='pl';$entry.targets=@('pl/pl/download/index.html')}
+        $counts=Get-GuideLegacyAliasTargets $policy @('pl')
+        $counts['pl/pl/download/index.html'] | Should -Be 2
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: pl/pl/download/index.html (2)') -AllowedLegacyDuplicates $counts).Outcome | Should -Be pass
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: pl/pl/download/index.html (3)') -AllowedLegacyDuplicates $counts).Findings.Code | Should -Contain HUGO_DUPLICATE_TARGETS
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: pl/pl/downloads/index.html (2)') -AllowedLegacyDuplicates $counts).Findings.Code | Should -Contain HUGO_DUPLICATE_TARGETS
+        (Get-GuideLegacyAliasTargets $policy @('en')).Count | Should -Be 0
+    }
+    It 'rejects unsafe or unsupported duplicate targets even when supplied in the allowance' -ForEach @(
+        @{target='../pl/download/index.html'}, @{target='pl/../download/index.html'},
+        @{target='/pl/download/index.html'}, @{target='pl/pl/pl/download/index.html'},
+        @{target='pl/pl/other/index.html'}, @{target='pl/%2e%2e/download/index.html'}
+    ) {
+        (Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @("WARN  Duplicate target paths: $target (2)") -AllowedLegacyDuplicates @{$target=2}).Findings.Code | Should -Contain HUGO_DUPLICATE_TARGETS
+    }
     It 'does not grant inactive languages or unrelated routes a duplicate exemption' {
         (Get-GuideLegacyAliasTargets $policy @('ja')).Count | Should -Be 0
         {Test-GuideArtifact "$workspace/site" -RequiredRoutes @() -HugoLog @('WARN  Duplicate target paths: other/index.html (2)') -AllowedLegacyDuplicates @{'other/index.html'=2}} | Should -Not -Throw

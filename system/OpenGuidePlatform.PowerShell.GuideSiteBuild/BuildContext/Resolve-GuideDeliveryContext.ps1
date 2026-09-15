@@ -3,7 +3,7 @@ function Resolve-GuideDeliveryContext {
     param([Parameter(Mandatory)][string]$WorkspaceRoot,
         [ValidateSet('auto','local','canary','preview','production')][string]$Target='auto',
         [int]$PullRequestNumber,[string]$BaseUrl,[string]$DeploymentEnvironment,
-        [string]$ConfigurationPath='.OpenGuidePlatform/delivery.yaml')
+        [string]$ConfigurationPath='.OpenGuidePlatform/settings.yaml')
     $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
     if($LASTEXITCODE -ne 0){throw 'Cannot identify the guide-site checkout. Run from a Git repository.'}
     $version=$null
@@ -25,9 +25,13 @@ function Resolve-GuideDeliveryContext {
         if($PullRequestNumber -gt 0){$Target='canary'}
     }
     $path=Join-Path $WorkspaceRoot $ConfigurationPath
+    if(-not (Test-Path $path) -and $ConfigurationPath -eq '.OpenGuidePlatform/settings.yaml'){
+        $ConfigurationPath='.OpenGuidePlatform/delivery.yaml';$path=Join-Path $WorkspaceRoot $ConfigurationPath
+    }
     if(Test-Path $path){
         Import-Module powershell-yaml -MinimumVersion 0.4.12
         $configuration=Get-Content $path -Raw|ConvertFrom-Yaml
+        if($ConfigurationPath -eq '.OpenGuidePlatform/settings.yaml'){$configuration=$configuration.delivery}
         if(-not $configuration.ContainsKey($Target)){throw "Delivery configuration has no '$Target' destination. Add it to $ConfigurationPath and rerun Prepare."}
         $destination=$configuration[$Target]
         if(-not $BaseUrl){$BaseUrl=[string]$destination['url']}

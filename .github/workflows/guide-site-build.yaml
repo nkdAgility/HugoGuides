@@ -18,11 +18,11 @@ on:
         type: string
         default: ''
       platform-ring:
-        description: Installation compatibility input; builds use the installed release pin, regardless of ring
+        description: Release ring for explicit overrides; normal builds honor settings.yaml or the legacy installed pin
         type: string
         default: production
       platform-release:
-        description: Optional explicit release override; otherwise restore .OpenGuidePlatform/installation.json. Candidate ZIPs are for platform validation.
+        description: Optional release override; otherwise use settings.yaml and the generated installation record. Candidate ZIPs are for platform validation.
         default: ''
         type: string
       platform-package-url:

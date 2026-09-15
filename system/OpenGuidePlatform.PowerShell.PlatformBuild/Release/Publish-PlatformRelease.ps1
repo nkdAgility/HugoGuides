@@ -2,6 +2,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$WorkspaceRoot,[Parameter(Mandatory)][string]$OutputPath,[string]$Repository='nkdAgility/OpenGuidePlatform')
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Publish-PlatformWorkflowAliases.ps1"
 $WorkspaceRoot=[IO.Path]::GetFullPath($WorkspaceRoot)
 $OutputPath=[IO.Path]::GetFullPath($OutputPath,$WorkspaceRoot)
 $manifest=Get-Content "$OutputPath/release-manifest.json" -Raw|ConvertFrom-Json
@@ -44,6 +45,7 @@ if($LASTEXITCODE -eq 0){
         $part=$manifest.packages.$name
         if((Get-FileHash "$verify/$($part.archive)").Hash -ine $part.sha256){throw 'Existing release bytes differ; publish a new source commit, never overwrite.'}
     }
+    Publish-PlatformWorkflowAliases -WorkspaceRoot $WorkspaceRoot -Repository $Repository -Version $manifest.version -Commit $commit
     Write-Host "Existing immutable release $tag verified."
     return
 }
@@ -63,7 +65,7 @@ On a review branch, run:
 ./build.ps1 -Target production
 ~~~~
 
-Review and commit the coordinated update. Your installation record pins OGP for local and CI builds; publishing this release does not automatically update your site. A production site using preview OGP receives a warning, not a deployment block.
+Review and commit the coordinated update. Your settings.yaml selects an exact release or a major/minor version family for local and CI builds. The installation record remains generated. Publishing this release does not trigger your site; its next build can select a matching family update. A production site using preview OGP receives a warning, not a deployment block.
 
 ### First installation
 
@@ -86,3 +88,5 @@ The corresponding native Hugo module tag is $($module.tag). The platform tests a
 $releaseFlags=if($prerelease){@('--prerelease','--latest=false')}else{@()}
 & gh release create $tag "$OutputPath/OpenGuidePlatform-GuideSite.zip" "$OutputPath/OpenGuidePlatform-PlatformBuild.zip" "$OutputPath/release-manifest.json" --repo $Repository --target $commit @releaseFlags --title "OpenGuidePlatform $($manifest.version)" --generate-notes --notes-file "$OutputPath/release-notes.md"
 if($LASTEXITCODE -ne 0){throw 'Platform release publication failed.'}
+
+Publish-PlatformWorkflowAliases -WorkspaceRoot $WorkspaceRoot -Repository $Repository -Version $manifest.version -Commit $commit
