@@ -1,6 +1,19 @@
 # OpenGuidePlatform
 
-Build and maintain guide websites with shared Hugo rendering, publishing tools, translation checks and agent skills. Your site keeps its own design, content and any number of guides.
+**Publish guides, papers and articles in multiple languages and versions—with a front end designed for your audience.**
+
+OpenGuidePlatform provides the shared publishing system beneath your site. Publish one document, a collection, or a growing library. Keep past editions available, manage translations independently, and offer web and PDF access to your publications.
+
+Your site owns its front end: branding, navigation, page layouts and the surrounding experience. Use the shared Hugo modules within a bespoke site, or make your guides one part of a larger website. The platform does not prescribe a single site design.
+
+It provides:
+
+- **Multilingual, versioned publishing:** separate editions and translations, stable latest-edition links and publication rules.
+- **Hugo rendering and PDF tooling:** shared publication components, downloadable documents and tools for generating declared PDFs.
+- **One build process locally and in CI:** PowerShell preparation, build and validation, with deployment and verification support.
+- **Actionable checks:** findings for missing content, broken links, downloads and publishing exclusions, reported in build output and pull requests.
+- **Shared agent resources:** instructions and skills for contributors using Codex, Claude and GitHub Copilot.
+- **Controlled updates:** install a coordinated platform release, review the changes, and keep local and hosted builds on that installed version.
 
 Installation and updates support published preview and production releases. First adoption needs maintainer setup; independently enforced agent controls remain separate work.
 
