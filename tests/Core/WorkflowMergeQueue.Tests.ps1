@@ -11,3 +11,17 @@ Describe 'Merge-queue acceptance' {
         $main.jobs.sample.needs | Should -Be build
     }
 }
+
+Describe 'Guide-site release tag triggers' {
+    It 'routes version tags through the existing shared guide-site pipeline' {
+        $caller=Get-Content "$root/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/main.yaml" -Raw|ConvertFrom-Yaml
+        $caller.on.push.branches|Should -Contain main
+        $caller.on.pull_request.branches|Should -Contain main
+        $caller.on.push.tags|Should -Contain 'v[0-9]*'
+        $caller.on.push.tags|Should -Contain '[0-9]*'
+        $caller.jobs.Count|Should -Be 1
+        $caller.jobs['guide-site'].uses|Should -Match 'guide-site-build.yaml@__RELEASE__$'
+        $caller.jobs['guide-site'].with['source-ref']|Should -Be '${{ github.event.pull_request.head.sha || github.sha }}'
+        $caller.jobs['guide-site'].with.ContainsKey('target')|Should -BeFalse
+    }
+}

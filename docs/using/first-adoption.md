@@ -22,6 +22,8 @@ The wrapper must already have a `site/go.mod` (or the equivalent under its confi
 
 Review the resulting module/configuration diff, build adapter, installation record, skills and instructions. Build preview and production output. Check guide bodies, language fallbacks, links, downloads and the site's appearance against the existing site.
 
+The starter triggers the same pipeline for pushes to `main`, pull requests and version-tag pushes (for example `v1.2.3` or `1.2.3`). Prepare uses GitVersion to select the site version and ring; the installed OGP pin remains unchanged. Existing sites own their callers and must add the tag triggers themselves. Tag a commit that already contains the updated workflow; adding the trigger does not replay older tag pushes.
+
 The installer creates a small site-owned caller when no OGP caller exists. It starts with deployment disabled. Configure its triggers, concurrency, inputs and secret mapping for your site; keep build logic in the shared workflow. Add the [shared close-PR workflow](../../.github/workflows/guide-site-close-pr.yaml) through another site-owned caller. The platform's [sample cleanup caller](../../.github/workflows/sample-close-pr.yaml) illustrates this; its hosting destination and secret belong to the sample, not your site.
 
 ### Caller ownership and updates
