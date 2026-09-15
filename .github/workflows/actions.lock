@@ -4,39 +4,39 @@
 version: 'v0.0.2'
 workflows:
     '.github/workflows/guide-site-build.yaml':
-        - 'actions/checkout@v4'
-        - 'actions/download-artifact@v4'
-        - 'actions/setup-go@v5'
-        - 'actions/upload-artifact@v4'
+        - 'actions/checkout@v7'
+        - 'actions/download-artifact@v8'
+        - 'actions/setup-go@v7'
+        - 'actions/upload-artifact@v7'
         - 'peaceiris/actions-hugo@v3'
     '.github/workflows/guide-site-close-pr.yaml':
         - 'azure/static-web-apps-deploy@v1'
     '.github/workflows/main.yaml':
-        - 'actions/checkout@v4'
-        - 'actions/download-artifact@v4'
-        - 'actions/setup-go@v5'
-        - 'actions/upload-artifact@v4'
-        - 'gittools/actions@v3'
+        - 'actions/checkout@v7'
+        - 'actions/download-artifact@v8'
+        - 'actions/setup-go@v7'
+        - 'actions/upload-artifact@v7'
+        - 'gittools/actions@v4'
         - 'peaceiris/actions-hugo@v3'
 dependencies:
-    'actions/checkout@v4':
-        ref: 'v4'
-        commit: 'sha1-11d5960a326750d5838078e36cf38b85af677262'
+    'actions/checkout@v7':
+        ref: 'v7'
+        commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
         owner_id: 44036562
         repo_id: 197814629
-    'actions/download-artifact@v4':
-        ref: 'v4'
-        commit: 'sha1-d3f86a106a0bac45b974a628896c90dbdf5c8093'
+    'actions/download-artifact@v8':
+        ref: 'v8'
+        commit: 'sha1-3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c'
         owner_id: 44036562
         repo_id: 192626254
-    'actions/setup-go@v5':
-        ref: 'v5'
-        commit: 'sha1-40f1582b2485089dde7abd97c1529aa768e1baff'
+    'actions/setup-go@v7':
+        ref: 'v7'
+        commit: 'sha1-b7ad1dad31e06c5925ef5d2fc7ad053ef454303e'
         owner_id: 44036562
         repo_id: 192624594
-    'actions/upload-artifact@v4':
-        ref: 'v4'
-        commit: 'sha1-ea165f8d65b6e75b540449e92b4886f43607fa02'
+    'actions/upload-artifact@v7':
+        ref: 'v7'
+        commit: 'sha1-043fb46d1a93c77aae656e7c1c64a875d1fc6a0a'
         owner_id: 44036562
         repo_id: 192625955
     'azure/static-web-apps-deploy@v1':
@@ -44,9 +44,9 @@ dependencies:
         commit: 'sha1-1a947af9992250f3bc2e68ad0754c0b0c11566c9'
         owner_id: 6844498
         repo_id: 256014197
-    'gittools/actions@v3':
-        ref: 'v3'
-        commit: 'sha1-51d325634925d7d9ce0a7efc2c586c0bc2b9eee6'
+    'gittools/actions@v4':
+        ref: 'v4'
+        commit: 'sha1-7417b1089e2c7de93510f1901d656ddf60bb024f'
         owner_id: 11839771
         repo_id: 220321564
     'peaceiris/actions-hugo@v3':

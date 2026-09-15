@@ -74,13 +74,13 @@ jobs:
       environment: ${{ steps.delivery.outputs.environment }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.source-ref }}
           fetch-depth: 0
           persist-credentials: false
       - name: Get platform installer
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ github.repository == 'nkdAgility/OpenGuidePlatform' && inputs.platform-package-url != '' && github.sha || 'main' }}
@@ -94,7 +94,7 @@ jobs:
         with:
           hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
           extended: true
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version: '>=1.24.5'
           cache: false
@@ -118,7 +118,7 @@ jobs:
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Prepare -DeliveryContextPath .processing/delivery-context.json -BaseUrl $env:SITE_BASE_URL -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain Prepare report for PR delivery
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Assessment
           path: |
@@ -127,7 +127,7 @@ jobs:
           if-no-files-found: error
       - name: Retain prepared context and assessment
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Prepare
           include-hidden-files: true
@@ -151,7 +151,7 @@ jobs:
     steps:
       # Restore platform code separately; the site supplies assessment data only.
       - name: Get platform installer
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ needs.prepare.outputs.platform-source }}
@@ -165,7 +165,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: GuideSite-Assessment
           path: assessment
@@ -186,13 +186,13 @@ jobs:
       SITE_TARGET: ${{ needs.prepare.outputs.target }}
       SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.source-ref }}
           fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Prepare
           path: .processing
@@ -200,7 +200,7 @@ jobs:
         with:
           hugo-version: ${{ vars.HUGO_BUILD_VERSION || 'latest' }}
           extended: true
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version: '>=1.24.5'
           cache: false
@@ -208,7 +208,7 @@ jobs:
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Build -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site
       - name: Retain built artifact and identity
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Build
           include-hidden-files: true
@@ -223,18 +223,18 @@ jobs:
       SITE_TARGET: ${{ needs.prepare.outputs.target }}
       SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.source-ref }}
           fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Prepare
           path: .processing
       - name: Download built guide site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Build
           path: .processing/guide-site
@@ -250,7 +250,7 @@ jobs:
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation ConfirmDeployment
       - name: Retain validated deployment files
         if: ${{ inputs.deploy }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Deployment
           include-hidden-files: true
@@ -261,7 +261,7 @@ jobs:
           if-no-files-found: error
       - name: Retain artifact validation
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Validate
           path: |
@@ -288,7 +288,7 @@ jobs:
     steps:
       # Restore platform code separately; never execute code from the site artifact.
       - name: Get platform installer
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: nkdAgility/OpenGuidePlatform
           ref: ${{ needs.prepare.outputs.platform-source }}
@@ -302,7 +302,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: ./.processing/platform-installer/.build/Restore-OpenGuidePlatform.ps1 -FromWorkflow -OutputPath .processing/platform
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: GuideSite-Deployment
           path: deployment
@@ -325,7 +325,7 @@ jobs:
         run: ./.processing/platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/GitHubActions/Invoke-GuideSiteGitHubAction.ps1 -Operation Deploy
       - name: Retain deployment result and diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Hosting
           path: |
@@ -343,23 +343,23 @@ jobs:
       SITE_BASE_URL: ${{ needs.prepare.outputs.url }}
       SITE_DEPLOYMENT_URL: ${{ needs.deploy.outputs.url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.source-ref }}
           fetch-depth: 0
           persist-credentials: false
       - name: Restore prepared platform and site context
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Prepare
           path: .processing
       - name: Download built guide site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Build
           path: .processing/guide-site
       - name: Download validation evidence
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: GuideSite-Validate
           path: .processing/guide-site
@@ -367,7 +367,7 @@ jobs:
         run: ./.processing/platform/build.ps1 -Product GuideSite -Stage Verify -WorkspaceRoot $PWD -SourcePath $env:SITE_SOURCE -Target $env:SITE_TARGET -OutputPath .processing/guide-site -DeploymentUrl $env:SITE_DEPLOYMENT_URL
       - name: Retain deployed-site verification
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GuideSite-Verify
           path: .processing/guide-site/deployment-verification.json

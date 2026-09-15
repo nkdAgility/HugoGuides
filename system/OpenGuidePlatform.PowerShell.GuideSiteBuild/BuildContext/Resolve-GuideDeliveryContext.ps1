@@ -14,7 +14,8 @@ function Resolve-GuideDeliveryContext {
         $prior=$env:DOTNET_ROLL_FORWARD
         try{
             $env:DOTNET_ROLL_FORWARD='Major'
-            $raw=& $tool $WorkspaceRoot /config "$WorkspaceRoot/.github/GitVersion.yml" /output json /nofetch
+            $configuration=Get-GuideGitVersionConfigurationPath -WorkspaceRoot $WorkspaceRoot
+            $raw=& $tool $WorkspaceRoot /config $configuration /output json /nofetch
             if($LASTEXITCODE -ne 0){throw 'GitVersion failed. Fetch full Git history and tags, check .github/GitVersion.yml, and rerun Prepare.'}
             $version=$raw|ConvertFrom-Json
         }finally{$env:DOTNET_ROLL_FORWARD=$prior}

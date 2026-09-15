@@ -1,3 +1,4 @@
+. (Join-Path $PSScriptRoot 'Versioning/GitVersion.ps1')
 $script:GuideBuildModuleRoot=$PSScriptRoot
 Set-StrictMode -Version Latest
 Import-Module (Join-Path $PSScriptRoot '../OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1')

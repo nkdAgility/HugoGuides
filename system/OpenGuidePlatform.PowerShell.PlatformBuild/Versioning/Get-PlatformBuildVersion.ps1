@@ -1,3 +1,4 @@
+. (Join-Path $PSScriptRoot '../../OpenGuidePlatform.PowerShell.GuideSiteBuild/Versioning/GitVersion.ps1')
 function Get-PlatformBuildVersion {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$WorkspaceRoot,[string]$Version)
@@ -13,9 +14,13 @@ function Get-PlatformBuildVersion {
     try{
         $env:DOTNET_ROLL_FORWARD='Major'
         $actual=& $path /version
-        if($LASTEXITCODE -ne 0 -or "$actual" -notmatch '^5\.') {throw 'This repository uses GitVersion 5 configuration. Run ./build.ps1 Dependencies to install a compatible tool locally; do not change the global tool.'}
-        $raw=& $path $WorkspaceRoot /config "$WorkspaceRoot/.github/GitVersion.yml" /output json /nofetch
-        if($LASTEXITCODE -ne 0){throw 'GitVersion could not calculate this build version. Fetch complete Git history and tags, then rerun the build.'}
+        if($LASTEXITCODE -ne 0 -or "$actual" -notmatch '^6\.') {throw 'This repository uses GitVersion 6 configuration. Run ./build.ps1 Dependencies to install a compatible tool locally; do not change the global tool.'}
+        $configuration=Get-GuideGitVersionConfigurationPath -WorkspaceRoot $WorkspaceRoot
+        $raw=& $path $WorkspaceRoot /config $configuration /output json /nofetch 2>&1
+        if($LASTEXITCODE -ne 0){
+            $detail=(@($raw|Where-Object {$_ -match 'ERROR|Exception|path too long'}|Select-Object -First 3) -join ' '); if(-not $detail){$detail=($raw -join ' ')}
+            throw "GitVersion could not calculate this build version. Check the reported cause and full Git history/tags, then rerun build.ps1 Version. Details: $detail"
+        }
         $result=$raw|ConvertFrom-Json
     }finally{$env:DOTNET_ROLL_FORWARD=$prior}
     if($result.Sha -cne $commit -or $result.SemVer -notmatch '^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$'){throw 'Calculated version does not identify this checkout. Recalculate from the intended clean Git checkout.'}

@@ -22,8 +22,10 @@
 {{ $cacheKey := printf "sharedDropdownRendered-%d" now.Unix }}
 {{ if not (.Page.Scratch.Get $cacheKey) }}
   {{ .Page.Scratch.Set $cacheKey true }}
-  {{ $url := "" }}
-  {{ $url = printf "%s/%s" .Site.Params.productionSiteUrl .Params.ResourceId }}
+  {{ $url := .Permalink }}
+  {{ with .Params.ResourceId }}
+    {{ $url = printf "%s/%s" (strings.TrimSuffix "/" $.Site.Params.productionSiteUrl) . }}
+  {{ end }}
 
 
   <!-- JavaScript to copy link -->

@@ -20,9 +20,9 @@ function Invoke-GuideSiteBuild {
     $contextPath=Join-Path $WorkspaceRoot "$OutputPath/delivery-context.json"
     $delivery=$null
     if($DeliveryContextPath){$contextPath=Join-Path $WorkspaceRoot $DeliveryContextPath}
-    if($Target -eq 'auto' -or $DeliveryContextPath){
+    if($Target -eq 'auto' -or $DeliveryContextPath -or ($Target -ne 'local' -and $Stage -in @('All','Prepare','Serve') -and (($settings -and $settings.delivery) -or (Test-Path (Join-Path $WorkspaceRoot '.OpenGuidePlatform/delivery.yaml'))))){
         if(-not $DeliveryContextPath -and $Stage -in @('All','Prepare','Serve')){
-            $delivery=Resolve-GuideDeliveryContext -WorkspaceRoot $WorkspaceRoot -PullRequestNumber $PullRequestNumber -BaseUrl $BaseUrl -DeploymentEnvironment $DeploymentEnvironment
+            $delivery=Resolve-GuideDeliveryContext -WorkspaceRoot $WorkspaceRoot -Target $Target -PullRequestNumber $PullRequestNumber -BaseUrl $BaseUrl -DeploymentEnvironment $DeploymentEnvironment
         }else{
             $delivery=Get-Content $contextPath -Raw|ConvertFrom-Json
             $commit=(& git -C $WorkspaceRoot rev-parse HEAD).Trim()
