@@ -9,7 +9,7 @@
         {{- else if .image }}
           <img src="{{ .image }}" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
         {{- else }}
-          <img src="/images/user-default.png" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
+          <img src="/images/missing-user.png" width="80" height="80" alt="{{ .name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
         {{- end }}
       </div>
     </div>
