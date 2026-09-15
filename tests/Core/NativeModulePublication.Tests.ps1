@@ -14,6 +14,7 @@ BeforeAll {
         $global:LASTEXITCODE=0
         if($args -contains 'rev-parse'){return 'a'*40}
         if($args[0] -eq 'ls-remote'){return $global:OgpNativeTagExisting}
+        if($args -contains 'push'){return}
         throw 'Unexpected Git operation.'
     }
     function gh {
@@ -50,7 +51,7 @@ Describe 'Coordinated native module publication' {
         $global:OgpNativeTagCalls[-1] | Should -Match '--generate-notes'
         $notes=Get-Content "$assets/release-notes.md" -Raw
         $notes|Should -Match 'Update -ring preview -PlatformRelease v0.1.0-Preview.1'
-        $notes|Should -Match 'First installation|OpenGuidePlatform-GuideSite.zip|installation record pins'
+        $notes|Should -Match 'First installation|OpenGuidePlatform-GuideSite.zip|settings.yaml'
     }
     It 'publishes a stable version as a normal release with the matching module tag' {
         $manifest.version='0.1.0';$manifest.channel='stable'

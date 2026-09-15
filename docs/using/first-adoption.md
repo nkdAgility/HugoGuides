@@ -10,7 +10,7 @@ No site policy file is required. The default source is `site/`; supply `-SourceP
 
 Prepare discovers guide roots, editions, translation bodies, PDF resources and Hugo public URLs. It checks the root, history and translations scaffolding for active guide languages. The resulting inventory is build evidence under `.processing/`, not a second set of content declarations to maintain.
 
-Keep destination settings in `.OpenGuidePlatform/delivery.yaml`. Installation writes its record and resolver under `.OpenGuidePlatform/`; the thin root `build.ps1` remains the command people run.
+Keep destination settings in the `delivery` mapping of `.OpenGuidePlatform/settings.yaml`. Upgrade migrates the old delivery file and source path transactionally; `installation.json` remains generated JSON. Installation writes its record and resolver under `.OpenGuidePlatform/`; the thin root `build.ps1` remains the command people run.
 
 ## Install and integrate
 
@@ -28,7 +28,28 @@ The installer creates a small site-owned caller when no OGP caller exists. It st
 
 ### Caller ownership and updates
 
-OGP owns the reusable workflow implementation. Your site owns the caller YAML and `.OpenGuidePlatform/delivery.yaml`. Callers are recorded separately from checksum-managed adapters and skills. Updates also migrate callers from older installations that checksum-managed the whole file, preserving site edits when their references can be recognised safely.
+PR cleanup must use the same environment name as deployment. The shared cleanup
+workflow defaults to the PR number, preserving existing callers. If your delivery
+configuration uses `environment: canary-{pr}`, add this job input to your site-owned
+cleanup caller:
+
+```yaml
+with:
+  deployment-environment: canary-${{ github.event.pull_request.number }}
+```
+
+Pass the resolved name, not the `{pr}` template. Cleanup accepts the name directly;
+it does not read the site's delivery file. Keep the caller on the pull request
+`closed` event. Confirm the deployment and cleanup names match before enabling
+deployment.
+
+Existing language-prefixed legacy download aliases are preserved during discovery.
+For example, Hugo can render a Polish `/pl/downloads/` alias at
+`pl/pl/downloads/index.html`. Validation accepts that existing path without
+rewriting the source alias; duplicate exemptions still require the exact discovered
+path, active language and occurrence count.
+
+OGP owns the reusable workflow implementation. Your site owns the caller YAML and `.OpenGuidePlatform/settings.yaml`. Callers are recorded separately from checksum-managed adapters and skills. Updates also migrate callers from older installations that checksum-managed the whole file, preserving site edits when their references can be recognised safely.
 
 Install/update recognises literal job-level calls to `guide-site-build.yaml` and `guide-site-close-pr.yaml` in `.github/workflows/*.yaml` and `*.yml`. Existing calls must use the installed release tag (or the selected release on first installation). Updates change only these release references, preserving comments, triggers, inputs and secret mappings. Flow-style calls, aliases, unsupported refs, missing recorded callers and conflicting versions stop for manual reconciliation before installation changes. An unrelated existing `main.yaml` is never overwritten to create a starter.
 

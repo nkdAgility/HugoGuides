@@ -23,12 +23,15 @@ $overlay=Join-Path $output 'candidate-platform.json'
 $inferred=-not $PolicyPath
 if($inferred){$PolicyPath="$OutputPath/discovered-site.json"}
 $configs=@('hugo.yaml',"hugo.$Target.yaml",$overlay)
+$priorGoFlags=$env:GOFLAGS;$priorGoWork=$env:GOWORK;$priorGoWorkspace=$env:OGP_BUILD_WORKSPACE;$priorHugoWorkspace=$env:HUGO_MODULE_WORKSPACE
+try {
 if($Stage -in @('All','Prepare','Serve')){
     if(Test-Path -LiteralPath $output){throw 'Guide-site output exists; choose a fresh evidence directory.'}
     [IO.Directory]::CreateDirectory($output)|Out-Null
     try {
         $policy=if($inferred){@{wrapper=@{sourcePath=$SourcePath}}}else{Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)}
         $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
+        Initialize-GuideResolvedModule -WorkspaceRoot $root -SourcePath $source -PlatformRoot $platformRoot -OutputPath $output -Prepare
         $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
         $resolution=Get-GuideModuleResolution -PlatformRoot $platformRoot -SourcePath $source -Version $Version
         $values=@{params=@{AzureSitesConfig=$Target;GitVersion_SemVer="v$(if($SiteVersion){$SiteVersion}else{$Version})"}}
@@ -54,6 +57,13 @@ if($Stage -in @('All','Prepare','Serve')){
         }
         $null=Get-GuideHugoToolchain
         $preparedTools=Get-GuidePreparedBuildTools
+        if(Test-Path "$platformRoot/platform.json"){
+            $runtimeMetadata=Get-Content "$platformRoot/platform.json" -Raw|ConvertFrom-Json
+            [ordered]@{version=$runtimeMetadata.version;sourceCommit=$runtimeMetadata.sourceCommit;platformRoot=[IO.Path]::GetRelativePath($root,$platformRoot).Replace('\','/')}|ConvertTo-Json|Set-Content "$output/platform-context.json"
+            $runtimeSettings=& "$platformRoot/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $root -ReadSettings
+            $runtimeManifest=if(Test-Path "$platformRoot/release-manifest.json"){Get-Content "$platformRoot/release-manifest.json" -Raw|ConvertFrom-Json}else{$null}
+            [ordered]@{selection=$(if($runtimeSettings){$runtimeSettings.platform.version}else{'v'+$runtimeMetadata.version});ring=$(if($runtimeSettings){$runtimeSettings.platform.ring}else{if($runtimeMetadata.version.Contains('-')){'preview'}else{'production'}});releaseTag=('v'+$runtimeMetadata.version);sourceCommit=$runtimeMetadata.sourceCommit;sha256=$(if($runtimeManifest){$runtimeManifest.packages.GuideSite.sha256}else{$null})}|ConvertTo-Json|Set-Content "$output/platform-selection.json"
+        }
         $preparedInputs=Get-GuidePreparedInputs @inputArguments
     } catch {
         # Route setup failures through the same contract/renderers as assessment failures.
@@ -67,6 +77,7 @@ if($Stage -in @('All','Prepare','Serve')){
     if($DeliveryContext){$DeliveryContext|ConvertTo-Json|Set-Content "$output/delivery-context.json"}
 }
 if($Stage -in @('Build','Validate')){
+    Initialize-GuideResolvedModule -WorkspaceRoot $root -SourcePath $SourcePath -PlatformRoot $platformRoot -OutputPath $output
     $policy=Import-GuidePolicy (Resolve-GuideWorkspacePath $root $PolicyPath)
     $source=Resolve-GuideWorkspacePath $root $policy.wrapper.sourcePath
     $inputArguments=@{WorkspaceRoot=$root;Policy=$policy;PolicyPath=$PolicyPath;PlatformRoot=$platformRoot;OverlayPath=$overlay;Version=$Version;Target=$Target}
@@ -156,3 +167,5 @@ if($Stage -eq 'Serve'){
     & hugo serve --source $source --config ($configs -join ',') --destination $site --environment $Target
     if($LASTEXITCODE -ne 0){throw "Hugo server exited with $LASTEXITCODE"}
 }
+
+}finally{$env:GOFLAGS=$priorGoFlags;$env:GOWORK=$priorGoWork;$env:OGP_BUILD_WORKSPACE=$priorGoWorkspace;$env:HUGO_MODULE_WORKSPACE=$priorHugoWorkspace}

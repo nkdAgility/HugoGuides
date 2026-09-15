@@ -158,7 +158,7 @@
                 "uniqueItems": true,
                 "items": {
                   "type": "string",
-                  "pattern": "^(?:[A-Za-z0-9-]+/)?(?:download|downloads|translationsdirectory)/index\\.html$"
+                  "pattern": "^(?:[A-Za-z0-9-]+/){0,2}(?:download|downloads|translationsdirectory)/index\\.html$"
                 }
               }
             }

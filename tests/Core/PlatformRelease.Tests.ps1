@@ -13,6 +13,7 @@ BeforeAll {
         $global:LASTEXITCODE=0
         $global:OgpReleaseTestCalls.Add(($args -join ' '))
         if($args[0] -eq 'api'){
+            if($global:OgpSelectionReleases){return (ConvertTo-Json -InputObject $global:OgpSelectionReleases -Depth 8)}
             return (ConvertTo-Json -InputObject @(@(@{tag_name='v1.2.3-Preview.4';target_commitish=$global:OgpReleaseTestCommit;draft=$false;prerelease=$false;assets=@(@{name='OpenGuidePlatform-GuideSite.zip'});published_at='2026-09-01T00:00:00Z'})) -Depth 5)
         }
         if($args[0] -eq 'release' -and $args[1] -eq 'view'){
@@ -34,12 +35,30 @@ Describe 'Released platform restoration boundary' {
         [IO.Directory]::CreateDirectory($global:OgpReleaseTestAssets)|Out-Null
         $global:OgpReleaseTestCalls=[Collections.Generic.List[string]]::new()
         $global:OgpReleaseTestCommit='a'*40
+        $global:OgpSelectionReleases=$null
         $manifest=@{product='OpenGuidePlatform';version='1.2.3-Preview.4';sourceCommit=('a'*40);archive='OpenGuidePlatform-GuideSite.zip';sha256=('0'*64)}
         [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/OpenGuidePlatform-GuideSite.zip",'not a zip')
         [IO.File]::WriteAllText("$global:OgpReleaseTestAssets/release-manifest.json",(ConvertTo-PackageManifest $manifest|ConvertTo-Json -Depth 10))
         Push-Location $workspace
     }
     AfterEach { Pop-Location }
+    It 'selects by semantic version inside the configured boundary and ring' -ForEach @(
+        @{Selection='v1';Ring='production';Expected='v1.10.0'},
+        @{Selection='v1.2';Ring='production';Expected='v1.2.11'},
+        @{Selection='v0';Ring='production';Expected='v0.9.0'},
+        @{Selection='v1.2';Ring='preview';Expected='v1.2.12-Preview.10'}
+    ) {
+        $global:OgpSelectionReleases=@(foreach($tag in @('v0.9.0','v1.2.9','v1.2.11','v1.10.0','v2.0.0','v1.2.12-Preview.2','v1.2.12-Preview.10')){
+            @{tag_name=$tag;prerelease=$tag.Contains('-');draft=$false;assets=@(@{name='OpenGuidePlatform-GuideSite.zip'});published_at='2000-01-01'}
+        })
+        { & $installer -ReleaseTag $Selection -PlatformRing $Ring -OutputPath .processing/install }|Should -Throw
+        @($global:OgpReleaseTestCalls|Where-Object {$_ -like "release view $Expected *"}).Count|Should -Be 1
+    }
+    It 'fails rather than crossing the selected major when no eligible release exists' {
+        $global:OgpSelectionReleases=@(@{tag_name='v2.0.0';prerelease=$false;draft=$false;assets=@(@{name='OpenGuidePlatform-GuideSite.zip'})})
+        { & $installer -ReleaseTag v1 -OutputPath .processing/install }|Should -Throw '*version boundary was not crossed*'
+        @($global:OgpReleaseTestCalls|Where-Object {$_ -match '^release view'}).Count|Should -Be 0
+    }
     It 'rejects a release from another source commit before installing' {
         $global:OgpReleaseTestCommit='b'*40
         { & $installer -ReleaseTag v1.2.3-Preview.4 -ExpectedCommit ('a'*40) -OutputPath .processing/install } | Should -Throw '*source/tag*'

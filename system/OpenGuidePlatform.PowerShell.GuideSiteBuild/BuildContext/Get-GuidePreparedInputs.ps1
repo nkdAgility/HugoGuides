@@ -46,7 +46,7 @@ function Get-GuidePreparedInputs {
     foreach($guide in $Policy.guides){Add-InputTree (Resolve-GuideWorkspacePath $WorkspaceRoot $guide.contentRoot) "guide/$($guide.id)"}
     foreach($path in $Policy.wrapper.requiredFiles){Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $path)}
     Add-InputFile (Resolve-GuideWorkspacePath $WorkspaceRoot $PolicyPath)
-    foreach($path in @('.OpenGuidePlatform/delivery.yaml','.github/GitVersion.yml','go.mod','go.sum','go.work','go.work.sum','staticwebapp.config.json','staticwebapp.config.canary.json','staticwebapp.config.preview.json','staticwebapp.config.production.json')){
+    foreach($path in @('.OpenGuidePlatform/settings.yaml','.OpenGuidePlatform/delivery.yaml','.github/GitVersion.yml','go.mod','go.sum','go.work','go.work.sum','staticwebapp.config.json','staticwebapp.config.canary.json','staticwebapp.config.preview.json','staticwebapp.config.production.json')){
         Add-InputFile (Join-Path $WorkspaceRoot $path)
     }
     foreach($component in @('OpenGuidePlatform.PowerShell.Core','OpenGuidePlatform.PowerShell.GuideSiteBuild','OpenGuidePlatform.Hugo.Guides')){
@@ -59,12 +59,14 @@ function Get-GuidePreparedInputs {
         Add-InputFile (Join-Path $PlatformRoot $file)
     }
     Add-InputFile $OverlayPath
+    foreach($file in @('native/go.mod','native/go.sum','native/go.work','native/go.work.sum','platform-selection.json','platform-context.json')){Add-InputFile (Join-Path (Split-Path $OverlayPath) $file)}
     foreach($entry in Get-ChildItem Env: | Where-Object { $_.Name -match '^HUGO_' -and $_.Name -notin @('HUGO_RESOURCEDIR','HUGO_CACHEDIR') } | Sort-Object Name){
         # Store only hashes; environment values may contain deployment data.
-        $records["environment/$($entry.Name)"]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($entry.Value))).ToLowerInvariant()
+        $records["environment/$($entry.Name)"]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($(if($entry.Name -eq 'HUGO_MODULE_WORKSPACE' -and $env:OGP_BUILD_WORKSPACE){'<prepared-native-workspace>'}else{$entry.Value})))).ToLowerInvariant()
     }
     foreach($name in @('GOFLAGS','GOWORK')){
         $value=[Environment]::GetEnvironmentVariable($name)
+        if($name -eq 'GOWORK' -and $env:OGP_BUILD_WORKSPACE){$value='<prepared-native-workspace>'}
         $records["environment/$name"]=if($null -eq $value){'unset'}else{[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($value))).ToLowerInvariant()}
     }
     $inputText="version=$Version`ntarget=$Target`n"+(@($records.GetEnumerator()|ForEach-Object {"$($_.Key)=$($_.Value)"}) -join "`n")

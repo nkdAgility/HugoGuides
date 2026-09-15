@@ -42,6 +42,9 @@ if($automatic){
 if($previous -and ($previous.kind -cne 'preview-installation' -or $previous.schemaVersion -ne 1)){throw 'Unsupported installation record.'}
 if($Update){if(-not $previous){throw 'No installation found; run -Install first.'}}
 if($Install -and $previous){throw 'Already installed; use -Update.'}
+Import-Module "$PSScriptRoot/PlatformSettings.psm1" -Force
+$settingsPlan=New-GuideSettingsPlan -WorkspaceRoot $root -PackageRoot $package -SourcePath $SourcePath -Previous $previous -Manifest $manifest
+$SourcePath=[string]$settingsPlan.Settings.site.source
 $reviewBranch=$null
 if($true){
     $branch=(& git -C $root branch --show-current).Trim()
@@ -49,7 +52,6 @@ if($true){
         $reviewBranch='codex/platform-adoption-'+[guid]::NewGuid().ToString('N').Substring(0,8)
     }
     if($LASTEXITCODE -ne 0 -or -not $branch -or ($branch -in @('main','master') -and -not $reviewBranch)){throw 'Install/update requires a checked-out review branch, not main/master or detached HEAD.'}
-    if($Update -and $previous.ContainsKey('sourcePath')){$SourcePath=$previous.sourcePath}
     $sourceDirectory=Resolve-InstallPath $SourcePath
     if(-not (Test-Path (Join-Path $sourceDirectory 'hugo.yaml'))){throw "Hugo source not found at $SourcePath. Supply -SourcePath with the site's Hugo directory."}
 }
@@ -63,12 +65,13 @@ $nativeArguments=@{WorkspaceRoot=$root;SourcePath=$SourcePath;NativeModule=$nati
 if($previous -and $previous.ContainsKey('nativeHugoModule')){$nativeArguments.PreviousVersion=$previous.nativeHugoModule.version}
 $nativePlan=& "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/New-NativeHugoUpdate.ps1" @nativeArguments
 $files=[ordered]@{}
+foreach($name in $settingsPlan.Files.Keys){$files[$name]=$settingsPlan.Files[$name]}
 $files['build.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/build.ps1")
 $files['.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1']=[IO.File]::ReadAllBytes("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Resolve-OpenGuidePlatform.ps1")
 $workflow=[IO.File]::ReadAllText("$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/main.yaml")
-$workflow=$workflow.Replace('__RELEASE__',$ReleaseTag).Replace('__COMMIT__',$manifest.sourceCommit).Replace('__SOURCE__',($SourcePath|ConvertTo-Json -Compress))
+$workflow=$workflow.Replace('__RELEASE__',$settingsPlan.WorkflowReference).Replace('__COMMIT__',$manifest.sourceCommit).Replace('__SOURCE__',($SourcePath|ConvertTo-Json -Compress))
 Import-Module "$PSScriptRoot/WorkflowCallers.psm1" -Force
-$callerPlan=New-GuideWorkflowCallerPlan -WorkspaceRoot $root -ReleaseTag $ReleaseTag -Previous $previous -Starter $workflow
+$callerPlan=New-GuideWorkflowCallerPlan -WorkspaceRoot $root -ReleaseTag $settingsPlan.WorkflowReference -Previous $previous -Starter $workflow
 foreach($name in $callerPlan.Files.Keys){$files[$name]=$callerPlan.Files[$name]}
 $actionsLockPath=Resolve-InstallPath '.github/workflows/actions.lock'
 $actionsLockBefore=if(Test-Path $actionsLockPath){Get-Digest $actionsLockPath}else{$null}
@@ -82,7 +85,7 @@ $files['AGENTS.md']=$instructions
 $files['CLAUDE.md']=$instructions
 # Fail before any tracked changes if this machine cannot create Git-compatible shims.
 try{New-Item -ItemType SymbolicLink -Path (Join-Path $work 'shim-test') -Target '.agents/agents.md' -WhatIf:$false | Out-Null}
-catch{throw 'Symbolic links are required. Enable Windows Developer Mode (or use an elevated shell), run git config --global core.symlinks true before cloning.'}
+catch{throw "Symbolic links are required. Enable Windows Developer Mode (or use an elevated shell), run git config --global core.symlinks true before cloning. Technical detail: $($_.Exception.Message)"}
 $files['.github/copilot-instructions.md']=$instructions
 # Native dependency/configuration patches remain consumer-owned.
 foreach($name in $nativePlan.Files.Keys){
@@ -90,6 +93,11 @@ foreach($name in $nativePlan.Files.Keys){
     $files[$name]=$nativePlan.Files[$name]
 }
 function Confirm-NativeSnapshot {
+    foreach($name in $settingsPlan.ExpectedHashes.Keys){
+        $path=Resolve-InstallPath $name
+        $actual=if(Test-Path $path){Get-Digest $path}else{$null}
+        if($actual -cne $settingsPlan.ExpectedHashes[$name]){throw "Site settings changed during update: $name"}
+    }
     foreach($name in $nativePlan.ExpectedHashes.Keys){
         $path=Resolve-InstallPath $name
         $actual=if(Test-Path -LiteralPath $path -PathType Leaf){Get-Digest $path}else{$null}
@@ -109,7 +117,7 @@ $conflicts=[Collections.Generic.List[string]]::new()
 if($previous){
     foreach($name in $previous.managedFiles.Keys){
         # Legacy whole-file callers become site-owned after semantic preflight.
-        if($callerPlan.Files.Contains($name)){continue}
+        if($callerPlan.Files.Contains($name) -or $settingsPlan.Files.Contains($name) -or $name -in $settingsPlan.Retired){continue}
         if(-not $files.Contains($name) -and $name -cnotin @('bootstrap.ps1','Resolve-OpenGuidePlatform.ps1')){throw "Managed file retirement needs explicit migration: $name"}
         $path=Resolve-InstallPath $name
         if(-not (Test-Path -LiteralPath $path -PathType Leaf) -or (Get-Digest $path) -cne $previous.managedFiles[$name]){$conflicts.Add($name)}
@@ -117,13 +125,14 @@ if($previous){
 }
 foreach($name in $files.Keys){
     $path=Resolve-InstallPath $name
-    if(-not $nativePlan.Files.Contains($name) -and -not $callerPlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
+    if(-not $settingsPlan.Files.Contains($name) -and -not $nativePlan.Files.Contains($name) -and -not $callerPlan.Files.Contains($name) -and (Test-Path -LiteralPath $path) -and (-not $previous -or -not $previous.managedFiles.ContainsKey($name))){$conflicts.Add($name)}
 }
 if($conflicts.Count){throw "Managed-file conflicts; reconcile on your review branch before retrying: $($conflicts -join ', ')"}
 $hashes=[ordered]@{}
-foreach($name in $files.Keys){if($nativePlan.Files.Contains($name) -or $callerPlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
+foreach($name in $files.Keys){if($settingsPlan.Files.Contains($name) -or $nativePlan.Files.Contains($name) -or $callerPlan.Files.Contains($name)){continue};$hashes[$name]=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($files[$name])).ToLowerInvariant()}
 $record=[ordered]@{schemaVersion=1;kind='preview-installation';releaseTag=$ReleaseTag;sourcePath=$SourcePath;release=$manifest;hugoResolution='native-module';nativeHugoModule=$native;nativeChecksums=@{sum=$nativePlan.Sum;goModSum=$nativePlan.GoModSum};adoptionBlockers=@('Coordinated agent controls and independent enforcement');managedFiles=$hashes}
 $record.workflowCallers=$callerPlan.Callers
+$record.workflowReference=$settingsPlan.WorkflowReference
 $files['.OpenGuidePlatform/installation.json']=[Text.Encoding]::UTF8.GetBytes(($record|ConvertTo-Json -Depth 30)+[Environment]::NewLine)
 Write-Host "Selected $ReleaseTag ($($manifest.sourceCommit)); planned files (including site-owned caller references):"
 $files.Keys|ForEach-Object {Write-Host "  $_"}
@@ -146,6 +155,7 @@ try{
     $retired=@()
     if($previous){$retired=@(@('bootstrap.ps1','Resolve-OpenGuidePlatform.ps1')|Where-Object {$previous.managedFiles.ContainsKey($_)})}
     if($previousPath -eq $legacyLockPath -and (Test-Path $legacyLockPath)){$retired+=@('open-guide-platform.installation.json')}
+    $retired+=@($settingsPlan.Retired)
     foreach($name in $retired){
         $path=Resolve-InstallPath $name
         $original[$name]=[IO.File]::ReadAllBytes($path);$written.Add($name)
@@ -194,9 +204,18 @@ if($Ring){
     $PlatformSource=if($Ring -eq 'production'){'Production'}else{'Preview'}
 }
 $record=Get-Content "$WorkspaceRoot/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
+$settings=& "$PSScriptRoot/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -ReadSettings
+if($settings -and -not $PlatformRelease -and -not $PlatformPath -and (($PlatformSource -eq 'Auto' -and -not $Ring) -or $settings.platform.version -match '^v[0-9]+(?:\.[0-9]+)?$')){
+    $PlatformRelease=[string]$settings.platform.version
+    if(-not $Ring -and $PlatformSource -eq 'Auto'){$PlatformSource=if($settings.platform.ring -eq 'production'){'Production'}else{'Preview'}}
+}
 if($PlatformSource -eq 'Auto' -and -not $PlatformPath -and -not $PlatformRelease){$PlatformSource=if($record.release.channel -eq 'stable'){'Production'}else{'Preview'}}
 $package=& "$PSScriptRoot/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $WorkspaceRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease
 if(-not (Test-Path "$package/release-manifest.json")){throw 'An update needs a packaged release with its manifest. Build the local candidate package first, then supply its ZIP path.'}
+if($PlatformPath){
+    $selectedManifest=Get-Content "$package/release-manifest.json" -Raw|ConvertFrom-Json
+    [IO.File]::WriteAllText("$package/platform-selection.json",(@{version=('v'+$selectedManifest.version);ring=$(if($selectedManifest.channel -eq 'preview'){'preview'}else{'production'})}|ConvertTo-Json))
+}
 # Run the target release's migration, not stale installation logic.
 $next=Import-Module "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/OpenGuidePlatform.PowerShell.GuideSiteAdoption.psm1" -Force -PassThru
 & $next { param($Package,$Root,$Preview) Invoke-GuideSiteAdoption -PackageRoot $Package -WorkspaceRoot $Root -Update -WhatIf:$Preview } $package $WorkspaceRoot $WhatIfPreference

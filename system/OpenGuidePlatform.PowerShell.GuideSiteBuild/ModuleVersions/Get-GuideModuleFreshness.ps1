@@ -23,7 +23,9 @@ function Invoke-GuideGoModuleQuery {
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.RedirectStandardOutput=$true;$start.RedirectStandardError=$true
     # Disable ambient workspace and mutable module flags; registry/cache access is read-only with respect to the consumer.
     $start.Environment['GOWORK']='off';$start.Environment['GOFLAGS']=''
-    foreach($argument in @('list','-mod=readonly','-m','-json',$Query)){$start.ArgumentList.Add($argument)}
+    $start.ArgumentList.Add('list')
+    if($env:OGP_BUILD_WORKSPACE){$start.Environment['GOWORK']=$env:OGP_BUILD_WORKSPACE}
+    foreach($argument in @('-mod=readonly','-m','-json',$Query)){$start.ArgumentList.Add($argument)}
     $process=[Diagnostics.Process]::new();$process.StartInfo=$start
     try {
         $null=$process.Start();$stdout=$process.StandardOutput.ReadToEndAsync();$stderr=$process.StandardError.ReadToEndAsync()

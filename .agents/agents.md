@@ -34,4 +34,4 @@ Root AGENTS.md and CLAUDE.md are symbolic links to this canonical file. Keep the
 
 Do not create or use Git worktrees without the user's explicit permission. Work in the existing HugoGuides checkout; never place a repository checkout inside another repository.
 
-Use one working branch and one PR for the agreed work. Obtain Martin's explicit approval before switching branches. Do not edit another branch remotely to bypass this rule.
+Use one working branch and one PR for the agreed work. Obtain Martin's explicit approval before creating branches. Switching between existing branches does not require approval. Do not edit another branch remotely to bypass this rule.

@@ -3,6 +3,12 @@
 name: GuideSite Close PR
 on:
   workflow_call:
+    inputs:
+      deployment-environment:
+        description: Exact Azure environment to close; defaults to the pull request number.
+        type: string
+        required: false
+        default: ''
     secrets:
       static-web-app-token:
         required: true
@@ -21,7 +27,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.static-web-app-token }}
           repo_token: ${{ github.token }}
           action: close
-          deployment_environment: ${{ github.event.pull_request.number }}
+          deployment_environment: ${{ inputs.deployment-environment || github.event.pull_request.number }}
           app_location: ''
           skip_app_build: true
           skip_api_build: true

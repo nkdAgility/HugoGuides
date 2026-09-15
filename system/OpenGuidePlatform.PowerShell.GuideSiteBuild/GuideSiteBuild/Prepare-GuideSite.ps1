@@ -56,6 +56,11 @@ try {
     $latestFindings=@(Test-GuideLatestAliases -WorkspaceRoot $WorkspaceRoot -Policy $policy -Languages $Languages)
     if($latestFindings.Count){$assessment.findings+=$latestFindings;$assessment.outcome='fail'}
     $assessment.policyDigest=$policyDigest
+    $selectionPath=Join-Path $WorkspaceRoot ((Split-Path $OutputPath -Parent)+'/platform-selection.json')
+    if(Test-Path $selectionPath){
+        $selection=Get-Content $selectionPath -Raw|ConvertFrom-Json
+        $assessment.findings+=[ordered]@{code='PLATFORM_VERSION_SELECTED';severity='info';scope='platform';subject='OGP version';message="Selection: $($selection.selection); resolved: $($selection.releaseTag); OGP ring: $($selection.ring).";remediation='Use the recorded exact release to reproduce this build.';evidence=@("Commit: $($selection.sourceCommit)","SHA256: $($selection.sha256)")}
+    }
     $freshness=Get-GuideModuleFreshness -SourcePath $source -ModulePath $ModulePath
     $assessment.findings+= [ordered]@{code=$freshness.Code;severity=$freshness.Severity;scope='platform';subject=$freshness.Module;message=$freshness.Message;remediation='Review the module version through the coordinated platform update process; never change the pin during Prepare.';evidence=@("Installed: $($freshness.Installed)","Latest resolved by Go: $($freshness.Latest)")}
 } catch {

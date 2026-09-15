@@ -54,6 +54,29 @@ Describe 'Inferred guide-site validation' {
 }
 
 Describe 'Source-only discovery' {
+    It 'validates discovered Polish aliases without rewriting their existing public paths' {
+        $fixture=Join-Path $TestDrive 'polish-alias'
+        New-Item "$fixture/content/guide/2024.1","$fixture/content/guide/translations" -ItemType Directory -Force|Out-Null
+        ''|Set-Content "$fixture/hugo.preview.yaml"
+        "---`ntitle: Guide`ntype: guide`nlayout: root`n---"|Set-Content "$fixture/content/guide/_index.md"
+        "---`ntitle: Published`ntype: guide`nversion: 2024.1`n---`nBody"|Set-Content "$fixture/content/guide/2024.1/index.md"
+        "---`ntitle: Translations`naliases: [/pl/downloads/, /pl/download/]`n---"|Set-Content "$fixture/content/guide/translations/index.pl.md"
+        Mock Get-GuideHugoConfiguration -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild {
+            @{Configuration=@{contentdir='content';defaultcontentlanguage='en';defaultcontentlanguageinsubdir=$false;languages=@{en=@{disabled=$false};pl=@{disabled=$false}};outputs=@{home=@()};outputformats=@{};mediatypes=@{}}}
+        }
+        Mock Get-GuideSourcePages -ModuleName OpenGuidePlatform.PowerShell.GuideSiteBuild { @() }
+        $found=New-GuideSiteDiscovery -WorkspaceRoot $TestDrive -SourcePath polish-alias -ConfigFiles @('hugo.yaml') -Target preview -OutputPath .processing/discovery
+        $found.wrapper.legacyAliases.Count|Should -Be 1
+        $found.wrapper.legacyAliases[0].targets|Should -Contain 'pl/pl/downloads/index.html'
+        $found.wrapper.legacyAliases[0].targets|Should -Contain 'pl/pl/download/index.html'
+        $found|ConvertTo-Json -Depth 50|Set-Content "$fixture/policy.json"
+        {Import-GuidePolicy "$fixture/policy.json"}|Should -Not -Throw
+        foreach($invalid in @('../download/index.html','pl/pl/pl/download/index.html','pl/pl/other/index.html','/pl/download/index.html','pl/%2e%2e/download/index.html')){
+            $found.wrapper.legacyAliases[0].targets=@($invalid)
+            $found|ConvertTo-Json -Depth 50|Set-Content "$fixture/policy.json"
+            {Import-GuidePolicy "$fixture/policy.json"}|Should -Throw
+        }
+    }
     It 'reads guide metadata without parsing or executing consumer shortcodes' {
         $fixture=Join-Path $TestDrive 'source-only'
         New-Item "$fixture/content/guide/2024.1" -ItemType Directory -Force|Out-Null

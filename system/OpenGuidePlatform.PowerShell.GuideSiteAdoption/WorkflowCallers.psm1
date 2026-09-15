@@ -59,10 +59,10 @@ function New-GuideWorkflowCallerPlan {
                     if($job -is [YamlDotNet.RepresentationModel.YamlMappingNode]){$uses=$job.Children[[YamlDotNet.RepresentationModel.YamlScalarNode]::new('uses')]}
                     if($uses -is [YamlDotNet.RepresentationModel.YamlScalarNode] -and $uses.Value.StartsWith('nkdAgility/OpenGuidePlatform/',[StringComparison]::OrdinalIgnoreCase)){
                         $reference=$uses.Value
-                        if($reference -cnotmatch '^nkdAgility/OpenGuidePlatform/\.github/workflows/guide-site-(build|close-pr)\.yaml@(?<version>v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?)$'){
+                        if($reference -cnotmatch '^nkdAgility/OpenGuidePlatform/\.github/workflows/guide-site-(build|close-pr)\.yaml@(?<version>v[0-9]+(?:\.[0-9]+){0,2}(?:-[A-Za-z0-9.-]+)?)$'){
                             throw "Unsupported OGP caller reference in $($item.Name): $reference. Reconcile the caller manually."
                         }
-                        $allowed=if($Previous){[string]$Previous.releaseTag}else{$ReleaseTag}
+                        $allowed=if($Previous){if($Previous.ContainsKey('workflowReference')){[string]$Previous.workflowReference}else{[string]$Previous.releaseTag}}else{$ReleaseTag}
                         if($Matches.version -cne $allowed){throw "Conflicting OGP caller version in $($item.Name): expected $allowed. Reconcile the caller manually."}
                         $spanStart=[int]$uses.Start.Index;$spanLength=[int]($uses.End.Index-$uses.Start.Index)
                         $literal=$text.Substring($spanStart,$spanLength)

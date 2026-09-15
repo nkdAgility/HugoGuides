@@ -4,6 +4,21 @@ Initial implementation: `codex/open-guide-platform`, merged PR #35. Adoption-rea
 
 Companion: [architecture and adoption proposal](open-guide-platform-proposal.md).
 
+## Settings and bounded updates follow-up — PR #46
+
+Approved 15 September 2026. The installation record remains generated JSON; editable configuration moves to `.OpenGuidePlatform/settings.yaml`, including the existing delivery mapping. This adds major/minor selection to the existing coordinated update command. [ADR 001](decisions/001-coordinated-releases.md#approved-version-selection-extension--15-september-2026) records the extension to the original exact-only release decision.
+
+- [x] Implement exact, minor and major selection without crossing the configured version family or OGP ring.
+- [x] Keep site GitVersion/ring independent, and resolve one exact platform/native identity for all build stages.
+- [x] Implement transactional upgrade migration, destination preservation, rollback and coordinated caller updates.
+- [x] Document human settings and install/update commands, including existing-installation migration.
+- [x] Complete independent read-only review of settings, resolution and migration; address its findings.
+- [x] Complete local platform/package/sample acceptance: full root build passed 410 tests, zero failures/skips; packaged preview (125 files) and production (91 files) passed. Report: `.processing/platform-tests/72539fd46c054faaaee4b90fd260c30e/summary.md`. The subsequent CI family-resolution correction passed all 16 focused restoration checks, including local/CI parity; migration/rollback and relocated native evidence passed five focused checks. Workflow lock coverage passed for all four workflows.
+- [ ] Verify PR-hosted checks for the pushed revision.
+- [ ] After merge/publication, verify major/minor workflow aliases and a clean upgrade using the published release. Candidate tests cannot establish published alias availability.
+
+Related explicitly authorized fixes share PR #46: consumer version-tag triggers, deployment verification with custom domains, configurable preview cleanup, frozen legacy-alias validation, and guide-name-first browser/social titles. Their separate review and verification evidence will accompany the final combined revision. No consumer deployment or repository administration change is part of this follow-up.
+
 ## Active distribution follow-up
 
 Approved after the initial E07 implementation: split consumer and platform engineering release packages while keeping one coordinated version; remove bootstrap from release/install assets; move adoption into its released PowerShell module; share restoration across local and Actions entry points. Installed consumers update with `./build.ps1 Update -ring preview`; remote bootstrap remains the first-install and recovery entry point. This supersedes the earlier single-ZIP distribution detail, without changing the E00–E14 stage scope.
