@@ -118,11 +118,11 @@ Describe 'Candidate ZIP restoration before publication' {
     }
 }
 Describe 'Platform publication dependency' {
-    It 'allows publication only for pushes to main, never PR or manual runs' {
+    It 'allows publication for configured main and version-tag pushes, never PR or manual runs' {
         Import-Module powershell-yaml -MinimumVersion 0.4.12
         $main=Get-Content "$root/.github/workflows/main.yaml" -Raw|ConvertFrom-Yaml
         # An exact allowlist prevents same-repository PR exceptions and bypass conditions.
-        $main.jobs.release['if'] | Should -Be '${{ github.event_name == ''push'' && github.ref == ''refs/heads/main'' }}'
+        $main.jobs.release['if'] | Should -Be '${{ github.event_name == ''push'' }}'
     }
     It 'requires the direct sample consumer to succeed before publishing the same build artifact' {
         Import-Module powershell-yaml -MinimumVersion 0.4.12

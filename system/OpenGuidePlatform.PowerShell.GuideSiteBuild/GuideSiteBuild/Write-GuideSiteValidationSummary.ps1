@@ -5,10 +5,13 @@ function Escape-Cell($value){[Net.WebUtility]::HtmlEncode([string]$value).Replac
 $reportPath=Join-Path $OutputPath 'artifact-validation.json'
 if([IO.File]::Exists($reportPath)){
     $report=Get-Content -LiteralPath $reportPath -Raw|ConvertFrom-Json
-    $lines=@("## Validate: $(Escape-Cell $report.Outcome)",'',"Commit: $(Escape-Cell $report.SourceCommit)","Target: $(Escape-Cell $report.Target)","Files: $($report.FileCount); bytes: $($report.SizeBytes)",'','| Finding | Path | What to fix |','|---|---|---|')
-    foreach($finding in $report.Findings){$lines+="| $(Escape-Cell $finding.Code) | $(Escape-Cell $finding.Path) | $(Escape-Cell $finding.Message) |"}
-    if($report.Findings.Count -eq 0){$lines+='| None | Artifact | All configured artifact checks passed. |'}
-    $lines+=@('','Build validation is not deployment or visual approval. Artifact identity and detailed results are retained as CI evidence.')
+    $lines=@("## Validate: $(Escape-Cell $report.Outcome)",'',"Commit: $(Escape-Cell $report.SourceCommit) · Target: $(Escape-Cell $report.Target)","Files: $($report.FileCount); bytes: $($report.SizeBytes)")
+    if($report.Findings.Count){
+        $lines+=@('','| Finding | Path | What to fix |','|---|---|---|')
+        foreach($finding in $report.Findings){$lines+="| $(Escape-Cell $finding.Code) | $(Escape-Cell $finding.Path) | $(Escape-Cell $finding.Message) |"}
+    }elseif($report.Outcome -eq 'pass'){$lines+=@('','Artifact checks passed.')}
+    else{$lines+=@('','Validation did not pass and supplied no diagnostic findings. Inspect artifact-validation.json and the build logs before continuing.')}
+    $lines+=@('','Deployment and live verification are separate stages.')
 }else{
     $lines=@('## Validate: blocked','','Build did not produce an artifact validation report. Inspect the failed build step and retained logs; do not treat missing evidence as a pass.')
 }

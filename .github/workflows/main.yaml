@@ -8,6 +8,7 @@ on:
     branches: [main]
   push:
     branches: [main]
+    tags: ['v[0-9]*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -85,7 +86,7 @@ jobs:
   release:
     name: Release
     needs: [build, sample]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' }}
     permissions:
       contents: write
     runs-on: ubuntu-24.04
@@ -99,12 +100,12 @@ jobs:
           artifact-ids: ${{ needs.build.outputs.artifact-id }}
           merge-multiple: true
           path: .processing/platform-release
-      - name: Publish and verify preview release
+      - name: Publish versioned release
         env:
           GH_TOKEN: ${{ github.token }}
           PLATFORM_VERSION: ${{ needs.build.outputs.version }}
         run: ./build.ps1 -Stage Release -OutputPath .processing/platform-release
-      - name: Verify published preview release
+      - name: Verify published release
         env:
           GH_TOKEN: ${{ github.token }}
           PLATFORM_VERSION: ${{ needs.build.outputs.version }}

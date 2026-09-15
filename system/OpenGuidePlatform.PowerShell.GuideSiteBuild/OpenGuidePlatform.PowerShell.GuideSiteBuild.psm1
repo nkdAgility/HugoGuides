@@ -10,14 +10,22 @@ function ConvertTo-GuideAssessmentMarkdown {
     $lines.Add('')
     $lines.Add("Commit: $(Escape-ReportText $Assessment.sourceCommit) · Platform: $(Escape-ReportText $Assessment.platformVersion) · Target: $(Escape-ReportText $Assessment.target)")
     $lines.Add('')
-    $lines.Add('| Severity | Scope | Subject | Finding | What to fix |')
-    $lines.Add('|---|---|---|---|---|')
-    foreach($finding in $Assessment.findings){$lines.Add("| $(Escape-ReportText $finding.severity) | $(Escape-ReportText $finding.scope) | $(Escape-ReportText $finding.subject) | $(Escape-ReportText $finding.code): $(Escape-ReportText $finding.message) | $(Escape-ReportText $finding.remediation) |")}
-    if($Assessment.findings.Count -eq 0){$lines.Add('| info | platform | Assessment | No findings in the checks performed. | Continue with the next stage. |')}
+    $guideScopes=@('guide','edition','translation','download')
+    $guideFindings=@($Assessment.findings | Where-Object { $_.scope -in $guideScopes -and $_.severity -in @('warning','blocker') })
+    $otherFindings=@($Assessment.findings | Where-Object { $_.scope -notin $guideScopes -and $_.severity -in @('warning','blocker') })
+    if($otherFindings.Count){
+        $lines.Add('| Severity | Scope | Subject | Finding | What to fix |')
+        $lines.Add('|---|---|---|---|---|')
+        foreach($finding in $otherFindings){$lines.Add("| $(Escape-ReportText $finding.severity) | $(Escape-ReportText $finding.scope) | $(Escape-ReportText $finding.subject) | $(Escape-ReportText $finding.code): $(Escape-ReportText $finding.message) | $(Escape-ReportText $finding.remediation) |")}
+    }
     $lines.Add('');$lines.Add('### Guide status');$lines.Add('')
-    $lines.Add('| Guide | Edition | Language | State | Body | Downloads |');$lines.Add('|---|---|---|---|---|---|')
-    foreach($guide in $Assessment.inventory.guides){foreach($edition in $guide.editions){foreach($translation in $edition.translations){$lines.Add("| $(Escape-ReportText $guide.id) | $(Escape-ReportText $edition.id) | $(Escape-ReportText $translation.language) | $(Escape-ReportText $translation.state) | $(Escape-ReportText $translation.body) | $($translation.downloads.Count) |")}}}
-    $lines.Add('');$lines.Add("Wrapper runtime readiness: $(Escape-ReportText $Assessment.inventory.wrapper.state). A Prepare result is not a deployment or visual approval.")
+    if($guideFindings.Count){
+        $lines.Add('| Severity | Guide / edition / language / resource | Problem | What to fix |')
+        $lines.Add('|---|---|---|---|')
+        foreach($finding in $guideFindings){$lines.Add("| $(Escape-ReportText $finding.severity) | $(Escape-ReportText $finding.subject) | $(Escape-ReportText $finding.code): $(Escape-ReportText $finding.message) | $(Escape-ReportText $finding.remediation) |")}
+    }else{$lines.Add('No guide fixes identified by these checks.')}
+    if(@($Assessment.findings | Where-Object code -eq 'MODULE_CURRENT').Count){$lines.Add('');$lines.Add('Hugo module: current.')}
+    $lines.Add('');$lines.Add('Artifact and live-site checks run in later stages.')
     $lines -join "`n"
 }
 function Write-GuideAssessmentReport {

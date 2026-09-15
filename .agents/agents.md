@@ -33,3 +33,5 @@ Do not change or deploy consumer sites as a side effect of platform work.
 Root AGENTS.md and CLAUDE.md are symbolic links to this canonical file. Keep the links; edit only this file. Windows checkouts require symbolic link support and git core.symlinks=true. Maintain human README instructions whenever commands change.
 
 Do not create or use Git worktrees without the user's explicit permission. Work in the existing HugoGuides checkout; never place a repository checkout inside another repository.
+
+Use one working branch and one PR for the agreed work. Obtain Martin's explicit approval before switching branches. Do not edit another branch remotely to bypass this rule.
